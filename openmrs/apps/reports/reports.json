@@ -91,34 +91,7 @@
      "applyDateRangeFor": "obsDate",
      "visitTypesToFilter": []
      }
-    },
-    "formBuilderReport":{
-        "name": "Form builder form Report",
-        "type": "formBuilder",
-        "config": {
-            "patientAttributes": [
-                "caste",
-                "class",
-                "education",
-                "occupation"
-            ],
-            "patientAddresses": [
-                "address3",
-                "city_village"
-            ],
-            "visitAttributes": [
-                "Visit Status"
-            ],
-            "showVisitInfo": true,
-            "showProvider": true,
-            "formNamesToFilter": [ "Test Form"],
-            "conceptNameDisplayFormat": "shortNamePreferred",
-            "locationTagsToFilter": [],
-            "programsToFilter": [],
-            "applyDateRangeFor": "obsDate",
-            "visitTypesToFilter": []
-        }
-    },
+},
     "chiefComplaintReport": {
         "name": "Chief Complaint Report",
         "type": "obsCount",
@@ -656,5 +629,12 @@
         "Patient Identifier"
       ]
     }
-  }
+  },
+   "test report":{
+   "name": "Medicine sales price list",
+   "type": "MRSGeneric", 
+   "config": {
+   "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/test1.sql"
+        }
+    }
 }

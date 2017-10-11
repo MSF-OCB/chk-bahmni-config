@@ -23,7 +23,6 @@
         "visitUuid"
     ],
     "config": {
-        "hideConditions": false,
         "enableRadiologyOrderOptions":["Urgent","NeedsPrint"],
         "quickPrints":false,
         "networkConnectivity" : {
@@ -39,15 +38,6 @@
             "program": {
                 "patientInformation": {
                     "ageLimit": 100
-                },
-                "ID_Number": {
-                    "required" : true
-                },
-                "Co-morbidites": {
-                    "excludeFrom": ["HIV Program"]
-                },
-                "Doctor": {
-                    "excludeFrom": ["TB Program"]
                 }
             },
             "patientContext": {

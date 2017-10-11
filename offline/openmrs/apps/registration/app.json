@@ -1,5 +1,4 @@
-{
-        "id": "bahmni.registration",
+"id": "bahmni.registration",
         "instanceOf":"bahmni.template.registration",
         "description": "Bahmni Patient Registration App",
         "extensionPoints": [
@@ -52,9 +51,6 @@
             "autoCompleteFields":["familyName", "caste"],
             "defaultIdentifierPrefix": "GAN",
             "defaultVisitType": "OPD",
-            "showLastName": true,
-            "isLastNameMandatory": true,
-            "disablePhotoCapture": true,
             "searchByIdForwardUrl": "/patient/{{patientUuid}}",
             "showMiddleName": true,
             "showBirthTime": true,
@@ -114,4 +110,3 @@
                 }
             }
         }
-}

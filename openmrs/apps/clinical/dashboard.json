@@ -16,7 +16,7 @@
                     "address1",
                     "address2",
                     "cityVillage",
-                    "countyDistrict"
+                    "countryDistrict"
                 ]
             },
             "diagnosis":{  
@@ -91,7 +91,7 @@
             "programs":{  
                 "translationKey":"DASHBOARD_TITLE_PROGRAMS_KEY",
                 "type":"programs",
-                "displayOrder":10
+                "displayOrder":6
             },
             "radiologyOrders":{  
                 "orderType":"Radiology Order",
@@ -123,18 +123,12 @@
                 "displayOrder":9,
                 "dashboardConfig":{  
                     "conceptNames":[  
-                        "Systolic",
-                        "Diastolic",
-                        "Posture",
-                        "Temperature"
+                       
                     ]
                 },
                 "expandedViewConfig":{  
                     "conceptNames":[  
-                        "Systolic",
-                        "Diastolic",
-                        "Posture",
-                        "Temperature"
+                      
                     ],
                     "showDetailsButton":true
                 }
@@ -153,16 +147,15 @@
             "labResults":{  
                 "translationKey":"DASHBOARD_TITLE_LAB_RESULTS_KEY",
                 "type":"labOrders",
-                "displayOrder":6,
+                "displayOrder":10,
                 "dashboardConfig":{  
                     "title":null,
-                    "numberOfVisits":6,
-                    "showChart":true,
-                    "showTable":false,
-                    "showNormalLabResults": true,
-                    "showCommentsExpanded": true,
-                    "showAccessionNotes": true,
-                    "showDetailsButton":false
+                    "numberOfVisits":1,
+                    "showChart":false,
+                    "showTable":true,
+                    "showDetailsButton":false,
+                    "initialAccessionCount":0,
+                    "latestAccessionCount":1
                 },
                 "expandedViewConfig":{  
                     "numberOfVisits":10
@@ -391,16 +384,12 @@
                     "title": null,
                     "maximumNoOfVisits": 10
                 },
-                "formGroup": [ ],
+                "formGroup": [
+                    "History and Examination",
+                    "Discharge Summary",
+                    "ANC"
+                ],
                 "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
-            },
-            "patientAppointments": {
-                "type": "custom",
-                "displayOrder": 22,
-                "config": {
-                    "title": "DASHBOARD_TITLE_APPOINTMENTS_KEY",
-                    "template": "<patient-appointments-dashboard section='config' patient='patient'></patient-appointments-dashboard>"
-                }
             }
         }
     },
@@ -427,7 +416,7 @@
                     "address1",
                     "address2",
                     "cityVillage",
-                    "countyDistrict"
+                    "countryDistrict"
                 ],
                 "displayOrder":0
             },

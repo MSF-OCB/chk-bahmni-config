@@ -16,35 +16,42 @@
             "patientUuid",
             "activeVisitUuid"
         ],
+        
         "config" : {
+            
             "patientInformation": {
-               "sectionDépendante":{
-                          "title": "Dependent" ,
-                          "translation_key": "Dependent Section",
-                          "attributes": ["Membre famille_Dep","Prénom_Dep","Nom_Dep","Date de naissance_Dep(Age c'est plus simple)","Informé du statut VIH du patient_Dep","Résultat_Dep","No CHK_Dep"]
-                        },
+                 "contactInformation": {            
+                          "title": "Informations de contact",
+                          "translationKey": "REGISTRATION_CONTACT_INFORMATION",
+                          "attributes":["Tel 1",
+                                        "Tel 2",
+                                        "Nom du contact",
+                                        "Tel 1 du Contact",
+                                        "Tel 2 du Contact"]
+                                        },
+                
+                "patientMedicalInformation": {
+                         "title" : "Information médicale pour le patient",
+                         "translationKey" : "REGISTRATION_PATIENT_MEDICAL_INFORMATION",
+                         "attributes" : ["Date depistage",
+                                         "Lieu de depistage",
+                                         "ARV Naif/ Non Naif"       
+                                        ]
+                       },
+            "mandatoryPersonAttributes": ["primaryContact"],
+                          "primaryContact":{ "required": true },
 
-               "contactInformation":{
-                          "title": "Contact Info",
-                          "translation_key": "Contact Info",
-                          "attributes":["Tel 1","Tel 2","Nom du contact","Tel 1 du Contact","Tel 2 du Contact"]
-                        },          
 
-                "additionalPatientInformation": {
-                    "title": "Additional Patient Information",
+            "primaryContact":{ "required": true },
+                "required": {
                     "attributes": [
-                        "distanceFromCenter",
-                        "isUrban",
-                        "cluster",
-                        "RationCard",
-                        "familyIncome",
-                        "debt",
-                        "cluster"
+                     "primaryContact"
                     ]
                 },
                 "hidden": {
                     "attributes": [
-                        "primaryContact"
+
+                     
                     ]
                 },
                 "defaults":  {
@@ -62,13 +69,11 @@
             },
 
             "autoCompleteFields":["familyName", "caste"],
-            "defaultIdentifierPrefix": "GAN",
+            "defaultIdentifierPrefix": "CHK17",
             "defaultVisitType": "OPD",
             "searchByIdForwardUrl": "/patient/{{patientUuid}}",
             "showMiddleName": true,
-            "showLastName": true,
-            "isLastNameMandatory": true,
-            "showBirthTime": true,
+            "showBirthTime": false,
             "showCasteSameAsLastNameCheckbox": false,
             "printOptions": [
                 {
@@ -105,24 +110,25 @@
                 }
             },
             "fieldValidation" : {
-                "primaryContact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be 12 characters starting with 91 (country code)"},
-                "landHolding" : {"pattern" : "[0-9]{0,3}", "errorMessage" : "Should be between 1 to 999 acres"},
+                "Tel 1" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
+                "Tel 2" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
+                "Tel 1 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
+                "Tel 2 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
                 "familyName" : {"pattern" : "[a-zA-Z]{0,}", "errorMessage" : "Should contain characters"},
                 "givenName" : {"pattern" : "[a-zA-Z]{0,}", "errorMessage" : "Should contain characters"},
                 "middleName" : {"pattern" : "[a-zA-Z]{0,}", "errorMessage" : "Should contain characters"},
-                "address1" : {"pattern" : "[a-zA-Z0-9]{3}", "errorMessage" : "Should contain 3 characters"}
+                "address1" : {"pattern" : "[a-zA-Z0-9]{3}", "errorMessage" : "Should contain 5 characters"}
             },
             "patientSearch": {
                 "address": {
                     "label": "Rural Ward",
                     "placeholder": "Enter ward",
                     "field": "address2"
-                },
-                "customAttributes": {
-                    "label": "रुग्णाचे नाव",
-                    "placeholder": "रुग्णाचे नाव",
-                    "fields": ["givenNameLocal", "middleNameLocal", "familyNameLocal"]
+
                 }
-            }
-        }
+                
+            }    
+            
+        
+    }
 }
