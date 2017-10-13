@@ -28,15 +28,6 @@
     "icon": "icon-bahmni-admin",
     "order": 3,
     "requiredPrivilege": "app:admin"
-  },
-  "reports": {
-    "id": "bahmni.reports",
-    "extensionPointId": "org.bahmni.home.dashboard",
-    "type": "link",
-    "translationKey": "MODULE_LABEL_REPORTS_KEY",
-    "url": "../reports/#/dashboard",
-    "icon": "icon-bahmni-reports",
-    "order": 4,
-    "requiredPrivilege": "app:reports"
+
 }
 }

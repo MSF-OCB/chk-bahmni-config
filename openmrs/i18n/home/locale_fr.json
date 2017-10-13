@@ -39,7 +39,7 @@
   "MESSAGE_START_OPENMRS":"Le service OpenMRS est actuellement indisponible. S'il vous plaît vérifier si le service est démarré et actualiser la page une fois qu'il est en place",
   "MESSAGE_DIALOG_OPTION_COPY":"Erreur de copie",
   "MESSAGE_DIALOG_OPTION_OKAY":"d'accord",
-  "LOGIN_PAGE_HEADER_TEXT":"BAHMNI EMR LOGIN"
+  "LOGIN_PAGE_HEADER_TEXT":"Connexion à Bahmni EMR"
 
 
 

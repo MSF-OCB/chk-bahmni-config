@@ -75,28 +75,7 @@
             "showMiddleName": true,
             "showBirthTime": false,
             "showCasteSameAsLastNameCheckbox": false,
-            "printOptions": [
-                {
-                    "translationKey": "REGISTRATION_PRINT_REG_CARD_LOCAL_KEY",
-                    "templateUrl": "/bahmni_config/openmrs/apps/registration/registrationCardLayout/print_local.html",
-                    "shortcutKey": "l"
-                },
-                {
-                    "translationKey": "REGISTRATION_PRINT_REG_CARD_KEY",
-                    "templateUrl": "/bahmni_config/openmrs/apps/registration/registrationCardLayout/print.html",
-                    "shortcutKey": "p"
-                },
-                {
-                    "translationKey": "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER",
-                    "templateUrl": "/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/print.html",
-                    "shortcutKey": "r"
-                },
-                {
-                    "translationKey": "REGISTRATION_PRINT_WITH_BARCODE",
-                    "templateUrl": "/bahmni_config/openmrs/apps/registration/registrationCardLayout/printWithBarcode.html",
-                    "shortcutKey": "c"
-                }
-            ],
+            
             "conceptSetUI": {
                 "REGISTRATION FEES": {
                     "required": true,
@@ -109,12 +88,18 @@
                     "FHS": "Present"
                 }
             },
+            "disablePhotoCapture": true,
             "fieldValidation" : {
                 "Tel 1" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
                 "Tel 2" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
                 "Tel 1 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
                 "Tel 2 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
-                "address1" : {"pattern" : "[a-zA-Z0-9]{3}", "errorMessage" : "Should contain 5 characters"}
+                "address1" : {"pattern" : "[a-zA-Z0-9]{3}", "errorMessage" : "Should contain 5 characters"},
+                "givenName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "middleName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "familyName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"}
+
+       
             },
             "patientSearch": {
                 "address": {
