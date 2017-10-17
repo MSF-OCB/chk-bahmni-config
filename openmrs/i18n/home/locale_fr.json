@@ -41,7 +41,8 @@
   "MESSAGE_DIALOG_OPTION_OKAY":"d'accord",
   "LOGIN_PAGE_HEADER_TEXT":"Connexion à Bahmni EMR",
   "MODULE_LABEL_REGISTRATION_KEY": "Enregistrement",
-  "MODULE_LABEL_ORDERS_KEY": "Demandes"
+  "MODULE_LABEL_ORDERS_KEY": "Demandes",
+  "LOGIN_LABEL_SELECT_LOCALE_KEY": "Choisir la langue "
 
 
 
