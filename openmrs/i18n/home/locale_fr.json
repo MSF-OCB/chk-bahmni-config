@@ -36,10 +36,12 @@
   "OLD_LABEL_PASSWORD":"Entrez le mot de passe ancien",
   "NEW_LABEL_PASSWORD":"Entrez un nouveau mot de passe",
   "CONFIRM_LABEL_PASSWORD":"Confirmez le mot de passe",
-  "MESSAGE_START_OPENMRS":"Le service OpenMRS est actuellement indisponible. S'il vous plaît vérifier si le service est démarré et actualiser la page une fois qu'il est en place",
+  "MESSAGE_START_OPENMRS":"Le service OpenMRS est actuellement indisponible. Veuillez vérifier que le service est démarré et actualisez la page une fois que le service est démarré",
   "MESSAGE_DIALOG_OPTION_COPY":"Erreur de copie",
   "MESSAGE_DIALOG_OPTION_OKAY":"d'accord",
-  "LOGIN_PAGE_HEADER_TEXT":"Connexion à Bahmni EMR"
+  "LOGIN_PAGE_HEADER_TEXT":"Connexion à Bahmni EMR",
+  "MODULE_LABEL_REGISTRATION_KEY": "Enregistrement",
+  "MODULE_LABEL_ORDERS_KEY": "Demandes"
 
 
 
