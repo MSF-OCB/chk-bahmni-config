@@ -74,6 +74,7 @@
             "searchByIdForwardUrl": "/patient/{{patientUuid}}",
             "showMiddleName": true,
             "showBirthTime": false,
+            "isLastNameMandatory": true,
             "showCasteSameAsLastNameCheckbox": false,
             
             "conceptSetUI": {

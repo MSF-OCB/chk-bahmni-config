@@ -20,7 +20,6 @@
   "REGISTRATION_INSTITUTE_REGISTERED_TEXT_KEY": "(Enregistré)",
   "REGISTRATION_INSTITUTE_ADDRESS": "Ganiyari , District - Bilaspur",
   "MODULE_LABEL_ATOMFEED_CONSOLE_KEY":"Atomfeed Console",
-  "MODULE_LABEL_CLINICAL_KEY":"Clinique",
   "MODULE_LABEL_REPORTS_KEY": "Rapports",
   "CHANGE_PASSWORD":"Changer le mot de passe",
   "OLD_PASSWORD":"ancien mot de passe",
@@ -42,8 +41,24 @@
   "LOGIN_PAGE_HEADER_TEXT":"Connexion à Bahmni EMR",
   "MODULE_LABEL_REGISTRATION_KEY": "Enregistrement",
   "MODULE_LABEL_ORDERS_KEY": "Demandes",
-  "LOGIN_LABEL_SELECT_LOCALE_KEY": "Choisir la langue "
-
+  "LOGIN_LABEL_SELECT_LOCALE_KEY": "Choisir la langue ",
+  "LOGIN_LABEL_USERNAME_KEY": "Nom d'utilisateur",
+  "LOGIN_MESSAGE_ENTER_USERNAME_KEY": "Saisissez votre nom d'utilisateur",
+  "LOGIN_MESSAGE_ENTER_PASSWORD_KEY": "Saisissez votre mot de passe",
+  "LOGIN_LABEL_SELECT_LOCALE_KEY": "Choisir la langue ",
+  "LOGIN_LABEL_LOGIN_ERROR_MESSAGE_KEY": "Vous n'êtes pas authentifié ou votre session a expiré . Connectez vous s'il vous plait.",
+  "LOGIN_LABEL_SELECT_LOCATION_KEY": "Choisir l'emplacement",
+  "LOGIN_LABEL_PASSWORD_KEY": "Mot de passe",
+  "LOGIN_LABEL_LOCATION_KEY": "Emplacement",
+  "LOGIN_LABEL_LOGIN_KEY": "S'identifier",
+  "HEADER_LABEL_LOGOUT_KEY": "Se déconnecter",
+  "MODULE_LABEL_CLINICAL_KEY": "Clinique",
+  "MODULE_LABEL_INPATIENT_KEY": "patients hospitalisés",
+  "MODULE_LABEL_RADIOLOGY_UPLOAD_KEY": "Radiologie chargement",
+  "MODULE_LABEL_PATIENT_DOCUMENTS_KEY": "Documents patients",
+  "MODULE_LABEL_ADMIN_KEY": "Administrateur",
+  "MODULE_LABEL_PROGRAMS_KEY": "programmes",
+  "LOGIN_LABEL_LOGIN_ERROR_MESSAGE_KEY": "Vous n'êtes pas authentifié ou la session est expirée. Veuillez réessayer"
 
 
 }
