@@ -4,5 +4,7 @@
 "MESSAGE_DIALOG_OPTION_OKAY": "d'accord",
 "DASHBOARD_TAB_ORDERS_KEY": "Demandes",
 "CLINICAL_SAVE_SUCCESS_MESSAGE_KEY":"Enregistré",
-"CLINICAL_PRINT_TRANSLATION_KEY":"impression"
+"CLINICAL_PRINT_TRANSLATION_KEY":"impression",
+"SEARCH_NAME_PLACEHOLDER_KEY":"Recherche par nom de patient / ID",
+"SEARCH_KEY":"Recherche"
 }

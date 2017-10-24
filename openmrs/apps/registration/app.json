@@ -23,8 +23,7 @@
                  "contactInformation": {            
                           "title": "Informations de contact",
                           "translationKey": "REGISTRATION_CONTACT_INFORMATION",
-                          "attributes":["Tel 1",
-                                        "Tel 2",
+                          "attributes":[
                                         "Nom du contact",
                                         "Tel 1 du Contact",
                                         "Tel 2 du Contact"]
@@ -40,9 +39,6 @@
                        },
             "mandatoryPersonAttributes": ["primaryContact"],
                           "primaryContact":{ "required": true },
-
-
-            "primaryContact":{ "required": true },
                 "required": {
                     "attributes": [
                      "primaryContact"
@@ -55,8 +51,7 @@
                     ]
                 },
                 "defaults":  {
-                    "class": "General",
-                    "landHolding": 2
+                    
                 }
             },
             "addressHierarchy": {
@@ -76,19 +71,6 @@
             "showBirthTime": false,
             "isLastNameMandatory": true,
             "showCasteSameAsLastNameCheckbox": false,
-            
-            "conceptSetUI": {
-                "REGISTRATION FEES": {
-                    "required": true,
-                    "label": "Fee"
-                },
-                "FHS": {
-                    "buttonSelect": true
-                },
-                "defaults":{
-                    "FHS": "Present"
-                }
-            },
             "disablePhotoCapture": true,
             "fieldValidation" : {
                 "Tel 1" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
@@ -96,9 +78,9 @@
                 "Tel 1 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
                 "Tel 2 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
                 "address1" : {"pattern" : "[a-zA-Z0-9]{3}", "errorMessage" : "Should contain 5 characters"},
-                "givenName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
-                "middleName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
-                "familyName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"}
+                "givenName" : {"pattern" : "[a-zA-Zà-żÀ-Ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "middleName" : {"pattern" : "[a-zA-Zà-żÀ-Ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "familyName" : {"pattern" : "[a-zA-Zà-żÀ-Ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"}
 
        
             },
