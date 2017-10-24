@@ -73,14 +73,21 @@
             "showCasteSameAsLastNameCheckbox": false,
             "disablePhotoCapture": true,
             "fieldValidation" : {
-                "Tel 1" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
-                "Tel 2" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
-                "Tel 1 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
-                "Tel 2 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 8 digits and maximum 10 digits"},
-                "address4" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ-']{3}", "errorMessage" : "Should contain 5 characters"},
-                "givenName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
-                "middleName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
-                "familyName" : {"pattern" : "[a-zA-Zà-ż]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"}
+                "Tel 1" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 10 digits"},
+                "Tel 2" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 10 digits"},
+                "Tel 1 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 10 digits"},
+                "Tel 2 du Contact" : {"pattern" : "[0-9]{8,10}", "errorMessage" : "Should be contain minimum 10 digits"},
+                "address2" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"},
+                "address3" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"},
+                "address4" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"},
+                "address5" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"},
+                "givenName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "middleName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "familyName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "Nom du contact" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "Lieu de depistage" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+                "Occupation" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"},
+                "Nombre d'années d'étude" : {"pattern" : "[0-25]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"}
        
             },
             "patientSearch": {
