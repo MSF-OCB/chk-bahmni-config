@@ -64,7 +64,6 @@
             },
 
             "autoCompleteFields":["familyName", "caste"],
-            "defaultIdentifierPrefix": "CHK17",
             "defaultVisitType": "OPD",
             "searchByIdForwardUrl": "/patient/{{patientUuid}}",
             "showMiddleName": true,
