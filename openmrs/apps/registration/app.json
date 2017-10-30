@@ -83,7 +83,7 @@
                 "Nom du contact" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
                 "Lieu de depistage" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
                 "Occupation" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"},
-                "Nombre d'années d'étude" : {"pattern" : "[0-25]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"}
+                "Nombre d'années d'étude" : {"pattern" : "[0-25]{0,2}", "errorMessage" : "Doit contenir le numéro 0 à 25"}
        
             },
             "patientSearch": {
