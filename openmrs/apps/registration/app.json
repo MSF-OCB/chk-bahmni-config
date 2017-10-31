@@ -88,9 +88,9 @@
             },
             "patientSearch": {
                 "address": {
-                    "label": "Province d'origine",
-                    "placeholder": "Entrez Province",
-                    "field": "STATE_PROVINCE"
+                    "label": "Commune",
+                    "placeholder": "Entrez Commune",
+                    "field": "address6"
 
                 }
                 
