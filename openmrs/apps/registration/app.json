@@ -89,7 +89,7 @@
             "patientSearch": {
                 "address": {
                     "label": "Commune",
-                    "placeholder": "Saisissez Commune",
+                    "placeholder": "Saisissez la commune",
                     "field": "address6"
 
                 }
