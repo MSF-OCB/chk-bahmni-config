@@ -4,7 +4,14 @@
 "MESSAGE_DIALOG_OPTION_OKAY": "d'accord",
 "DASHBOARD_TAB_ORDERS_KEY": "Demandes",
 "CLINICAL_SAVE_SUCCESS_MESSAGE_KEY":"Enregistré",
-"CLINICAL_PRINT_TRANSLATION_KEY":"impression",
+"CLINICAL_PRINT_TRANSLATION_KEY":"Impression",
 "SEARCH_NAME_PLACEHOLDER_KEY":"Recherche par nom de patient / ID",
-"SEARCH_KEY":"Recherche"
+"SEARCH_KEY":"Recherche",
+
+
+"DASHBOARD_TAB_GENERAL_KEY": "Général",
+  "DASHBOARD_TAB_TRENDS_KEY": "Les tendances",
+  "DASHBOARD_TAB_PATIENT_SUMMARY_KEY": "Résumé du patient",
+  "DASHBOARD_TAB_DISCHARGE_SUMMARY_KEY": "Résumé de décharge",
+  "DASHBOARD_TAB_ORDERS_KEY": "Demandes"
 }

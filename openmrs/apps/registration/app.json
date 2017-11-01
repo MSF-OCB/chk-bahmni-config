@@ -53,17 +53,18 @@
                 "defaults":  {
                     
                 }
+            
             },
             "addressHierarchy": {
                 "showAddressFieldsTopDown": false,
-                "strictAutocompleteFromLevel": "stateProvince"
+                "strictAutocompleteFromLevel": ""
             },
             "relationshipTypeMap": {
                 "Doctor":"provider",
                 "Parent":"patient"
             },
 
-            "autoCompleteFields":["familyName", "caste"],
+            
             "defaultVisitType": "OPD",
             "searchByIdForwardUrl": "/patient/{{patientUuid}}",
             "showMiddleName": true,
@@ -78,13 +79,13 @@
                 "Tel 1 du Contact" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
                 "Tel 2 du Contact" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
                 "givenName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
+>>>>>>> #6 Pritam |Translation for Audit logs
                 "middleName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
                 "familyName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
                 "Nom du contact" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
                 "Lieu de depistage" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Devrait contenir des caractères (longueur max 50)"},
                 "Occupation" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Devrait contenir des caractères (longueur max 10)"},
                 "Nombre d'années d'étude" : {"pattern" : "[0-25]{0,2}", "errorMessage" : "Doit contenir le numéro 0 à 25"}
-       
             },
             "patientSearch": {
                 "address": {
