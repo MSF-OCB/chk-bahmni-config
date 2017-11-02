@@ -59,7 +59,8 @@
   "MODULE_LABEL_ADMIN_KEY": "Administrateur",
   "MODULE_LABEL_PROGRAMS_KEY": "programmes",
   "LOGIN_LABEL_LOGIN_ERROR_MESSAGE_KEY": "Vous n'êtes pas authentifié ou la session est expirée. Veuillez réessayer",
-  "LOGIN_UNSUPPORTED_BROWSER_KEY": "Bahmni est supporté entièrement seulement sur Google Chrome."
+  "LOGIN_UNSUPPORTED_BROWSER_KEY": "Bahmni est supporté entièrement seulement sur Google Chrome.",
+  "BAHMNI_HOME_TRANSLATION_KEY" : "BAHMNI"
 
 
 }

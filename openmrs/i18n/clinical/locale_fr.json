@@ -13,5 +13,14 @@
   "DASHBOARD_TAB_TRENDS_KEY": "Les tendances",
   "DASHBOARD_TAB_PATIENT_SUMMARY_KEY": "Résumé du patient",
   "DASHBOARD_TAB_DISCHARGE_SUMMARY_KEY": "Résumé de décharge",
-  "DASHBOARD_TAB_ORDERS_KEY": "Demandes"
+  "DASHBOARD_TAB_ORDERS_KEY": "Demandes",
+  "DASHBOARD_TITLE_VISITS_KEY" : "Visites",
+  "DASHBOARD_TITLE_PRINT_KEY":"ABCD",
+
+
+  "ORDERS_BOARD_LABEL_KEY" : "Demandes",
+  "INVESTIGATION_CHART_KEY":"Tableau d'enquête",
+  "PATIENT_REGISTRATION_PAGE_KEY" : "Enregistrement",
+  "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY" : "Visiter la page d'attribut"
+
 }
