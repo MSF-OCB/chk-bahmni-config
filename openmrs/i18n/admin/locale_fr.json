@@ -1,5 +1,6 @@
 {
-
+"PATIENT_ID": "ID du patient",
+"INVALID_DATE": "Veuillez entrer une date valide!!",
 "PATIENT_ID": "ID du patient",
 "INVALID_DATE": "Veuillez entrer une date valide!!",
 "VIEWED_CLINICAL_DASHBOARD_MESSAGE": "Utilisateur {{userId}} a accédé(e) au tableau clinique de patient(e) {{patientId}}.",
@@ -26,6 +27,10 @@
 "MATCHING_EVENTS_NOT_FOUND": "Aucun résultat trouvé pour les critères donnés.",
 "INVALID_DATE": "Veuillez saisir une date valide.",
 "NO_EVENTS_FOUND": "Aucun événement à afficher.",
-"NO_MORE_EVENTS_FOUND": "Plus d'événements à afficher."
-
+"NO_MORE_EVENTS_FOUND": "Plus d'événements à afficher.",
+"EVENT_ID": "Identifiant d'événement ",
+"CREATED_AT": "Créé à",
+"EVENT_TYPE": "Type d'événement",
+"USERNAME" : "Nom d'utilisateur",
+"MESSAGE" : "Message"
 }
