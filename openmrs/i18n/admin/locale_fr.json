@@ -1,9 +1,9 @@
 {
-"PATIENT_ID": "ID du patient",
-"INVALID_DATE": "Veuillez entrer une date valide!!",
-"PATIENT_ID": "ID du patient",
-"INVALID_DATE": "Veuillez entrer une date valide!!",
-"VIEWED_CLINICAL_DASHBOARD_MESSAGE": "Utilisateur {{userId}} a accédé(e) au tableau clinique de patient(e) {{patientId}}.",
+"PATIENT_ID": "ID du/de la patient(e)",
+"INVALID_DATE": "Veuillez saisir une date valide",
+"PATIENT_ID": "ID du/de la patient(e)",
+"INVALID_DATE": "Veuillez saisir une date valide",
+"VIEWED_CLINICAL_DASHBOARD_MESSAGE": "Utilisateur {{userId}} a accédé(e) au tableau clinique du/de la patient(e) {{patientId}}.",
 "VIEWED_PATIENT_SEARCH_MESSAGE": " Utilisateur {{userId}} a accédé(e) à la page de recherche.",
 "VIEWED_OBSERVATIONS_TAB_MESSAGE": " Utilisateur {{userId}} a accédé(e) aux observations du/de la patient(e) {{patientId}}.",
 "VIEWED_TREATMENT_TAB_MESSAGE": " Utilisateur {{userId}} a accédé(e) à l'onglet de traitement du/de la patient(e) {{patientId}}.",
@@ -34,3 +34,4 @@
 "USERNAME" : "Nom d'utilisateur",
 "MESSAGE" : "Message"
 }
+
