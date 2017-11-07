@@ -14,12 +14,12 @@
 
 - name: Download bahmni-lab yum repo rpm if not present
   get_url:
-    url: http://s3.ap-south-1.amazonaws.com/ocg-repos/lab_artifacts/bahmni-lab-89-84.noarch.rpm
-    dest: /tmp/bahmni-lab-89-84.noarch.rpm
+    url: http://s3.ap-south-1.amazonaws.com/ocg-repos/lab_artifacts/bahmni-lab-89-85.noarch.rpm
+    dest: /tmp/bahmni-lab-89-85.noarch.rpm
     force: yes
 
 - name: Install bahmni-lab yum repository
-  yum: name=/tmp/bahmni-lab-89-84.noarch.rpm state=present
+  yum: name=/tmp/bahmni-lab-89-85.noarch.rpm state=present
   
 - name: "Start bahmni-lab"
   service: "name=bahmni-lab state=started"
