@@ -2,7 +2,7 @@
 - 
   name: "Stop bahmni-lab"
   service: "name=bahmni-lab state=stopped"
-  when: "passive is not defined or passive != 'yes'"
+  
 - 
   name: "Uninstall bahmni-lab rpm"
   when: "installed_bahmni_lab.stdout.find(\"{{ bahmni_lab_version }}\") == -1"
