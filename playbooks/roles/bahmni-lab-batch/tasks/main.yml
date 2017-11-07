@@ -2,7 +2,11 @@
 - 
   name: "Stop bahmni-lab"
   service: "name=bahmni-lab state=stopped"
-  
+- 
+  command: "yum list installed bahmni-lab"
+  ignore_errors: true
+  name: "Check if bahmni-lab rpm needs an update"
+  register: installed_bahmni_lab
 - 
   name: "Uninstall bahmni-lab rpm"
   when: "installed_bahmni_lab.stdout.find(\"{{ bahmni_lab_version }}\") == -1"
