@@ -8,6 +8,6 @@
   yum_repository:
     name: bahmni-lab-89-83.noarch.rpm
     description: Bahmni-lab repo build internally
-    baseurl: https://s3.ap-south-1.amazonaws.com/ocg-repos/lab_artifacts/bahmni-lab-89-83.noarch.rpm
+    baseurl: https://s3.ap-south-1.amazonaws.com/ocg-repos/lab_artifacts/bahmni-lab-89-84.noarch.rpm
     state: present
 
