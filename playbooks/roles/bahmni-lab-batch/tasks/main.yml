@@ -4,10 +4,8 @@
     state=stopped
   when: passive is not defined or passive != 'yes'
 
-- name: Add bahmni-lab repository
-  yum_repository:
-    name: bahmni-lab-89-83.noarch.rpm
-    description: Bahmni-lab repo build internally
-    baseurl: https://s3.ap-south-1.amazonaws.com/ocg-repos/lab_artifacts/bahmni-lab-89-83.noarch.rpm
-    state: present
-
+- name: Download bahmni-lab yum repo rpm if not present
+  get_url:
+    url: http://s3.ap-south-1.amazonaws.com/ocb-repos/lab_artifacts/bahmni-lab-89-86.noarch.rpm
+    dest: /tmp/bahmni-lab-89-86.noarch.rpm
+    force: yes
