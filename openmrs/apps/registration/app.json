@@ -72,6 +72,13 @@
             "isLastNameMandatory": true,
             "showCasteSameAsLastNameCheckbox": false,
             "disablePhotoCapture": true,
+             "printOptions": [
+                {
+                    "translationKey": "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER",
+                    "templateUrl": "/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/print.html",
+                    "shortcutKey": "r"
+                }
+            ],
             "fieldValidation" : {
                 "Tel 1" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
                 "Tel 2" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},

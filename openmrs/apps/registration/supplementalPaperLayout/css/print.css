@@ -1,15 +1,51 @@
+@page {
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
+  margin-top: 0.5cm;
+  margin-bottom: 0.5cm;
+}
 .row {
     float: clear;
+}
+.rowx {
+    clear:both;
 }
 .left {
     width: 50%;
     float: left;
+    font-size: 15px;
+    text-align: left;
 }
 .right {
     width: 50%;
     float: left;
+    font-size: 15px;
+    text-align: right;
 }
-
+.middle {
+    width: 50%;
+    float: left;
+    font-size: 15px;
+    text-align: middle;
+}
+.center {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
 .label {
     font-weight: bold;
+}
+
+.col {
+    width:  33%;
+    text-align: left;
+}
+.colu{
+    width:25%;
+    text-align: left;
+}
+.bold{
+  font-size: 15px;
+  font-weight: bold;
 }

@@ -1,52 +1,150 @@
 <link rel="stylesheet" href="/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/css/print.css"/>
+
+<div class="center"><span >FICHE D'IDENTIFICATION SOCIALE</span></div>
+<br>
+<hr>
 <div>
-    <style>
-    </style>
-    <div class="row">
+
+     <div class="row">
         <div class="left">
-            <span class="label">ओपीडी क्र.:</span>
-            <span></span>
-        </div>
-        <div class="right">
-            <span class="label">दिनांक:</span>
-            <span>{{today | date:'dd/MM/yyyy'}}</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="left">
-            <span class="label">पंजी. क्र.:</span>
+            <span class="label">ID Patient :</span>
             <span>{{patient.primaryIdentifier.identifier}}</span>
         </div>
-        <div class="right">
-            <span class="label">गाँव:</span>
-            <span>{{patient.address.cityVillage}}</span>
+        <div class="right col">
+            <span class="label">Date dépistage :</span>
+            <span>{{patient['Date depistage']| date:'dd/MM/yyyy'}}</span>
+
+        </div>
+     </div>
+     <br/>
+     <br/>
+     <div class="rowx">
+        <div class="left col">
+            <span class="label">Nom :</span>
+            <span>{{patient.givenName}} </span>
+
+        </div>
+        <div class="middle col">
+            <span class="label">Postnom :</span>
+            <span>{{patient.middleName}} </span>
+        </div>
+        <div class="right col">
+            <span class="label">Prénom :</span>
+            <span>{{patient.familyName}} </span>
+        </div>
+     </div>
+     <br/>
+     <br/>
+     <div class="row">
+        <div class="left col">
+           <span class="label">Sexe :</span>
+           <span>{{patient.gender}} </span>
+        </div>
+        <div class="middle col">
+           <span class="label">Date Naissance :</span>
+           <span>{{patient.birthdate | date:'dd/MM/yyyy'}}</span>
+        </div>
+        <div class="right col">
+           <span class="label">Province de provenance :</span>
+           <span>{{patient['Province de provenance'].value}}</span>
+        </div>
+     </div>
+     <br/>
+     <br/>
+     <div class="row">
+        <div class="left col">
+           <span class="label">Etat Civil :</span>
+           <span>{{patient['Etat Civil'].value}}</span>
+        </div>
+        <div class="right col">
+          <span class="label">Situation Parental :</span>
+          <span>{{patient['Situation Parental(enfants)'].value}}</span>
+        </div>
+     </div>
+     <br/>
+     <br/>
+     <div class="rowx">
+         <div class="left bold">
+            <span class="label">Domicile<span>
+        </div>
+     </div>
+     <br/>
+     <br/>
+     <div class="rowx">
+         <div class="left">
+           <span class="label">Commune :</span>
+           <span>{{patient.address.address6}} </span>
+        </div>
+        <div class="right col">
+          <span class="label">Quartier :</span>
+          <span>{{patient.address.address4}} </span>
         </div>
     </div>
-    <div class="row">
+    <br/>
+    <div class="rowx">
         <div class="left">
-            <span class="label">नाम:</span>
-            <span>{{patient.fullNameLocal() || patient.name}}</span>
+          <span class="label">Rue :</span>
+          <span>{{patient.address.address3}}</span>
         </div>
-        <div class="right">
-            <span class="label">जिला:</span>
-            <span>{{patient.address.countyDistrict}}</span>
+
+        <div class="right col">
+          <span class="label">No :</span>
+          <span> {{patient.address.address2}}</span>
         </div>
     </div>
-    <div class="row">
+    <br/>
+    <div class="rowx">
+          <div class="left">
+              <span class="label">Indicateur de localisation :</span>
+              <span> {{patient.address.address5}}</span>
+          </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="rowx">
         <div class="left">
-            <span class="label">पिता/पति का नाम:</span>
-            <span>{{patient.primaryRelative}}</span>
-        </div>  
-        <div class="right">
-            <span class="label">उम्र/लिंग:</span>
-            <span>{{patient.age.years || "0"}}</span>
-            <span ng-show="patient.gender">/ {{patient.gender}}</span>
+          <span class="label">Tel :</span>
+          <span> {{patient['Tel 1']}}</span>
         </div>
     </div>
-    <div class="row">
+    <div class="rowx">
         <div class="left">
-            <span class="label">वज़न:</span>
-            <span>{{obs.WEIGHT}}</span>
+          <span class="label">Nom du contact :</span>
+          <span> {{patient['Nom du contact']}}</span>
         </div>
+    </div>
+    <div class="rowx">
+        <div class="left">
+          <span class="label">Tél du contact :</span>
+          <span> {{patient['Tel 1 du Contact']}}</span>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="rowx">
+        <div class="left bold">
+           <span class="label">Informations Diverses :<span>
+       </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="rowx">
+        <div class="left">
+          <span class="label">Membre d'un réseau PVVIH :</span>
+          <span> {{patient["Membre d'un réseau PVVIH"].value}}</span>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="rowx">
+
+          <div class="left">
+              <span class="label">Date:</span>
+              <span>{{today | date:'dd/MM/yyyy'}}</span>
+          </div>
     </div>
 </div>
