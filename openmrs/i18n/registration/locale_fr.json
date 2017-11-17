@@ -79,7 +79,7 @@
   "REGISTRATION_PATIENT_MEDICAL_INFORMATION":"Information médicale pour le patient",
   "REGISTRATION_PRINT_REG_CARD_KEY":"<u>P</u>rint carte d'enregistrement",
   "REGISTRATION_PRINT_REG_CARD_LOCAL_KEY" : "Imprimer Reg . Carte(<u>L</u>Ocal)",
-  "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER":"P<u>r</u>int papier supplémentaire",
+  "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER":"P<u>r</u>int enregistrement du patient",
   "REGISTRATION_RELATIONSHIPS_ACCESS_KEY": "l",
   "REGISTRATION_SEARCH_CONFIG_ACCESS_KEY": "e",
   "REGISTRATION_SEARCH_CONFIG_KEY": "<u>R</u>echerche",

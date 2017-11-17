@@ -41,7 +41,7 @@
                     "numberOfVisits":1,
                     "showChart": true,
                     "showTable":true,
-                    "showDetailsButton":false,
+                    "showDetailsButton":true,
                     "initialAccessionCount":0,
                     "latestAccessionCount":1
                 },
