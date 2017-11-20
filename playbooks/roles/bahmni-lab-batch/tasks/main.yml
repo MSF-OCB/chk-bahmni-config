@@ -14,7 +14,7 @@
 
 - name: Download bahmni-lab yum repo rpm if not present
   get_url:
-    url: http://s3.ap-south-1.amazonaws.com/ocb-repos/lab_artifacts/bahmni-lab-89-87.noarch.rpm
+    url: http://s3.ap-south-1.amazonaws.com/ocb-repos/lab_artifacts/bahmni-lab-89-89.noarch.rpm
     dest: /tmp/bahmni-lab-89-87.noarch.rpm
     force: yes
 
