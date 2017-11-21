@@ -19,7 +19,7 @@
     force: yes
 
 - name: Install bahmni-lab yum repository
-  yum: name=/tmp/bahmni-lab-89-87.noarch.rpm state=present
+  yum: name=/tmp/bahmni-lab-89-96.noarch.rpm state=present
   
 - name: "Start bahmni-lab"
   service: "name=bahmni-lab state=started"
