@@ -59,13 +59,8 @@
                 "showAddressFieldsTopDown": false,
                 "strictAutocompleteFromLevel": ""
             },
-            "relationshipTypeMap": {
-                "Doctor":"provider",
-                "Parent":"patient"
-            },
 
             "defaultVisitType": "OPD",
-            "searchByIdForwardUrl": "/patient/{{patientUuid}}",
             "showMiddleName": true,
             "showLastName": true,
             "showBirthTime": false,
