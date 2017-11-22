@@ -4,6 +4,7 @@
   roles:
     - { role: bahmni-mrs-batch }
    
+   
 - hosts: bahmni-lab
   become: yes
   roles:

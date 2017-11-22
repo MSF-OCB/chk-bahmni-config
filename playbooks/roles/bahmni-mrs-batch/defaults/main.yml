@@ -1,5 +1,3 @@
-bahmniapps_url: "https://s3.ap-south-1.amazonaws.com/ocb-repos/ocb-bahmniapps/bahmniapps-34.zip"
 id_gen_url: "https://s3.ap-south-1.amazonaws.com/ocb-repos/idGen.sh"
-bahmni_omod_url: "https://s3.ap-south-1.amazonaws.com/ocb-repos/bahmnicore-omod-0.90-SNAPSHOT.omod"
 bahmni_user: bahmni
 bahmni_group: bahmni
