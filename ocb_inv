@@ -51,6 +51,7 @@ localhost
 [mysql-backup-tool]
 
 [postgres-backup-tool]
+localhost
 
 [bahmni-backup-artifacts]
 
