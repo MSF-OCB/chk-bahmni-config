@@ -79,7 +79,7 @@
   "REGISTRATION_PATIENT_MEDICAL_INFORMATION":"Information médicale pour le patient",
   "REGISTRATION_PRINT_REG_CARD_KEY":"<u>P</u>rint carte d'enregistrement",
   "REGISTRATION_PRINT_REG_CARD_LOCAL_KEY" : "Imprimer Reg . Carte(<u>L</u>Ocal)",
-  "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER":"P<u>r</u>int enregistrement du patient",
+  "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER":"Imprimer les informations",
   "REGISTRATION_RELATIONSHIPS_ACCESS_KEY": "l",
   "REGISTRATION_SEARCH_CONFIG_ACCESS_KEY": "e",
   "REGISTRATION_SEARCH_CONFIG_KEY": "<u>R</u>echerche",
@@ -93,6 +93,7 @@
   "REGISTRATION_TITLE_KEY": "Enregistrement des patients",
   "REGISTRATION_TITLE_RELATIONSHIPS":"<u>r</u>apports",
   "REGISTRATION_VIEW_CONFIG_KEY": "Vue",
-  "REGISTRATION_VISIT_CANNOT_BE_CLOSED":"La visite de patient admis ne peut pas être fermé . Décharge du patient et essayez à nouveau"
+  "REGISTRATION_VISIT_CANNOT_BE_CLOSED":"La visite de patient admis ne peut pas être fermé . Décharge du patient et essayez à nouv",
+  "REGISTRATION_HIV_DATE_ERROR_KEY":"Veuillez entrer une date précéde"
 
 }
