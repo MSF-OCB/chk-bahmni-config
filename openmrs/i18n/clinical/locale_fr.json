@@ -1,42 +1,45 @@
 {
   "MODULE_LABEL_ACTIVE_KEY":"Actif",
-  
+  "MODULE_LABEL_ALL_KEY":"Tous",
+
   "MESSAGE_DIALOG_OPTION_COPY":"Erreur de copie",
   "MESSAGE_DIALOG_OPTION_OKAY": "d'accord",
-  
+
   "CLINICAL_SAVE_SUCCESS_MESSAGE_KEY":"Enregistré",
   "CLINICAL_PRINT_TRANSLATION_KEY":"Imprimer",
   "CLINICAL_YEARS_TRANSLATION_KEY":"Années",
   "CLINICAL_MONTHS_TRANSLATION_KEY":"Mois",
   "CLINICAL_DAYS_TRANSLATION_KEY":"Journées",
-  
+
   "SEARCH_NAME_PLACEHOLDER_KEY":"Recherche par nom de patient / ID",
   "SEARCH_KEY":"Recherche",
 
-  
+
   "DASHBOARD_TAB_GENERAL_KEY": "Général",
   "DASHBOARD_TAB_TRENDS_KEY": "Les tendances",
   "DASHBOARD_TAB_PATIENT_SUMMARY_KEY": "Résumé du patient",
   "DASHBOARD_TAB_DISCHARGE_SUMMARY_KEY": "Résumé de décharge",
   "DASHBOARD_TAB_ORDERS_KEY": "Demandes",
   "DASHBOARD_TITLE_VISITS_KEY" : "Visites",
-  "DASHBOARD_TITLE_PRINT_KEY":"ABCD",
+  "DASHBOARD_TITLE_PRINT_KEY":"Imprimer",
+  "DASHBOARD_TITLE_LAB_RESULTS_KEY":"Résultats Lab",
+  "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY": "Commandes Lab Display Control",
 
 
   "ORDERS_BOARD_LABEL_KEY" : "Demandes",
   "INVESTIGATION_CHART_KEY":"Tableau d'enquête",
-  
+
   "PATIENT_REGISTRATION_PAGE_KEY" : "Enregistrement",
   "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY" : "Visiter la page d'attribut",
   "PATIENT_DOCUMENT_TRANSLATION_KEY": "Documents patients",
-  
-  
+
+
   "BAHMNI_HOME_TRANSLATION_KEY": "Bahmni Accueil",
-  
+
   "ENTERING_DATA_FOR_TRANSLATION_KEY":  "Entrer des données pour",
-  
+
   "LOGOUT_TRANSLATION_KEY": "Connectez - Out",
-  
+
   "ALL_KEY" :"Tous",
 
   "DISPLAY_CONTROL_ERROR_MESSAGE_KEY":"Pas de {{displayControl}} pour ce patient",
