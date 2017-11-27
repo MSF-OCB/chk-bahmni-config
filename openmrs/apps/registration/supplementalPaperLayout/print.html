@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/css/print.css"/>
+<img src="/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/msf_logo/msf.jpg" style="height: 18mm; "/>
 
 <div class="center"><span >FICHE D'IDENTIFICATION SOCIALE</span></div>
-<br>
+<br/>
 <hr>
 <div>
-
-     <div class="row">
+    <div class="row">
         <div class="left">
             <span class="label">ID Patient :</span>
             <span>{{patient.primaryIdentifier.identifier}}</span>
@@ -13,81 +13,68 @@
         <div class="right col">
             <span class="label">Date dépistage :</span>
             <span>{{patient['Date depistage']| date:'dd/MM/yyyy'}}</span>
-
-        </div>
-     </div>
-     <br/>
-     <br/>
-     <div class="rowx">
-        <div class="left col">
-            <span class="label">Nom :</span>
-            <span>{{patient.givenName}} </span>
-
-        </div>
-        <div class="middle col">
-            <span class="label">Postnom :</span>
-            <span>{{patient.middleName}} </span>
-        </div>
-        <div class="right col">
-            <span class="label">Prénom :</span>
-            <span>{{patient.familyName}} </span>
-        </div>
-     </div>
-     <br/>
-     <br/>
-     <div class="row">
-        <div class="left col">
-           <span class="label">Sexe :</span>
-           <span>{{patient.gender}} </span>
-        </div>
-        <div class="middle col">
-           <span class="label">Date Naissance :</span>
-           <span>{{patient.birthdate | date:'dd/MM/yyyy'}}</span>
-        </div>
-        <div class="right col">
-           <span class="label">Province de provenance :</span>
-           <span>{{patient['Province de provenance'].value}}</span>
-        </div>
-     </div>
-     <br/>
-     <br/>
-     <div class="row">
-        <div class="left col">
-           <span class="label">Etat Civil :</span>
-           <span>{{patient['Etat Civil'].value}}</span>
-        </div>
-        <div class="right col">
-          <span class="label">Situation Parental :</span>
-          <span>{{patient['Situation Parental(enfants)'].value}}</span>
-        </div>
-     </div>
-     <br/>
-     <br/>
-     <br/>
-     <div class="rowx">
-         <div class="left bold">
-            <span class="label">Domicile<span>
-        </div>
-     </div>
-     <br/>
-     <br/>
-     <div class="rowx">
-         <div class="left">
-           <span class="label">Commune :</span>
-           <span>{{patient.address.address6}} </span>
-        </div>
-        <div class="right col">
-          <span class="label">Quartier :</span>
-          <span>{{patient.address.address4}} </span>
         </div>
     </div>
     <br/>
     <div class="rowx">
         <div class="left">
-          <span class="label">Rue :</span>
-          <span>{{patient.address.address3}}</span>
+            <span class="label">Noms :</span>
+            <span>{{patient.givenName}} {{patient.middleName}} {{patient.familyName}} </span>
         </div>
-
+        <div class="right col">
+            <span class="label">Sexe :</span>
+            <span>{{patient.gender}} </span>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="left">
+            <span class="label">Date Naissance :</span>
+            <span>{{patient.birthdate | date:'dd/MM/yyyy'}}</span>
+        </div>
+        <div class="right col">
+            <span class="label">Province de provenance :</span>
+            <span>{{patient['Province de provenance'].value}}</span>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="left">
+            <span class="label">Etat Civil :</span>
+            <span>{{patient['Etat Civil'].value}}</span>
+        </div>
+        <div class="right col">
+            <span class="label">Situation Parental :</span>
+            <span>{{patient['Situation Parental(enfants)'].value}}</span>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="rowx">
+        <div class="left bold">
+            <span class="label">Domicile<span>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="rowx">
+        <div class="left">
+            <span class="label">Commune :</span>
+            <span>{{patient.address.address6}} </span>
+        </div>
+        <div class="right col">
+            <span class="label">Quartier :</span>
+            <span>{{patient.address.address4}} </span>
+        </div>
+    </div>
+    <br/>
+    <div class="rowx">
+        <div class="left">
+            <span class="label">Rue :</span>
+            <span>{{patient.address.address3}}</span>
+        </div>
         <div class="right col">
           <span class="label">Indicateur de localisation :</span>
           <span> {{patient.address.address5}}</span>
@@ -101,50 +88,193 @@
         </div>
     </div>
     <br/>
-    <br/>
     <div class="rowx">
         <div class="left">
-          <span class="label">Tel :</span>
-          <span> {{patient['Tel 1']}}</span>
-        </div>
-    </div>
-    <div class="rowx">
-        <div class="left">
-          <span class="label">Nom du contact :</span>
-          <span> {{patient['Nom du contact']}}</span>
-        </div>
-    </div>
-    <div class="rowx">
-        <div class="left">
-          <span class="label">Tél du contact :</span>
-          <span> {{patient['Tel 1 du Contact']}}</span>
+            <span class="label">Tel :</span>
+            <span> {{patient['Tel 1']}}</span>
         </div>
     </div>
     <br/>
+    <br/>
+    <div class="rowx">
+        <div class="left">
+            <span class="label">Nom du contact :</span>
+            <span> {{patient['Nom du contact']}}</span>
+        </div>
+    </div>
+    <br/>
+    <div class="rowx">
+        <div class="left">
+            <span class="label">Tél du contact :</span>
+            <span> {{patient['Tel 1 du Contact']}}</span>
+        </div>
+    </div>
     <br/>
     <br/>
     <div class="rowx">
         <div class="left bold">
-           <span class="label">Informations Diverses<span>
-       </div>
+            <span class="label">Informations Diverses<span>
+        </div>
     </div>
     <br/>
     <br/>
     <div class="rowx">
         <div class="left">
-          <span class="label">Membre d'un réseau PVVIH :</span>
-          <span> {{patient["Membre d'un réseau PVVIH"].value}}</span>
+            <span class="label">Education :</span>
+            <span> {{patient["Niveau d'etudes"].value}}</span>
+        </div>
+        <div class="right col">
+            <span class="label">Occupation :</span>
+            <span> {{patient["Occupation"]}}</span>
+        </div>
+    </div>
+    <br/>
+    <div class="rowx">
+        <div class="left">
+            <span class="label">Membre d'un réseau PVVIH :</span>
+            <span> {{patient["Membre d'un réseau PVVIH"].value}}</span>
+        </div>
+        <div class="right col">
+            <span class="label">Frequente un Tradipraticien :</span>
+            <span> {{patient["Frequente un Tradipraticien"].value}}</span>
         </div>
     </div>
     <br/>
     <br/>
-    <br/>
-    <br/>
     <div class="rowx">
-
-          <div class="left">
-              <span class="label">Date d'exécution du rapport :</span>
-              <span>{{today | date:'dd/MM/yyyy'}}</span>
-          </div>
+        <div class="left bold">
+            <span class="label">Membre Famille<span>
+        </div>
     </div>
+    <br/>
+    <br/>
+    <head>
+        <style>
+            table, th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+            th {
+            padding: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <table style="width:100%">
+            <col width="150">
+            <col width="300">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <tr>
+                <th>Lien</th>
+                <th>Nom</th>
+                <th>Date Naissance
+                    (jj/mm/aaaa)
+                </th>
+                <th>Informé du statut HIV patient (Oui/Non)</th>
+                <th>Résultat
+                    (+/-)
+                </th>
+                <th>No CHK</th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        <div class="rowx">
+            <div class="left col">
+                <span class="label">Nom du confident 1 :<span>
+            </div>
+            <div class="left col">
+                <span class="label">Lien :<span>
+            </div>
+            <div class="left col">
+                <span class="label">Tél :<span>
+            </div>
+        </div>
+        <br/>
+        <div class="rowx">
+            <div class="left col">
+                <span class="label">Nom du confident 2 :<span>
+            </div>
+            <div class="left col">
+                <span class="label">Lien :<span>
+            </div>
+            <div class="left col">
+                <span class="label">Tél :<span>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="rowx">
+            <div class="left">
+                <span class="label">Date d'exécution du rapport :</span>
+                <span>{{today | date:'dd/MM/yyyy'}}</span>
+            </div>
+        </div>
 </div>
