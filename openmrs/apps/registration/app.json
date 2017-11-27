@@ -16,11 +16,11 @@
             "patientUuid",
             "activeVisitUuid"
         ],
-        
+
         "config" : {
-            
+
             "patientInformation": {
-                 "contactInformation": {            
+                 "contactInformation": {
                           "title": "Informations de contact",
                           "translationKey": "REGISTRATION_CONTACT_INFORMATION",
                           "attributes":[
@@ -28,38 +28,31 @@
                                         "Tel 1 du Contact",
                                         "Tel 2 du Contact"]
                                         },
-                
+
                 "patientMedicalInformation": {
                          "title" : "Informations médicaux du patient",
                          "translationKey" : "REGISTRATION_PATIENT_MEDICAL_INFORMATION",
                          "attributes" : ["Date depistage",
                                          "Lieu de depistage",
-                                         "ARV Naif/ Non Naif"       
+                                         "ARV Naif/ Non Naif"
                                         ]
                        },
-            "mandatoryPersonAttributes": ["primaryContact"],
-                          "primaryContact":{ "required": true },
-                "required": {
-                    "attributes": [
-                     "primaryContact"
-                    ]
-                },
                 "hidden": {
                     "attributes": [
 
-                     
+
                     ]
                 },
                 "defaults":  {
-                    
+
                 }
-            
+
             },
             "addressHierarchy": {
                 "showAddressFieldsTopDown": false,
                 "strictAutocompleteFromLevel": ""
             },
-
+            "mandatoryPersonAttributes": ["ARV Naif/ Non Naif"],
             "defaultVisitType": "OPD",
             "showMiddleName": true,
             "showLastName": true,
@@ -84,8 +77,7 @@
                 "familyName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
                 "Nom du contact" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
                 "Lieu de depistage" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
-                "Occupation" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Doit contenir des caractères (longueur max 10)"},
-                "Nombre d'années d'étude" : {"pattern" : "^([01]?[0-9]|2[0-5])$", "errorMessage" : "Doit contenir un numéro entre 0 et 25"}
+                "Occupation" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒ]{0,10}", "errorMessage" : "Doit contenir des caractères (longueur max 10)"}
             },
             "patientSearch": {
                 "address": {
@@ -94,9 +86,9 @@
                     "field": "address6"
 
                 }
-                
-            }    
-            
-        
+
+            }
+
+
     }
 }
