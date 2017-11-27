@@ -9,3 +9,4 @@
   become: yes
   roles:
     - { role: bahmni-lab-batch }
+   
