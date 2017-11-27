@@ -27,7 +27,7 @@
   "CONFIRM_PASSWORD":"Confirmez le mot de passe",
   "PASSWORD_POLICY_HEADER":"Politique de mot de passe",
   "PASSWORD_SHOULD_NOT_MATCH_USER_NAME":"Ne doit pas correspondre au nom d'utilisateur",
-  "PASSWORD_SHOULD_BE_MINIMUM_CHARACTERS":"Devrait comporter au moins 8 caractères",
+  "PASSWORD_SHOULD_BE_MINIMUM_CHARACTERS":"Devrait comporter au moins {0} caractères",
   "PASSWORD_SHOULD_BE_A_MIX_OF_BOTH_UPPER_CASE_AND_LOWER_CASE":"Doit être un mélange de lettres majuscules et minuscules",
   "PASSWORD_SHOULD_CONTAIN_DIGITS":"Devrait contenir au moins un nombre",
   "PASSWORD_SHOULD_HAVE_ATLEAST_ONE_NON_DIGIT":"Devrait contenir au moins un caractère non numérique",
@@ -61,7 +61,11 @@
   "LOGIN_LABEL_LOGIN_ERROR_MESSAGE_KEY": "Vous n'êtes pas authentifié ou la session est expirée. Veuillez réessayer",
   "LOGIN_UNSUPPORTED_BROWSER_KEY": "Bahmni est supporté entièrement seulement sur Google Chrome.",
   "BAHMNI_HOME_TRANSLATION_KEY" : "BAHMNI",
-  "PASSWORD_DOESNOT_MATCH_WITH_NEW_PASSWORD":"Confirmer le mot de passe ne correspond pas au nouveau mot de passe"
+  "PASSWORD_DOESNOT_MATCH_WITH_NEW_PASSWORD":"Confirmer le mot de passe ne correspond pas au nouveau mot de passe",
+  "PASSWORD_SHOULD_MATCH_THE_REGEX": "Devrait correspondre à l'expression rationnelle donnée {{regex}}",
+  "UNABLE_TO_GET_PROVIDER_DATA": "Impossible d'obtenir les données du fournisseur",
+  "YOU_HAVE_NOT_BEEN_SETUP_PROVIDER": "Vous n'avez pas été configuré en tant que fournisseur, veuillez contacter l'administrateur.",
+  "COULD_NOT_GET_PROVIDER": "Impossible d'obtenir le fournisseur pour l'utilisateur actuel."
 
 
 }
