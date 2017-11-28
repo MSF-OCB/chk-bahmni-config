@@ -1,11 +1,11 @@
 {
   "homePage": {
     "header_text": "<b>BIENVENUE À<br />BAHMNI EMR & SERVICE HOSPITALIER",
-    "logo": "/bahmni/images/bahmniLogoFull.png",
+    "logo": "/bahmni/images/Msf_logo.svg.png",
     "title_text": " "
   },
   "loginPage": {
-    "logo": "/bahmni/images/bahmniLogoFull.png",
+    "logo": "/bahmni/images/Msf_logo.svg.png",
     "showHeaderText": true,
     "showTitleText": false
   },
