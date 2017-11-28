@@ -26,7 +26,7 @@
   file: 
     dest: /opt/openmrs/configuration
     group: bahmni
-    mode: 420
+    mode: 644
     owner: bahmni
     src: /var/www/bahmni_config/openmrs/custom/
     state: link

@@ -5,5 +5,8 @@ source $PATH_OF_CURRENT_SCRIPT/vagrant/vagrant_functions.sh
 USER=bahmni
 
 run_in_vagrant -c "sudo rm -rf /var/www/bahmni_config"
-run_in_vagrant -c "sudo ln -s /bahmni/default-config /var/www/bahmni_config"
+run_in_vagrant -c "sudo ln -s /bahmni/ocb-config /var/www/bahmni_config"
 run_in_vagrant -c "sudo chown -h ${USER}:${USER} /var/www/bahmni_config"
+
+run_in_vagrant -c "sudo rm -rf /opt/openmrs/configuration"
+run_in_vagrant -c "sudo ln -s /var/www/bahmni_config/openmrs/custom /opt/openmrs/configuration"
