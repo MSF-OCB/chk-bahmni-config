@@ -63,6 +63,7 @@
  "AUDIT_LOG_TABLE_HEADER_LABEL":"Evènements d'audit",
 "VIEWED_NEW_PATIENT_PAGE_MESSAGE" : "L'utilisateur {{userId}} a accédé à la page nouveau patient",
 "VIEWED_REGISTRATION_PATIENT_SEARCH_MESSAGE" : "L'utilisateur {{userId}} a accédé à la page de recherche patient dans l'application d'enregistrement.",
-"REGISTER_NEW_PATIENT_MESSAGE" : "L'utilisateur {{userId}} a enregistré le patient {{patientId}}"
+"REGISTER_NEW_PATIENT_MESSAGE" : "L'utilisateur {{userId}} a enregistré le patient {{patientId}}",
+ "EDIT_PATIENT_DETAILS_MESSAGE" :"L'utilisateur {{userId}} a modifié les détails du patient {{patientId}}".
 
 }
