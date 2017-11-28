@@ -32,6 +32,14 @@
     state: link
   name: "Linking configuration folder for Initializer module"
 - 
+  copy: 
+    dest: /opt/openmrs/modules/initializer-1.0.1-SNAPSHOT.omod
+    group: bahmni
+    mode: "u=rw,g=r,o=r"
+    owner: bahmni
+    src: /tmp/initializer-1.0.1-SNAPSHOT.omod
+  name: "Install initializer module"
+- 
   name: "Start openmrs"
   service: "name=openmrs state=started"
   when: "passive is not defined or passive != 'yes'"
