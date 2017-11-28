@@ -27,7 +27,7 @@
   "CONFIRM_PASSWORD":"Confirmez le mot de passe",
   "PASSWORD_POLICY_HEADER":"Politique de mot de passe",
   "PASSWORD_SHOULD_NOT_MATCH_USER_NAME":"Ne doit pas correspondre au nom d'utilisateur",
-  "PASSWORD_SHOULD_BE_MINIMUM_CHARACTERS":"Devrait comporter au moins {0} caractères",
+  "PASSWORD_SHOULD_BE_MINIMUM_CHARACTERS":"Devrait comporter au moins {{length}} caractères",
   "PASSWORD_SHOULD_BE_A_MIX_OF_BOTH_UPPER_CASE_AND_LOWER_CASE":"Doit être un mélange de lettres majuscules et minuscules",
   "PASSWORD_SHOULD_CONTAIN_DIGITS":"Devrait contenir au moins un nombre",
   "PASSWORD_SHOULD_HAVE_ATLEAST_ONE_NON_DIGIT":"Devrait contenir au moins un caractère non numérique",
