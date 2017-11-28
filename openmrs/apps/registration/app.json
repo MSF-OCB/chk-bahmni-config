@@ -29,25 +29,16 @@
                                         "Tel 2 du Contact"]
                                         },
 
-                "patientMedicalInformation": {
+                "patientMedicalInformation":
+                {
                          "title" : "Informations médicaux du patient",
                          "translationKey" : "REGISTRATION_PATIENT_MEDICAL_INFORMATION",
                          "attributes" : ["Date depistage",
                                          "Lieu de depistage",
-                                         "ARV Naif/ Non Naif"
-                                        ]
-                       },
-                "hidden": {
-                    "attributes": [
-
-
-                    ]
-                },
-                "defaults":  {
-
-                }
-
-            },
+                                         "ARV Naif/ Non Naif"],
+                                         "expanded": true
+                                       }
+                                    },
             "addressHierarchy": {
                 "showAddressFieldsTopDown": false,
                 "strictAutocompleteFromLevel": ""
