@@ -76,3 +76,6 @@ https://ci-bahmni.thoughtworks.com/go/files/Bahmni_MRS_Master/{Build_Number}/Bui
 }
 
 ```
+
+##### Server Side OpenMRS custom config
+**openmrs/custom** folder holds all the custom config for OpenMRS. For more info check this [link](https://github.com/OCB-MSF/openmrs-module-initializer)  
