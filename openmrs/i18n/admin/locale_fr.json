@@ -17,7 +17,8 @@
   "REGISTRATION_SUNDAYS_HOLIDAY_TEXT_KEY": "Les dimanches sont les jours fériés.",
   "REGISTRATION_SMOKING_INJURIOUS_TEXT_KEY" : "Fumeurs , le tabac à chiquer peut causer le cancer , les maladies cardiaques et asthama .",
   "REGISTRATION_INSTITUTE_NAME_TEXT_KEY": "Jan Swasthya Sahyog",
-  "REGISTRATION_INSTITUTE_REGISTERED_TEXT_KEY": "(Enregistré)",
+  "REGISTRATION_INSTITUTE_REGISTERED_TEXT_KEY": "(Enregistré
+  )",
   "REGISTRATION_INSTITUTE_ADDRESS": "Ganiyari , District - Bilaspur",
   "MODULE_LABEL_ATOMFEED_CONSOLE_KEY":"Atomfeed Console",
   "MODULE_LABEL_REPORTS_KEY": "Rapports",
@@ -61,7 +62,7 @@
   "LOGIN_LABEL_LOGIN_ERROR_MESSAGE_KEY": "Vous n'êtes pas authentifié ou la session est expirée. Veuillez réessayer",
   "LOGIN_UNSUPPORTED_BROWSER_KEY": "Bahmni est supporté entièrement seulement sur Google Chrome.",
   "BAHMNI_HOME_TRANSLATION_KEY" : "BAHMNI",
-  "PASSWORD_DOESNOT_MATCH_WITH_NEW_PASSWORD":"Confirmer le mot de passe ne correspond pas au nouveau mot de passe",
+  "PASSWORD_DOESNOT_MATCH_WITH_NEW_PASSWORD":"Les mots de passes entrés ne sont pas identiques",
   "PASSWORD_SHOULD_MATCH_THE_REGEX": "Devrait correspondre à l'expression rationnelle donnée {{regex}}",
   "UNABLE_TO_GET_PROVIDER_DATA": "Impossible d'obtenir les données du fournisseur",
   "YOU_HAVE_NOT_BEEN_SETUP_PROVIDER": "Vous n'avez pas été configuré en tant que fournisseur, veuillez contacter l'administrateur.",
