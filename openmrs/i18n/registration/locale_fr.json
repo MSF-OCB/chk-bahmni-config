@@ -94,6 +94,6 @@
   "REGISTRATION_TITLE_RELATIONSHIPS":"<u>r</u>apports",
   "REGISTRATION_VIEW_CONFIG_KEY": "Vue",
   "REGISTRATION_VISIT_CANNOT_BE_CLOSED":"La visite de patient admis ne peut pas être fermé . Décharge du patient et essayez à nouv",
-  "REGISTRATION_HIV_DATE_ERROR_KEY":"S'il vous plaît ne pas entrer Date future"
+  "REGISTRATION_HIV_DATE_ERROR_KEY":"S'il vous plaît, ne pas entrer une date future"
 
 }
