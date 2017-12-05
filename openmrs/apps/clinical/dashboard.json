@@ -1,58 +1,53 @@
-{  
-    "general":{  
-        "translationKey":"DASHBOARD_TAB_GENERAL_KEY",
-        "displayByDefault":true,
-        "maxRecentlyViewedPatients":10,
-        "sections":{  
-            "patientInformation":{  
-                "translationKey":"DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
-                "type":"patientInformation",
-                "displayOrder":0,
-                "ageLimit":100,
-                "patientAttributes":["ARV Naif/ Non Naif","Date depistage"],
-                "addressFields":[  
-                    "address6"
-                ]
-            },
-            "labOrdersDisplayControl":{  
-                "translationKey":"DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
-                "type":"ordersControl",
-                "orderType":"Lab Order",
-                "showDetailsButton":true,
-                "displayOrder":1,
-                "dashboardConfig":{  
-                    "conceptNames":[  
-                       
-                    ]
-                },
-                "expandedViewConfig":{  
-                    "conceptNames":[  
-                      
-                    ],
-                    "showDetailsButton":true
-                }
-            },
-            "labResults":{  
-                "translationKey":"DASHBOARD_TITLE_LAB_RESULTS_KEY",
-                "type":"labOrders",
-                "displayOrder":2,
-                "dashboardConfig":{  
-                    "title":null,
-                    "numberOfVisits":1,
-                    "showChart": true,
-                    "showTable":true,
-                    "showDetailsButton":true,
-                    "initialAccessionCount":0,
-                    "latestAccessionCount":1
-                },
-                "expandedViewConfig":{  
-                    "numberOfVisits":10
-                }
-            
-           }
-
-       }    
-    
-    }   
-   
+{
+  "general": {
+    "translationKey": "DASHBOARD_TAB_GENERAL_KEY",
+    "displayByDefault": true,
+    "maxRecentlyViewedPatients": 10,
+    "sections": {
+      "patientInformation": {
+        "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
+        "type": "patientInformation",
+        "displayOrder": 0,
+        "ageLimit": 100,
+        "patientAttributes": [
+          "ARV Naif/ Non Naif",
+          "Date depistage"
+        ],
+        "addressFields": [
+          "address6"
+        ]
+      },
+      "labOrdersDisplayControl": {
+        "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
+        "type": "ordersControl",
+        "orderType": "Lab Order",
+        "showDetailsButton": true,
+        "displayOrder": 1,
+        "dashboardConfig": {
+          "conceptNames": []
+        },
+        "expandedViewConfig": {
+          "conceptNames": [],
+          "showDetailsButton": true
+        }
+      },
+      "labResults": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 2,
+        "dashboardConfig": {
+          "title": null,
+          "numberOfVisits": 1,
+          "showChart": true,
+          "showTable": true,
+          "showDetailsButton": true,
+          "initialAccessionCount": 0,
+          "latestAccessionCount": 1
+        },
+        "expandedViewConfig": {
+          "numberOfVisits": 10
+        }
+      }
+    }
+  }
 }

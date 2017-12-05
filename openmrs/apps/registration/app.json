@@ -1,85 +1,118 @@
 {
-        "id": "bahmni.registration",
-        "instanceOf":"bahmni.template.registration",
-        "description": "Bahmni Patient Registration App",
-        "extensionPoints": [
-            {
-                "id": "org.bahmni.registration.patient.search.result.action",
-                "description": "Bahmni Patient Search Result Action"
-            },
-            {
-                "id": "org.bahmni.registration.patient.next",
-                "description": "After Bahmni Patient Registration, forward url configuration"
-            }
-        ],
-        "contextModel": [
-            "patientUuid",
-            "activeVisitUuid"
-        ],
-
-        "config" : {
-            "showStartVisitButton": false,
-            "patientInformation": {
-                 "contactInformation": {
-                          "title": "Informations de contact",
-                          "translationKey": "REGISTRATION_CONTACT_INFORMATION",
-                          "attributes":[
-                                        "Nom du contact",
-                                        "Tel 1 du Contact",
-                                        "Tel 2 du Contact"]
-                                        },
-
-                "patientMedicalInformation":
-                {
-                         "title" : "Informations médicaux du patient",
-                         "translationKey" : "REGISTRATION_PATIENT_MEDICAL_INFORMATION",
-                         "attributes" : ["Date depistage",
-                                         "Lieu de depistage",
-                                         "ARV Naif/ Non Naif"],
-                                         "expanded": true
-                                       }
-                                    },
-            "addressHierarchy": {
-                "showAddressFieldsTopDown": false,
-                "strictAutocompleteFromLevel": "address6"
-            },
-            "mandatoryPersonAttributes": ["ARV Naif/ Non Naif"],
-            "defaultVisitType": "OPD",
-            "showMiddleName": true,
-            "showLastName": true,
-            "showBirthTime": false,
-            "isLastNameMandatory": true,
-            "showCasteSameAsLastNameCheckbox": false,
-            "disablePhotoCapture": true,
-             "printOptions": [
-                {
-                    "translationKey": "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER",
-                    "templateUrl": "/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/print.html",
-                    "shortcutKey": "r"
-                }
+   "id": "bahmni.registration",
+   "instanceOf": "bahmni.template.registration",
+   "description": "Bahmni Patient Registration App",
+   "extensionPoints": [
+      {
+         "id": "org.bahmni.registration.patient.search.result.action",
+         "description": "Bahmni Patient Search Result Action"
+      },
+      {
+         "id": "org.bahmni.registration.patient.next",
+         "description": "After Bahmni Patient Registration, forward url configuration"
+      }
+   ],
+   "contextModel": [
+      "patientUuid",
+      "activeVisitUuid"
+   ],
+   "config": {
+      "showStartVisitButton": true,
+      "patientInformation": {
+         "contactInformation": {
+            "title": "Informations de contact",
+            "translationKey": "REGISTRATION_CONTACT_INFORMATION",
+            "attributes": [
+               "Nom du contact",
+               "Tel 1 du Contact",
+               "Tel 2 du Contact"
+            ]
+         },
+         "patientMedicalInformation": {
+            "title": "Informations médicaux du patient",
+            "translationKey": "REGISTRATION_PATIENT_MEDICAL_INFORMATION",
+            "attributes": [
+               "Date depistage",
+               "Lieu de depistage",
+               "ARV Naif/ Non Naif"
             ],
-            "fieldValidation" : {
-                "Tel 1" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
-                "Tel 2" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
-                "Tel 1 du Contact" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
-                "Tel 2 du Contact" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
-                "givenName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
-                "middleName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
-                "familyName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
-                "Nom du contact" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
-                "Lieu de depistage" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
-                "Occupation" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,10}", "errorMessage" : "Doit contenir des caractères (longueur max 10)"}
-            },
-            "patientSearch": {
-                "address": {
-                    "label": "Commune",
-                    "placeholder": "Saisissez la commune",
-                    "field": "address6"
+            "expanded": true
+         }
+      },
+      "addressHierarchy": {
+         "showAddressFieldsTopDown": false,
+         "strictAutocompleteFromLevel": "address6"
+      },
+      "mandatoryPersonAttributes": [
+         "ARV Naif/ Non Naif"
+      ],
+      "defaultVisitType": "OPD",
+      "showMiddleName": true,
+      "showLastName": true,
+      "showBirthTime": false,
+      "isLastNameMandatory": true,
+      "showCasteSameAsLastNameCheckbox": false,
+      "disablePhotoCapture": true,
+      "printOptions": [
+         {
+            "translationKey": "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER",
+            "templateUrl": "/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/print.html",
+            "shortcutKey": "r"
+         }
+      ],
+      "fieldValidation": {
+         "Tel 1": {
+            "pattern": "[0-9]{10}",
+            "errorMessage": "Doit contenir 10 chiffres"
+         },
+         "Tel 2": {
+            "pattern": "[0-9]{10}",
+            "errorMessage": "Doit contenir 10 chiffres"
+         },
+         "Tel 1 du Contact": {
+            "pattern": "[0-9]{10}",
+            "errorMessage": "Doit contenir 10 chiffres"
+         },
+         "Tel 2 du Contact": {
+            "pattern": "[0-9]{10}",
+            "errorMessage": "Doit contenir 10 chiffres"
+         },
+         "givenName": {
+            "pattern": "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}",
+            "errorMessage": "Doit contenir des caractères (longueur max 50)"
+         },
+         "middleName": {
+            "pattern": "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}",
+            "errorMessage": "Doit contenir des caractères (longueur max 50)"
+         },
+         "familyName": {
+            "pattern": "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}",
+            "errorMessage": "Doit contenir des caractères (longueur max 50)"
+         },
+         "Nom du contact": {
+            "pattern": "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}",
+            "errorMessage": "Doit contenir des caractères (longueur max 50)"
+         },
+         "Lieu de depistage": {
+            "pattern": "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}",
+            "errorMessage": "Doit contenir des caractères (longueur max 50)"
+         },
+         "Occupation": {
+            "pattern": "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,10}",
+            "errorMessage": "Doit contenir des caractères (longueur max 10)"
+         },
+         "registrationNumber": {
+            "pattern": "^[0-9,\/]+$",
+            "errorMessage": "Entrer seulement les numéros pour l'identification du patient"
+         }
 
-                }
-
-            }
-
-
-    }
+      },
+      "patientSearch": {
+         "address": {
+            "label": "Commune",
+            "placeholder": "Saisissez la commune",
+            "field": "address6"
+         }
+      }
+   }
 }
