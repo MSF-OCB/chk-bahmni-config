@@ -57,5 +57,4 @@
     name: yearly_id_change
     special_time: "yearly"
     job: "/etc/bahmni-installer/idGen.sh"
-  when: active
 
