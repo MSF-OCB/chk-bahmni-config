@@ -52,3 +52,10 @@
   get_url: "url={{ id_gen_url }} force=yes dest=/etc/bahmni-installer/ owner={{ bahmni_user }} group={{ bahmni_group }} mode=755"
   name: "Download Id generation script file for bahmni Registration ID"
 
+- name: Configure yearly id cronjob
+  cron:
+    name: yearly_id_change
+    special_time: "yearly"
+    job: "/etc/bahmni-installer/idGen.sh"
+  when: active
+
