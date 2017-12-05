@@ -3,10 +3,10 @@ export pass=`grep OPENMRS_DB_PASSWORD /etc/bahmni-installer/bahmni.conf |cut -f 
 
 mysql -uroot -p${pass} openmrs << EOF
 start transaction;
-update idgen_seq_id_gen set prefix = Concat('CHK', substring(now(), 3, 2)) where prefix like 'CHK%';
-update idgen_seq_id_gen set next_sequence_value = 0001 where prefix like 'CHK%';
-update idgen_seq_id_gen set prefix = Concat('CP', substring(now(), 3, 2)) where prefix like 'CP%';
-update idgen_seq_id_gen set next_sequence_value = 0001 where prefix like 'CP%';
+update idgen_seq_id_gen set next_sequence_value = Concat(substring(now(), 3, 2),'0001') where prefix like 'CHK';
+update idgen_seq_id_gen set first_identifier_base = Concat(substring(now(), 3, 2),'0000') where prefix like 'CHK';
+update idgen_seq_id_gen set next_sequence_value = Concat(substring(now(), 3, 2),'0001') where prefix like 'CP';
+update idgen_seq_id_gen set first_identifier_base = Concat(substring(now(), 3, 2),'0000') where prefix like 'CP';
 commit;
 EOF
 
