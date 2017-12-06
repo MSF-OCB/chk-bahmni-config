@@ -50,7 +50,7 @@
                "Nom_Dep",
                "Informé du statut VIH du patient_Dep",
                "Résultat_Dep",
-               "Date de naissance_Dep(Age c'est plus simple)"
+               "Date de naissance_Dep"
             ]
          },
          "patientConfidentInformation":
