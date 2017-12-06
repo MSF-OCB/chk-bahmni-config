@@ -67,6 +67,9 @@
                "Tel_Conf 2",
                "Lien 2"
             ]
+         },
+         "defaults":{
+         "Résultat_Dep":"Non connu"
          }
       },
       "addressHierarchy": {
