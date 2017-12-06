@@ -105,7 +105,6 @@
             "pattern": "^[0-9,\/]+$",
             "errorMessage": "Entrer seulement les numéros pour l'identification du patient"
          }
-
       },
       "patientSearch": {
          "address": {
