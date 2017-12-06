@@ -16,6 +16,7 @@
       "patientUuid",
       "activeVisitUuid"
    ],
+
    "config": {
       "showStartVisitButton": true,
       "patientInformation": {
@@ -37,6 +38,35 @@
                "ARV Naif/ Non Naif"
             ],
             "expanded": true
+         },
+         "patientDependentInformation":
+                {
+            "title" : "Informations Des Dependents",
+            "translationKey" : "REGISTRATION_PATIENT_DEPENDENT_INFORMATION",
+            "attributes" : [
+               "Lien_Dep",
+               "No CHK_Dep",
+               "Prénom_Dep",
+               "Nom_Dep",
+               "Informé du statut VIH du patient_Dep",
+               "Résultat_Dep",
+               "Date de naissance_Dep(Age c'est plus simple)"
+            ]
+         },
+         "patientConfidentInformation":
+                {
+            "title" : "Informations Des Confidents",
+            "translationKey" : "REGISTRATION_PATIENT_CONFIDENT_INFORMATION",
+            "attributes" : [
+               "Prénom du Confident 1",
+               "Nom du Confident 1",
+               "Tel_Conf 1",
+               "Lien 1",
+               "Prénom du Confident 2",
+               "Nom du Confident 2",
+               "Tel_Conf 2",
+               "Lien 2"
+            ]
          }
       },
       "addressHierarchy": {
@@ -69,6 +99,15 @@
             "pattern": "[0-9]{10}",
             "errorMessage": "Doit contenir 10 chiffres"
          },
+         "Tel_Conf 1" : {
+            "pattern" : "[0-9]{10}",
+            "errorMessage" : "Doit contenir 10 chiffres"
+         },
+         "Tel_Conf 2" : {
+            "pattern" : "[0-9]{10}",
+            "errorMessage" : "Doit contenir 10 chiffres"
+         },
+
          "Tel 1 du Contact": {
             "pattern": "[0-9]{10}",
             "errorMessage": "Doit contenir 10 chiffres"

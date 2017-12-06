@@ -77,6 +77,8 @@
   "REGISTRATION_NO_RESULTS_FOUND":"Aucun resultat trouvé",
   "REGISTRATION_OPD_DAYS_TEXT_KEY" : "Jours OPD sont le lundi , mercredi, vendredi .",
   "REGISTRATION_PATIENT_MEDICAL_INFORMATION":"Information médicale pour le patient",
+  "REGISTRATION_PATIENT_DEPENDENT_INFORMATION": "Informations Des Dependants",
+  "REGISTRATION_PATIENT_CONFIDENT_INFORMATION": "Informations Des Confidents",
   "REGISTRATION_PRINT_REG_CARD_KEY":"<u>P</u>rint carte d'enregistrement",
   "REGISTRATION_PRINT_REG_CARD_LOCAL_KEY" : "Imprimer Reg . Carte(<u>L</u>Ocal)",
   "REGISTRATION_PRINT_SUPPLEMENTAL_PAPER":"Imprimer les informations",
