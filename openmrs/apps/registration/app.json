@@ -44,6 +44,7 @@
                 "strictAutocompleteFromLevel": "address6"
             },
             "mandatoryPersonAttributes": ["ARV Naif/ Non Naif"],
+            "dobMandatory": true,
             "defaultVisitType": "OPD",
             "showMiddleName": true,
             "showLastName": true,
