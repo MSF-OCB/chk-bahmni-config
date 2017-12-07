@@ -40,9 +40,7 @@
           "numberOfVisits": 1,
           "showChart": true,
           "showTable": true,
-          "showDetailsButton": true,
-          "initialAccessionCount": 0,
-          "latestAccessionCount": 1
+          "showDetailsButton": true
         },
         "expandedViewConfig": {
           "numberOfVisits": 10
