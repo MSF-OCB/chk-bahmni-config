@@ -52,6 +52,7 @@
   "SELECTED_ORDERS_EMPTY_MESSAGE" : "Pas de liste pour les demandes sélectionnées",
   "CLINICAL_ORDER_PRIORITY_PRINT_BUTTON": "Elevée",
   "OKAY_LABEL" : "d'accord",
-  "ENTER_ORDER_NOTE_LABEL" : "Entrez les notes pour"
-  
+  "ENTER_ORDER_NOTE_LABEL" : "Entrez les notes pour",
+  "PATIENT_PROFILE_RELATIONSHIPS_LABEL":"Des relations"
+
 }
