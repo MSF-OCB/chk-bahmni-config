@@ -23,11 +23,11 @@
   "DASHBOARD_TITLE_VISITS_KEY" : "Visites",
   "DASHBOARD_TITLE_PRINT_KEY":"Imprimer",
   "DASHBOARD_TITLE_LAB_RESULTS_KEY":"Résultats Lab",
-  "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY": "Commandes Lab Display Control",
+  "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY": "Toutes les demandes Labo",
 
 
   "ORDERS_BOARD_LABEL_KEY" : "Demandes",
-  "INVESTIGATION_CHART_KEY":"Tableau d'enquête",
+  "INVESTIGATION_CHART_KEY":"Tableau des résultats",
 
   "PATIENT_REGISTRATION_PAGE_KEY" : "Enregistrement",
   "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY" : "Visiter la page d'attribut",
@@ -52,6 +52,12 @@
   "SELECTED_ORDERS_EMPTY_MESSAGE" : "Pas de liste pour les demandes sélectionnées",
   "CLINICAL_ORDER_PRIORITY_PRINT_BUTTON": "Elevée",
   "OKAY_LABEL" : "d'accord",
-  "ENTER_ORDER_NOTE_LABEL" : "Entrez les notes pour"
+  "ENTER_ORDER_NOTE_LABEL" : "Entrez les notes pour",
+  "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE" : "Impossible de modifier les notes après l'enregistrement.",
+  "CLINICAL_SAVE_TRANSLATION_KEY" : "Enregistrer",
+  "NO_FULFILMENT_MESSAGE" :"Aucune observation pour cette demande",
+  "ALL_LAB_RESULTS_LABEL" : "Tous les résultats Labo",
+  "SEARCH_BY_PATIENT_ID_KEY" : "Recherche par ID Patient"
   
+ 
 }
