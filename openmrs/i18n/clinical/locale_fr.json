@@ -53,6 +53,7 @@
   "CLINICAL_ORDER_PRIORITY_PRINT_BUTTON": "Elevée",
   "OKAY_LABEL" : "d'accord",
   "ENTER_ORDER_NOTE_LABEL" : "Entrez les notes pour",
-  "PATIENT_PROFILE_RELATIONSHIPS_LABEL":"Des relations"
+  "PATIENT_PROFILE_RELATIONSHIPS_LABEL":"Des relations",
+  "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE" : "Impossible de modifier les notes après l'enregistrement"
 
 }
