@@ -18,6 +18,7 @@
    ],
 
    "config": {
+      "minCharRequireToSearch": 3,
       "showStartVisitButton": true,
       "patientInformation": {
          "contactInformation": {
