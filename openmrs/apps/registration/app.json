@@ -110,7 +110,6 @@
             "pattern" : "[0-9]{10}",
             "errorMessage" : "Doit contenir 10 chiffres"
          },
-
          "Tel 1 du Contact": {
             "pattern": "[0-9]{10}",
             "errorMessage": "Doit contenir 10 chiffres"
