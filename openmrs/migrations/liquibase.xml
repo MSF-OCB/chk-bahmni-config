@@ -7,47 +7,587 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-        <changeSet id="bahmni-atomfeed-offset-marker" author="tw" context="rel3">
-                <preConditions onFail="MARK_RAN">
-                        <sqlCheck expectedResult="0">
-                                SELECT COUNT(*) FROM scheduler_task_config where schedulable_class = 'org.openmrs.module.atomfeed.scheduler.tasks.EventRecordsNumberOffsetMarkerTask'
-                        </sqlCheck>
-                </preConditions>
-                <comment>rel3</comment>
-                <sql>
-                        INSERT INTO  scheduler_task_config  (name, description, schedulable_class,
-                        start_time, start_time_pattern, repeat_interval, start_on_startup, started,
-                        created_by, date_created, changed_by, date_changed, last_execution_time, uuid )
-                        VALUES ('OpenMRS event offset marker task', NULL, 'org.openmrs.module.atomfeed.scheduler.tasks.EventRecordsNumberOffsetMarkerTask',
-                        '2014-01-14 00:00:00','MM/dd/yyyy HH:mm:ss',86400, 1, 1,
-                        1, now(), NULL, NULL, NULL, uuid());
-                </sql>
-        </changeSet>
-        <changeSet id="default-201604211822" author="Gautam, Angshuman">
+        <changeSet id="OCB-CONFIG-1712071615" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                    select count(concept_id) from concept where uuid="5090AAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                    select count(*) from concept_name where name = "Lien_Dep" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_attribute_type where name = "Lien_Dep" 
                 </sqlCheck>
             </preConditions>
-            <comment>update Height concept uuid to standard CEIL concept uuid</comment>
+            <comment>Adding concept Lien_Dep and Person Attribute type along with the Mapping</comment>
             <sql>
-                update concept set uuid="5090AAAAAAAAAAAAAAAAAAAAAAAAAAAA" where concept_id in (
-                select concept_name.concept_id from concept_name where name="Height" and concept_name_type="FULLY_SPECIFIED"
-                );
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien_Dep','Lien_Dep','Coded','Misc',false);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien_Dep', 'Lien_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 24, uuid(), @concept_id);
             </sql>
         </changeSet>
-        <changeSet id="default-201604211823" author="Gautam, Angshuman">
+
+        <changeSet id="OCB-CONFIG-1712071617" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                    select count(concept_id) from concept where uuid="5089AAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                    select count(*) from concept_name where name = "Partenaire" and concept_name_type = "FULLY_SPECIFIED"
                 </sqlCheck>
             </preConditions>
-            <comment>update Weight concept uuid to standard CEIL concept uuid</comment>
+            <comment>Adding concept Partenaire</comment>
             <sql>
-                update concept set uuid="5089AAAAAAAAAAAAAAAAAAAAAAAAAAAA" where concept_id in (
-                select concept_name.concept_id from concept_name where name="Weight" and concept_name_type="FULLY_SPECIFIED"
-                );
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Partenaire','Partenaire','N/A','Misc',false);
             </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071618" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Conjoint(e)" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Conjoint(e)</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Conjoint(e)','Conjoint(e)','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071619" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Enfant" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Enfant</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Enfant','Enfant','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071620" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Père" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Père</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Père','Père','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071621" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Mère" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Mère</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Mère','Mère','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+
+        <changeSet id="OCB-CONFIG-1712081115" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'No CHK_Dep';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding No CHK_Dep person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('No CHK_Dep', 'No CHK_Dep', 'java.lang.String', '0', 1, now(), 0, 25, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081116" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Prénom_Dep';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Prénom_Dep person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom_Dep', 'Prénom_Dep', 'java.lang.String', '0', 1, now(), 0, 26, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081117" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Nom_Dep';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Nom_Dep person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom_Dep', 'Nom_Dep', 'java.lang.String', '0', 1, now(), 0, 27, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071622" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Informé du statut VIH du patient_Dep" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_attribute_type where name = "Informé du statut VIH du patient_Dep"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Informé du statut VIH du patient_Dep and Person Attribute type along with the Mapping</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Informé du statut VIH du patient_Dep','Informé du statut VIH du patient_Dep','Coded','Misc',false);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Informé du statut VIH du patient_Dep', 'Informé du statut VIH du patient_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 28, uuid(), @concept_id);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071623" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Oui" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Oui</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Oui','Oui','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071624" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Non" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Non</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Non','Non','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071625" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Résultat_Dep" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_attribute_type where name = "Résultat_Dep"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Résultat_Dep and Person Attribute type along with its mapping</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat_Dep','Résultat_Dep','Coded','Misc',false);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Résultat_Dep', 'Résultat_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 29, uuid(), @concept_id);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071626" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Positif" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Positif</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Positif','Positif','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071627" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Negatif" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Negatif</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Negatif','Negatif','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071628" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Non connu" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Non connu</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Non connu','Non connu','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081118" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Date de naissance_Dep';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Date de naissance_Dep person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Date de naissance_Dep', 'Date de naissance_Dep', 'org.openmrs.util.AttributableDate', '0', 1, now(), 0, 30, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081119" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Prénom du Confident 1';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Prénom du Confident 1 person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom du Confident 1', 'Prénom du Confident 1', 'java.lang.String', '0', 1, now(), 0, 31, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081120" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Nom du Confident 1';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Nom du Confident 1 person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom du Confident 1', 'Nom du Confident 1', 'java.lang.String', '0', 1, now(), 0, 32, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081121" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Tel_Conf 1';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Tel_Conf 1 person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Tel_Conf 1', 'Tel_Conf 1', 'java.lang.String', '0', 1, now(), 0, 33, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071629" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Lien 1" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_attribute_type where name = "Lien 1"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Lien 1</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien 1','Lien 1','Coded','Misc',false);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 1', 'Lien 1', 'org.openmrs.Concept', '0', 1, now(), 0, 33, uuid(), @concept_id);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071630" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Ami(e)" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Ami(e)</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Ami(e)','Ami(e)','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071635" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Famille" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Famille</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Famille','Famille','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071640" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Autre" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Autre</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autre','Autre','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081122" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Prénom du Confident 2';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Prénom du Confident 2 person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom du Confident 2', 'Prénom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 34, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081123" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Nom du Confident 2';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Nom du Confident 2 person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom du Confident 2', 'Nom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 35, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712081124" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) FROM person_attribute_type where name = 'Tel_Conf 2';
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding Tel_Conf 2 person attribute type</comment>
+            <sql>
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Tel_Conf 2', 'Tel_Conf 2', 'java.lang.String', '0', 1, now(), 0, 36, uuid());
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712071641" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Lien 2" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_attribute_type where name = "Lien 2"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Lien 2</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien 2','Lien 2','Coded','Misc',false);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 2', 'Lien 2', 'org.openmrs.Concept', '0', 1, now(), 0, 37, uuid(), @concept_id);
+            </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712111529" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca 
+                   join 
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Enfant','Père','Mère') and concept_name_type = "FULLY_SPECIFIED")
+                   AND 
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Lien_Dep');
+                </sqlCheck>
+            </preConditions>
+        <comment>Adding Answers to Lien_Dep Question</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+            set @child5_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Lien_Dep' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Partenaire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Conjoint(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Enfant' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Père' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = 'Mère' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+            call add_concept_answer(@concept_id, @child5_concept_id, 5);
+        </sql> 
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712111530" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca 
+                   join 
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui','Non') and concept_name_type = "FULLY_SPECIFIED")
+                   AND 
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Informé du statut VIH du patient_Dep');
+                </sqlCheck>
+            </preConditions>
+        <comment>Adding Answers to Informé du statut VIH du patient_Dep Question</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Informé du statut VIH du patient_Dep' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Oui' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Non' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql> 
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712111531" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca 
+                   join 
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Negatif','Non connu') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Résultat_Dep');
+                </sqlCheck>
+            </preConditions>
+        <comment>Adding Answers to Résultat_Dep Question</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Résultat_Dep' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Negatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Non connu' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+        </sql> 
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712111532" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca 
+                   join 
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Père','Mère','Ami(e)','Famille','Autre') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Lien 1');
+                </sqlCheck>
+            </preConditions>
+        <comment>Adding Answers to Lien 1 Question</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+            set @child5_concept_id = 0;
+            set @child6_concept_id = 0;
+            set @child7_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Lien 1' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Partenaire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Conjoint(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Père' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Mère' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = 'Ami(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child6_concept_id from concept_name where name = 'Famille' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child7_concept_id from concept_name where name = 'Autre' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+            call add_concept_answer(@concept_id, @child5_concept_id, 5);
+            call add_concept_answer(@concept_id, @child6_concept_id, 6);
+            call add_concept_answer(@concept_id, @child7_concept_id, 7);
+        </sql> 
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1712111533" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca 
+                   join 
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Père','Mère','Ami(e)','Famille','Autre') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Lien 2');
+                </sqlCheck>
+            </preConditions>
+        <comment>Adding Answers to Lien 2 Question</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+            set @child5_concept_id = 0;
+            set @child6_concept_id = 0;
+            set @child7_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Lien 2' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Partenaire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Conjoint(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Père' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Mère' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = 'Ami(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child6_concept_id from concept_name where name = 'Famille' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child7_concept_id from concept_name where name = 'Autre' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+            call add_concept_answer(@concept_id, @child5_concept_id, 5);
+            call add_concept_answer(@concept_id, @child6_concept_id, 6);
+            call add_concept_answer(@concept_id, @child7_concept_id, 7);
+        </sql> 
         </changeSet>
 
 </databaseChangeLog>
