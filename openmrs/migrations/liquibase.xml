@@ -314,7 +314,7 @@
                 set @concept_short_id = 0;
                 set @concept_full_id = 0;
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien 1','Lien 1','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 1', 'Lien 1', 'org.openmrs.Concept', '0', 1, now(), 0, 33, uuid(), @concept_id);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 1', 'Lien 1', 'org.openmrs.Concept', '0', 1, now(), 0, 34, uuid(), @concept_id);
             </sql>
         </changeSet>
 
@@ -371,7 +371,7 @@
             </preConditions>
             <comment>Adding Prénom du Confident 2 person attribute type</comment>
             <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom du Confident 2', 'Prénom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 34, uuid());
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom du Confident 2', 'Prénom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 35, uuid());
             </sql>
         </changeSet>
 
@@ -383,7 +383,7 @@
             </preConditions>
             <comment>Adding Nom du Confident 2 person attribute type</comment>
             <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom du Confident 2', 'Nom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 35, uuid());
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom du Confident 2', 'Nom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 36, uuid());
             </sql>
         </changeSet>
 
@@ -395,7 +395,7 @@
             </preConditions>
             <comment>Adding Tel_Conf 2 person attribute type</comment>
             <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Tel_Conf 2', 'Tel_Conf 2', 'java.lang.String', '0', 1, now(), 0, 36, uuid());
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Tel_Conf 2', 'Tel_Conf 2', 'java.lang.String', '0', 1, now(), 0, 37, uuid());
             </sql>
         </changeSet>
 
@@ -414,7 +414,7 @@
                 set @concept_short_id = 0;
                 set @concept_full_id = 0;
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien 2','Lien 2','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 2', 'Lien 2', 'org.openmrs.Concept', '0', 1, now(), 0, 37, uuid(), @concept_id);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 2', 'Lien 2', 'org.openmrs.Concept', '0', 1, now(), 0, 38, uuid(), @concept_id);
             </sql>
         </changeSet>
 
