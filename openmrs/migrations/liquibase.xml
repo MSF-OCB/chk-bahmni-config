@@ -224,15 +224,15 @@
         <changeSet id="OCB-CONFIG-1712071627" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Negatif" and concept_name_type = "FULLY_SPECIFIED"
+                    select count(*) from concept_name where name = "Négatif" and concept_name_type = "FULLY_SPECIFIED"
                 </sqlCheck>
             </preConditions>
-            <comment>Adding concept Negatif</comment>
+            <comment>Adding concept Négatif</comment>
             <sql>
                 set @concept_id = 0;
                 set @concept_short_id = 0;
                 set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Negatif','Negatif','N/A','Misc',false);
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Négatif','Négatif','N/A','Misc',false);
             </sql>
         </changeSet>
 
@@ -486,7 +486,7 @@
                    join 
                    concept_name cn
                    on ca.concept_id = cn.concept_id
-                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Negatif','Non connu') and concept_name_type = "FULLY_SPECIFIED")
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif','Non connu') and concept_name_type = "FULLY_SPECIFIED")
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Résultat_Dep');
                 </sqlCheck>
@@ -500,7 +500,7 @@
 
             select concept_id into @concept_id from concept_name where name = 'Résultat_Dep' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Negatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child3_concept_id from concept_name where name = 'Non connu' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);

@@ -143,6 +143,10 @@
          "registrationNumber": {
             "pattern": "^[0-9,\/]+$",
             "errorMessage": "Entrer seulement les numéros pour l'identification du patient"
+         },
+         "No CHK_Dep": {
+            "pattern": "^[0-9a-zA-Z]+$",
+            "errorMessage": "Entrer seulement les caractères et les chiffres"
          }
       },
       "patientSearch": {
