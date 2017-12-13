@@ -19,6 +19,16 @@
     "order": 3,
     "requiredPrivilege": "app:clinical"
   },
+"reports": {
+    "id": "bahmni.reports",
+    "extensionPointId": "org.bahmni.home.dashboard",
+    "type": "link",
+    "translationKey": "MODULE_LABEL_REPORTS_KEY",
+    "url": "../reports/#/dashboard",
+    "icon": "icon-bahmni-reports",
+    "order": 8,
+    "requiredPrivilege": "app:reports"
+  },
   "admin": {
     "id": "bahmni.admin",
     "extensionPointId": "org.bahmni.home.dashboard",
