@@ -136,6 +136,14 @@
             "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/testCount.sql"
         }
     },
+   "viralLoadReport":{
+        "name": "Viral Load Report",
+        "type": "ElisGeneric",
+        "config": {
+            "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/viral_report.sql"  
+        }    
+    },  
+
     "bloodPressure": {
         "name": "Blood Pressure",
         "type": "obsCount",
