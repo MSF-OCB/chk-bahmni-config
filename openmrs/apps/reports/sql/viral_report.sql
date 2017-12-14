@@ -8,7 +8,7 @@ SELECT B.sample_date AS "Date de prelevement",
        sum(cast(B.ChargeVirale_value_log AS INTEGER)) AS "Log Value VL",
        B.date_of_results AS "Date of Results",
        B.month_of_results AS "Month of result",
-       B.comment
+       B.comment AS "Notes"
 FROM
   (/*Pivoting the table row to column*/ SELECT Patient_Name,
                                                care_center_requesting,
