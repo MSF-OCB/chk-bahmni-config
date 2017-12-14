@@ -1,18 +1,18 @@
 SELECT B.date_of_results AS "Date of Results",
-       B.care_center_requesting AS "Care_center_requesting",
-       B.Patient_Name AS "Name",
-       B.Patient_Identifier AS "Patient_Identifier",
+       B.care_center_requesting AS "Center",
+       B.Patient_Name AS "Last and First Name",
+       B.Patient_Identifier AS "PATIENT ID",
        EXTRACT(YEAR FROM Now()) - EXTRACT(YEAR FROM B.dob) as "Age"  ,
        B.sexe AS "Sexe",
-       sum(cast(B.CD4 AS INTEGER)) AS "CD4",
+       sum(cast(B.CD4 AS INTEGER)) AS "RESULTS CD4 (cells/µl)",
        sum(cast(B.CD4_percentage AS INTEGER)) AS "CD4 %",
-       sum(cast(B.GPT AS INTEGER)) AS "GPT",
-       sum(cast(B.Creatinine AS INTEGER)) AS "Creatinine",
-       sum(cast(B.Glucose_LCR AS INTEGER)) AS "Glucose (LCR)",
+       sum(cast(B.GPT AS INTEGER)) AS "SGPT (UI/L)",
+       sum(cast(B.Creatinine AS INTEGER)) AS "CREAT (µmol/L)",
+       sum(cast(B.Glucose_LCR AS INTEGER)) AS "GLU LCR (mg/dl)",
        (Select dict_entry from DICTIONARY where id in (sum(cast(B.Hep_B AS INTEGER))) ) "Hep. B", /*getting coded value for tests*/
-       (Select dict_entry from DICTIONARY where id in (sum(cast(B.Crag_serique AS INTEGER))) )AS "Crag serique",/*getting coded value for tests*/
-       (Select dict_entry from DICTIONARY where id in (sum(cast(B.Crag_LCR AS INTEGER)))) AS "Crag (LCR)"/*getting coded value for tests*/
-      
+       (Select dict_entry from DICTIONARY where id in (sum(cast(B.Crag_serique AS INTEGER))) )AS "CRAG SERIQUE",/*getting coded value for tests*/
+       (Select dict_entry from DICTIONARY where id in (sum(cast(B.Crag_LCR AS INTEGER)))) AS "CRAG LCR"/*getting coded value for tests*/
+
 FROM
   (/*Pivoting the table row to column*/ SELECT date_of_results,
                                                Patient_Name,
@@ -44,7 +44,7 @@ FROM
                                                 CASE
                                                    WHEN tname ='Crag' THEN tvalue
                                                END AS Crag_LCR
-                                               
+
    FROM
      (/*defining columns*/          SELECT r.lastupdated :: DATE AS date_of_results,
                                                   ss.name AS care_center_requesting,
@@ -54,8 +54,8 @@ FROM
                                                   patient.gender AS sexe,
                                                   t.name AS tname,
                                                   r.value AS tvalue
-                                                  
-                                                 
+
+
       FROM
         (                           SELECT p_identiity.identity_data,
                                                      p_identiity.patient_id
@@ -81,6 +81,7 @@ FROM
                         'Hep. B',
                         'Crag serique',
                         'Crag') ) AS A) AS B
+      WHERE B.date_of_results BETWEEN '#startDate#' and '#endDate#'
 GROUP BY B.Patient_Name,
          B.care_center_requesting,
          B.Patient_Identifier,

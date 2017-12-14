@@ -46,9 +46,10 @@ FROM
       INNER JOIN person ON patient.person_id = person.id
       INNER JOIN sample_human ON patient.id = sample_human.patient_id
       INNER JOIN
-        ( SELECT *
-         FROM sample
-         WHERE accession_number IS NOT NULL ) AS sample ON sample_human.samp_id = sample.id
+        ( SELECT id,sample_source_id,lastupdated
+            FROM sample
+            WHERE accession_number IS NOT NULL
+            and status_id=3 ) AS sample ON sample_human.samp_id = sample.id
       INNER JOIN sample_source ss ON sample.sample_source_id = ss.id
       INNER JOIN sample_item item ON sample.id = item.samp_id
       INNER JOIN analysis a ON item.id = a.sampitem_id
