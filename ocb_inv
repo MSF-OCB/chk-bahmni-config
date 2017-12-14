@@ -17,8 +17,10 @@ localhost
 [bahmni-erp-db-slave]
 
 [bahmni-lab]
+localhost
 
 [bahmni-lab-db]
+localhost
 
 [bahmni-lab-db-slave]
 
