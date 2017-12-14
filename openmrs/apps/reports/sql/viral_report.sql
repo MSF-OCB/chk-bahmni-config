@@ -56,6 +56,7 @@ FROM
       INNER JOIN test t ON a.test_id = t.id
       WHERE t.name IN ('Charge Virale - Value',
                        'Charge Virale - Logarythm') ) AS A) AS B
+      WHERE B.date_of_results BETWEEN '#startDate#' and '#endDate#'
 GROUP BY B.Patient_Name,
          B.sample_date,
          B.care_center_requesting,
