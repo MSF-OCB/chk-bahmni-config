@@ -1,7 +1,7 @@
 SELECT B.date_of_results AS "Date of Results",
        B.care_center_requesting AS "Center",
-       B.Patient_Name AS "Last and First Name",
-       B.Patient_Identifier AS "PATIENT ID",
+       B.Patient_Name AS "Nom du patient",
+       B.Patient_Identifier AS "Patient ID",
        EXTRACT(YEAR FROM Now()) - EXTRACT(YEAR FROM B.dob) as "Age"  ,
        B.sexe AS "Sexe",
        sum(cast(B.CD4 AS INTEGER)) AS "RESULTS CD4 (cells/µl)",
@@ -87,6 +87,7 @@ FROM
                             'Crag serique',
                             'Crag') ) AS A
     ) AS B
+    WHERE B.date_of_results BETWEEN '#startDate#' and '#endDate#'
 GROUP BY B.Patient_Name,
          B.care_center_requesting,
          B.Patient_Identifier,
