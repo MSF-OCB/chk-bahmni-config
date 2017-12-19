@@ -57,7 +57,7 @@ FROM
                        AND a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
                        AND pi.identity_type_id = 2) AS A) AS B
-      /*WHERE B.date_of_results BETWEEN '#startDate#' and '#endDate#'*/
+      WHERE B.date_of_results BETWEEN '#startDate#' and '#endDate#'
 GROUP BY B.Patient_Name,
          B.sample_date,
          B.care_center_requesting,
