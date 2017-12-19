@@ -3,6 +3,11 @@
     "translationKey": "DASHBOARD_TAB_GENERAL_KEY",
     "displayByDefault": true,
     "maxRecentlyViewedPatients": 10,
+    "printing": {
+    "title": "CHK",
+    "header": "General Summary",
+    "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+},
     "sections": {
       "patientInformation": {
         "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
@@ -37,7 +42,7 @@
         "displayOrder": 2,
         "dashboardConfig": {
           "title": null,
-          "numberOfVisits": 1,
+          "numberOfVisits": 10,
           "showChart": true,
           "showTable": true,
           "showDetailsButton": true
@@ -47,5 +52,31 @@
         }
       }
     }
-  }
+  },
+  "investigationChart": {
+       "translationKey": "Investigation Chart",
+       "printing": {
+           "title": "CHK",
+           "header": "Investigation Chart",
+           "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+       },
+       "sections": {
+           "labResults": {
+             "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+             "type": "labOrders",
+             "displayOrder": 2,
+             "displayType": "Full-Page",
+             "dashboardConfig": {
+               "title": null,
+               "numberOfVisits": 10,
+               "showChart": true,
+               "showTable": false,
+               "showDetailsButton": true
+             },
+             "expandedViewConfig": {
+               "numberOfVisits": 10
+             }
+           }
+       }
+   }
 }
