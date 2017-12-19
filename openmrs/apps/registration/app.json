@@ -18,7 +18,7 @@
         ],
 
         "config" : {
-            "showStartVisitButton": false,
+            "showStartVisitButton": true,
             "patientInformation": {
                  "contactInformation": {
                           "title": "Informations de contact",
