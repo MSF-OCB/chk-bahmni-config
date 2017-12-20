@@ -4,7 +4,7 @@
     "displayByDefault": true,
     "maxRecentlyViewedPatients": 10,
     "printing": {
-    "title": "CHK",
+    "title": "Centre Hospitalier Kabinda",
     "header": "General Summary",
     "logo": "/bahmni_config/openelis/images/labLogo.jpg"
 },
@@ -54,10 +54,10 @@
     }
   },
   "investigationChart": {
-       "translationKey": "Investigation Chart",
+       "translationKey": "Tableau des résultats",
        "printing": {
-           "title": "CHK",
-           "header": "Investigation Chart",
+           "title": "Centre Hospitalier Kabinda",
+           "header": "Tableau des résultats",
            "logo": "/bahmni_config/openelis/images/labLogo.jpg"
        },
        "sections": {
