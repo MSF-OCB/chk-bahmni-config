@@ -7,7 +7,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-        <changeSet id="default-2017122701" author="vishnu">
+        <changeSet id="OCB-CONFIG-1712271610" author="vishnu">
             <preConditions onFail="MARK_RAN">
                <sqlCheck expectedResult="0">
                       SELECT count(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE="PROCEDURE"  AND ROUTINE_SCHEMA="openmrs" and ROUTINE_NAME='add_concept_fr';
