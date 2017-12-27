@@ -425,52 +425,8 @@
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien 2','Lien 2','Coded','Misc',false);
                 INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 2', 'Lien 2', 'org.openmrs.Concept', '0', 1, now(), 0, 38, uuid(), @concept_id);
             </sql>
-
         </changeSet>
 
-        <changeSet id="OCB-CONFIG-1912071617" author="vishnu">
-             <comment> Adding the Cohort attribute </comment>
-             <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Type de cohorte','Type de cohorte','Coded','Misc',false);
-                   INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-                   VALUES ('Type de cohorte', 'Type de cohorte', 'org.openmrs.Concept', 0, 1, now(), 0, 24, uuid(), @concept_id);
-                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CP Converted','CP Converted','Boolean','Misc',false);
-                   INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-                   VALUES ('Converti CP', 'Converti CP', 'java.lang.Boolean', 0, 1, now(), 0, 24, uuid(), @concept_id);
-                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CHK','CHK','N/A','Misc',false);
-                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CP','CP','N/A','Misc',false);
-                   INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-                   VALUES ('Date de conversion','Date de conversion','org.openmrs.util.AttributableDate',0,1,now(),0,24,uuid(),@concept_id);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712111518" author="vishnu">
-        <comment>Adding Answers to Person Attributes</comment>
-        <sql>
-            set @concept_id = 0;
-            set @child1_concept_id = 0;
-            set @child2_concept_id = 0;
-            select concept_id into @concept_id from concept_name where name = 'Type de cohorte' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'CHK' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'CP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql>
-        </changeSet>
-        <changeSet id="OCB-CONFIG-1712111519" author="vishnu">
-         <comment>Removing the identifiers from Database</comment>
-         <sql>
-             set @concept_id = 0;
-             set @child1_concept_id = 0;
-             set @child2_concept_id = 0;
-             delete from idgen_log_entry;
-             delete from idgen_seq_id_gen;
-             delete from idgen_identifier_source;
-         </sql>
-        </changeSet>
         <changeSet id="OCB-CONFIG-1712111529" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
