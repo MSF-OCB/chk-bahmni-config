@@ -20,6 +20,29 @@
         "config" : {
             "showStartVisitButton": true,
             "patientInformation": {
+              "additionalInformation":{
+                         "title":"Informations supplémentaires",
+                         "translationKey":"REGISTRATION_ADDITIONAL_INFORMATION",
+                         "attributes":[
+
+                "Tel 1",
+                "Tel 2",
+                "Etat Civil",
+                "Situation Parental(enfants)",
+                "Niveau d'etudes",
+                "Occupation",
+                "Religion",
+                "Membre d'un réseau PVVIH",
+                "Frequente un Tradipraticien",
+                "Resident à Kinshasa",
+                "Province de provenance",
+                "Pays d'origine(autre que RDC)",
+                "Centre de provenance"
+             ],
+              "expanded": true
+             },
+
+
                  "contactInformation": {
                           "title": "Informations de contact",
                           "translationKey": "REGISTRATION_CONTACT_INFORMATION",
@@ -43,7 +66,7 @@
                 "showAddressFieldsTopDown": false,
                 "strictAutocompleteFromLevel": "address6"
             },
-            "mandatoryPersonAttributes": ["ARV Naif/ Non Naif"],
+            "mandatoryPersonAttributes": ["ARV Naif/ Non Naif","Type de cohorte"],
             "dobMandatory": true,
             "defaultVisitType": "OPD",
             "showMiddleName": true,
