@@ -17,6 +17,158 @@
         <sqlFile splitStatements="false" path="AddConceptProc.sql"/>
         </changeSet>
 
+
+         <changeSet id="OCB-CONFIG-1912071617" author="vishnu">
+            <preConditions onFail="MARK_RAN">
+                 <sqlCheck expectedResult="0">
+                     select count(*) from concept_name where name='Type de cohorte' and concept_name_type='FULLY_SPECIFIED' and locale='fr' ;
+                 </sqlCheck>
+                 <sqlCheck expectedResult="0">
+                     select count(*) from person_attribute_type where name ='Type de cohorte' ;
+                 </sqlCheck>
+               </preConditions>
+             <comment> Adding the Cohort attribute </comment>
+             <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Type de cohorte','Type de cohorte','Coded','Misc',false);
+                   INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
+                   VALUES ('Type de cohorte', 'Type de cohorte', 'org.openmrs.Concept', 0, 1, now(), 0, 24, uuid(), @concept_id);
+
+             </sql>
+         </changeSet>
+
+            <changeSet id="OCB-CONFIG-1912071620" author="vishnu">
+          <preConditions onFail="MARK_RAN">
+                 <sqlCheck expectedResult="0">
+                    select count(*) from  concept_name where name ='CP Converted' and concept_name_type='FULLY_SPECIFIED' and locale='fr';
+                 </sqlCheck>
+                 <sqlCheck expectedResult="0">
+                    select count(*) from person_attribute_type where name='CP Converted';
+                 </sqlCheck>
+                 </preConditions>
+                 <comment> Adding the CP attribute </comment>
+                 <sql>
+                  set @concept_id = 0;
+                  set @concept_short_id = 0;
+                   set @concept_full_id = 0;
+                    call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CP Converted','CP Converted','Boolean','Misc',false);
+                    INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
+                    VALUES ('Converti CP', 'Converti CP', 'java.lang.Boolean', 0, 1, now(), 0, 24, uuid(), @concept_id);
+                 </sql>
+          </changeSet>
+
+            <changeSet id="OCB-CONFIG-1912071621" author="vishnu">
+      <preConditions onFail="MARK_RAN">
+                 <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name in('CHK','CP') and concept_name_type='FULLY_SPECIFIED';
+                 </sqlCheck>
+                 </preConditions>
+                 <comment> Adding the CHK and CP concepts </comment>
+                  <sql>
+                   set @concept_id = 0;
+                   set @concept_short_id = 0;
+                   set @concept_full_id = 0;
+                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CHK','CHK','N/A','Misc',false);
+                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CP','CP','N/A','Misc',false);
+                  </sql>
+          </changeSet>
+
+            <changeSet id="OCB-CONFIG-1912071622" author="vishnu">
+       <preConditions onFail="MARK_RAN">
+                  <sqlCheck expectedResult="0">
+                    select count(*) from person_attribute_type where name='Date de conversion';
+                  </sqlCheck>
+                  </preConditions>
+                  <comment>Adding the Date of conversion in Registration page as person attribute</comment>
+                  <sql>
+                   set @concept_id = 0;
+                   set @concept_short_id = 0;
+                   set @concept_full_id = 0;
+                   INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
+                   VALUES ('Date de conversion','Date de conversion','org.openmrs.util.AttributableDate',0,1,now(),0,24,uuid(),@concept_id);
+            </sql>
+
+
+</changeSet>
+
+ <changeSet id="OCB-CONFIG-1712111518" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+                 <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer  where concept_id in(select concept_id from concept_name where name = 'Type de cohorte');
+                 </sqlCheck>
+                 </preConditions>
+        <comment>Adding Answers to Person Attributes</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'Type de cohorte' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'CHK' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'CP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+        </changeSet>
+<changeSet id="OCB-CONFIG-1712111519" author="vishnu">
+            <preConditions onFail="MARK_RAN">
+                  <sqlCheck expectedResult="2">
+                   select count(*) from idgen_seq_id_gen ;
+                  </sqlCheck>
+           </preConditions> 
+                  
+         <comment>Removing the identifiers from Database</comment>
+         <sql>
+             delete from idgen_seq_id_gen order by next_sequence_value limit 1;
+             delete from idgen_identifier_source order by id limit 1;
+         </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-1712111523" author="vishnu">
+            <preConditions onFail="MARK_RAN">
+                  <sqlCheck expectedResult="1">
+                   select count(*) from idgen_seq_id_gen where prefix='CHK' ;
+                  </sqlCheck>
+           </preConditions>
+
+         <comment>Removing the CHK prefix</comment>
+         <sql>
+                update idgen_seq_id_gen set prefix ='' where prefix='CHK';
+         </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-1712111524" author="vishnu">
+            <preConditions onFail="MARK_RAN">
+                  <sqlCheck expectedResult="1">
+                   select count(*) from idgen_seq_id_gen where min_length='8' ;
+                  </sqlCheck>
+           </preConditions>
+
+         <comment>updating the patient Identifier length</comment>
+         <sql>
+                update idgen_seq_id_gen set min_length =6 where min_length=8;
+         </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-1712111525" author="vishnu">
+            <preConditions onFail="MARK_RAN">
+                  <sqlCheck expectedResult="1">
+                   select count(*) from patient_identifier_type where format like '%CHK%';
+                  </sqlCheck>
+           </preConditions>
+
+         <comment>updating the patient Identifier format by removing the CHK prefix</comment>
+         <sql>
+                update patient_identifier_type set format='^[0-9,\\/]+$' where patient_identifier_type_id=3 and format like '%CHK%';
+         </sql>
+</changeSet>
+        <changeSet id="OCB-CONFIG-2017012212993" author="Ravindra">
+            <comment>Migrations to split identifier and assign cohort type</comment>
+           <sqlFile path="IdentifierMigrations.sql"/>
+        </changeSet>
+
+
         <changeSet id="OCB-CONFIG-1712071615" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
