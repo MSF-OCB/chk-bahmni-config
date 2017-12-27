@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
-        <changeSet id="OCB-CONFIG-1712271610" author="vishnu">
-            <preConditions onFail="MARK_RAN">
-               <sqlCheck expectedResult="0">
+    <changeSet id="OCB-CONFIG-1712271610" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                       SELECT count(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE="PROCEDURE"  AND ROUTINE_SCHEMA="openmrs" and ROUTINE_NAME='add_concept_fr';
                </sqlCheck>
-            </preConditions>     
+        </preConditions>
         <comment>Adding the Procedure for creating concepts in Fr</comment>
         <sqlFile splitStatements="false" path="AddConceptProc.sql"/>
-        </changeSet>
-
-
-         <changeSet id="OCB-CONFIG-1912071617" author="vishnu">
-            <preConditions onFail="MARK_RAN">
-                 <sqlCheck expectedResult="0">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1912071617" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                      select count(*) from concept_name where name='Type de cohorte' and concept_name_type='FULLY_SPECIFIED' and locale='fr' ;
                  </sqlCheck>
-                 <sqlCheck expectedResult="0">
+            <sqlCheck expectedResult="0">
                      select count(*) from person_attribute_type where name ='Type de cohorte' ;
                  </sqlCheck>
-               </preConditions>
-             <comment> Adding the Cohort attribute </comment>
-             <sql>
+        </preConditions>
+        <comment> Adding the Cohort attribute </comment>
+        <sql>
                 set @concept_id = 0;
                 set @concept_short_id = 0;
                 set @concept_full_id = 0;
@@ -37,19 +33,18 @@
                    VALUES ('Type de cohorte', 'Type de cohorte', 'org.openmrs.Concept', 0, 1, now(), 0, 24, uuid(), @concept_id);
 
              </sql>
-         </changeSet>
-
-            <changeSet id="OCB-CONFIG-1912071620" author="vishnu">
-          <preConditions onFail="MARK_RAN">
-                 <sqlCheck expectedResult="0">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1912071620" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                     select count(*) from  concept_name where name ='CP Converted' and concept_name_type='FULLY_SPECIFIED' and locale='fr';
                  </sqlCheck>
-                 <sqlCheck expectedResult="0">
+            <sqlCheck expectedResult="0">
                     select count(*) from person_attribute_type where name='CP Converted';
                  </sqlCheck>
-                 </preConditions>
-                 <comment> Adding the CP attribute </comment>
-                 <sql>
+        </preConditions>
+        <comment> Adding the CP attribute </comment>
+        <sql>
                   set @concept_id = 0;
                   set @concept_short_id = 0;
                    set @concept_full_id = 0;
@@ -57,48 +52,43 @@
                     INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
                     VALUES ('Converti CP', 'Converti CP', 'java.lang.Boolean', 0, 1, now(), 0, 24, uuid(), @concept_id);
                  </sql>
-          </changeSet>
-
-            <changeSet id="OCB-CONFIG-1912071621" author="vishnu">
-      <preConditions onFail="MARK_RAN">
-                 <sqlCheck expectedResult="0">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1912071621" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                     select count(*) from concept_name where name in('CHK','CP') and concept_name_type='FULLY_SPECIFIED';
                  </sqlCheck>
-                 </preConditions>
-                 <comment> Adding the CHK and CP concepts </comment>
-                  <sql>
+        </preConditions>
+        <comment> Adding the CHK and CP concepts </comment>
+        <sql>
                    set @concept_id = 0;
                    set @concept_short_id = 0;
                    set @concept_full_id = 0;
                    call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CHK','CHK','N/A','Misc',false);
                    call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CP','CP','N/A','Misc',false);
                   </sql>
-          </changeSet>
-
-            <changeSet id="OCB-CONFIG-1912071622" author="vishnu">
-       <preConditions onFail="MARK_RAN">
-                  <sqlCheck expectedResult="0">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1912071622" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                     select count(*) from person_attribute_type where name='Date de conversion';
                   </sqlCheck>
-                  </preConditions>
-                  <comment>Adding the Date of conversion in Registration page as person attribute</comment>
-                  <sql>
+        </preConditions>
+        <comment>Adding the Date of conversion in Registration page as person attribute</comment>
+        <sql>
                    set @concept_id = 0;
                    set @concept_short_id = 0;
                    set @concept_full_id = 0;
                    INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
                    VALUES ('Date de conversion','Date de conversion','org.openmrs.util.AttributableDate',0,1,now(),0,24,uuid(),@concept_id);
             </sql>
-
-
-</changeSet>
-
- <changeSet id="OCB-CONFIG-1712111518" author="vishnu">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712111518" author="vishnu">
         <preConditions onFail="MARK_RAN">
-                 <sqlCheck expectedResult="0">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer  where concept_id in(select concept_id from concept_name where name = 'Type de cohorte');
                  </sqlCheck>
-                 </preConditions>
+        </preConditions>
         <comment>Adding Answers to Person Attributes</comment>
         <sql>
             set @concept_id = 0;
@@ -110,683 +100,86 @@
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
-        </changeSet>
-<changeSet id="OCB-CONFIG-1712111519" author="vishnu">
-            <preConditions onFail="MARK_RAN">
-                  <sqlCheck expectedResult="2">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712111519" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="2">
                    select count(*) from idgen_seq_id_gen ;
                   </sqlCheck>
-           </preConditions> 
-                  
-         <comment>Removing the identifiers from Database</comment>
-         <sql>
+        </preConditions>
+        <comment>Removing the identifiers from Database</comment>
+        <sql>
              delete from idgen_seq_id_gen order by next_sequence_value limit 1;
              delete from idgen_identifier_source order by id limit 1;
          </sql>
-</changeSet>
-
-<changeSet id="OCB-CONFIG-1712111523" author="vishnu">
-            <preConditions onFail="MARK_RAN">
-                  <sqlCheck expectedResult="1">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712111523" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
                    select count(*) from idgen_seq_id_gen where prefix='CHK' ;
                   </sqlCheck>
-           </preConditions>
-
-         <comment>Removing the CHK prefix</comment>
-         <sql>
+        </preConditions>
+        <comment>Removing the CHK prefix</comment>
+        <sql>
                 update idgen_seq_id_gen set prefix ='' where prefix='CHK';
          </sql>
-</changeSet>
-
-<changeSet id="OCB-CONFIG-1712111524" author="vishnu">
-            <preConditions onFail="MARK_RAN">
-                  <sqlCheck expectedResult="1">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712111524" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
                    select count(*) from idgen_seq_id_gen where min_length='8' ;
                   </sqlCheck>
-           </preConditions>
-
-         <comment>updating the patient Identifier length</comment>
-         <sql>
+        </preConditions>
+        <comment>updating the patient Identifier length</comment>
+        <sql>
                 update idgen_seq_id_gen set min_length =6 where min_length=8;
          </sql>
-</changeSet>
-
-<changeSet id="OCB-CONFIG-1712111525" author="vishnu">
-            <preConditions onFail="MARK_RAN">
-                  <sqlCheck expectedResult="1">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712111525" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
                    select count(*) from patient_identifier_type where format like '%CHK%';
                   </sqlCheck>
-           </preConditions>
-
-         <comment>updating the patient Identifier format by removing the CHK prefix</comment>
-         <sql>
+        </preConditions>
+        <comment>updating the patient Identifier format by removing the CHK prefix</comment>
+        <sql>
                 update patient_identifier_type set format='^[0-9,\\/]+$' where patient_identifier_type_id=3 and format like '%CHK%';
          </sql>
-</changeSet>
-        <changeSet id="OCB-CONFIG-2017012212993" author="Ravindra">
-            <comment>Migrations to split identifier and assign cohort type</comment>
-           <sqlFile path="IdentifierMigrations.sql"/>
-        </changeSet>
-
-
-        <changeSet id="OCB-CONFIG-1712071615" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Lien_Dep" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-                <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Lien_Dep" 
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Lien_Dep and Person Attribute type along with the Mapping</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien_Dep','Lien_Dep','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien_Dep', 'Lien_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 24, uuid(), @concept_id);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071617" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Partenaire" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Partenaire</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Partenaire','Partenaire','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071618" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Conjoint(e)" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Conjoint(e)</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Conjoint(e)','Conjoint(e)','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071619" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Enfant" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Enfant</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Enfant','Enfant','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071620" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Père" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Père</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Père','Père','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071621" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Mère" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Mère</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Mère','Mère','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081115" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'No CHK_Dep';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding No CHK_Dep person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('No CHK_Dep', 'No CHK_Dep', 'java.lang.String', '0', 1, now(), 0, 25, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081116" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Prénom_Dep';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Prénom_Dep person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom_Dep', 'Prénom_Dep', 'java.lang.String', '0', 1, now(), 0, 26, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081117" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Nom_Dep';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Nom_Dep person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom_Dep', 'Nom_Dep', 'java.lang.String', '0', 1, now(), 0, 27, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071622" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Informé du statut VIH du patient_Dep" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-                <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Informé du statut VIH du patient_Dep"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Informé du statut VIH du patient_Dep and Person Attribute type along with the Mapping</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Informé du statut VIH du patient_Dep','Informé du statut VIH du patient_Dep','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Informé du statut VIH du patient_Dep', 'Informé du statut VIH du patient_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 28, uuid(), @concept_id);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071623" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Oui" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Oui</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Oui','Oui','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071624" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Non" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Non</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Non','Non','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071625" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Résultat_Dep" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-                <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Résultat_Dep"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Résultat_Dep and Person Attribute type along with its mapping</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat_Dep','Résultat_Dep','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Résultat_Dep', 'Résultat_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 29, uuid(), @concept_id);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071626" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Positif" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Positif</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Positif','Positif','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071627" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Négatif" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Négatif</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Négatif','Négatif','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071628" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Non connu" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Non connu</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Non connu','Non connu','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081118" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Date de naissance_Dep';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Date de naissance_Dep person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Date de naissance_Dep', 'Date de naissance_Dep', 'org.openmrs.util.AttributableDate', '0', 1, now(), 0, 30, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081119" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Prénom du Confident 1';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Prénom du Confident 1 person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom du Confident 1', 'Prénom du Confident 1', 'java.lang.String', '0', 1, now(), 0, 31, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081120" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Nom du Confident 1';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Nom du Confident 1 person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom du Confident 1', 'Nom du Confident 1', 'java.lang.String', '0', 1, now(), 0, 32, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081121" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Tel_Conf 1';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Tel_Conf 1 person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Tel_Conf 1', 'Tel_Conf 1', 'java.lang.String', '0', 1, now(), 0, 33, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071629" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Lien 1" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-                <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Lien 1"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Lien 1</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien 1','Lien 1','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 1', 'Lien 1', 'org.openmrs.Concept', '0', 1, now(), 0, 34, uuid(), @concept_id);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071630" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Ami(e)" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Ami(e)</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Ami(e)','Ami(e)','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071635" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Famille" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Famille</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Famille','Famille','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071640" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Autre" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Autre</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autre','Autre','N/A','Misc',false);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081122" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Prénom du Confident 2';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Prénom du Confident 2 person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom du Confident 2', 'Prénom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 35, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081123" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Nom du Confident 2';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Nom du Confident 2 person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom du Confident 2', 'Nom du Confident 2', 'java.lang.String', '0', 1, now(), 0, 36, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712081124" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Tel_Conf 2';
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding Tel_Conf 2 person attribute type</comment>
-            <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Tel_Conf 2', 'Tel_Conf 2', 'java.lang.String', '0', 1, now(), 0, 37, uuid());
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712071641" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                    select count(*) from concept_name where name = "Lien 2" and concept_name_type = "FULLY_SPECIFIED"
-                </sqlCheck>
-                <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Lien 2"
-                </sqlCheck>
-            </preConditions>
-            <comment>Adding concept Lien 2</comment>
-            <sql>
-                set @concept_id = 0;
-                set @concept_short_id = 0;
-                set @concept_full_id = 0;
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien 2','Lien 2','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien 2', 'Lien 2', 'org.openmrs.Concept', '0', 1, now(), 0, 38, uuid(), @concept_id);
-            </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712111529" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
-                   concept_name cn
-                   on ca.concept_id = cn.concept_id
-                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Enfant','Père','Mère') and concept_name_type = "FULLY_SPECIFIED")
-                   AND 
-                   cn.concept_id IN (select concept_id from concept_name where name = 'Lien_Dep');
-                </sqlCheck>
-            </preConditions>
-        <comment>Adding Answers to Lien_Dep Question</comment>
-        <sql>
-            set @concept_id = 0;
-            set @child1_concept_id = 0;
-            set @child2_concept_id = 0;
-            set @child3_concept_id = 0;
-            set @child4_concept_id = 0;
-            set @child5_concept_id = 0;
-
-            select concept_id into @concept_id from concept_name where name = 'Lien_Dep' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'Partenaire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Conjoint(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child3_concept_id from concept_name where name = 'Enfant' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child4_concept_id from concept_name where name = 'Père' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child5_concept_id from concept_name where name = 'Mère' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);
-            call add_concept_answer(@concept_id, @child3_concept_id, 3);
-            call add_concept_answer(@concept_id, @child4_concept_id, 4);
-            call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712111530" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
-                   concept_name cn
-                   on ca.concept_id = cn.concept_id
-                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui','Non') and concept_name_type = "FULLY_SPECIFIED")
-                   AND 
-                   cn.concept_id IN (select concept_id from concept_name where name = 'Informé du statut VIH du patient_Dep');
-                </sqlCheck>
-            </preConditions>
-        <comment>Adding Answers to Informé du statut VIH du patient_Dep Question</comment>
-        <sql>
-            set @concept_id = 0;
-            set @child1_concept_id = 0;
-            set @child2_concept_id = 0;
-
-            select concept_id into @concept_id from concept_name where name = 'Informé du statut VIH du patient_Dep' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'Oui' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Non' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712111531" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
-                   concept_name cn
-                   on ca.concept_id = cn.concept_id
-                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif','Non connu') and concept_name_type = "FULLY_SPECIFIED")
-                   AND
-                   cn.concept_id IN (select concept_id from concept_name where name = 'Résultat_Dep');
-                </sqlCheck>
-            </preConditions>
-        <comment>Adding Answers to Résultat_Dep Question</comment>
-        <sql>
-            set @concept_id = 0;
-            set @child1_concept_id = 0;
-            set @child2_concept_id = 0;
-            set @child3_concept_id = 0;
-
-            select concept_id into @concept_id from concept_name where name = 'Résultat_Dep' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child3_concept_id from concept_name where name = 'Non connu' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);
-            call add_concept_answer(@concept_id, @child3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712111532" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
-                   concept_name cn
-                   on ca.concept_id = cn.concept_id
-                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Père','Mère','Ami(e)','Famille','Autre') and concept_name_type = "FULLY_SPECIFIED")
-                   AND
-                   cn.concept_id IN (select concept_id from concept_name where name = 'Lien 1');
-                </sqlCheck>
-            </preConditions>
-        <comment>Adding Answers to Lien 1 Question</comment>
-        <sql>
-            set @concept_id = 0;
-            set @child1_concept_id = 0;
-            set @child2_concept_id = 0;
-            set @child3_concept_id = 0;
-            set @child4_concept_id = 0;
-            set @child5_concept_id = 0;
-            set @child6_concept_id = 0;
-            set @child7_concept_id = 0;
-
-            select concept_id into @concept_id from concept_name where name = 'Lien 1' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'Partenaire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Conjoint(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child3_concept_id from concept_name where name = 'Père' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child4_concept_id from concept_name where name = 'Mère' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child5_concept_id from concept_name where name = 'Ami(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child6_concept_id from concept_name where name = 'Famille' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child7_concept_id from concept_name where name = 'Autre' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);
-            call add_concept_answer(@concept_id, @child3_concept_id, 3);
-            call add_concept_answer(@concept_id, @child4_concept_id, 4);
-            call add_concept_answer(@concept_id, @child5_concept_id, 5);
-            call add_concept_answer(@concept_id, @child6_concept_id, 6);
-            call add_concept_answer(@concept_id, @child7_concept_id, 7);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712111533" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
-                   concept_name cn
-                   on ca.concept_id = cn.concept_id
-                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Père','Mère','Ami(e)','Famille','Autre') and concept_name_type = "FULLY_SPECIFIED")
-                   AND
-                   cn.concept_id IN (select concept_id from concept_name where name = 'Lien 2');
-                </sqlCheck>
-            </preConditions>
-        <comment>Adding Answers to Lien 2 Question</comment>
-        <sql>
-            set @concept_id = 0;
-            set @child1_concept_id = 0;
-            set @child2_concept_id = 0;
-            set @child3_concept_id = 0;
-            set @child4_concept_id = 0;
-            set @child5_concept_id = 0;
-            set @child6_concept_id = 0;
-            set @child7_concept_id = 0;
-
-            select concept_id into @concept_id from concept_name where name = 'Lien 2' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'Partenaire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Conjoint(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child3_concept_id from concept_name where name = 'Père' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child4_concept_id from concept_name where name = 'Mère' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child5_concept_id from concept_name where name = 'Ami(e)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child6_concept_id from concept_name where name = 'Famille' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child7_concept_id from concept_name where name = 'Autre' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);
-            call add_concept_answer(@concept_id, @child3_concept_id, 3);
-            call add_concept_answer(@concept_id, @child4_concept_id, 4);
-            call add_concept_answer(@concept_id, @child5_concept_id, 5);
-            call add_concept_answer(@concept_id, @child6_concept_id, 6);
-            call add_concept_answer(@concept_id, @child7_concept_id, 7);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261215" author="Yash">
+    </changeSet>
+    <changeSet id="OCB-CONFIG-2017012212993" author="Ravindra">
+        <comment>Migrations to split identifier and assign cohort type</comment>
+        <sqlFile path="IdentifierMigrations.sql"/>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261215" author="Yash">
         <comment>Deleting entry of  Selles Directs - Type concept from concept_name table</comment>
-            <sql>delete from concept_name where name = 'Selles Directs - Type' and locale = 'fr';
-            </sql>    
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261803" author="Yash">
+        <sql>delete from concept_name where name = 'Selles Directs - Type' and locale = 'fr';
+            </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261803" author="Yash">
         <comment>Deleting unnecessary entried from event_records table</comment>
-            <sql>
+        <sql>
             delete from event_records where title NOT IN ('addressHierarchy','Patient','Encounter');
-            </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712141133" author="Yash">
+            </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712141133" author="Yash">
         <comment>Adding All Concepts related to Lab</comment>
-            <sqlFile path="AddAllLabConcepts.sql"/>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712181600" author="Yash">
+        <sqlFile path="AddAllLabConcepts.sql"/>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712181600" author="Yash">
         <comment>Adding Description for Concepts</comment>
-            <sqlFile path="AddDescriptionForConcepts.sql"/>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712271600" author="Yash">
+        <sqlFile path="AddDescriptionForConcepts.sql"/>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712271600" author="Yash">
         <comment>Truncate table concept_numeric</comment>
-            <sql> truncate table concept_numeric; </sql>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712191530" author="Yash">
+        <sql> truncate table concept_numeric; </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712191530" author="Yash">
         <comment>Adding Units for Lab tests</comment>
-            <sqlFile path="AddUnitsToLabTests.sql"/>
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201055" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        <sqlFile path="AddUnitsToLabTests.sql"/>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201055" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -795,7 +188,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Typage anémie');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Typage anémie LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -820,12 +213,11 @@
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
             call add_concept_answer(@concept_id, @child6_concept_id, 6);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201115" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201115" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -834,7 +226,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Groupage sanguin ABO');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Typage Groupage sanguin ABO LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -853,12 +245,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201140" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201140" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -867,7 +258,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Groupage sanguin Rhesus');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Groupage sanguin Rhesus LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -880,12 +271,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201141" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201141" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -894,7 +284,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Test de compatibilité');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Test de compatibilité LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -907,12 +297,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201155" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201155" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -921,7 +310,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Sang Frais (Goutte fraiche)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Sang Frais (Goutte fraiche) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -934,12 +323,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201205" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201205" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -948,7 +336,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'GE');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to GE LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -970,12 +358,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201217" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201217" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -984,7 +371,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Selles Directs - KOP');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Selles Directs - KOP LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1001,12 +388,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201220" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201220" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1015,7 +401,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Selles I.O');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Selles I.O LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1033,12 +419,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201225" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201225" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1047,7 +432,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Crag');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Crag LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1060,12 +445,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201226" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201226" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1074,7 +458,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Encre de chine');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Encre de chine LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1087,12 +471,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201228" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201228" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1101,7 +484,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Proteinorachie (test de Pandy)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Proteinorachie (test de Pandy) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1114,12 +497,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201229" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201229" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1128,7 +510,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Gram');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Gram LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1141,12 +523,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201230" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201230" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1155,7 +536,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = '(If positif) Forme');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to (If positif) Forme LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1168,12 +549,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201231" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201231" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1182,7 +562,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = '(If positif) Coloration');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to (If positif) Coloration LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1195,12 +575,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201236" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201236" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1209,7 +588,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = '(If positif) Groupement');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to (If positif) Groupement LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1229,12 +608,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201434" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201434" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1243,7 +621,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'GeneXpert TB (LCR)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to GeneXpert TB (LCR) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1262,12 +640,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201454" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201454" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1276,7 +653,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Sang (hématurie)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Sang (hématurie) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1289,12 +666,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201458" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201458" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1303,7 +679,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Urobilinogène');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Urobilinogène LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1315,12 +691,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201500" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201500" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1329,7 +704,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Bilirubine');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Bilirubine LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1342,13 +717,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-
-        <changeSet id="OCB-CONFIG-1712201800" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201800" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1357,7 +730,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Protéines');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Protéines LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1376,12 +749,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201840" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201840" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1390,7 +762,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Nitrites');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Nitrites LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1409,12 +781,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201842" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201842" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1423,7 +794,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Corps cétoniques');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Corps cétoniques LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1436,12 +807,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201910" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201910" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1450,7 +820,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Acide ascorbique');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Acide ascorbique LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1463,12 +833,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201912" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201912" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1477,7 +846,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Glucose');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Glucose LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1496,12 +865,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-         <changeSet id="OCB-CONFIG-1712201423" author="Pritam">
-                <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201423" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1510,7 +878,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'pH');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to pH LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1532,12 +900,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-         <changeSet id="OCB-CONFIG-1712201429" author="Pritam">
-                <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201429" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1546,7 +913,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Leucocytes');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Leucocytes LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1568,12 +935,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201441" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201441" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1582,7 +948,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Test de Grossesse');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Test de Grossesse LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1595,12 +961,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);  
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202141" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202141" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1609,7 +974,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'EID (PCR)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to EID (PCR) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1622,12 +987,11 @@
             
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);  
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201715" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201715" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1636,7 +1000,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'HIV - Determine');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to HIV - Determine LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1650,12 +1014,11 @@
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201941" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201941" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1664,7 +1027,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'HIV - Unigold');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to HIV - Unigold LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1677,12 +1040,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);     
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201943" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201943" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1691,7 +1053,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Hépatite B');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Hépatite B LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1704,12 +1066,11 @@
             
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2); 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201949" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201949" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1718,7 +1079,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Hépatite C');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Hépatite C LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1731,12 +1092,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2); 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201951" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201951" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1745,7 +1105,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Malaria');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Malaria LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1758,12 +1118,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712201953" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712201953" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1772,7 +1131,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Syphilis');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Syphilis LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1785,12 +1144,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2); 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202153" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202153" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1799,7 +1157,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Crag serique');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Crag serique LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1812,12 +1170,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221417" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221417" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1826,7 +1183,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (LCR) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1848,12 +1205,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202001" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202001" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1862,7 +1218,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Crachat)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (Crachat) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1884,12 +1240,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202007" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202007" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1898,7 +1253,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (Crachat)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Genexpert (Crachat) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1917,12 +1272,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202013" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202013" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1931,7 +1285,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (Crachat)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Rivalta (Crachat) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1944,12 +1298,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202015" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202015" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1958,7 +1311,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Pus)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (Pus) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -1980,12 +1333,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202017" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202017" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -1994,7 +1346,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (Pus)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Genexpert (Pus) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2013,12 +1365,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202019" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202019" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2027,7 +1378,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (Pus)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Rivalta (Pus) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2040,12 +1391,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2); 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202021" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202021" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2054,7 +1404,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Gastrique)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (Gastrique) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2076,12 +1426,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202023" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202023" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2090,7 +1439,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (Gastrique)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Genexpert (Gastrique) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2109,12 +1458,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202025" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202025" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2123,7 +1471,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (Gastrique)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Rivalta (Gastrique) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2136,12 +1484,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202029" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202029" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2150,7 +1497,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Ascite)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (Ascite) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2172,12 +1519,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202031" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202031" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2186,7 +1532,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (Ascite)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Genexpert (Ascite) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2205,12 +1551,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202133" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202133" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2219,7 +1564,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (Ascite)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Rivalta (Ascite) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2232,12 +1577,11 @@
             
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2); 
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202129" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202129" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2246,7 +1590,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Pleural)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (Pleural) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2268,12 +1612,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202131" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202131" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2282,7 +1625,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (Pleural)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Genexpert (Pleural) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2301,12 +1644,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202033" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202033" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2315,7 +1657,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (Pleural)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Rivalta (Pleural) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2328,12 +1670,11 @@
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202041" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202041" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2342,7 +1683,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Ganglionnaire)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (Ganglionnaire) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2364,12 +1705,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202043" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202043" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2378,7 +1718,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (Ganglionnaire)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Genexpert (Ganglionnaire) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2397,12 +1737,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202045" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202045" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2411,7 +1750,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (Ganglionnaire)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Rivalta (Ganglionnaire) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2424,12 +1763,11 @@
             
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202051" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202051" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2438,7 +1776,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Synovial)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Microscopie TB - Recherche de BAAR (Synovial) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2460,12 +1798,11 @@
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202053" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202053" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2474,7 +1811,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (Synovial)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Genexpert (Synovial) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2493,12 +1830,11 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712202055" author="Pritam">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712202055" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select count(*) from concept_answer ca 
                    join 
                    concept_name cn
@@ -2507,7 +1843,7 @@
                    AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (Synovial)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Answers to Rivalta (Synovial) LabTest</comment>
         <sql>
             set @concept_id = 0;
@@ -2520,12 +1856,11 @@
             
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221055" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221055" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
@@ -2533,7 +1868,7 @@
 and 
 cs.concept_set IN (select concept_id from concept_name where name = 'Demande de Transfusion Sanguine(Blood Transfusion Request)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Demande de Transfusion Sanguine(Blood Transfusion Request) Panel
         </comment>
         <sql>
@@ -2551,19 +1886,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221230" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221230" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Selles Directs - KOP','Selles Directs - Type','Selles I.O') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Selles (Panel)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Selles Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2580,19 +1914,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221355" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221355" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Numeration GB','FL - LYM%','FL - MXD%','FL - NEUT%','Crag','Encre de chine','Proteinorachie (test de Pandy)','Gram','(If positif) Forme','(If positif) Coloration','(If positif) Groupement','Microscopie TB - Recherche de BAAR (LCR)','Glycorachie','GeneXpert TB (LCR)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Panel)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to LCR Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2643,19 +1976,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member12_concept_id, 12);
             call add_concept_set_members (@concept_id, @member13_concept_id, 13);
             call add_concept_set_members (@concept_id, @member14_concept_id, 14);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221430" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221430" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Sang (hématurie)','Urobilinogèn','Bilirubine','Protéines','Nitrites','Corps cétoniques','Acide ascorbique','Glucose','pH','Leucocytes') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Urine bandelette');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Urine bandelette Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2693,13 +2025,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member8_concept_id, 8);
             call add_concept_set_members (@concept_id, @member9_concept_id, 9);
             call add_concept_set_members (@concept_id, @member10_concept_id, 10);
-        </sql> 
-        </changeSet>
-
-
-        <changeSet id="OCB-CONFIG-1712221455" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221455" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
@@ -2707,7 +2037,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                    AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Hemogramme');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Hemogramme Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2745,19 +2075,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member8_concept_id, 8);
             call add_concept_set_members (@concept_id, @member9_concept_id, 9);
             call add_concept_set_members (@concept_id, @member10_concept_id, 10);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221500" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221500" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('CD4','CD4 % (enfants de - 5 ans)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'CD4 (Panel)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to CD4 Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2771,19 +2100,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221505" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221505" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Creatinine','GPT','Glycémie') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Biochimie');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Biochimie Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2800,19 +2128,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221512" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221512" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('sodium','potassium','Chlore') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Ionogramme');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Ionogramme Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2829,19 +2156,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221518" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221518" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Bilirubine totalE','Bilirubine directE','Gamma GT','Phosphatase alcaline') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY) Panel</comment>
         <sql>
             set @concept_id = 0;
@@ -2861,12 +2187,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
             call add_concept_set_members (@concept_id, @member4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221547" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221547" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
@@ -2925,7 +2250,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                     AND concept_name_type = "FULLY_SPECIFIED") 
                     and cs.concept_set IN (select concept_id from concept_name where name = 'Sang');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests and Panels to Sang Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3086,19 +2411,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member49_concept_id, 49);
             call add_concept_set_members (@concept_id, @member50_concept_id, 50);
             call add_concept_set_members (@concept_id, @member51_concept_id, 51);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221852" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221852" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Selles (Panel)','Selles Directs - KOP','Selles Directs - Type','Selles I.O') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Selles (Sample)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests and Panel to Selles Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3118,19 +2442,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
             call add_concept_set_members (@concept_id, @member4_concept_id, 4);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221900" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221900" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('LCR (Panel)','Numeration GB','FL - LYM%','FL - MXD%','FL - NEUT%','Crag','Encre de chine','Proteinorachie (test de Pandy)','Gram','(If positif) Forme','(If positif) Coloration','(If positif) Groupement','Microscopie TB - Recherche de BAAR (LCR)','Glycorachie','GeneXpert TB (LCR)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Sample)');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests and Panels to LCR Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3183,19 +2506,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member13_concept_id, 13);
             call add_concept_set_members (@concept_id, @member14_concept_id, 14);
             call add_concept_set_members (@concept_id, @member15_concept_id, 15);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221921" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221921" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Urine bandelette','Sang (hématurie)','Urobilinogène','Bilirubine','Protéines','Nitrites','Corps cétoniques','Acide ascorbique','Glucose','pH','Leucocytes','Test de Grossesse') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Urine');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests and Panels to Urine Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3239,19 +2561,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member10_concept_id, 10);
             call add_concept_set_members (@concept_id, @member11_concept_id, 11);
             call add_concept_set_members (@concept_id, @member12_concept_id, 12);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221739" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221739" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Pus)','Genexpert (Pus)','Rivalta (Pus)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Pus');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Pus Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3268,19 +2589,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221744" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221744" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Crachat)','Genexpert (Crachat)','Rivalta (Crachat)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Crachat');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Crachat Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3297,19 +2617,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221747" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221747" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Gastrique)','Genexpert (Gastrique)','Rivalta (Gastrique)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Suc gastrique');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Suc gastrique Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3326,19 +2645,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221752" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221752" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Ascite)','Genexpert (Ascite)','Rivalta (Ascite)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Liquide ascite');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Liquide ascite Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3355,19 +2673,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221756" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221756" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Pleural)','Genexpert (Pleural)','Rivalta (Pleural)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = "Liquide d'épanchement pleural");
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Liquide d'épanchement pleural Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3384,19 +2701,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221759" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221759" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Ganglionnaire)','Genexpert (Ganglionnaire)','Rivalta (Ganglionnaire)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Suc ganglionnaire');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Suc ganglionnaire Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3413,19 +2729,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712221859" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712221859" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Synovial)','Genexpert (Synovial)','Rivalta (Synovial)') AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Liquide Synovial');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Liquide Synovial Sample</comment>
         <sql>
             set @concept_id = 0;
@@ -3442,13 +2757,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-
-        <changeSet id="OCB-CONFIG-1712241230" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241230" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
@@ -3558,7 +2871,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                     AND concept_name_type = "FULLY_SPECIFIED") 
                     and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding All Tests and Panels to All_Tests_and_Panels set</comment>
         <sql>
             set @concept_id = 0;
@@ -3876,12 +3189,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member101_concept_id, 101);
             call add_concept_set_members (@concept_id, @member102_concept_id, 102);
             call add_concept_set_members (@concept_id, @member103_concept_id, 103);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712241832" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241832" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
@@ -3889,7 +3201,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                    ) AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = '1');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Department 1</comment>
         <sql>
             set @concept_id = 0;
@@ -4007,18 +3319,17 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member35_concept_id, 35);
             call add_concept_set_members (@concept_id, @member36_concept_id, 36);
             call add_concept_set_members (@concept_id, @member37_concept_id, 37);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712241853" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241853" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Groupage sanguin ABO','HIV - Determine','Crag serique','Groupage sanguin Rhesus','Test de compatibilité','HIV -Unigold','Hépatite B','Hépatite C') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = '2');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Department 2</comment>
         <sql>
             set @concept_id = 0;
@@ -4050,19 +3361,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member6_concept_id, 6);
             call add_concept_set_members (@concept_id, @member7_concept_id, 7);
             call add_concept_set_members (@concept_id, @member8_concept_id, 8);;
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712242155" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712242155" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Creatinine',
                    'GPT','Glycorachie','sodium','Bilirubine totalE','Calcium','Lipase','potassium','Chlore','Bilirubine directE','Gamma GT','Phosphatase alcaline') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = '3');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests Department 3</comment>
         <sql>
             set @concept_id = 0;
@@ -4106,18 +3416,17 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member10_concept_id, 10);
             call add_concept_set_members (@concept_id, @member11_concept_id, 11);
             call add_concept_set_members (@concept_id, @member12_concept_id, 12);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712241955" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241955" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Globules Blancs','Globules Rouges','Hemoglobine','Hematocrite','VGM','CCMH','Plaquettes','LYM%','MXD% (Eosino+Monocytes)','NEUT%','CD4','CD4 % (enfants de - 5 ans)') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = '4');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Department 4</comment>
         <sql>
             set @concept_id = 0;
@@ -4161,19 +3470,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member10_concept_id, 10);
             call add_concept_set_members (@concept_id, @member11_concept_id, 11);
             call add_concept_set_members (@concept_id, @member12_concept_id, 12);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712241907" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241907" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('EID (PCR)',
                    'Charge Virale HIV - Value','Charge Virale HIV - Logarithme') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = 'CV');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Department CV</comment>
         <sql>
             set @concept_id = 0;
@@ -4190,18 +3498,17 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712241855" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241855" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Temps de coagulation','Temps de saignement','Glycémie','Malaria','Syphilis','Lactate','Hemoglobine*') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = 'PR');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Department PR</comment>
         <sql>
             set @concept_id = 0;
@@ -4230,12 +3537,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member5_concept_id, 5);
             call add_concept_set_members (@concept_id, @member6_concept_id, 6);
             call add_concept_set_members (@concept_id, @member7_concept_id, 7);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712241922" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241922" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
@@ -4243,7 +3549,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                    ) AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'TB');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding Tests to Department TB</comment>
         <sql>
             set @concept_id = 0;
@@ -4296,12 +3602,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member13_concept_id, 13);
             call add_concept_set_members (@concept_id, @member14_concept_id, 14);
             call add_concept_set_members (@concept_id, @member15_concept_id, 15);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712241957" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712241957" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
@@ -4309,7 +3614,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                    ) AND concept_name_type = "FULLY_SPECIFIED") 
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Lab Samples');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding All Samples to Lab Samples set</comment>
         <sql>
             set @concept_id = 0;
@@ -4350,18 +3655,17 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member9_concept_id, 9);
             call add_concept_set_members (@concept_id, @member10_concept_id, 10);
             call add_concept_set_members (@concept_id, @member11_concept_id, 11);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712242098" author="Yash">
-            <preConditions onFail="MARK_RAN">
-                <sqlCheck expectedResult="0">
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712242098" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
                    join concept_name cn 
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('1','2','3','4','CV','PR','TB') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = 'Lab Departments');
                 </sqlCheck>
-            </preConditions>
+        </preConditions>
         <comment>Adding all Departments to Lab Departments Set</comment>
         <sql>
             set @concept_id = 0;
@@ -4390,11 +3694,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member5_concept_id, 5);
             call add_concept_set_members (@concept_id, @member6_concept_id, 6);
             call add_concept_set_members (@concept_id, @member7_concept_id, 7);
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261440" author="Yash">
-            <comment>Adding entries in event_records table for All_Tests_and_Panels</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261440" author="Yash">
+        <comment>Adding entries in event_records table for All_Tests_and_Panels</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4403,11 +3706,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'all-tests-and-panels',now(),concat('/openmrs/ws/rest/v1/reference-data/all-tests-and-panels/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/all-tests-and-panels/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261450" author="Yash">
-            <comment>Adding entries in event_records table for Lab Samples</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261450" author="Yash">
+        <comment>Adding entries in event_records table for Lab Samples</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4416,11 +3718,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'all-samples',now(),concat('/openmrs/ws/rest/v1/reference-data/all-samples/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/all-samples/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261455" author="Yash">
-            <comment>Adding entries in event_records table for Sang Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261455" author="Yash">
+        <comment>Adding entries in event_records table for Sang Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4429,11 +3730,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261500" author="Yash">
-            <comment>Adding entries in event_records table for Selles Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261500" author="Yash">
+        <comment>Adding entries in event_records table for Selles Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4442,11 +3742,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261505" author="Yash">
-            <comment>Adding entries in event_records table for Urine Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261505" author="Yash">
+        <comment>Adding entries in event_records table for Urine Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4455,11 +3754,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261506" author="Yash">
-            <comment>Adding entries in event_records table for LCR lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261506" author="Yash">
+        <comment>Adding entries in event_records table for LCR lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4468,11 +3766,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261508" author="Yash">
-            <comment>Adding entries in event_records table for Crachat Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261508" author="Yash">
+        <comment>Adding entries in event_records table for Crachat Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4481,11 +3778,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261510" author="Yash">
-            <comment>Adding entries in event_records table for Liquide d'épanchement pleural lab sample
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261510" author="Yash">
+        <comment>Adding entries in event_records table for Liquide d'épanchement pleural lab sample
             </comment>
         <sql>
             set @concept_id = 0;
@@ -4495,11 +3791,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261512" author="Yash">
-            <comment>Adding entries in event_records table for Liquide ascite Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261512" author="Yash">
+        <comment>Adding entries in event_records table for Liquide ascite Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4508,11 +3803,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261514" author="Yash">
-            <comment>Adding entries in event_records table for Pus Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261514" author="Yash">
+        <comment>Adding entries in event_records table for Pus Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4521,11 +3815,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261519" author="Yash">
-            <comment>Adding entries in event_records table for Suc ganglionnaire Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261519" author="Yash">
+        <comment>Adding entries in event_records table for Suc ganglionnaire Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4534,11 +3827,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261521" author="Yash">
-            <comment>Adding entries in event_records table for Liquide Synovial Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261521" author="Yash">
+        <comment>Adding entries in event_records table for Liquide Synovial Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4547,11 +3839,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261523" author="Yash">
-            <comment>Adding entries in event_records table for Suc gastrique Lab Sample</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261523" author="Yash">
+        <comment>Adding entries in event_records table for Suc gastrique Lab Sample</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4560,11 +3851,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261529" author="Yash">
-            <comment>Adding entries in event_records table for Hemogramme Lab Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261529" author="Yash">
+        <comment>Adding entries in event_records table for Hemogramme Lab Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4573,11 +3863,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261533" author="Yash">
-            <comment>Adding entries in event_records table for Demande de Transfusion Sanguine(Blood Transfusion Request) Lab Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261533" author="Yash">
+        <comment>Adding entries in event_records table for Demande de Transfusion Sanguine(Blood Transfusion Request) Lab Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4586,11 +3875,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261534" author="Yash">
-            <comment>Adding entries in event_records table for CD4 Lab Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261534" author="Yash">
+        <comment>Adding entries in event_records table for CD4 Lab Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4599,11 +3887,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261535" author="Yash">
-            <comment>Adding entries in event_records table for Ionogramme Lab Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261535" author="Yash">
+        <comment>Adding entries in event_records table for Ionogramme Lab Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4612,11 +3899,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261536" author="Yash">
-            <comment>Adding entries in event_records table for Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY) Lab Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261536" author="Yash">
+        <comment>Adding entries in event_records table for Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY) Lab Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4625,11 +3911,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261538" author="Yash">
-            <comment>Adding entries in event_records table for Selles Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261538" author="Yash">
+        <comment>Adding entries in event_records table for Selles Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4638,11 +3923,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261540" author="Yash">
-            <comment>Adding entries in event_records table for LCR Panel Lab</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261540" author="Yash">
+        <comment>Adding entries in event_records table for LCR Panel Lab</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4651,11 +3935,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261545" author="Yash">
-            <comment>Adding entries in event_records table for Urine bandelette Lab Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261545" author="Yash">
+        <comment>Adding entries in event_records table for Urine bandelette Lab Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4664,11 +3947,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261546" author="Yash">
-            <comment>Adding entries in event_records table for Biochimie Lab Panel</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261546" author="Yash">
+        <comment>Adding entries in event_records table for Biochimie Lab Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4677,11 +3959,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261943" author="Yash">
-            <comment>Adding entries in event_records table for Department 1</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261943" author="Yash">
+        <comment>Adding entries in event_records table for Department 1</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4690,11 +3971,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261949" author="Yash">
-            <comment>Adding entries in event_records table for Department 2</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261949" author="Yash">
+        <comment>Adding entries in event_records table for Department 2</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4703,11 +3983,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261950" author="Yash">
-            <comment>Adding entries in event_records table for Department 3</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261950" author="Yash">
+        <comment>Adding entries in event_records table for Department 3</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4716,11 +3995,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261951" author="Yash">
-            <comment>Adding entries in event_records table for Department 4</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261951" author="Yash">
+        <comment>Adding entries in event_records table for Department 4</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4729,11 +4007,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712261946" author="Yash">
-            <comment>Adding entries in event_records table for CV Department</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712261946" author="Yash">
+        <comment>Adding entries in event_records table for CV Department</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4742,11 +4019,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712262046" author="Yash">
-            <comment>Adding entries in event_records table for PR Department</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712262046" author="Yash">
+        <comment>Adding entries in event_records table for PR Department</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4755,11 +4031,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
-
-        <changeSet id="OCB-CONFIG-1712262146" author="Yash">
-            <comment>Adding entries in event_records table for TB Department</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1712262146" author="Yash">
+        <comment>Adding entries in event_records table for TB Department</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -4768,6 +4043,6 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = @concept_id;
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
-        </sql> 
-        </changeSet>
+        </sql>
+    </changeSet>
 </databaseChangeLog>
