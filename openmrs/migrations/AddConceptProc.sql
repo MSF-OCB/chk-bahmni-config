@@ -1,4 +1,3 @@
-DELIMITER //
 CREATE PROCEDURE add_concept_fr (INOUT new_concept_id INT,
                               INOUT concept_name_short_id INT,
                               INOUT concept_name_full_id INT,
