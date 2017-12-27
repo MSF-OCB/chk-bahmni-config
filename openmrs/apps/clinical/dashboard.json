@@ -11,7 +11,8 @@
         "ageLimit": 100,
         "patientAttributes": [
           "ARV Naif/ Non Naif",
-          "Date depistage"
+          "Date depistage",
+          "Type de cohorte"
         ],
         "addressFields": [
           "address6"
@@ -49,3 +50,4 @@
     }
   }
 }
+
