@@ -542,10 +542,6 @@
                 select uuid into @uuid from concept where concept_id = @concept_id;
                 INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Glycorachie','Glycorachie','Numeric','LabTest',false);
-                select uuid into @uuid from concept where concept_id = @concept_id;
-                INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
-
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'GeneXpert TB (LCR)','GeneXpert TB (LCR)','Coded','LabTest',false);
                 select uuid into @uuid from concept where concept_id = @concept_id;
                 INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
