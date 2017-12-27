@@ -207,5 +207,9 @@
                 update patient_identifier_type set format='^[0-9,\\/]+$' where patient_identifier_type_id=3 and format like '%CHK%';
          </sql>
 </changeSet>
+        <changeSet id="OCB-CONFIG-2017012212993" author="Ravindra">
+            <comment>Migrations to split identifier and assign cohort type</comment>
+           <sqlFile path="IdentifierMigrations.sql"/>
+        </changeSet>
 
 </databaseChangeLog>
