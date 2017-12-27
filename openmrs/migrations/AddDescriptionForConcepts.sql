@@ -1,3 +1,4 @@
+
 INSERT INTO concept_description (concept_id,description,locale,creator,date_created,changed_by,date_changed,uuid) 
 VALUES 
 ((select concept_id from concept_name where name = 'Hemogramme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),'Sang','fr',1,now(),NULL,NULL,uuid());
@@ -9,11 +10,11 @@ VALUES
 
 INSERT INTO concept_description (concept_id,description,locale,creator,date_created,changed_by,date_changed,uuid) 
 VALUES 
-((select concept_id from concept_name where name = 'Demande de Transfusion Sanguine (Blood Transfusion Request)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),
+((select concept_id from concept_name where name = 'Demande de Transfusion Sanguine(Blood Transfusion Request)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),
 'Sang','fr',1,now(),NULL,NULL,uuid());
 INSERT INTO concept_description (concept_id,description,locale,creator,date_created,changed_by,date_changed,uuid) 
 VALUES 
-((select concept_id from concept_name where name = 'Demande de Transfusion Sanguine (Blood Transfusion Request)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'en' and voided = 0),
+((select concept_id from concept_name where name = 'Demande de Transfusion Sanguine(Blood Transfusion Request)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'en' and voided = 0),
 'Sang','en',1,now(),NULL,NULL,uuid());
 
 

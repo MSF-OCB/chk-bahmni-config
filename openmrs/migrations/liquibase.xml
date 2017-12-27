@@ -7,6 +7,16 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+        <changeSet id="default-2017122701" author="vishnu">
+            <preConditions onFail="MARK_RAN">
+               <sqlCheck expectedResult="0">
+                      SELECT count(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE="PROCEDURE"  AND ROUTINE_SCHEMA="openmrs" and ROUTINE_NAME='add_concept_fr';
+               </sqlCheck>
+            </preConditions>     
+        <comment>Adding the Procedure for creating concepts in Fr</comment>
+        <sqlFile splitStatements="false" path="AddConceptProc.sql"/>
+        </changeSet>
+
         <changeSet id="OCB-CONFIG-1712071615" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
@@ -417,16 +427,6 @@
             </sql>
 
         </changeSet>
-        <changeSet id="default-2017122701" author="vishnu">
-            <preConditions onFail="MARK_RAN">
-               <sqlCheck expectedResult="0">
-                      SELECT count(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE="PROCEDURE"  AND ROUTINE_SCHEMA="openmrs" and ROUTINE_NAME='add_concept_fr';
-               </sqlCheck>
-            </preConditions>     
-        <comment>Adding the Fr Procedure in the Databases</comment>
-        <sqlFile path="AddConceptProc.sql"/>
-        </changeSet>
-
 
         <changeSet id="OCB-CONFIG-1912071617" author="vishnu">
              <comment> Adding the Cohort attribute </comment>
