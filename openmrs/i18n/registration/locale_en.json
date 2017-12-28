@@ -24,6 +24,7 @@
   "REGISTRATION_PRINT_WITH_BARCODE": "Bar<u>c</u>ode Print",
   "REGISTRATION_CONTACT_INFORMATION":"Contact Information",
   "REGISTRATION_PATIENT_MEDICAL_INFORMATION":"Patient Medical Information",
-  "REGISTRATION_HIV_DATE_ERROR_KEY":"Please do not enter a future date"
+  "REGISTRATION_HIV_DATE_ERROR_KEY":"Please do not enter a future date",
+  "REGISTRATION_ADDITIONAL_INFORMATION":"Additional Information"
 
 }
