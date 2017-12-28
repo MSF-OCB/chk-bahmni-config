@@ -24,7 +24,7 @@
         <div class="right col">
             <span class="label">Bébé éxposé'</span>
             <span ng-if="patient['Bébé éxposé'] === true">Oui</span>
-            <span ng-if="patient['Bébé éxposé'] === false">Non</span>
+            <span ng-if="!patient['Bébé éxposé']">Non</span>
         </div>
     </div>
     <br/>
@@ -32,7 +32,7 @@
         <div class="left">
             <span class="label">Converti CP : </span>
             <span ng-if="patient['Converti CP'] === true">Oui</span>
-            <span ng-if="patient['Converti CP'] === false">Non</span>
+            <span ng-if="!patient['Converti CP']">Non</span>
         </div>
         <div class="right col">
             <span class="label">Status VIH</span>
