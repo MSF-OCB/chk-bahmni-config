@@ -14,6 +14,7 @@
         <comment>Adding the Procedure for creating concepts in Fr</comment>
         <sqlFile splitStatements="false" path="AddConceptProc.sql"/>
     </changeSet>
+
     <changeSet id="OCB-CONFIG-1912071617" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -4045,4 +4046,86 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
         </sql>
     </changeSet>
+
+    <changeSet id="OCB-CONFIG-2017122801" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from person_attribute_type where name='Bébé éxposé';
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding the Exposed Baby concept and including in Person attribute table</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            INSERT INTO person_attribute_type (name, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
+            VALUES ('Bébé éxposé','java.lang.Boolean',0,1,now(),0,24,uuid(),@concept_id);
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-2017122802" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from  concept_name where name ='Status VIH' and concept_name_type='FULLY_SPECIFIED' and locale='fr';
+            </sqlCheck>
+            <sqlCheck expectedResult="0">
+                select count(*) from person_attribute_type where name='Status VIH';
+            </sqlCheck>
+        </preConditions>
+        <comment> Adding the CP attribute </comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Status VIH','Status VIH','Coded','Misc',false);
+            INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
+            VALUES ('Status VIH', 'Status VIH', 'org.openmrs.Concept', 0, 1, now(), 0, 24, uuid(), @concept_id);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-2017122803" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name in('HIV+','HIV-','Undetermined') and concept_name_type='FULLY_SPECIFIED';
+            </sqlCheck>
+        </preConditions>
+        <comment> Adding the CHK and CP concepts </comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'HIV+','HIV+','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'HIV-','HIV-','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Undetermined','Undetermined','N/A','Misc',false);
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-2017122804" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer  where concept_id in(select concept_id from concept_name where name = 'Status VIH');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding Answers to Person Attributes</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'Status VIH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'HIV+' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'HIV-' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Undetermined' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+        </sql>
+    </changeSet>
+
+
+
+
+
+
 </databaseChangeLog>

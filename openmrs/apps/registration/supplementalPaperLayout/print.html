@@ -21,6 +21,11 @@
             <span class="label">Type de cohorte :</span>
             <span>{{patient['Type de cohorte'].value}}</span>
         </div>
+        <div class="right col">
+            <span class="label">Bébé éxposé'</span>
+            <span ng-if="patient['Bébé éxposé'] === true">Oui</span>
+            <span ng-if="patient['Bébé éxposé'] === false">Non</span>
+        </div>
     </div>
     <br/>
     <div class="row">
@@ -28,6 +33,10 @@
             <span class="label">Converti CP : </span>
             <span ng-if="patient['Converti CP'] === true">Oui</span>
             <span ng-if="patient['Converti CP'] === false">Non</span>
+        </div>
+        <div class="right col">
+            <span class="label">Status VIH</span>
+            <span>{{patient['Status VIH'].value}}</span>
         </div>
     </div>
     <br/>

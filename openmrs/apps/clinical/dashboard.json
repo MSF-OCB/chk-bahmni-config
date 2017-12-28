@@ -12,7 +12,8 @@
         "patientAttributes": [
           "ARV Naif/ Non Naif",
           "Date depistage",
-          "Type de cohorte"
+          "Type de cohorte",
+          "Status VIH"
         ],
         "addressFields": [
           "address6"
