@@ -157,7 +157,7 @@
             </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712261803" author="Yash">
-        <comment>Deleting unnecessary entried from event_records table</comment>
+        <comment>Deleting unnecessary entries from event_records table</comment>
         <sql>
             delete from event_records where title NOT IN ('addressHierarchy','Patient','Encounter');
             </sql>
@@ -169,10 +169,6 @@
     <changeSet id="OCB-CONFIG-1712181600" author="Yash">
         <comment>Adding Description for Concepts</comment>
         <sqlFile path="AddDescriptionForConcepts.sql"/>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712271600" author="Yash">
-        <comment>Truncate table concept_numeric</comment>
-        <sql> truncate table concept_numeric; </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712191530" author="Yash">
         <comment>Adding Units for Lab tests</comment>
@@ -3697,161 +3693,293 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member7_concept_id, 7);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1712261440" author="Yash">
-        <comment>Adding entries in event_records table for All_Tests_and_Panels</comment>
+    <changeSet id="OCB-CONFIG-17122861748" author="Yash">
+        <comment>Adding entries in event_records table for All Lab Tests</comment>
         <sql>
-            set @concept_id = 0;
             set @uuid = NULL;
 
-            select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Globules Blancs' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'all-tests-and-panels',now(),concat('/openmrs/ws/rest/v1/reference-data/all-tests-and-panels/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/all-tests-and-panels/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261450" author="Yash">
-        <comment>Adding entries in event_records table for Lab Samples</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Globules Rouges' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Lab Samples' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Hematocrite' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'all-samples',now(),concat('/openmrs/ws/rest/v1/reference-data/all-samples/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/all-samples/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261455" author="Yash">
-        <comment>Adding entries in event_records table for Sang Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'VGM' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Sang' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'CCMH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261500" author="Yash">
-        <comment>Adding entries in event_records table for Selles Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Plaquettes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Selles (Sample)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'LYM%' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261505" author="Yash">
-        <comment>Adding entries in event_records table for Urine Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'MXD% (Eosino+Monocytes)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Urine' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'NEUT%' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261506" author="Yash">
-        <comment>Adding entries in event_records table for LCR lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Numération reticulocyte' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'LCR (Sample)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Typage anémie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261508" author="Yash">
-        <comment>Adding entries in event_records table for Crachat Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Temps de coagulation' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Crachat' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Temps de saignement' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261510" author="Yash">
-        <comment>Adding entries in event_records table for Liquide d'épanchement pleural lab sample
-            </comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Groupage sanguin ABO' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = "Liquide d'épanchement pleural" and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Groupage sanguin Rhesus' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261512" author="Yash">
-        <comment>Adding entries in event_records table for Liquide ascite Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Test de compatibilité' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Liquide ascite' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Sang Frais (Goutte fraiche)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261514" author="Yash">
-        <comment>Adding entries in event_records table for Pus Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'CD4' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Pus' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'CD4 % (enfants de - 5 ans)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261519" author="Yash">
-        <comment>Adding entries in event_records table for Suc ganglionnaire Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Creatinine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Suc ganglionnaire' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'GPT' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261521" author="Yash">
-        <comment>Adding entries in event_records table for Liquide Synovial Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Glycémie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Liquide Synovial' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'GE' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG-1712261523" author="Yash">
-        <comment>Adding entries in event_records table for Suc gastrique Lab Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Selles Directs - KOP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select concept_id into @concept_id from concept_name where name = 'Suc gastrique' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Selles Directs - Type' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Selles I.O' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Numeration GB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'FL - LYM%' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'FL - MXD%' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'FL - NEUT%' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Crag' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Encre de chine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Proteinorachie (test de Pandy)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Gram' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = '(If positif) Forme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = '(If positif) Coloration' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = '(If positif) Groupement' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Glycorachie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Urobilinogène' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Bilirubine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Protéines' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Nitrites' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Corps cétoniques' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Acide ascorbique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Glucose' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'pH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Leucocytes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Test de Grossesse' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'sodium' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'potassium' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Chlore' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'EID (PCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'HIV - Determine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'HIV - Unigold' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Malaria' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Syphilis' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Hemoglobine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Hemoglobine*' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Crag serique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Lactate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Gamma GT' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Phosphatase alcaline' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Crachat)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (Crachat)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (Crachat)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Pus)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (Pus)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (Pus)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Gastrique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (Gastrique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (Gastrique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Ascite)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (Ascite)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (Ascite)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Pleural)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (Pleural)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (Pleural)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Ganglionnaire)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (Ganglionnaire)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (Ganglionnaire)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Synovial)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (Synovial)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (Synovial)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'GeneXpert TB (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Sang (hématurie)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Hépatite B' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Hépatite C' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Bilirubine totalE' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Bilirubine directE' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+            
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Calcium' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Lipase' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Charge Virale HIV - Value' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Charge Virale HIV - Logarithme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712261529" author="Yash">
@@ -3927,7 +4055,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712261540" author="Yash">
-        <comment>Adding entries in event_records table for LCR Panel Lab</comment>
+        <comment>Adding entries in event_records table for LCR Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -3962,6 +4090,164 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-1712261440" author="Yash">
+        <comment>Adding entries in event_records table for All_Tests_and_Panels</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'all-tests-and-panels',now(),concat('/openmrs/ws/rest/v1/reference-data/all-tests-and-panels/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/all-tests-and-panels/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-1712261455" author="Yash">
+    <comment>Adding entries in event_records table for Sang Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Sang' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261500" author="Yash">
+    <comment>Adding entries in event_records table for Selles Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Selles (Sample)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261505" author="Yash">
+    <comment>Adding entries in event_records table for Urine Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Urine' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261506" author="Yash">
+    <comment>Adding entries in event_records table for LCR lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Sample)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261508" author="Yash">
+    <comment>Adding entries in event_records table for Crachat Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Crachat' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261510" author="Yash">
+    <comment>Adding entries in event_records table for Liquide d'épanchement pleural lab sample
+            </comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = "Liquide d'épanchement pleural" and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261512" author="Yash">
+    <comment>Adding entries in event_records table for Liquide ascite Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Liquide ascite' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261514" author="Yash">
+    <comment>Adding entries in event_records table for Pus Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Pus' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261519" author="Yash">
+    <comment>Adding entries in event_records table for Suc ganglionnaire Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Suc ganglionnaire' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261521" author="Yash">
+    <comment>Adding entries in event_records table for Liquide Synovial Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Liquide Synovial' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261523" author="Yash">
+    <comment>Adding entries in event_records table for Suc gastrique Lab Sample</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Suc gastrique' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-1712261450" author="Yash">
+    <comment>Adding entries in event_records table for Lab Samples</comment>
+    <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Lab Samples' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'all-samples',now(),concat('/openmrs/ws/rest/v1/reference-data/all-samples/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/all-samples/',@uuid),'lab',now(),'lab');
+        </sql>
+</changeSet>
+
     <changeSet id="OCB-CONFIG-1712261943" author="Yash">
         <comment>Adding entries in event_records table for Department 1</comment>
         <sql>
