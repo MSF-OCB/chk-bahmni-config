@@ -57,7 +57,8 @@
   "CLINICAL_SAVE_TRANSLATION_KEY" : "Enregistrer",
   "NO_FULFILMENT_MESSAGE" :"Aucune observation pour cette demande",
   "ALL_LAB_RESULTS_LABEL" : "Tous les résultats Labo",
-  "SEARCH_BY_PATIENT_ID_KEY" : "Recherche par ID Patient"
+  "SEARCH_BY_PATIENT_ID_KEY" : "Recherche par ID Patient",
+  "SIDEBAR_NO_IMAGES_DISPLAY" : "Aucune image à afficher"
   
  
 }
