@@ -4,7 +4,9 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
-    <changeSet id="201509011514" author="Preethi,Sourav">
+
+
+<changeSet id="201509011514-001" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 select count(*) from site_information where name='defaultOrganizationName';
@@ -12,27 +14,10 @@
         </preConditions>
         <comment>Add default organization name for openelis</comment>
         <sql>
-            INSERT INTO site_information(id, name, lastupdated, description, value, encrypted, value_type)  VALUES ( nextVal( 'site_information_seq' ) , 'defaultOrganizationName', now(), 'Default organization name for department to be synced from openmrs',  'Bahmni', 'f', 'text' );
+ INSERT INTO site_information(id, name, lastupdated, description, value, encrypted, value_type)  VALUES ( nextVal( 'site_information_seq' ) , 'defaultOrganizationName', now(), 'Default organization name for department to be synced from openmrs',  'MSF', 'f', 'text' );
         </sql>
     </changeSet>
-    <changeSet id="201510121504" author="Preethi,Sourav">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select count(*) from organization where name='Bahmni';
-            </sqlCheck>
-        </preConditions>
-        <comment>Add Bahmni organization</comment>
-        <sql>
-            INSERT INTO organization(id, name)  VALUES ( nextVal( 'organization_seq' ) , 'Bahmni' );
-        </sql>
-    </changeSet>
-    <changeSet id="201603021148" author="Preethi,Vikash">
-        <comment>Update Active Flag for Bahmni Organization</comment>
-        <sql>
-            update organization set is_active='Y' where name='Bahmni';
-        </sql>
-    </changeSet>
-    <changeSet id="20171229-10" author="vishnu">
+    <changeSet id="201510121504" author="Vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 select count(*) from organization where name='MSF';
@@ -43,23 +28,29 @@
             INSERT INTO organization(id, name)  VALUES ( nextVal( 'organization_seq' ) , 'MSF' );
         </sql>
     </changeSet>
-    <changeSet id="20171229-02" author="vishnu">
+    <changeSet id="201603021148-02" author="vishnu">
         <comment>Update Active Flag for Bahmni Organization</comment>
         <sql>
             update organization set is_active='Y' where name='MSF';
         </sql>
     </changeSet>
 
-<changeSet id="20171229-003" author="Vishnu">
+<changeSet id="20171239-003" author="Vishnu">
+<preConditions onFail="MARK_RAN">
+<sqlCheck expectedResult="2">
+   select count(*) from organization where name not in ('MSF');
+</sqlCheck>
+</preConditions>
 <comment> Removing the organizations other than MSF </comment>
         <sql>
             delete from test_section  where org_id in (select id from organization where name not in ('MSF'));
-            delete from organization where name not in ('MSF');
+            delete from organization where name ='External Lab';
+            delete from organization where name ='Haiti';
         </sql>
    </changeSet>
 
 <changeSet id="20171229-04" author="vishnu">
-<preConditions>
+<preConditions onFail="MARK_RAN">
 <sqlCheck expectedResult ="0">
         select count(*) from site_information where name='SiteName' and value = 'MSF';
  </sqlCheck>
@@ -71,7 +62,7 @@
 
 
    <changeSet id="20171229-05" author="vishnu">
-   <preConditions>
+   <preConditions onFail="MARK_RAN">
    <sqlCheck expectedResult= "5">
               select count(*) from sample_source where name in('IPD','OPD','Emergency','Sub Center','Community Program');
               </sqlCheck>
@@ -83,7 +74,7 @@
               </changeSet>
 
               <changeSet id="20180102-01" author="vishnu">
-              <preConditions>
+              <preConditions onFail="MARK_RAN">
               <sqlCheck expectedResult="0">
               select count(*) from site_information where value='/home/MSF' and name='parentOfUploadedFilesDirectory';
               </sqlCheck>
@@ -95,7 +86,7 @@
               </changeSet>
 
               <changeSet id="20180103-01" author="vishnu">
-              <preConditions>
+              <preConditions onFail="MARK_RAN">
               <sqlCheck expectedResult="0">
               select count(*) from site_information where name='configuration name' and value='Centre Hospitalier de Kinshasa';
               </sqlCheck>
@@ -107,7 +98,7 @@
               </changeSet>
 
             <changeSet id="20180103-02" author="vishnu">
-            <preConditions>
+            <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
             select count(*)  from site_information where name ='stNumberFormat';
             </sqlCheck>
@@ -117,5 +108,11 @@
                  INSERT INTO site_information(id, name, lastupdated, description, value, encrypted, value_type)  VALUES (nextVal( 'site_information_seq' ) , 'stNumberFormat', now(), 'For Uploading Patient results for Patients without Prefix in Patient Identifier', '/.*/', 'f', 'text' );
             </sql>
             </changeSet>
+           <changeSet id="20180103-03" author="vishnu">
+            <comment>deleting the markers</comment>
+            <sql>
+                delete from markers ;
+            </sql>
+          </changeSet>
 
 </databaseChangeLog>
