@@ -50,12 +50,7 @@
         </sql>
     </changeSet>
 
-<changeSet id="20171229-03" author="Vishnu">
-<preConditions>
-    <sqlCheck expectedResult ="2">
-       select count(*) from organization where name not in ('MSF');
-    </sqlCheck>
-</preConditions>
+<changeSet id="20171229-003" author="Vishnu">
 <comment> Removing the organizations other than MSF </comment>
         <sql>
             delete from test_section  where org_id in (select id from organization where name not in ('MSF'));
