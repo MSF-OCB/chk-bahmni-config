@@ -4408,10 +4408,4 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
         </sql>
     </changeSet>
-
-
-
-
-
-
 </databaseChangeLog>
