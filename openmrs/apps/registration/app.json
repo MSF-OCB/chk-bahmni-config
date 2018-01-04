@@ -81,6 +81,7 @@
                 {
             "title" : "Informations Des Confidents",
             "translationKey" : "REGISTRATION_PATIENT_CONFIDENT_INFORMATION",
+               "attributes" : [
                "Nom du Confident 1",
                "Tel_Conf 1",
                "Lien 1",
