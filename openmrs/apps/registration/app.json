@@ -17,10 +17,33 @@
       "activeVisitUuid"
    ],
 
+
    "config": {
       "minCharRequireToSearch": 3,
       "showStartVisitButton": true,
       "patientInformation": {
+        "additionalInformation":{
+          "title":"Informations supplémentaires",
+          "translationKey":"REGISTRATION_ADDITIONAL_INFORMATION",
+          "attributes":[
+
+            "Tel 1",
+            "Tel 2",
+            "Etat Civil",
+            "Situation Parental(enfants)",
+            "Niveau d'etudes",
+            "Occupation",
+            "Religion",
+            "Membre d'un réseau PVVIH",
+            "Frequente un Tradipraticien",
+            "Resident à Kinshasa",
+            "Province de provenance",
+            "Pays d'origine(autre que RDC)",
+            "Centre de provenance"
+          ],
+          "expanded": true
+        },
+
          "contactInformation": {
             "title": "Informations de contact",
             "translationKey": "REGISTRATION_CONTACT_INFORMATION",
@@ -58,8 +81,6 @@
                 {
             "title" : "Informations Des Confidents",
             "translationKey" : "REGISTRATION_PATIENT_CONFIDENT_INFORMATION",
-            "attributes" : [
-               "Prénom du Confident 1",
                "Nom du Confident 1",
                "Tel_Conf 1",
                "Lien 1",

@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/css/print.css"/>
-<img src="/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/msf_logo/msf.png" style="height: 18mm; "/>
+<link rel="stylesheet" href="/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/css/print.css" />
+<img src="/bahmni_config/openmrs/apps/registration/supplementalPaperLayout/msf_logo/msf.png" style="height: 18mm; " />
 
-<div class="center"><span >FICHE D'IDENTIFICATION SOCIALE</span></div>
+<div class="center"><span>FICHE D'IDENTIFICATION SOCIALE</span></div>
 <br/>
 <hr>
 <div>
@@ -15,6 +15,31 @@
             <span>{{patient['Date depistage']| date:'dd/MM/yyyy'}}</span>
         </div>
     </div>
+    <br/>
+    <div class="row">
+        <div class="left">
+            <span class="label">Type de cohorte :</span>
+            <span>{{patient['Type de cohorte'].value}}</span>
+        </div>
+        <div class="right col">
+            <span class="label">Bébé éxposé'</span>
+            <span ng-if="patient['Bébé éxposé'] === true">Oui</span>
+            <span ng-if="!patient['Bébé éxposé']">Non</span>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="left">
+            <span class="label">Converti CP : </span>
+            <span ng-if="patient['Converti CP'] === true">Oui</span>
+            <span ng-if="!patient['Converti CP']">Non</span>
+        </div>
+        <div class="right col">
+            <span class="label">Status VIH</span>
+            <span>{{patient['Status VIH'].value}}</span>
+        </div>
+    </div>
+    <br/>
     <br/>
     <div class="rowx">
         <div class="left">
@@ -57,7 +82,6 @@
             <span class="label">Domicile<span>
         </div>
     </div>
-    <br/>
     <br/>
     <div class="rowx">
         <div class="left">
@@ -116,7 +140,6 @@
             <span class="label">Informations Diverses<span>
         </div>
     </div>
-    <br/>
     <br/>
     <div class="rowx">
         <div class="left">
@@ -274,7 +297,7 @@
         <div class="rowx">
             <div class="left">
                 <span class="label">Date d'exécution du rapport :</span>
-                <span>{{today | date:'dd/MM/yyyy'}}</span>
-            </div>
+            <span>{{today | date:'dd/MM/yyyy'}}</span>
         </div>
+    </div>
 </div>

@@ -1,4 +1,3 @@
-DELIMITER //
 CREATE PROCEDURE add_concept_fr (INOUT new_concept_id INT,
                               INOUT concept_name_short_id INT,
                               INOUT concept_name_full_id INT,
@@ -20,10 +19,9 @@ BEGIN
   END CASE;
 
   SELECT count(distinct concept_id) into @concept_count from concept_name where name = name_of_concept and concept_name_type='FULLY_SPECIFIED';
-  IF @concept_count > 0 THEN
-    SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = 'Concept Already Exists';
-  ELSE
+
+  IF @concept_count = 0 THEN
+
     SELECT concept_datatype_id INTO data_type_id FROM concept_datatype WHERE name = data_type_name;
     SELECT concept_class_id INTO class_id FROM concept_class WHERE name = class_name;
 
@@ -53,4 +51,6 @@ BEGIN
     SELECT MAX(concept_name_id) INTO concept_name_full_id FROM concept_name;
 
   END IF;
+
 END;
+

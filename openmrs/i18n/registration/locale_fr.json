@@ -50,7 +50,7 @@
   "REGISTRATION_LABEL_NUMERIC_DAYS":"Entrez une valeur numérique entre 0 à 31",
   "REGISTRATION_LABEL_NUMERIC_MONTHS":"Entrez une valeur numérique entre 0 à 12",
   "REGISTRATION_LABEL_NUMERIC_YEARS":"Entrez une valeur numérique pour les années .",
-  "REGISTRATION_LABEL_OTHER_INFO":"Informations supplémentaires",
+  "REGISTRATION_LABEL_OTHER_INFO":"Autre information",
   "REGISTRATION_LABEL_PAPER" : "papier",
   "REGISTRATION_LABEL_PATIENT_LAST_NAME" : "Saisissez le nom du patient",
   "REGISTRATION_LABEL_PATIENT_MIDDLE_NAME" : "Saisissez le post-nom du patient",
@@ -98,5 +98,6 @@
   "REGISTRATION_VISIT_CANNOT_BE_CLOSED":"La visite de patient admis ne peut pas être fermé . Décharge du patient et essayez à nouv",
   "REGISTRATION_HIV_DATE_ERROR_KEY":"S'il vous plaît, ne pas entrer une date future",
   "REGISTRATION_LABEL_PATIENT_AUTOCOMPLETE_LIST": "Veuillez sélectionner une valeur de la liste"
-
+  "REGISTRATION_ADDITIONAL_INFORMATION":"Informations supplémentaires",
+  "REGISTRATION_DATE_OF_CONVERSION_CP_ERROR_KEY":"S'il vous plaît, ne pas entrer une date future pour la conversion de cohorte"
 }

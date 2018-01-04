@@ -4,8 +4,8 @@ SELECT B.sample_date :: DATE AS "Date de prelevement",
        B.Patient_Identifier AS "Id Patient",
        B.dob AS "Dob",
        B.sexe AS "Sexe",
-       sum(cast(B.ChargeVirale_value AS INTEGER)) AS "Viral Load",
-       sum(cast(B.ChargeVirale_value_log AS INTEGER)) AS "Log Value VL",
+       sum(cast(B.ChargeVirale_value AS NUMERIC)) AS "Viral Load",
+       sum(cast(B.ChargeVirale_value_log AS NUMERIC)) AS "Log Value VL",
        B.date_of_results AS "Date of Results",
        B.month_of_results AS "Month of result",
        CASE when string_agg(B.comment,', ')= 'OPD, OPD' then 'OPD'
@@ -57,7 +57,7 @@ FROM
                        AND a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
                        AND pi.identity_type_id = 2) AS A) AS B
-      WHERE B.date_of_results BETWEEN '#startDate#' and '#endDate#'
+                       WHERE date(B.date_of_results) BETWEEN '#startDate#' and '#endDate#'
 GROUP BY B.Patient_Name,
          B.sample_date,
          B.care_center_requesting,

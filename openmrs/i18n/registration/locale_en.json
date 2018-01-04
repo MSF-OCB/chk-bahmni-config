@@ -26,6 +26,7 @@
   "REGISTRATION_PATIENT_MEDICAL_INFORMATION":"Patient Medical Information",
   "REGISTRATION_PATIENT_DEPENDENT_INFORMATION": "Information Of Dependents",
   "REGISTRATION_PATIENT_CONFIDENT_INFORMATION": "Information Of Confidants",
-  "REGISTRATION_HIV_DATE_ERROR_KEY":"Please do not enter a future date"
+  "REGISTRATION_HIV_DATE_ERROR_KEY":"Please do not enter a future date",
+  "REGISTRATION_ADDITIONAL_INFORMATION":"Additional Information"
 
 }
