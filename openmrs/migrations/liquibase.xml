@@ -32,14 +32,15 @@
                    call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Type de cohorte','Type de cohorte','Coded','Misc',false);
                    INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
                    VALUES ('Type de cohorte', 'Type de cohorte', 'org.openmrs.Concept', 0, 1, now(), 0, 24, uuid(), @concept_id);
-
+</sql>
+</changeSet>
         <changeSet id="OCB-CONFIG-1712071615" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
                     select count(*) from concept_name where name = "Lien_Dep" and concept_name_type = "FULLY_SPECIFIED"
                 </sqlCheck>
                 <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Lien_Dep" 
+                    select count(*) from person_attribute_type where name = "Lien du dépendant" 
                 </sqlCheck>
             </preConditions>
             <comment>Adding concept Lien_Dep and Person Attribute type along with the Mapping</comment>
@@ -48,7 +49,7 @@
                 set @concept_short_id = 0;
                 set @concept_full_id = 0;
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Lien_Dep','Lien_Dep','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien_Dep', 'Lien_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 24, uuid(), @concept_id);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Lien du dépendant', 'Lien du dépendant', 'org.openmrs.Concept', '0', 1, now(), 0, 24, uuid(), @concept_id);
             </sql>
         </changeSet>
 
@@ -131,36 +132,36 @@
         <changeSet id="OCB-CONFIG-1712081115" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'No CHK_Dep';
+                    select count(*) FROM person_attribute_type where name = 'CHK ID du dépendant';
                 </sqlCheck>
             </preConditions>
-            <comment>Adding No CHK_Dep person attribute type</comment>
+            <comment>Adding CHK ID du dépendant person attribute type</comment>
             <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('No CHK_Dep', 'No CHK_Dep', 'java.lang.String', '0', 1, now(), 0, 25, uuid());
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('CHK ID du dépendant', 'CHK ID du dépendant', 'java.lang.String', '0', 1, now(), 0, 25, uuid());
             </sql>
         </changeSet>
 
         <changeSet id="OCB-CONFIG-1712081116" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Prénom_Dep';
+                    select count(*) FROM person_attribute_type where name = 'Prénom dépendant';
                 </sqlCheck>
             </preConditions>
-            <comment>Adding Prénom_Dep person attribute type</comment>
+            <comment>Adding Prénom dépendant person attribute type</comment>
             <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom_Dep', 'Prénom_Dep', 'java.lang.String', '0', 1, now(), 0, 26, uuid());
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Prénom dépendant', 'Prénom dépendant', 'java.lang.String', '0', 1, now(), 0, 26, uuid());
             </sql>
         </changeSet>
 
         <changeSet id="OCB-CONFIG-1712081117" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Nom_Dep';
+                    select count(*) FROM person_attribute_type where name = 'Nom dépendant';
                 </sqlCheck>
             </preConditions>
-            <comment>Adding Nom_Dep person attribute type</comment>
+            <comment>Adding Nom dépendant person attribute type</comment>
             <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom_Dep', 'Nom_Dep', 'java.lang.String', '0', 1, now(), 0, 27, uuid());
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Nom dépendant', 'Nom dépendant', 'java.lang.String', '0', 1, now(), 0, 27, uuid());
             </sql>
         </changeSet>
 
@@ -170,7 +171,7 @@
                     select count(*) from concept_name where name = "Informé du statut VIH du patient_Dep" and concept_name_type = "FULLY_SPECIFIED"
                 </sqlCheck>
                 <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Informé du statut VIH du patient_Dep"
+                    select count(*) from person_attribute_type where name = "Est informé du statut sérologique"
                 </sqlCheck>
             </preConditions>
             <comment>Adding concept Informé du statut VIH du patient_Dep and Person Attribute type along with the Mapping</comment>
@@ -179,7 +180,7 @@
                 set @concept_short_id = 0;
                 set @concept_full_id = 0;
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Informé du statut VIH du patient_Dep','Informé du statut VIH du patient_Dep','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Informé du statut VIH du patient_Dep', 'Informé du statut VIH du patient_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 28, uuid(), @concept_id);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Est informé du statut sérologique', 'Est informé du statut sérologique', 'org.openmrs.Concept', '0', 1, now(), 0, 28, uuid(), @concept_id);
             </sql>
         </changeSet>
 
@@ -219,7 +220,7 @@
                     select count(*) from concept_name where name = "Résultat_Dep" and concept_name_type = "FULLY_SPECIFIED"
                 </sqlCheck>
                 <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Résultat_Dep"
+                    select count(*) from person_attribute_type where name = "Résultat du test VIH"
                 </sqlCheck>
             </preConditions>
             <comment>Adding concept Résultat_Dep and Person Attribute type along with its mapping</comment>
@@ -228,7 +229,7 @@
                 set @concept_short_id = 0;
                 set @concept_full_id = 0;
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat_Dep','Résultat_Dep','Coded','Misc',false);
-                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Résultat_Dep', 'Résultat_Dep', 'org.openmrs.Concept', '0', 1, now(), 0, 29, uuid(), @concept_id);
+                INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key) VALUES ('Résultat du test VIH', 'Résultat du test VIH', 'org.openmrs.Concept', '0', 1, now(), 0, 29, uuid(), @concept_id);
             </sql>
         </changeSet>
 
@@ -280,12 +281,12 @@
         <changeSet id="OCB-CONFIG-1712081118" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                    select count(*) FROM person_attribute_type where name = 'Date de naissance_Dep';
+                    select count(*) FROM person_attribute_type where name = 'Date de naissance dépendant';
                 </sqlCheck>
             </preConditions>
-            <comment>Adding Date de naissance_Dep person attribute type</comment>
+            <comment>Adding Date de naissance dépendant person attribute type</comment>
             <sql>
-               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Date de naissance_Dep', 'Date de naissance_Dep', 'org.openmrs.util.AttributableDate', '0', 1, now(), 0, 30, uuid());
+               INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid) VALUES ('Date de naissance dépendant', 'Date de naissance dépendant', 'org.openmrs.util.AttributableDate', '0', 1, now(), 0, 30, uuid());
             </sql>
         </changeSet>
 
@@ -4727,7 +4728,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
     <changeSet id="OCB-CONFIG-2017122803" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                select count(*) from concept_name where name in('HIV+','HIV-','Undetermined') and concept_name_type='FULLY_SPECIFIED';
+                select count(*) from concept_name where name in('VIH+','VIH-','Indeterminé') and concept_name_type='FULLY_SPECIFIED';
             </sqlCheck>
         </preConditions>
         <comment> Adding the CHK and CP concepts </comment>
@@ -4735,9 +4736,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @concept_id = 0;
             set @concept_short_id = 0;
             set @concept_full_id = 0;
-            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'HIV+','HIV+','N/A','Misc',false);
-            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'HIV-','HIV-','N/A','Misc',false);
-            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Undetermined','Undetermined','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'VIH+','VIH+','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'VIH-','VIH-','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Indeterminé','Indeterminé','N/A','Misc',false);
 
         </sql>
     </changeSet>
@@ -4983,14 +4984,47 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
     set @child2_concept_id = 0;
     set @child3_concept_id = 0;
             select concept_id into @concept_id from concept_name where name = 'Status VIH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'HIV+' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'HIV-' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child3_concept_id from concept_name where name = 'Undetermined' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'VIH+' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'VIH-' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Indeterminé' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
         </sql>
     </changeSet>
 
+        <changeSet id="OCB-CONFIG-1808041141" author="Yash">
+        <comment>Adding Relationships type</comment>
+        <sql>
+            update relationship_type set retired = 1, retired_by = 1, date_retired = now(), retire_reason = 'Not required' where a_is_to_b = 'Supervisor' and b_is_to_a = 'Supervisee';
+
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            ('Partenaire','Patient',0,0,'Partner to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            ('Conjoint(e)','Patient',0,0,'Spouse to patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            ('Enfant','Patient',0,0,'Child to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            ('Pére','Patient',0,0,'Father to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            ('Mére','Patient',0,0,'Mother to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+        </sql> 
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1801041614" author="Yash">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                   select COUNT(*) from concept_name where name = 'Death Reason' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Configuring Death Information section on registration page</comment>
+        <sql>
+            update global_property set property_value = (select name from concept_name where name = 'Death Reason' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0), date_changed = now(), changed_by = 1 where property = 'concept.reasonForDeath';
+        </sql>
+        </changeSet>
 </databaseChangeLog>
 

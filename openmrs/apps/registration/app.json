@@ -45,7 +45,7 @@
         },
 
          "contactInformation": {
-            "title": "Informations de contact",
+            "title": "Information de contact",
             "translationKey": "REGISTRATION_CONTACT_INFORMATION",
             "attributes": [
                "Nom du contact",
@@ -65,23 +65,24 @@
          },
          "patientDependentInformation":
                 {
-            "title" : "Informations Des Dependents",
+            "title" : "Informations des dépendants",
             "translationKey" : "REGISTRATION_PATIENT_DEPENDENT_INFORMATION",
             "attributes" : [
-               "Lien_Dep",
-               "No CHK_Dep",
-               "Prénom_Dep",
-               "Nom_Dep",
-               "Informé du statut VIH du patient_Dep",
-               "Résultat_Dep",
-               "Date de naissance_Dep"
+               "Lien du dépendant",
+               "CHK ID du dépendant",
+               "Prénom dépendant",
+               "Nom dépendant",
+               "Est informé du statut sérologique",
+               "Résultat du test VIH",
+               "Date de naissance dépendant"
             ]
          },
          "patientConfidentInformation":
                 {
             "title" : "Informations Des Confidents",
             "translationKey" : "REGISTRATION_PATIENT_CONFIDENT_INFORMATION",
-               "attributes" : [
+            "attributes" : [
+               "Prénom du Confident 1",
                "Nom du Confident 1",
                "Tel_Conf 1",
                "Lien 1",
@@ -166,7 +167,7 @@
             "pattern": "^[0-9,\/]+$",
             "errorMessage": "Entrer seulement les numéros pour l'identification du patient"
          },
-         "No CHK_Dep": {
+         "CHK ID du dépendant": {
             "pattern": "^[0-9a-zA-Z]+$",
             "errorMessage": "Entrer seulement les caractères et les chiffres"
          }
