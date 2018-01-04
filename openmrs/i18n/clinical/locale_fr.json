@@ -34,9 +34,9 @@
   "PATIENT_DOCUMENT_TRANSLATION_KEY": "Documents patients",
 
 
-  "BAHMNI_HOME_TRANSLATION_KEY": "Bahmni Accueil",
+  "BAHMNI_HOME_TRANSLATION_KEY": "Page d'accueil Bahmni",
 
-  "ENTERING_DATA_FOR_TRANSLATION_KEY":  "Entrer des données pour",
+  "ENTERING_DATA_FOR_TRANSLATION_KEY":  "Entrer les données pour",
 
   "LOGOUT_TRANSLATION_KEY": "Connectez - Out",
 
@@ -53,7 +53,7 @@
   "CLINICAL_ORDER_PRIORITY_PRINT_BUTTON": "Elevée",
   "OKAY_LABEL" : "d'accord",
   "ENTER_ORDER_NOTE_LABEL" : "Entrez les notes pour",
-  "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE" : "Impossible de modifier les notes après l'enregistrement.",
+  "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE" : "Les notes ne peuvent pas être modifiées après être sauvegardées",
   "CLINICAL_SAVE_TRANSLATION_KEY" : "Enregistrer",
   "NO_FULFILMENT_MESSAGE" :"Aucune observation pour cette demande",
   "ALL_LAB_RESULTS_LABEL" : "Tous les résultats Labo",
