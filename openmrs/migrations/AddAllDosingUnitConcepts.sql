@@ -25,6 +25,6 @@ call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Solution à 
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Solution enterale','Solution enterale','N/A','Misc',false);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tube à usage externe','Tube à usage externe','N/A','Misc',false);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Unité','Unité','N/A','Misc',false);
-call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Solution(Inhallation)','Solution(Inhallation)','N/A','Misc',false);
-call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Comprimé(Inhallation)','Comprimé(Inhallation)','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Solution (Inhallation)','Solution (Inhallation)','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Comprimé (Inhallation)','Comprimé (Inhallation)','N/A','Misc',false);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Géllule (Prefusion)','Géllule (Prefusion)','N/A','Misc',false);
