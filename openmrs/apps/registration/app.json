@@ -98,7 +98,7 @@
          "strictAutocompleteFromLevel": "address6"
       },
       "mandatoryPersonAttributes": [
-         "ARV Naif/ Non Naif"
+         "ARV Naif/ Non Naif","Type de cohorte","Status VIH"
       ],
       "defaultVisitType": "OPD",
       "showMiddleName": true,
