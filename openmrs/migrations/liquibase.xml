@@ -5042,6 +5042,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <comment>Adding Drugs to the Drug template</comment>
         <sqlFile path="AddDrugConceptToDrugForm.sql"/>
     </changeSet>
+    <changeSet id="OCB-CONFIG-1712191538" author="Pritam">
+        <comment>Adding Drugs to the Drug template</comment>
+        <sqlFile path="RenameAllFrequencyConcepts.sql"/>
+    </changeSet>
     <changeSet id="OCB-CONFIG-191201212212" author="Pritam">
        <comment> Delete set members from Drug Routes set </comment>
        <sql>
