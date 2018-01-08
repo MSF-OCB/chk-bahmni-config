@@ -29,3 +29,4 @@ update concept_name set name ='Le soir' where name='In the evening' and locale= 
 update concept_name set name ='Avant de dormir' where name='At bedtime' and locale= 'fr' and concept_name_type='FULLY_SPECIFIED' and voided = 0;
 update concept_name set name ='Immédiatement' where name='Immediately' and locale= 'fr' and concept_name_type='FULLY_SPECIFIED' and voided = 0;
 update concept_name set name ='Tel que préscrit' where name='As directed' and locale= 'fr' and concept_name_type='FULLY_SPECIFIED' and voided = 0;
+update concept_name set name ='Refusé de prendre' where name='Refused To Take' and locale= 'fr' and concept_name_type='FULLY_SPECIFIED' and voided = 0;
