@@ -24,10 +24,10 @@ FROM
                                                month_of_results,
                                                COMMENT,
                                                CASE
-                                                   WHEN tname ='Charge Virale - Value' THEN tvalue
+                                                   WHEN tname ='Charge Virale HIV - Value' THEN tvalue
                                                END AS ChargeVirale_value,
                                                CASE
-                                                   WHEN tname ='Charge Virale - Logarythm' THEN tvalue
+                                                   WHEN tname ='Charge Virale HIV - Logarithme' THEN tvalue
                                                END AS ChargeVirale_value_log
    FROM
      (/*Pivoting the table row to column*/ SELECT sample.lastupdated  AS sample_date,
@@ -52,8 +52,8 @@ FROM
       INNER JOIN analysis a ON item.id = a.sampitem_id
       INNER JOIN RESULT r ON a.id = r.analysis_id
       INNER JOIN test t ON a.test_id = t.id
-      WHERE t.name IN  ('Charge Virale - Value',
-                       'Charge Virale - Logarythm')
+      WHERE t.name IN  ('Charge Virale HIV - Value',
+                       'Charge Virale HIV - Logarithme')
                        AND a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
                        AND pi.identity_type_id = 2) AS A) AS B

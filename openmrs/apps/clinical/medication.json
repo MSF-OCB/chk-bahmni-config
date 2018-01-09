@@ -4,9 +4,11 @@
   "tabConfig": {
     "allMedicationTabConfig": {
       "inputOptionsConfig": {
+        "allowOnlyCodedDrugs" : true,
         "defaultDurationUnit": "Day(s)",
-        "hideOrderSet" : false,
+        "hideOrderSet" : true,
         "defaultInstructions": "As directed",
+        "hiddenFields": ["sos","dosingTypeToggle"],
         "frequencyDefaultDurationUnitsMap": [
           {
             "minFrequency": "1/7",
@@ -25,78 +27,107 @@
           }
         ],
         "drugFormDefaults": {
-          "Ayurvedic": {
-            "doseUnits": "Teaspoon",
-            "route": "Oral"
+          "Cuillerée à soupe": {
+            "doseUnits": "Cuillerée à soupe",
+            "route": "Orale"
           },
-          "Capsule": {
-            "doseUnits": "Capsule(s)",
-            "route": "Oral"
+          "Comprimé": {
+            "doseUnits": "Comprimé",
+            "route": "Orale"
           },
-          "Cream": {
-            "route": "Topical"
+          "Géllule": {
+            "doseUnits": "Géllule",
+            "route": "Orale"
           },
-          "Drops": {
-            "doseUnits": "Drop",
-            "route": "Topical"
+          "Poudre en boite": {
+            "doseUnits": "Poudre en boite",
+            "route": "Orale"
           },
-          "Food Supplement": {
-            "doseUnits": "Unit(s)",
-            "route": "Oral"
+          "Poudre en sachet et en boite": {
+            "doseUnits": "Poudre en sachet et en boite",
+            "route": "Orale"
           },
-          "Gel": {
-            "route": "Topical"
-          },
-          "Granule": {
-            "doseUnits": "Unit(s)",
-            "route": "Oral"
-          },
-          "Inhaler": {
-            "doseUnits": "Puff(s)",
-            "route": "Inhalation"
-          },
-          "Injection": {
-            "doseUnits": "mg",
-            "route": "Intravenous"
-          },
-          "Jelly": {
-            "route": "Topical"
-          },
-          "Liquid": {
-            "doseUnits": "ml",
-            "route": "Oral"
-          },
-          "Lotion": {
-            "route": "Topical"
-          },
-          "Ointment": {
-            "route": "Topical"
-          },
-          "Pessary": {
-            "doseUnits": "Unit(s)",
-            "route": "Per Vaginal"
-          },
-          "Powder": {
-            "doseUnits": "mg",
-            "route": "Topical"
+          "Sachet": {
+            "doseUnits": "Sachet",
+            "route": "Orale"
           },
           "Solution": {
-            "doseUnits": "ml",
-            "route": "Topical"
+            "doseUnits": "Solution",
+            "route": "Orale"
           },
-          "Spray": {
-            "doseUnits": "Puff(s)",
-            "route": "Nasal"
+          "Pate": {
+            "doseUnits": "Pate",
+            "route": "Á manger"
           },
-          "Syrup": {
-            "doseUnits": "ml",
-            "route": "Oral"
+          "Collyre": {
+            "doseUnits": "Collyre",
+            "route": "Application locale"
           },
-          "Tablet": {
-            "doseUnits": "Tablet(s)",
-            "route": "Oral"
+          "Pomade à usage externe": {
+            "doseUnits": "Pomade à usage externe",
+            "route": "Application locale"
+          },
+          "Tube à usage externe": {
+            "doseUnits": "Tube à usage externe",
+            "route": "Application locale"
+          },
+          "Lotion à usage externe": {
+            "doseUnits": "Lotion à usage externe",
+            "route": "Application locale"
+          },
+          "Comprimé vaginale": {
+            "doseUnits": "Comprimé vaginale",
+            "route": "Application locale"
+          },
+          "Solution à usage externe": {
+            "doseUnits": "Solution à usage externe",
+            "route": "Application locale"
+          },
+          "Gel à usage externe": {
+            "doseUnits": "Gel à usage externe",
+            "route": "Application locale"
+          },
+          "Crème à usage externe": {
+            "doseUnits": "Crème à usage externe",
+            "route": "Application locale"
+          },
+          "Solution (Inhallation)": {
+            "doseUnits": "Solution (Inhallation)",
+            "route": "Inhallation"
+          },
+          "Comprimé (Inhallation)": {
+            "doseUnits": "Comprimé (Inhallation)",
+            "route": "Inhallation"
+          },
+          "Ampoule injectable": {
+            "doseUnits": "Ampoule injectable",
+            "route": "Injectable"
+          },
+          "Flacon injectable": {
+            "doseUnits": "Flacon injectable",
+            "route": "Injectable"
+          },
+          "Unité": {
+            "doseUnits": "Unité",
+            "route": "Injectable"
+          },
+          "Poche souple": {
+            "doseUnits": "Poche souple",
+            "route": "Perfusion"
+          },
+          "Solution enterale": {
+            "doseUnits": "Solution enterale",
+            "route": "Perfusion"
+          },
+          "Géllule (Prefusion)": {
+            "doseUnits": "Géllule (Prefusion)",
+            "route": "Perfusion"
           }
+
         }
+      },
+      "drugOrderHistoryConfig" :{
+        "numberOfVisits" : 5
       }
     }
   }
