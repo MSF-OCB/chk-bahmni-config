@@ -35,7 +35,11 @@ FROM
                                                   trim( concat( COALESCE(NULLIF(person.first_name, ''), ''), ' ', COALESCE(NULLIF(person.last_name, ''), '') ) ) AS Patient_Name,
                                                   pi.identity_data AS Patient_Identifier,
                                                   patient.birth_date :: DATE AS dob,
-                                                  patient.gender AS sexe,
+                                                  case when patient.gender = 'M' then 'H'
+                                                       when patient.gender = 'F' then 'F'
+                                                       when patient.gender = 'O' then 'A'
+                                                  else
+                                                      patient.gender END AS sexe,
                                                   t.name AS tname,
                                                   r.value AS tvalue,
                                                   r.lastupdated :: DATE AS date_of_results,
@@ -57,7 +61,7 @@ FROM
                        AND a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
                        AND pi.identity_type_id = 2) AS A) AS B
-                       WHERE date(B.date_of_results) BETWEEN '#startDate#' and '#endDate#'
+                       WHERE date(B.date_of_results) BETWEEN '2017-12-01' and '2018-01-09'
 GROUP BY B.Patient_Name,
          B.sample_date,
          B.care_center_requesting,

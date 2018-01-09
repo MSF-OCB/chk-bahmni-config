@@ -163,7 +163,7 @@
             "pattern": "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,8}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,10}",
             "errorMessage": "Doit contenir des caractères (longueur max 10)"
          },
-         "registrationNumber": {"pattern": "[0-9]{5,6}", "errorMessage": "6 chiffres"},
+         "registrationNumber": {"pattern": "[0-9]{6}", "errorMessage": "6 chiffres"},
          "CHK ID du dépendant": {
             "pattern": "^[0-9a-zA-Z]+$",
             "errorMessage": "Entrer seulement les caractères et les chiffres"
