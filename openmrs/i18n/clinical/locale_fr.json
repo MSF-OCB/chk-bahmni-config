@@ -77,9 +77,13 @@
   "MEDICATION_STOP": "Arrêter",
   "MEDICATION_REFILL": "Renouveller",
   "MEDICATION_STARTED_ON": "Commencé le",
+  "MEDICATION_STOPPED_ON" : "",
   "DRUG_DETAILS_STOP_DATE": "Date d'arrêt",
   "MEDICATION_ADD_BUTTON_LABEL": "Ajouter",
   "MEDICATION_CLEAR_BUTTON_LABEL": "Effacer",
   "REMOVE_CONFIRMATION_KEY": "Êtes-vous sûr de vouloir désinstaller?",
-  "MEDICATION_NO_RECENT_TREATMENTS": "Aucun traitement récent"
+  "MEDICATION_NO_RECENT_TREATMENTS": "Aucun traitement récent",
+  "CLINICAL_DURATION_UNIT_DAYS": "Jour(s)",
+  "CLINICAL_DURATION_UNIT_WEEKS": "Semaine(s)",
+  "CLINICAL_DURATION_UNIT_MONTHS": "Mois(s)"
 }
