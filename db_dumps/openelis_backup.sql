@@ -8,6 +8,7 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
+DROP DATABASE clinlims;
 --
 -- Name: clinlims; Type: DATABASE; Schema: -; Owner: postgres
 --
