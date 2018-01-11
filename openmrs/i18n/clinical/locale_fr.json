@@ -85,5 +85,12 @@
   "MEDICATION_NO_RECENT_TREATMENTS": "Aucun traitement récent",
   "CLINICAL_DURATION_UNIT_DAYS": "Jour(s)",
   "CLINICAL_DURATION_UNIT_WEEKS": "Semaine(s)",
-  "CLINICAL_DURATION_UNIT_MONTHS": "Mois(s)"
+  "CLINICAL_DURATION_UNIT_MONTHS": "Mois(s)",
+  "ADD_NEW_OBSERVATION" : "Ajouter un nouveau formulaire d'observation",
+  "CONCEPT_SET_GROUP_SEARCH_LABEL" : "Rechercher un formulaire d'observation",
+  "EMPTY_TEMPLATE_MESSAGE" : "",
+  "OBSERVATIONS_BOARD_LABEL_KEY": "Observations",
+  "ADD_SECTION_KEY" : "Ajouter plus",
+  "CHOOSE_ANSWER_FROM_DROPDOWN_LABEL": "Choisissez une réponse"
+
 }

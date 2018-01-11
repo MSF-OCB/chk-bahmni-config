@@ -5194,4 +5194,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
            call add_concept_set_members (@concept_id, @member24_concept_id, 24);
        </sql>
    </changeSet>
+   <changeSet id="OCB-CONFIG-1801102024" author="Pritam">
+       <comment>Rename the concepts to french</comment>
+       <sqlFile path="AddIPDAdmissionFormConcept.sql"/>
+   </changeSet>
+
+     <include file ="IPD_Admission_Form.xml"/>
+
 </databaseChangeLog>
