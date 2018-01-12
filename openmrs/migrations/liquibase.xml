@@ -40,7 +40,7 @@
                     select count(*) from concept_name where name = "Lien_Dep" and concept_name_type = "FULLY_SPECIFIED"
                 </sqlCheck>
                 <sqlCheck expectedResult="0">
-                    select count(*) from person_attribute_type where name = "Lien du dépendant" 
+                    select count(*) from person_attribute_type where name = "Lien du dépendant"
                 </sqlCheck>
             </preConditions>
             <comment>Adding concept Lien_Dep and Person Attribute type along with the Mapping</comment>
@@ -533,8 +533,8 @@
     <changeSet id="OCB-CONFIG-1712201055" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('microcitaire hypochrome','microcitaire hyperchrome','microcitaire normochrome','macrocitaire hypochrome','macrocitaire hyperchrome','macrocitaire normochrome') and concept_name_type = "FULLY_SPECIFIED")
@@ -571,8 +571,8 @@
     <changeSet id="OCB-CONFIG-1712201115" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('A','B','AB','O') and concept_name_type = "FULLY_SPECIFIED")
@@ -603,8 +603,8 @@
     <changeSet id="OCB-CONFIG-1712201140" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -629,8 +629,8 @@
     <changeSet id="OCB-CONFIG-1712201141" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui','Non') and concept_name_type = "FULLY_SPECIFIED")
@@ -655,8 +655,8 @@
     <changeSet id="OCB-CONFIG-1712201155" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('presence microfilaire','absence microfilaire') and concept_name_type = "FULLY_SPECIFIED")
@@ -681,8 +681,8 @@
     <changeSet id="OCB-CONFIG-1712201205" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('+','++','+++','++++','-') and concept_name_type = "FULLY_SPECIFIED")
@@ -716,8 +716,8 @@
     <changeSet id="OCB-CONFIG-1712201217" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Kyste','Œuf','Parasite') and concept_name_type = "FULLY_SPECIFIED")
@@ -746,8 +746,8 @@
     <changeSet id="OCB-CONFIG-1712201220" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Isospora','Cryptosporidium','Cyclospora') and concept_name_type = "FULLY_SPECIFIED")
@@ -777,8 +777,8 @@
     <changeSet id="OCB-CONFIG-1712201225" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -803,8 +803,8 @@
     <changeSet id="OCB-CONFIG-1712201226" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Presence de cryptocoque','Absence de cryptocoque') and concept_name_type = "FULLY_SPECIFIED")
@@ -829,8 +829,8 @@
     <changeSet id="OCB-CONFIG-1712201228" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -855,8 +855,8 @@
     <changeSet id="OCB-CONFIG-1712201229" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -881,8 +881,8 @@
     <changeSet id="OCB-CONFIG-1712201230" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('coque','bacille') and concept_name_type = "FULLY_SPECIFIED")
@@ -907,8 +907,8 @@
     <changeSet id="OCB-CONFIG-1712201231" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('gram +','gram -') and concept_name_type = "FULLY_SPECIFIED")
@@ -933,8 +933,8 @@
     <changeSet id="OCB-CONFIG-1712201236" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('isolé','en amas','en chainette','en diplo') and concept_name_type = "FULLY_SPECIFIED")
@@ -966,8 +966,8 @@
     <changeSet id="OCB-CONFIG-1712201434" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -998,8 +998,8 @@
     <changeSet id="OCB-CONFIG-1712201454" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1024,8 +1024,8 @@
     <changeSet id="OCB-CONFIG-1712201458" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1049,8 +1049,8 @@
     <changeSet id="OCB-CONFIG-1712201500" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1075,8 +1075,8 @@
     <changeSet id="OCB-CONFIG-1712201800" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1107,8 +1107,8 @@
     <changeSet id="OCB-CONFIG-1712201840" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1139,8 +1139,8 @@
     <changeSet id="OCB-CONFIG-1712201842" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1165,8 +1165,8 @@
     <changeSet id="OCB-CONFIG-1712201910" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1191,8 +1191,8 @@
     <changeSet id="OCB-CONFIG-1712201912" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1223,8 +1223,8 @@
     <changeSet id="OCB-CONFIG-1712201423" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('5','6','7','8','9') and concept_name_type = "FULLY_SPECIFIED")
@@ -1258,8 +1258,8 @@
     <changeSet id="OCB-CONFIG-1712201429" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','+','++','+++','++++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1293,8 +1293,8 @@
     <changeSet id="OCB-CONFIG-1712201441" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1307,20 +1307,20 @@
             set @concept_id = 0;
             set @child1_concept_id = 0;
             set @child2_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Test de Grossesse' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;     
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);  
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712202141" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1333,20 +1333,20 @@
             set @concept_id = 0;
             set @child1_concept_id = 0;
             set @child2_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'EID (PCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            
+
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);  
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712201715" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1362,18 +1362,18 @@
 
             select concept_id into @concept_id from concept_name where name = 'HIV - Determine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0; 
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-            
+
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712201941" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1389,17 +1389,17 @@
 
             select concept_id into @concept_id from concept_name where name = 'HIV - Unigold' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;    
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2);     
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712201943" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1411,21 +1411,21 @@
         <sql>
             set @concept_id = 0;
             set @child1_concept_id = 0;
-            set @child2_concept_id = 0; 
+            set @child2_concept_id = 0;
 
             select concept_id into @concept_id from concept_name where name = 'Hépatite B' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            
+
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2); 
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712201949" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1438,20 +1438,20 @@
             set @concept_id = 0;
             set @child1_concept_id = 0;
             set @child2_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Hépatite C' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2); 
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712201951" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1464,7 +1464,7 @@
             set @concept_id = 0;
             set @child1_concept_id = 0;
             set @child2_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Malaria' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -1476,8 +1476,8 @@
     <changeSet id="OCB-CONFIG-1712201953" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1496,14 +1496,14 @@
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2); 
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712202153" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1528,8 +1528,8 @@
     <changeSet id="OCB-CONFIG-1712221417" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1563,8 +1563,8 @@
     <changeSet id="OCB-CONFIG-1712202001" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1598,8 +1598,8 @@
     <changeSet id="OCB-CONFIG-1712202007" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -1630,8 +1630,8 @@
     <changeSet id="OCB-CONFIG-1712202013" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1656,8 +1656,8 @@
     <changeSet id="OCB-CONFIG-1712202015" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1691,8 +1691,8 @@
     <changeSet id="OCB-CONFIG-1712202017" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -1723,8 +1723,8 @@
     <changeSet id="OCB-CONFIG-1712202019" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1740,17 +1740,17 @@
 
             select concept_id into @concept_id from concept_name where name = 'Rivalta (Pus)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0; 
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2); 
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712202021" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1784,8 +1784,8 @@
     <changeSet id="OCB-CONFIG-1712202023" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -1816,8 +1816,8 @@
     <changeSet id="OCB-CONFIG-1712202025" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1842,8 +1842,8 @@
     <changeSet id="OCB-CONFIG-1712202029" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1877,8 +1877,8 @@
     <changeSet id="OCB-CONFIG-1712202031" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -1909,8 +1909,8 @@
     <changeSet id="OCB-CONFIG-1712202133" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -1923,20 +1923,20 @@
             set @concept_id = 0;
             set @child1_concept_id = 0;
             set @child2_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Rivalta (Ascite)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            
+
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
-            call add_concept_answer(@concept_id, @child2_concept_id, 2); 
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712202129" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -1970,8 +1970,8 @@
     <changeSet id="OCB-CONFIG-1712202131" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -2002,8 +2002,8 @@
     <changeSet id="OCB-CONFIG-1712202033" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -2028,8 +2028,8 @@
     <changeSet id="OCB-CONFIG-1712202041" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -2063,8 +2063,8 @@
     <changeSet id="OCB-CONFIG-1712202043" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -2095,8 +2095,8 @@
     <changeSet id="OCB-CONFIG-1712202045" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -2113,7 +2113,7 @@
             select concept_id into @concept_id from concept_name where name = 'Rivalta (Ganglionnaire)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            
+
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
@@ -2121,8 +2121,8 @@
     <changeSet id="OCB-CONFIG-1712202051" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
@@ -2156,8 +2156,8 @@
     <changeSet id="OCB-CONFIG-1712202053" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
@@ -2188,8 +2188,8 @@
     <changeSet id="OCB-CONFIG-1712202055" author="Pritam">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
@@ -2202,11 +2202,11 @@
             set @concept_id = 0;
             set @child1_concept_id = 0;
             set @child2_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Rivalta (Synovial)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            
+
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
@@ -2215,10 +2215,10 @@
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Groupage sanguin ABO','Groupage sanguin Rhesus','Test de compatibilité') AND concept_name_type = "FULLY_SPECIFIED") 
-and 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Groupage sanguin ABO','Groupage sanguin Rhesus','Test de compatibilité') AND concept_name_type = "FULLY_SPECIFIED")
+and
 cs.concept_set IN (select concept_id from concept_name where name = 'Demande de Transfusion Sanguine(Blood Transfusion Request)');
                 </sqlCheck>
         </preConditions>
@@ -2229,7 +2229,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Demande de Transfusion Sanguine(Blood Transfusion Request)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Groupage sanguin ABO' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2245,9 +2245,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Selles Directs - KOP','Selles Directs - Type','Selles I.O') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Selles Directs - KOP','Selles Directs - Type','Selles I.O') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Selles (Panel)');
                 </sqlCheck>
         </preConditions>
@@ -2257,7 +2257,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Selles (Panel)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Selles Directs - KOP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2273,9 +2273,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Numeration GB','FL - LYM%','FL - MXD%','FL - NEUT%','Crag','Encre de chine','Proteinorachie (test de Pandy)','Gram','(If positif) Forme','(If positif) Coloration','(If positif) Groupement','Microscopie TB - Recherche de BAAR (LCR)','Glycorachie','GeneXpert TB (LCR)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Numeration GB','FL - LYM%','FL - MXD%','FL - NEUT%','Crag','Encre de chine','Proteinorachie (test de Pandy)','Gram','(If positif) Forme','(If positif) Coloration','(If positif) Groupement','Microscopie TB - Recherche de BAAR (LCR)','Glycorachie','GeneXpert TB (LCR)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Panel)');
                 </sqlCheck>
         </preConditions>
@@ -2313,7 +2313,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             select concept_id into @member12_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member13_concept_id from concept_name where name = 'Glycorachie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member14_concept_id from concept_name where name = 'GeneXpert TB (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            
+
 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
@@ -2335,9 +2335,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Sang (hématurie)','Urobilinogèn','Bilirubine','Protéines','Nitrites','Corps cétoniques','Acide ascorbique','Glucose','pH','Leucocytes') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Sang (hématurie)','Urobilinogèn','Bilirubine','Protéines','Nitrites','Corps cétoniques','Acide ascorbique','Glucose','pH','Leucocytes') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Urine bandelette');
                 </sqlCheck>
         </preConditions>
@@ -2384,10 +2384,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Globules Blancs','Globules Rouges','Hemoglobine','Hematocrite','VGM','CCMH','Plaquettes','LYM%','MXD% (Eosino+Monocytes)','NEUT%') 
-                   AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Globules Blancs','Globules Rouges','Hemoglobine','Hematocrite','VGM','CCMH','Plaquettes','LYM%','MXD% (Eosino+Monocytes)','NEUT%')
+                   AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Hemogramme');
                 </sqlCheck>
         </preConditions>
@@ -2434,9 +2434,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('CD4','CD4 % (enfants de - 5 ans)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('CD4','CD4 % (enfants de - 5 ans)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'CD4 (Panel)');
                 </sqlCheck>
         </preConditions>
@@ -2445,7 +2445,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @concept_id = 0;
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'CD4 (Panel)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'CD4' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2459,9 +2459,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Creatinine','GPT','Glycémie') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Creatinine','GPT','Glycémie') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Biochimie');
                 </sqlCheck>
         </preConditions>
@@ -2471,7 +2471,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Biochimie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Creatinine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2487,9 +2487,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('sodium','potassium','Chlore') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('sodium','potassium','Chlore') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Ionogramme');
                 </sqlCheck>
         </preConditions>
@@ -2499,7 +2499,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Ionogramme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'sodium' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2515,9 +2515,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Bilirubine totalE','Bilirubine directE','Gamma GT','Phosphatase alcaline') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Bilirubine totalE','Bilirubine directE','Gamma GT','Phosphatase alcaline') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)');
                 </sqlCheck>
         </preConditions>
@@ -2528,7 +2528,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
             set @member4_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Bilirubine totalE' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2546,7 +2546,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN(
                    'Globules Blancs',
@@ -2599,8 +2599,8 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                    'CD4 (Panel)',
                    'Biochimie',
                    'Ionogramme',
-                   'Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)') 
-                    AND concept_name_type = "FULLY_SPECIFIED") 
+                   'Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)')
+                    AND concept_name_type = "FULLY_SPECIFIED")
                     and cs.concept_set IN (select concept_id from concept_name where name = 'Sang');
                 </sqlCheck>
         </preConditions>
@@ -2658,7 +2658,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member49_concept_id = 0;
             set @member50_concept_id = 0;
             set @member51_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Sang' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Globules Blancs' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2712,7 +2712,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             select concept_id into @member49_concept_id from concept_name where name = 'Ionogramme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member50_concept_id from concept_name where name = 'Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member51_concept_id from concept_name where name = 'Hemoglobine*' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            
+
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
@@ -2770,9 +2770,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Selles (Panel)','Selles Directs - KOP','Selles Directs - Type','Selles I.O') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Selles (Panel)','Selles Directs - KOP','Selles Directs - Type','Selles I.O') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Selles (Sample)');
                 </sqlCheck>
         </preConditions>
@@ -2783,7 +2783,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
             set @member4_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Selles (Sample)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Selles (Panel)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2801,7 +2801,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('LCR (Panel)','Numeration GB','FL - LYM%','FL - MXD%','FL - NEUT%','Crag','Encre de chine','Proteinorachie (test de Pandy)','Gram','(If positif) Forme','(If positif) Coloration','(If positif) Groupement','Microscopie TB - Recherche de BAAR (LCR)','Glycorachie','GeneXpert TB (LCR)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Sample)');
@@ -2825,7 +2825,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member13_concept_id = 0;
             set @member14_concept_id = 0;
             set @member15_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'LCR (Sample)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'LCR (Panel)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2865,7 +2865,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Urine bandelette','Sang (hématurie)','Urobilinogène','Bilirubine','Protéines','Nitrites','Corps cétoniques','Acide ascorbique','Glucose','pH','Leucocytes','Test de Grossesse') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Urine');
@@ -2920,9 +2920,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Pus)','Genexpert (Pus)','Rivalta (Pus)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Pus)','Genexpert (Pus)','Rivalta (Pus)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Pus');
                 </sqlCheck>
         </preConditions>
@@ -2932,7 +2932,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Pus' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Pus)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2948,9 +2948,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Crachat)','Genexpert (Crachat)','Rivalta (Crachat)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Crachat)','Genexpert (Crachat)','Rivalta (Crachat)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Crachat');
                 </sqlCheck>
         </preConditions>
@@ -2960,7 +2960,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Crachat' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Crachat)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -2976,9 +2976,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Gastrique)','Genexpert (Gastrique)','Rivalta (Gastrique)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Gastrique)','Genexpert (Gastrique)','Rivalta (Gastrique)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Suc gastrique');
                 </sqlCheck>
         </preConditions>
@@ -2988,7 +2988,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Suc gastrique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Gastrique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3004,9 +3004,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Ascite)','Genexpert (Ascite)','Rivalta (Ascite)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Ascite)','Genexpert (Ascite)','Rivalta (Ascite)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Liquide ascite');
                 </sqlCheck>
         </preConditions>
@@ -3016,7 +3016,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Liquide ascite' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Ascite)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3032,9 +3032,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Pleural)','Genexpert (Pleural)','Rivalta (Pleural)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Pleural)','Genexpert (Pleural)','Rivalta (Pleural)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = "Liquide d'épanchement pleural");
                 </sqlCheck>
         </preConditions>
@@ -3044,7 +3044,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = "Liquide d'épanchement pleural" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Pleural)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3060,9 +3060,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Ganglionnaire)','Genexpert (Ganglionnaire)','Rivalta (Ganglionnaire)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Ganglionnaire)','Genexpert (Ganglionnaire)','Rivalta (Ganglionnaire)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Suc ganglionnaire');
                 </sqlCheck>
         </preConditions>
@@ -3072,7 +3072,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Suc ganglionnaire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Ganglionnaire)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3088,9 +3088,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
-                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Synovial)','Genexpert (Synovial)','Rivalta (Synovial)') AND concept_name_type = "FULLY_SPECIFIED") 
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (Synovial)','Genexpert (Synovial)','Rivalta (Synovial)') AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Liquide Synovial');
                 </sqlCheck>
         </preConditions>
@@ -3100,7 +3100,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
             set @member3_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Liquide Synovial' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (Synovial)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3116,7 +3116,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN(
                    'Globules Blancs',
@@ -3220,8 +3220,8 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
                    'Microscopie TB - Recherche de BAAR (Synovial)',
                    'Genexpert (Synovial)',
                    'Rivalta (Synovial)'
-                    ) 
-                    AND concept_name_type = "FULLY_SPECIFIED") 
+                    )
+                    AND concept_name_type = "FULLY_SPECIFIED")
                     and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels');
                 </sqlCheck>
         </preConditions>
@@ -3331,7 +3331,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member101_concept_id = 0;
             set @member102_concept_id = 0;
             set @member103_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Globules Blancs' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3438,7 +3438,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             select concept_id into @member102_concept_id from concept_name where name = 'Rivalta (Synovial)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member103_concept_id from concept_name where name = 'Hemoglobine*' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
-            
+
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
             call add_concept_set_members (@concept_id, @member2_concept_id, 2);
             call add_concept_set_members (@concept_id, @member3_concept_id, 3);
@@ -3519,7 +3519,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member78_concept_id, 78);
             call add_concept_set_members (@concept_id, @member79_concept_id, 79);
             call add_concept_set_members (@concept_id, @member80_concept_id, 80);
-            call add_concept_set_members (@concept_id, @member81_concept_id, 81); 
+            call add_concept_set_members (@concept_id, @member81_concept_id, 81);
             call add_concept_set_members (@concept_id, @member82_concept_id, 82);
             call add_concept_set_members (@concept_id, @member83_concept_id, 83);
             call add_concept_set_members (@concept_id, @member84_concept_id, 84);
@@ -3531,7 +3531,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member90_concept_id, 90);
             call add_concept_set_members (@concept_id, @member91_concept_id, 91);
             call add_concept_set_members (@concept_id, @member92_concept_id, 92);
-            call add_concept_set_members (@concept_id, @member93_concept_id, 93); 
+            call add_concept_set_members (@concept_id, @member93_concept_id, 93);
             call add_concept_set_members (@concept_id, @member94_concept_id, 94);
             call add_concept_set_members (@concept_id, @member95_concept_id, 95);
             call add_concept_set_members (@concept_id, @member96_concept_id, 96);
@@ -3548,10 +3548,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Numération reticulocyte','Typage anémie','Sang Frais (Goutte fraiche)','GE','Selles Directs - KOP','Numeration GB','Sang (hématurie)','Test de Grossesse','Rivalta (Pus)','Rivalta (Crachat)','Rivalta (Gastrique)','Rivalta (Ascite)','Rivalta (Pleural)','Rivalta (Ganglionnaire)','Rivalta (Synovial)','Selles Directs - Type','Selles I.O','FL - LYM%','FL - MXD%','FL - NEUT%','Crag','Encre de chine','Proteinorachie (test de Pandy)','Gram','(If positif) Forme','(If positif) Coloration','(If positif) Groupement','Microscopie TB - Recherche de BAAR (LCR)','Urobilinogène','Bilirubine','Protéines','Nitrites','Corps cétoniques','Acide ascorbique','Glucose','pH','Leucocytes'
-                   ) AND concept_name_type = "FULLY_SPECIFIED") 
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = '1');
                 </sqlCheck>
         </preConditions>
@@ -3678,7 +3678,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Groupage sanguin ABO','HIV - Determine','Crag serique','Groupage sanguin Rhesus','Test de compatibilité','HIV -Unigold','Hépatite B','Hépatite C') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = '2');
                 </sqlCheck>
@@ -3694,7 +3694,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member6_concept_id = 0;
             set @member7_concept_id = 0;
             set @member8_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = '2' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Groupage sanguin ABO' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3720,7 +3720,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Creatinine',
                    'GPT','Glycorachie','sodium','Bilirubine totalE','Calcium','Lipase','potassium','Chlore','Bilirubine directE','Gamma GT','Phosphatase alcaline') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = '3');
@@ -3741,7 +3741,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member10_concept_id = 0;
             set @member11_concept_id = 0;
             set @member12_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = '3' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Creatinine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3775,7 +3775,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Globules Blancs','Globules Rouges','Hemoglobine','Hematocrite','VGM','CCMH','Plaquettes','LYM%','MXD% (Eosino+Monocytes)','NEUT%','CD4','CD4 % (enfants de - 5 ans)') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = '4');
                 </sqlCheck>
@@ -3795,7 +3795,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member10_concept_id = 0;
             set @member11_concept_id = 0;
             set @member12_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = '4' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Globules Blancs' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3829,7 +3829,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('EID (PCR)',
                    'Charge Virale HIV - Value','Charge Virale HIV - Logarithme') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = 'CV');
@@ -3840,7 +3840,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @concept_id = 0;
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
-            set @member3_concept_id = 0; 
+            set @member3_concept_id = 0;
 
             select concept_id into @concept_id from concept_name where name = 'CV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
@@ -3857,7 +3857,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Temps de coagulation','Temps de saignement','Glycémie','Malaria','Syphilis','Lactate','Hemoglobine*') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = 'PR');
                 </sqlCheck>
@@ -3896,10 +3896,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('GeneXpert TB (LCR)','Genexpert (Crachat)','Genexpert (Pus)','Genexpert (Gastrique)','Genexpert (Ascite)','Genexpert (Pleural)','Genexpert (Ganglionnaire)','Genexpert (Synovial)','Microscopie TB - Recherche de BAAR (Crachat)','Microscopie TB - Recherche de BAAR (Pus)','Microscopie TB - Recherche de BAAR (Gastrique)','Microscopie TB - Recherche de BAAR (Ascite)','Microscopie TB - Recherche de BAAR (Pleural)','Microscopie TB - Recherche de BAAR (Ganglionnaire)','Microscopie TB - Recherche de BAAR (Synovial)'
-                   ) AND concept_name_type = "FULLY_SPECIFIED") 
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'TB');
                 </sqlCheck>
         </preConditions>
@@ -3921,7 +3921,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member13_concept_id = 0;
             set @member14_concept_id = 0;
             set @member15_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'TB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'GeneXpert TB (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -3961,10 +3961,10 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('Sang','Selles (Sample)','Urine','LCR (Sample)','Crachat',"Liquide d'épanchement pleural",'Liquide ascite','Pus','Suc ganglionnaire','Liquide Synovial','Suc gastrique'
-                   ) AND concept_name_type = "FULLY_SPECIFIED") 
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
                    and cs.concept_set IN (select concept_id from concept_name where name = 'Lab Samples');
                 </sqlCheck>
         </preConditions>
@@ -3982,7 +3982,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member9_concept_id = 0;
             set @member10_concept_id = 0;
             set @member11_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Lab Samples' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Sang' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -4014,7 +4014,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select COUNT(*) from concept_set cs
-                   join concept_name cn 
+                   join concept_name cn
                    on cs.concept_id = cn.concept_id
                    where cs.concept_id IN (select concept_id from concept_name where name IN('1','2','3','4','CV','PR','TB') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = 'Lab Departments');
                 </sqlCheck>
@@ -4029,7 +4029,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @member5_concept_id = 0;
             set @member6_concept_id = 0;
             set @member7_concept_id = 0;
-         
+
             select concept_id into @concept_id from concept_name where name = 'Lab Departments' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = '1' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -4324,7 +4324,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Bilirubine directE' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
-            
+
             select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Calcium' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
             INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
@@ -4802,12 +4802,12 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <changeSet id="OCB-CONFIG-1712111529" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Enfant','Père','Mère') and concept_name_type = "FULLY_SPECIFIED")
-                   AND 
+                   AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Lien_Dep');
                 </sqlCheck>
             </preConditions>
@@ -4831,18 +4831,18 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
-        </sql> 
+        </sql>
         </changeSet>
 
         <changeSet id="OCB-CONFIG-1712111530" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui','Non') and concept_name_type = "FULLY_SPECIFIED")
-                   AND 
+                   AND
                    cn.concept_id IN (select concept_id from concept_name where name = 'Informé du statut VIH du patient_Dep');
                 </sqlCheck>
             </preConditions>
@@ -4857,14 +4857,14 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             select concept_id into @child2_concept_id from concept_name where name = 'Non' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
-        </sql> 
+        </sql>
         </changeSet>
 
         <changeSet id="OCB-CONFIG-1712111531" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif','Non connu') and concept_name_type = "FULLY_SPECIFIED")
@@ -4886,14 +4886,14 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
             call add_concept_answer(@concept_id, @child3_concept_id, 3);
-        </sql> 
+        </sql>
         </changeSet>
 
         <changeSet id="OCB-CONFIG-1712111532" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Père','Mère','Ami(e)','Famille','Autre') and concept_name_type = "FULLY_SPECIFIED")
@@ -4927,14 +4927,14 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
             call add_concept_answer(@concept_id, @child6_concept_id, 6);
             call add_concept_answer(@concept_id, @child7_concept_id, 7);
-        </sql> 
+        </sql>
         </changeSet>
 
         <changeSet id="OCB-CONFIG-1712111533" author="Yash">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">
-                   select count(*) from concept_answer ca 
-                   join 
+                   select count(*) from concept_answer ca
+                   join
                    concept_name cn
                    on ca.concept_id = cn.concept_id
                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('Partenaire','Conjoint(e)','Père','Mère','Ami(e)','Famille','Autre') and concept_name_type = "FULLY_SPECIFIED")
@@ -4968,7 +4968,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_answer(@concept_id, @child5_concept_id, 5);
             call add_concept_answer(@concept_id, @child6_concept_id, 6);
             call add_concept_answer(@concept_id, @child7_concept_id, 7);
-        </sql> 
+        </sql>
         </changeSet>
 <changeSet id="OCB-CONFIG-2017122804" author="vishnu">
 <preConditions onFail="MARK_RAN">
@@ -4998,23 +4998,45 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <sql>
             update relationship_type set retired = 1, retired_by = 1, date_retired = now(), retire_reason = 'Not required' where a_is_to_b = 'Supervisor' and b_is_to_a = 'Supervisee';
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Partenaire','Patient',0,0,'Partner to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Conjoint(e)','Patient',0,0,'Spouse to patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Enfant','Patient',0,0,'Child to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Pére','Patient',0,0,'Father to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Mére','Patient',0,0,'Mother to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
-        </sql> 
+        </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG1801121449" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                   select COUNT(*) from concept_name where name = "Décès à l'arrivée" and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décès durant l'hospitalisation, lié au VIH" where name = "Décès à l'arrivée" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        </sql>
         </changeSet>
 
+        <changeSet id="OCB-CONFIG1801121450" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+            select COUNT(*) from concept_name where name = "Heart Attack" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décès à l'arrivée" where name = "Heart Attack" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        </sql>
+        </changeSet>
         <changeSet id="OCB-CONFIG-1801041614" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -5027,4 +5049,3 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         </sql>
         </changeSet>
 </databaseChangeLog>
-
