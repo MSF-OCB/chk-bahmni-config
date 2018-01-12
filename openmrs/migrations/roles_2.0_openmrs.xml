@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20180106-01" author="vishnu"  >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role WHERE role = 'Doctor';
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating new role for Doctor</comment>
+        <sql>
+            INSERT INTO role(role, description, uuid) VALUES
+('Doctor', "Ability to view and edit clinicalApp  and view the registration app", uuid());;
+        </sql>
+    </changeSet>
+    <changeSet id="20180106-02" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Registration-App-Read-Only" AND child_role = "Doctor";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Registration-App-Read-Only role to Doctor role</comment>
+        <sql>
+            insert into role_role values ('Registration-App-Read-Only','Doctor');
+        </sql>
+    </changeSet>
+
+    <changeSet id="20180106-03" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Clinical-App" AND child_role = "Doctor";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Clinical-App role to Doctor role</comment>
+        <sql>
+            insert into role_role values ('Clinical-App','Doctor');
+        </sql>
+    </changeSet>
+
+     <changeSet id="20180106-04" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role WHERE role = 'OPD Nurse';
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating new role for OPD Nurse</comment>
+        <sql>
+            INSERT INTO role(role, description, uuid) VALUES
+("OPD Nurse", "Ability to view and edit clinicalApp  and view the registration app", uuid());;
+        </sql>
+    </changeSet>
+    <changeSet id="20180106-05" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Registration-App-Read-Only" AND child_role = "OPD Nurse";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Registration-App-Read-Only role to OPD Nurse role</comment>
+        <sql>
+            insert into role_role values ('Registration-App-Read-Only','OPD Nurse');
+        </sql>
+    </changeSet>
+
+    <changeSet id="20180106-06" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Clinical-App" AND child_role = "OPD Nurse";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Clinical-App role to OPD Nurse role</comment>
+        <sql>
+            insert into role_role values ('Clinical-App','OPD Nurse');
+        </sql>
+    </changeSet>
+     <changeSet id="20180106-07" author="vishnu"  >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role WHERE role = 'OPD Supervisor';
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating new role for OPD Supervisor</comment>
+        <sql>
+            INSERT INTO role(role, description, uuid) VALUES
+("OPD Supervisor", "Ability to view and edit clinicalApp  and view the registration app and reports", uuid());;
+        </sql>
+    </changeSet>
+    <changeSet id="20180106-08" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Registration-App-Read-Only" AND child_role = "OPD Supervisor";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Registration-App-Read-Only role to OPD Supervisor role</comment>
+        <sql>
+            insert into role_role values ('Registration-App-Read-Only','OPD Supervisor');
+        </sql>
+
+</changeSet>
+    <changeSet id="20180106-09" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Clinical-App" AND child_role = "OPD Supervisor";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Clinical-App role to OPD Supervisor role</comment>
+        <sql>
+            insert into role_role values ('Clinical-App','OPD Supervisor');
+        </sql>
+    </changeSet>
+     <changeSet id="20180106-10" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Reports-App" AND child_role = "OPD Supervisor";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Reports-App role to OPD Supervisor role</comment>
+        <sql>
+            insert into role_role values ('Reports-App','OPD Supervisor');
+        </sql>
+    </changeSet>
+
+     <changeSet id="20180106-11" author="vishnu"  >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role WHERE role = 'IPD Nurse';
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating new role for IPD Nurse</comment>
+        <sql>
+            INSERT INTO role(role, description, uuid) VALUES
+('IPD Nurse', 'Ability to view and edit clinicalApp  and view the registration app', uuid());;
+        </sql>
+    </changeSet>
+    <changeSet id="20180106-12" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Registration-App-Read-Only" AND child_role = "IPD Nurse";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Registration-App-Read-Only role to IPD Nurse role</comment>
+        <sql>
+            insert into role_role values ('Registration-App-Read-Only','IPD Nurse');
+        </sql>
+    </changeSet>
+
+    <changeSet id="20180106-13" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Clinical-App" AND child_role = "IPD Nurse";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Clinical-App role to IPD Nurse role</comment>
+        <sql>
+            insert into role_role values ('Clinical-App','IPD Nurse');
+        </sql>
+    </changeSet>
+
+     <changeSet id="20180106-14" author="vishnu"  >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role WHERE role = 'Triage Nurse';
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating new role for Triage Nurse</comment>
+        <sql>
+            INSERT INTO role(role, description, uuid) VALUES
+("Triage Nurse", "Having access for Search patients, Start visit, Patient Dashboard", uuid());;
+        </sql>
+    </changeSet>
+    <changeSet id="20180106-15" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Registration-App-Read-Only" AND child_role = "Triage Nurse";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Registration-App-Read-Only role to Triage Nurse role</comment>
+        <sql>
+            insert into role_role values ('Registration-App-Read-Only','Triage Nurse');
+        </sql>
+    </changeSet>
+
+    <changeSet id="20180106-16" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_role WHERE parent_role = "Clinical-App-Read-Only" AND child_role = "Triage Nurse";
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Clinical-App-Read-Only role to Triage Nurse role</comment>
+        <sql>
+            insert into role_role values ('Clinical-App-Read-Only','Triage Nurse');
+        </sql>
+    </changeSet>
+
+    <changeSet id="20180121238" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT count(*) FROM role_privilege WHERE role = "Triage Nurse" AND privilege in ('Edit Patients','Get Patient Identifiers');
+            </sqlCheck>
+        </preConditions>
+        <comment>Inheriting privileges from Edit patients and get identifier  role to Triage Nurse role</comment>
+        <sql>
+          insert into role_privilege values ('Triage Nurse','Edit Patients');
+          insert into role_privilege values ('Triage Nurse','Get Patient Identifiers');
+          insert into role_privilege values ('Triage Nurse','Get Visit Attribute Types');
+          insert into role_privilege values ('Triage Nurse','Edit Encounters');
+          insert into role_privilege values ('Triage Nurse','Add Encounters');
+          insert into role_privilege values('Triage Nurse','Configure Visits');
+          insert into role_privilege values('Triage Nurse','Delete Visits');
+          insert into role_privilege values ('Triage Nurse','Edit Visits');
+          insert into role_privilege values ('Triage Nurse','Add Visits');
+          insert into role_privilege values ('Triage Nurse','Get Encounter Roles');
+
+
+
+
+        </sql>
+    </changeSet>
+<changeSet id="20180106-17" author="vishnu">
+     <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from role where role='Lab Referant';
+            </sqlCheck>
+       </preConditions>
+<comment> Creating Lab Referant role </comment>
+<sql>
+       insert into role(role,description,uuid) values
+              ("Lab Referent","Having access to Bahmni Reports", uuid());
+</sql>
+ </changeSet>
+<changeSet id="20180106-18" author="vishnu">
+     <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+             select count(*) from role_role where parent_role='Reports-App' and child_role='Lab Referent';
+            </sqlCheck>
+       </preConditions>
+<comment> Inheriting privileges from Reports role </comment>
+<sql>
+            insert into role_role values ('Reports-App','Lab Referent');
+</sql>
+</changeSet>
+<changeSet id="20180106-19" author="vishnu">
+      <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+              select count(*) from role_role where parent_role='Clinical-App-Read-Only' and child_role='PSE';
+            </sqlCheck>
+     </preConditions>
+ <comment> Providing Clinical Read only access to the PSE role </comment>
+ <sql>
+     update role_role set parent_role='Clinical-App-Read-Only' where child_role='PSE' and parent_role='Clinical-App';
+  </sql>
+  </changeSet>
+   <changeSet id="20180106-20" author="vishnu">
+      <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+              select count(*) from role_role where parent_role='Clinical-App-Read-Only' and child_role='Receptionist';
+            </sqlCheck>
+     </preConditions>
+ <comment> Providing Clinical Read only access for the Receptionist role </comment>
+ <sql>
+             insert into role_role values ('Clinical-App-Read-Only','Receptionist');
+  </sql>
+  </changeSet>
+
+  <changeSet id="201801121213" author="vishnu">
+     <preConditions onFail="MARK_RAN">
+           <sqlCheck expectedResult="0">
+             select count(*) from role_privilege where role='Receptionist' and privilege in ('Add Visits',
+             'Configure Visits','Delete Visits','Edit Visits','View Patients');
+           </sqlCheck>
+    </preConditions>
+<comment> Providing Clinical Read only access for the Receptionist role </comment>
+<sql>
+            insert into role_privilege values('Receptionist','Add Visits');
+            insert into role_privilege values('Receptionist','Configure Visits');
+            insert into role_privilege values('Receptionist','Delete Visits');
+            insert into role_privilege values('Receptionist','Edit Visits');
+            insert into role_privilege values('Receptionist','View Patients');
+            insert into role_privilege values('Receptionist','Add Encounters');
+            insert into role_privilege values('Receptionist','Edit Encounters');
+            insert into role_privilege values('Receptionist','Get Encounter Roles');
+            insert into role_privilege values('Receptionist','Get Visit Attribute Types');
+
+
+ </sql>
+ </changeSet>
+
+
+<changeSet id="20180106-21" author="vishnu">
+     <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from role where role='Lab Supervisor';
+            </sqlCheck>
+       </preConditions>
+<comment> Creating Lab Supervisor role </comment>
+<sql>
+       insert into role(role,description,uuid) values
+              ("Lab Supervisor","Having access to Bahmni Reports", uuid());
+</sql>
+ </changeSet>
+<changeSet id="20180106-22" author="vishnu">
+     <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+             select count(*) from role_role where parent_role='Reports-App' and child_role='Lab Supervisor';
+            </sqlCheck>
+       </preConditions>
+<comment> Inheriting privileges from Reports role </comment>
+<sql>
+            insert into role_role values ('Reports-App','Lab Supervisor');
+</sql>
+</changeSet>
+
+</databaseChangeLog>

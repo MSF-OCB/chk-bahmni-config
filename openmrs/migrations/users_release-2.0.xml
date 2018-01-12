@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="20180109-01" author="vishnu" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+            select count(*) from users where username in('JMandalaAnswor','NBanonakifu','EowangaTambwe','ChristianKalambaKabongo',
+            'JMfutisiBibi','ABarakaMola','LKanyonaMbuyi' ,'ANgonde','JMandala','TKalwangilaSequeira','GMucinyaLumowo',
+            'ATshimungu','FMangana','CKalengay','AKabema','CAmsini' ,'NNtabugi',
+            'SMbunga','KKayembe','PKisaka','PMwasomi','EWallays','JMbuaya','DNyalenge','CBandelier','EMunzika','AMbala','RNgandu',
+            'LShako','CLukelo','EMpoyi');    
+               </sqlCheck>
+        </preConditions>   
+ <comment> Creating new users for release-2.0 </comment>
+        
+<sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Jeanine","MANDALA ANSWOR",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("JMandalaAnswor","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Supervisor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+<sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Nono","BANONA KIFU",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("NBanonakifu","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+ 
+
+ <sql>
+    INSERT INTO person (creator, gender,date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Esther","OWANGA TAMBWE",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("EowangaTambwe","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Triage Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+  
+
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Christian","KALAMBA KABONGO",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("ChristianKalambaKabongo","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Judith","MFUTISI Bibi",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("JMfutisiBibi","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+  
+ <sql>
+    INSERT INTO person (creator, gender,date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"ANNIE","BARAKA MOLA",6, now(), uuid());
+    INSERT INTO users(username,password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("ABarakaMola","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+  
+
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"LOUIS RICHARD","KANYONA MBUYI",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("LKanyonaMbuyi","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+ 
+<sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"ANNIE","NGONDE",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("ANgonde","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+<sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Jeanine","MANDALA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("JMandala","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Supervisor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Tony","KALWANGILA SEQUEIRA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("TKalwangilaSequeira","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+  
+
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Alain","TSHIMUNGU",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("ATshimungu","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+
+ <sql>
+    INSERT INTO person (creator, gender,date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Freddy","MANGANAR",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("FMangana","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+<sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Corine","KALENGAY",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("CKalengay","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Antoine","KABEMA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("AKabema","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+  
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Chicco","AMSINI",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("CAmsini","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Nadine","NTABUGI",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("NNtabugi","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+     
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Stephane","MBUNGA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("SMbunga","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+    
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Kick","KAYEMBE",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("KKayembe","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+    
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Patrick","KISAKA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("PKisaka","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+    
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Patrick","MWASOMI",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("PMwasomi","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+  
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Elisabeth","WALLAYS",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("EWallays","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+
+  <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Joelle","MBUAYA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("JMbuaya","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+
+  <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Destin","NYALENGE",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("DNyalenge","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+
+  <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"EVA","MUNZIKA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("EMunzika","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    insert into user_role values ((select max(user_id) from users),'IPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+<sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"ALEXIS","MBALA",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("AMbala","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    insert into user_role values ((select max(user_id) from users),'IPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"ROBERT","NGANDU",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("RNgandu","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    insert into user_role values ((select max(user_id) from users),'IPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"LISETTE","SHAKO",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("LShako","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    insert into user_role values ((select max(user_id) from users),'IPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"CECILE","LUKELO",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("CLukelo","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    insert into user_role values ((select max(user_id) from users),'IPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+   
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"EMMANUEL","MPOYI",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("EMpoyi","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'OPD Nurse');
+    insert into user_role values ((select max(user_id) from users),'IPD Nurse');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+
+ <sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'M',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Claude","BANDELIER",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("CBandelier","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Lab Referent');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+<sql>
+    INSERT INTO person (creator,gender, date_created, uuid)VALUES (6,'F',now(),uuid());
+    INSERT INTO person_name (person_id, given_name, family_name,creator, date_created, uuid) VALUES ((SELECT max(person_id) FROM person),"Gisèle","MUCINYA LUMOWO",6, now(), uuid());
+    INSERT INTO users(username, password, salt, creator, date_created, changed_by, person_id,retired,uuid) VALUES ("GMucinyaLumowo","5cf456be925a6b403454ea4bfbf444d406789cf05614bf164068ff29ea648dcea17f9f34137505d8c6dad3d1102bd8832ab34c545353cc47ec0532e7d6d2e938","bb27aaf6dd5590a09923659f89a7c51197273c058947a5bb902bd9a1eb19ed9b68152fc2d7d3e1f5d097b51b0720dac1acddb55a113c806cdeb2949170e9ba1a",8,now(),8,(SELECT max(person_id) FROM person),0,uuid());
+    insert into user_role values ((select max(user_id) from users),'Doctor');
+    INSERT INTO provider (person_id, creator, date_created, retired, uuid)VALUES ((SELECT max(person_id) FROM person),6,now(),0,uuid());
+ </sql>
+        </changeSet>
+
+</databaseChangeLog>
