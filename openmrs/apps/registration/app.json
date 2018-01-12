@@ -20,6 +20,7 @@
 
    "config": {
       "minCharRequireToSearch": 3,
+      "dobMandatory": true,
       "showStartVisitButton": true,
       "patientInformation": {
         "additionalInformation":{
