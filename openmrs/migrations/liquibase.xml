@@ -31,7 +31,7 @@
                 set @concept_full_id = 0;
                    call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Type de cohorte','Type de cohorte','Coded','Misc',false);
                    INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-                   VALUES ('Type de cohorte', 'Type de cohorte', 'org.openmrs.Concept', 0, 1, now(), 0, 24, uuid(), @concept_id);
+                   VALUES ('Type de cohorte', 'Type de cohorte', 'org.openmrs.Concept', 0, 1, now(), 0, 39, uuid(), @concept_id);
 </sql>
 </changeSet>
         <changeSet id="OCB-CONFIG-1712071615" author="Yash">
@@ -406,7 +406,7 @@
                    set @concept_full_id = 0;
                     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CP Converted','CP Converted','Boolean','Misc',false);
                     INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-                    VALUES ('Converti CP', 'Converti CP', 'java.lang.Boolean', 0, 1, now(), 0, 24, uuid(), @concept_id);
+                    VALUES ('Converti CP', 'Converti CP', 'java.lang.Boolean', 0, 1, now(), 0, 40, uuid(), @concept_id);
                  </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1912071621" author="vishnu">
@@ -436,7 +436,7 @@
                    set @concept_short_id = 0;
                    set @concept_full_id = 0;
                    INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-                   VALUES ('Date de conversion','Date de conversion','org.openmrs.util.AttributableDate',0,1,now(),0,24,uuid(),@concept_id);
+                   VALUES ('Date de conversion','Date de conversion','org.openmrs.util.AttributableDate',0,1,now(),0,42,uuid(),@concept_id);
             </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712111518" author="vishnu">
@@ -4692,7 +4692,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
     <changeSet id="OCB-CONFIG-2017122801" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                select count(*) from person_attribute_type where name='Bébé éxposé';
+                select count(*) from person_attribute_type where name='Bébé exposé';
             </sqlCheck>
         </preConditions>
         <comment>Adding the Exposed Baby concept and including in Person attribute table</comment>
@@ -4701,7 +4701,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @concept_short_id = 0;
             set @concept_full_id = 0;
             INSERT INTO person_attribute_type (name, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-            VALUES ('Bébé éxposé','java.lang.Boolean',0,1,now(),0,24,uuid(),@concept_id);
+            VALUES ('Bébé exposé','java.lang.Boolean',0,1,now(),0,43,uuid(),@concept_id);
 
         </sql>
     </changeSet>
@@ -4722,7 +4722,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @concept_full_id = 0;
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Status VIH','Status VIH','Coded','Misc',false);
             INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-            VALUES ('Status VIH', 'Status VIH', 'org.openmrs.Concept', 0, 1, now(), 0, 24, uuid(), @concept_id);
+            VALUES ('Status VIH', 'Status VIH', 'org.openmrs.Concept', 0, 1, now(), 0, 41, uuid(), @concept_id);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-2017122803" author="vishnu">
@@ -4999,19 +4999,19 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             update relationship_type set retired = 1, retired_by = 1, date_retired = now(), retire_reason = 'Not required' where a_is_to_b = 'Supervisor' and b_is_to_a = 'Supervisee';
 
             INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
-            ('Partenaire','Patient',0,0,'Partner to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+            ('Partenaire','Partenaire',0,0,'Partner to Partner relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
             INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
-            ('Conjoint(e)','Patient',0,0,'Spouse to patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+            ('Conjoint(e)','Conjoint(e)',0,0,'Spouse to Spouse relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
             INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
-            ('Enfant','Patient',0,0,'Child to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+            ('Enfant','Parent',0,0,'Child to Parent relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
             INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
-            ('Pére','Patient',0,0,'Father to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+            ('Pére','Enfant',0,0,'Father to Child relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
             INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
-            ('Mére','Patient',0,0,'Mother to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+            ('Mére','Enfant',0,0,'Mother to Child relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
         </sql> 
         </changeSet>
 
@@ -5026,5 +5026,30 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             update global_property set property_value = (select name from concept_name where name = 'Death Reason' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0), date_changed = now(), changed_by = 1 where property = 'concept.reasonForDeath';
         </sql>
         </changeSet>
+
+        <changeSet id="OCB-CONFIG-1801021526" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="1">
+                   select count(*) from person_attribute_type where name = 'Lieu de depistage' and retired = 0;
+                </sqlCheck>
+            </preConditions>
+        <comment>Updating Lieu de depistage person attribute</comment>
+        <sql>
+          update person_attribute_type set name = 'Lieu de dépistage', description = 'Lieu de dépistage', date_changed = now(), changed_by = 1 where name = 'Lieu de depistage' and retired = 0;
+        </sql> 
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-1801021549" author="Yash">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="1">
+                   select count(*) from person_attribute_type where name = 'Date depistage' and retired = 0;
+                </sqlCheck>
+            </preConditions>
+        <comment>Updating Date depistage person attribute</comment>
+        <sql>
+          update person_attribute_type set name = 'Date dépistage', description = 'Date dépistage', date_changed = now(), changed_by = 1 where name = 'Date depistage' and retired = 0;
+        </sql> 
+        </changeSet>
+
 </databaseChangeLog>
 
