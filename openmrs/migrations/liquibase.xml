@@ -5014,7 +5014,29 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             ('Mére','Patient',0,0,'Mother to Patient relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
         </sql>
         </changeSet>
+        <changeSet id="OCB-CONFIG1801121449" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                   select COUNT(*) from concept_name where name = "Décès à l'arrivée" and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décès durant l'hospitalisation, lié au VIH" where name = "Décès à l'arrivée" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        </sql>
+        </changeSet>
 
+        <changeSet id="OCB-CONFIG1801121450" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+            select COUNT(*) from concept_name where name = "Heart Attack" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décès à l'arrivée" where name = "Heart Attack" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        </sql>
+        </changeSet>
         <changeSet id="OCB-CONFIG-1801041614" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -5026,6 +5048,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             update global_property set property_value = (select name from concept_name where name = 'Death Reason' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0), date_changed = now(), changed_by = 1 where property = 'concept.reasonForDeath';
         </sql>
         </changeSet>
+
 	 <changeSet id="OCB-CONFIG-1712141133" author="Pritam">
         <comment>Adding All Concepts related to Lab</comment>
         <sqlFile path="AddAllDrugConcepts.sql"/>
@@ -5200,5 +5223,4 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
    </changeSet>
 
      <include file ="IPD_Admission_Form.xml"/>
-
 </databaseChangeLog>
