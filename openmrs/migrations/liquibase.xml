@@ -5048,4 +5048,6 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             update global_property set property_value = (select name from concept_name where name = 'Death Reason' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0), date_changed = now(), changed_by = 1 where property = 'concept.reasonForDeath';
         </sql>
         </changeSet>
+        <include file ="roles_2.0_openmrs.xml"/>
+        <include file ="users_release-2.0.xml"/>
 </databaseChangeLog>
