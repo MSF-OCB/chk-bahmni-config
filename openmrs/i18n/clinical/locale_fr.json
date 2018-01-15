@@ -18,11 +18,11 @@
   "DASHBOARD_TITLE_VISITS_KEY": "Visites",
   "DASHBOARD_TITLE_PRINT_KEY": "Imprimer",
   "DASHBOARD_TITLE_LAB_RESULTS_KEY": "Résultats Lab",
-  "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY": "Toutes les demandes Labo",
   "ORDERS_BOARD_LABEL_KEY": "Demandes",
   "INVESTIGATION_CHART_KEY": "Tableau des résultats",
   "PATIENT_REGISTRATION_PAGE_KEY": "Enregistrement",
   "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY": "Visiter la page d'attribut",
+  "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY": "Demandes Labo",
   "PATIENT_DOCUMENT_TRANSLATION_KEY": "Documents patients",
   "BAHMNI_HOME_TRANSLATION_KEY": "Bahmni Accueil",
   "ENTERING_DATA_FOR_TRANSLATION_KEY": "Entrer des données pour",
@@ -39,7 +39,6 @@
   "OKAY_LABEL": "d'accord",
   "ENTER_ORDER_NOTE_LABEL": "Entrez les notes pour",
   "PATIENT_PROFILE_RELATIONSHIPS_LABEL": "Des relations",
-  "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE": "Impossible de modifier les notes après l'enregistrement.",
   "CLINICAL_SAVE_TRANSLATION_KEY": "Enregistrer",
   "NO_FULFILMENT_MESSAGE": "Aucune observation pour cette demande",
   "ALL_LAB_RESULTS_LABEL": "Tous les résultats Labo",
@@ -91,5 +90,9 @@
   "EMPTY_TEMPLATE_MESSAGE" : "",
   "OBSERVATIONS_BOARD_LABEL_KEY": "Observations",
   "ADD_SECTION_KEY" : "Ajouter plus",
-  "CHOOSE_ANSWER_FROM_DROPDOWN_LABEL": "Choisissez une réponse"
+  "CHOOSE_ANSWER_FROM_DROPDOWN_LABEL": "Choisissez une réponse",
+  "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE" : "Les notes ne peuvent pas être modifiées après être sauvegardées",
+  "NO_FULFILMENT_MESSAGE" :"Aucune observation pour cette demande",
+  "ALL_KEY_DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY" :"Toutes les demandes Labo"
+
 }

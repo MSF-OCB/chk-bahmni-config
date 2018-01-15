@@ -4010,6 +4010,19 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             call add_concept_set_members (@concept_id, @member11_concept_id, 11);
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-1801151159" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name = "Échantillons de laboratoire" and concept_name_type = "SHORT" and locale='fr'
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding short name for Lab Samples</comment>
+        <sql>
+          set @conceptid =(select concept_id from concept_name where name='Lab Samples' and concept_name_type='FULLY_SPECIFIED' and locale='fr');
+          insert into concept_name (concept_id,name,locale,date_created,creator,concept_name_type,uuid) values (@conceptid,'Échantillons de laboratoire','fr',now(),6,'SHORT',uuid());
+        </sql>
+    </changeSet>
+
     <changeSet id="OCB-CONFIG-1712242098" author="Yash">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
