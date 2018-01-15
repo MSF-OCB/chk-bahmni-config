@@ -87,7 +87,7 @@
                 "Tel 2" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
                 "Tel 1 du Contact" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
                 "Tel 2 du Contact" : {"pattern" : "[0-9]{10}", "errorMessage" : "Doit contenir 10 chiffres"},
-                "registrationNumber": {"pattern": "[0-9]{5,6}", "errorMessage": "6 chiffres"},
+                "registrationNumber": {"pattern": "[0-9]{5,6}", "errorMessage": "L'ID patient doit contenir 5 ou 6 chiffres"},
                 "givenName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
                 "middleName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
                 "familyName" : {"pattern" : "[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ' -]{0,48}[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]+|[a-zA-ZâÂàÀäÄçÇéÉèÈêÊëËîÎïÏôÔùÙûÛüÜÿñÑœŒÆæ]{0,50}", "errorMessage" : "Doit contenir des caractères (longueur max 50)"},
