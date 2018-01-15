@@ -23,7 +23,7 @@
   "DASHBOARD_TITLE_VISITS_KEY" : "Visites",
   "DASHBOARD_TITLE_PRINT_KEY":"Imprimer",
   "DASHBOARD_TITLE_LAB_RESULTS_KEY":"Résultats Lab",
-  "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY": "Toutes les demandes Labo",
+  "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY": "Demandes Labo",
 
 
   "ORDERS_BOARD_LABEL_KEY" : "Demandes",
@@ -60,7 +60,8 @@
   "NO_FULFILMENT_MESSAGE" :"Aucune observation pour cette demande",
   "ALL_LAB_RESULTS_LABEL" : "Tous les résultats Labo",
   "SEARCH_BY_PATIENT_ID_KEY" : "Recherche par ID Patient",
-  "SIDEBAR_NO_IMAGES_DISPLAY" : "Aucune image à afficher"
-  
- 
+  "SIDEBAR_NO_IMAGES_DISPLAY" : "Aucune image à afficher",
+  "ALL_KEY DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY" :"Toutes les demandes Labo"
+
+
 }
