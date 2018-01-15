@@ -45,7 +45,7 @@ call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Malaria(IPDF
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autres(IPDForm)','Autres','N/A','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'PF','PF','N/A','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'No Tier','No Tier','Text','Misc',false );
-call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Date d\'admission','Date d\'admission','Date','Misc',false );
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Date d\'admission','Date d\'admission','Datetime','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Référé en IPD par(FOSA)','Référé en IPD par(FOSA)','Coded','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'FOSA de suivi ARV','FOSA de suivi ARV','Coded','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Syndrome d\'admission','Syndrome d\'admission','Coded','Misc',false );
@@ -57,7 +57,7 @@ call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Stade OMS','
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'SNC_Glasgow(/15)','SNC_Glasgow(/15)','Numeric','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Type','Type','Coded','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Resultat','Resultat','Coded','Misc',false );
-call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Resultat(Creatine)','Resultat(Creatine)','Text','Misc',false );
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Resultat(Creatine)','Resultat(Creatine)','Numeric','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Date(IPDForm)','Date','Date','Misc',false );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Examen Physique á l\'admission','Examen Physique á l\'admission','N/A','ConvSet',true );
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Test á l\'admission','Test á l\'admission','N/A','ConvSet',true );
