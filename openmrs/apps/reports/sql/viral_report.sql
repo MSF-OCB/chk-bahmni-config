@@ -35,7 +35,11 @@ FROM
                                                   trim( concat( COALESCE(NULLIF(person.first_name, ''), ''), ' ', COALESCE(NULLIF(person.last_name, ''), '') ) ) AS Patient_Name,
                                                   pi.identity_data AS Patient_Identifier,
                                                   patient.birth_date :: DATE AS dob,
-                                                  patient.gender AS sexe,
+                                                  case when patient.gender = 'M' then 'H'
+                                                       when patient.gender = 'F' then 'F'
+                                                       when patient.gender = 'O' then 'A'
+                                                  else
+                                                      patient.gender END AS sexe,
                                                   t.name AS tname,
                                                   r.value AS tvalue,
                                                   r.lastupdated :: DATE AS date_of_results,

@@ -5,7 +5,7 @@
     "allMedicationTabConfig": {
       "inputOptionsConfig": {
         "allowOnlyCodedDrugs" : true,
-        "defaultDurationUnit": "Day(s)",
+        "defaultDurationUnit": "Jour(s)",
         "hideOrderSet" : true,
         "defaultInstructions": "As directed",
         "hiddenFields": ["sos","dosingTypeToggle"],

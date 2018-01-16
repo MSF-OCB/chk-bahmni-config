@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+
+<changeSet id="20180109-01" author="vishnu" >
+    <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="0">
+            select count(*) from system_user where login_name in('JMandalaAnswor','NBanonakifu','EowangaTambwe','ChristianKalambaKabongo',
+            'JMfutisiBibi','ABarakaMola','LKanyonaMbuyi' ,'ANgonde','JMandala','TKalwangilaSequeira',
+            'GMucinyaLumowo','ATshimungu','FMangana','CKalengay','AKabema','CAmsini' ,'NNtabugi',
+            'SMbunga','KKayembe','PKisaka','PMwasomi','JWallays','JMbuaya','DNyalenge','EMunzika','AMbala','RNgandu',
+            'LShako','CLukelo','EMpoyi');
+               </sqlCheck>
+    </preConditions>
+<comment>Creating new users openelis for release-2.0</comment>
+    <sql>
+insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (2,'JMandalaAnswor','MANDALAANSWOR','Jeanine','Y','N',now());
+insert into login_user values (2,'JMandalaAnswor','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (2,12);
+        </sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (3,'NBanonakifu','BANONAKIFU','Nono','Y','N',now());
+insert into login_user values (3,'NBanonakifu','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (3,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (4,'CKalambaKabongo','KALAMBAKABONGO','Christian','Y','N',now());
+insert into login_user values (4,'CKalambaKabongo','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (4,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (5,'JMfutisiBibi','MFUTISIBibi','Judith','Y','N',now());
+insert into login_user values (4,'JMfutisiBibi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (5,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (6,'ABarakaMola','KALAMBAKABONGO ','Christian','Y','N',now());
+insert into login_user values (6,'ABarakaMola','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (6,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (7,'LKanyonaMbuyi','KANYONAMBUYI','LOUIS RICHARD','Y','N',now());
+insert into login_user values (7,'LKanyonaMbuyi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (7,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (8,'ANgonde','NGONDE','ANNIE','Y','N',now());
+insert into login_user values (8,'ANgonde','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (8,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (9,'JMandala','MANDALA','Jeanine','Y','N',now());
+insert into login_user values (9,'JMandala','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (9,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (11,'TKalwangilaSequeira','KALWANGILASEQUEIRA','Tony','Y','N',now());
+insert into login_user values (11,'TKalwangilaSequeira','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (11,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (12,'GMucinyaLumowo','MUCINYALUMOWO','Gisèle','Y','N',now());
+insert into login_user values (12,'GMucinyaLumowo','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (12,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (13,'ATshimungu','TSHIMUNGU','Alain','Y','N',now());
+insert into login_user values (13,'ATshimungu','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (13,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (14,'FMangana','MANGANA','Freddy','Y','N',now());
+insert into login_user values (14,'FMangana','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (14,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (15,'CKalengay','KALENGAY','Corine','Y','N',now());
+insert into login_user values (15,'CKalengay','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (15,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (16,'AKabema','KABEMA','Antoine','Y','N',now());
+insert into login_user values (16,'AKabema','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (16,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (17,'CAmsini','AMSINI','Chicco','Y','N',now());
+insert into login_user values (17,'CAmsini','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (17,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (18,'NNtabugi','NTABUGI','Nadine','Y','N',now());
+insert into login_user values (18,'NNtabugi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (18,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (19,'SMbunga','MBUNGA','Stephane','Y','N',now());
+insert into login_user values (19,'SMbunga','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (19,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (20,'KKayembe','KAYEMBE','Kick','Y','N',now());
+insert into login_user values (20,'KKayembe','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (20,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (21,'PKisaka','KISAKA','Patrick','Y','N',now());
+insert into login_user values (21,'PKisaka','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (21,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (22,'PMwasomi','MWASOMI','Patrick','Y','N',now());
+insert into login_user values (22,'PMwasomi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (22,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (23,'EWallays','WALLAYS','Elisabeth','Y','N',now());
+insert into login_user values (23,'EWallays','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (23,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (24,'JMbuaya','MBUAYA','Joelle','Y','N',now());
+insert into login_user values (24,'JMbuaya','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (24,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (25,'DNyalenge','NYALENGE','Destin','Y','N',now());
+insert into login_user values (25,'DNyalenge','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (25,12);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (26,'CLuporteMboma','LUPORTEMBOMA','Charles','Y','N',now());
+insert into login_user values (26,'CLuporteMboma','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (26,4);
+insert into system_user_role values (26,5);
+insert into system_user_role values (26,7);
+insert into system_user_role values (26,9);
+insert into system_user_role values (26,10);
+insert into system_user_role values (26,12);
+insert into system_user_role values (26,13);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (27,'ABwanga','BWANGA','Alliance','Y','N',now());
+insert into login_user values (27,'ABwanga','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (27,4);
+insert into system_user_role values (27,5);
+insert into system_user_role values (27,7);
+insert into system_user_role values (27,9);
+insert into system_user_role values (27,10);
+insert into system_user_role values (27,12);
+insert into system_user_role values (27,13);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (28,'GLusambaLusamba','LUSAMBALUSAMBA','Gentil','Y','N',now());
+insert into login_user values (28,'GLusambaLusamba','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (28,4);
+insert into system_user_role values (28,5);
+insert into system_user_role values (28,7);
+insert into system_user_role values (28,9);
+insert into system_user_role values (28,10);
+insert into system_user_role values (28,12);
+insert into system_user_role values (28,13);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (30,'PMboSomanza','MBOSOMANZA','Princia','Y','N',now());
+insert into login_user values (30,'PMboSomanza','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (30,4);
+insert into system_user_role values (30,5);
+insert into system_user_role values (30,7);
+insert into system_user_role values (30,9);
+insert into system_user_role values (30,10);
+insert into system_user_role values (30,12);
+insert into system_user_role values (30,13);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (31,'AMusingaImense','MUSINGAIMENSE','Alain','Y','N',now());
+insert into login_user values (31,'AMusingaImense','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (31,4);
+insert into system_user_role values (31,5);
+insert into system_user_role values (31,7);
+insert into system_user_role values (31,9);
+insert into system_user_role values (31,10);
+insert into system_user_role values (31,12);
+insert into system_user_role values (31,13);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (32,'BNgamalaKabanga','NGAMALAKABANGA','Bibiche','Y','N',now());
+insert into login_user values (32,'BNgamalaKabanga','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (32,4);
+insert into system_user_role values (32,5);
+insert into system_user_role values (32,7);
+insert into system_user_role values (32,9);
+insert into system_user_role values (32,10);
+insert into system_user_role values (32,12);
+insert into system_user_role values (32,13);
+</sql>
+    <sql>
+        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (33,'FKutomisaMakasi','KUTOMISAMAKASI','Fidele','Y','N',now());
+insert into login_user values (33,'FKutomisaMakasi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (33,4);
+insert into system_user_role values (33,5);
+insert into system_user_role values (33,7);
+insert into system_user_role values (33,9);
+insert into system_user_role values (33,10);
+insert into system_user_role values (33,12);
+insert into system_user_role values (33,13);
+</sql>
+    <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (34,'CBandelier','BANDELIER','Claude','Y','N',now());
+insert into login_user values (34,'CBandelier','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (34,4);
+insert into system_user_role values (34,5);
+insert into system_user_role values (34,7);
+insert into system_user_role values (34,9);
+insert into system_user_role values (34,12);
+insert into system_user_role values (34,13);
+</sql>
+    <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (35,'EMunzika','MUNZIKA','EVA','Y','N',now());
+insert into login_user values (35,'EMunzika','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+
+insert into system_user_role values (35,4);
+insert into system_user_role values (35,5);
+insert into system_user_role values (35,12);
+</sql>
+    <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (36,'AMbala','MBALA','ALEXIS','Y','N',now());
+insert into login_user values (36,'AMbala','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+
+insert into system_user_role values (36,4);
+insert into system_user_role values (36,5);
+insert into system_user_role values (36,12);
+</sql>
+    <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (37,'RNgandu','NGANDU','ROBERT','Y','N',now());
+insert into login_user values (37,'RNgandu','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+
+insert into system_user_role values (37,4);
+insert into system_user_role values (37,5);
+insert into system_user_role values (37,12);
+</sql>
+    <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (38,'LShako','SHAKO','LISETTE','Y','N',now());
+insert into login_user values (38,'LShako','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+
+insert into system_user_role values (38,4);
+insert into system_user_role values (38,5);
+insert into system_user_role values (38,12);
+</sql>
+    <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (39,'CLukelo','LUKELO','CECILE','Y','N',now());
+insert into login_user values (39,'CLukelo','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+
+insert into system_user_role values (39,4);
+insert into system_user_role values (39,5);
+insert into system_user_role values (39,12);
+</sql>
+    <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (40,'EMpoyi','MPOYI','EMMANUEL','Y','N',now());
+insert into login_user values (33,'EMpoyi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+
+insert into system_user_role values (40,4);
+insert into system_user_role values (40,5);
+insert into system_user_role values (40,12);
+</sql>
+</changeSet>
+</databaseChangeLog>
