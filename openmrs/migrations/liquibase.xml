@@ -480,15 +480,26 @@
                 update idgen_seq_id_gen set prefix ='' where prefix='CHK';
          </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1712111524" author="vishnu">
+    <changeSet id="OCB-CONFIG-1801162203" author="vishnu">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="1">
-                   select count(*) from idgen_seq_id_gen where min_length='8' ;
+            <sqlCheck expectedResult="0">
+                   select count(*) from idgen_seq_id_gen where min_length='5' ;
                   </sqlCheck>
         </preConditions>
         <comment>updating the patient Identifier length</comment>
         <sql>
-                update idgen_seq_id_gen set min_length =6 where min_length=8;
+                update idgen_seq_id_gen set min_length =5 where min_length=6;
+         </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801162204" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select count(*) from idgen_seq_id_gen where max_length='6' ;
+                  </sqlCheck>
+        </preConditions>
+        <comment>updating the patient Identifier length</comment>
+        <sql>
+                update idgen_seq_id_gen set max_length =6 where max_length=10;
          </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712111525" author="vishnu">
