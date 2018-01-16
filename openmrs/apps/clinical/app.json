@@ -72,31 +72,17 @@
         "maxConceptSetLevels": 3,
         "allowOnlyCodedDiagnosis": false,
         "conceptSetUI": {
-            "Test á l'admission": {
-                "allowAddMore" :true
-            },
-            "Syndrome d'admission" :{
-            "dropdown":true
-            },
-            "Type":{
-            "dropdown":true
-            },
-            "Référé en IPD par(FOSA)":{
-            "dropdown":true
-            },
-            "FOSA de suivi ARV":{
-            "dropdown":true
-            },
-            "Malade arrivé mort":{
-            "dropdown":true
-            },
-            "Stade OMS":{
-            "dropdown":true
-            },
-            "Resultat":{
-            "dropdown":true
+		"Chief Complaint Data": {
+                 "autocomplete":true,
+                 "codedConceptName":"Chief Complaint",
+                 "nonCodedConceptName":"Non-Coded Chief Complaint",
+                 "durationRequired": false,
+                 "allowAddMore": true
             }
+	},
+        "visitPage": {
+               "observationDisplay": {
+                "conceptNames": []
         }
-
     }
 }
