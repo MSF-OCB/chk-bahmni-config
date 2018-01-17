@@ -5022,19 +5022,19 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <sql>
             update relationship_type set retired = 1, retired_by = 1, date_retired = now(), retire_reason = 'Not required' where a_is_to_b = 'Supervisor' and b_is_to_a = 'Supervisee';
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Partenaire','Partenaire',0,0,'Partner to Partner relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Conjoint(e)','Conjoint(e)',0,0,'Spouse to Spouse relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Enfant','Parent',0,0,'Child to Parent relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Pére','Enfant',0,0,'Father to Child relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
 
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES 
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Mére','Enfant',0,0,'Mother to Child relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
         </sql>
         </changeSet>
@@ -5082,7 +5082,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <comment>Updating Lieu de depistage person attribute</comment>
         <sql>
           update person_attribute_type set name = 'Lieu de dépistage', description = 'Lieu de dépistage', date_changed = now(), changed_by = 1 where name = 'Lieu de depistage' and retired = 0;
-        </sql> 
+        </sql>
         </changeSet>
 
         <changeSet id="OCB-CONFIG-1801021549" author="Yash">
@@ -5094,7 +5094,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <comment>Updating Date depistage person attribute</comment>
         <sql>
           update person_attribute_type set name = 'Date dépistage', description = 'Date dépistage', date_changed = now(), changed_by = 1 where name = 'Date depistage' and retired = 0;
-        </sql> 
+        </sql>
         </changeSet>
         <include file ="roles_2.0_openmrs.xml"/>
         <include file ="users_release-2.0.xml"/>
