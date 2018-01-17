@@ -58,8 +58,8 @@
             "title": "Informations médicaux du patient",
             "translationKey": "REGISTRATION_PATIENT_MEDICAL_INFORMATION",
             "attributes": [
-               "Date depistage",
-               "Lieu de depistage",
+               "Date dépistage",
+               "Lieu de dépistage",
                "ARV Naif/ Non Naif"
             ],
             "expanded": true

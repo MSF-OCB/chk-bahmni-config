@@ -12,7 +12,7 @@
         </div>
         <div class="right col">
             <span class="label">Date dépistage :</span>
-            <span>{{patient['Date depistage']| date:'dd/MM/yyyy'}}</span>
+            <span>{{patient['Date dépistage']| date:'dd/MM/yyyy'}}</span>
         </div>
     </div>
     <br/>
@@ -22,9 +22,9 @@
             <span>{{patient['Type de cohorte'].value}}</span>
         </div>
         <div class="right col">
-            <span class="label">Bébé éxposé :</span>
-            <span ng-if="patient['Bébé éxposé'] === true">Oui</span>
-            <span ng-if="!patient['Bébé éxposé']">Non</span>
+            <span class="label">Bébé exposé :</span>
+            <span ng-if="patient['Bébé exposé'] === true">Oui</span>
+            <span ng-if="!patient['Bébé exposé']">Non</span>
         </div>
     </div>
     <br/>

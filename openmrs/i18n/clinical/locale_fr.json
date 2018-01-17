@@ -92,7 +92,6 @@
   "ADD_SECTION_KEY" : "Ajouter plus",
   "CHOOSE_ANSWER_FROM_DROPDOWN_LABEL": "Choisissez une réponse",
   "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE" : "Les notes ne peuvent pas être modifiées après être sauvegardées",
-  "NO_FULFILMENT_MESSAGE" :"Aucune observation pour cette demande",
   "ALL_KEY_DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY" :"Toutes les demandes Labo"
 
 }

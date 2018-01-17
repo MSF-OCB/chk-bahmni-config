@@ -50,7 +50,7 @@
           "showDetailsButton": true
         },
         "expandedViewConfig": {
-          "numberOfVisits": 10
+          "numberOfVisits": ""
         }
       }
     }
@@ -63,7 +63,7 @@
            "logo": "/bahmni_config/openelis/images/labLogo.jpg"
        },
        "sections": {
-           "labResults": {
+           "investigationsChart": {
              "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
              "type": "labOrders",
              "displayOrder": 2,
@@ -74,9 +74,6 @@
                "showChart": true,
                "showTable": false,
                "showDetailsButton": true
-             },
-             "expandedViewConfig": {
-               "numberOfVisits": 10
              }
            }
        }
