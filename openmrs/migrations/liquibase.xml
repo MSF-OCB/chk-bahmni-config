@@ -488,7 +488,7 @@
         </preConditions>
         <comment>updating the patient Identifier length</comment>
         <sql>
-                update idgen_seq_id_gen set min_length =5 where min_length=6;
+                update idgen_seq_id_gen set min_length =5;
          </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1801162204" author="vishnu">
@@ -499,7 +499,7 @@
         </preConditions>
         <comment>updating the patient Identifier length</comment>
         <sql>
-                update idgen_seq_id_gen set max_length =6 where max_length=10;
+                update idgen_seq_id_gen set max_length =6;
          </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712111525" author="vishnu">
