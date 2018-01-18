@@ -491,7 +491,7 @@
                 update idgen_seq_id_gen set min_length =5;
          </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1801162204" author="vishnu">
+    <changeSet id="OCB-CONFIG-1801162202" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                    select count(*) from idgen_seq_id_gen where max_length='6' ;
@@ -4716,7 +4716,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
     <changeSet id="OCB-CONFIG-2017122801" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                select count(*) from person_attribute_type where name='Bébé exposé';
+                select count(*) from person_attribute_type where name='Bébé éxposé';
             </sqlCheck>
         </preConditions>
         <comment>Adding the Exposed Baby concept and including in Person attribute table</comment>
@@ -4725,10 +4725,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @concept_short_id = 0;
             set @concept_full_id = 0;
             INSERT INTO person_attribute_type (name, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-            VALUES ('Bébé exposé','java.lang.Boolean',0,1,now(),0,43,uuid(),@concept_id);
+            VALUES ('Bébé éxposé','java.lang.Boolean',0,1,now(),0,43,uuid(),@concept_id);
 
         </sql>
     </changeSet>
+
 
     <changeSet id="OCB-CONFIG-2017122802" author="vishnu">
         <preConditions onFail="MARK_RAN">
@@ -5098,4 +5099,49 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         </changeSet>
         <include file ="roles_2.0_openmrs.xml"/>
         <include file ="users_release-2.0.xml"/>
+        <changeSet id="OCB-CONFIG1801171423" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="2">
+            select COUNT(*) from concept_name where name = "Décés à l'arrivée" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décés à l'arrivée" where name = "Décès à l'arrivée" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+        </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG1801171434" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="2">
+            select COUNT(*) from concept_name where name = "Décés durant l'hospitalisation, lié au VIH" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décès durant l'hospitalisation, lié au VIH" where name = "Décès durant l'hospitalisation, lié au VIH" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+        </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG1801171438" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="2">
+            select COUNT(*) from concept_name where name = "Décés durant l'hospitalisation, non lié au VIH" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décés durant l'hospitalisation, non lié au VIH" where name = "Décès durant l'hospitalisation, non lié au VIH" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+        </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG1801171442" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="2">
+            select COUNT(*) from concept_name where name = "Décès hors du CHK" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+                </sqlCheck>
+        </preConditions>
+        <comment>Updating  Death Information answers on registration page</comment>
+        <sql>
+            update concept_name set name = "Décés hors du CHK" where name = "Décès hors du CHK" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
+        </sql>
+        </changeSet>
+
 </databaseChangeLog>
