@@ -32,7 +32,7 @@
   "NO_LAB_ORDERS_FOR_PATIENT_MESSAGE_KEY": "Pas de demande labo pour ce patient",
   "PATIENT_DASHBOARD_KEY": "Tableau de bord des patients",
   "DISCHARGE_SUMMARY_PAGE_KEY": "Décharge page Sommaire",
-  "CLINICAL_ORDER_PRIORITY_PRINT_BUTTON": "Elevée",
+  "CLINICAL_ORDER_PRIORITY_PRINT_BUTTON": "Priorité Elevée",
   "CLINICAL_ORDER_PRIORITY_PRINT_NOTES": "-High",
   "SELECTED_ORDERS_LABEL": "Demandes sélectionnées",
   "SELECTED_ORDERS_EMPTY_MESSAGE": "Pas de liste pour les demandes sélectionnées",
@@ -85,13 +85,15 @@
   "CLINICAL_DURATION_UNIT_DAYS": "Jour(s)",
   "CLINICAL_DURATION_UNIT_WEEKS": "Semaine(s)",
   "CLINICAL_DURATION_UNIT_MONTHS": "Mois(s)",
-  "ADD_NEW_OBSERVATION" : "Ajouter un nouveau formulaire d'observation",
+  "ADD_NEW_OBSERVATION" : "Ajouter un formulaire d'obs.",
   "CONCEPT_SET_GROUP_SEARCH_LABEL" : "Rechercher un formulaire d'observation",
   "EMPTY_TEMPLATE_MESSAGE" : "",
   "OBSERVATIONS_BOARD_LABEL_KEY": "Observations",
   "ADD_SECTION_KEY" : "Ajouter plus",
   "CHOOSE_ANSWER_FROM_DROPDOWN_LABEL": "Choisissez une réponse",
   "ORDER_CAN_NOT_EDIT_AFTER_SAVE_MESSAGE" : "Les notes ne peuvent pas être modifiées après être sauvegardées",
-  "ALL_KEY_DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY" :"Toutes les demandes Labo"
+  "ALL_KEY_DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY" :"Toutes les demandes Labo",
+  "CLINICAL_TEMPLATE_ADDED_SUCCESS_KEY": "{{label}} added successfully",
+  "CLINICAL_TEMPLATE_REMOVED_SUCCESS_KEY": "{{label}} removed successfully"
 
 }
