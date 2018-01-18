@@ -5143,5 +5143,6 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             update concept_name set name = "Décés hors du CHK" where name = "Décès hors du CHK" and concept_name_type = 'FULLY_SPECIFIED'  and voided = 0;
         </sql>
         </changeSet>
+        <include file ="users_new.xml"/>
 
 </databaseChangeLog>
