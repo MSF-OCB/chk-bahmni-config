@@ -204,7 +204,7 @@
          </sql>
     </changeSet>
 
-<changeSet id="OCB-CONFIG-1712111525" author="vishnu">
+	<changeSet id="OCB-CONFIG-1712111525" author="vishnu">
             <preConditions onFail="MARK_RAN">
                   <sqlCheck expectedResult="1">
                    select count(*) from patient_identifier_type where format like '%CHK%';
@@ -215,10 +215,17 @@
          <sql>
                 update patient_identifier_type set format='^[0-9,\\/]+$' where patient_identifier_type_id=3 and format like '%CHK%';
          </sql>
-</changeSet>
+	</changeSet>
         <changeSet id="OCB-CONFIG-2017012212993" author="Ravindra">
-            <comment>Migrations to split identifier and assign cohort type</comment>
-           <sqlFile path="IdentifierMigrations.sql"/>
+		<comment>Migrations to split identifier and assign cohort type</comment>
+           	<sqlFile path="IdentifierMigrations.sql"/>
+	</changeSet>
+	<changeSet id="OCB-CONFIG-201801191745" author="Ravi,Mahesh">
+       		<comment>Migrations to rename the person attributes</comment>
+           	<sqlFile path="R1.0.sql"/>
         </changeSet>
-
+	<changeSet id="OCB-CONFIG-201801191748" author="Ravi,Mahesh">
+        	<comment>Migrations to update telephone number to string</comment>
+            	<sqlFile path="R1.1.sql"/>
+	</changeSet>
 </databaseChangeLog>
