@@ -5144,5 +5144,8 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         </sql>
         </changeSet>
         <include file ="users_new.xml"/>
-
+       <changeSet id="OCB-CONFIG-sethivstatus" author="Ravindra">
+         <comment>Migrations to set HIV staus</comment>
+         <sqlFile path="set_person_attribute_to_hiv_positive.sql"/>
+       </changeSet>
 </databaseChangeLog>
