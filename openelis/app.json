@@ -2,7 +2,7 @@
  "labPriority":{
    "IPD-High":1,
    "IPD":2,
-   "OPD-High":3,
+   "OPD-Prioritaire":3,
    "OPD":4,
 
 }
