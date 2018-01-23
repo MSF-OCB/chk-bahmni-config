@@ -236,7 +236,7 @@
             call add_concept_set_members (@concept_id, @member_concept_id, 17);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1801221626" author="Mahesh">
+    <changeSet id="OCB-CONFIG-1801221631" author="Mahesh">
         <comment>Adding entries in event_records table for Genexpert (Urine)</comment>
         <sql>
             set @uuid = NULL;
