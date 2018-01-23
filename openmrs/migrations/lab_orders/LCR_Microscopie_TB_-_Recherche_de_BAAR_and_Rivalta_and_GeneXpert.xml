@@ -1,0 +1,398 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-1801231215" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' and concept_name_type = "FULLY_SPECIFIED";
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating Microscopie TB - Recherche de BAAR (LCR-TB) LabTest</comment>
+        <sql>
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Microscopie TB - Recherche de BAAR (LCR-TB)','Microscopie TB - Recherche de BAAR (LCR-TB)','Coded','LabTest',false);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231216" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Négatif','Scanti','+','++','+++') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Answers to Microscopie TB - Recherche de BAAR (LCR-TB) LabTest</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+            set @child5_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Scanti' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = '+' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = '++' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = '+++' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+            call add_concept_answer(@concept_id, @child5_concept_id, 5);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231217" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Sample)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Microscopie TB - Recherche de BAAR (LCR-TB) to LCR Sample</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Sample)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member_concept_id, 16);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231218" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Microscopie TB - Recherche de BAAR (LCR-TB) to All_Tests_and_Panels set</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member_concept_id, 107);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231219" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Microscopie TB - Recherche de BAAR (LCR-TB)'
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'TB');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Microscopie TB - Recherche de BAAR (LCR-TB) to Department TB</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'TB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            
+            call add_concept_set_members (@concept_id, @member_concept_id, 18);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231220" author="Mahesh">
+        <comment>Adding entries in event_record table for Microscopie TB - Recherche de BAAR (LCR-TB)</comment>
+        <sql>
+            set @uuid = NULL;
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR-TB)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231230" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name = 'Genexpert (LCR)' and concept_name_type = "FULLY_SPECIFIED";
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating Genexpert (LCR) LabTest</comment>
+        <sql>
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Genexpert (LCR)','Genexpert (LCR)','Coded','LabTest',false);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231231" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('MTB -','MTB + RIF -','MTB + RIF +','MTB + RIF indeterminé') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Genexpert (LCR)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Answers to Genexpert (LCR) LabTest</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Genexpert (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'MTB -' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'MTB + RIF -' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'MTB + RIF +' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'MTB + RIF indeterminé' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231232" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name = 'Genexpert (LCR)' AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Sample)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Genexpert (LCR) to LCR Sample</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Sample)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Genexpert (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member_concept_id, 17);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231233" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name = 'Genexpert (LCR)' AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Genexpert (LCR) to All_Tests_and_Panels set</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Genexpert (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member_concept_id, 108);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231234" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Genexpert (LCR)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'TB');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Genexpert (LCR) to Department TB</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'TB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Genexpert (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            
+            call add_concept_set_members (@concept_id, @member_concept_id, 19);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231235" author="Mahesh">
+        <comment>Adding entries in event_records table for Genexpert (LCR)</comment>
+        <sql>
+            set @uuid = NULL;
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Genexpert (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231236" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name = 'Rivalta (LCR)' and concept_name_type = "FULLY_SPECIFIED";
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating Rivalta (LCR) LabTest</comment>
+        <sql>
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Rivalta (LCR)','Rivalta (LCR)','Coded','LabTest',false);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231237" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Positif','Négatif') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Rivalta (LCR)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Answers to Rivalta (LCR) LabTest</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Rivalta (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231238" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name = 'Rivalta (LCR)' AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Sample)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Rivalta (LCR) to LCR Sample</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Sample)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Rivalta (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member_concept_id, 18);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231239" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name = 'Rivalta (LCR)' AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Rivalta (LCR) to All_Tests_and_Panels set</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Rivalta (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member_concept_id, 109);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231240" author="Mahesh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Rivalta (LCR)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = '1');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Rivalta (LCR) to Department 1</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = '1' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member_concept_id from concept_name where name = 'Rivalta (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            
+            call add_concept_set_members (@concept_id, @member_concept_id, 39);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231241" author="Mahesh">
+        <comment>Adding entries in event_records table for Rivalta (LCR)</comment>
+        <sql>
+            set @uuid = NULL;
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Rivalta (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231242" author="Mahesh">
+        <comment>Adding entries in event_records table for LCR Lab Sample</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Sample)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231243" author="Mahesh">
+        <comment>Adding entries in event_records table for Department 1</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = '1' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801231244" author="Mahesh">
+        <comment>Adding entries in event_records table for TB Department</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'TB' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

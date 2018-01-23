@@ -47,7 +47,7 @@
    "FILTERS_HEADER_LABEL":"Filtres",
    "START_FROM_FILTER_LABEL":"Du",
    "USERNAME_FILTER_LABEL":"Utilisateur",
-   "ENTER_USERNAME_PLACEHOLDER":"Entrez le nom d'utilisateur",
+   "ENTER_USERNAME_PLACEHOLDER":"Nom d'utilisateur",
    "PATIENT_ID_FILTER_LABEL":"ID Patient",
    "ENTER_PATIENT_ID_PLACEHOLDER":"Entrez l'ID du patient",
    "FILTER_BUTTON_LABEL":"Filtrer",

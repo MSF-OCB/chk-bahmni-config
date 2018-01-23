@@ -5321,4 +5321,6 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
          <comment>Migrations to set HIV staus</comment>
          <sqlFile path="set_person_attribute_to_hiv_positive.sql"/>
        </changeSet>
+    <include file ="lab_orders/Urine_Microscopie_TB_-_Recherche_de_BAAR_and_Rivalta_and_GeneXpert.xml"/>
+    <include file ="lab_orders/LCR_Microscopie_TB_-_Recherche_de_BAAR_and_Rivalta_and_GeneXpert.xml"/>
 </databaseChangeLog>
