@@ -4716,7 +4716,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
     <changeSet id="OCB-CONFIG-2017122801" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                select count(*) from person_attribute_type where name='Bébé éxposé';
+                select count(*) from person_attribute_type where name='Bébé exposé';
             </sqlCheck>
         </preConditions>
         <comment>Adding the Exposed Baby concept and including in Person attribute table</comment>
@@ -4725,7 +4725,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             set @concept_short_id = 0;
             set @concept_full_id = 0;
             INSERT INTO person_attribute_type (name, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
-            VALUES ('Bébé éxposé','java.lang.Boolean',0,1,now(),0,43,uuid(),@concept_id);
+            VALUES ('Bébé exposé','java.lang.Boolean',0,1,now(),0,43,uuid(),@concept_id);
 
         </sql>
     </changeSet>
