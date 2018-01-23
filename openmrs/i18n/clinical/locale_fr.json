@@ -33,7 +33,7 @@
   "PATIENT_DASHBOARD_KEY": "Tableau de bord des patients",
   "DISCHARGE_SUMMARY_PAGE_KEY": "Décharge page Sommaire",
   "CLINICAL_ORDER_PRIORITY_PRINT_BUTTON": "Priorité Elevée",
-  "CLINICAL_ORDER_PRIORITY_PRINT_NOTES": "-High",
+  "CLINICAL_ORDER_PRIORITY_PRINT_NOTES": "-Prioritaire",
   "SELECTED_ORDERS_LABEL": "Demandes sélectionnées",
   "SELECTED_ORDERS_EMPTY_MESSAGE": "Pas de liste pour les demandes sélectionnées",
   "OKAY_LABEL": "d'accord",
