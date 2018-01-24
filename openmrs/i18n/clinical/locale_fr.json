@@ -99,6 +99,6 @@
   "RETROSPECTIVE_POPUP_ON_BEHALF_LABEL":"Au nom de",
   "RETROSPECTIVE_POPUP_DATA_FOR_LABEL":"Données du",
   "CONTROL_PANEL_ACTIONS": "Actions",
-  "CONTROL_PANEL_OTHER_ACTIONS": "Autres actions"
-
+  "CONTROL_PANEL_OTHER_ACTIONS": "Autres actions",
+  "PRIVILEGE_REQUIRED": "L'utilisateur est connecté mais n'a pas les privilèges requis"
 }
