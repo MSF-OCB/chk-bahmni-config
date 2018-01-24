@@ -12,5 +12,12 @@
          "config": {
              "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/CD4_Biochem.sql"
          }
+     },
+    "regInfoReport": {
+        "name": "registration rep",
+         "type": "MRSGeneric",
+         "config": {
+             "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/patient_reg_info.sql"
+         }
      }
 }
