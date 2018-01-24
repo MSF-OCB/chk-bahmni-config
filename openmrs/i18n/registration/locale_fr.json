@@ -99,5 +99,6 @@
   "REGISTRATION_HIV_DATE_ERROR_KEY":"S'il vous plaît, ne pas entrer une date future",
   "REGISTRATION_LABEL_PATIENT_AUTOCOMPLETE_LIST": "Veuillez sélectionner une valeur de la liste",
   "REGISTRATION_ADDITIONAL_INFORMATION":"Informations supplémentaires",
-  "REGISTRATION_DATE_OF_CONVERSION_CP_ERROR_KEY":"S'il vous plaît, ne pas entrer une date future pour la conversion de cohorte"
+  "REGISTRATION_DATE_OF_CONVERSION_CP_ERROR_KEY":"S'il vous plaît, ne pas entrer une date future pour la conversion de cohorte",
+  "PRIVILEGE_REQUIRED": "L'utilisateur est connecté mais n'a pas les privilèges requis"
 }
