@@ -41,5 +41,5 @@ select distinct pi.identifier  as "ID Patient",
               join patient_identifier pi on p.person_id=pi.patient_id
               left outer join person_address pad on pad.person_id=p.person_id
               LEFT OUTER join concept_name c on c.concept_id=pa.value
-               and p.date_created BETWEEN '#startDate#' and '#endDate#'
+               and p.date_created BETWEEN '#startDate#' and '#endDate#' and c.voided=0
               group by p.person_id;    
