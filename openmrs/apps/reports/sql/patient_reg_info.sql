@@ -1,4 +1,4 @@
-select distinct p.person_id as "ID Patient",
+select distinct pi.identifier  as "ID Patient",
               group_concat( distinct (case when pat.name='Type de cohorte' then c.name else NULL end)) as "Type Cohorte",
               concat(pn.family_name,' ',ifnull(pn.middle_name,''),' ', ifnull(pn.family_name,'')) as Nom,
               concat(floor(datediff(now(), p.birthdate)/365), ' Années, ',  floor((datediff(now(), p.birthdate)%365)/30),' Mois') as "Age",
@@ -33,12 +33,13 @@ select distinct p.person_id as "ID Patient",
                group_concat(distinct (case when pat.name="Frequente un tradipraticien" then c.name else null end)) as "Fréquente tradipraticien",
                group_concat(distinct (case when pat.name="Nom du contact" then pa.value else null end)) as "Nom contact",
                group_concat(distinct (case when pat.name="Tel 1 du Contact" then pa.value else null end)) as "Tel 1 Contact",
-               group_concat(distinct (case when pat.name="Tel 2 du Contact" then pa.value else null end)) as "Tel 2 Contact"
+               group_concat(distinct (case when pat.name="Tel 2 du Contact" then pa.value else null end)) as "Tel 2 Contact"    
                from
               person_attribute pa join person_attribute_type pat on pa.person_attribute_type_id=pat.person_attribute_type_id
               join person p on p.person_id=pa.person_id
               join person_name pn on  p.person_id=pn.person_id
+              join patient_identifier pi on p.person_id=pi.patient_id
               left outer join person_address pad on pad.person_id=p.person_id
               LEFT OUTER join concept_name c on c.concept_id=pa.value
-              where p.person_id
-              group by p.person_id;
+               and p.date_created BETWEEN '#startDate#' and '#endDate#'
+              group by p.person_id;    

@@ -14,7 +14,7 @@
          }
      },
     "regInfoReport": {
-        "name": "registration rep",
+        "name": "Patient Registration Info",
          "type": "MRSGeneric",
          "config": {
              "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/patient_reg_info.sql"
