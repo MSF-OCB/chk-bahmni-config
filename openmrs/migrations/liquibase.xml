@@ -164,8 +164,13 @@
                   
          <comment>Removing the identifiers from Database</comment>
          <sql>
-             delete from idgen_seq_id_gen order by next_sequence_value limit 1;
-             delete from idgen_identifier_source order by id limit 1;
+             delete from idgen_seq_id_gen where prefix = 'CP' limit 1;
+
+             update idgen_log_entry
+             set source = (select id from idgen_identifier_source where name = 'CHK')
+             where source = (select id from idgen_identifier_source where name = 'CP');
+
+             delete from idgen_identifier_source where name = 'CP' limit 1;
          </sql>
 </changeSet>
 
@@ -178,7 +183,7 @@
 
          <comment>Removing the CHK prefix</comment>
          <sql>
-                update idgen_seq_id_gen set prefix ='' where prefix='CHK';
+                update idgen_seq_id_gen set prefix = '' where prefix='CHK';
          </sql>
 </changeSet>
 <changeSet id="OCB-CONFIG-1801162203" author="vishnu">
