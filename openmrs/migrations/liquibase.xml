@@ -5323,4 +5323,17 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
        </changeSet>
     <include file ="lab_orders/Urine_Microscopie_TB_-_Recherche_de_BAAR_and_Rivalta_and_GeneXpert.xml"/>
     <include file ="lab_orders/LCR_Microscopie_TB_-_Recherche_de_BAAR_and_Rivalta_and_GeneXpert.xml"/>
+    <changeSet id="OCB-CONFIG-1801251544" author="Mahesh">
+       <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+            select count(*) from person_attribute_type where name in ("Nom du contact","Tel 1 du Contact","Tel 2 du Contact") and description is null;
+            </sqlCheck>
+        </preConditions>
+        <comment>Updating descriptions for Information de contact fields in patient registration page</comment>
+        <sql>
+            update person_attribute_type set description = 'Nom du contact' where name = 'Nom du contact';
+            update person_attribute_type set description = 'Tel 1 du Contact' where name = 'Tel 1 du Contact';
+            update person_attribute_type set description = 'Tel 2 du Contact' where name = 'Tel 2 du Contact';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

@@ -7,7 +7,7 @@
     "title": "Centre Hospitalier Kabinda",
     "header": "General Summary",
     "logo": "/bahmni_config/openelis/images/labLogo.jpg"
-},
+    },
     "sections": {
       "patientInformation": {
         "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
@@ -18,23 +18,34 @@
           "ARV Naif/ Non Naif",
           "Date depistage",
           "Type de cohorte",
-          "Status VIH"
+          "Status VIH",
+          "Nom du contact",
+          "Tel 1 du Contact",
+          "Tel 2 du Contact"
         ],
         "addressFields": [
           "address6"
         ]
       },
-      "labOrdersDisplayControl": {
-        "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
-        "type": "ordersControl",
-        "orderType": "Lab Order",
-        "showDetailsButton": true,
-        "displayOrder": 1,
+      "treatmentInfo": {
+        "type": "treatment",
+        "translationKey" : "DASHBOARD_TITLE_TREATMENT_DISPLAY_CONTROL_KEY",
+        "displayOrder" : 1,
         "dashboardConfig": {
-          "conceptNames": []
+          "showFlowSheet": false,
+          "showListView": true,
+          "showRoute": false,
+          "showDrugForm": false,
+          "numberOfVisits": 3,
+          "showOtherActive": true,
+          "showDetailsButton": false
         },
         "expandedViewConfig": {
-          "conceptNames": [],
+          "showFlowSheet": false,
+          "showListView": true,
+          "showRoute": true,
+          "showDrugForm": true,
+          "showOtherActive": true,
           "showDetailsButton": true
         }
       },
@@ -51,6 +62,20 @@
         },
         "expandedViewConfig": {
           "numberOfVisits": ""
+        }
+      },
+      "labOrdersDisplayControl": {
+        "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
+        "type": "ordersControl",
+        "orderType": "Lab Order",
+        "showDetailsButton": true,
+        "displayOrder": 3,
+        "dashboardConfig": {
+          "conceptNames": []
+        },
+        "expandedViewConfig": {
+          "conceptNames": [],
+          "showDetailsButton": true
         }
       }
     }
