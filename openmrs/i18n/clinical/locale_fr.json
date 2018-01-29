@@ -102,5 +102,6 @@
   "CONTROL_PANEL_OTHER_ACTIONS": "Autres actions",
   "PRIVILEGE_REQUIRED": "L'utilisateur est connecté mais n'a pas les privilèges requis",
   "DASHBOARD_TITLE_TREATMENT_DISPLAY_CONTROL_KEY": "Traitement",
-  "TREATMENTS_SUMMARY_PRESCRIPTION_KEY": "Prescription"
+  "TREATMENTS_SUMMARY_PRESCRIPTION_KEY": "Prescription",
+  "VISIT_ON_TRANSLATION_KEY": "Visite le"
 }
