@@ -1,0 +1,16 @@
+{
+  "DASHBOARD_TITLE_ADMISSION_DETAILS_KEY" : "Détails d'admission",
+  "DASHBOARD_TITLE_DISPOSITION_KEY" : "Sortie",
+  "PATIENT_MOVEMENT_LABEL" : "Patient Movement",
+  "PATIENT_MOVEMENT_SELECT_LABEL" : "Select",
+  "DOB_LABEL" : "Date of Birth",
+  "PATIENT_PROFILE_RELATIONSHIPS_LABEL" : "Des relations",
+  "ADMISSION_DATE_LABEL" : "Date d'admission",
+  "DISCHARGE_DATE_LABEL" : "Date de sortie",
+  "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY": "Visit Attributes",
+  "NO_DISPOSTIONS_AVAILABLE_MESSAGE_KEY": "Pas de sortie disponibles",
+  "IPD_DASHBOARD_ORDERS_LINK_KEY" : "Demand Labo",
+  "IPD_DASHBOARD_DASHBOARD_LINK_KEY" : "Tableau de bord Clinique",
+  "IPD_DASHBOARD_MEDICATIONS_LINK_KEY" : "Ordonnance",
+  "IPD_DASHBOARD_DASHBOARD_LINK_KEY" : "Admission IPD"
+}
