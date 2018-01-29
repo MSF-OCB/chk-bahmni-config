@@ -18,10 +18,7 @@
           "ARV Naif/ Non Naif",
           "Date depistage",
           "Type de cohorte",
-          "Status VIH",
-          "Nom du contact",
-          "Tel 1 du Contact",
-          "Tel 2 du Contact"
+          "Status VIH"
         ],
         "addressFields": [
           "address6"
