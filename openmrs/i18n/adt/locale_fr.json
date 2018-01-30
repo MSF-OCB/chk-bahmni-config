@@ -3,14 +3,16 @@
   "DASHBOARD_TITLE_DISPOSITION_KEY" : "Sortie",
   "PATIENT_MOVEMENT_LABEL" : "Patient Movement",
   "PATIENT_MOVEMENT_SELECT_LABEL" : "Select",
-  "DOB_LABEL" : "Date of Birth",
+  "DOB_LABEL" : "Date de naissance",
   "PATIENT_PROFILE_RELATIONSHIPS_LABEL" : "Des relations",
   "ADMISSION_DATE_LABEL" : "Date d'admission",
   "DISCHARGE_DATE_LABEL" : "Date de sortie",
-  "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY": "Visit Attributes",
+  "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY": "Signes vitaux",
+  "PATIENT_REGISTRATION_PAGE_KEY": "Info socio démographiques",
   "NO_DISPOSTIONS_AVAILABLE_MESSAGE_KEY": "Pas de sortie disponibles",
   "IPD_DASHBOARD_ORDERS_LINK_KEY" : "Demand Labo",
   "IPD_DASHBOARD_DASHBOARD_LINK_KEY" : "Tableau de bord Clinique",
   "IPD_DASHBOARD_MEDICATIONS_LINK_KEY" : "Ordonnance",
-  "IPD_DASHBOARD_DASHBOARD_LINK_KEY" : "Admission IPD"
+  "IPD_DASHBOARD_OBSERVATION_LINK_KEY" : "Observations",
+  "YEARS_LABEL" : "Années"
 }

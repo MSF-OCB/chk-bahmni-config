@@ -52,19 +52,19 @@
 				"showLinks" : ["registration","visitAttribute"],
                                 "customLinks": [
                                         {
-                                        "translationKey": "Demand Labo",
+                                        "translationKey": "IPD_DASHBOARD_ORDERS_LINK_KEY",
                                         "url": "../clinical/#/default/patient/{{patientUuid}}/dashboard/orders"
                                         },
                                         {
-                                        "translationKey": "Tableau de bord Clinique",
+                                        "translationKey": "IPD_DASHBOARD_DASHBOARD_LINK_KEY",
                                         "url": "../clinical/#/default/patient/{{patientUuid}}/dashboard"
                                         },
                                         {
-                                        "translationKey": "Ordonnance",
+                                        "translationKey": "IPD_DASHBOARD_MEDICATIONS_LINK_KEY",
                                         "url": "../clinical/#/default/patient/{{patientUuid}}/dashboard/treatment?tabConfigName=allMedicationTabConfig"
                                         },
                                         {
-                                        "translationKey": "Admission IPD",
+                                        "translationKey": "IPD_DASHBOARD_OBSERVATION_LINK_KEY",
                                         "url": "../clinical/#/default/patient/{{patientUuid}}/dashboard/concept-set-group/observations"
                                         }
                                 ]
