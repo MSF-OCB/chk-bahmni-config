@@ -169,4 +169,16 @@ insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextva
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 </changeSet>
+<changeSet id="OCBCONFIG201801311451" author="Pritam" >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+            select count(*) from person  where last_name ='BASILUA' and is_active=true;
+               </sqlCheck>
+        </preConditions>
+ <comment> Creating providers for release-2.0 </comment>
+ <sql>
+ insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BASILUA','Claude',now(),true);
+ insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
+ </sql>
+ </changeSet>
 </databaseChangeLog>

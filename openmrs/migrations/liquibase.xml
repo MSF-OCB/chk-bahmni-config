@@ -4713,7 +4713,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         </sql>
     </changeSet>
 
-    <changeSet id="OCB-CONFIG-2017122801" author="vishnu">
+    <changeSet id="OCB-CONFIG-2017122800" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 select count(*) from person_attribute_type where name='Bébé exposé';
@@ -5018,7 +5018,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         </sql>
     </changeSet>
 
-        <changeSet id="OCB-CONFIG-1808041141" author="Yash">
+        <changeSet id="OCB-CONFIG-1808041140" author="Yash">
         <comment>Adding Relationships type</comment>
         <sql>
             update relationship_type set retired = 1, retired_by = 1, date_retired = now(), retire_reason = 'Not required' where a_is_to_b = 'Supervisor' and b_is_to_a = 'Supervisee';
@@ -5037,6 +5037,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Mére','Enfant',0,0,'Mother to Child relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+
+            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
+            ('Tuteur','Tutoré',0,0,'Guardian to tutored relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
         </sql>
         </changeSet>
         <changeSet id="OCB-CONFIG1801121449" author="Pritam">
@@ -5323,6 +5326,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
        </changeSet>
     <include file ="lab_orders/Urine_Microscopie_TB_-_Recherche_de_BAAR_and_Rivalta_and_GeneXpert.xml"/>
     <include file ="lab_orders/LCR_Microscopie_TB_-_Recherche_de_BAAR_and_Rivalta_and_GeneXpert.xml"/>
+
     <changeSet id="OCB-CONFIG-1801251544" author="Mahesh">
        <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -5336,4 +5340,112 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
             update person_attribute_type set description = 'Tel 2 du Contact' where name = 'Tel 2 du Contact';
         </sql>
     </changeSet>
+
+    <changeSet id="OCB-CONFIG-1801311108" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                     select count(*) from concept_name where name='Categorie Centre de provenance' and concept_name_type='FULLY_SPECIFIED' and locale='fr' ;
+                 </sqlCheck>
+            <sqlCheck expectedResult="0">
+                     select count(*) from person_attribute_type where name ='Categorie Centre de provenance' ;
+                 </sqlCheck>
+        </preConditions>
+        <comment> Adding the  Categorie Centre de provenance attribute </comment>
+        <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                   call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Categorie Centre de provenance','Categorie Centre de provenance','Coded','Misc',false);
+                   INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
+                   VALUES ('Categorie Centre de provenance', 'Categorie Centre de provenance', 'org.openmrs.Concept', 0, 1, now(), 0, 44, uuid(), @concept_id);
+    </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-180131152" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "CDV famille" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept CDV famille</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CDV famille','CDV famille','N/A','Misc',false);
+            </sql>
+        </changeSet>
+    <changeSet id="OCB-CONFIG-180131153" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "PODI" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept PODI</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'PODI','PODI','N/A','Misc',false);
+            </sql>
+        </changeSet>
+    <changeSet id="OCB-CONFIG-180131154" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "Centre partenaires" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept Centre partenaires</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Centre partenaires','Centre partenaires','N/A','Misc',false);
+            </sql>
+        </changeSet>
+
+    <changeSet id="OCB-CONFIG-1801311202" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('CDV famille','PODI','Centre partenaires','Autres') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Categorie Centre de provenance');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Answers to Categorie Centre de provenance Person attribute</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Categorie Centre de provenance' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'CDV famille' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'PODI' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Centre partenaires' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Autres' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1801311256" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                     select count(*) from person_attribute_type where name ='Centre de provenance' ;
+                 </sqlCheck>
+        </preConditions>
+        <comment> Updating sort order the Centre de provenance attribute </comment>
+        <sql>
+          update person_attribute_type set sort_weight=45 where name='Centre de provenance';
+    </sql>
+    </changeSet>
+
 </databaseChangeLog>
