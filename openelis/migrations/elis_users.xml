@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
 
-<changeSet id="20180109-01" author="vishnu" >
+<changeSet id="201801311446" author="vishnu" >
     <preConditions onFail="MARK_RAN">
         <sqlCheck expectedResult="0">
             select count(*) from system_user where login_name in('JMandalaAnswor','NBanonakifu','EowangaTambwe','ChristianKalambaKabongo',
@@ -303,6 +303,27 @@ insert into login_user values (33,'EMpoyi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-0
 insert into system_user_role values (40,4);
 insert into system_user_role values (40,5);
 insert into system_user_role values (40,12);
+</sql>
+</changeSet>
+<changeSet id="201801311447" author="Pritam" >
+    <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="0">
+            select count(*) from system_user where login_name in('CBasilua');
+               </sqlCheck>
+    </preConditions>
+<comment>Creating new users openelis for release-2.0</comment>
+<sql>
+    insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (41,'CBasilua','BASILUA','Claude','Y','N',now());
+insert into login_user values (32,'CBasilua','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (41,3);
+insert into system_user_role values (41,4);
+insert into system_user_role values (41,5);
+insert into system_user_role values (41,7);
+insert into system_user_role values (41,9);
+insert into system_user_role values (41,10);
+insert into system_user_role values (41,12);
+insert into system_user_role values (41,13);
 </sql>
 </changeSet>
 </databaseChangeLog>
