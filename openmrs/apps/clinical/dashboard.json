@@ -29,20 +29,17 @@
         "translationKey" : "DASHBOARD_TITLE_TREATMENT_DISPLAY_CONTROL_KEY",
         "displayOrder" : 1,
         "dashboardConfig": {
-          "showFlowSheet": false,
-          "showListView": true,
-          "showRoute": false,
-          "showDrugForm": false,
-          "numberOfVisits": 3,
-          "showOtherActive": true,
-          "showDetailsButton": false
-        },
-        "expandedViewConfig": {
-          "showFlowSheet": false,
           "showListView": true,
           "showRoute": true,
           "showDrugForm": true,
-          "showOtherActive": true,
+          "numberOfVisits": 3,
+          "showDetailsButton": true
+        },
+        "expandedViewConfig": {
+          "showListView": true,
+          "showRoute": true,
+          "showDrugForm": true,
+          "numberOfVisits": 0,
           "showDetailsButton": true
         }
       },
