@@ -5037,9 +5037,12 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 
             INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
             ('Mére','Enfant',0,0,'Mother to Child relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
-
-            INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
-            ('Tuteur','Tutoré',0,0,'Guardian to tutored relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
+        </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG1801311607" author="Pritam">
+        <sql>
+          INSERT INTO relationship_type (a_is_to_b,b_is_to_a,preferred,weight,description,creator,date_created,retired,retired_by,date_retired,retire_reason,uuid,date_changed,changed_by) VALUES
+          ('Tuteur','Tutoré',0,0,'Guardian to tutored relationship',1,now(),0,NULL,NULL,NULL,uuid(),NULL,NULL );
         </sql>
         </changeSet>
         <changeSet id="OCB-CONFIG1801121449" author="Pritam">

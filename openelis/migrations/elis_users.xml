@@ -315,7 +315,7 @@ insert into system_user_role values (40,12);
 <sql>
     insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
 values (41,'CBasilua','BASILUA','Claude','Y','N',now());
-insert into login_user values (32,'CBasilua','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into login_user values (41,'CBasilua','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
 insert into system_user_role values (41,3);
 insert into system_user_role values (41,4);
 insert into system_user_role values (41,5);
