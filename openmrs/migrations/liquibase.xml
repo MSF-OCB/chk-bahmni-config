@@ -5450,5 +5450,8 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
           update person_attribute_type set sort_weight=45 where name='Centre de provenance';
     </sql>
     </changeSet>
-
+       <changeSet id="OCB-CONFIG-RenamePanelAndLabTest" author="Ravindra">
+         <comment>Migrations to set Panel and Labttests description</comment>
+         <sqlFile path="update_concept_class_description.sql"/>
+       </changeSet>
 </databaseChangeLog>
