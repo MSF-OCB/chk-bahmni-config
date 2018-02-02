@@ -5277,4 +5277,27 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
          <comment>Migrations to set Panel and Labttests description</comment>
          <sqlFile path="update_concept_class_description.sql"/>
        </changeSet>
+    <changeSet id="OCB-CONFIG-1802011444" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+            select count(*) from person_attribute_type where name='Tel 1 du Contact' and format='java.lang.String' and retired=0;
+          </sqlCheck>
+      </preConditions>
+      <comment> Migration to change the format for Tel 1 du Contact </comment>
+      <sql>
+        update person_attribute_type set format='java.lang.String' where name='Tel 1 du Contact';
+      </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1802011446" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+            select count(*) from person_attribute_type where name='Tel 2 du Contact' and format='java.lang.String' and retired=0;
+          </sqlCheck>
+      </preConditions>
+      <comment> Migration to change the format for Tel 2 du Contact </comment>
+      <sql>
+        update person_attribute_type set format='java.lang.String' where name='Tel 2 du Contact';
+      </sql>
+    </changeSet>
+
 </databaseChangeLog>
