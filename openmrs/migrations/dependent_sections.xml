@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-02021136" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+         <sqlCheck expectedResult="0">
+                   select count(*) from person_attribute_type where name in
+                   ('Dépendant 1','Dépandant 2','Dépandant 3','Dépandant 4'
+                   'Dépandant 5','Dépandant 6'); 
+                </sqlCheck>
+                </preConditions>
+                <comment>Removing the older dependent section concepts ,updating the person attribute limit and editing the Dependant person attributes as per story no:197</comment>
+                <sql>
+                  update person_attribute_type set retired=1 where name in ('Lien du dépendant','CHK ID du dépendant','Prénom dépendant','Nom dépendant','Résultat du test VIH',
+                 'Date de naissance dépendant','Est informé du statut sérologique');
+                </sql>
+                <sql>
+                insert into person_attribute_type (name,description,format,searchable,creator,date_created,sort_weight,uuid) values
+                 ('Dépendant 1','Dépendant 1','java.lang.Boolean',0,1,now(),46,uuid());
+                insert into person_attribute_type (name,description,format,searchable,creator,date_created,sort_weight,uuid) values
+                 ('Dépendant 2','Dépendant 2','java.lang.Boolean',0,1,now(),47,uuid());
+                insert into person_attribute_type (name,description,format,searchable,creator,date_created,sort_weight,uuid) values
+                 ('Dépendant 3','Dépendant 3','java.lang.Boolean',0,1,now(),48,uuid());
+                insert into person_attribute_type (name,description,format,searchable,creator,date_created,sort_weight,uuid) values
+                 ('Dépendant 4','Dépendant 4','java.lang.Boolean',0,1,now(),49,uuid());
+                insert into person_attribute_type (name,description,format,searchable,creator,date_created,sort_weight,uuid) values
+                 ('Dépendant 5','Dépendant 5','java.lang.Boolean',0,1,now(),50,uuid());
+                insert into person_attribute_type (name,description,format,searchable,creator,date_created,sort_weight,uuid) values
+                 ('Dépendant 6','Dépendant 6','java.lang.Boolean',0,1,now(),51,uuid());
+                 </sql>
+                 </changeSet>
+                </databaseChangeLog>
