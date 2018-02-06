@@ -65,20 +65,7 @@
             ],
             "expanded": true
          },
-         "patientDependentInformation":
-                {
-            "title" : "Informations des dépendants",
-            "translationKey" : "REGISTRATION_PATIENT_DEPENDENT_INFORMATION",
-            "attributes" : [
-               "Lien du dépendant",
-               "CHK ID du dépendant",
-               "Prénom dépendant",
-               "Nom dépendant",
-               "Est informé du statut sérologique",
-               "Résultat du test VIH",
-               "Date de naissance dépendant"
-            ]
-         },
+         
          "patientConfidentInformation":
                 {
             "title" : "Informations Des Confidents",
@@ -93,8 +80,101 @@
                "Tel_Conf 2",
                "Lien 2"
             ]
-         }
+         },
+         "patientDependentsSection": {
+          "title": "Dépendants",
+          "translationKey": "REGISTRATION_PATIENT_DEPENDENTS_INFORMATON",
+          "attributes": [
+            "Dépendant 1",
+            "Dépendant 2",
+            "Dépendant 3",
+            "Dépendant 4",
+            "Dépendant 5",
+            "Dépendant 6"
+          ]
+        },
+        "patientNewDependentSectionFirst": {
+          "title": "Dependants Sections First",
+          "translationKey": "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_1",
+          "attributes": [
+            "LienDuDépendant1",
+            "CHKIDDuDépendant1",
+            "PrénomDépendant1",
+            "NomDépendant1",
+            "EstInforméDuStatutSérologique1",
+            "RésultatDuTestVIH1",
+            "DateDeNaissanceDépendant1"
+            
+            
+          ]
+        },
+        "patientNewDependentSectionSecond": {
+          "title": "Dépendants Sections Second",
+          "translationKey": "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_2",
+          "attributes": [
+            "LienDuDépendant2",
+            "CHKIDDuDépendant2",
+            "PrénomDépendant2",
+            "NomDépendant2",
+            "EstInforméDuStatutSérologique2",
+            "RésultatDuTestVIH2",
+            "DateDeNaissanceDépendant2"
+          ]
+        },
+        "patientNewDependentSectionThird": {
+          "title": "Dépendants Sections Third",
+          "translationKey": "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_3",
+          "attributes": [
+            "LienDuDépendant3",
+            "CHKIDDuDépendant3",
+            "PrénomDépendant3",
+            "NomDépendant3",
+            "EstInforméDuStatutSérologique3",
+            "RésultatDuTestVIH3",
+            "DateDeNaissanceDépendant3"
+          ]
+        },
+        "patientNewDependentSectionFourth": {
+          "title": "Dépendants Sections Fourth",
+          "translationKey": "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_4",
+          "attributes": [
+            "LienDuDépendant4",
+            "CHKIDDuDépendant4",
+            "PrénomDépendant4",
+            "NomDépendant4",
+            "EstInforméDuStatutSérologique4",
+            "RésultatDuTestVIH4",
+            "DateDeNaissanceDépendant4"
+          ]
+        },
+        "patientNewDependentSectionFifth": {
+          "title": "Dépendants Sections Fifth",
+          "translationKey": "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_5",
+          "attributes": [
+            "LienDuDépendant5",
+            "CHKIDDuDépendant5",
+            "PrénomDépendant5",
+            "NomDépendant5",
+            "EstInforméDuStatutSérologique5",
+            "RésultatDuTestVIH5",
+            "DateDeNaissanceDépendant5"
+          ]
+        },
+        "patientNewDependentSectionSixth": {
+          "title": "Dépendants Sections Sixth",
+          "translationKey": "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_6",
+          "attributes": [
+            "LienDuDépendant6",
+            "CHKIDDuDépendant6",
+            "PrénomDépendant6",
+            "NomDépendant6",
+            "EstInforméDuStatutSérologique6",
+            "RésultatDuTestVIH6",
+            "DateDeNaissanceDépendant6"
+          ]
+        }
       },
+      
       "addressHierarchy": {
          "showAddressFieldsTopDown": false,
          "strictAutocompleteFromLevel": "address6"

@@ -5465,4 +5465,52 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
          <comment>Migrations to set Panel and Labttests description</comment>
          <sqlFile path="update_concept_class_description.sql"/>
        </changeSet>
+    <changeSet id="OCB-CONFIG-1802011444" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+            select count(*) from person_attribute_type where name='Tel 1 du Contact' and format='java.lang.String' and retired=0;
+          </sqlCheck>
+      </preConditions>
+      <comment> Migration to change the format for Tel 1 du Contact </comment>
+      <sql>
+        update person_attribute_type set format='java.lang.String' where name='Tel 1 du Contact';
+      </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-1802011446" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+            select count(*) from person_attribute_type where name='Tel 2 du Contact' and format='java.lang.String' and retired=0;
+          </sqlCheck>
+      </preConditions>
+      <comment> Migration to change the format for Tel 2 du Contact </comment>
+      <sql>
+        update person_attribute_type set format='java.lang.String' where name='Tel 2 du Contact';
+      </sql>
+    </changeSet>
+ <include file ="dependent_sections.xml"/>
+ <changeSet id="OCB-CONFIG1801171442" author="Vishnu">
+          <comment> </comment>
+           <sqlFile path= "dependent_1.sql"/>
+</changeSet>
+<changeSet id="OCB-CONFIG1801171443" author="Vishnu">
+          <comment> </comment>
+           <sqlFile path= "dependent_2.sql"/>
+</changeSet>
+<changeSet id="OCB-CONFIG1801171444" author="Vishnu">
+          <comment> </comment>
+           <sqlFile path= "dependent_3.sql"/>
+</changeSet>
+<changeSet id="OCB-CONFIG1801171445" author="Vishnu">
+          <comment> </comment>
+           <sqlFile path= "dependent_4.sql"/>
+</changeSet>
+<changeSet id="OCB-CONFIG1801171446" author="Vishnu">
+          <comment> </comment>
+           <sqlFile path= "dependent_5.sql"/>
+</changeSet>
+<changeSet id="OCB-CONFIG1801171447" author="Vishnu">
+          <comment> </comment>
+           <sqlFile path= "dependent_6.sql"/>
+</changeSet>
+<include file ="update_global_prop_person_attr.xml"/>
 </databaseChangeLog>

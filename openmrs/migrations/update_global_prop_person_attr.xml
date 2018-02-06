@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+<changeSet id="OCB-CONFIG-201801301234" author="Vishnu">
+
+           <comment> Updating the To Person Attribute limit through Openmrs Global Property  </comment>
+           <sql>
+               update global_property set property_value=100 where property='webservices.rest.maxResultsDefault';
+           </sql>
+</changeSet>
+</databaseChangeLog>
