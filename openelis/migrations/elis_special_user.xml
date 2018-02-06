@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <changeSet id="20180602031145" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+            select count(*) from system_user where login_name ='FMandarKoL''ampwe' ;
+    
+            </preConditions>
+            <comment>Creating new users openelis for release-2.0</comment>
+            <sql>
+       insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
+values (42,'FMandarKoL''ampwe','MANDAR KOL''AMPWE','Félix','Y','N',now());
+insert into login_user values (42,'FMandarKoL''ampwe','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into system_user_role values (42,4);
+insert into system_user_role values (42,5);
+insert into system_user_role values (42,7);
+insert into system_user_role values (42,9);
+insert into system_user_role values (42,10);
+insert into system_user_role values (42,12);
+insert into system_user_role values (42,13);
+</sql>
+        </changeSet>
+    </databaseChangeLog>
