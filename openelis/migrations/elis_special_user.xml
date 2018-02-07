@@ -7,7 +7,7 @@
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
             select count(*) from system_user where login_name ='FMandarKoL''ampwe' ;
-    
+            </sqlCheck>    
             </preConditions>
             <comment>Creating new users openelis for release-2.0</comment>
             <sql>
