@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+       <changeSet id="OCB-CONFIG-201801301233" author="Vishnu">
+
+           <comment> Updating the To Admit Queue in IPD module </comment>
+           <sql>
+
+                   update global_property set property_value=
+                   "select distinct concat(pn.given_name,' ', ifnull(pn.family_name,'')) as name,
+        pi.identifier as identifier,
+        p.uuid as uuid,
+        v.uuid as activeVisitUuid
+        from visit v
+        join visit_type vi on vi.visit_type_id=v.visit_type_id
+        join person_name pn on v.patient_id = pn.person_id and pn.voided = 0 AND v.voided = 0
+        join patient_identifier pi on v.patient_id = pi.patient_id
+        join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
+        join global_property gp on gp.property='bahmni.primaryIdentifierType' and gp.property_value=pit.uuid
+        join person p on v.patient_id = p.person_id
+        LEFT join encounter e on v.visit_id = e.visit_id
+        LEFT join obs o on e.encounter_id = o.encounter_id and o.voided = 0
+        LEFT join concept c on o.value_coded = c.concept_id
+        LEFT join concept_name cn on c.concept_id = cn.concept_id
+        join location l  ON l.uuid = ${visit_location_uuid} AND v.location_id = l.location_id
+        where (v.date_stopped is NULL and vi.name = 'IPD') OR (v.date_stopped is null and cn.name = 'Admit Patient' and v.visit_id not in (select visit_id
+        from encounter ie join encounter_type iet
+        on iet.encounter_type_id = ie.encounter_type
+        where iet.name = 'ADMISSION'));" where property="emrapi.sqlSearch.patientsToAdmit";
+
+           </sql>
+         </changeSet>
+       </databaseChangeLog>

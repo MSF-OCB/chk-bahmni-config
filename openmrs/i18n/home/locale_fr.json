@@ -53,7 +53,7 @@
   "LOGIN_LABEL_LOGIN_KEY": "S'identifier",
   "HEADER_LABEL_LOGOUT_KEY": "Se déconnecter",
   "MODULE_LABEL_CLINICAL_KEY": "Clinique",
-  "MODULE_LABEL_INPATIENT_KEY": "patients hospitalisés",
+  "MODULE_LABEL_INPATIENT_KEY": "Hospitalisations",
   "MODULE_LABEL_RADIOLOGY_UPLOAD_KEY": "Radiologie chargement",
   "MODULE_LABEL_PATIENT_DOCUMENTS_KEY": "Documents patients",
   "MODULE_LABEL_ADMIN_KEY": "Administrateur",

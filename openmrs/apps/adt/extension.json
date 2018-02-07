@@ -16,7 +16,7 @@
         "extensionPointId": "org.bahmni.adt.admit.action",
         "type": "config",
         "extensionParams" : {
-            "display": "Cancel",
+            "display": "Annuler",
             "action":"cancel"
         },
         "order": 3,
@@ -49,7 +49,7 @@
         "extensionPointId": "org.bahmni.adt.discharge.action",
         "type": "config",
         "extensionParams" : {
-            "display": "Discharge",
+            "display": "Laisser sortir le",
             "action":"discharge"
         },
         "order": 2,
@@ -60,7 +60,7 @@
         "extensionPointId": "org.bahmni.adt.discharge.action",
         "type": "config",
         "extensionParams" : {
-            "display": "Cancel",
+            "display": "Annuler",
             "action":"cancel"
         },
         "order": 3,
@@ -71,7 +71,7 @@
         "extensionPointId": "org.bahmni.adt.undo.discharge.action",
         "type": "config",
         "extensionParams" : {
-            "display": "Undo Discharge",
+            "display": "Annuler la sortie",
             "action":"undoDischarge"
         },
         "order": 1,

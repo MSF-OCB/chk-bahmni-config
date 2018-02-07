@@ -18,7 +18,7 @@
                 "description": "Bahmni patient search, lookup Page"
             }
         ],
-        "contextModel": [ 
+        "contextModel": [
             "patientUuid",
             "encounterUuid",
             "visitUuid"
@@ -32,7 +32,7 @@
             "maxPatientsPerBed" : 2,
             "dashboard":{
                 "translationKey": "DASHBOARD_TAB_GENERAL_KEY",
-                "conceptName": "Adt Notes",
+                "conceptName": "Ajouter des notes",
                 "sections": {
 			"patientInformation":{
                                 "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
@@ -75,8 +75,8 @@
                                 "numberOfVisits": 1,
                                 "displayOrder": 4
                         }
-                }
-            }
+                
+            }}
 
         }
 }

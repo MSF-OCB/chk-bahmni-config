@@ -16,5 +16,10 @@
   "IPD_DASHBOARD_OBSERVATION_LINK_KEY" : "Observations",
   "YEARS_LABEL" : "Années",
   "CLINICAL_MONTHS_TRANSLATION_KEY": "Mois",
-  "CLINICAL_DAYS_TRANSLATION_KEY": "Jours"
+  "CLINICAL_DAYS_TRANSLATION_KEY": "Jours",
+   "MODULE_LABEL_TO_ADMIT_KEY" : "A hospitaliser",
+  "MODULE_LABEL_ADMITTED_KEY" :"Hospitalisés",
+  "MODULE_LABEL_TO_DISCHARGE_KEY":"A laisser sortir",
+  "MODULE_LABEL_ALL_KEY": "Tous",
+  "IPD_ADMIT_PATIENT_KEY": "Hospitaliser le patient"
 }
