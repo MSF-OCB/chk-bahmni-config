@@ -465,8 +465,8 @@
         </preConditions>
         <comment>Removing the identifiers from Database</comment>
         <sql>
-             delete from idgen_seq_id_gen order by next_sequence_value limit 1;
              delete from idgen_identifier_source order by id limit 1;
+             delete from idgen_seq_id_gen order by next_sequence_value limit 1;
          </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-1712111523" author="vishnu">
