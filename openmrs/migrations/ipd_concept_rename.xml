@@ -57,4 +57,5 @@
                   update concept_name set name ='Ajouter des notes' where
                   name ='Adt Notes' and locale='fr' and voided =0 and concept_name_type in ('SHORT','FULLY_SPECIFIED');
                </sql>
+       </changeSet>
            </databaseChangeLog>
