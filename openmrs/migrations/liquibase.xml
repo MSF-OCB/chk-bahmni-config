@@ -5515,4 +5515,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 <include file ="update_global_prop_person_attr.xml"/>
 <include file ="ipd_concept_rename.xml"/>
 <include file ="update_global_prop.xml"/>
+<changeSet id="OCB-CONFIG1801171448" author="Vishnu">
+           <sqlFile path= "update_location_tag.sql"/>
+</changeSet>
 </databaseChangeLog>

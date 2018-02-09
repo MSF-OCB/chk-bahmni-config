@@ -19,7 +19,7 @@
     "order": 2,
     "requiredPrivilege": "app:clinical"
   },
-   adt": {
+   "adt": {
     "id": "bahmni.adt",
     "extensionPointId": "org.bahmni.home.dashboard",
     "type": "link",
