@@ -44,4 +44,18 @@
                   insert into location_tag (name,description,creator,date_created,uuid) values ('Admission Location','Admission Location',1,now(),uuid());
                </sql>
              </changeSet>
+         <changeSet id="OCB-CONFIG-201801301029" author="Vishnu">
+               <preConditions onFail="MARK_RAN">
+                   <sqlCheck expectedResult="0">
+                     select count(*) from concept_name where name='Ajouter des notes'  and locale ='fr'
+                     and concept_id in (select distinct concept_id from concept_name where name='Consultation Note' and voided=0 and locale='en');
+
+                       </sqlCheck>
+               </preConditions>
+               <comment> Adding french translation for the Adt Notes  concept </comment>
+               <sql>
+                  update concept_name set name ='Ajouter des notes' where
+                  name ='Adt Notes' and locale='fr' and voided =0 and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+               </sql>
+       </changeSet>
            </databaseChangeLog>
