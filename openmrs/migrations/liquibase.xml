@@ -5516,4 +5516,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
 <include file ="ipd_concept_rename.xml"/>
 <include file ="update_global_prop.xml"/>
 <include file ="update_location_tag.xml"/>
+<changeSet id="OCB-CONFIG-1802061116" author="Vishnu">
+       <comment>adding the sql file for creating dignostic concepts</comment>
+       <sqlFile path="add_concept_ipd_diagnostic.sql"/>
+  </changeSet>
+<include file="ipd_resume_form.xml"/>
 </databaseChangeLog>
