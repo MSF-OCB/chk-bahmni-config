@@ -1,13 +1,13 @@
 SELECT B.sample_date :: DATE AS "Date de prelevement",
-       B.care_center_requesting AS "Care Center Requesting",
+       B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "Id Patient",
-       B.dob AS "Dob",
+       B.dob AS "Date naissance",
        B.sexe AS "Sexe",
-       sum(cast(B.ChargeVirale_value AS NUMERIC)) AS "Viral Load",
-       sum(cast(B.ChargeVirale_value_log AS NUMERIC)) AS "Log Value VL",
-       B.date_of_results AS "Date of Results",
-       B.month_of_results AS "Month of result",
+       sum(cast(B.ChargeVirale_value AS NUMERIC)) AS "Charge virale",
+       sum(cast(B.ChargeVirale_value_log AS NUMERIC)) AS "Charge virale (Valeur Log)",
+       B.date_of_results AS "Date des résultats",
+       B.month_of_results AS "Mois des résultats",
        CASE when string_agg(B.comment,', ')= 'OPD, OPD' then 'OPD'
             when string_agg(B.comment,', ')= 'IPD, IPD' then 'IPD'
             when string_agg(B.comment,', ')= 'OPD-High, OPD-High' then 'OPD-High'

@@ -1,20 +1,20 @@
 {
    "viralLoadReport":{
-        "name": "Viral Load Report",
+        "name": "Rapport de charge virale",
         "type": "ElisGeneric",
         "config": {
             "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/viral_report.sql"
         }
     },
     "CD4BiochemReport":{
-         "name": "CD4 and Biochemistry Report",
+         "name": "Rapport CD4 et biochimie",
          "type": "ElisGeneric",
          "config": {
              "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/CD4_Biochem.sql"
          }
      },
     "regInfoReport": {
-        "name": "Patient Registration Info",
+        "name": "Informations sur l'enregistrement du patient",
          "type": "MRSGeneric",
          "config": {
              "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/patient_reg_info.sql"
