@@ -107,6 +107,9 @@
              "multiSelect": true,
              "disableAddNotes":true
             },
+             "RPEC":{
+            "allowAddMore" :true
+            }, 
             "Resultat":{
             "dropdown":true
             }
