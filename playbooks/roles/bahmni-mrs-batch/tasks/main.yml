@@ -9,7 +9,7 @@
     state: absent
   name: "delete previous bahmnicore module"
 - 
-  command: "cp /tmp/bahmnicore-omod-0.90-SNAPSHOT.omod /opt/openmrs/modules/bahmnicore-0.90-SNAPSHOT.omod"
+  command: "cp /tmp/bahmnicore-0.90-SNAPSHOT.omod /opt/openmrs/modules/bahmnicore-0.90-SNAPSHOT.omod"
   name: "copying the bahmnicore omod"
 - 
   command: "cp /tmp/bahmniapps.zip /opt/bahmni-web/etc/bahmniapps.zip"
