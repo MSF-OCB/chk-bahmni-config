@@ -99,7 +99,7 @@
             "dropdown":true
             },
             "Date":{
-            "allowFutureDates":false,
+            "allowFutureDates":false
             },
             "Diagnostic":{
              "dropdown":false,
