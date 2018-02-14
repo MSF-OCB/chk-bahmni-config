@@ -8,7 +8,7 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-DROP DATABASE clinlims;
+DROP DATABASE clinlims CASCADE;
 --
 -- Name: clinlims; Type: DATABASE; Schema: -; Owner: postgres
 --
@@ -30,6 +30,7 @@ SET client_min_messages = warning;
 -- Name: clinlims; Type: SCHEMA; Schema: -; Owner: clinlims
 --
 
+DROP SCHEMA clinlims CASCADE;
 CREATE SCHEMA clinlims;
 
 
