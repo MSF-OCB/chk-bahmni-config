@@ -1,7 +1,7 @@
 SELECT B.sample_date :: DATE AS "Date de prelevement",
        B.care_center_requesting AS "Care Center Requesting",
        B.Patient_Name AS "Nom du patient",
-       B.Patient_Identifier AS "Id Patient",
+       B.Patient_Identifier AS "ID Patient",
        B.dob AS "Dob",
        B.sexe AS "Sexe",
        B.date_of_results AS "Date of Results",
