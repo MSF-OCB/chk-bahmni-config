@@ -1,8 +1,6 @@
 @page {
-  margin-left: 0.5cm;
-  margin-right: 0.5cm;
-  margin-top: 0.5cm;
-  margin-bottom: 0.5cm;
+    size: A4;
+    margin: 0;
 }
 .row {
     float: clear;
@@ -34,7 +32,7 @@
     font-weight: bold;
 }
 .label {
-    font-weight: bold;
+    font-weight: semibold;
 }
 
 .col {
@@ -49,3 +47,4 @@
   font-size: 18px;
   font-weight: bold;
 }
+

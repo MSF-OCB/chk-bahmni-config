@@ -8,47 +8,52 @@
     <div class="row">
         <div class="left">
             <span class="label">ID Patient :</span>
-            <span>{{patient.primaryIdentifier.identifier}}</span>
+            <span class="bold">{{patient.primaryIdentifier.identifier}}</span>
         </div>
         <div class="right col">
             <span class="label">Date dépistage :</span>
-            <span>{{patient['Date dépistage']| date:'dd/MM/yyyy'}}</span>
+            <span class="bold">{{patient['Date dépistage']| date:'dd/MM/yyyy'}}</span>
         </div>
     </div>
     <br/>
     <div class="row">
         <div class="left">
             <span class="label">Type de cohorte :</span>
-            <span>{{patient['Type de cohorte'].value}}</span>
+            <span class="bold">{{patient['Type de cohorte'].value}}</span>
         </div>
         <div class="right col">
-            <span class="label">Bébé exposé :</span>
-            <span ng-if="patient['Bébé exposé'] === true">Oui</span>
-            <span ng-if="!patient['Bébé exposé']">Non</span>
+            <span class="label">Status VIH :</span>
+            <span class="bold">{{patient['Status VIH'].value}}</span>
         </div>
     </div>
     <br/>
     <div class="row">
         <div class="left">
             <span class="label">Converti CP : </span>
-            <span ng-if="patient['Converti CP'] === true">Oui</span>
-            <span ng-if="!patient['Converti CP']">Non</span>
+            <span class="bold" ng-if="patient['Converti CP'] === true">Oui</span>
+            <span class="bold" ng-if="!patient['Converti CP']">Non</span>
+        </div>
+        <br/>
+        <div class="rowx">
+        <div class="left">
+            <span class="label">Date de conversion : </span>
+            <span class="bold">{{patient['Date de conversion']|date:'dd/MM/yyyy'}}</span>
         </div>
         <div class="right col">
-            <span class="label">Status VIH :</span>
-            <span>{{patient['Status VIH'].value}}</span>
+            <span class="label">Bébé exposé :</span>
+            <span class="bold" ng-if="patient['Bébé exposé'] === true">Oui</span>
+            <span class="bold" ng-if="!patient['Bébé exposé']">Non</span>
         </div>
     </div>
-    <br/>
     <br/>
     <div class="rowx">
         <div class="left">
             <span class="label">Noms :</span>
-            <span>{{patient.givenName}} {{patient.middleName}} {{patient.familyName}} </span>
+            <span class="bold">{{patient.givenName}} {{patient.middleName}} {{patient.familyName}} </span>
         </div>
         <div class="right col">
             <span class="label">Sexe :</span>
-            <span>{{patient.gender}} </span>
+            <span class="bold">{{patient.gender}} </span>
         </div>
     </div>
     <br/>
@@ -56,11 +61,11 @@
     <div class="row">
         <div class="left">
             <span class="label">Date Naissance :</span>
-            <span>{{patient.birthdate | date:'dd/MM/yyyy'}}</span>
+            <span class="bold">{{patient.birthdate | date:'dd/MM/yyyy'}}</span>
         </div>
         <div class="right col">
             <span class="label">Province de provenance :</span>
-            <span>{{patient['Province de provenance'].value}}</span>
+            <span class="bold">{{patient['Province de provenance'].value}}</span>
         </div>
     </div>
     <br/>
@@ -68,11 +73,11 @@
     <div class="row">
         <div class="left">
             <span class="label">Etat Civil :</span>
-            <span>{{patient['Etat Civil'].value}}</span>
+            <span class="bold">{{patient['Etat Civil'].value}}</span>
         </div>
         <div class="right col">
             <span class="label">Situation Parental :</span>
-            <span>{{patient['Situation Parental(enfants)'].value}}</span>
+            <span class="bold">{{patient['Situation Parental(enfants)'].value}}</span>
         </div>
     </div>
     <br/>
@@ -86,54 +91,46 @@
     <div class="rowx">
         <div class="left">
             <span class="label">Commune :</span>
-            <span>{{patient.address.address6}} </span>
+            <span class="bold">{{patient.address.address6}} </span>
         </div>
         <div class="right col">
             <span class="label">Quartier :</span>
-            <span>{{patient.address.address4}} </span>
+            <span class="bold">{{patient.address.address4}} </span>
         </div>
     </div>
     <br/>
     <div class="rowx">
         <div class="left">
             <span class="label">Rue :</span>
-            <span>{{patient.address.address3}}</span>
+            <span class="bold">{{patient.address.address3}}</span>
         </div>
         <div class="right col">
             <span class="label">Indicateur de localisation :</span>
-            <span> {{patient.address.address5}}</span>
+            <span class="bold"> {{patient.address.address5}}</span>
         </div>
     </div>
     <br/>
     <div class="rowx">
         <div class="left">
             <span class="label">No :</span>
-            <span> {{patient.address.address2}}</span>
+            <span class="bold"> {{patient.address.address2}}</span>
         </div>
-    </div>
-    <br/>
-    <div class="rowx">
         <div class="left">
             <span class="label">Tel :</span>
-            <span> {{patient['Tel 1']}}</span>
+            <span class="bold"> {{patient['Tel 1']}}</span>
         </div>
     </div>
-    <br/>
     <br/>
     <div class="rowx">
         <div class="left">
             <span class="label">Nom du contact :</span>
-            <span> {{patient['Nom du contact']}}</span>
+            <span class="bold"> {{patient['Nom du contact']}}</span>
         </div>
-    </div>
-    <br/>
-    <div class="rowx">
         <div class="left">
             <span class="label">Tél du contact :</span>
-            <span> {{patient['Tel 1 du Contact']}}</span>
+            <span class="bold"> {{patient['Tel 1 du Contact']}}</span>
         </div>
     </div>
-    <br/>
     <br/>
     <div class="rowx">
         <div class="left bold">
@@ -144,22 +141,26 @@
     <div class="rowx">
         <div class="left">
             <span class="label">Education :</span>
-            <span> {{patient["Niveau d'etudes"].value}}</span>
+            <span class="bold"> {{patient["Niveau d'etudes"].value}}</span>
         </div>
         <div class="right col">
             <span class="label">Occupation :</span>
-            <span> {{patient["Occupation"]}}</span>
+            <span class="bold"> {{patient["Occupation"]}}</span>
         </div>
     </div>
     <br/>
     <div class="rowx">
         <div class="left">
             <span class="label">Membre d'un réseau PVVIH :</span>
-            <span> {{patient["Membre d'un réseau PVVIH"].value}}</span>
+            <span class="bold"> {{patient["Membre d'un réseau PVVIH"].value}}</span>
         </div>
         <div class="right col">
             <span class="label">Fréquente tradipraticien :</span>
-            <span> {{patient["Frequente un Tradipraticien"].value}}</span>
+            <span class="bold"> {{patient["Frequente un Tradipraticien"].value}}</span>
+        </div>
+        <div class="left">
+            <span class="label">Centre de provenance :</span>
+            <span class="bold"> {{patient["Centre de provenance"]}}</span>
         </div>
     </div>
     <br/>
@@ -176,120 +177,122 @@
             table, th {
             border: 1px solid black;
             border-collapse: collapse;
+            font-weight: normal;
             }
             th {
-            padding: 12px;
+            padding: 10px;
             }
         </style>
     </head>
     <body>
         <table style="width:100%">
-            <col width="150">
-            <col width="300">
+            <col width="100">
+            <col width="100">
             <col width="100">
             <col width="100">
             <col width="100">
             <col width="100">
             <tr>
-                <th>Lien</th>
+                <th><span class=".label">Lien</span></th>
                 <th>Nom</th>
                 <th>Date Naissance
                     (jj/mm/aaaa)
                 </th>
-                <th>Informé du statut HIV patient (Oui/Non)</th>
+                <th>Informé du statut HIV patient</th>
                 <th>Résultat
                     (+/-)
                 </th>
                 <th>No CHK</th>
             </tr>
             <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
+                <th> <div ng-if="patient['LienDuDépendant1']"> {{patient["LienDuDépendant1"].value}}</div></th>
+                <th> <div ng-if="patient['PrénomDépendant1']"> {{patient["PrénomDépendant1"]}} 
+                <th> <div ng-if="patient['DateDeNaissanceDépendant1']">{{patient["DateDeNaissanceDépendant1"]|date:'dd/MM/yyyy'}}</div></th>
+                <th> <div ng-if="patient['EstInforméDuStatutSérologique1']">{{patient["EstInforméDuStatutSérologique1"].value}}</div></th>
+                <th> <div ng-if="patient['RésultatDuTestVIH1']">{{patient["RésultatDuTestVIH1"].value}}</div></th>
+                <th> <div ng-if="patient['CHKIDDuDépendant1']">{{patient["CHKIDDuDépendant1"]}}</div></th>
             </tr>
             <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
+                    <th> <div ng-if="patient['LienDuDépendant2']"> {{patient["LienDuDépendant2"].value}}</div></th>
+                    <th> <div ng-if="patient['PrénomDépendant2']"> {{patient["PrénomDépendant2"]}} 
+                    <th> <div ng-if="patient['DateDeNaissanceDépendant2']">{{patient["DateDeNaissanceDépendant2"]|date:'dd/MM/yyyy'}}</div></th>
+                    <th> <div ng-if="patient['EstInforméDuStatutSérologique2']">{{patient["EstInforméDuStatutSérologique2"].value}}</div></th>
+                    <th> <div ng-if="patient['RésultatDuTestVIH2']">{{patient["RésultatDuTestVIH2"].value}}</div></th>
+                    <th> <div ng-if="patient['CHKIDDuDépendant2']">{{patient["CHKIDDuDépendant2"]}}</div></th>
+            </tr>
+             <tr>
+                    <th> <div ng-if="patient['LienDuDépendant3']"> {{patient["LienDuDépendant3"].value}}</div></th>
+                    <th> <div ng-if="patient['PrénomDépendant3']"> {{patient["PrénomDépendant3"]}} 
+                    <th> <div ng-if="patient['DateDeNaissanceDépendant3']">{{patient["DateDeNaissanceDépendant3"]|date:'dd/MM/yyyy'}}</div></th>
+                    <th> <div ng-if="patient['EstInforméDuStatutSérologique3']">{{patient["EstInforméDuStatutSérologique3"].value}}</div></th>
+                    <th> <div ng-if="patient['RésultatDuTestVIH3']">{{patient["RésultatDuTestVIH3"].value}}</div></th>
+                    <th> <div ng-if="patient['CHKIDDuDépendant3']">{{patient["CHKIDDuDépendant3"]}}</div></th>
+             </tr>
+            <tr>
+                    <th> <div ng-if="patient['LienDuDépendant4']"> {{patient["LienDuDépendant4"].value}}</div></th>
+                    <th> <div ng-if="patient['PrénomDépendant4']"> {{patient["PrénomDépendant4"]}} 
+                    <th> <div ng-if="patient['DateDeNaissanceDépendant4']">{{patient["DateDeNaissanceDépendant4"]|date:'dd/MM/yyyy'}}</div></th>
+                    <th> <div ng-if="patient['EstInforméDuStatutSérologique4']">{{patient["EstInforméDuStatutSérologique4"].value}}</div></th>
+                    <th> <div ng-if="patient['RésultatDuTestVIH4']">{{patient["RésultatDuTestVIH4"].value}}</div></th>
+                    <th> <div ng-if="patient['CHKIDDuDépendant4']">{{patient["CHKIDDuDépendant4"]}}</div></th>
             </tr>
             <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-            </tr>
-            <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-            </tr>
-            <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-            </tr>
-            <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-            </tr>
-            <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-            </tr>
-            <tr>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-            </tr>
+                    <th> <div ng-if="patient['LienDuDépendant5']"> {{patient["LienDuDépendant5"].value}}</div></th>
+                    <th> <div ng-if="patient['PrénomDépendant5']"> {{patient["PrénomDépendant5"]}} 
+                    <th> <div ng-if="patient['DateDeNaissanceDépendant5']">{{patient["DateDeNaissanceDépendant5"]|date:'dd/MM/yyyy'}}</div></th>
+                    <th> <div ng-if="patient['EstInforméDuStatutSérologique5']">{{patient["EstInforméDuStatutSérologique5"].value}}</div></th>
+                    <th> <div ng-if="patient['RésultatDuTestVIH5']">{{patient["RésultatDuTestVIH5"].value}}</div></th>
+                    <th> <div ng-if="patient['CHKIDDuDépendant5']">{{patient["CHKIDDuDépendant5"]}}</div></th>
+          </tr>
+          <tr>
+                <th> <div ng-if="patient['LienDuDépendant6']"> {{patient["LienDuDépendant6"].value}}</div></th>
+                <th> <div ng-if="patient['PrénomDépendant6']"> {{patient["PrénomDépendant6"]}} 
+                <th> <div ng-if="patient['DateDeNaissanceDépendant6']">{{patient["DateDeNaissanceDépendant6"]|date:'dd/MM/yyyy'}}</div></th>
+                <th> <div ng-if="patient['EstInforméDuStatutSérologique6']">{{patient["EstInforméDuStatutSérologique6"].value}}</div></th>
+                <th> <div ng-if="patient['RésultatDuTestVIH6']">{{patient["RésultatDuTestVIH6"].value}}</div></th>
+                <th> <div ng-if="patient['CHKIDDuDépendant6']">{{patient["CHKIDDuDépendant6"]}}</div></th>
+      </tr>
         </table>
         <br/>
         <br/>
         <div class="rowx">
+                <div class="left">
+                <span class="bold">Relations</span>
+                <!--<span class="bold">{{patient.relationships["0"].personB.display}} ({{patient.relationships["0"].relationshipType.display}})</span>
+                -->
+                
+                <div ng-repeat="relationship in patient.relationshipsToPrint track by $index">
+                <span class="label">{{relationship.person}} ({{relationship.relationshipType}})</span></div>
+                </div>
+                <br/>
+                <br/>         
+        <div class="rowx">
             <div class="left col">
                 <span class="label">Nom du confident 1 :<span>
+                <span class="bold"> {{patient["Nom du Confident 1"]}}</span>
             </div>
             <div class="left col">
                 <span class="label">Lien :<span>
+                <span class="bold">{{patient["Lien 1"].value}}   
             </div>
             <div class="left col">
                 <span class="label">Tél :<span>
+                <span class="bold">{{patient["Tel_Conf 1"]}}</span>   
             </div>
         </div>
         <br/>
         <div class="rowx">
             <div class="left col">
                 <span class="label">Nom du confident 2 :<span>
+                <span class="bold"> {{patient["Nom du Confident 2"]}}</span>
             </div>
             <div class="left col">
                 <span class="label">Lien :<span>
+                <span class="bold">{{patient["Lien 2"].value}}       
             </div>
             <div class="left col">
                 <span class="label">Tél :<span>
+                <span class="bold">{{patient["Tel_Conf 2"]}}</span>       
             </div>
         </div>
         <br/>
@@ -297,7 +300,7 @@
         <div class="rowx">
             <div class="left">
                 <span class="label">Date d'exécution du rapport :</span>
-            <span>{{today | date:'dd/MM/yyyy'}}</span>
+            <span class="bold">{{today | date:'dd/MM/yyyy'}}</span>
         </div>
     </div>
 </div>
