@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-1712271610" author="vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                      SELECT count(*) FROM location_tag_map where location_tag_id =(select location_id from location where name='CHK');
+               </sqlCheck>          
+        </preConditions>
+
+          <sql>
+          set @tagid =(select location_tag_id from location_tag where name='Admission Location');
+          set @locationid =(select location_id from location where name ='CHK');
+          insert into location_tag_map (location_id,location_tag_id) values (@locationid,@tagid);
+         </sql>
+   </changeSet>
+</databaseChangeLog>

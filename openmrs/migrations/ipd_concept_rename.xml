@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+       <changeSet id="OCB-CONFIG-201801301000" author="Vishnu">
+           <preConditions onFail="MARK_RAN">
+               <sqlCheck expectedResult="0">
+                 select count(*) from concept_name where name='Hospitaliser le patient'  and locale ='fr'
+                 and concept_id =(select distinct concept_id from concept_name where name='Admit Patient' and voided=0);
+                   </sqlCheck>
+           </preConditions>
+           <comment> Adding french translation for the admit patient concept </comment>
+           <sql>
+              update concept_name set name ='Hospitaliser le patient' where
+              name ='Admit Patient' and locale='fr' and voided =0 and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+           </sql>
+         </changeSet>
+         <changeSet id="OCB-CONFIG-201801301119" author="Vishnu">
+             <preConditions onFail="MARK_RAN">
+                 <sqlCheck expectedResult="0">
+                   select count(*) from concept_name where name='Laisser sortir le patient'  and locale ='fr'
+                   and concept_id =(select distinct concept_id from concept_name where name='Discharge Patient' and voided=0);
+                     </sqlCheck>
+             </preConditions>
+             <comment> Adding french translation for the Discharge patient concept </comment>
+             <sql>
+                update concept_name set name ='Laisser sortir le patient' where
+                name ='Discharge Patient' and locale='fr' and voided =0 and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+             </sql>
+           </changeSet>
+           <changeSet id="OCB-CONFIG-201801301028" author="Vishnu">
+               <preConditions onFail="MARK_RAN">
+                   <sqlCheck expectedResult="0">
+                     select count(*) from concept_name where name='Annuler la sortie'  and locale ='fr'
+                     and concept_id =(select distinct concept_id from concept_name where name='Undo Discharge' and voided=0);
+
+                       </sqlCheck>
+               </preConditions>
+               <comment> Adding french translation for the Undo Discharge  concept </comment>
+               <sql>
+                  update concept_name set name ='Annuler la sortie' where
+                  name ='Undo Discharge' and locale='fr' and voided =0 and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+               </sql>
+               <sql>
+                  insert into location_tag (name,description,creator,date_created,uuid) values ('Admission Location','Admission Location',1,now(),uuid());
+               </sql>
+             </changeSet>
+         <changeSet id="OCB-CONFIG-201801301029" author="Vishnu">
+               <preConditions onFail="MARK_RAN">
+                   <sqlCheck expectedResult="0">
+                     select count(*) from concept_name where name='Ajouter des notes'  and locale ='fr'
+                     and concept_id in (select distinct concept_id from concept_name where name='Consultation Note' and voided=0 and locale='en');
+
+                       </sqlCheck>
+               </preConditions>
+               <comment> Adding french translation for the Adt Notes  concept </comment>
+               <sql>
+                  update concept_name set name ='Ajouter des notes' where
+                  name ='Adt Notes' and locale='fr' and voided =0 and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+               </sql>
+       </changeSet>
+           </databaseChangeLog>

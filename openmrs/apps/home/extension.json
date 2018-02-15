@@ -19,6 +19,16 @@
     "order": 2,
     "requiredPrivilege": "app:clinical"
   },
+   "adt": {
+    "id": "bahmni.adt",
+    "extensionPointId": "org.bahmni.home.dashboard",
+    "type": "link",
+    "translationKey": "MODULE_LABEL_INPATIENT_KEY",
+    "url": "../adt/",
+    "icon": "icon-bahmni-inpatient",
+    "order": 3,
+    "requiredPrivilege": "app:adt"
+  },
 "reports": {
     "id": "bahmni.reports",
     "extensionPointId": "org.bahmni.home.dashboard",
