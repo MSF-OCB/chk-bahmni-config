@@ -104,7 +104,7 @@
             <span class="label">Rue :</span>
             <span class="label">{{patient.address.address3}}</span>
         </div>
-        <div class="right col">
+        <div class="right custom">
             <span class="label">Indicateur de localisation :</span>
             <span class="label"> {{patient.address.address5}}</span>
         </div>
@@ -155,11 +155,11 @@
             <span class="label"> {{patient["Membre d'un réseau PVVIH"].value}}</span>
         </div>
         <div class="right col">
-            <span class="label">Fréquente tradipraticien :</span>
+            <span class="label">Fréquente tradipraticien :</span>
             <span class="label"> {{patient["Frequente un Tradipraticien"].value}}</span>
         </div>
         <div class="left">
-            <span class="label">Centre de provenance :</span>
+            <span class="label">Centre de provenance :</span>
             <span class="label"> {{patient["Centre de provenance"]}}</span>
         </div>
     </div>
@@ -264,6 +264,7 @@
                 <div ng-repeat="relationship in patient.relationshipsToPrint track by $index">
                 <span class="label">- {{relationship.person}} ({{relationship.relationshipType}})</span></div>
                 </div>
+                <br/>
                 <br/>
                 <br/>
         <div class="rowx">
