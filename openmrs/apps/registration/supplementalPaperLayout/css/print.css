@@ -9,7 +9,7 @@
     clear:both;
 }
 .left {
-    width: 50%;
+    width: 40%;
     float: left;
     font-size: 15px;
     text-align: left;
@@ -28,8 +28,9 @@
 }
 .center {
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
+    border-style: none;
 }
 .label {
     font-weight: semibold;
@@ -38,7 +39,13 @@
 .col {
     width:  33%;
     text-align: left;
+    display: inline-block;
 }
+.custom {
+    width: 43%;
+    text-align: left;
+}
+
 .colu{
     width:25%;
     text-align: left;
@@ -47,4 +54,3 @@
   font-size: 18px;
   font-weight: bold;
 }
-

@@ -5526,4 +5526,5 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
        <sqlFile path="add_concept_ipd_diagnostic.sql"/>
   </changeSet>
 <include file="ipd_resume_form.xml"/>
+<include file ="remove_onbehalf_priv.xml"/>
 </databaseChangeLog>
