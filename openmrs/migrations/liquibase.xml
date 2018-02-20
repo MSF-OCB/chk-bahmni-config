@@ -5340,4 +5340,5 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
            <sqlFile path= "dependent_6.sql"/>
 </changeSet>
 <include file ="update_global_prop_person_attr.xml"/>
+<include file ="remove_onbehalf_priv.xml"/>
 </databaseChangeLog>
