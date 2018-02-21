@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="OCB-CONFIG-20180219413" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Hémoglobine (IPD)','Glycémie (IPD)','TDR - Paludisme (IPD)'
+                   ,'CD4 (IPD)','CD4 % (enfants de - 5 ans) (IPD)','TB - LAM (IPD)'
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Sang');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Tests to Sang</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+            set @member4_concept_id = 0;
+            set @member5_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'Sang' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Hémoglobine (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Glycémie (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = 'TDR - Paludisme (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member4_concept_id from concept_name where name = 'CD4 (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member5_concept_id from concept_name where name = 'CD4 % (enfants de - 5 ans) (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+           
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+            call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+            call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+          </sql>
+       </changeSet>
+<changeSet id="OCB-CONFIG-20180220413" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('TB - LAM (IPD)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Urine');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Tests to Urine</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+             select concept_id into @concept_id from concept_name where name = 'Urine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+             select concept_id into @member1_concept_id from concept_name where name = 'TB - LAM (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+      </sql>
+    </changeSet>
+
+<changeSet id="OCB-CONFIG-20180219414" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Hémoglobine (IPD)','Glycémie (IPD)','TDR - Paludisme (IPD)'
+                   ,'CD4 (IPD)','CD4 % (enfants de - 5 ans) (IPD)','TB - LAM (IPD)'
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Tests to All Tests and panels</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+            set @member4_concept_id = 0;
+            set @member5_concept_id = 0;
+            set @member6_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Hémoglobine (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Glycémie (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = 'TDR - Paludisme (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member4_concept_id from concept_name where name = 'CD4 (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member5_concept_id from concept_name where name = 'CD4 % (enfants de - 5 ans) (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member6_concept_id from concept_name where name = 'TB - LAM (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;              
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+            call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+            call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+            call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+   </sql>
+  </changeSet>
+            <changeSet id="OCB-CONFIG-20180219415" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name  in ('IPD') AND concept_name_type = "FULLY_SPECIFIED")and cs.concept_set IN (select concept_id from concept_name where name = 'Lab Departments');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding IPD Department to Lab Departments Set</comment>
+        <sql>
+             set @concept_id = 0;
+             set @member1_concept_id = 0;
+             select concept_id into @concept_id from concept_name where name = 'Lab Departments' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+             select concept_id into @member1_concept_id from concept_name where name = 'IPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+         </sql>
+        </changeSet>
+ 
+        <changeSet id="OCB-CONFIG-20180219416" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Hémoglobine (IPD)','Glycémie (IPD)','TDR - Paludisme (IPD)'
+                   ,'CD4 (IPD)','CD4 % (enfants de - 5 ans) (IPD)','TB - LAM (IPD)'
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'IPD');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Tests to IPD department</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+            set @member4_concept_id = 0;
+            set @member5_concept_id = 0;
+            set @member6_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'IPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Hémoglobine (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Glycémie (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = 'TDR - Paludisme (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member4_concept_id from concept_name where name = 'CD4 (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member5_concept_id from concept_name where name = 'CD4 % (enfants de - 5 ans) (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member6_concept_id from concept_name where name = 'TB - LAM (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+            call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+            call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+            call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+          </sql>
+       </changeSet>
+    <changeSet id="OCB-CONFIG-201802190509" author="Vishnu">
+        <comment>Adding entries in event_records table for IPD department</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'IPD' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'department',now(),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/department/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201802190500" author="Vishnu">
+        <comment>Adding entries in event_records table for All Lab Tests</comment>
+        <sql>
+            set @uuid = NULL;
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Hémoglobine (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Glycémie (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'TDR - Paludisme (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'CD4 (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'CD4 % (enfants de - 5 ans) (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'TB - LAM (IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201802210509" author="Vishnu">
+        <comment>Adding entries in event_records for Sang Sample</comment>
+        <sql>
+
+
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Sang' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201802210510" author="Vishnu">
+        <comment>Adding entries in event_records for Urine Sample</comment>
+        <sql>
+
+
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Urine' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>
