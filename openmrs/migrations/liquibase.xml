@@ -5536,4 +5536,9 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
         <sqlFile path= "syndrome_concepts.sql"/>
 </changeSet>
 <include file="formulaire_form.xml"/>
+<changeSet id="OCB-CONFIG-201802190416" author="Vishnu">
+          <comment>Creating new Lab tests as part of Feedback </comment>
+          <sqlFile path= "new_lab_tests.sql"/>
+</changeSet>
+<include file ="new_tests_mrs.xml"/>
 </databaseChangeLog>
