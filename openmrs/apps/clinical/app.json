@@ -110,6 +110,33 @@
              "RPEC":{
             "allowAddMore" :true
             }, 
+            "Date de sortie":{
+            "allowFutureDates": true,
+            "disableAddNotes":true
+            },
+            "Syndrome et Diagnostic":{
+             "allowAddMore":true
+            },
+            "Syndrome":{
+                "dropdown":true,
+                "disableAddNotes":true
+            },
+             "Ligne":{
+                "disableAddNotes":true
+            },
+            "Mis sous ARV en hospitalization":{
+                "disableAddNotes":true
+            },
+            "Traitemtent TB commencé?":{
+                "disableAddNotes":true
+            },
+            "Mode de sortie":{
+                "disableAddNotes":true
+            },
+            "Date du prochain RDV":{
+                "disableAddNotes":true
+            },
+           
             "Resultat":{
             "dropdown":true
             }

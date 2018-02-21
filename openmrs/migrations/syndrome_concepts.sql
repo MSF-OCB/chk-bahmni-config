@@ -1,0 +1,24 @@
+set @concept_id = 0;
+set @concept_short_id = 0;
+set @concept_full_id = 0;
+set @count = 0;
+set @uuid = NULL;
+
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Neurologique (1)','Neurologique (1)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Diarrhée aigue (2)','Diarrhée aigue (2)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Diarrhée chronique (3)','Diarrhée chronique (3)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autres syndromes GI (4)','Autres syndromes GI (4)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hematologique: anemie (5)','Hematologique: anemie (5)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Psychiatrique (6)','Psychiatrique (6)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Respiratoire (7)','Respiratoire (7)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Cardiaque (8)','Cardiaque (8)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Cutane (9)','Cutane (9)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Génitale/STI (10)','Génitale/STI (10)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Néphrologique (11)','Néphrologique (11)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Urologique (12)','Urologique (12)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Endocrine (13)','Endocrine (13)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Orale (14)','Orale (14)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hépatite (15)','Hépatite (15)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB Disséminée (16)','TB Disséminée (16)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Paludisme (17)','Paludisme (17)','N/A','Misc',false);
+     call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autres (18)','Autres (18)','N/A','Misc',false);

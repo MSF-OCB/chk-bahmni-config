@@ -5527,4 +5527,13 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
   </changeSet>
 <include file="ipd_resume_form.xml"/>
 <include file ="remove_onbehalf_priv.xml"/>
+<changeSet id="OCB-CONFIG-201802190417" author="Vishnu">
+          <comment>Creating form concepts </comment>
+           <sqlFile path= "formulaire_de_sorti_concepts.sql"/>
+</changeSet>
+<changeSet id="OCB-CONFIG-201802190419" author="Vishnu">
+        <comment>Creating answers concepts to syndrome </comment>
+        <sqlFile path= "syndrome_concepts.sql"/>
+</changeSet>
+<include file="formulaire_form.xml"/>
 </databaseChangeLog>
