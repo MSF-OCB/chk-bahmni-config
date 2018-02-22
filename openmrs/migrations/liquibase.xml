@@ -5526,7 +5526,6 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
        <sqlFile path="add_concept_ipd_diagnostic.sql"/>
   </changeSet>
 <include file="ipd_resume_form.xml"/>
-<include file ="remove_onbehalf_priv.xml"/>
 <changeSet id="OCB-CONFIG-201802190417" author="Vishnu">
           <comment>Creating form concepts </comment>
            <sqlFile path= "formulaire_de_sorti_concepts.sql"/>
@@ -5541,4 +5540,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
           <sqlFile path= "new_lab_tests.sql"/>
 </changeSet>
 <include file ="new_tests_mrs.xml"/>
+ <changeSet id="OCB-CONFIG-1802061117" author="Vishnu">
+       <comment>adding the sql file for creating dignostic concepts</comment>
+       <sql>
+         delete from role_privilege where privilege='app:clinical:onbehalf' ;
+       </sql>
+  </changeSet>
+</databaseChangeLog>
 </databaseChangeLog>
