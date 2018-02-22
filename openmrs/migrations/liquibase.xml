@@ -5547,4 +5547,3 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
        </sql>
   </changeSet>
 </databaseChangeLog>
-</databaseChangeLog>
