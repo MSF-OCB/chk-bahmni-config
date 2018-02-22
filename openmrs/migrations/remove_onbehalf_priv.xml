@@ -8,7 +8,7 @@
         <changeSet id="OCB-CONFIG-2018022205179" author="vishnu">
         <comment>Removing the onbehalf privilege from bahmni</comment>
         <sql>
-        delete from role_privilege where privilege='app:clinical:onbehalf' and role ='Privilege Level: Full';
+        delete from role_privilege where privilege='app:clinical:onbehalf';
         </sql>
         </changeSet>
         </databaseChangeLog>
