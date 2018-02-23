@@ -27,6 +27,24 @@
   command: "ln -s /opt/bahmni-web/etc/bahmniapps /var/www/bahmniapps"
   name: "linking /var/www/bahmniapps to Possible bahmniapps"
   when: "bahmniapps_url is defined"
+-
+  service:
+    name: bahmni-reports
+    state: stopped
+
+- name: download bahmnireports war file
+  get_url:
+    url:  https://s3.ap-south-1.amazonaws.com/ocb-repos/bahmnireports.war
+    dest: /opt/bahmni-reports/
+-
+  name: 'Unzip downloaded bahmnireports.war file'
+  unarchive:
+    dest: /opt/bahmni-reports/bahmni-reports
+    src: /opt/bahmni-reports/bahmnireports.war
+-
+  service:
+    name: bahmni-reports
+    state: started
 - 
   file: 
     dest: /opt/openmrs/configuration
