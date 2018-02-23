@@ -5351,4 +5351,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
          delete from role_privilege where privilege='app:clinical:onbehalf' ;
        </sql>
   </changeSet>
+<changeSet id="OCB-CONFIG-1802231117" author="Vishnu">
+       <comment>Allowing decimal values to newly created lab tests</comment>
+       <sql>
+         INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "TDR - Paludisme (IPD)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL);
+INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "TB - LAM (IPD)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL) ;
+       </sql>
+  </changeSet
 </databaseChangeLog>
