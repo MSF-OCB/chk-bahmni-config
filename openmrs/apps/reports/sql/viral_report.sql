@@ -1,12 +1,12 @@
-SELECT B.sample_date :: DATE AS "Date de prelevement",
+SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date de prelevement",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "Id Patient",
-       B.dob AS "Date naissance",
+       to_char(B.dob,'DD/MM/YYYY') AS "Date naissance",
        B.sexe AS "Sexe",
        sum(cast(B.ChargeVirale_value AS NUMERIC)) AS "Charge virale",
        sum(cast(B.ChargeVirale_value_log AS NUMERIC)) AS "Charge virale (Valeur Log)",
-       B.date_of_results AS "Date des résultats",
+       to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        B.month_of_results AS "Mois des résultats",
        CASE when string_agg(B.comment,', ')= 'OPD, OPD' then 'OPD'
             when string_agg(B.comment,', ')= 'IPD, IPD' then 'IPD'
@@ -43,7 +43,7 @@ FROM
                                                   t.name AS tname,
                                                   r.value AS tvalue,
                                                   r.lastupdated :: DATE AS date_of_results,
-                                                  to_char(to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'), 'Month') AS month_of_results,
+                                                  to_char(r.lastupdated, 'MM') AS month_of_results,
                                                   a.comment
       FROM
       patient_identity pi

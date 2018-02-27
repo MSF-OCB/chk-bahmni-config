@@ -1,9 +1,10 @@
-SELECT B.date_of_results :: date  AS "Date des résultats",
+SELECT to_char(B.date_of_results,'DD/MM/YYYY')   AS "Date des résultats",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "ID Patient",
        EXTRACT(YEAR FROM Now()) - EXTRACT(YEAR FROM B.dob) as "Age"  ,
        B.sexe AS "Sexe",
+       to_char(B.sample_date, 'DD/MM/YYYY') as "Date de prélèvement",
        sum(cast(B.CD4 AS NUMERIC)) AS "RESULTS CD4 (cells/µl)",
        sum(cast(B.CD4_percentage AS NUMERIC)) AS "CD4 %",
        sum(cast(B.GPT AS NUMERIC)) AS "SGPT (UI/L)",
@@ -23,6 +24,8 @@ FROM
        Patient_Identifier,
        dob,
        sexe,
+       sample_date,
+       
        CASE
            WHEN tname ='CD4' THEN tvalue
        END AS CD4,
@@ -61,6 +64,7 @@ FROM
                      when patient.gender = 'O' then 'A'
                 else
                     patient.gender END AS sexe,
+                sample.entered_date as "sample_date",
                 t.name AS tname,
                 r.value AS tvalue,
                 sample.accession_number
@@ -96,6 +100,7 @@ GROUP BY B.Patient_Name,
          B.Patient_Identifier,
          B.dob,
          B.sexe,
+         B.sample_date,
          B.date_of_results,
          B.accession_number
 ORDER BY B.date_of_results,
