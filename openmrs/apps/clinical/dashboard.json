@@ -24,29 +24,10 @@
           "address6"
         ]
       },
-      "treatmentInfo": {
-        "type": "treatment",
-        "translationKey" : "DASHBOARD_TITLE_TREATMENT_DISPLAY_CONTROL_KEY",
-        "displayOrder" : 1,
-        "dashboardConfig": {
-          "showListView": true,
-          "showRoute": true,
-          "showDrugForm": true,
-          "numberOfVisits": 3,
-          "showDetailsButton": true
-        },
-        "expandedViewConfig": {
-          "showListView": true,
-          "showRoute": true,
-          "showDrugForm": true,
-          "numberOfVisits": 0,
-          "showDetailsButton": true
-        }
-      },
       "labResults": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
         "type": "labOrders",
-        "displayOrder": 2,
+        "displayOrder": 1,
         "dashboardConfig": {
           "title": null,
           "numberOfVisits": 10,
@@ -63,7 +44,7 @@
         "type": "ordersControl",
         "orderType": "Lab Order",
         "showDetailsButton": true,
-        "displayOrder": 3,
+        "displayOrder": 2,
         "dashboardConfig": {
           "conceptNames": []
         },
