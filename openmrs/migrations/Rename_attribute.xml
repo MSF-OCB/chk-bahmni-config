@@ -28,11 +28,11 @@
            update concept_name set name ='CD4(Groupe)' where concept_name_type='FULLY_SPECIFIED' and name ='CD4 (Panel)';
            set @uuid = NULL;
            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'CD4(Groupe)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
-           INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+           INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
        </sql>
   </changeSet>
-    <changeSet id="OCB-CONFIG-180226125" author="Vishnu">
+    <changeSet id="OCB-CONFIG-180226126" author="Vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 select count(*) from concept_name where name ='Demande de transfusion sanguine' and concept_name_type in ('FULLY_SPECIFIED','SHORT');
@@ -43,11 +43,11 @@
             update concept_name set name ='Demande de transfusion sanguine' where concept_name_type in ('SHORT','FULLY_SPECIFIED') and name  like 'Demande%de%Transfusion%Sanguine(Blood Transfusion Request%';
             set @uuid = NULL;
             select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Demande de transfusion sanguine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
 
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-180227124" author="Vishnu">
+    <changeSet id="OCB-CONFIG-180227127" author="Vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 select count(*) from visit_type where name ='LAB VISIT' ;
