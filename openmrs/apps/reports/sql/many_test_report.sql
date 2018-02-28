@@ -96,7 +96,7 @@ FROM
                                                    WHEN tname ='EID (PCR)' THEN tvalue
                                                END AS EID
    FROM
-     (/*Pivoting the table row to column*/ SELECT sample.lastupdated  AS sample_date,
+     (/*Pivoting the table row to column*/ SELECT sample.collection_date AS sample_date,
                                                   ss.name AS care_center_requesting,
                                                   trim( concat( COALESCE(NULLIF(person.first_name, ''), ''), ' ', COALESCE(NULLIF(person.last_name, ''), '') ) ) AS Patient_Name,
                                                   pi.identity_data AS Patient_Identifier,
@@ -109,7 +109,7 @@ FROM
                                                   t.name AS tname,
                                                   r.value AS tvalue,
                                                   trim( concat( COALESCE(NULLIF(d.dict_entry,''),''),' ')) AS dvalue,
-                                                  r.lastupdated :: DATE AS date_of_results,
+                                                  sample.lastupdated :: DATE AS date_of_results,
                                                   to_char(to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'), 'Month') AS month_of_results,
                                                   a.comment
       FROM
@@ -141,4 +141,4 @@ ORDER BY B.date_of_results,
          B.care_center_requesting,
          B.Patient_Name,
          B.dob,
-         B.sexe;
+         B.sexe ;

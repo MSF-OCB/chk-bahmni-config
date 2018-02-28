@@ -64,7 +64,7 @@ FROM
                      when patient.gender = 'O' then 'A'
                 else
                     patient.gender END AS sexe,
-                sample.entered_date as "sample_date",
+                sample.collection_date as "sample_date",
                 t.name AS tname,
                 r.value AS tvalue,
                 sample.accession_number
