@@ -30,7 +30,7 @@ FROM
                                                    WHEN tname ='Charge Virale HIV - Logarithme' THEN tvalue
                                                END AS ChargeVirale_value_log
    FROM
-     (/*Pivoting the table row to column*/ SELECT sample.lastupdated  AS sample_date,
+     (/*Pivoting the table row to column*/ SELECT sample.collection_date  AS sample_date,
                                                   ss.name AS care_center_requesting,
                                                   trim( concat( COALESCE(NULLIF(person.first_name, ''), ''), ' ', COALESCE(NULLIF(person.last_name, ''), '') ) ) AS Patient_Name,
                                                   pi.identity_data AS Patient_Identifier,
@@ -42,7 +42,7 @@ FROM
                                                       patient.gender END AS sexe,
                                                   t.name AS tname,
                                                   r.value AS tvalue,
-                                                  r.lastupdated :: DATE AS date_of_results,
+                                                  sample.lastupdated :: DATE AS date_of_results,
                                                   to_char(r.lastupdated, 'MM') AS month_of_results,
                                                   a.comment
       FROM
@@ -61,7 +61,7 @@ FROM
                        AND a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
                        AND pi.identity_type_id = 2) AS A) AS B
-                       WHERE date(B.date_of_results) BETWEEN '#startDate#' and '#endDate#'
+                       WHERE date(B.date_of_results) BETWEEN '#endDate#' and '#startDate#'
 GROUP BY B.Patient_Name,
          B.sample_date,
          B.care_center_requesting,
