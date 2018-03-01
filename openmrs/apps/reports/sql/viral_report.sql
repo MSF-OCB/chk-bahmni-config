@@ -43,7 +43,7 @@ FROM
                                                   t.name AS tname,
                                                   r.value AS tvalue,
                                                   sample.lastupdated :: DATE AS date_of_results,
-                                                  to_char(r.lastupdated, 'MM') AS month_of_results,
+                                                  to_char(sample.lastupdated, 'MM') AS month_of_results,
                                                   a.comment
       FROM
       patient_identity pi
