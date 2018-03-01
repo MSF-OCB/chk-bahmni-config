@@ -51,6 +51,11 @@
     text-align: left;
 }
 .bold{
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
 }
+.bolded{
+  font-size: 20px;
+  font-weight: bold;
+}
+
