@@ -32,15 +32,21 @@
     name: bahmni-reports
     state: stopped
 
+- name: Check if bahmnireports is already put in place
+  stat:
+    path: /tmp/bahmni-reports
+  register: bahmni_reports_stat_result
+
 - name: download bahmnireports war file
   get_url:
     url:  https://s3.ap-south-1.amazonaws.com/ocb-repos/bahmnireports.war
-    dest: /opt/bahmni-reports/
--
-  name: 'Unzip downloaded bahmnireports.war file'
+    dest: /tmp/bahmnireports.war
+  when: not (bahmni_reports_stat_result.stat.exists|bool)
+
+- name: 'Unzip downloaded bahmnireports.war file'
   unarchive:
     dest: /opt/bahmni-reports/bahmni-reports
-    src: /opt/bahmni-reports/bahmnireports.war
+    src: /tmp/bahmnireports.war
 -
   service:
     name: bahmni-reports
