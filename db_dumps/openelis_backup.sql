@@ -9,6 +9,7 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 DROP DATABASE clinlims CASCADE;
+DROP SCHEMA clinlims CASCADE;
 --
 -- Name: clinlims; Type: DATABASE; Schema: -; Owner: postgres
 --
