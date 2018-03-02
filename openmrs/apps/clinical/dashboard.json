@@ -27,7 +27,7 @@
       "labResults": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
         "type": "labOrders",
-        "displayOrder": 1,
+        "displayOrder": 2,
         "dashboardConfig": {
           "title": null,
           "numberOfVisits": 10,
@@ -44,7 +44,7 @@
         "type": "ordersControl",
         "orderType": "Lab Order",
         "showDetailsButton": true,
-        "displayOrder": 2,
+        "displayOrder": 1,
         "dashboardConfig": {
           "conceptNames": []
         },

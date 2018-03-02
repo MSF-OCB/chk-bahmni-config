@@ -17,7 +17,7 @@
             update person_attribute_type set name='Tel Conf 1',description='Tel Conf 2' where name ='Tel_Conf 2';
         </sql>
     </changeSet>
-     <changeSet id="OCB-CONFIG-180226120" author="Vishnu">
+     <changeSet id="OCB-CONFIG-180326120" author="Vishnu">
       <preConditions onFail="MARK_RAN">
           <sqlCheck expectedResult="0">
               select count(*) from concept_name where name ='CD4(Groupe)' and concept_name_type='FULLY_SPECIFIED';
@@ -32,7 +32,7 @@
 
        </sql>
   </changeSet>
-    <changeSet id="OCB-CONFIG-180226126" author="Vishnu">
+    <changeSet id="OCB-CONFIG-180326126" author="Vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 select count(*) from concept_name where name ='Demande de transfusion sanguine' and concept_name_type in ('FULLY_SPECIFIED','SHORT');
@@ -56,6 +56,20 @@
         <comment>Updating the Lab visit for syncing lab tests from elis to Openmrs  </comment>
         <sql>
             update visit_type set name ='LAB VISIT',retired=0  where name ='LAB';
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-180301129" author="Vishnu">
+        <comment>Updating the relation ship type concepts  </comment>
+        <sql>
+            update relationship_type set a_is_to_b ='Père' where a_is_to_b ='Pére';
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-180301127" author="Vishnu">
+        <comment>Updating the relation ship type concepts  </comment>
+        <sql>
+            update relationship_type set a_is_to_b ='Mère' where a_is_to_b ='Mére';
 
         </sql>
     </changeSet>

@@ -5554,4 +5554,8 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
        </sql>
   </changeSet>
     <include file="Rename_attribute.xml"/>
+    <changeSet id="OCB-CONFIG-1803011404" author="Pritam">
+        <comment>Adding Units for Lab tests</comment>
+        <sqlFile path="UpdateUnitsToLabTests.sql"/>
+    </changeSet>
 </databaseChangeLog>
