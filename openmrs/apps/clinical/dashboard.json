@@ -40,6 +40,25 @@
           "numberOfVisits": ""
         }
       },
+      "treatmentInfo": {
+            "type": "treatment",
+                "translationKey" : "DASHBOARD_TITLE_TREATMENT_DISPLAY_CONTROL_KEY",
+                "displayOrder" : 1,
+                "dashboardConfig": {
+                    "showListView": true,
+                    "showRoute": true,
+                    "showDrugForm": true,
+                    "numberOfVisits": 3,
+                    "showDetailsButton": true
+                  },
+               "expandedViewConfig": {
+                    "showListView": true,
+                    "showRoute": true,
+                    "showDrugForm": true,
+                    "numberOfVisits": 0,
+                    "showDetailsButton": true
+                  }
+             },
       "labOrdersDisplayControl": {
         "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
         "type": "ordersControl",
@@ -67,7 +86,7 @@
            "investigationsChart": {
              "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
              "type": "labOrders",
-             "displayOrder": 2,
+             "displayOrder": 3,
              "displayType": "Full-Page",
              "dashboardConfig": {
                "title": null,
@@ -80,4 +99,5 @@
        }
    }
 }
+
 
