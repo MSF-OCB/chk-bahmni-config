@@ -55,7 +55,8 @@
             "personAttributes":[
                 "class",
                 "caste",
-                "Type de cohorte"
+                "Type de cohorte",
+                "Converti CP"
             ],
             "additionalPatientIdentifiers":[
                 "National ID"
