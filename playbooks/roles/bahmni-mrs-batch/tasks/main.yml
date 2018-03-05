@@ -34,7 +34,7 @@
 
 - name: Check if bahmnireports is already put in place
   stat:
-    path: /tmp/bahmni-reports
+    path: /tmp/bahmnireports.war
   register: bahmni_reports_stat_result
 
 - name: download bahmnireports war file
