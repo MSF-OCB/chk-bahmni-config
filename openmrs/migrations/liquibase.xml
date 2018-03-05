@@ -15,7 +15,7 @@
         <sqlFile splitStatements="false" path="AddConceptProc.sql"/>
     </changeSet>
 
-    <changeSet id="OCB-CONFIG-1912071617" author="vishnu">
+    <changeSet id="OCB-CONFIG-201803051130" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                      select count(*) from concept_name where name='Type de cohorte' and concept_name_type='FULLY_SPECIFIED' and locale='fr' ;
@@ -390,7 +390,7 @@
 
              </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1912071620" author="vishnu">
+    <changeSet id="OCB-CONFIG-201803051131" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                     select count(*) from  concept_name where name ='CP Converted' and concept_name_type='FULLY_SPECIFIED' and locale='fr';
@@ -424,7 +424,7 @@
                    call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CP','CP','N/A','Misc',false);
                   </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1912071622" author="vishnu">
+    <changeSet id="OCB-CONFIG-201803051132" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                     select count(*) from person_attribute_type where name='Date de conversion';
@@ -457,7 +457,7 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1712111519" author="vishnu">
+    <changeSet id="OCB-CONFIG-201803051133" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="2">
                    select count(*) from idgen_seq_id_gen ;
@@ -469,7 +469,7 @@
              delete from idgen_identifier_source order by id limit 1;
          </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-1712111523" author="vishnu">
+    <changeSet id="OCB-CONFIG-201803051134" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
                    select count(*) from idgen_seq_id_gen where prefix='CHK' ;
