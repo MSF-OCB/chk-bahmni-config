@@ -5,7 +5,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-<changeSet id="OCBCONFIG20180116" author="Pritam" >
+        <changeSet id="OCBCONFIG-201803061514" author="Pritam/Ramses" >
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
             select count(*) from person  where first_name in ('Jeanine','Nono','Esther','Christian','Judith','ANNIE','LOUIS RICHARD','ANNIE','Jeanine','Tony','Gisèle','Alain','Freddy','Corine','Antoine','Chicco','Nadine','Stephane','Kick','Patrick','Patrick','Elisabeth','Joelle','Destin',	'Charles','Alliance','Gentil','Félix','Princia','Alain','Bibiche','Fidele','Claude','EVA','ALEXIS','ROBERT','LISETTE','CECILE','EMMANUEL') and is_active=true;
@@ -13,163 +13,163 @@
         </preConditions>
  <comment> Creating providers for release-2.0 </comment>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MANDALA ANSWOR','Jeanine',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MANDALA','ANSWOR','Jeanine',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BANONA KIFU','Nono',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BANONA','KIFU','Nono',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'OWANGA TAMBWE','Esther',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'OWANGA','TAMBWE','Esther',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KALAMBA KABONGO','Christian',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KALAMBA','KABONGO','Christian',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MFUTISI Bibi','Judith',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MFUTISI','BIBI','Judith',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BARAKA MOLA','ANNIE',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BARAKA','MOLA','Annie',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KANYONA MBUYI','LOUIS RICHARD',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KANYONA','MBUYI','Louis Richard',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NGONDE','ANNIE',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NGONDE','','Annie',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MANDALA','Jeanine',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MANDALA','','Jeanine',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KALWANGILA SEQUEIRA','Tony',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KALWANGILA','SEQUEIRA','Tony',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MUCINYA LUMOWO','Gisèle',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MUCINYA','LUMOWO','Gisèle',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'TSHIMUNGU','Alain',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'TSHIMUNGU','','Alain',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MANGANA','Freddy',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MANGANA','','Freddy',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KALENGAY','Corine',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KALENGAY','','Corine',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KABEMA','Antoine',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KABEMA','','Antoine',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'AMSINI','Chicco',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'AMSINI','','Chicco',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NTABUGI','Nadine',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NTABUGI','','Nadine',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MBUNGA','Stephane',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MBUNGA','','Stephane',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KAYEMBE','Kick',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KAYEMBE','','Kick',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KISAKA','Patrick',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KISAKA','','Patrick',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MWASOMI','Patrick',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MWASOMI','','Patrick',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'WALLAYS','Elisabeth',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'WALLAYS','','Elisabeth',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MBUAYA','Joelle',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MBUAYA','','Joelle',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NYALENGE','Destin',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NYALENGE','','Destin',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'LUPORTE MBOMA','Charles',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'LUPORTE','MBOMA','Charles',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BWANGA','Alliance',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BWANGA','','Alliance',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'LUSAMBA LUSAMBA','Gentil',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'LUSAMBA','LUSAMBA','Gentil',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'), E'MANDAR KOL\'AMPWE','Félix',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'), 'MANDAR',$$KOL'AMPWE$$,'Félix',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MBO SOMANZA','Princia',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'SOMANZA','MBO','Princia',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MUSINGA IMENSE','Alain',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MUSINGA','IMENSE','Alain',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NGAMALA KABANGA','Bibiche',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NGAMALA','KABANGA','Bibiche',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KUTOMISA MAKASI','Fidele',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KUTOMISA','MAKASI','Fidele',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BANDELIER','Claude',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BANDELIER','','Claude',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MUNZIKA','EVA',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MUNZIKA','','Eva',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MBALA','ALEXIS',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MBALA','','Alexis',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NGANDU','ROBERT',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'NGANDU','','Robert',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'SHAKO','LISETTE',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'SHAKO','','Lisette',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'LUKELO','CECILE',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'LUKELO','','Cecile',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MPOYI','EMMANUEL',now(),true);
+insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MPOYI','','Emmanuel',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 </changeSet>
-<changeSet id="OCBCONFIG201801311451" author="Pritam" >
+<changeSet id="OCBCONFIG-201803061515" author="Pritam/Ramses" >
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
             select count(*) from person  where last_name ='BASILUA' and is_active=true;
@@ -177,8 +177,9 @@ insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(
         </preConditions>
  <comment> Creating providers for release-2.0 </comment>
  <sql>
- insert into person(id,last_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BASILUA','Claude',now(),true);
+ insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'BASILUA','','Claude',now(),true);
  insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
  </sql>
  </changeSet>
 </databaseChangeLog>
+
