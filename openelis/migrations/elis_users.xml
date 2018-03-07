@@ -61,12 +61,6 @@ insert into system_user_role values (8,12);
 </sql>
     <sql>
         insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
-values (9,'JMandala','MANDALA','Jeanine','Y','N',now());
-insert into login_user values (9,'JMandala','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
-insert into system_user_role values (9,12);
-</sql>
-    <sql>
-        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
 values (11,'TKalwangila','KALWANGILA','Tony','Y','N',now());
 insert into login_user values (11,'TKalwangila','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
 insert into system_user_role values (11,12);
