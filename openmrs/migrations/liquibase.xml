@@ -5,13 +5,9 @@
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <changeSet id="OCB-CONFIG-1712271610" author="vishnu">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                      SELECT count(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE="PROCEDURE"  AND ROUTINE_SCHEMA="openmrs" and ROUTINE_NAME='add_concept_fr';
-               </sqlCheck>
-        </preConditions>
+    <changeSet id="OCB-CONFIG-201803081140" author="vishnu/Ramses" runAlways="true">
         <comment>Adding the Procedure for creating concepts in Fr</comment>
+        <sql>drop procedure if exists add_concept_fr;</sql>
         <sqlFile splitStatements="false" path="AddConceptProc.sql"/>
     </changeSet>
 
