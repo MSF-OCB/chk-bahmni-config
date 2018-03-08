@@ -5359,7 +5359,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <comment>Adding Units for Lab tests</comment>
         <sqlFile path="UpdateUnitsToLabTests.sql"/>
     </changeSet>
-  <changeset id="OCB-CONFIG-201803081521" author="Ramses">
-    <sqlfile path="categorie_centre_de_provenance.sql"/>
-  </changeset>
+  <changeSet id="OCB-CONFIG-201803081521" author="Ramses">
+    <sqlFile path="categorie_centre_de_provenance.sql"/>
+  </changeSet>
 </databaseChangeLog>
