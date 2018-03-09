@@ -1,15 +1,9 @@
 insert into person_attribute (uuid, person_id, creator, date_created, person_attribute_type_id, value)
 select uuid() as uuid,
-       a.person_id,
-       (select user_id
-        from users
-        where username = "superman"
-       ) as creator,
+       p.patient_id,
+       c.user_id as creator,
        now() as date_created,
-       (select person_attribute_type_id
-        from person_attribute_type
-        where name = "Categorie Centre de provenance"
-       ) as person_attribute_type_id,
+       cat_type.person_attribute_type_id,
        -- Select the concept id from the concept which is an answer to "Cat Centre de prov"
        -- and whose name correspondes to the name determinded by the case expression.
        (select distinct n.concept_id
@@ -21,6 +15,8 @@ select uuid() as uuid,
           -- and n.locale = "fr"
           and n.concept_name_type = "FULLY_SPECIFIED"
           and n.name = case
+            when a.value is null
+              then "Autres"
             -- when a.value in ()
             --   then "CDV famille"
             when a.value in ("Podi Funa")
@@ -63,12 +59,18 @@ select uuid() as uuid,
        ) as value
 -- We insert a row for every person attribute of type "Centre de provenance"
 -- for which no person attribute of type "Categorie Centre de provenance" exists.
-from person_attribute a inner join person_attribute_type a_type
-  on a.person_attribute_type_id = a_type.person_attribute_type_id
-where a_type.name = "Centre de provenance"
-  and not exists (select 1
+from patient p
+left join (person_attribute a inner join person_attribute_type a_type
+             on a.person_attribute_type_id = a_type.person_attribute_type_id
+            and a_type.name = "Centre de provenance")
+  on a.person_id = p.patient_id,
+person_attribute_type cat_type,
+users c
+where not exists (select 1
                   from person_attribute a2 inner join person_attribute_type a2_type
                     on a2.person_attribute_type_id = a2_type.person_attribute_type_id
                   where a.person_id = a2.person_id
-                    and a2_type.name = "Categorie Centre de provenance");
+                    and a2_type.name = "Categorie Centre de provenance")
+  and cat_type.name = "Categorie Centre de provenance"
+  and c.username = "superman";
 
