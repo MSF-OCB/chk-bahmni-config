@@ -50,6 +50,20 @@ BEGIN
     values (new_concept_id, name_of_concept, 'en', 0, 1, now(), 'FULLY_SPECIFIED', @uuid);
     SELECT MAX(concept_name_id) INTO concept_name_full_id FROM concept_name;
 
+  ELSE
+
+    select concept_id, concept_name_id into new_concept_id, concept_name_full_id
+    from concept_name
+    where name = name_of_concept
+      and concept_name_type = "FULLY_SPECIFIED"
+      and locale = "fr";
+
+    select concept_name_id into concept_name_short_id
+    from concept_name
+    where name = name_of_concept
+      and concept_name_type = "SHORT"
+      and locale = "fr";
+
   END IF;
 
 END;
