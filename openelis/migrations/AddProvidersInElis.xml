@@ -45,10 +45,6 @@ insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VA
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
 <sql>
-insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'MANDALA','','Jeanine',now(),true);
-insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
-</sql>
-<sql>
 insert into person(id,last_name,middle_name,first_name,lastupdated,is_active) VALUES (nextval('person_seq'),'KALWANGILA','SEQUEIRA','Tony',now(),true);
 insert into provider(id,person_id,lastupdated) VALUES (nextval('provider_seq'),(SELECT max(id) FROM person),now());
 </sql>
