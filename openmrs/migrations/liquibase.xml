@@ -5311,28 +5311,7 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Demande de 
     </changeSet>
  <include file ="dependent_sections.xml"/>
  <changeSet id="OCB-CONFIG1801171442" author="Vishnu">
-          <comment> </comment>
-           <sqlFile path= "dependent_1.sql"/>
-</changeSet>
-<changeSet id="OCB-CONFIG1801171443" author="Vishnu">
-          <comment> </comment>
-           <sqlFile path= "dependent_2.sql"/>
-</changeSet>
-<changeSet id="OCB-CONFIG1801171444" author="Vishnu">
-          <comment> </comment>
-           <sqlFile path= "dependent_3.sql"/>
-</changeSet>
-<changeSet id="OCB-CONFIG1801171445" author="Vishnu">
-          <comment> </comment>
-           <sqlFile path= "dependent_4.sql"/>
-</changeSet>
-<changeSet id="OCB-CONFIG1801171446" author="Vishnu">
-          <comment> </comment>
-           <sqlFile path= "dependent_5.sql"/>
-</changeSet>
-<changeSet id="OCB-CONFIG1801171447" author="Vishnu">
-          <comment> </comment>
-           <sqlFile path= "dependent_6.sql"/>
+           <sqlFile path= "dependent.sql"/>
 </changeSet>
 <include file ="update_global_prop_person_attr.xml"/>
 <changeSet id="OCB-CONFIG-201802190416" author="Vishnu">
