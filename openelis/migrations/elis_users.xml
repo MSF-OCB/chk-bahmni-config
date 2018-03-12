@@ -38,7 +38,7 @@ insert into system_user_role values (4,12);
     <sql>
         insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
 values (5,'JMfutisi','MFUTISI','Judith','Y','N',now());
-insert into login_user values (4,'JMfutisi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into login_user values (5,'JMfutisi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
 insert into system_user_role values (5,12);
 </sql>
     <sql>
@@ -304,7 +304,7 @@ insert into system_user_role values (39,12);
     <sql>
        insert into system_user (id,login_name,last_name,first_name,is_active,is_employee,lastupdated)
 values (40,'EMpoyi','MPOYI','Emmanuel','Y','N',now());
-insert into login_user values (33,'EMpoyi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
+insert into login_user values (40,'EMpoyi','n2OrWHXVm/BQsgd1YZJoCA==','2020-04-02','N','N','N',480);
 
 insert into system_user_role values (40,4);
 insert into system_user_role values (40,5);
