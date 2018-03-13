@@ -14,7 +14,7 @@
         <comment>Updating the person attribute Tel_conf_1</comment>
         <sql>
             update person_attribute_type set name='Tel Conf 1',description='Tel Conf 1' where name ='Tel_Conf 1';
-            update person_attribute_type set name='Tel Conf 1',description='Tel Conf 2' where name ='Tel_Conf 2';
+            update person_attribute_type set name='Tel Conf 2',description='Tel Conf 2' where name ='Tel_Conf 2';
         </sql>
     </changeSet>
      <changeSet id="OCB-CONFIG-180326120" author="Vishnu">
