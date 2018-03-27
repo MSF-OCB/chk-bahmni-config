@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-20180327518" author="vishnu"  >
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name in ('Jour(s)','Semaine(s)','Mois(s)') and locale='fr' and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+            </sqlCheck>
+        </preConditions>
+        <comment>Updating the french concept name for 'Days'concept</comment>
+        <sql>
+            update concept_name set name='Jour(s)' where name ='Day(s)' and locale='fr' and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+            update concept_name set name='Semaine(s)' where name ='Week(s)' and locale='fr' and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+            update concept_name set name='Mois(s)' where name ='Month(s)' and locale='fr' and concept_name_type in ('SHORT','FULLY_SPECIFIED');
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>
