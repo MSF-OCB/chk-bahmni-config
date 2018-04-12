@@ -63,5 +63,18 @@ Bahmni.ConceptSet.FormConditions.rules = {
                         conditions.hide.push( Traitemtent);
                     }
                     return conditions;
+                },
+'Type d\'Echo' : function (formName, formFieldValues) {
+                    var form_variable = formFieldValues['Type d\'Echo'];
+             
+                    if (form_variable == "Autre") {
+                        return {
+                            enable: ["Autre Type d\’Echo"]
+                        }
+                    } else {
+                        return {
+                            disable: ["Autre Type d\’Echo"]
+                        }
+                    }
                 }
  };
