@@ -5341,4 +5341,8 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     <sqlFile path="categorie_centre_de_provenance.sql"/>
   </changeSet>
 <include file="rename_Days_months_weeks.xml"/>
+<changeSet id="OCB-CONFIG-201804081521" author="Ramses">
+    <sqlFile path="para_concepts.sql"/>
+  </changeSet>
+<include file="paracl_form.xml"/>
 </databaseChangeLog>
