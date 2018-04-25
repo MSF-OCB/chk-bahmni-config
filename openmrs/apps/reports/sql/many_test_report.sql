@@ -1,3 +1,4 @@
+
 SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom",
@@ -5,26 +6,43 @@ SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
        concat((current_Date-b.dob)/365 ,' ','ans' , ' ',((current_date-b.dob)%365)/30, ' ','Mois')as Age,
        B.sexe AS "Sexe",
        to_char(B.date_of_results,'DD/MM/YYYY') AS "Date resultats",
-       sum(cast(B.Plaquettes AS NUMERIC)) AS "Pqt",
-       sum(cast(B.Hemoglobine AS NUMERIC)) AS "Hb",
-       sum(cast(B.Globules_Blancs AS NUMERIC)) AS "GB",
-       sum(cast(B.FLLYM AS NUMERIC)) AS "FL-L%",
-       sum(cast(B.FLNEUT AS NUMERIC)) AS "FL-N%",
-       sum(cast(B.FLMXD AS NUMERIC)) AS "FL-MID%",
-       max(COALESCE(B.Malaria)) AS "Palu",
-       max(COALESCE(B.Syphilis)) AS "Siphilis",
-       sum(cast(B.Hemoglobine_pr AS NUMERIC)) AS "Hb(Hemocue)",
-       sum(cast(B.Glycame AS NUMERIC)) AS "Glycémie",
-       sum(cast(B.Lactate AS NUMERIC)) AS "Lactate",
-       sum(cast(B.potassium AS NUMERIC)) AS "K",
-       sum(cast(B.sodium AS NUMERIC)) AS "Na",
-       sum(cast(B.Chlore AS NUMERIC)) AS "Cl",
-       sum(cast(B.GammaGT AS NUMERIC)) AS "Gamma GT(GGT)",
-       sum(cast(B.Phosphatasealcaline AS NUMERIC)) AS "Phosphatase alchaline(Pal)",
-       sum(cast(B.Bilirubine_totalE AS NUMERIC)) AS "Billi Total(BT)",
-       sum(cast(B.BilirubinedirectE AS NUMERIC)) AS "Billi direct(BD)",
-       sum(cast(B.Calcium AS NUMERIC)) AS "Calcium (Ca)",
-       sum(cast(B.EID AS NUMERIC)) AS "EID/PCR"
+sum(cast(B.FLLYM AS NUMERIC))AS "FLLYM%",
+sum(cast(B.FLMXD AS NUMERIC)) AS "FL-MXD%",
+sum(cast(B.FLNEUT AS NUMERIC))AS "FL-NEUT%",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Proteinorachie AS NUMERIC))) AS "Proteinorachie (test de Pandy)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_Urine AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Urine)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_LCR AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (LCR)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_LCR_TB AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (LCR-TB)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_TB_Crachat AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Crachat)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_TB_Pleural AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Pleural)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_TB_Ascite AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Ascite)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_TB_Pus AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Pus)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_TB_Gangi AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Ganglionnaire)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_TB_Synovial AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Synovial)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Microscopie_TB_Gastrique AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Gastrique)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Sang_hématurie AS NUMERIC))) AS "Sang (hématurie)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.urobilinogène AS NUMERIC))) AS "Urobilinogène",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.bilirubine_urine AS NUMERIC))) AS "Bilirubine",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Proteines_urine AS NUMERIC))) AS "Protéines",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.nitrites AS NUMERIC))) AS "Nitrites",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.corps_urine AS NUMERIC))) AS "Corps cétoniques",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Acide_urine AS NUMERIC))) AS "Acide ascorbique",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Glucose_urine  AS NUMERIC))) AS "Glucose",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.ph_urine AS NUMERIC))) AS "pH",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.leucocytes AS NUMERIC))) AS "Leucocytes",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Test_de_urine AS NUMERIC))) AS "Test de Grossesse",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.gram AS NUMERIC))) AS "Gram",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_urine AS NUMERIC))) AS "Rivalta(Urine)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_LCR  AS NUMERIC))) AS "Rivalta(LCR)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_Crachat  AS NUMERIC))) AS "Rivalta(Crachat)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_Pleural  AS NUMERIC))) AS "Rivalta(Pleural)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_Ascite AS NUMERIC))) AS "Rivalta(Ascite)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_Pus AS NUMERIC))) AS "Rivalta(Pus)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_Ganglionnaire  AS NUMERIC))) AS "Rivalta(Ganglionnaire)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_Synovial  AS NUMERIC))) AS "Rivalta (Synovial)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.Rivalta_Gastrique  AS NUMERIC))) AS "Rivalta (Gastrique)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(B.ge  AS NUMERIC))) AS "GE"
+
 FROM
   (/*Pivoting the table row to column*/ SELECT Patient_Name,
                                                care_center_requesting,
@@ -36,65 +54,118 @@ FROM
                                                month_of_results,
                                                COMMENT,
                                                CASE
-                                                   WHEN tname ='Bilirubine totalE' THEN tvalue
-                                               END AS Bilirubine_totalE,
+                                                   WHEN tname ='GE' THEN tvalue
+                                               END AS ge,
                                                CASE
-                                                   WHEN tname ='Plaquettes' THEN tvalue
-                                               END AS Plaquettes,
+                                                   WHEN tname = 'Rivalta (Gastrique)' THEN tvalue
+                                               END AS Rivalta_Gastrique,
                                                CASE
-                                                   WHEN tname ='Hemoglobine' THEN tvalue
-                                               END AS Hemoglobine,
+                                                   WHEN tname ='Rivalta (Synovial)' THEN tvalue
+                                               END AS Rivalta_Synovial,
+                                               CASE WHEN tname ='Rivalta (Ganglionnaire)' THEN tvalue
+                                               END AS Rivalta_Ganglionnaire,
                                                CASE
-                                                   WHEN tname ='Hemoglobine*' THEN tvalue
-                                               END AS Hemoglobine_pr,
+                                                   WHEN tname ='Rivalta (Pus)' THEN tvalue
+                                               END AS Rivalta_Pus,
                                                CASE
-                                                   WHEN tname ='Globules Blancs' THEN tvalue
-                                               END AS Globules_Blancs,
+                                                   WHEN tname ='Rivalta (Ascite)' THEN tvalue
+                                               END AS Rivalta_Ascite,
                                                CASE
-                                                   WHEN tname ='FL - NEUT%' THEN tvalue
-                                               END AS FLLYM,
+                                                   WHEN tname ='Rivalta (Pleural)' THEN tvalue
+                                               END AS Rivalta_Pleural,
                                                CASE
-                                                   WHEN tname ='FL - NEUT%' THEN tvalue
+                                                   WHEN tname ='Rivalta (Crachat)' THEN tvalue
+                                               END AS Rivalta_Crachat,
+                                               CASE
+                                                   WHEN tname ='Rivalta (LCR)' THEN tvalue
+                                               END AS Rivalta_LCR,
+                                               CASE
+                                                   WHEN tname ='Rivalta (Urine)' THEN tvalue
+                                               END AS Rivalta_urine,
+                                               CASE
+                                                   WHEN tname ='Gram' THEN tvalue
+                                               END AS gram,
+                                               CASE
+                                                   WHEN tname ='Test de Grossesse' THEN tvalue
+                                               END AS Test_de_urine,
+                                               CASE
+                                                   WHEN tname ='Leucocytes' THEN tvalue
+                                               END AS leucocytes,
+                                               CASE
+                                                   WHEN tname ='pH' THEN tvalue
+                                               END AS ph_urine,
+                                               CASE
+                                                   WHEN tname ='Glucose' THEN tvalue
+                                               END AS Glucose_urine,
+                                               CASE
+                                                   WHEN tname ='Acide ascorbique' then tvalue
+                                               END AS Acide_urine,
+                                               CASE
+                                                   WHEN tname ='Corps cétoniques' then tvalue
+                                               END AS corps_urine,
+                                               CASE
+                                                   WHEN tname ='Nitrites' then tvalue
+                                               END AS nitrites,
+                                               CASE
+                                                   WHEN tname ='Protéines' then tvalue
+                                               END AS proteines_urine,
+                                               CASE
+                                                   WHEN tname ='Bilirubine' then tvalue
+                                               END AS bilirubine_urine,
+                                               CASE
+                                                   WHEN tname ='Urobilinogène' then tvalue
+                                               END AS urobilinogène,
+                                               CASE
+                                                   WHEN tname ='Sang (hématurie)' then tvalue
+                                               END AS Sang_hématurie,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Gastrique)' then tvalue
+                                               END AS Microscopie_TB_Gastrique,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Synovial)' then tvalue
+                                               END AS Microscopie_TB_Synovial,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Ganglionnaire)' then tvalue
+                                               END AS Microscopie_TB_Gangi,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Pus)' then tvalue
+                                               END AS Microscopie_TB_Pus,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Ascite)' then tvalue
+                                               END AS Microscopie_TB_Ascite,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Pleural)' then tvalue
+                                               END AS Microscopie_TB_Pleural,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Crachat)' then tvalue
+                                               END AS Microscopie_TB_Crachat,
+                                               CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (LCR-TB)' then tvalue
+                                               END AS Microscopie_LCR_TB,
+                                                CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (LCR)' then tvalue
+                                               END AS Microscopie_LCR,
+                                                CASE
+                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Urine)' then tvalue
+                                               END AS Microscopie_Urine,
+                                                CASE
+                                                   WHEN tname ='Proteinorachie (test de Pandy)' then tvalue
+                                               END AS Proteinorachie,
+                                                CASE
+                                                   WHEN tname ='FL - NEUT%' then tvalue
                                                END AS FLNEUT,
-                                               CASE
-                                                   WHEN tname ='FL - MXD%' THEN tvalue
+                                                CASE
+                                                   WHEN tname ='FL - MXD%' then tvalue
                                                END AS FLMXD,
-                                               CASE
-                                                   WHEN tname ='Malaria' THEN dvalue
-                                               END AS Malaria,
-                                               CASE
-                                                   WHEN tname ='Syphilis' THEN dvalue
-                                               END AS Syphilis,
-                                               CASE
-                                                   WHEN tname ='Glycémie' THEN tvalue
-                                               END AS Glycame,
-                                               CASE
-                                                   WHEN tname ='Lactate' THEN tvalue
-                                               END AS Lactate,
-                                               CASE
-                                                   WHEN tname ='potassium' THEN tvalue
-                                               END AS potassium,
-                                               CASE
-                                                   WHEN tname ='sodium' THEN tvalue
-                                               END AS sodium,
-                                               CASE
-                                                   WHEN tname ='Chlore' THEN tvalue
-                                               END AS Chlore,
-                                               CASE
-                                                   WHEN tname ='Gamma GT' THEN tvalue
-                                               END AS GammaGT,
-                                               CASE
-                                                   WHEN tname ='Phosphatase alcaline' THEN tvalue
-                                               END AS Phosphatasealcaline,
-                                               CASE
-                                                   WHEN tname ='Bilirubine directE' THEN tvalue
-                                               END AS BilirubinedirectE,
-                                               CASE
-                                                   WHEN tname ='Calcium' THEN tvalue
-                                               END AS Calcium,
-                                               CASE
-                                                   WHEN tname ='EID (PCR)' THEN tvalue
-                                               END AS EID
+                                                CASE
+                                                   WHEN tname ='FL - LYM%' then tvalue
+                                               END AS FLLYM
+
+
+
+
+
+
    FROM
      (/*Pivoting the table row to column*/ SELECT sample.collection_date AS sample_date,
                                                   ss.name AS care_center_requesting,
@@ -108,7 +179,7 @@ FROM
                                                       patient.gender END AS sexe,
                                                   t.name AS tname,
                                                   r.value AS tvalue,
-                                                  trim( concat( COALESCE(NULLIF(d.dict_entry,''),''),' ')) AS dvalue,
+
                                                   sample.lastupdated :: DATE AS date_of_results,
                                                   to_char(to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'), 'Month') AS month_of_results,
                                                   a.comment
@@ -123,8 +194,14 @@ FROM
       INNER JOIN analysis a ON item.id = a.sampitem_id
       INNER JOIN RESULT r ON a.id = r.analysis_id
       INNER JOIN test t ON a.test_id = t.id AND
-            t.name IN  ('Bilirubine totalE','Plaquettes','Hemoglobine','Hemoglobine*','Globules Blancs','FL - LYM%','FL - NEUT%','FL - MXD%','Malaria','Syphilis','Glycémie','Lactate','potassium','sodium','Chlore','Gamma GT','Phosphatase alcaline','Bilirubine totalE','Bilirubine directE','Calcium','EID (PCR)')
-       LEFT JOIN dictionary d ON  r.result_type = 'D' and cast(d.id as Text) = r.value
+            t.name IN  ('GE','Rivalta (Gastrique)','Rivalta (Synovial)','Rivalta (Pus)','Rivalta (Ascite)','Rivalta (Pleural)','Rivalta (Crachat)','Rivalta (LCR)','Rivalta (Urine)','Gram',
+            'Test de Grossesse','Leucocytes','pH','Glucose','Acide ascorbique','Corps cétoniques','Nitrites','Protéines','Bilirubine',
+            'Urobilinogène','Sang (hématurie)','Microscopie TB - Recherche de BAAR (Gastrique)','Microscopie TB - Recherche de BAAR (Synovial)',
+            'Microscopie TB - Recherche de BAAR (Ganglionnaire)','Microscopie TB - Recherche de BAAR (Pus)','Microscopie TB - Recherche de BAAR (Ascite)',
+            'Microscopie TB - Recherche de BAAR (Pleural)','Microscopie TB - Recherche de BAAR (Crachat)','Microscopie TB - Recherche de BAAR (LCR-TB)',
+            'Microscopie TB - Recherche de BAAR (LCR)','Microscopie TB - Recherche de BAAR (Urine)','Proteinorachie (test de Pandy)',
+            'FL - NEUT%','FL - MXD%','FL - LYM%','Rivalta (Ganglionnaire)')
+
        WHERE   a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
                        AND pi.identity_type_id = 2) AS A) AS B
