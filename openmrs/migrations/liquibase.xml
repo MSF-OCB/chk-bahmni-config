@@ -5540,4 +5540,524 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     <sqlFile path="para_concepts.sql"/>
   </changeSet>
 <include file="paracl_form.xml"/>
+    <changeSet id="OCB-CONFIG1804231047" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name = "Bilan post hepatique(DONE AT EXTERNAL FACILITY)" and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Updating concept_name for Bilan post hepatique </comment>
+        <sql>
+            update concept_name set name = "Bilan post hepatique" where name = "Bilan post hepatique(DONE AT EXTERNAL FACILITY)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804231057" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="6">
+                select COUNT(*) from person_attribute_type where name IN ("CHKIDDuDépendant1", "CHKIDDuDépendant2", "CHKIDDuDépendant3", "CHKIDDuDépendant4", "CHKIDDuDépendant5", "CHKIDDuDépendant6") and retired = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>voiding CHKIDDpendant person_attributes  </comment>
+        <sql>
+            update person_attribute_type set retired = 1 where name IN ("CHKIDDuDépendant1", "CHKIDDuDépendant2", "CHKIDDuDépendant3", "CHKIDDuDépendant4", "CHKIDDuDépendant5", "CHKIDDuDépendant6") and retired = 0;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804231217" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_name where name IN ("LCR (Sample)", "Selles (Sample)", "Selles (Panel)") and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Updating translation for LCR (Sample), Selles (Sample), Selles (Panel) </comment>
+        <sql>
+            update concept_name set name = "LCR (Echantillon)" where name = "LCR (Sample)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Selles (Echantillon)" where name = "Selles (Sample)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Selles (Panneau)" where name = "Selles (Panel)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "LCR (Echantillon)" where name = "LCR (Sample)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Selles (Echantillon)" where name = "Selles (Sample)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Selles (Panneau)" where name = "Selles (Panel)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804231237" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="3">
+                select count(*) from concept_answer  where concept_id in(select concept_id from concept_name where name = 'Status VIH');
+            </sqlCheck>
+        </preConditions>
+        <comment> Adding Answers to Person Attributes for Status VIH </comment>
+        <sql>
+            set @concept_id = 0;
+            set @child4_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'Status VIH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Non connu' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804231407" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('Selles (Echantillon)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for Selles Echantillon </comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Selles (Echantillon)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804231408" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('LCR (Echantillon)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for LCR Echantillon</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Echantillon)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804231413" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('Selles (Panneau)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for Selles Panneau </comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Selles (Panneau)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201804242217" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from person_attribute_type where name ='Date entrée cohorte' ;
+            </sqlCheck>
+        </preConditions>
+        <comment> Adding the Date entrée cohorte </comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            set @weight = 0;
+
+            select max(sort_weight) into @weight from person_attribute_type;
+
+            INSERT INTO person_attribute_type (name, description, format, searchable, creator, date_created, retired, sort_weight, uuid, foreign_key)
+            VALUES ('Date entrée cohorte', 'Date entrée cohorte', 'org.openmrs.util.AttributableDate', 0, 1, now(), 0, @weight+1, uuid(), @concept_id);
+
+            update person_attribute_type set sort_weight = @weight+2 where name like "Date de conversion";
+            update person_attribute_type set sort_weight = @weight+3 where name like "Status VIH";
+            update person_attribute_type set sort_weight = @weight+4 where name like "Bébé exposé";
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG1804232250" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('CCMH') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+            <sqlCheck expectedResult="1">
+                select count(*) from concept_numeric where concept_id IN (select concept_id from concept_name where name IN ('CCMH' ) and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0) and units = '%';
+            </sqlCheck>
+        </preConditions>
+        <comment>Updating units for CCMH</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'CCMH' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_numeric set units = 'g/dl' where concept_id = @concept_id;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804232307" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="5">
+                select COUNT(*) from concept_name where name IN ('(If positif) Forme', '(If positif) Coloration', '(If positif) Groupement','Malaria', 'Hemoglobine*') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment> Renaming (If positif) Forme, (If positif) Groupement, (If positif) Coloration, Malaria </comment>
+        <sql>
+            update concept_name set name = "Forme" where name = "(If positif) Forme" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Groupement" where name = "(If positif) Groupement" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Coloration" where name = "(If positif) Coloration" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "TDR - Malaria" where name = "Malaria" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Hemoglobine* (Hemocue)" where name = "Hemoglobine*" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Forme" where name = "(If positif) Forme" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Groupement" where name = "(If positif) Groupement" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Coloration" where name = "(If positif) Coloration" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "TDR - Malaria" where name = "Malaria" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Hemoglobine* (Hemocue)" where name = "Hemoglobine*" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804240037" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="3">
+                select COUNT(*) from concept_name where name IN ('Forme', 'Coloration', 'Groupement') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+            <sqlCheck expectedResult="7">
+                select COUNT(*) from concept_answer where concept_id IN (select concept_id from concept_name where name IN ('Forme','Coloration','Groupement' ) and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0) ;
+            </sqlCheck>
+        </preConditions>
+        <comment> Adding Answers to Person Attributes for Status VIH </comment>
+        <sql>
+            set @concept1_id = 0;
+            set @concept2_id = 0;
+            set @concept3_id = 0;
+            set @child3_concept_id = 0;
+
+            select concept_id into @concept1_id from concept_name where name = 'Forme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept2_id from concept_name where name = 'Coloration' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept3_id from concept_name where name = 'Groupement' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept1_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept2_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept3_id, @child3_concept_id, 3);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804232319" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="5">
+                select COUNT(*) from concept_name where name IN ('Forme', 'Coloration', 'Groupement', 'Hemoglobine* (Hemocue)', 'TDR - Malaria') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for Forme, Coloration, Groupement</comment>
+        <sql>
+            set @uuid = NULL;
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Forme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Coloration' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Groupement' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'TDR - Malaria' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Hemoglobine* (Hemocue)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804240042" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name = "Pas applicable" and concept_name_type = "FULLY_SPECIFIED"  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Pas applicable</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Pas applicable','Pas applicable','N/A','Misc',false);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804240057" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="6">
+                select COUNT(*) from concept_name where name IN ('Crag', 'Gram', 'Encre de chine', 'Proteinorachie (test de Pandy)', 'Microscopie TB - Recherche de BAAR (LCR)', 'Pas applicable') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+            <sqlCheck expectedResult="13">
+                select COUNT(*) from concept_answer where concept_id IN (select concept_id from concept_name where name IN ('Crag', 'Gram', 'Encre de chine', 'Proteinorachie (test de Pandy)', 'Microscopie TB - Recherche de BAAR (LCR)', 'Pas applicable') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0);
+            </sqlCheck>
+        </preConditions>
+        <comment> Adding Answers to Crag, Gram, Encre de chine, Proteinorachie (test de Pandy), Microscopie TB - Recherche de BAAR (LCR) </comment>
+        <sql>
+            set @concept1_id = 0;
+            set @concept2_id = 0;
+            set @concept3_id = 0;
+            set @concept4_id = 0;
+            set @concept5_id = 0;
+            set @child3_concept_id = 0;
+
+            select concept_id into @concept1_id from concept_name where name = 'Crag' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept2_id from concept_name where name = 'Gram' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept3_id from concept_name where name = 'Encre de chine' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept4_id from concept_name where name = 'Proteinorachie (test de Pandy)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept5_id from concept_name where name = 'Microscopie TB - Recherche de BAAR (LCR)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Pas applicable' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept1_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept2_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept3_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept4_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept5_id, @child3_concept_id, 6);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804242222" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name = "MCH" and concept_name_type = "FULLY_SPECIFIED"  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding LabTest concept MCH</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'MCH','MCH','Numeric','LabTest',false);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804242225" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN('MCH')
+                AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Hemogramme');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding MCH Test to Hemogramme Panel</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'Hemogramme' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 5);
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804250049" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN('MCH')
+                AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Sang');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding Aspect Test to LCR Sample</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Sang' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 5);
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804242232" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name IN( 'Aspect', 'Clair', 'Jaune citron','Trouble','Hemathique') and concept_name_type = "FULLY_SPECIFIED"  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding LabTest concept Aspect</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Aspect','Aspect','Coded','LabTest',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Clair','Clair','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Jaune citron','Jaune citron','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Trouble','Trouble','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hemathique','Hemathique','N/A','Misc',false);
+
+            select concept_id into @concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Clair' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Jaune citron' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Trouble' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Hemathique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804250032" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect')
+                AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Panel)');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding Aspect Test to LCR Panel</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Panel)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member1_concept_id from concept_name where name = 'Numeration GB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 11);
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804250038" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect')
+                AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Echantillon)');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding Aspect Test to LCR Sample</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Echantillon)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 12);
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804250041" author="Sudhamsh">
+        <comment>Adding entries in event_records table for MCH and Aspect</comment>
+        <sql>
+            set @uuid = NULL;
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+            select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804250132" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name IN( 'Aspect', 'Clair', 'Jaune citron','Trouble','Hemathique') and concept_name_type = "FULLY_SPECIFIED"  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding LabTest concept Aspect</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Aspect','Aspect','Coded','LabTest',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Clair','Clair','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Jaune citron','Jaune citron','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Trouble','Trouble','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hemathique','Hemathique','N/A','Misc',false);
+
+            select concept_id into @concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Clair' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Jaune citron' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Trouble' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Hemathique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804250059" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="2">
+                select COUNT(*) from concept_name where name IN ('Œuf', 'Kyste') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment> Renaming Œuf', 'Kyste' </comment>
+        <sql>
+            update concept_name set name = "Œuf - Ascaris" where name = "Œuf" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Kyste - Giardia" where name = "Kyste" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Œuf - Ascaris" where name = "Œuf" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Kyste - Giardia" where name = "Kyste" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804250159" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="3">
+                select COUNT(*) from concept_answer where concept_id = (select concept_id from concept_name where name = 'Selles Directs - KOP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            </sqlCheck>
+        </preConditions>
+        <comment> Adding new concept answers to Selles Directs - KOP </comment>
+        <sql>
+            set @concept_id = 0;
+            set @weight = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+            set @child5_concept_id = 0;
+            set @child6_concept_id = 0;
+            set @child7_concept_id = 0;
+            set @child8_concept_id = 0;
+            set @child9_concept_id = 0;
+            set @child10_concept_id = 0;
+            set @answer_concept =0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'FV - Entamoeba Histolyca','FV - Entamoeba Histolyca','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'FV - Giardia','FV - Giardia','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Kyste - Entamoeba Histolyca','Kyste - Entamoeba Histolyca','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Œuf - Trichocephale','Œuf - Trichocephale','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Œuf - Ankylostome','Œuf - Ankylostome','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Œuf - Trichomonas','Œuf - Trichomonas','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Larve - Ankylostome','Larve - Ankylostome','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Larve - Angullule','Larve - Angullule','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Levures','Levures','N/A','Misc',false);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autres','Autres','N/A','Misc',false);
+
+            select max(sort_weight) into @weight from concept_answer where concept_id = (select concept_id from concept_name where name = 'Selles Directs - KOP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+
+            select concept_id into @concept_id from concept_name where name = 'Selles Directs - KOP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @answer_concept from concept_name where name = 'Parasite' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            delete from concept_answer where concept_id = @concept_id and answer_concept = @answer_concept;
+
+            select concept_id into @child1_concept_id from concept_name where name = 'FV - Entamoeba Histolyca'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'FV - Giardia'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Kyste - Entamoeba Histolyca'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Œuf - Trichocephale'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = 'Œuf - Ankylostome'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child6_concept_id from concept_name where name = 'Œuf - Trichomonas'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child7_concept_id from concept_name where name = 'Larve - Ankylostome'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child8_concept_id from concept_name where name = 'Larve - Angullule'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child9_concept_id from concept_name where name = 'Levures'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child10_concept_id from concept_name where name = 'Autres'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, @weight+1);
+            call add_concept_answer(@concept_id, @child2_concept_id, @weight+2);
+            call add_concept_answer(@concept_id, @child3_concept_id, @weight+3);
+            call add_concept_answer(@concept_id, @child4_concept_id, @weight+4);
+            call add_concept_answer(@concept_id, @child5_concept_id, @weight+5);
+            call add_concept_answer(@concept_id, @child6_concept_id, @weight+6);
+            call add_concept_answer(@concept_id, @child7_concept_id, @weight+7);
+            call add_concept_answer(@concept_id, @child8_concept_id, @weight+8);
+            call add_concept_answer(@concept_id, @child9_concept_id, @weight+9);
+            call add_concept_answer(@concept_id, @child10_concept_id, @weight+10);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
