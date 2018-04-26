@@ -5562,9 +5562,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             update person_attribute_type set retired = 1 where name IN ("CHKIDDuDépendant1", "CHKIDDuDépendant2", "CHKIDDuDépendant3", "CHKIDDuDépendant4", "CHKIDDuDépendant5", "CHKIDDuDépendant6") and retired = 0;
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG1804231217" author="Sudhamsh">
+    <changeSet id="OCB-CONFIG1804231218" author="Sudhamsh">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
+            <sqlCheck expectedResult="3">
                 select COUNT(*) from concept_name where name IN ("LCR (Sample)", "Selles (Sample)", "Selles (Panel)") and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
             </sqlCheck>
         </preConditions>
