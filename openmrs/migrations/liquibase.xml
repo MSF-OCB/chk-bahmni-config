@@ -5345,15 +5345,16 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     <sqlFile path="para_concepts.sql"/>
   </changeSet>
 <include file="paracl_form.xml"/>
-    <changeSet id="OCB-CONFIG1804231047" author="Sudhamsh">
+    <changeSet id="OCB-CONFIG1804231049" author="Sudhamsh">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
-                select COUNT(*) from concept_name where name = "Bilan post hepatique(DONE AT EXTERNAL FACILITY)" and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+                select COUNT(*) from concept_name where name = "Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)" and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
             </sqlCheck>
         </preConditions>
-        <comment>Updating concept_name for Bilan post hepatique </comment>
+        <comment>Updating concept_name for Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY) </comment>
         <sql>
-            update concept_name set name = "Bilan post hepatique" where name = "Bilan post hepatique(DONE AT EXTERNAL FACILITY)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Bilan post hepatique" where name = "Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Bilan post hepatique" where name = "Bilan post hepatique (ANALYSIS DONE AT EXTERNAL FACILITY)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG1804231057" author="Sudhamsh">
