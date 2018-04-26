@@ -136,8 +136,12 @@
             },
             "Date du prochain RDV":{
                 "disableAddNotes":true
+            },"Paraclinique": {
+                "allowAddMore": true
             },
-           
+            "Echographie": {
+                "allowAddMore": true
+            },
             "Resultat":{
             "dropdown":true
             }
