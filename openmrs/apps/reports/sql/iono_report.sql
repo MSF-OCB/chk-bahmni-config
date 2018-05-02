@@ -60,7 +60,7 @@ FROM
                                                   t.name AS tname,
                                                   r.value AS tvalue,
                                                   trim( concat( COALESCE(NULLIF(d.dict_entry,''),''),' ')) AS dvalue,
-                                                  sample.lastupdated :: DATE AS date_of_results,
+                                                  r.lastupdated :: DATE AS date_of_results,
                                                   to_char(to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'), 'Month') AS month_of_results,
                                                   a.comment
       FROM
