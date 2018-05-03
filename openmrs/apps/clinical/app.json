@@ -144,6 +144,51 @@
       },
       "Resultat": {
         "dropdown": true
+      },
+      "Infections Opportunistes": {
+        "autocomplete": true
+      },
+      "Type de TB": {
+        "multiSelect": true
+      },
+      "Ligne d'ARV": {
+        "dropdown": true
+      },
+      "ARV": {
+        "autocomplete": true
+      },
+      "Information Infections opportunistes": {
+        "allowAddMore": true
+      },
+      "Informations TB": {
+        "allowAddMore": true
+      },
+      "Historique ARV": {
+        "allowAddMore": true
+      },
+      "Informations Prophylaxie": {
+        "allowAddMore": true
+      },
+      "Informations allergies": {
+        "allowAddMore": true
+      },
+      "Informations chirurgicales": {
+        "allowAddMore": true
+      },
+      "Hématologique transfusion antérieures années": {
+        "allowAddMore": true
+      },
+      "Info Prophylaxie après la naissance": {
+        "allowAddMore": true
+      },
+      "Info Prophylaxie à l'accouchement": {
+        "allowAddMore": true
+      },
+      "Informations Vaccination": {
+        "allowAddMore": true
+      },
+      "Vaccination": {
+        "autocomplete": true
       }
     }
   }

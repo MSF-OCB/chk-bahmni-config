@@ -64,17 +64,39 @@ Bahmni.ConceptSet.FormConditions.rules = {
                     }
                     return conditions;
                 },
-'Type d\'Echo' : function (formName, formFieldValues) {
-                    var form_variable = formFieldValues['Type d\'Echo'];
-             
-                    if (form_variable == "Autre") {
-                        return {
-                            enable: ["Autre Type d\’Echo"]
+    'Type d\'Echo': function (formName, formFieldValues) {
+                        var form_variable = formFieldValues['Type d\'Echo'];
+
+                        if (form_variable == "Autre") {
+                            return {
+                                enable: ["Autre Type d\’Echo"]
+                            }
+                        } else {
+                            return {
+                                disable: ["Autre Type d\’Echo"]
+                            }
                         }
-                    } else {
-                        return {
-                            disable: ["Autre Type d\’Echo"]
-                        }
-                    }
-                }
+                    },
+    'Vaccination': function (formName, formFieldValues) {
+        var conditions = {enable: [], disable: []};
+        var Vaccination = "Type de vaccination";
+        var result = formFieldValues['Vaccination'];
+        if (result == "Autres") {
+            conditions.enable.push(Vaccination);
+        } else {
+            conditions.disable.push(Vaccination);
+        }
+        return conditions;
+    },
+    "Mère sous ARV pendant la grossesse":function (formName, formFieldValues) {
+        var conditions = {enable: [], disable: []};
+        var Mois = "Si oui, Nombre de mois";
+        var result = formFieldValues['Mère sous ARV pendant la grossesse'];
+        if (result == "Oui") {
+            conditions.enable.push(Mois);
+        } else {
+            conditions.disable.push(Mois);
+        }
+        return conditions;
+    },
  };
