@@ -5,14 +5,14 @@ SELECT to_char(B.date_of_results,'DD/MM/YYYY')   AS "Date des résultats",
        EXTRACT(YEAR FROM Now()) - EXTRACT(YEAR FROM B.dob) as "Age"  ,
        B.sexe AS "Sexe",
        to_char(B.sample_date, 'DD/MM/YYYY') as "Date de prélèvement",
-       sum(cast( CASE when B.CD4 = '' then NULL ELSE B.CD4 END  AS NUMERIC)) AS "RESULTS CD4 (cells/µl)",
-       sum(cast( CASE when B.CD4_percentage = '' then NULL ELSE B.CD4_percentage END  AS NUMERIC)) AS "CD4 %",
-       sum(cast( CASE when B.GPT = '' then NULL ELSE B.GPT END AS NUMERIC)) AS "SGPT (UI/L)",
-       sum(cast( CASE when B.Creatinine = '' then NULL ELSE B.Creatinine END  AS NUMERIC)) AS "CREAT (µmol/L)",
-       sum(cast( CASE when B.Glucose_LCR = '' then NULL ELSE B.Glucose_LCR END  AS NUMERIC)) AS "GLU LCR (mg/dl)",
-       (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Hep_B = '' then NULL ELSE B.Hep_B END AS NUMERIC))) ) "Hep. B", /*getting coded value for tests*/
-       (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Crag_serique = '' then NULL ELSE B.Crag_serique END AS NUMERIC))) )AS "CRAG SERIQUE",/*getting coded value for tests*/
-       (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Crag_LCR = '' then NULL ELSE B.Crag_LCR END AS NUMERIC)))) AS "CRAG LCR"/*getting coded value for tests*/
+       sum(cast(B.CD4 AS NUMERIC)) AS "RESULTS CD4 (cells/µl)",
+       sum(cast(B.CD4_percentage AS NUMERIC)) AS "CD4 %",
+       sum(cast(B.GPT AS NUMERIC)) AS "SGPT (UI/L)",
+       sum(cast(B.Creatinine AS NUMERIC)) AS "CREAT (µmol/L)",
+       sum(cast(B.Glucose_LCR AS NUMERIC)) AS "GLU LCR (mg/dl)",
+       (Select dict_entry from DICTIONARY where id in (sum(cast(B.Hep_B AS NUMERIC))) ) "Hep. B", /*getting coded value for tests*/
+       (Select dict_entry from DICTIONARY where id in (sum(cast(B.Crag_serique AS NUMERIC))) )AS "CRAG SERIQUE",/*getting coded value for tests*/
+       (Select dict_entry from DICTIONARY where id in (sum(cast(B.Crag_LCR AS NUMERIC)))) AS "CRAG LCR"/*getting coded value for tests*/
 
 FROM
   (/*Pivoting the table row to column*/
