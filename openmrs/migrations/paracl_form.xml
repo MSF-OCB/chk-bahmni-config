@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        <changeSet id="OCB-CONFIG-20180412359" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN ('Cardiaque','Abdominale','Pelvienne','Abdomino Pelvienne','Autre(Paraform)') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Type d\'Echo');
+                </sqlCheck>
+                </preConditions>
+                <sql>
+                  set @concept_id = 0;
+set @child1_concept_id = 0;
+set @child2_concept_id = 0;
+set @child3_concept_id = 0;
+set @child4_concept_id = 0;
+set @child5_concept_id = 0;
+
+
+select concept_id into @concept_id from concept_name where name='Type d\'Echo'	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+select concept_id into @child1_concept_id from concept_name where name='Cardiaque'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+select concept_id into @child2_concept_id from concept_name where name='Abdominale'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+select concept_id into @child3_concept_id from concept_name where name='Pelvienne'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+select concept_id into @child4_concept_id from concept_name where name='Abdomino Pelvienne'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+select concept_id into @child5_concept_id from concept_name where name='Autre(Paraform)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+            call add_concept_answer(@concept_id, @child5_concept_id, 5);
+</sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-20180412360" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Paraclinique','Echographie')
+                   AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Paraclinique(form)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Test á l'admission</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+         select concept_id into @concept_id from concept_name where name = 'Paraclinique(form)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+         select concept_id into @member1_concept_id from concept_name where name = 'Paraclinique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @member2_concept_id from concept_name where name = 'Echographie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+         </sql>
+         </changeSet>
+
+<changeSet id="OCB-CONFIG-20180412361" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Type de radio','Date de radio','Resultats Radio')
+                   AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Paraclinique');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Test á l'admission</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+         select concept_id into @concept_id from concept_name where name = 'Paraclinique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+         select concept_id into @member1_concept_id from concept_name where name = 'Type de radio' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @member2_concept_id from concept_name where name = 'Date de radio' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @member3_concept_id from concept_name where name = 'Resultats Radio' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+            
+         </sql>
+         </changeSet>
+
+         <changeSet id="OCB-CONFIG-20180412362" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Type d\'Echo',"Autre Type d’Echo")
+                   AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Echographie');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Test á l'admission</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+            set @member4_concept_id = 0;
+         select concept_id into @concept_id from concept_name where name = 'Echographie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+         select concept_id into @member1_concept_id from concept_name where name = 'Type d\'Echo' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @member2_concept_id from concept_name where name = "Autre Type d’Echo"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @member3_concept_id from concept_name where name = "Date Echo"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @member4_concept_id from concept_name where name = "Resultats Echo"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+            call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+            
+         </sql>
+         </changeSet>
+         
+        
+         <changeSet id="OCB-CONFIG-20180412363" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN
+                   ('Paraclinique(form)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'All Observation Templates');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding observation to All Observation Templates</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'All Observation Templates' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Paraclinique(form)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>
+
+
+
+
+
+
