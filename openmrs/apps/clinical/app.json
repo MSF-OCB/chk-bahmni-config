@@ -189,6 +189,35 @@
             },
             "Vaccination":{
                 "autocomplete":true
+            },
+            "Sc, Diagnostic":{
+                "dropdown":false,
+                "autocomplete":true,
+                "multiSelect": true
+            },
+            "Stade clinique OMS":{
+                "dropdown":true
+            },
+            "Examen clinique":{
+                "allowAddMore": true
+            },
+            "Information Diagnostique":{
+                "allowAddMore": true
+
+            },
+            "Sc, Informations prophylaxie":{
+                "allowAddMore": true
+            },
+            "Sc, Informations Infections opportunistes":{
+                "allowAddMore": true
+            },
+            "Infections Opportunistes":{
+                "dropdown":false,
+                "autocomplete":true,
+                "multiSelect": true
+            },
+            "Date de prochain RDV":{
+                "allowFutureDates": true
             }
         }
     }

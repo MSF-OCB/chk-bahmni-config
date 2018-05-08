@@ -6841,13 +6841,13 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-201805072201" author="Sudhamsh">
-        <comment>Adding set members for Informations infections opportunistes</comment>
+        <comment>Adding set members for Sc, Informations Infections opportunistes</comment>
         <sql>
             set @concept_id = 0;
             set @member1_concept_id = 0;
             set @member2_concept_id = 0;
 
-            select concept_id into @concept_id from concept_name where name = 'Informations infections opportunistes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept_id from concept_name where name = 'Sc, Informations Infections opportunistes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select concept_id into @member1_concept_id from concept_name where name = 'Infections Opportunistes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member2_concept_id from concept_name where name = 'Status IO' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
@@ -6953,7 +6953,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             select concept_id into @member3_concept_id from concept_name where name = 'Stade clinique OMS' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member4_concept_id from concept_name where name = 'Examen clinique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member5_concept_id from concept_name where name = 'Information Diagnostique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @member6_concept_id from concept_name where name = 'Informations infections opportunistes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member6_concept_id from concept_name where name = 'Sc, Informations Infections opportunistes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member7_concept_id from concept_name where name = 'Sc, Informations prophylaxie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member8_concept_id from concept_name where name = 'Prochain RDV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 

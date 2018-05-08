@@ -21,8 +21,7 @@ call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Information 
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Sc, Diagnostic','Diagnostic','Coded','Misc',FALSE);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Observations et conduite à tenir','Observations et conduite à tenir','Text','Misc',FALSE);
 
-call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Informations infections opportunistes','Informations infections opportunistes','N/A','Misc',TRUE);
-call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Infections Opportunistes','Infections Opportunistes','Coded','Misc',FALSE);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Sc, Informations Infections opportunistes','Informations Infections opportunistes','N/A','Misc',TRUE);
 
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Status IO','Status IO','Coded','Misc',FALSE);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Nouveau', 'Nouveau','N/A','Misc',FALSE);
