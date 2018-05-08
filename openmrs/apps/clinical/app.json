@@ -1,224 +1,224 @@
 {
-    "id":"bahmni.clinical",
-    "extensionPoints":[
-        {
-            "id":"org.bahmni.clinical.consultation.board",
-            "description":"Bahmni Clinical Consultation Page"
-        },
-        {
-            "id":"org.bahmni.clinical.conceptSetGroup.*",
-            "description":"Define conceptsets part of a conceptset group"
-        },
-        {
-            "id":"org.bahmni.clinical.orders",
-            "description":"Bahmni Orders Page"
-        },
-        {
-            "id":"org.bahmni.patient.search",
-            "description":"Bahmni Patient search, lookups Page"
-        }
-    ],
-    "contextModel":[
-        "patientUuid",
-        "visitUuid"
-    ],
-    "config":{
-        "enableLabOrderOptions":true,
-        "addVisitTypeToComment":true,
-        "quickPrints":true,
-        "networkConnectivity":{
-            "showNetworkStatusMessage":false,
-            "networkStatusCheckInterval":20000,
-            "locales":[
-                {
-                    "locale":"fr",
-                    "css":"offline-language-french"
-                },
-                {
-                    "locale":"es",
-                    "css":"offline-language-spanish"
-                }
-            ]
-        },
-        "diagnosisStatus":"Inactive",
-        "program":{
-            "patientInformation":{
-                "ageLimit":100
-            }
-        },
-        "patientContext":{
-            "programAttributes":[
-                "Id_Number",
-                "Doctor",
-                "Stage"
-            ],
-            "personAttributes":[
-                "class",
-                "caste",
-                "Type de cohorte",
-                "Converti CP"
-            ],
-            "additionalPatientIdentifiers":[
-                "National ID"
-            ],
-            "preferredIdentifier":"Id_Number"
-        },
-        "obsIgnoreList":[
-            "REGISTRATION FEES",
-            "COMMENTS",
-            "Patient file"
-        ],
-        "otherInvestigationsMap":{
-            "Radiology":"Radiology Order",
-            "Endoscopy":"Endoscopy Order"
-        },
-        "allowConsultationWhenNoOpenVisit":false,
-        "defaultVisitType":"OPD",
-        "visitTypeForRetrospectiveEntries":"Special OPD",
-        "maxConceptSetLevels":3,
-        "allowOnlyCodedDiagnosis":false,
-        "conceptSetUI": {
-            "Test á l'admission": {
-                "allowAddMore" :true
-            },
-            "Syndrome d'admission" :{
-            "dropdown":true
-            },
-            "Type":{
-            "dropdown":true
-            },
-            "Référé en IPD par(FOSA)":{
-            "dropdown":true
-            },
-            "FOSA de suivi ARV":{
-            "dropdown":true
-            },
-            "Malade arrivé mort":{
-            "dropdown":true
-            },
-            "Stade OMS":{
-            "dropdown":true
-            },
-            "Date":{
-            "allowFutureDates":false
-            },
-            "Diagnostic":{
-             "dropdown":false,
-             "autocomplete":true,
-             "multiSelect": true,
-             "disableAddNotes":true
-            },
-             "RPEC":{
-            "allowAddMore" :true
-            }, 
-            "Date de sortie":{
-            "allowFutureDates": true,
-            "disableAddNotes":true
-            },
-            "Syndrome et Diagnostic":{
-             "allowAddMore":true
-            },
-            "Syndrome":{
-                "dropdown":true,
-                "disableAddNotes":true
-            },
-             "Ligne":{
-                "disableAddNotes":true
-            },
-            "Mis sous ARV en hospitalization":{
-                "disableAddNotes":true
-            },
-            "Traitemtent TB commencé?":{
-                "disableAddNotes":true
-            },
-            "Mode de sortie":{
-                "disableAddNotes":true
-            },
-            "Date du prochain RDV":{
-                "disableAddNotes":true
-            },"Paraclinique": {
-                "allowAddMore": true
-            },
-            "Echographie": {
-                "allowAddMore": true
-            },
-            "Resultat":{
-            "dropdown":true
-            },
-            "Infections Opportunistes":{
-                "autocomplete":true
-            },
-            "Type de TB":{
-                "multiSelect":true
-            },
-            "Ligne d'ARV":{
-                "dropdown":true
-            },
-            "ARV":{
-                "autocomplete":true
-            },
-            "Information Infections opportunistes":{
-                "allowAddMore":true
-            },
-            "Informations TB":{
-                "allowAddMore":true
-            },
-            "Historique ARV":{
-                "allowAddMore":true
-            },
-            "Informations Prophylaxie":{
-                "allowAddMore":true
-            },
-            "Informations allergies":{
-                "allowAddMore":true
-            },
-            "Informations chirurgicales":{
-                "allowAddMore":true
-            },
-            "Hématologique transfusion antérieures années":{
-                "allowAddMore":true
-            },
-            "Info Prophylaxie après la naissance":{
-                "allowAddMore":true
-            },
-            "Info Prophylaxie à l'accouchement":{
-                "allowAddMore":true
-            },
-            "Informations Vaccination":{
-                "allowAddMore":true
-            },
-            "Vaccination":{
-                "autocomplete":true
-            },
-            "Sc, Diagnostic":{
-                "dropdown":false,
-                "autocomplete":true,
-                "multiSelect": true
-            },
-            "Stade clinique OMS":{
-                "dropdown":true
-            },
-            "Examen clinique":{
-                "allowAddMore": true
-            },
-            "Information Diagnostique":{
-                "allowAddMore": true
-
-            },
-            "Sc, Informations prophylaxie":{
-                "allowAddMore": true
-            },
-            "Sc, Informations Infections opportunistes":{
-                "allowAddMore": true
-            },
-            "Infections Opportunistes":{
-                "dropdown":false,
-                "autocomplete":true,
-                "multiSelect": true
-            },
-            "Date de prochain RDV":{
-                "allowFutureDates": true
-            }
-        }
+  "id": "bahmni.clinical",
+  "extensionPoints": [
+    {
+      "id": "org.bahmni.clinical.consultation.board",
+      "description": "Bahmni Clinical Consultation Page"
+    },
+    {
+      "id": "org.bahmni.clinical.conceptSetGroup.*",
+      "description": "Define conceptsets part of a conceptset group"
+    },
+    {
+      "id": "org.bahmni.clinical.orders",
+      "description": "Bahmni Orders Page"
+    },
+    {
+      "id": "org.bahmni.patient.search",
+      "description": "Bahmni Patient search, lookups Page"
     }
+  ],
+  "contextModel": [
+    "patientUuid",
+    "visitUuid"
+  ],
+  "config": {
+    "enableLabOrderOptions": ["Urgent"],
+    "addVisitTypeToComment": true,
+    "quickPrints": true,
+    "networkConnectivity": {
+      "showNetworkStatusMessage": false,
+      "networkStatusCheckInterval": 20000,
+      "locales": [
+        {
+          "locale": "fr",
+          "css": "offline-language-french"
+        },
+        {
+          "locale": "es",
+          "css": "offline-language-spanish"
+        }
+      ]
+    },
+    "diagnosisStatus": "Inactive",
+    "program": {
+      "patientInformation": {
+        "ageLimit": 100
+      }
+    },
+    "patientContext": {
+      "programAttributes": [
+        "Id_Number",
+        "Doctor",
+        "Stage"
+      ],
+      "personAttributes": [
+        "class",
+        "caste",
+        "Type de cohorte"
+      ],
+      "additionalPatientIdentifiers": [
+        "National ID"
+      ],
+      "preferredIdentifier": "Id_Number"
+    },
+    "obsIgnoreList": [
+      "REGISTRATION FEES",
+      "COMMENTS",
+      "Patient file"
+    ],
+    "otherInvestigationsMap": {
+      "Radiology": "Radiology Order",
+      "Endoscopy": "Endoscopy Order"
+    },
+    "allowConsultationWhenNoOpenVisit": false,
+    "defaultVisitType": "OPD",
+    "visitTypeForRetrospectiveEntries": "Special OPD",
+    "maxConceptSetLevels": 3,
+    "allowOnlyCodedDiagnosis": false,
+    "conceptSetUI": {
+      "Test á l'admission": {
+        "allowAddMore": true
+      },
+      "Syndrome d'admission": {
+        "dropdown": true
+      },
+      "Type": {
+        "dropdown": true
+      },
+      "Référé en IPD par(FOSA)": {
+        "dropdown": true
+      },
+      "FOSA de suivi ARV": {
+        "dropdown": true
+      },
+      "Malade arrivé mort": {
+        "dropdown": true
+      },
+      "Stade OMS": {
+        "dropdown": true
+      },
+      "Date": {
+        "allowFutureDates": false
+      },
+      "Diagnostic": {
+        "dropdown": false,
+        "autocomplete": true,
+        "multiSelect": true,
+        "disableAddNotes": true
+      },
+      "RPEC": {
+        "allowAddMore": true
+      },
+      "Date de sortie": {
+        "allowFutureDates": true,
+        "disableAddNotes": true
+      },
+      "Syndrome et Diagnostic": {
+        "allowAddMore": true
+      },
+      "Syndrome": {
+        "dropdown": true,
+        "disableAddNotes": true
+      },
+      "Ligne": {
+        "disableAddNotes": true
+      },
+      "Mis sous ARV en hospitalization": {
+        "disableAddNotes": true
+      },
+      "Traitemtent TB commencé?": {
+        "disableAddNotes": true
+      },
+      "Mode de sortie": {
+        "disableAddNotes": true
+      },
+      "Date du prochain RDV": {
+        "disableAddNotes": true
+      },
+      "Paraclinique": {
+        "allowAddMore": true
+      },
+      "Echographie": {
+        "allowAddMore": true
+      },
+      "Resultat": {
+        "dropdown": true
+      },
+      "Infections Opportunistes": {
+        "autocomplete": true
+      },
+      "Type de TB": {
+        "multiSelect": true
+      },
+      "Ligne d'ARV": {
+        "dropdown": true
+      },
+      "ARV": {
+        "autocomplete": true
+      },
+      "Information Infections opportunistes": {
+        "allowAddMore": true
+      },
+      "Informations TB": {
+        "allowAddMore": true
+      },
+      "Historique ARV": {
+        "allowAddMore": true
+      },
+      "Informations Prophylaxie": {
+        "allowAddMore": true
+      },
+      "Informations allergies": {
+        "allowAddMore": true
+      },
+      "Informations chirurgicales": {
+        "allowAddMore": true
+      },
+      "Hématologique transfusion antérieures années": {
+        "allowAddMore": true
+      },
+      "Info Prophylaxie après la naissance": {
+        "allowAddMore": true
+      },
+      "Info Prophylaxie à l'accouchement": {
+        "allowAddMore": true
+      },
+      "Informations Vaccination": {
+        "allowAddMore": true
+      },
+      "Vaccination": {
+        "autocomplete": true
+      },
+      "Sc, Diagnostic":{
+        "dropdown":false,
+        "autocomplete":true,
+        "multiSelect": true
+      },
+      "Stade clinique OMS":{
+        "dropdown":true
+      },
+      "Examen clinique":{
+        "allowAddMore": true
+      },
+      "Information Diagnostique":{
+        "allowAddMore": true
+
+      },
+      "Sc, Informations prophylaxie":{
+        "allowAddMore": true
+      },
+      "Sc, Informations Infections opportunistes":{
+        "allowAddMore": true
+      },
+      "Infections Opportunistes":{
+        "dropdown":false,
+        "autocomplete":true,
+        "multiSelect": true
+      },
+      "Date de prochain RDV":{
+        "allowFutureDates": true
+      }
+    }
+  }
 }
