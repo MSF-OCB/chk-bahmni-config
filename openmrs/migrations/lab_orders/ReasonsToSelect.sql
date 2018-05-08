@@ -48,7 +48,10 @@ set @child20_concept_id = 0;
 set @child21_concept_id = 0;
 set @child22_concept_id = 0;
 set @child24_concept_id = 0;
+<<<<<<< HEAD
 set @child25_concept_id = 0;
+=======
+>>>>>>> ebd627f... Mahitha | #252 | Added migrations to create reasons concepts for lab orders
 
 select concept_id into @concept_id from concept_name where name = 'Raisons du test de laboratoire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
@@ -76,6 +79,7 @@ select concept_id into @child21_concept_id from concept_name where name = 'TB - 
 select concept_id into @child22_concept_id from concept_name where name = 'TB - CONTROLE F2' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 select concept_id into @child23_concept_id from concept_name where name = 'TB - CONTROLE F3' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 select concept_id into @child24_concept_id from concept_name where name = 'TB - CONTROLE F5' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+<<<<<<< HEAD
 select concept_id into @child25_concept_id from concept_name where name = 'Autres' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
 
@@ -104,3 +108,31 @@ call add_concept_answer(@concept_id, @child22_concept_id, 22);
 call add_concept_answer(@concept_id, @child23_concept_id, 23);
 call add_concept_answer(@concept_id, @child24_concept_id, 24);
 call add_concept_answer(@concept_id, @child25_concept_id, 25);
+=======
+
+
+call add_concept_set_members(@concept_id, @child1_concept_id, 1);
+call add_concept_set_members(@concept_id, @child2_concept_id, 2);
+call add_concept_set_members(@concept_id, @child3_concept_id, 3);
+call add_concept_set_members(@concept_id, @child4_concept_id, 4);
+call add_concept_set_members(@concept_id, @child5_concept_id, 5);
+call add_concept_set_members(@concept_id, @child6_concept_id, 6);
+call add_concept_set_members(@concept_id, @child7_concept_id, 7);
+call add_concept_set_members(@concept_id, @child8_concept_id, 8);
+call add_concept_set_members(@concept_id, @child9_concept_id, 9);
+call add_concept_set_members(@concept_id, @child10_concept_id, 10);
+call add_concept_set_members(@concept_id, @child11_concept_id, 11);
+call add_concept_set_members(@concept_id, @child12_concept_id, 12);
+call add_concept_set_members(@concept_id, @child13_concept_id, 13);
+call add_concept_set_members(@concept_id, @child14_concept_id, 14);
+call add_concept_set_members(@concept_id, @child15_concept_id, 15);
+call add_concept_set_members(@concept_id, @child16_concept_id, 16);
+call add_concept_set_members(@concept_id, @child17_concept_id, 17);
+call add_concept_set_members(@concept_id, @child18_concept_id, 18);
+call add_concept_set_members(@concept_id, @child19_concept_id, 19);
+call add_concept_set_members(@concept_id, @child20_concept_id, 20);
+call add_concept_set_members(@concept_id, @child21_concept_id, 21);
+call add_concept_set_members(@concept_id, @child22_concept_id, 22);
+call add_concept_set_members(@concept_id, @child23_concept_id, 23);
+call add_concept_set_members(@concept_id, @child24_concept_id, 24);
+>>>>>>> ebd627f... Mahitha | #252 | Added migrations to create reasons concepts for lab orders
