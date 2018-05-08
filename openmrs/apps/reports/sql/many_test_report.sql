@@ -1,4 +1,3 @@
-
 Select
 * from (
 SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
