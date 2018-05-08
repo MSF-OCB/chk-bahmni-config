@@ -23,7 +23,7 @@
     "visitUuid"
   ],
   "config": {
-    "enableLabOrderOptions": true,
+    "enableLabOrderOptions": ["Urgent"],
     "addVisitTypeToComment": true,
     "quickPrints": true,
     "networkConnectivity": {
