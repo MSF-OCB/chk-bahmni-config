@@ -120,4 +120,4 @@ ORDER BY B.date_of_results,
          ) as A
          Where
 coalesce ("RESULTS CD4 (cells/µl)", "CD4 %","SGPT (UI/L)","CREAT (µmol/L)","GLU LCR (mg/dl)") is not null
-and coalesce ("CRAG LCR","Hep. B","CRAG SERIQUE") is not null;
+OR coalesce ("CRAG LCR","Hep. B","CRAG SERIQUE") is not null;
