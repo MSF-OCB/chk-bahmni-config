@@ -453,7 +453,7 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-201803051133" author="vishnu">
+    <changeSet id="OCB-CONFIG-201803051123" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="2">
                    select count(*) from idgen_seq_id_gen ;
@@ -470,7 +470,7 @@
              delete from idgen_identifier_source where name = 'CP' limit 1;
          </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-201803051134" author="vishnu">
+    <changeSet id="OCB-CONFIG-201803051124" author="vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
                    select count(*) from idgen_seq_id_gen where prefix='CHK' ;
@@ -6995,7 +6995,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Transfert','Transfert','N/A','Misc',TRUE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Transfert, Date','Date','Date', 'Misc',FALSE);;
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Centre de réference','Centre de réference','Coded','Misc',FALSE);
-            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'PODI','PODI','Coded','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'SC, PODI','PODI','Coded','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Ouest','Ouest','N/A','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Est','Est','N/A','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Centre','Centre','N/A','Misc',FALSE);
@@ -7028,15 +7028,15 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             set @child8_concept_id = 0;
             set @child9_concept_id = 0;
 
-            select concept_id into @concept_id from concept_name where name = 'PODI' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Autre'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Centre'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Est'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Kingasani'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Kintambo'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Lemba'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Lingwala'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child9_concept_id from concept_name where name = 'Masina 2'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @concept_id from concept_name where name = 'SC, PODI' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Autre'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Centre'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Est'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'Kingasani'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = 'Kintambo'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child6_concept_id from concept_name where name = 'Lemba'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child7_concept_id from concept_name where name = 'Lingwala'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child8_concept_id from concept_name where name = 'Masina 2'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @child9_concept_id from concept_name where name = 'Ouest'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
@@ -7064,7 +7064,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 
             select concept_id into @member1_concept_id from concept_name where name = 'Transfert, Date' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member2_concept_id from concept_name where name = 'Centre de réference' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @member3_concept_id from concept_name where name = 'PODI' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = 'Sc, PODI' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
             select concept_id into @member4_concept_id from concept_name where name = 'Notes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
@@ -7095,4 +7095,125 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_set_members (@concept_id, @member1_concept_id, 6);
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201805091108" author="Sudhamsh">
+        <comment>Adding concepts for Tests rapides  form</comment>
+        <sql>
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tests rapides','Tests rapides', 'N/A','Misc',TRUE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tests','Tests','Coded','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hémoglobine (Hemocue)(g/dl)','Hémoglobine (Hemocue)(g/dl)','N/A','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Glycémie(mg/dl)','Glycémie(mg/dl)','N/A','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CD4(cells/µl)','CD4(cells/µl)','N/A','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CD4 % (Enfants de moins de 5 ans)(%)','CD4 % (Enfants de moins de 5 ans)(	%)','N/A','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - LAM','TB - LAM','N/A','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat(Numérique)','Résultat(Numérique)','Numeric','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat(Option)','Résultat(Option)','Coded','Misc',FALSE);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805091208" author="Sudhamsh">
+        <comment>Adding concept answers to Tests</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+            set @child5_concept_id = 0;
+            set @child6_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Tests' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Hémoglobine (Hemocue)(g/dl)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'TDR - Malaria'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Glycémie(mg/dl)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'CD4(cells/µl)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = 'CD4 % (Enfants de moins de 5 ans)(%)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child6_concept_id from concept_name where name = 'TB - LAM'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 4);
+            call add_concept_answer(@concept_id, @child2_concept_id, 6);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 2);
+            call add_concept_answer(@concept_id, @child5_concept_id, 1);
+            call add_concept_answer(@concept_id, @child6_concept_id, 5);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805091446" author="Sudhamsh">
+        <comment>Adding concept answers for Résultat(Option)</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Résultat(Option)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805091248" author="Sudhamsh">
+        <comment>Adding set members for Tests rapides</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Tests rapides' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Tests' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Résultat(Numérique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = 'Résultat(Option)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805091253" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name ='Tests rapides'  AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'All Observation Templates');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for to all observation templates</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'All Observation Templates' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Tests rapides' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 7);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805092254" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="13">
+                select COUNT(*) from concept where concept_id IN (select concept_id from concept_name where name IN ('Résultat(Numérique)','Si oui, Nombre de mois','Infections Opportunistes année','TB Année de depistage','Autre pathologies années','Obstétricaux Gestité','Obstétricaux Parité','Obstétricaux Fausses couches','Chirurgicaux année','Si prémature, nombre de semaines','Hématologique transfusion antérieures nbre','Hématologique transfusion antérieures années','MCH') and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept numeric entries for the numeric concepts</comment>
+        <sql>
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Résultat(Numérique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Si oui, Nombre de mois' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Infections Opportunistes année' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Si prémature, nombre de semaines' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Hématologique transfusion antérieures nbre' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Hématologique transfusion antérieures années' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'TB Année de depistage' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Autre pathologies années' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Obstétricaux Gestité' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Chirurgicaux année' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Obstétricaux Fausses couches' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'Obstétricaux Parité' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+        </sql>
+    </changeSet>
+
+
 </databaseChangeLog>

@@ -224,6 +224,9 @@
       },
       "PODI":{
         "dropdown":true
+      },
+      "Tests rapides":{
+        "allowAddMore": true
       }
     }
   }
