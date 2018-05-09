@@ -218,6 +218,12 @@
       },
       "Date de prochain RDV":{
         "allowFutureDates": true
+      },
+      "Centre de réference":{
+        "autocomplete":true
+      },
+      "PODI":{
+        "dropdown":true
       }
     }
   }
