@@ -23,6 +23,7 @@ call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - DIAGNOS
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - CONTROLE F2','TB - CONTROLE F2','N/A','Misc',FALSE);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - CONTROLE F3','TB - CONTROLE F3','N/A','Misc',FALSE);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - CONTROLE F5','TB - CONTROLE F5','N/A','Misc',FALSE);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autres','Autres','N/A','Misc',FALSE);
 
 set @concept_id = 0;
 set @child1_concept_id = 0;
