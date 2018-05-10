@@ -99,4 +99,28 @@ Bahmni.ConceptSet.FormConditions.rules = {
         }
         return conditions;
     },
+    'Tests' : function (formName, formFieldValues) {
+        var typeAdmission = formFieldValues['Tests'];
+        var conditions = {
+            enable: [],
+            disable: []
+        }
+        if (typeAdmission =="Hémoglobine (Hemocue)(g/dl)"
+            || typeAdmission =="Glycémie(mg/dl)"
+            || typeAdmission =="CD4(cells/µl)"
+            || typeAdmission =="CD4 % (Enfants de moins de 5 ans)(%)") {
+            {
+                conditions.disable.push("Résultat(Option)")
+                conditions.enable.push("Résultat(Numérique)")
+            }
+        } else if (typeAdmission =="TB - LAM" || typeAdmission =="TDR - Malaria"){
+            conditions.enable.push("Résultat(Option)")
+            conditions.disable.push("Résultat(Numérique)")
+        } else {
+            conditions.disable.push("Résultat(Option)")
+            conditions.disable.push("Résultat(Numérique)")
+        }
+
+        return conditions;
+    }
  };
