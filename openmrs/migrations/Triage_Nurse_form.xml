@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-20180512345" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Bien hydraté','Modéré','Sévère') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = 'Déshydratation');
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+
+
+
+            select concept_id into @concept_id from concept_name where name='Déshydratation'	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='Bien hydraté'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='Modéré'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name='Sévère'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-20180512346" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui(Triage)','Non(Triage)') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = "Incapacité de marcher sans aide");
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name="Incapacité de marcher sans aide"	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='Oui(Triage)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='Non(Triage)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-20180512347" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui(Triage_1)','Non(Triage_1)') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = "Altération de l\'état neurologique");
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name="Altération de l\'état neurologique"	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='Oui(Triage_1)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='Non(Triage_1)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-20180512348" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui(Triage_2)','Non(Triage_2)') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = "Symptôme de TB");
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name="Symptôme de TB"	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='Oui(Triage_2)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='Non(Triage_2)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-20180512349" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui(Triage_3)','Non(Triage_3)') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = "Sous ARV");
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name="Sous ARV"	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='Oui(Triage_3)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='Non(Triage_3)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-20180512350" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui(Triage_4)','Non(Triage_4)') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = "Hospitalisation récente");
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name="Hospitalisation récente"	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='Oui(Triage_4)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='Non(Triage_4)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-20180512361" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Oui(Triage_5)','Non(Triage_5)') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = "Patient Instable");
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name="Patient Instable"	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='Oui(Triage_5)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='Non(Triage_5)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-20180512355" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN('Temperature Data',"Tension_arterielle Data",
+                "Frequence cardiaque Data","Frequence respiratoire Data","Saturation",
+                "Déshydratation","Incapacité de marcher sans aide",
+                "Altération de l\'état neurologique","Autre signe neurologique",
+                "Poids habituel","Poids","Taille","IMC",
+                "Symptôme de TB","Sous ARV","Hospitalisation récente"
+                ,"Patient Instable")
+                AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Triage');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Triage Form</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+            set @member5_concept_id = 0;
+            set @member6_concept_id = 0;
+            set @member7_concept_id = 0;
+            set @member8_concept_id = 0;
+            set @member9_concept_id = 0;
+            set @member10_concept_id = 0;
+            set @member11_concept_id = 0;
+            set @member12_concept_id = 0;
+            set @member13_concept_id = 0;
+            set @member14_concept_id = 0;
+            set @member15_concept_id = 0;
+            set @member16_concept_id = 0;
+            set @member17_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Triage Form' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = "Temperature Data"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = "Tension_arterielle Data"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = "Frequence cardiaque Data" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member4_concept_id from concept_name where name = "Frequence respiratoire Data"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member5_concept_id from concept_name where name = "Saturation"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member6_concept_id from concept_name where name = "Déshydratation"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member7_concept_id from concept_name where name = "Incapacité de marcher sans aide"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member8_concept_id from concept_name where name = "Altération de l\'état neurologique"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member9_concept_id from concept_name where name = "Autre signe neurologique"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member10_concept_id from concept_name where name = "Poids habituel"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member11_concept_id from concept_name where name = "Poids"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member12_concept_id from concept_name where name = "Taille"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member13_concept_id from concept_name where name = "IMC"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member14_concept_id from concept_name where name = "Symptôme de TB"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member15_concept_id from concept_name where name = "Sous ARV"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member16_concept_id from concept_name where name = "Hospitalisation récente"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member17_concept_id from concept_name where name = "Patient Instable"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+            call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+            call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+            call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+            call add_concept_set_members (@concept_id, @member7_concept_id, 7);
+            call add_concept_set_members (@concept_id, @member8_concept_id, 8);
+            call add_concept_set_members (@concept_id, @member9_concept_id, 9);
+            call add_concept_set_members (@concept_id, @member10_concept_id, 10);
+            call add_concept_set_members (@concept_id, @member11_concept_id, 11);
+            call add_concept_set_members (@concept_id, @member12_concept_id, 12);
+            call add_concept_set_members (@concept_id, @member13_concept_id, 13);
+            call add_concept_set_members (@concept_id, @member14_concept_id, 14);
+            call add_concept_set_members (@concept_id, @member15_concept_id, 15);
+            call add_concept_set_members (@concept_id, @member16_concept_id, 16);
+            call add_concept_set_members (@concept_id, @member17_concept_id, 17);
+
+
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-20180512370" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('Temperature','Temperature Abnormal') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Temeperature Data');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Temperature Data</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Temperature Data' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Temperature Triage' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Temperature Abnormal' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-20180512380" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('Tension arterielle','Tension_arterielle Abnormal') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Tension_arterielle Data');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Tension arterielle Data</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Tension_arterielle Data' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Tension arterielle' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Tension_arterielle Abnormal' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-20180512372" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('Frequence cardiaque','Frequence cardiaque Data Abnormal') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Frequence cardiaque Data');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Frequence Cardiaque Data</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Frequence cardiaque Data' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Frequence cardiaque' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Frequence cardiaque Data Abnormal' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-20180512373" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('Frequence respiratoire','Frequence respiratoire Data Abnormal') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Frequence respiratoire Data');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to Frequence respiratorie Datas</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Frequence respiratoire Data' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Frequence respiratoire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Frequence respiratoire Data Abnormal' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+
+        </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-20180512374" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('IMC','IMC ABNORMAL') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'IMC DATA');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to IMC Data</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'IMC DATA' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'IMC' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'IMC ABNORMAL' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+
+        </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-20180512375" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('IMC STATUS','IMC STATUS ABNORMAL') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'IMC STATUS DATA');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members to IMC STatus Data</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'IMC STATUS DATA' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'IMC STATUS' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'IMC STATUS ABNORMAL' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
+
+
