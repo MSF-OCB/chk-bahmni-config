@@ -23,7 +23,6 @@ call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - DIAGNOS
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - CONTROLE F2','TB - CONTROLE F2','N/A','Misc',FALSE);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - CONTROLE F3','TB - CONTROLE F3','N/A','Misc',FALSE);
 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - CONTROLE F5','TB - CONTROLE F5','N/A','Misc',FALSE);
-call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Autres','Autres','N/A','Misc',FALSE);
 
 set @concept_id = 0;
 set @child1_concept_id = 0;
@@ -49,6 +48,7 @@ set @child20_concept_id = 0;
 set @child21_concept_id = 0;
 set @child22_concept_id = 0;
 set @child24_concept_id = 0;
+set @child25_concept_id = 0;
 
 select concept_id into @concept_id from concept_name where name = 'Raisons du test de laboratoire' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
@@ -76,6 +76,7 @@ select concept_id into @child21_concept_id from concept_name where name = 'TB - 
 select concept_id into @child22_concept_id from concept_name where name = 'TB - CONTROLE F2' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 select concept_id into @child23_concept_id from concept_name where name = 'TB - CONTROLE F3' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 select concept_id into @child24_concept_id from concept_name where name = 'TB - CONTROLE F5' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+select concept_id into @child25_concept_id from concept_name where name = 'Autres' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
 
 call add_concept_answer(@concept_id, @child1_concept_id, 1);
@@ -102,3 +103,4 @@ call add_concept_answer(@concept_id, @child21_concept_id, 21);
 call add_concept_answer(@concept_id, @child22_concept_id, 22);
 call add_concept_answer(@concept_id, @child23_concept_id, 23);
 call add_concept_answer(@concept_id, @child24_concept_id, 24);
+call add_concept_answer(@concept_id, @child25_concept_id, 25);
