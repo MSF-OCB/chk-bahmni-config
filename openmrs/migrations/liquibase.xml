@@ -7219,4 +7219,14 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <sqlFile path="Triage_concepts.sql"/>
     </changeSet>
 <include file ="Triage_Nurse_form.xml"/>
+    <changeSet id="OCB-CONFIG-201805080318" author="Mahitha">
+        <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
+        <sqlFile path="lab_orders/ReasonsToSelect.sql"/>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805080205" author="Mahitha">
+        <comment>Creating Global Property emr.reasonsForLabtests</comment>
+        <sql>
+            INSERT INTO global_property (property, property_value, uuid) VALUES ('emr.reasonsForLabtests', 'Raisons du test de laboratoire', uuid());
+        </sql>
+    </changeSet>
 </databaseChangeLog>
