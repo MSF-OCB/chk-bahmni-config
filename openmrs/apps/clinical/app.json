@@ -225,7 +225,7 @@
       "PODI":{
         "dropdown":true
       },
-      "Tests rapides":{
+      "TDR":{
         "allowAddMore": true
       }
     }

@@ -7095,10 +7095,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_set_members (@concept_id, @member1_concept_id, 6);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-201805091108" author="Sudhamsh">
+    <changeSet id="OCB-CONFIG-201805091109" author="Sudhamsh">
         <comment>Adding concepts for Tests rapides  form</comment>
         <sql>
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tests rapides','Tests rapides', 'N/A','Misc',TRUE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TDR','TDR', 'N/A','Misc',TRUE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tests','Tests','Coded','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hémoglobine (Hemocue)(g/dl)','Hémoglobine (Hemocue)(g/dl)','N/A','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Glycémie(mg/dl)','Glycémie(mg/dl)','N/A','Misc',FALSE);
@@ -7151,6 +7152,25 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201805091348" author="Sudhamsh">
+        <comment>Adding set members for TDR</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'TDR' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Tests' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Résultat(Numérique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = 'Résultat(Option)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+        </sql>
+    </changeSet>
     <changeSet id="OCB-CONFIG-201805091248" author="Sudhamsh">
         <comment>Adding set members for Tests rapides</comment>
         <sql>
@@ -7161,13 +7181,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 
             select concept_id into @concept_id from concept_name where name = 'Tests rapides' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
-            select concept_id into @member1_concept_id from concept_name where name = 'Tests' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @member2_concept_id from concept_name where name = 'Résultat(Numérique)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @member3_concept_id from concept_name where name = 'Résultat(Option)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member1_concept_id from concept_name where name = 'TDR' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_set_members (@concept_id, @member1_concept_id, 1);
-            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
-            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-201805091253" author="Sudhamsh">
