@@ -7095,8 +7095,8 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_set_members (@concept_id, @member1_concept_id, 6);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-201805091109" author="Sudhamsh">
-        <comment>Adding concepts for Tests rapides  form</comment>
+    <changeSet id="OCB-CONFIG-201805121109" author="Sudhamsh">
+        <comment>Adding concepts for Tests rapides form</comment>
         <sql>
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tests rapides','Tests rapides', 'N/A','Misc',TRUE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TDR','TDR', 'N/A','Misc',TRUE);
@@ -7104,13 +7104,14 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hémoglobine (Hemocue)(g/dl)','Hémoglobine (Hemocue)(g/dl)','N/A','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Glycémie(mg/dl)','Glycémie(mg/dl)','N/A','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CD4(cells/µl)','CD4(cells/µl)','N/A','Misc',FALSE);
-            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CD4 % (Enfants de moins de 5 ans)(%)','CD4 % (Enfants de moins de 5 ans)(	%)','N/A','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CD4 % (Enfants de moins de 5 ans)(%)','CD4 % (Enfants de moins de 5 ans)(%)','N/A','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TB - LAM','TB - LAM','N/A','Misc',FALSE);
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, TDR - Malaria','TDR - Malaria','N/A','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat(Numérique)','Résultat(Numérique)','Numeric','Misc',FALSE);
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat(Option)','Résultat(Option)','Coded','Misc',FALSE);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-201805091208" author="Sudhamsh">
+    <changeSet id="OCB-CONFIG-201805121208" author="Sudhamsh">
         <comment>Adding concept answers to Tests</comment>
         <sql>
             set @concept_id = 0;
@@ -7122,12 +7123,12 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             set @child6_concept_id = 0;
 
             select concept_id into @concept_id from concept_name where name = 'Tests' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'Hémoglobine (Hemocue)(g/dl)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child2_concept_id from concept_name where name = 'TDR - Malaria'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child3_concept_id from concept_name where name = 'Glycémie(mg/dl)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child4_concept_id from concept_name where name = 'CD4(cells/µl)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child5_concept_id from concept_name where name = 'CD4 % (Enfants de moins de 5 ans)(%)'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child6_concept_id from concept_name where name = 'TB - LAM'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Hémoglobine (Hemocue)(g/dl)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'TR, TDR - Malaria' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = 'Glycémie(mg/dl)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = 'CD4(cells/µl)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = 'CD4 % (Enfants de moins de 5 ans)(%)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child6_concept_id from concept_name where name = 'TB - LAM' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             call add_concept_answer(@concept_id, @child1_concept_id, 4);
             call add_concept_answer(@concept_id, @child2_concept_id, 6);
