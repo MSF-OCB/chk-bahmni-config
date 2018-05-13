@@ -113,7 +113,7 @@ Bahmni.ConceptSet.FormConditions.rules = {
                 conditions.disable.push("Résultat(Option)")
                 conditions.enable.push("Résultat(Numérique)")
             }
-        } else if (typeAdmission =="TB - LAM" || typeAdmission =="TDR - Malaria"){
+        } else if (typeAdmission =="TB - LAM" || typeAdmission =="TR, TDR - Malaria"){
             conditions.enable.push("Résultat(Option)")
             conditions.disable.push("Résultat(Numérique)")
         } else {
