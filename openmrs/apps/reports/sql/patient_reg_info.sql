@@ -1,7 +1,7 @@
 select distinct pi.identifier  as "ID Patient",
               group_concat( distinct (case when pat.name='Type de cohorte' then c.name else NULL end)) as "Type Cohorte",
               concat(pn.family_name,' ',ifnull(pn.middle_name,''),' ', ifnull(pn.given_name,'')) as Nom,
-              concat(floor(datediff(now(), p.birthdate)/365), ' ans, ',  floor((datediff(now(), p.birthdate)%365)/30),' Mois') as "Age",
+              concat(floor(datediff(now(), p.birthdate)/365), ' ans, ',  floor((datediff(now(), p.birthdate)%365)/30),' mois') as "Age",
               case when p.gender='M' then 'Homme' when p.gender='F' then 'Femme' else null end as Sexe,
               date_format(p.birthdate, '%d/%m/%Y') as "Date de naissance",
               date_format(p.date_created,'%d/%m/%Y') as "Date enregistrement",

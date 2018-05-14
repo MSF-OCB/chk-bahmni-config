@@ -1,19 +1,19 @@
 SELECT
-  identifier AS "ID",
-  concept_full_name AS "Type cohorte",
-  TDRReport.NameOfPerson AS "Nom",
-  TDRReport.personAge AS "Age",
-  TDRReport.dateOfBirth as "Date de naissance",
-  TDRReport.gender AS "Sexe",
-  dateTypeTheCohorte AS "Date entrée cohorte",
-  obs_datetime AS "Date résultats",
-  typeOfVisit AS "Type de visite",
-  sum(Labtest1768) AS "Hémoglobine (Hemocue)(g/dl)",
-  (SELECT concept_full_name FROM concept_view WHERE concept_id = sum(Labtest549)) AS "TDR - Malaria",
-  sum(Labtest1769) AS "Glycémie(mg/dl)",
-  sum(Labtest1771) AS "CD4 % (Enfants de moins de 5 ans)(%)",
-  sum(Labtest1770) AS "CD4(cells/µl)",
-  (SELECT concept_full_name FROM concept_view WHERE concept_id = sum(Labtest1772)) AS "TB - LAM"
+    identifier AS "ID",
+    concept_full_name AS "Type cohorte",
+    TDRReport.NameOfPerson AS "Nom",
+    TDRReport.personAge AS "Age",
+    TDRReport.dateOfBirth AS "Date de naissance",
+    TDRReport.gender AS "Sexe",
+    dateTypeTheCohorte AS "Date entrée cohorte",
+    dateResults AS "Date résultats",
+    typeOfVisit AS "Type de visite",
+    sum(Labtest1768) AS "Hémoglobine (Hemocue)(g/dl)",
+    (Select concept_full_name FROM concept_view WHERE concept_id = sum(Labtest549)) AS "TDR - Malaria",
+    sum(Labtest1769) AS "Glycémie(mg/dl)",
+    sum(Labtest1771) AS "CD4 % (Enfants de moins de 5 ans)(%)",
+    sum(Labtest1770) AS "CD4(cells/µl)",
+    (Select concept_full_name FROM concept_view WHERE concept_id = sum(Labtest1772)) AS "TB - LAM"
 
 FROM
       (
@@ -21,16 +21,16 @@ FROM
       pi.identifier,
       cv.concept_full_name,
       obsLabResults.person_id,
-      obsLabResults.obs_datetime,
+      DATE_FORMAT(obsLabResults.obs_datetime, '%d-%m-%Y %H:%i:%S') AS "dateResults" ,
       vtype.name AS "typeOfVisit",
       concat( COALESCE(NULLIF(pnPersonAttribute.given_name, ''), ''), ' ', COALESCE(NULLIF(pnPersonAttribute.family_name, ''), '') ) AS "NameOfPerson",
-      TIMESTAMPDIFF(YEAR, person.birthdate, CURDATE()) AS "personAge",
-      person.birthdate AS "dateOfBirth",
+      concat(floor(datediff(now(), person.birthdate)/365), ' ans, ',  floor((datediff(now(), person.birthdate)%365)/30),' mois') AS "personAge",
+      date_format(person.birthdate, '%d-%m-%Y') AS "dateOfBirth",
       CASE WHEN person.gender = 'M' THEN 'H'
            WHEN person.gender = 'F' THEN 'F'
            WHEN person.gender = 'O' THEN 'A'
            else person.gender END AS "gender",
-      pa.date_created AS "dateTypeTheCohorte",
+      date_format(pa.date_created, '%d-%m-%Y') AS "dateTypeTheCohorte",
       CASE WHEN obsLabTest.value_coded = (
                                           SELECT concept_id
                                           FROM concept_view
@@ -86,7 +86,7 @@ FROM
       AND obsLabTest.value_coded IN
                                   (SELECT concept_id
                                   FROM concept_view
-                                  WHERE concept_full_name IN
+                                  WHERE concept_full_name in
                                                             ("CD4 % (Enfants de moins de 5 ans)(%)",
                                                             "CD4(cells/µl)","Glycémie(mg/dl)",
                                                             "Hémoglobine (Hemocue)(g/dl)",
@@ -96,6 +96,6 @@ FROM
       AND obsLabResults.voided = 0
       AND obsLabTest.voided = 0
       AND DATE(obsLabResults.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
-) AS TDRReport
-GROUP BY person_id,obs_datetime
+      ) AS TDRReport
+group by person_id,"Date résultats"
 ORDER BY "Date résultats"
