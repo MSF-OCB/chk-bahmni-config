@@ -1,3 +1,4 @@
+SELECT * from (
 SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
@@ -5,16 +6,16 @@ SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        b.dob AS "Date de naissance",
        to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
        B.sexe AS "Sexe",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.EID AS NUMERIC)) )AS "EID/PCR",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenCrachat AS NUMERIC)))  AS "Genexpert Crachat",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenUrine AS NUMERIC))) AS "Genexpert Urine",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenLcr AS NUMERIC))) AS "Genexpert LCR",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenPleural AS NUMERIC))) AS "Genexpert Pleural",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenAscite AS NUMERIC))) AS "Genexpert Ascite",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenPus AS NUMERIC))) AS "Genexpert Pus",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenGangilio AS NUMERIC))) AS "Genexpert Ganglionnaire",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenSynovial AS NUMERIC))) AS "Genexpert Synovial",
-       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(B.GenGastrique AS NUMERIC))) AS "Genexpert Gastrique"
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.EID = '' then null else B.EID end AS NUMERIC))) AS "EID/PCR",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenCrachat = '' then null else B.GenCrachat end AS NUMERIC))) AS "Genexpert Crachat",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenUrine = '' then null else B.GenUrine end AS NUMERIC))) AS "Genexpert Urine",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenLcr = '' then null else B.GenLcr end AS NUMERIC))) AS "Genexpert LCR",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenPleural = '' then null else B.GenPleural end AS NUMERIC))) AS "Genexpert Pleural",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenAscite = '' then null else B.GenAscite end AS NUMERIC))) AS "Genexpert Ascite",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenPus = '' then null else B.GenPus end AS NUMERIC))) AS "Genexpert Pus",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenGangilio = '' then null else B.GenGangilio end AS NUMERIC))) AS "Genexpert Ganglionnaire",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenSynovial = '' then null else B.GenSynovial end AS NUMERIC))) AS "Genexpert Synovial",
+       (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenGastrique = '' then null else B.GenGastrique end AS NUMERIC))) AS "Genexpert Gastrique"
        
 FROM
   (/*Pivoting the table row to column*/ SELECT Patient_Name,
@@ -102,4 +103,6 @@ ORDER BY B.date_of_results,
          B.care_center_requesting,
          B.Patient_Name,
          B.dob,
-         B.sexe ;
+         B.sexe ) as A
+         Where
+coalesce  ("EID/PCR","Genexpert Crachat","Genexpert Urine","Genexpert LCR","Genexpert Pleural","Genexpert Ascite","Genexpert Pus","Genexpert Ganglionnaire","Genexpert Synovial","Genexpert Gastrique") is not null;

@@ -1,3 +1,5 @@
+
+SELECT * from (
 SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
@@ -5,14 +7,13 @@ SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        b.dob AS "Date de naissance",
        to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
        B.sexe AS "Sexe",
-       sum(cast(B.Potassium AS NUMERIC)) AS "K",
-       sum(cast(B.sod AS NUMERIC)) AS "Na",
-       sum(cast(B.chlore AS NUMERIC)) AS "Cl",
-       sum(cast(B.phosphate_alca AS NUMERIC)) AS "Phosphate_alcaline",
-       sum(cast(B.bilitotalE AS NUMERIC)) AS "Bilirubine totalE",
-       sum(cast(B.bildirect AS NUMERIC)) AS "Bilirubine directE",
-       sum(cast(B.calc AS NUMERIC)) AS "Calcium"
-       
+       sum(cast(case when B.Potassium = '' then null else B.Potassium end AS NUMERIC)) AS "K",
+       sum(cast(case when B.sod = '' then null else B.sod end AS NUMERIC)) AS "Na",
+       sum(cast(case when B.chlore = '' then null else B.chlore end AS NUMERIC)) AS "Cl",
+       sum(cast(case when B.phosphate_alca = '' then null else B.phosphate_alca end AS NUMERIC)) AS "Phosphate_alcaline",
+       sum(cast(case when B.bilitotalE = '' then null else B.bilitotalE end AS NUMERIC)) AS "Bilirubine totalE",
+       sum(cast(case when B.bildirect = '' then null else B.bildirect end AS NUMERIC)) AS "Bilirubine directE",
+       sum(cast(case when B.calc = '' then null else B.calc end AS NUMERIC)) AS "Calcium"
 FROM
   (/*Pivoting the table row to column*/ SELECT Patient_Name,
                                                care_center_requesting,
@@ -92,4 +93,8 @@ ORDER BY B.date_of_results,
          B.care_center_requesting,
          B.Patient_Name,
          B.dob,
-         B.sexe ;
+         B.sexe
+                  ) as A
+         Where
+COALESCE ("K","Na","Cl","Phosphate_alcaline","Bilirubine totalE","Bilirubine directE","Calcium") is not null;
+
