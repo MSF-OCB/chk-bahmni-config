@@ -1,11 +1,12 @@
+SELECT * from (
 SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date de prelevement",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "Id Patient",
        to_char(B.dob,'DD/MM/YYYY') AS "Date naissance",
        B.sexe AS "Sexe",
-       sum(cast(B.ChargeVirale_value AS NUMERIC)) AS "Charge virale",
-       sum(cast(B.ChargeVirale_value_log AS NUMERIC)) AS "Charge virale (Valeur Log)",
+       sum(cast(case when B.ChargeVirale_value = '' then null else B.ChargeVirale_value end AS NUMERIC)) AS "Charge virale",
+       sum(cast(case when B.ChargeVirale_value_log = '' then null else B.ChargeVirale_value_log end AS NUMERIC)) AS "Charge virale (Valeur Log)",
        to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        B.month_of_results AS "Mois des résultats",
        CASE when string_agg(B.comment,', ')= 'OPD, OPD' then 'OPD'
@@ -74,4 +75,7 @@ ORDER BY B.date_of_results,
          B.care_center_requesting,
          B.Patient_Name,
          B.dob,
-         B.sexe;
+         B.sexe
+         ) as A
+         Where
+COALESCE ("Charge virale", "Charge virale (Valeur Log)") is not null;
