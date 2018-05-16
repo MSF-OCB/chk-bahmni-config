@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-201805141154" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+             select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in("Guéri","Traitement terminé",
+                "Echec","Décédé","Perdu de vue","Référé","Non évalué","Succès") AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'TB Outcome');
+
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for "TB outcome" concept</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+            set @member4_concept_id = 0;
+            set @member5_concept_id = 0;
+            set @member6_concept_id = 0;
+            set @member7_concept_id = 0;
+            set @member8_concept_id = 0;
+
+               select concept_id into @concept_id from concept_name where name = 'TB Outcome' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = "Guéri" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = "Traitement terminé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member3_concept_id from concept_name where name = "Echec" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member4_concept_id from concept_name where name = "Décédé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member5_concept_id from concept_name where name = "Perdu de vue" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member6_concept_id from concept_name where name = "Référé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member7_concept_id from concept_name where name = "Non évalué" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member8_concept_id from concept_name where name = "Succès" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+            call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+            call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+            call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+            call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+            call add_concept_set_members (@concept_id, @member7_concept_id, 7);
+            call add_concept_set_members (@concept_id, @member8_concept_id, 8);
+
+            </sql>
+
+    </changeSet>  
+        
+        <changeSet id="OCB-CONFIG-201805110311" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from program where name='Programme TB';
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding TB programmes to Programe table
+        and creating the End Date attribue </comment>
+        <sql>
+        INSERT INTO program
+ (concept_id,outcomes_concept_id,creator,date_created,name,
+ description,uuid)
+  VALUES ((select concept_id from concept_name where name = 'Programme TB'
+   and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),(select concept_id from concept_name where name = 'TB Outcome'
+   and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),1,
+   now(),'Programme TB','Programme TB',uuid());
+   
+   </sql>
+   </changeSet>
+    <changeSet id="OCB-CONFIG-201805110322" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+               select count(*) from concept_answer  where concept_id in
+               (select concept_id from concept_name where name = 'Program States for TB');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding Program states for TB program</comment>
+        <sql>
+            set @concept_id = 0;
+        set @child1_concept_id = 0;
+        set @child2_concept_id = 0;
+        
+       
+            select concept_id into @concept_id from concept_name where name = 'Program States for TB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name = "Intensive(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = "Entretien(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+        call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        call add_concept_answer(@concept_id, @child2_concept_id, 2);
+    
+        </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-201805110323" author="Vishnu">   
+        <comment>Adding 'Program states for TB program'in  Programe table </comment>
+        <sql>
+    insert into program_attribute_type(name, description, datatype, 
+   datatype_config, min_occurs, creator, date_created, uuid)
+    values('Program States for TB','Program States', 'org.bahmni.module.bahmnicore.customdatatype.datatype.CodedConceptDatatype',(select distinct concept_id
+    from concept_name where name='Program States'),0,1,NOW(),UUID());  
+   </sql> 
+   </changeSet>
+
+    <changeSet id="OCB-CONFIG-201805110315" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+               select count(*) from concept_answer  where concept_id in
+               (select concept_id from concept_name where name = 'Motif début traitement');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for "Motif début traitement" concept</comment>
+        <sql>
+            set @concept_id = 0;
+        set @child1_concept_id = 0;
+        set @child2_concept_id = 0;
+        set @child3_concept_id = 0;
+        set @child4_concept_id = 0;
+        set @child5_concept_id = 0;
+       
+            select concept_id into @concept_id from concept_name where name = 'Motif début traitement' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name = "Nouveau patient" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = "Rechute" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = "Traitement après echec" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = "Traitement après perdu de vue" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = "Autre" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            
+
+        call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        call add_concept_answer(@concept_id, @child3_concept_id, 3);
+        call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        call add_concept_answer(@concept_id, @child5_concept_id, 5);
+    
+        </sql>
+    </changeSet> 
+<changeSet id="OCB-CONFIG-201805110316" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+               select count(*) from concept_answer  where concept_id in
+               (select concept_id from concept_name where name = 'Site TEP');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for "Site TEP" concept</comment>
+        <sql>
+            set @concept_id = 0;
+        set @child1_concept_id = 0;
+        set @child2_concept_id = 0;
+        set @child3_concept_id = 0;
+        set @child4_concept_id = 0;
+        set @child5_concept_id = 0;
+        set @child6_concept_id = 0;
+        set @child7_concept_id = 0;
+        set @child8_concept_id = 0;
+        set @child9_concept_id = 0;
+        set @child10_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Site TEP' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name = "Abdominale" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = "Ganglionnaire" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = "Mal de pott" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name = "Meningé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child5_concept_id from concept_name where name = "Miliaire" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child6_concept_id from concept_name where name = "Os et articulaire" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child7_concept_id from concept_name where name = "Pericardite" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child8_concept_id from concept_name where name = "Pleuresie" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child9_concept_id from concept_name where name = "Poly-serosite" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child10_concept_id from concept_name where name = "Autre" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+           
+
+
+        call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        call add_concept_answer(@concept_id, @child3_concept_id, 3);
+        call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        call add_concept_answer(@concept_id, @child5_concept_id, 5);
+        call add_concept_answer(@concept_id, @child6_concept_id, 6);
+        call add_concept_answer(@concept_id, @child7_concept_id, 7);
+        call add_concept_answer(@concept_id, @child8_concept_id, 8);
+        call add_concept_answer(@concept_id, @child9_concept_id, 9);
+        call add_concept_answer(@concept_id, @child10_concept_id, 10);
+
+        </sql>
+    </changeSet> 
+    <changeSet id="OCB-CONFIG-201805110317" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+               select count(*) from concept_answer  where concept_id in
+               (select concept_id from concept_name where name = 'TB Type');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for "TB Type" concept</comment>
+        <sql>
+            set @concept_id = 0;
+        set @child1_concept_id = 0;
+        set @child2_concept_id = 0;
+        set @child3_concept_id = 0;
+        
+            select concept_id into @concept_id from concept_name where name = 'TB Type' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name = "Pulmonaire-Bactériologiquement confirmé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = "Pulmonaire-Cliniquement Confirmé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name = "Extrapulmonaire" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+        call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        call add_concept_answer(@concept_id, @child3_concept_id, 3);
+        </sql>
+    </changeSet> 
+<changeSet id="OCB-CONFIG-201805110319" author="Vishnu">
+       
+        <comment>Adding TB attribue to Programe table </comment>
+        <sql>
+    insert into program_attribute_type(name, description, datatype, 
+   datatype_config, min_occurs, creator, date_created, uuid)
+    values('Motif début traitement','Motif début traitement', 'org.bahmni.module.bahmnicore.customdatatype.datatype.CodedConceptDatatype',(select distinct concept_id
+    from concept_name where name='Motif début traitement'),0,1,NOW(),UUID());  
+   </sql>
+   </changeSet>  
+<changeSet id="OCB-CONFIG-201805110320" author="Vishnu">
+       
+        <comment>Adding 'TB type' attributeto Programe table </comment>
+        <sql>
+    insert into program_attribute_type(name, description, datatype, 
+   datatype_config, min_occurs, creator, date_created, uuid)
+    values('TB Type','TB Type', 'org.bahmni.module.bahmnicore.customdatatype.datatype.CodedConceptDatatype',(select distinct concept_id
+    from concept_name where name='TB Type'),0,1,NOW(),UUID());  
+   </sql>
+   </changeSet> 
+   <changeSet id="OCB-CONFIG-201805110321" author="Vishnu">   
+        <comment>Adding 'Site TEP' attributeto Programe table </comment>
+        <sql>
+    insert into program_attribute_type(name, description, datatype, 
+   datatype_config, min_occurs, creator, date_created, uuid)
+    values('Site TEP','Site TEP', 'org.bahmni.module.bahmnicore.customdatatype.datatype.CodedConceptDatatype',(select distinct concept_id
+    from concept_name where name='Site TEP'),0,1,NOW(),UUID());  
+   </sql> 
+   </changeSet>
+
+      
+   </databaseChangeLog>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+<changeSet id="OCB-CONFIG-201805111230" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from program where name='Programme ARV';
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding ARV programmes to Programe table
+        and creating the End Date attribue </comment>
+        <sql>
+        INSERT INTO program
+ (concept_id,outcomes_concept_id,creator,date_created,name,
+ description,uuid)
+  VALUES ((select concept_id from concept_name where name = 'Programme ARV'
+   and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),(select concept_id from concept_name where name = 'ARV outcome'
+   and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),
+   (select user_id from users where username='superman'),
+   now(),'Programme ARV','Programme ARV',uuid());
+   
+   </sql>
+   </changeSet>
+   <changeSet id="OCB-CONFIG-201805111231" author="Vishnu">
+       
+        <comment>Adding ARV attribue to Programe table </comment>
+        <sql>
+    insert into program_attribute_type(name, description, datatype, 
+   datatype_config, min_occurs, creator, date_created, uuid)
+    values('ARV Line(Programme)','ARV Line', 'org.bahmni.module.bahmnicore.customdatatype.datatype.CodedConceptDatatype',(select distinct concept_id
+    from concept_name where name='ARV Line'),0,1,NOW(),UUID());  
+   </sql>
+   </changeSet> 
+    <changeSet id="OCB-CONFIG-201805111232" author="Vishnu">
+       
+        <comment>Adding ARV attribue to Programe table </comment>
+        <sql>
+   insert into program_attribute_type(name, description, 
+   datatype, datatype_config, min_occurs, creator, date_created, uuid)
+ values('End Date for Program','End Date', 
+ 'org.openmrs.customdatatype.datatype.DateDatatype','',0, 1, NOW(), UUID());
+   
+   </sql>
+   </changeSet>
+  
+  
+    <changeSet id="OCB-CONFIG-201805111233" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in("Décédé","Autre") AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'ARV outcome');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for "ARV outcome" concept</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'ARV outcome' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = "Décédé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = "Autre" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+        </sql>
+    </changeSet>  
+<changeSet id="OCB-CONFIG-201805111234" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in('1ere(ARV)','2e(ARV)',
+                '3e(ARV)','1ere alternative(ARV)','2e alternative(ARV)','3e alternative(ARV)','autres(ARV Program)') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'ARV Line');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for "ARV Line" concept</comment>
+        <sql>
+            set @concept_id = 0;
+        set @child1_concept_id = 0;
+        set @child2_concept_id = 0;
+        set @child3_concept_id = 0;
+        set @child4_concept_id = 0;
+        set @child5_concept_id = 0;
+        set @child6_concept_id = 0;
+        set @child7_concept_id = 0;
+        
+        
+            
+
+        select concept_id into @concept_id from concept_name where name = 'ARV Line' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+         select concept_id into @child1_concept_id from concept_name where name = '1ere(ARV)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @child2_concept_id from concept_name where name = '2e(ARV)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @child3_concept_id from concept_name where name = '3e(ARV)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @child4_concept_id from concept_name where name = '1ere alternative(ARV)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @child5_concept_id from concept_name where name = '2e alternative(ARV)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @child6_concept_id from concept_name where name = '3e alternative(ARV)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+         select concept_id into @child7_concept_id from concept_name where name = 'autres(ARV Program)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            
+
+        call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        call add_concept_answer(@concept_id, @child3_concept_id, 3);
+        call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        call add_concept_answer(@concept_id, @child5_concept_id, 5);
+        call add_concept_answer(@concept_id, @child6_concept_id, 6);
+        call add_concept_answer(@concept_id, @child7_concept_id, 7);
+
+        </sql>
+    </changeSet> 
+<changeSet id="OCB-CONFIG-201805111235" author="Vishnu">
+  <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+            select count(*) from global_property
+            where property='emrapi.sqlSearch.activePatientsArv';
+            </sqlCheck>
+        </preConditions>       
+        <comment>Adding Global Property for ARV PROGRAM Queu </comment>
+        <sql>
+    insert into global_property (property,property_value,uuid) 
+values ('emrapi.sqlSearch.activePatientsArv',"(SELECT DISTINCT Concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
+                pi.identifier                                          AS 
+                identifier, 
+                Concat("", p.uuid)                                     AS uuid, 
+                Concat("", v.uuid)                                     AS 
+                activeVisitUuid, 
+                IF(va.value_reference = 'admitted', 'true', 'false')   AS 
+                hasBeenAdmitted 
+FROM   visit v 
+       join person_name pn 
+         ON v.patient_id = pn.person_id 
+            AND pn.voided = 0 
+       join patient_identifier pi 
+         ON v.patient_id = pi.patient_id 
+       join patient_identifier_type pit 
+         ON pi.identifier_type = pit.patient_identifier_type_id 
+       join global_property gp 
+         ON gp.property = 'bahmni.primaryidentifiertype'
+            AND gp.property_value = pit.uuid 
+       join person p 
+         ON p.person_id = v.patient_id 
+       join patient_program pg 
+         ON pg.patient_id = pi.patient_id 
+       join program pgg 
+         ON pgg.program_id = pg.program_id 
+       join location l 
+         ON l.uuid = ${visit_location_uuid} 
+            AND v.location_id = l.location_id 
+       left outer join visit_attribute va 
+                    ON va.visit_id = v.visit_id 
+                       AND va.attribute_type_id = 
+                           (SELECT 
+                           visit_attribute_type_id 
+                                                   FROM   visit_attribute_type 
+                                                   WHERE  name = 
+                           'admission status'
+                           ) 
+                       AND va.voided = 0 
+WHERE  v.date_stopped IS NULL 
+       AND v.voided = 0 
+       AND pgg.name = 'Programme ARV');", uuid() );  
+   </sql>
+   </changeSet>
+<changeSet id="OCB-CONFIG-201805111237" author="Vishnu">
+  <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+            select count(*) from global_property
+            where property='emrapi.sqlSearch.activePatientsTb';
+            </sqlCheck>
+        </preConditions>       
+        <comment>Adding Global Property for ARV PROGRAM Queu </comment>
+        <sql>
+    insert into global_property (property,property_value,uuid) 
+values ('emrapi.sqlSearch.activePatientsTb',"(SELECT DISTINCT Concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
+                pi.identifier                                          AS 
+                identifier, 
+                Concat("", p.uuid)                                     AS uuid, 
+                Concat("", v.uuid)                                     AS 
+                activeVisitUuid, 
+                IF(va.value_reference = 'admitted', 'true', 'false')   AS 
+                hasBeenAdmitted 
+FROM   visit v 
+       join person_name pn 
+         ON v.patient_id = pn.person_id 
+            AND pn.voided = 0 
+       join patient_identifier pi 
+         ON v.patient_id = pi.patient_id 
+       join patient_identifier_type pit 
+         ON pi.identifier_type = pit.patient_identifier_type_id 
+       join global_property gp 
+         ON gp.property = 'bahmni.primaryidentifiertype'
+            AND gp.property_value = pit.uuid 
+       join person p 
+         ON p.person_id = v.patient_id 
+       join patient_program pg 
+         ON pg.patient_id = pi.patient_id 
+       join program pgg 
+         ON pgg.program_id = pg.program_id 
+       join location l 
+         ON l.uuid = ${visit_location_uuid} 
+            AND v.location_id = l.location_id 
+       left outer join visit_attribute va 
+                    ON va.visit_id = v.visit_id 
+                       AND va.attribute_type_id = 
+                           (SELECT 
+                           visit_attribute_type_id 
+                                                   FROM   visit_attribute_type 
+                                                   WHERE  name = 
+                           'admission status'
+                           ) 
+                       AND va.voided = 0 
+WHERE  v.date_stopped IS NULL 
+       AND v.voided = 0 
+       AND pgg.name = 'Programme TB');", uuid());  
+   </sql>
+   </changeSet>
+    </databaseChangeLog>

@@ -1,4 +1,30 @@
 {
+ "bahmniClinicalPatientsSearchActivePatientsForARVPrograms": {
+        "id": "bahmni.clinical.patients.search.arvActivePatients",
+        "extensionPointId": "org.bahmni.patient.search",
+        "type": "config",
+        "extensionParams": {
+            "searchHandler": "emrapi.sqlSearch.activePatientsArv",
+            "translationKey": "MODULE_LABEL_PROGRAMS_KEY_ARV",
+            "forwardUrl": "#/programs/patient/{{patientUuid}}/consultationContext"
+        },
+        "label": "Programme ARV",
+        "order": 1,
+        "requiredPrivilege": "app:clinical"
+    },
+    "bahmniClinicalPatientsSearchActivePatientsForTBPrograms": {
+        "id": "bahmni.clinical.patients.search.tbActivePatients",
+        "extensionPointId": "org.bahmni.patient.search",
+        "type": "config",
+        "extensionParams": {
+            "searchHandler": "emrapi.sqlSearch.activePatientsTb",
+            "translationKey": "MODULE_LABEL_PROGRAMS_KEY_TB",
+            "forwardUrl": "#/programs/patient/{{patientUuid}}/consultationContext"
+        },
+        "label": "Programme TB",
+        "order": 2,
+        "requiredPrivilege": "app:clinical"
+    },
     "bahmniClinicalPatientsSearchActivePatientsForPrograms": {
         "id": "bahmni.clinical.patients.search.activePatients",
         "extensionPointId": "org.bahmni.patient.search",
