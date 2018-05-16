@@ -1,6 +1,6 @@
 {
    "viralLoadReport":{
-        "name": "Rapport de charge virale",
+        "name": "Rapport de biologie moléculaire-Charge Virale",
         "type": "ElisGeneric",
         "config": {
             "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/viral_report.sql"
@@ -28,14 +28,14 @@
          }
      },
     "labReport_1": {
-      "name": "IONO/Bilan Post Hepatite",
+      "name": "Rapport IONO/Bilan Post Hepatite",
       "type": "ElisGeneric",
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/iono_report.sql"
       }
     },
     "labReport_2": {
-      "name": "EID/TB Diagnostic Genexpert report",
+      "name": "Rapport de Biologie moléculaire-EID/TB Diagnostic Genexpert",
       "type": "ElisGeneric",
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/EID_TB_report.sql"
