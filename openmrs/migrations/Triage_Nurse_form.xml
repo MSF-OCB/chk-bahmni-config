@@ -436,6 +436,34 @@
         </sql>
     </changeSet>
 
+    <changeSet id="OCB-CONFIG-20180516515" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('IMC DATA') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Triage Form');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set member IMC DATA to Triage Form</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member2_concept_id = 0;
+            set @sort_weight = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Triage Form' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member1_concept_id from concept_name where name = "IMC DATA"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = "IMC"and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select sort_weight into @sort_weight from concept_set where concept_id = @member2_concept_id and concept_set = @concept_id;
+            update concept_set set concept_id = @member1_concept_id where concept_set =  @concept_id and sort_weight = @sort_weight;
+
+            update concept_numeric set low_normal = NULL where concept_id = (select concept_id from concept_name where name = 'IMC'
+            and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
 
 

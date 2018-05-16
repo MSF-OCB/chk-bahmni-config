@@ -65,9 +65,9 @@ public class BahmniObsValueCalculator implements ObsValueCalculator {
             BahmniObservation bmiObservation = find("IMC", bmiDataObservation ? [bmiDataObservation] : [], null)
             BahmniObservation bmiAbnormalObservation = find("IMC ABNORMAL", bmiDataObservation ? [bmiDataObservation]: [], null)
 
-            BahmniObservation bmiStatusDataObservation = find("IMC STATUS DATA", observations, null)
-            BahmniObservation bmiStatusObservation = find("IMC STATUS", bmiStatusDataObservation ? [bmiStatusDataObservation] : [], null)
-            BahmniObservation bmiStatusAbnormalObservation = find("IMC STATUS ABNORMAL", bmiStatusDataObservation ? [bmiStatusDataObservation]: [], null)
+//            BahmniObservation bmiStatusDataObservation = find("IMC STATUS DATA", observations, null)
+//            BahmniObservation bmiStatusObservation = find("IMC STATUS", bmiStatusDataObservation ? [bmiStatusDataObservation] : [], null)
+//            BahmniObservation bmiStatusAbnormalObservation = find("IMC STATUS ABNORMAL", bmiStatusDataObservation ? [bmiStatusDataObservation]: [], null)
 
             Patient patient = Context.getPatientService().getPatientByUuid(bahmniEncounterTransaction.getPatientUuid())
             def patientAgeInMonthsAsOfEncounter = Months.monthsBetween(new LocalDate(patient.getBirthdate()), new LocalDate(nowAsOfEncounter)).getMonths()
@@ -78,8 +78,8 @@ public class BahmniObsValueCalculator implements ObsValueCalculator {
             if ((TailleObservation && TailleObservation.voided) && (PoidsObservation && PoidsObservation.voided)) {
                 voidObs(bmiDataObservation);
                 voidObs(bmiObservation);
-                voidObs(bmiStatusDataObservation);
-                voidObs(bmiStatusObservation);
+//                voidObs(bmiStatusDataObservation);
+//                voidObs(bmiStatusObservation);
                 voidObs(bmiAbnormalObservation);
                 return
             }
@@ -94,69 +94,35 @@ public class BahmniObsValueCalculator implements ObsValueCalculator {
             if (Taille == null || Poids == null) {
                 voidObs(bmiDataObservation)
                 voidObs(bmiObservation)
-                voidObs(bmiStatusDataObservation)
-                voidObs(bmiStatusObservation)
+//                voidObs(bmiStatusDataObservation)
+//                voidObs(bmiStatusObservation)
                 voidObs(bmiAbnormalObservation)
                 return
             }
 
-            bmiDataObservation = bmiDataObservation ?: createObs("IMC DATA", null, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
-            bmiStatusDataObservation = bmiStatusDataObservation ?: createObs("IMC STATUS DATA", null, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
+            bmiDataObservation = bmiDataObservation ?: createObs("IMC DATA", parent, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
+//            bmiStatusDataObservation = bmiStatusDataObservation ?: createObs("IMC STATUS DATA", null, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
 
-            def bmi = bmi(Taille, Poids)
+            def bmi = bmi(convertToCentiMeters(Taille), Poids)
             bmiObservation = bmiObservation ?: createObs("IMC", bmiDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
             bmiObservation.setValue(bmi);
 
             def bmiStatus = bmiStatus(bmi, patientAgeInMonthsAsOfEncounter, patient.getGender());
-            bmiStatusObservation = bmiStatusObservation ?: createObs("IMC STATUS", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
-            bmiStatusObservation.setValue(bmiStatus);
+//            bmiStatusObservation = bmiStatusObservation ?: createObs("IMC STATUS", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
+//            bmiStatusObservation.setValue(bmiStatus);
 
             def bmiAbnormal = bmiAbnormal(bmiStatus);
             bmiAbnormalObservation =  bmiAbnormalObservation ?: createObs("IMC ABNORMAL", bmiDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
             bmiAbnormalObservation.setValue(bmiAbnormal);
 
-            bmiStatusAbnormalObservation =  bmiStatusAbnormalObservation ?: createObs("IMC STATUS ABNORMAL", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
-            bmiStatusAbnormalObservation.setValue(bmiAbnormal);
+//            bmiStatusAbnormalObservation =  bmiStatusAbnormalObservation ?: createObs("IMC STATUS ABNORMAL", bmiStatusDataObservation, bahmniEncounterTransaction, obsDatetime) as BahmniObservation;
+//            bmiStatusAbnormalObservation.setValue(bmiAbnormal);
             return
         }
+    }
 
-        BahmniObservation waistCircumferenceObservation = find("Waist Circumference", observations, null)
-        BahmniObservation hipCircumferenceObservation = find("Hip Circumference", observations, null)
-        if (hasValue(waistCircumferenceObservation) && hasValue(hipCircumferenceObservation)) {
-            def calculatedConceptName = "Waist/Hip Ratio"
-            BahmniObservation calculatedObs = find(calculatedConceptName, observations, null)
-            parent = obsParent(waistCircumferenceObservation, null)
-
-            Date obsDatetime = getDate(waistCircumferenceObservation)
-            def waistCircumference = waistCircumferenceObservation.getValue() as Double
-            def hipCircumference = hipCircumferenceObservation.getValue() as Double
-            def waistByHipRatio = waistCircumference/hipCircumference
-            if (calculatedObs == null)
-                calculatedObs = createObs(calculatedConceptName, parent, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
-
-            calculatedObs.setValue(waistByHipRatio)
-            return
-        }
-
-        BahmniObservation lmpObservation = find("Obstetrics, Last Menstrual Period", observations, null)
-        def calculatedConceptName = "Estimated Date of Delivery"
-        if (hasValue(lmpObservation)) {
-            parent = obsParent(lmpObservation, null)
-            def calculatedObs = find(calculatedConceptName, observations, null)
-
-            Date obsDatetime = getDate(lmpObservation)
-
-            LocalDate edd = new LocalDate(lmpObservation.getValue()).plusMonths(9).plusWeeks(1)
-            if (calculatedObs == null)
-                calculatedObs = createObs(calculatedConceptName, parent, bahmniEncounterTransaction, obsDatetime) as BahmniObservation
-            calculatedObs.setValue(edd)
-            return
-        } else {
-            def calculatedObs = find(calculatedConceptName, observations, null)
-            if (hasValue(calculatedObs)) {
-                voidObs(calculatedObs)
-            }
-        }
+    private static double convertToCentiMeters(double meters) {
+        return meters * 100;
     }
 
     private static BahmniObservation obsParent(BahmniObservation child, BahmniObservation parent) {
