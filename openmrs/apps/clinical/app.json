@@ -44,7 +44,31 @@
     "program": {
       "patientInformation": {
         "ageLimit": 100
-      }
+      },
+"ARV Line(Programme)" : {
+              "excludeFrom" : ["Programme TB"]
+      },
+      "TB Type":{
+        "required": true
+    },
+      "Site TEP": {
+              "required": true
+      },
+      "Motif début traitement" : {
+        "required": true
+      },
+      "TB Type":{
+        "excludeFrom" : ["Programme ARV"]
+    },
+  "Motif début traitement" : {
+       "excludeFrom" : ["Programme ARV"]
+ }, 
+ "Site TEP" : {
+       "excludeFrom" : ["Programme ARV"]
+ },
+       "Program States for TB":{
+         "excludeFrom": ["Programme ARV"]
+       }
     },
     "patientContext": {
       "programAttributes": [

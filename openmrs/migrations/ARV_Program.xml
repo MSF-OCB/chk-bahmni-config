@@ -130,11 +130,11 @@
         <comment>Adding Global Property for ARV PROGRAM Queu </comment>
         <sql>
     insert into global_property (property,property_value,uuid) 
-values ('emrapi.sqlSearch.activePatientsArv',"(SELECT DISTINCT Concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
+values ('emrapi.sqlSearch.activePatientsArv',"(SELECT DISTINCT concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
                 pi.identifier                                          AS 
                 identifier, 
-                Concat("", p.uuid)                                     AS uuid, 
-                Concat("", v.uuid)                                     AS 
+                concat("", p.uuid)                                     AS uuid, 
+                concat("", v.uuid)                                     AS 
                 activeVisitUuid, 
                 IF(va.value_reference = 'admitted', 'true', 'false')   AS 
                 hasBeenAdmitted 
@@ -180,14 +180,14 @@ WHERE  v.date_stopped IS NULL
             where property='emrapi.sqlSearch.activePatientsTb';
             </sqlCheck>
         </preConditions>       
-        <comment>Adding Global Property for ARV PROGRAM Queu </comment>
+        <comment>Adding Global Property for TB PROGRAM Queue </comment>
         <sql>
     insert into global_property (property,property_value,uuid) 
-values ('emrapi.sqlSearch.activePatientsTb',"(SELECT DISTINCT Concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
+values ('emrapi.sqlSearch.activePatientsTb',"(SELECT DISTINCT concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
                 pi.identifier                                          AS 
                 identifier, 
-                Concat("", p.uuid)                                     AS uuid, 
-                Concat("", v.uuid)                                     AS 
+                concat("", p.uuid)                                     AS uuid, 
+                concat("", v.uuid)                                     AS 
                 activeVisitUuid, 
                 IF(va.value_reference = 'admitted', 'true', 'false')   AS 
                 hasBeenAdmitted 
