@@ -6804,14 +6804,4 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             INSERT INTO global_property (property, property_value, uuid) VALUES ('emr.reasonsForLabtests', 'Raisons du test de laboratoire', uuid());
         </sql>
     </changeSet>
-<changeSet id="OCB-CONFIG-2018053300001" author="Vishnu">
-        <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
-        <sqlFile path="ARV_Program_concepts.sql"/>
-    </changeSet>
-<include file ="ARV_Program.xml"/>
-<changeSet id="OCB-CONFIG-2018053300002" author="Vishnu">
-        <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
-        <sqlFile path="TB_Program_concepts.sql"/>
-    </changeSet>
-<include file ='TB_Program.xml'/>
 </databaseChangeLog>
