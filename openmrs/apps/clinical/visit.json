@@ -28,20 +28,6 @@
                     ],
                     "labConcepts": ""
                 }
-            },
-            "pacsOrders":{
-                "type":"pacsOrders",
-                "displayOrder": 1,
-                "translationKey": "PACS_ORDERS_VISIT_PAGE_KEY",
-                "config":{
-                    "orderType": "Radiology Order"
-                }
-            },
-            "conditions": {
-                "title": "Conditions",
-                "type": "conditionsList",
-                "displayOrder": 2,
-                "config": { }
             }
         }
     }
