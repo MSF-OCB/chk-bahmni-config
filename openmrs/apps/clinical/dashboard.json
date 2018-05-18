@@ -152,10 +152,10 @@
          "hideEmptyDisplayControl":false,
          "dashboardConfig":{
             "showDetailsButton":true,
+            "numberOfVisits":5,
             "conceptNames":[
                "Tests rapides"
-            ],
-            "scope":"latest"
+            ]
          },
          "expandedViewConfig":{
             "conceptNames":[
@@ -176,7 +176,6 @@
          "hideEmptyDisplayControl":false,
          "dashboardConfig":{
             "showDetailsButton":true,
-            "numberOfVisits":3,
             "conceptNames":[
                "Antécédents cliniques"
             ],
@@ -206,8 +205,7 @@
                "Transfert, Date",
                "Centre de réference",
                "SC, PODI"
-            ],
-            "scope":"latest"
+            ]
          },
          "expandedViewConfig":{
             "conceptNames":[
@@ -253,8 +251,7 @@
             "numberOfVisits":5,
             "conceptNames":[
                "Regime ARV"
-            ],
-            "scope":"latest"
+            ]
          },
          "expandedViewConfig":{
             "conceptNames":[
