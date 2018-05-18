@@ -5707,12 +5707,12 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             update concept_name set name = "Hemoglobine* (Hemocue)" where name = "Hemoglobine*" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG1804240037" author="Sudhamsh">
+    <changeSet id="OCB-CONFIG1804240137" author="Sudhamsh">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="3">
                 select COUNT(*) from concept_name where name IN ('Forme', 'Coloration', 'Groupement') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
             </sqlCheck>
-            <sqlCheck expectedResult="7">
+            <sqlCheck expectedResult="8">
                 select COUNT(*) from concept_answer where concept_id IN (select concept_id from concept_name where name IN ('Forme','Coloration','Groupement' ) and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0) ;
             </sqlCheck>
         </preConditions>
@@ -7325,4 +7325,39 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <sqlFile path="TB_Program_concepts.sql"/>
     </changeSet>
 <include file ='TB_Program.xml'/>
+
+    <changeSet id="OCB-CONFIG1805181432" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="12">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name ='Autres'  AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Examen clinique');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding Autres concept to Examen clinique</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Examen clinique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Autres' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 13);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-CONFIG1805181448" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_numeric where concept_id IN (select concept_id from concept_name where name IN ('MCH') and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            </sqlCheck>
+        </preConditions>
+        <comment>Allowing decimal for MCH</comment>
+        <sql>
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,'pg',0,NULL);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
+

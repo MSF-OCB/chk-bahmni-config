@@ -241,9 +241,6 @@
         "autocomplete":true,
         "multiSelect": true
       },
-      "Date de prochain RDV":{
-        "allowFutureDates": true
-      },
       "Centre de réference":{
         "autocomplete":true
       },
@@ -255,6 +252,12 @@
       },
       "TDR":{
         "allowAddMore": true
+      },
+      "Regimen Start reason":{
+        "dropdown":true
+      },
+      "Résultat(Option)":{
+        "dropdown":true
       }
     }
   }
