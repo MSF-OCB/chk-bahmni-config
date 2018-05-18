@@ -35,7 +35,7 @@
       }
     },
     "labReport_2": {
-      "name": "Rapport de Biologie moléculaire-EID/TB Diagnostic Genexpert",
+      "name": "Rapports Biologie moléculaire-EID TB Diagnostic",
       "type": "ElisGeneric",
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/EID_TB_report.sql"
