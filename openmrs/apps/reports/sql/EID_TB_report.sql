@@ -3,8 +3,8 @@ SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "Id Patient",
-       b.dob AS "Date de naissance",
-       to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
+       to_char(b.dob,'DD/MM/YYYY') AS "Date naissance",
+       to_char(B.sample_date,'DD/MM/YYYY')  AS "Date de prelevement",
        B.sexe AS "Sexe",
        (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.EID = '' then null else B.EID end AS NUMERIC))) AS "EID/PCR",
        (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenCrachat = '' then null else B.GenCrachat end AS NUMERIC))) AS "Genexpert Crachat",
@@ -16,7 +16,7 @@ SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenGangilio = '' then null else B.GenGangilio end AS NUMERIC))) AS "Genexpert Ganglionnaire",
        (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenSynovial = '' then null else B.GenSynovial end AS NUMERIC))) AS "Genexpert Synovial",
        (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) = sum(cast(case when B.GenGastrique = '' then null else B.GenGastrique end AS NUMERIC))) AS "Genexpert Gastrique"
-       
+
 FROM
   (/*Pivoting the table row to column*/ SELECT Patient_Name,
                                                care_center_requesting,
@@ -54,7 +54,7 @@ FROM
                                                CASE
                                                    WHEN tname ='EID (PCR)' THEN tvalue
                                                END AS EID,
-                                               case 
+                                               case
                                                    when tname ='Genexpert (Synovial)' then tvalue
                                                end as GenSynovial
    FROM
@@ -70,7 +70,7 @@ FROM
                                                       patient.gender END AS sexe,
                                                   t.name AS tname,
                                                   r.value AS tvalue,
-                                                  
+
                                                   r.lastupdated :: DATE AS date_of_results,
                                                   to_char(to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'), 'Month') AS month_of_results,
                                                   a.comment
@@ -86,7 +86,7 @@ FROM
       INNER JOIN RESULT r ON a.id = r.analysis_id
       INNER JOIN test t ON a.test_id = t.id AND
             t.name IN  ('Genexpert (Crachat)','Genexpert (Urine)','Genexpert (LCR)','Genexpert (Pleural)','Genexpert (Ascite)','Genexpert (Pus)','Genexpert (Ganglionnaire)','Genexpert (Synovial)','Genexpert (Gastrique)','EID (PCR)')
-       
+
        WHERE   a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
                        AND pi.identity_type_id = 2) AS A) AS B

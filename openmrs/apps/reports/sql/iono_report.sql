@@ -1,19 +1,19 @@
-
 SELECT * from (
 SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "Id Patient",
-       b.dob AS "Date de naissance",
-       to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
+       b.dob AS "Date naissance",
+       to_char(B.sample_date,'DD/MM/YYYY')  AS "Date de prelevement",
        B.sexe AS "Sexe",
        sum(cast(case when B.Potassium = '' then null else B.Potassium end AS NUMERIC)) AS "K",
        sum(cast(case when B.sod = '' then null else B.sod end AS NUMERIC)) AS "Na",
        sum(cast(case when B.chlore = '' then null else B.chlore end AS NUMERIC)) AS "Cl",
-       sum(cast(case when B.phosphate_alca = '' then null else B.phosphate_alca end AS NUMERIC)) AS "Phosphate_alcaline",
-       sum(cast(case when B.bilitotalE = '' then null else B.bilitotalE end AS NUMERIC)) AS "Bilirubine totalE",
-       sum(cast(case when B.bildirect = '' then null else B.bildirect end AS NUMERIC)) AS "Bilirubine directE",
-       sum(cast(case when B.calc = '' then null else B.calc end AS NUMERIC)) AS "Calcium"
+       sum(cast(case when B.gamma = '' then null else B.gamma end AS NUMERIC)) AS "Gamma GT(GGT)",
+       sum(cast(case when B.phosphate_alca = '' then null else B.phosphate_alca end AS NUMERIC)) AS "Phosphatase alchaline(Pal)",
+       sum(cast(case when B.bilitotalE = '' then null else B.bilitotalE end AS NUMERIC)) AS "Billi Total(BT)",
+       sum(cast(case when B.bildirect = '' then null else B.bildirect end AS NUMERIC)) AS "Billi direct(BD)",
+       sum(cast(case when B.calc = '' then null else B.calc end AS NUMERIC)) AS "Calcium (Ca)"
 FROM
   (/*Pivoting the table row to column*/ SELECT Patient_Name,
                                                care_center_requesting,
@@ -34,6 +34,9 @@ FROM
                                                    WHEN tname ='Chlore' THEN tvalue
                                                END AS chlore,
                                                CASE
+                                                   WHEN tname ='Gamma GT' THEN tvalue
+                                               END as gamma,
+                                               CASE
                                                    WHEN tname ='Phosphatase alcaline' THEN tvalue
                                                END AS phosphate_alca,
                                                CASE
@@ -45,8 +48,8 @@ FROM
                                                CASE
                                                    WHEN tname ='Calcium' THEN tvalue
                                                END AS calc
-                                               
-                                               
+
+
    FROM
      (/*Pivoting the table row to column*/ SELECT sample.collection_date AS sample_date,
                                                   ss.name AS care_center_requesting,
@@ -96,5 +99,5 @@ ORDER BY B.date_of_results,
          B.sexe
                   ) as A
          Where
-COALESCE ("K","Na","Cl","Phosphate_alcaline","Bilirubine totalE","Bilirubine directE","Calcium") is not null;
 
+COALESCE ("K","Na","Cl","Gamma GT(GGT)","Phosphatase alchaline(Pal)","Billi Total(BT)","Billi direct(BD)","Calcium (Ca)") is not null;
