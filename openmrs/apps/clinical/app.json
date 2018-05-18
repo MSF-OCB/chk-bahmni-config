@@ -247,8 +247,11 @@
       "Centre de réference":{
         "autocomplete":true
       },
-      "PODI":{
+      "SC, PODI":{
         "dropdown":true
+      },
+      "Type d'Echo":{
+         "dropdown":true
       },
       "TDR":{
         "allowAddMore": true
