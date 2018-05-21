@@ -260,6 +260,15 @@
       },
       "TDR":{
         "allowAddMore": true
+      },
+      "Regimen Start reason":{
+        "dropdown":true
+      },
+      "Résultat(Option)":{
+        "dropdown":true
+      },
+      "RA, ARV Line": {
+        "dropdown": true
       }
     }
   }

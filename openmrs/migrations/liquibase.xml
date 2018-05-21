@@ -7359,9 +7359,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     </changeSet>
 <include file ='TB_Program.xml'/>
 
-    <changeSet id="OCB-CONFIG1805181432" author="Sudhamsh">
+    <changeSet id="OCB-CONFIG1805181446" author="Sudhamsh">
         <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="12">
+            <sqlCheck expectedResult="0">
                 select COUNT(*) from concept_set cs
                 join concept_name cn
                 on cs.concept_id = cn.concept_id
@@ -7374,11 +7374,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             set @concept_id = 0;
             set @concept_short_id = 0;
             set @concept_full_id = 0;
-
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Sv, Autres', 'Autres','Text','Misc',FALSE);
             select concept_id into @concept_id from concept_name where name = 'Examen clinique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @child1_concept_id from concept_name where name = 'Autres' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Sv, Autres' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
-            call add_concept_answer(@concept_id, @child1_concept_id, 13);
+            call add_concept_set_members(@concept_id, @child1_concept_id, 13);
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-CONFIG1805181448" author="Sudhamsh">
@@ -7414,4 +7414,52 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <sqlFile path="AddingNewConceptsToIPDAdmissionForm.sql"/>
 </changeSet>
 <include file ='IPD_Admission_Form_New_Fields.xml'/>
+    <changeSet id="OCB-CONFIG-201805211129" author="Sudhamsh">
+        <comment>Adding concept RA, ARV Line</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'RA, ARV Line', 'ARV Line','Coded','Misc',FALSE);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805211404" author="Sudhamsh">
+        <comment>Adding concept answers for ARV</comment>
+        <sqlFile path="RA_ARV_concept_answers.sql"/>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805211504" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('RA, ARV Line') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Regime ARV');
+            </sqlCheck>
+        </preConditions>
+        <comment>Updating RA, ARV Line in Regimen ARV form</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member2_concept_id = 0;
+            set @sort_weight = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Regime ARV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member1_concept_id from concept_name where name = "RA, ARV Line" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = "ARV" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select sort_weight into @sort_weight from concept_set where concept_id = @member2_concept_id and concept_set = @concept_id;
+            update concept_set set concept_id = @member1_concept_id where concept_set =  @concept_id and sort_weight = @sort_weight;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805211604" author="Sudhamsh">
+        <comment>Removing duplicates in ARV concept answers</comment>
+        <sql>
+            select concept_id into @concept_id from concept_name where name = 'ARV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            DELETE t1 FROM concept_answer t1
+            INNER JOIN
+            concept_answer t2
+            WHERE
+            t1.sort_weight > t2.sort_weight AND t1.answer_concept = t2.answer_concept and t1.concept_id = @concept_id;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
