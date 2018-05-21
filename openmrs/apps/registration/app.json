@@ -257,6 +257,11 @@
             "placeholder": "Saisissez la commune",
             "field": "address6"
          }
-      }
+      },
+     "patientSearchResults": {
+       "personAttributes": {
+         "fields": ["Type de cohorte" ]
+       }
+     }
    }
 }

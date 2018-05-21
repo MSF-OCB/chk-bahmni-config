@@ -46,5 +46,11 @@ Bahmni.Registration.customValidator = {
               return value <= new Date();
         },
       errorMessage: "REGISTRATION_DATE_OF_CONVERSION_CP_ERROR_KEY"
+    },
+    "Date entrée cohorte": {
+        method:function (name,value,personAttributeDetails) {
+            return value <= new Date();
+        },
+        errorMessage: "REGISTRATION_DATE_OF_COHORT_ERROR_KEY"
     }
 };
