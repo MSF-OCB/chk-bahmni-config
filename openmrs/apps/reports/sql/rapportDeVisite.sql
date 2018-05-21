@@ -15,9 +15,9 @@ group_concat( distinct ( case when personAttributeTypeDetails.name="Date entrée
 A.visitType AS "Type de visite",
 CASE WHEN DATE(personForDetails.date_created) = DATE(A.visitStartDate)  THEN  "New Visit" ELSE NULL END AS "Nouvelle visite",
 concat( COALESCE(NULLIF(personNameOfConsulatant.given_name, ''), ''), ' ', COALESCE(NULLIF(personNameOfConsulatant.family_name, ''), '') ) AS "Consultant",
-value_datetime AS "Date de rendez-vous",
-A.visitStartDate AS "Date debut visite",
-A.visitStopDate AS "Date fin visite"
+DATE(value_datetime) AS "Date de rendez-vous",
+DATE(A.visitStartDate) AS "Date debut visite",
+DATE(A.visitStopDate) AS "Date fin visite"
 
 from (
                         Select Distinct obsToGetConsultantName.person_id,

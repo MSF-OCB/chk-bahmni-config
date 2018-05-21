@@ -106,6 +106,9 @@
       "IPD Admission, Type": {
         "dropdown": true
       },
+      "IPD Admission Section, Hospitalisations antérieures":{
+        "allowAddMore": true
+      },
       "IPD Admission, Prophylaxie à l'admission": {
         "dropdown": true
       },

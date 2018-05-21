@@ -55,11 +55,11 @@
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/testsTDRReport.sql"
       }
     },
-    "PérdusDeVueEtPrésumésPerdusDeVue": {
+    "PerdusDeVueEtPresumesPerDusDeVue": {
       "name": "Perdus de vue et presumes perdus de vue",
       "type": "MRSGeneric",
       "config": {
-        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/PérdusDeVueEtPrésumésPerdusDeVue.sql"
+        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/PerdusDeVueEtPresumesPerDusDeVue.sql"
       }
     }
 
