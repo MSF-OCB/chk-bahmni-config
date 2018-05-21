@@ -7359,5 +7359,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,'pg',0,NULL);
         </sql>
     </changeSet>
+<changeSet id="OCB-CONFIG-CONFIG201805201232" author="Vishnu">
+        <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
+        <sqlFile path="TB_Program_concepts.sql"/>
+    </changeSet>
 </databaseChangeLog>
 
