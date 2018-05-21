@@ -18,9 +18,10 @@ SELECT
 FROM
       (
       SELECT
+      obsLabResults.obs_datetime,
+      obsLabResults.person_id,
       pi.identifier,
       cv.concept_full_name,
-      obsLabResults.person_id,
       DATE_FORMAT(obsLabResults.obs_datetime, '%d-%m-%Y %H:%i:%S') AS "dateResults" ,
       vtype.name AS "typeOfVisit",
       concat( COALESCE(NULLIF(pnPersonAttribute.given_name, ''), ''), ' ', COALESCE(NULLIF(pnPersonAttribute.family_name, ''), '') ) AS "NameOfPerson",
@@ -65,6 +66,7 @@ FROM
                                           FROM concept_view
                                           WHERE concept_full_name = "TR, TDR - Malaria"
                                           ) THEN obsLabResults.value_coded  END AS 'Labtest549'
+
       FROM obs obsLabTest
       INNER JOIN obs obsLabResults ON obsLabResults.obs_group_id = obsLabTest.obs_group_id
       AND obsLabResults.person_id = obsLabTest.person_id
@@ -95,7 +97,9 @@ FROM
                                                             )
       AND obsLabResults.voided = 0
       AND obsLabTest.voided = 0
-      AND DATE(obsLabResults.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
+      AND DATE(obsLabResults.obs_datetime) BETWEEN DATE('2018-05-01') AND DATE('2018-05-30')
+
       ) AS TDRReport
-group by person_id,"Date résultats"
-ORDER BY "Date résultats"
+
+group by person_id,obs_datetime
+ORDER BY obs_datetime
