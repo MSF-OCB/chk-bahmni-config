@@ -7603,4 +7603,15 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             INSERT INTO global_property (property, property_value, uuid) VALUES ('emr.reasonsForLabtests', 'Raisons du test de laboratoire', uuid());
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-CONFIG1805181448" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_numeric where concept_id IN (select concept_id from concept_name where name IN ('MCH') and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            </sqlCheck>
+        </preConditions>
+        <comment>Allowing decimal for MCH</comment>
+        <sql>
+            INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,'pg',0,NULL);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
