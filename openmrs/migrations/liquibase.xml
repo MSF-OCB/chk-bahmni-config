@@ -7014,6 +7014,24 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <comment>Adding concept answers for Centre de réference</comment>
         <sqlFile path="Centre_de_réference_Coded_answer.sql"/>
     </changeSet>
+
+    <changeSet id="OCB-CONFIG1805212032" author="Pritam">
+    <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="2">
+               select COUNT(*) from concept_name where name in ("MaternitÃ© BINZA","PÃ©d. KIMBONDO") and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+    </preConditions>
+    <comment>Updating  care center concepts</comment>
+    <sql>
+        update concept_name set name = "Maternité BINZA" where name = "MaternitÃ© BINZA" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        update concept_name set name = "Maternité BINZA" where name = "MaternitÃ© BINZA" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+        update concept_name set name = "Péd. KIMBONDO" where name = "PÃ©d. KIMBONDO" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        update concept_name set name = "Péd. KIMBONDO" where name = "PÃ©d. KIMBONDO" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+        update concept_name set name = "2ème RUE" where name = "2Ã¨me RUE" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        update concept_name set name = "2ème RUE" where name = "2Ã¨me RUE" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+    </sql>
+    </changeSet>
+
     <changeSet id="OCB-CONFIG-201805081808" author="Sudhamsh">
         <comment>Adding concept answers to PODI</comment>
         <sql>
