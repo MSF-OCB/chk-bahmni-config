@@ -7279,7 +7279,6 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             INSERT INTO global_property (property, property_value, uuid) VALUES ('emr.reasonsForLabtests', 'Raisons du test de laboratoire', uuid());
         </sql>
     </changeSet>
-
     <changeSet id="OCB-CONFIG-201805111242" author="Sudhamsh">
         <comment>Adding concepts for Regime ARV form</comment>
         <sql>
