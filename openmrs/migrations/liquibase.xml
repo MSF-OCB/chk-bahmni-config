@@ -7367,5 +7367,14 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
         <sqlFile path="Sort_ParacliniqueForm_concepts.sql"/>
     </changeSet>
+<changeSet id="OCB-CONFIG-CONFIG201805200145" author="Vishnu">
+        <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
+        <sqlFile path="Triage_Updated_units.sql"/>
+    </changeSet>
+<changeSet id="OCB-CONFIG-CONFIG201805200210" author="Vishnu">
+        <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
+        <sqlFile path="Adding_new_Sample.sql"/>
+    </changeSet>
+<include file ="New_Sample_labtests.xml"/>
 </databaseChangeLog>
 
