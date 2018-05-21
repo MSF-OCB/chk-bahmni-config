@@ -7376,5 +7376,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <sqlFile path="Adding_new_Sample.sql"/>
     </changeSet>
 <include file ="New_Sample_labtests.xml"/>
+<changeSet id="OCB-CONFIG-201805201407" author="Pritam">
+        <comment>Adding New concepts for IPD Admission Form</comment>
+        <sqlFile path="AddingNewConceptsToIPDAdmissionForm.sql"/>
+</changeSet>
+<include file ='IPD_Admission_Form_New_Fields.xml'/>
 </databaseChangeLog>
-

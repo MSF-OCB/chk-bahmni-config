@@ -24,6 +24,7 @@
   ],
   "config": {
     "enableLabOrderOptions": ["Urgent"],
+    "addVisitTypeToComment": true,
     "quickPrints": true,
     "networkConnectivity": {
       "showNetworkStatusMessage": false,
