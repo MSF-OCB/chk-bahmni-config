@@ -9,26 +9,7 @@
         },
         "defaultSections": true,
         "sections": {
-            "pivotTable":{
-                "type": "pivotTable",
-                "displayOrder": 0,
-                "title": "Vitals Flowsheet",
-                "config": {
-                    "groupBy": "encounters",
-                    "obsConcepts": [
-                        "Pulse",
-                        "Diastolic",
-                        "Systolic",
-                        "Temperature",
-                        "RR",
-                        "SPO2",
-                        "Height",
-                        "WEIGHT",
-                        "M/C Days"
-                    ],
-                    "labConcepts": ""
-                }
-            }
+
         }
     }
 }
