@@ -241,6 +241,6 @@ from (
     LEFT JOIN person_attribute personAttributeDetails on  A.person_id = personAttributeDetails.person_id AND personAttributeDetails.voided = 0
     LEFT JOIN person_attribute_type personAttributeTypeDetails ON  personAttributeDetails.person_attribute_type_id = personAttributeTypeDetails.person_attribute_type_id
     LEFT JOIN concept_view cvForAttribute on personAttributeDetails.value = cvForAttribute.concept_id
- WHERE DATE(A.visitStartDate) BETWEEN DATE('#starDate#') AND DATE('#endDare#')
+ WHERE DATE(A.visitStartDate) BETWEEN DATE('#starDate#') AND DATE('#endDate#')
  GROUP BY identifierOfPerson.identifier, visitStartDate
  ORDER BY A.visitStartDate
