@@ -98,7 +98,7 @@ FROM
       AND obsLabResults.voided = 0
       AND obsLabTest.voided = 0
       AND DATE(obsLabResults.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
-
+      Group  by obs_datetime,obsLabTest.value_coded
       ) AS TDRReport
 
 group by person_id,obs_datetime
