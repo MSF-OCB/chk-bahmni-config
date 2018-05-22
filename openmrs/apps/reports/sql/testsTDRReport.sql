@@ -97,7 +97,7 @@ FROM
                                                             )
       AND obsLabResults.voided = 0
       AND obsLabTest.voided = 0
-      AND DATE(obsLabResults.obs_datetime) BETWEEN DATE('#starDate#') AND DATE('#endDate#')
+      AND DATE(obsLabResults.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
 
       ) AS TDRReport
 
