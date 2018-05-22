@@ -83,7 +83,6 @@
       "Syndrome d'admission": {
         "dropdown": true
       },
-
       "IPD Admission, Diagnostics de sortie" :{
         "autocomplete":true,
         "multiSelect" : true
@@ -97,11 +96,11 @@
       "IPD Admission, Ligne ARV en cours" :{
         "dropdown": true
       },
+      "IPD Admission, Elements de diagnostic TB" : {
+        "multiSelect" : true
+      },
       "IPD Admission, Régime actuel" :{
         "autocomplete":true
-      },
-      "IPD Admission, Elements de diagnostic TB" :{
-        "dropdown": true
       },
       "IPD Admission, Type": {
         "dropdown": true
@@ -110,7 +109,7 @@
         "allowAddMore": true
       },
       "IPD Admission, Prophylaxie à l'admission": {
-        "dropdown": true
+        "multiSelect" : true
       },
       "IPD Admission, Stade OMS": {
         "dropdown": true
