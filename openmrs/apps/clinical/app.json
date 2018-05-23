@@ -263,6 +263,9 @@
       "Regimen Start reason":{
         "dropdown":true
       },
+       "Effets secondaires - médicaments":{
+        "allowAddMore":true
+      },
       "Résultat(Option)":{
         "dropdown":true
       },
