@@ -7144,6 +7144,94 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Résultat(Option)','Résultat(Option)','Coded','Misc',FALSE);
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201805221732" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+            select count(*) from concept
+            where datatype_id = (select concept_datatype_id from concept_datatype where `name` = "Numeric")
+            and
+            concept_id in (select concept_id from concept_name
+                           where `name` in ("Hémoglobine (Hemocue)(g/dl)","Glycémie(mg/dl)","CD4(cells/µl)","CD4 % (Enfants de moins de 5 ans)(%)")
+                           and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+                           )
+          </sqlCheck>
+      </preConditions>
+        <comment>updating concepts datatype for Tests rapides form</comment>
+        <sql>
+              update concept set datatype_id = (select concept_datatype_id from concept_datatype where `name` = "Numeric"  )
+              where concept_id in (select concept_id from concept_name where name = "Hémoglobine (Hemocue)(g/dl)" and concept_name_type = 'FULLY_SPECIFIED' and voided = 0);
+
+              update concept set datatype_id = (select concept_datatype_id from concept_datatype where `name` = "Numeric"  )
+              where concept_id in (select concept_id from concept_name where name = "Glycémie(mg/dl)" and concept_name_type = 'FULLY_SPECIFIED' and voided = 0);
+
+              update concept set datatype_id = (select concept_datatype_id from concept_datatype where `name` = "Numeric"  )
+              where concept_id in (select concept_id from concept_name where name = "CD4(cells/µl)" and concept_name_type = 'FULLY_SPECIFIED' and voided = 0);
+
+              update concept set datatype_id = (select concept_datatype_id from concept_datatype where `name` = "Numeric"  )
+              where concept_id in (select concept_id from concept_name where name = "CD4 % (Enfants de moins de 5 ans)(%)" and concept_name_type = 'FULLY_SPECIFIED' and voided = 0);
+          </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-201805221733" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+            select count(*) from concept_numeric
+            where
+            concept_id in (select concept_id from concept_name
+                           where `name` in ("Hémoglobine (Hemocue)(g/dl)","Glycémie(mg/dl)","CD4(cells/µl)","CD4 % (Enfants de moins de 5 ans)(%)")
+                           and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+                           )
+
+          </sqlCheck>
+      </preConditions>
+        <comment>updating concept numeric table for Tests rapides form</comment>
+        <sql>
+              INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "Hémoglobine (Hemocue)(g/dl)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+
+              INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "Glycémie(mg/dl)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+
+              INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "CD4(cells/µl)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+
+              INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "CD4 % (Enfants de moins de 5 ans)(%)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+          </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-201805221734" author="Pritam">
+        <comment>updating concept numeric table for Tests rapides form</comment>
+        <sql>
+
+          update concept_numeric set precise = 1
+          where concept_id in
+          (
+            select concept_id
+            from concept_name
+            where `name` in
+            (
+            "Hémoglobine (Hemocue)(g/dl)","Glycémie(mg/dl)","CD4(cells/µl)","CD4 % (Enfants de moins de 5 ans)(%)"
+            )
+            and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+          );
+      </sql>
+  </changeSet>
+
+  <changeSet id="OCB-CONFIG-201805221736" author="Pritam">
+      <comment>updating concept numeric table for Résultat(Numérique)</comment>
+      <sql>
+
+        update concept_numeric set precise = 1
+        where concept_id in
+        (
+          select concept_id
+          from concept_name
+          where `name` in
+          (
+          "Résultat(Numérique)"
+          )
+          and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+        );
+    </sql>
+</changeSet>
+
     <changeSet id="OCB-CONFIG-201805121208" author="Sudhamsh">
         <comment>Adding concept answers to Tests</comment>
         <sql>
