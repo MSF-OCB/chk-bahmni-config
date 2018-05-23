@@ -7549,4 +7549,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             t1.sort_weight > t2.sort_weight AND t1.answer_concept = t2.answer_concept and t1.concept_id = @concept_id;
         </sql>
     </changeSet>
+<changeSet id="OCB-CONFIG-201805231123" author="Vishnu">
+        <comment>Removing set members for the New IPD panel(Bilan de routine IPD)</comment>
+        <sql>
+           delete from concept_set where concept_id in (select distinct concept_id from concept_name where name in ('CD4(Bilan de routine IPD)','Glycémie(Bilan de routine IPD)','TDR - Malaria(Bilan de routine IPD)','Crag sérique(Bilan de routine IPD)','Syphilis(Bilan de routine IPD)','Hépatite B(Bilan de routine IPD)'))
+            and concept_set in (select distinct concept_id from concept_name where name ='Bilan de routine IPD');
+        </sql>
+    </changeSet>
 </databaseChangeLog>
