@@ -7556,4 +7556,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             and concept_set in (select distinct concept_id from concept_name where name ='Bilan de routine IPD');
         </sql>
     </changeSet>
+<changeSet id="OCB-CONFIG-201805231232" author="Sudhamsh">
+        <comment>Adding concept answers for ARV</comment>
+        <sqlFile path="Suivi_newSection_concepts.sql"/>
+    </changeSet>
+<include file ="Suivi_feedback.xml"/>
 </databaseChangeLog>

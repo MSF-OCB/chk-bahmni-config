@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="OCB-CONFIG-201805200530" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('1,Suivi','2,Suivi','3,Suivi',
+                '4,Suivi') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = 'Grade,Suivi');
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+
+
+
+            select concept_id into @concept_id from concept_name where name='Grade,Suivi'	and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child1_concept_id from concept_name where name='1,Suivi'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name='2,Suivi'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child3_concept_id from concept_name where name='3,Suivi'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child4_concept_id from concept_name where name='4,Suivi'and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+
+
+        </sql>
+        </changeSet>
+  
+<changeSet id="OCB-CONFIG-201805200532" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+             select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in("Effets secondaires - médicaments") AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Suivi Consultation');
+
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set members for "TB outcome" concept</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+               select concept_id into @concept_id from concept_name where name = 'Suivi Consultation' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = "Effets secondaires - médicaments" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            
+            call add_concept_set_members (@concept_id, @member1_concept_id, 9);
+            
+
+            </sql>
+            </changeSet>
+<changeSet id="OCB-CONFIG-201805200533" author="Vishnu">
+<preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+             select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in("Molécule","Effets secondaires","Grade,Suivi") AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Effets secondaires - médicaments');
+                </sqlCheck>
+                </preConditions>
+        <comment>Adding members to 'Effets secondaires - médicaments' </comment>
+        <sql>
+
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+            set @member3_concept_id = 0;
+            
+    select concept_id into @concept_id from concept_name where name = "Effets secondaires - médicaments" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    
+    select concept_id into @member1_concept_id from concept_name where name = "Molécule" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member2_concept_id from concept_name where name = "Effets secondaires" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member3_concept_id from concept_name where name = "Grade,Suivi" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    
+    call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+    call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+    call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+    </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-201805200534" author="Vishnu">
+        <comment>Changing the order of sections in Suivi Consultation form </comment>
+        <sql>
+update concept_set set sort_weight =8 where concept_id in
+ (select concept_id from concept_name where name ='Effets secondaires - médicaments' and locale='fr' and concept_name_type='FULLY_SPECIFIED') 
+ and concept_set in (select concept_id from concept_name where name ='Suivi Consultation' and locale='fr' and concept_name_type='FULLY_SPECIFIED');
+
+update concept_set set sort_weight =9 where concept_id in
+  (select concept_id from concept_name where name ='Prochain RDV' and locale='fr' and concept_name_type='FULLY_SPECIFIED')  and concept_set in (select concept_id
+  from concept_name where name ='Suivi Consultation'  and locale='fr' and concept_name_type='FULLY_SPECIFIED');
+   </sql>
+    </changeSet>
+    </databaseChangeLog>
