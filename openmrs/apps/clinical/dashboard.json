@@ -276,30 +276,8 @@
       }
    }
 },
-"investigationChart": {
-     "translationKey": "Tableau des résultats",
-     "printing": {
-         "title": "Centre Hospitalier Kabinda",
-         "header": "Tableau des résultats",
-         "logo": "/bahmni_config/openelis/images/labLogo.jpg"
-     },
-     "sections": {
-         "investigationsChart": {
-           "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
-           "type": "labOrders",
-           "displayOrder": 3,
-           "displayType": "Full-Page",
-           "dashboardConfig": {
-             "title": null,
-             "numberOfVisits": 10,
-             "showChart": true,
-             "showTable": false,
-             "showDetailsButton": true
-           }
-         }
-     }
- },
- "investigationChartSummary": {
+
+ "patientChartSummary": {
   "translationKey": "DASHBOARD_TITLE_PATIENT_SUMMARY_INFO",
   "printing": {
       "title": "Centre Hospitalier Kabinda",
@@ -351,9 +329,10 @@
         "displayType":"Full-Page",
         "dashboardConfig":{  
             "showGroupDateTime":false,
+            "numberOfVisits": 5,
             "conceptNames":["Stade clinique OMS",
               "Sc, Diagnostic","Sc, Informations Infections opportunistes",
-              "Informations Prophylaxie","Effets secondaires - médicaments"
+              "Sc, Informations prophylaxie","Effets secondaires - médicaments"
             ],
             "scope":"latest"
         },
@@ -366,6 +345,7 @@
       "displayType":"Full-Page",
       "dashboardConfig":{  
           "showGroupDateTime":false,
+          "numberOfVisits": 5,
           "conceptNames":[
            "Date d'admission","Syndrome d'admission","Si autre, preciser",
             "Diagnostic","Date de sortie"
@@ -396,7 +376,29 @@
     "displayType": "Full-Page"
    }
 }
+},
+"investigationChart": {
+  "translationKey": "Tableau des résultats",
+  "printing": {
+      "title": "Centre Hospitalier Kabinda",
+      "header": "Tableau des résultats",
+      "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+  },
+  "sections": {
+      "investigationsChart": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 3,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "title": null,
+          "numberOfVisits": 10,
+          "showChart": true,
+          "showTable": false,
+          "showDetailsButton": true
+        }
+      }
+  }
 }
 }
-
 
