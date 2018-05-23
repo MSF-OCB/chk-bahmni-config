@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+<changeSet id="OCB-CONFIG-201805231229" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+select COUNT(*) from concept_name where name ='MCH(Bilan de routine IPD)' and concept_name_type in (
+'FULLY_SPECIFIED','SHORT') and locale='fr';
+                </sqlCheck>
+                </preConditions>
+                <sql>
+           set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                set @count = 0;
+                set @uuid = NULL;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'MCH(Bilan de routine IPD)',
+            'MCH(Bilan de routine IPD)','Numeric','LabTest',false);
+INSERT INTO concept_numeric
+(concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES
+ ((select concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),
+NULL,NULL,NULL,NULL,NULL,NULL,'pg',0,NULL);
+update concept_name set name ='Genexpert(Panneau)' where name='Genexpert(Panel)' and concept_name_type='FULLY_SPECIFIED' 
+and locale='fr' and voided=0;
+
+    </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-201805231230" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN(
+                   'LYM%(Bilan de routine IPD)','MCH(Bilan de routine IPD)')
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels'));
+                </sqlCheck>
+                </preConditions>
+                <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+    select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member1_concept_id from concept_name where name = 'LYM%(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member2_concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+    call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+    call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+    </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-201805231231" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN(
+                   'LYM%(Bilan de routine IPD)','MCH(Bilan de routine IPD)')
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Bilan de routine IPD'));
+                </sqlCheck>
+                </preConditions>
+                <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+    select concept_id into @concept_id from concept_name where name = 'Bilan de routine IPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member1_concept_id from concept_name where name = 'LYM%(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member2_concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+    call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+    call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+    </sql>
+    </changeSet>
+<changeSet id="OCB-CONFIG-201805231239" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN(
+                   'LYM%(Bilan de routine IPD)','MCH(Bilan de routine IPD)')
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Bilan à l’admission - IPD'));
+                </sqlCheck>
+                </preConditions>
+                <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+    select concept_id into @concept_id from concept_name where name = 'Bilan à l’admission - IPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member1_concept_id from concept_name where name = 'LYM%(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+    select concept_id into @member2_concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+    call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+    call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+    </sql>
+    </changeSet>
+<changeSet id="OCB-201805231236" author="Vishnu">
+        <comment>Adding entries in event_records table for Bilan à l’admission - IPD </comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    
+    </databaseChangeLog>
