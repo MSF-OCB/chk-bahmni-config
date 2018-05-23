@@ -7562,4 +7562,6 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     </changeSet>
 <include file ="Suivi_feedback.xml"/>
 <include file="Update_newIPDPanel.xml"/>
+    <include file ='CliniquesFeedback.xml'/>
+
 </databaseChangeLog>
