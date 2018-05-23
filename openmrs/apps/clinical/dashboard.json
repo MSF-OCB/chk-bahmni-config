@@ -333,8 +333,8 @@
             "conceptNames":["Stade clinique OMS",
               "Sc, Diagnostic","Sc, Informations Infections opportunistes",
               "Sc, Informations prophylaxie","Effets secondaires - médicaments"
-            ],
-            "scope":"latest"
+            ]
+            
         },
         "displayOrder":2,
         "translationKey":"DASHBOARD_TITLE_OPD_INFO_KEY"
@@ -349,8 +349,8 @@
           "conceptNames":[
            "Date d'admission","Syndrome d'admission","Si autre, preciser",
             "Diagnostic","Date de sortie"
-          ],
-          "scope":"latest"
+          ]
+          
       },
       "displayOrder":3,
       "translationKey":"DASHBOARD_TITLE_IPD_INFO_KEY"
