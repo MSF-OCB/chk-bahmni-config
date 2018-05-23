@@ -298,5 +298,105 @@
            }
          }
      }
- }
+ },
+ "investigationChartSummary": {
+  "translationKey": "DASHBOARD_TITLE_PATIENT_SUMMARY_INFO",
+  "printing": {
+      "title": "Centre Hospitalier Kabinda",
+      "header": "Sommaire du patient",
+      "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+  },
+  
+      "sections":{
+         "patientInformation":{
+            "translationKey":"DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
+            "type":"patientInformation",
+            "displayOrder":0,
+            "ageLimit":100,
+            "displayType": "Full-Page",
+            "patientAttributes":[
+              "Type de cohorte"
+            ]
+          },
+          
+        "treatments":{  
+          "translationKey":"DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
+          "type":"treatment",
+          "displayOrder":1,
+          "displayType": "Full-Page",
+          "dashboardConfig":{  
+              "showFlowSheet":true,
+              "showListView":true,
+              "showRoute":true,
+              "showDrugForm":true,
+              "numberOfVisits":5,
+              "showOtherActive":true, 
+              "showDetailsButton":true,
+              "conceptNames":["Stopped Order Reason"]
+          },
+          "expandedViewConfig":{  
+              "translationKey":"DASHBOARD_TITLE_TREATMENTS_KEY",
+              "showFlowSheet":true,
+              "showListView":true,
+              "showRoute":true,
+              "showDrugForm":true,
+              "numberOfVisits":5,
+              "showOtherActive":true,
+              "showDetailsButton":true
+          }
+      },
+      "VitalsInformation":{  
+        "type":"vitals",
+        "isObservation":true,
+        "displayType":"Full-Page",
+        "dashboardConfig":{  
+            "showGroupDateTime":false,
+            "conceptNames":["Stade clinique OMS",
+              "Sc, Diagnostic","Sc, Informations Infections opportunistes",
+              "Informations Prophylaxie","Effets secondaires - médicaments"
+            ],
+            "scope":"latest"
+        },
+        "displayOrder":2,
+        "translationKey":"DASHBOARD_TITLE_OPD_INFO_KEY"
+    },
+    "VitalsInformationNew":{  
+      "type":"vitals",
+      "isObservation":true,
+      "displayType":"Full-Page",
+      "dashboardConfig":{  
+          "showGroupDateTime":false,
+          "conceptNames":[
+           "Date d'admission","Syndrome d'admission","Si autre, preciser",
+            "Diagnostic","Date de sortie"
+          ],
+          "scope":"latest"
+      },
+      "displayOrder":3,
+      "translationKey":"DASHBOARD_TITLE_IPD_INFO_KEY"
+  },
+    "investigationsChart": {
+      "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+      "type": "labOrders",
+      "displayOrder": 3,
+      "displayType": "Full-Page",
+      "dashboardConfig": {
+        "title": null,
+        "numberOfVisits": 5,
+        "showChart": true,
+        "showTable": false,
+        "showDetailsButton": true
+      }
+    
+   },
+   "programs_1":{
+    "translationKey":"PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+    "type":"programs",
+    "displayOrder":4,
+    "displayType": "Full-Page"
+   }
 }
+}
+}
+
+
