@@ -205,9 +205,6 @@
       "Infections Opportunistes": {
         "autocomplete": true
       },
-      "Type de TB": {
-        "multiSelect": true
-      },
       "Ligne d'ARV": {
         "dropdown": true
       },
@@ -244,7 +241,6 @@
       "Informations Vaccination": {
         "allowAddMore": true
       },
-<<<<<<< HEAD
       "Sc, Diagnostic":{
         "dropdown":false,
         "autocomplete":true,
@@ -303,10 +299,9 @@
       },
       "Prophylaxie":{
         "multiSelect": true
-=======
-      "Vaccination": {
-        "autocomplete": true
->>>>>>> ocb-release-2.1
+      },
+      "Informations autres pathologies":{
+        "allowAddMore": true
       }
     }
   }

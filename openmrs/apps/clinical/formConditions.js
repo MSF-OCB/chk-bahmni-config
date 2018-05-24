@@ -143,10 +143,9 @@ Bahmni.ConceptSet.FormConditions.rules = {
             show: [],
             hide: []
         };
-
         var Typede = "Site TB";
         var conditionConcept = formFieldValues["Type de TB"];
-        if (conditionConcept.indexOf("Extrapulmonaire")>=0){
+        if (conditionConcept == "Extrapulmonaire"){
             conditions.show.push(Typede);
         } else {
             conditions.hide.push(Typede);
