@@ -122,5 +122,81 @@ Bahmni.ConceptSet.FormConditions.rules = {
         }
 
         return conditions;
+    },
+    'Prématuré': function (formName, formFieldValues) {
+        var conditions = {
+            show: [],
+            hide: []
+        };
+
+        var SiPre = "Si prémature, nombre de semaines";
+        var result = formFieldValues['Prématuré'];
+        if (result == "Oui") {
+            conditions.show.push( SiPre);
+        } else {
+            conditions.hide.push( SiPre);
+        }
+        return conditions;
+    },
+    'Type de TB': function (formName, formFieldValues) {
+        var conditions = {
+            show: [],
+            hide: []
+        };
+
+        var Typede = "Site TB";
+        var conditionConcept = formFieldValues["Type de TB"];
+        if (conditionConcept.indexOf("Extrapulmonaire")>=0){
+            conditions.show.push(Typede);
+        } else {
+            conditions.hide.push(Typede);
+        }
+        return conditions;
+    },
+    "Prophylaxie à l'accouchement": function (formName, formFieldValues) {
+        var conditions = {
+            show: [],
+            hide: []
+        };
+
+        var Paccou = "Info Prophylaxie à l'accouchement";
+        var result = formFieldValues["Prophylaxie à l'accouchement"];
+        if (result == "Oui") {
+            conditions.show.push(Paccou);
+        } else {
+            conditions.hide.push(Paccou);
+        }
+        return conditions;
+    },
+    "Prophylaxie après la naissance": function (formName, formFieldValues) {
+        var conditions = {
+            show: [],
+            hide: []
+        };
+
+        var Pnai = "Info Prophylaxie après la naissance";
+        var result = formFieldValues['Prophylaxie après la naissance'];
+        if (result == "Oui") {
+            conditions.show.push(Pnai);
+        } else {
+            conditions.hide.push(Pnai);
+        }
+        return conditions;
+    },
+    "Traitement TB Antérieur": function (formName, formFieldValues) {
+        var conditions = {
+            show: [],
+            hide: []
+        };
+
+        var HisTB = "Historique TB antérieur(si traité précédemment)";
+        var result = formFieldValues['Traitement TB Antérieur'];
+        if (result == "Traité précédemment") {
+            conditions.show.push(HisTB);
+        } else {
+            conditions.hide.push(HisTB);
+        }
+        return conditions;
     }
+
  };

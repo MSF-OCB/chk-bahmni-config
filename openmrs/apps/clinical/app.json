@@ -293,6 +293,15 @@
       },
       "RA, ARV Line": {
         "dropdown": true
+      },
+      "Historique TB antérieur(si traité précédemment)":{
+        "dropdown": true
+      },
+      "TB résultat du traitement":{
+        "dropdown": true
+      },
+      "Prophylaxie":{
+        "multiSelect": true
       }
     }
   }
