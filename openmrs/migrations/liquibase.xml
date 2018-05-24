@@ -7357,8 +7357,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <changeSet id="OCB-CONFIG-201805230405" author="Vishnu">
         <comment>Removing old IPD panel labtests</comment>
         <sql>
-           delete from concept_set where concept_id in (select distinct concept_id from concept_name where name in ('CD4(Bilan de routine IPD)','Glycémie(Bilan de routine IPD)','TDR - Malaria(Bilan de routine IPD)','Crag sérique(Bilan de routine IPD)','Syphilis(Bilan de routine IPD)','Hépatite B(Bilan de routine IPD)'))
-            and concept_set in (select distinct concept_id from concept_name where name ='Bilan de routine IPD');
+         delete from concept_set where concept_id in 
+(select distinct concept_id from concept_name where name in 
+('Hémoglobine (IPD)','Glycémie (IPD)','TDR - Paludisme (IPD)','CD4 % (enfants de - 5 ans) (IPD)',
+'CD4 (IPD)','TB - LAM (IPD)')
+ and locale='fr');
         </sql>
     </changeSet>
 
