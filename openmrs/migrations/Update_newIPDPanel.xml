@@ -25,8 +25,7 @@ INSERT INTO concept_numeric
 (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES
  ((select concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),
 NULL,NULL,NULL,NULL,NULL,NULL,'pg',0,NULL);
-update concept_name set name ='Genexpert(Panneau)' where name='Genexpert(Panel)' and concept_name_type='FULLY_SPECIFIED' 
-and locale='fr' and voided=0;
+
 
     </sql>
     </changeSet>
@@ -100,7 +99,8 @@ select COUNT(*) from concept_set cs
     </sql>
     </changeSet>
 <changeSet id="OCB-201805231236" author="Vishnu">
-        <comment>Adding entries in event_records table for Bilan à l’admission - IPD </comment>
+        <comment>Adding entries in event_records table for Bilan à l’admission - IPD 
+        and renaming the Genexpert Panel</comment>
         <sql>
             set @concept_id = 0;
             set @uuid = NULL;
@@ -108,8 +108,53 @@ select COUNT(*) from concept_set cs
             select concept_id into @concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
             select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+            update concept_name set name ='Genexpert(Panneau)' where name='Genexpert(Panel)' and concept_name_type ='FULLY_SPECIFIED' and locale='fr' and voided=0;
+
+            update concept_name set name ='Genexpert(Panneau)' where name='Genexpert' and concept_name_type ='SHORT' and locale='fr' and voided=0;
+        
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-2018231237" author="Vishnu">
+        <comment>Adding entries in event_records table for Renamed Genexpert panel</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Genexpert(Panneau)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
+        
+        </sql>
+    </changeSet>
+<changeSet id="OCB-2018052337" author="Vishnu">
+        <comment>Adding entries in event_records table for LYM labtest</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'LYM%(Bilan de routine IPD)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+        
+        </sql>
+    </changeSet>
+<changeSet id="OCB-2018052312" author="Vishnu">
+        <comment>Adding entries in event_records table for MCH labtest</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'MCH(Bilan de routine IPD)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+        
         </sql>
     </changeSet>
     
     </databaseChangeLog>
+
+
