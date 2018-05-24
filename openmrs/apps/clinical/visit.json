@@ -5,11 +5,134 @@
         "printing": {
             "title": "Bahmni",
             "header": "Visit",
-            "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+            "logo": "../images/bahmniLogo.png"
         },
         "defaultSections": true,
         "sections": {
+        }
 
+    },
+    "ipdAdmission":{
+        "translationKey": "Fiche Clinique IPD CHK - Admission",
+        "printing": {
+            "title": "Centre Hospitalier Kabinda",
+            "header": "Fiche Clinique IPD CHK - Admission",
+            "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+        },
+        "sections": {
+            "ipdPatientInformation":{
+                "type": "patientInformation",
+                "displayOrder": 0,
+                "config": {
+                    "title": "PatientInformation",
+                    "patientAttributes": ["Type de cohorte","Nom du contact","Tel 1 du Contact"],
+                    "addressFields":  ["address6"]
+                }
+            },
+            "ipdObservation":{
+                "type":"observation",
+                "translationKey":"IPD Observation",
+                "displayOrder":1,
+                "displayType": "Full-Page",
+                "config":{
+                    "conceptNames":[
+                        "Référé en IPD par(FOSA)",
+                        "FOSA de suivi ARV",
+                        "Syndrome d'admission",
+                        "Malade arrivé mort"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "hospitalisationsAntérieures": {
+                "type": "observation",
+                "displayOrder": 3,
+                "translationKey":"Hospitalisations antérieures",
+                "config": {
+                    "conceptNames": ["IPD Admission Section, Hospitalisations antérieures"],
+                    "scope": "latest"
+                }
+            },
+            "historiqueVIH":{
+                "type": "observation",
+                "displayOrder": 5,
+                "translationKey": "Historique VIH",
+                "config": {
+                    "conceptNames": [
+                        "IPD Admission Section, Historique VIH"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "adherenceARV":{
+                "type": "observation",
+                "displayOrder": 6,
+                "translationKey": "Adhérence ARV",
+                "config": {
+                    "conceptNames": [
+                        "IPD Admission Section, Adherence ARV"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "historiqueTB":{
+                "type": "observation",
+                "displayOrder": 7,
+                "translationKey": "Historique TB",
+                "config": {
+                    "conceptNames": [
+                        "IPD Admission Section, Historique TB"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "tbPrécédentes":{
+                "type": "observation",
+                "displayOrder": 8,
+                "translationKey": "TB Précédentes",
+                "config": {
+                    "conceptNames": [
+                        "IPD Admission Section, TB Précédentes"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "prophylaxieAdmission":{
+                "type": "observation",
+                "displayOrder": 9,
+                "translationKey": "Prophylaxie",
+                "config": {
+                    "conceptNames": [
+                        "IPD Admission, Prophylaxie à l'admission",
+                        "IPD Admission, Stade OMS",
+                        "IPD Admission, SNC Glasgow(/15)"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "ipdAdmission":{
+                "type": "observation",
+                "displayOrder": 10,
+                "translationKey": "Admission Test",
+                "config": {
+                    "conceptNames": [
+                        "Test á l'admission"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "infoIPDAdmissionDetails":{
+                "type": "observation",
+                "displayOrder": 11,
+                "translationKey": "Admission Details",
+                "config": {
+                    "conceptNames": [
+                        "Infirmier en charge de l'admission",
+                        "Medecin en charge de l'admission"
+                    ],
+                    "scope": "latest"
+                }
+            }
         }
     }
 }
