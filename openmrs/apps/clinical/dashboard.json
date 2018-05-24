@@ -512,7 +512,7 @@
         }
      },
      "ipdAdmission":{
-        "translationKey": "Admission Test",
+        "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_DETAILS",
         "type":"vitals",
         "isObservation":true,
         "displayOrder":9,
@@ -526,7 +526,7 @@
         }
      },
      "infoIPDAdmissionDetails":{
-        "translationKey":"Admission Details",
+        "translationKey":"DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
         "type":"vitals",
         "isObservation":true,
         "displayOrder":10,

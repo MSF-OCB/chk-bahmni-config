@@ -113,7 +113,7 @@
             "ipdAdmission":{
                 "type": "observation",
                 "displayOrder": 10,
-                "translationKey": "Admission Test",
+                "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_DETAILS",
                 "config": {
                     "conceptNames": [
                         "Test á l'admission"
@@ -124,7 +124,7 @@
             "infoIPDAdmissionDetails":{
                 "type": "observation",
                 "displayOrder": 11,
-                "translationKey": "Admission Details",
+                "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
                 "config": {
                     "conceptNames": [
                         "Infirmier en charge de l'admission",
