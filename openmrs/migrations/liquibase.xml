@@ -7292,6 +7292,47 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <sqlFile path="AddingNewConceptsToIPDAdmissionForm.sql"/>
 </changeSet>
 <include file ='IPD_Admission_Form_New_Fields.xml'/>
+
+<changeSet id="OCB-CONFIG-201805240730" author="Pritam">
+  <preConditions onFail="MARK_RAN">
+      <sqlCheck expectedResult="0">
+        select count(*) from concept_numeric
+        where
+        concept_id in (select concept_id from concept_name
+                       where `name` in ("IPD Admission, Valeur Dernier CD4 (cells/mm3)","IPD Admission, Valeur dernière CV(cells/mm3)","IPD Admission, SNC Glasgow(/15)")
+                       and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+                       )
+
+      </sqlCheck>
+  </preConditions>
+    <comment>updating concept numeric table for Tests rapides form</comment>
+    <sql>
+          INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "IPD Admission, Valeur Dernier CD4 (cells/mm3)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+
+          INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "IPD Admission, Valeur dernière CV(cells/mm3)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+
+          INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "IPD Admission, SNC Glasgow(/15)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+      </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201805240734" author="Pritam">
+    <comment>updating concept numeric table for Tests rapides form</comment>
+    <sql>
+
+      update concept_numeric set precise = 1
+      where concept_id in
+      (
+        select concept_id
+        from concept_name
+        where `name` in
+        (
+        "IPD Admission, Valeur Dernier CD4 (cells/mm3)","IPD Admission, Valeur dernière CV(cells/mm3)","IPD Admission, SNC Glasgow(/15)"
+        )
+        and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+      );
+  </sql>
+</changeSet>
+
     <changeSet id="OCB-CONFIG-201805211129" author="Sudhamsh">
         <comment>Adding concept RA, ARV Line</comment>
         <sql>
@@ -7357,8 +7398,8 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <changeSet id="OCB-CONFIG-201805230405" author="Vishnu">
         <comment>Removing old IPD panel labtests</comment>
         <sql>
-         delete from concept_set where concept_id in 
-(select distinct concept_id from concept_name where name in 
+         delete from concept_set where concept_id in
+(select distinct concept_id from concept_name where name in
 ('Hémoglobine (IPD)','Glycémie (IPD)','TDR - Paludisme (IPD)','CD4 % (enfants de - 5 ans) (IPD)',
 'CD4 (IPD)','TB - LAM (IPD)')
  and locale='fr');
