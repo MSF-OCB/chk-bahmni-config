@@ -366,4 +366,34 @@
             call add_concept_answer(@concept_id, @child2_concept_id, 2);
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201805251057" author="Sudhamsh">
+        <comment>creating set members for Date diagnostic ARV</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Date diagnostic ARV', 'Date diagnostic ARV','Date','Misc',FALSE);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201805251052" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('Date diagnostic ARV') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Historique ARV');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Date diagnostic ARV to Historique ARV</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Historique ARV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Date diagnostic ARV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members(@concept_id, @child1_concept_id, 0);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
