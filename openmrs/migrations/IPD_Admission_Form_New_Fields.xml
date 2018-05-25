@@ -3659,6 +3659,20 @@ select concept_id into @child57_concept_id from concept_name where name = 'Autre
 
         </sql>
 </changeSet>
+<changeSet id="OCB-CONFIG-1805251425" author="Pritam">
+    <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="0">
+            select count(*) from concept_name where name = "Meilleure prise en charge" and concept_name_type = "FULLY_SPECIFIED"
+        </sqlCheck>
+    </preConditions>
+    <comment>Adding concept Meilleure prise en charge </comment>
+    <sql>
+        set @concept_id = 0;
+        set @concept_short_id = 0;
+        set @concept_full_id = 0;
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Meilleure prise en charge','Meilleure prise en charge','Text','Misc',false);
+    </sql>
+</changeSet>
 
 <changeSet id="OCB-CONFIG-1805201902" author="Pritam">
         <preConditions onFail="MARK_RAN">
@@ -3760,4 +3774,107 @@ select concept_id into @child57_concept_id from concept_name where name = 'Autre
 
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-1805251903" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="80">
+                       select COUNT(*) from concept_set cs
+                       join concept_name cn
+                       on cs.concept_id = cn.concept_id
+                       where cs.concept_id IN (select concept_id from concept_name where name IN
+                       (
+                       "IPD Admission, Date d\'admission","Référé en IPD par(FOSA)","FOSA de suivi ARV","IPD Admission, Référé en IPD pour MPEC?","Syndrome d\'admission","Si autre, preciser","Malade arrivé mort","IPD Admission Section, Hospitalisations antérieures","IPD Admission Section, Historique VIH","IPD Admission Section, Histoire ARV","IPD Admission Section, Adherence ARV","IPD Admission Section, Historique TB","IPD Admission Section, TB Précédentes","IPD Admission, Prophylaxie à l\'admission","IPD Admission, Stade OMS","IPD Admission, SNC Glasgow(/15)","Infirmier en charge de l\'admission","Medecin en charge de l\'admission","Examen Physique á l\'admission","Test á l\'admission"
+                       ) AND concept_name_type = "FULLY_SPECIFIED")
+                       and cs.concept_set IN (select concept_id from concept_name where name = 'Admission IPD Form');
+                    </sqlCheck>
+            </preConditions>
+            <comment>removing set members for Admission IPD Form</comment>
+            <sql>
+
+          delete from concept_set where concept_set IN (SELECT concept_id from concept_name where name = "Admission IPD Form");
+            </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-1805251906" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                       select COUNT(*) from concept_set cs
+                       join concept_name cn
+                       on cs.concept_id = cn.concept_id
+                       where cs.concept_id IN (select concept_id from concept_name where name IN
+                       ("IPD Admission, Date d\'admission","Référé en IPD par(FOSA)","FOSA de suivi ARV","IPD Admission, Référé en IPD pour MPEC?","Syndrome d\'admission","Si autre, preciser","Malade arrivé mort","IPD Admission Section, Hospitalisations antérieures","IPD Admission Section, Historique VIH","IPD Admission Section, Histoire ARV","IPD Admission Section, Adherence ARV","IPD Admission Section, Historique TB","IPD Admission Section, TB Précédentes","IPD Admission, Prophylaxie à l\'admission","IPD Admission, Stade OMS","IPD Admission, SNC Glasgow(/15)","Infirmier en charge de l\'admission","Medecin en charge de l\'admission","Examen Physique á l\'admission","Meilleure prise en charge","Test á l\'admission") AND concept_name_type = "FULLY_SPECIFIED")
+                       and cs.concept_set IN (select concept_id from concept_name where name = 'Admission IPD Form');
+                    </sqlCheck>
+            </preConditions>
+            <comment>Adding set members for Admission IPD Form</comment>
+            <sql>
+                set @concept_id = 0;
+                set @member1_concept_id = 0;
+                set @member2_concept_id = 0;
+                set @member3_concept_id = 0;
+                set @member4_concept_id = 0;
+                set @member5_concept_id = 0;
+                set @member6_concept_id = 0;
+                set @member7_concept_id = 0;
+                set @member8_concept_id = 0;
+                set @member9_concept_id = 0;
+                set @member10_concept_id = 0;
+                set @member11_concept_id = 0;
+                set @member12_concept_id = 0;
+                set @member13_concept_id = 0;
+                set @member14_concept_id = 0;
+                set @member15_concept_id = 0;
+                set @member16_concept_id = 0;
+                set @member17_concept_id = 0;
+                set @member18_concept_id = 0;
+                set @member19_concept_id = 0;
+                set @member20_concept_id = 0;
+                set @member21_concept_id = 0;
+
+                select concept_id into @concept_id from concept_name where name = 'Admission IPD Form' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                select concept_id into @member1_concept_id from concept_name where name = "IPD Admission, Date d\'admission" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member2_concept_id from concept_name where name = 'Référé en IPD par(FOSA)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member3_concept_id from concept_name where name = 'FOSA de suivi ARV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member4_concept_id from concept_name where name = "IPD Admission, Référé en IPD pour MPEC?" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member5_concept_id from concept_name where name = 'Syndrome d\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member6_concept_id from concept_name where name = 'Si autre, preciser' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member7_concept_id from concept_name where name = 'Malade arrivé mort' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member8_concept_id from concept_name where name = 'IPD Admission Section, Hospitalisations antérieures' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member9_concept_id from concept_name where name = 'IPD Admission Section, Historique VIH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member10_concept_id from concept_name where name = 'IPD Admission Section, Histoire ARV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member11_concept_id from concept_name where name = 'IPD Admission Section, Adherence ARV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member12_concept_id from concept_name where name = 'IPD Admission Section, Historique TB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member13_concept_id from concept_name where name = 'IPD Admission Section, TB Précédentes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member14_concept_id from concept_name where name = 'IPD Admission, Prophylaxie à l\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member15_concept_id from concept_name where name = 'IPD Admission, Stade OMS' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member16_concept_id from concept_name where name = 'IPD Admission, SNC Glasgow(/15)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member17_concept_id from concept_name where name = 'Infirmier en charge de l\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member18_concept_id from concept_name where name = 'Medecin en charge de l\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member19_concept_id from concept_name where name = 'Examen Physique á l\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member20_concept_id from concept_name where name = 'Meilleure prise en charge' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member21_concept_id from concept_name where name = 'Test á l\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+                call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+                call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+                call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+                call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+                call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+                call add_concept_set_members (@concept_id, @member7_concept_id, 7);
+                call add_concept_set_members (@concept_id, @member8_concept_id, 8);
+                call add_concept_set_members (@concept_id, @member9_concept_id, 9);
+                call add_concept_set_members (@concept_id, @member10_concept_id, 10);
+                call add_concept_set_members (@concept_id, @member11_concept_id, 11);
+                call add_concept_set_members (@concept_id, @member12_concept_id, 12);
+                call add_concept_set_members (@concept_id, @member13_concept_id, 13);
+                call add_concept_set_members (@concept_id, @member14_concept_id, 14);
+                call add_concept_set_members (@concept_id, @member15_concept_id, 15);
+                call add_concept_set_members (@concept_id, @member16_concept_id, 16);
+                call add_concept_set_members (@concept_id, @member17_concept_id, 17);
+                call add_concept_set_members (@concept_id, @member18_concept_id, 18);
+                call add_concept_set_members (@concept_id, @member19_concept_id, 19);
+                call add_concept_set_members (@concept_id, @member20_concept_id, 20);
+                call add_concept_set_members (@concept_id, @member21_concept_id, 20);
+            </sql>
+        </changeSet>
 </databaseChangeLog>
