@@ -6,9 +6,4 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
     <include file="elis_users.xml"/>
     <include file="AddProvidersInElis.xml"/>
-    <changeSet context="setup" author="Mahitha, Suman" id="210520181511">
-        <addColumn schemaName="clinlims" tableName="sample">
-            <column name="visit_type" type="varchar(255)"/>
-        </addColumn>
-    </changeSet>
 </databaseChangeLog>
