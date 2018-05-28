@@ -1,28 +1,18 @@
 
 Select
 * from (
-SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date rèsultats",
-
+SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prélèvement",
        B.care_center_requesting AS "Provenance",
-       B.Patient_Name AS "Nom du patient",
-       B.Patient_Identifier AS "Id Patient",
-       to_char(B.dob,'DD/MM/YYYY') AS "Date naissance",
-       to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prelevement",
+       B.Patient_Name AS "Nom",
+       B.Patient_Identifier AS "ID",
+       concat((current_Date-b.dob)/365 ,' ','ans' , ' ',((current_date-b.dob)%365)/30, ' ','Mois')as Age,
        B.sexe AS "Sexe",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.PROTIEN='' then null else B.PROTIEN end as   NUMERIC))) AS "Pandy LCR",
-sum(cast(case when B.PLAQUETTES = '' then null else B.PLAQUETTES end AS NUMERIC))AS "Pqt",    
-sum(cast(case when B.HEMO = '' then null else B.HEMO end AS NUMERIC))AS "Hb",   
-sum(cast(case when B.GBLANCS = '' then null else B.GBLANCS end AS NUMERIC))AS "GB",       
-sum(cast(case when B.FLLYM = '' then null else B.FLLYM end AS NUMERIC))AS "FL-L%",
-sum(cast(case when B.FLNEUT='' then null else B.FLNEUT  end AS NUMERIC))AS "FL-N%",
-sum(cast(case when B.FLMXD='' then null else B.FLMXD  end AS NUMERIC)) AS "FL-MID%",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.MALARIA='' then null else B.MALARIA end as   NUMERIC))) AS "Palu",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.SYPHILLS='' then null else B.SYPHILLS end as   NUMERIC))) AS "Siphilis",
-sum(cast(case when B.HEMOPR='' then null else B.HEMOPR  end AS NUMERIC)) AS "Hb(Hemocue)",
-sum(cast(case when B.GlYCEME='' then null else B.GlYCEME  end AS NUMERIC)) AS "Glycémie",
-sum(cast(case when B.LACT='' then null else B.LACT  end AS NUMERIC)) AS "Lactate",
+       to_char(B.date_of_results,'DD/MM/YYYY') AS "Date resultats",
+sum(cast(case when B.FLLYM = '' then null else B.FLLYM end AS NUMERIC))AS "FLLYM%",
+sum(cast(case when B.FLMXD='' then null else B.FLMXD  end AS NUMERIC)) AS "FL-MXD%",
+sum(cast(case when B.FLNEUT='' then null else B.FLNEUT  end AS NUMERIC))AS "FL-NEUT%",
 
-
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Proteinorachie='' then null else B.Proteinorachie end as   NUMERIC))) AS "Proteinorachie (test de Pandy)",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_Urine='' then null else B.Microscopie_Urine end    AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Urine)",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_LCR='' then null else B.Microscopie_LCR end   AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (LCR)",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_LCR_TB='' then null else B.Microscopie_LCR_TB end  AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (LCR-TB)",
@@ -33,17 +23,17 @@ sum(cast(case when B.LACT='' then null else B.LACT  end AS NUMERIC)) AS "Lactate
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Gangi='' then null else B.Microscopie_TB_Gangi end   AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Ganglionnaire)",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Synovial='' then null else B.Microscopie_TB_Synovial end  AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Synovial)",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Gastrique='' then null else  B.Microscopie_TB_Gastrique end AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Gastrique)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Sang_hématurie='' then null else B.Sang_hématurie end  AS NUMERIC))) AS "BU-Sang",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.urobilinogène='' then null else B.urobilinogène end  AS NUMERIC))) AS "BU-Urobilinogène",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.bilirubine_urine='' then null else B.bilirubine_urine end  AS NUMERIC))) AS "BU-Bilirubine",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Proteines_urine ='' then null else B.Proteines_urine end  AS NUMERIC))) AS "BU-Protéines",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.nitrites='' then null else B.nitrites end AS NUMERIC))) AS "BU-Nitrites",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.corps_urine='' then null else B.corps_urine end  AS NUMERIC))) AS "BU-Corps cétoniques",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Acide_urine='' then null else B.Acide_urine  end AS NUMERIC))) AS "BU-Acide ascorbique",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Glucose_urine ='' then null else  B.Glucose_urine end AS NUMERIC))) AS "BU-Glucose",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.ph_urine='' then null else B.ph_urine end AS NUMERIC))) AS "BU-pH",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.leucocytes='' then null else B.leucocytes end AS NUMERIC))) AS "BU-Leucocytes",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Test_de_urine='' then null else B.Test_de_urine end   AS NUMERIC))) AS "Urine Test de grosse",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Sang_hématurie='' then null else B.Sang_hématurie end  AS NUMERIC))) AS "Sang (hématurie)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.urobilinogène='' then null else B.urobilinogène end  AS NUMERIC))) AS "Urobilinogène",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.bilirubine_urine='' then null else B.bilirubine_urine end  AS NUMERIC))) AS "Bilirubine",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Proteines_urine ='' then null else B.Proteines_urine end  AS NUMERIC))) AS "Protéines",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.nitrites='' then null else B.nitrites end AS NUMERIC))) AS "Nitrites",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.corps_urine='' then null else B.corps_urine end  AS NUMERIC))) AS "Corps cétoniques",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Acide_urine='' then null else B.Acide_urine  end AS NUMERIC))) AS "Acide ascorbique",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Glucose_urine ='' then null else  B.Glucose_urine end AS NUMERIC))) AS "Glucose",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.ph_urine='' then null else B.ph_urine end AS NUMERIC))) AS "pH",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.leucocytes='' then null else B.leucocytes end AS NUMERIC))) AS "Leucocytes",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Test_de_urine='' then null else B.Test_de_urine end   AS NUMERIC))) AS "Test de Grossesse",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.gram ='' then null else B.gram end AS NUMERIC))) AS "Gram",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Rivalta_urine='' then null else B.Rivalta_urine end  AS NUMERIC))) AS "Rivalta(Urine)",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Rivalta_LCR='' then null else B.Rivalta_LCR end   AS NUMERIC))) AS "Rivalta(LCR)",
@@ -163,7 +153,7 @@ FROM
                                                END AS Microscopie_Urine,
                                                 CASE
                                                    WHEN tname ='Proteinorachie (test de Pandy)' then tvalue
-                                               END AS PROTIEN,
+                                               END AS Proteinorachie,
                                                 CASE
                                                    WHEN tname ='FL - NEUT%' then tvalue
                                                END AS FLNEUT,
@@ -172,35 +162,7 @@ FROM
                                                END AS FLMXD,
                                                 CASE
                                                    WHEN tname ='FL - LYM%' then tvalue
-                                               END AS FLLYM,
-                                               CASE
-                                                   WHEN tname ='Plaquettes' then tvalue
-                                               END AS PLAQUETTES,
-                                               CASE
-                                                   WHEN tname ='Hemoglobine' then tvalue
-                                               END AS HEMO,
-                                               CASE
-                                                   WHEN tname ='Syphills' then tvalue
-                                               END AS SYPHILLS,
-                                               CASE
-                                                   WHEN tname ='Glycémie' then tvalue
-                                               END AS GLYCEME,
-                                               CASE
-                                                   WHEN tname ='Hemoglobine* (Hemocue)' then tvalue
-                                               END AS HEMOPR,
-                                                CASE
-                                                   WHEN tname ='Lactate' then tvalue
-                                               END AS LACT,
-                                               CASE
-                                                   WHEN tname ='Globules Blancs' then tvalue
-                                               END AS GBLANCS,
-
-                                               CASE WHEN tname='Malaria' then tvalue
-                                               END AS MALARIA
-
-
-
-
+                                               END AS FLLYM
 
 
 
@@ -241,8 +203,7 @@ FROM
             'Microscopie TB - Recherche de BAAR (Ganglionnaire)','Microscopie TB - Recherche de BAAR (Pus)','Microscopie TB - Recherche de BAAR (Ascite)',
             'Microscopie TB - Recherche de BAAR (Pleural)','Microscopie TB - Recherche de BAAR (Crachat)','Microscopie TB - Recherche de BAAR (LCR-TB)',
             'Microscopie TB - Recherche de BAAR (LCR)','Microscopie TB - Recherche de BAAR (Urine)','Proteinorachie (test de Pandy)',
-            'FL - NEUT%','FL - MXD%','FL - LYM%','Rivalta (Ganglionnaire)','Hemoglobine* (Hemocue)','Hemoglobine',
-            'Lactate','Globules Blancs','Syphills','Malaria','Glycémie')
+            'FL - NEUT%','FL - MXD%','FL - LYM%','Rivalta (Ganglionnaire)')
 
        WHERE   a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
@@ -261,12 +222,10 @@ ORDER BY B.date_of_results,
          B.Patient_Name,
          B.dob,
          B.sexe )as A
-         where COALESCE ("FL-L%","FL-MID%","FL-N%") is not null
-         OR coalesce ("Siphilis","Microscopie TB - Recherche de BAAR (Urine)","Microscopie TB - Recherche de BAAR (LCR)","Microscopie TB - Recherche de BAAR (LCR-TB)","Microscopie TB - Recherche de BAAR (Crachat)","Microscopie TB - Recherche de BAAR (Pleural)","Microscopie TB - Recherche de BAAR (Ascite)","Microscopie TB - Recherche de BAAR (Pus)","Microscopie TB - Recherche de BAAR (Ganglionnaire)","Microscopie TB - Recherche de BAAR (Synovial)","Microscopie TB - Recherche de BAAR (Gastrique)",
-         "BU-Sang","BU-Urobilinogène","BU-Bilirubine","BU-Protéines","Palu","Pandy LCR",
-         "BU-Nitrites","BU-Corps cétoniques","BU-Acide ascorbique","BU-Acide ascorbique",
-         "BU-Glucose","BU-pH","BU-Leucocytes","Urine Test de grosse","Gram","Rivalta(Urine)","Rivalta(LCR)","Rivalta(Crachat)","Rivalta(Pleural)",
-         "Rivalta(Ascite)","Rivalta(Pus)","Rivalta(Ganglionnaire)","Rivalta (Synovial)","Rivalta (Gastrique)","GE") is not null
-          or coalesce ("Pqt","Hb","GB","Lactate","Glycémie","Hb(Hemocue)") is not null ;
-
+         where COALESCE ("FLLYM%","FL-MXD%","FL-NEUT%") is not null
+         OR coalesce ("Proteinorachie (test de Pandy)","Microscopie TB - Recherche de BAAR (Urine)","Microscopie TB - Recherche de BAAR (LCR)","Microscopie TB - Recherche de BAAR (LCR-TB)","Microscopie TB - Recherche de BAAR (Crachat)","Microscopie TB - Recherche de BAAR (Pleural)","Microscopie TB - Recherche de BAAR (Ascite)","Microscopie TB - Recherche de BAAR (Pus)","Microscopie TB - Recherche de BAAR (Ganglionnaire)","Microscopie TB - Recherche de BAAR (Synovial)","Microscopie TB - Recherche de BAAR (Gastrique)",
+         "Sang (hématurie)","Urobilinogène","Bilirubine","Protéines",
+         "Nitrites","Corps cétoniques","Acide ascorbique","Acide ascorbique",
+         "Glucose","pH","Leucocytes","Test de Grossesse","Gram","Rivalta(Urine)","Rivalta(LCR)","Rivalta(Crachat)","Rivalta(Pleural)",
+         "Rivalta(Ascite)","Rivalta(Pus)","Rivalta(Ganglionnaire)","Rivalta (Synovial)","Rivalta (Gastrique)","GE") is not null ;
 
