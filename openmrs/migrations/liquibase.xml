@@ -6574,10 +6574,20 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         </sql>
     </changeSet>
     <changeSet id="OCB-CONFIG-201805080318" author="Mahitha">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult= "0">
+                select count(*) from concept_name where name = 'Raisons du test de laboratoire';
+            </sqlCheck>
+        </preConditions>
         <comment>Create ReasonToSelect Concepts for Lab Orders</comment>
         <sqlFile path="lab_orders/ReasonsToSelect.sql"/>
     </changeSet>
     <changeSet id="OCB-CONFIG-201805080205" author="Mahitha">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult= "0">
+                select count(*) from global_property where property='emr.reasonsForLabtests';
+            </sqlCheck>
+        </preConditions>
         <comment>Creating Global Property emr.reasonsForLabtests</comment>
         <sql>
             INSERT INTO global_property (property, property_value, uuid) VALUES ('emr.reasonsForLabtests', 'Raisons du test de laboratoire', uuid());
