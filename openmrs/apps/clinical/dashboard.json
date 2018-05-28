@@ -542,29 +542,6 @@
      }
   }
 },
-"investigationChart": {
-  "translationKey": "Tableau des résultats",
-  "printing": {
-      "title": "Centre Hospitalier Kabinda",
-      "header": "Tableau des résultats",
-      "logo": "/bahmni_config/openelis/images/labLogo.jpg"
-  },
-  "sections": {
-      "investigationsChart": {
-        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
-        "type": "labOrders",
-        "displayOrder": 3,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "title": null,
-          "numberOfVisits": 10,
-          "showChart": true,
-          "showTable": false,
-          "showDetailsButton": true
-        }
-      }
-  }
-},
   "AntécédentsCliniques": {
     "translationKey": "Fiche Antécédents Cliniques",
     "printing": {
@@ -612,5 +589,29 @@
         "translationKey": "Fiche Antécédents Cliniques"
       }
     }
+  },
+"investigationChart": {
+  "translationKey": "Tableau des résultats",
+  "printing": {
+      "title": "Centre Hospitalier Kabinda",
+      "header": "Tableau des résultats",
+      "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+  },
+  "sections": {
+      "investigationsChart": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 3,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "title": null,
+          "numberOfVisits": 10,
+          "showChart": true,
+          "showTable": false,
+          "showDetailsButton": true
+        }
+      }
   }
+}
+
 }

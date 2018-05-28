@@ -134,5 +134,49 @@
                 }
             }
         }
+    },
+    "AntécédentsCliniques": {
+        "translationKey": "Fiche Antécédents Cliniques",
+        "printing": {
+            "title": "Centre Hospitalier Kabinda",
+            "header": "Fiche Antécédents Cliniques",
+            "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+        },
+        "sections": {
+            "CliniquesInformation": {
+                "type": "observation",
+                "displayOrder": 1,
+                "translationKey": "Fiche Antécédents Cliniques",
+                "config": {
+                    "conceptNames": [
+                        "Information Infections opportunistes",
+                        "Informations TB",
+                        "Autres Pathologies",
+                        "Informations allergies",
+                        "Informations obstétricaux",
+                        "Informations hématologiques",
+                        "Historique ARV",
+                        "Régime Début",
+                        "Informations Prophylaxie",
+                        "Autre traitement",
+                        "Poids Naissance",
+                        "Allaitement maternel",
+                        "Type d'allaitement",
+                        "Type d'accouchement",
+                        "Prématuré",
+                        "Si prémature, nombre de semaines",
+                        "Informations Vaccination",
+                        "Date prescription Vitamine A",
+                        "Mère sous ARV pendant la grossesse",
+                        "Si oui, Nombre de mois",
+                        "Info Prophylaxie à l'accouchement",
+                        "Info Prophylaxie après la naissance",
+                        "Traitement Antérieur ARV",
+                        "Chirurgicaux"
+                    ],
+                    "scope": "latest"
+                }
+            }
+        }
     }
 }
