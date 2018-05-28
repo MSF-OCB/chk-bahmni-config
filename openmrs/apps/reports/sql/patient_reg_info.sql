@@ -5,12 +5,14 @@ select distinct pi.identifier  as "ID Patient",
               case when p.gender='M' then 'Homme' when p.gender='F' then 'Femme' else null end as Sexe,
               date_format(p.birthdate, '%d/%m/%Y') as "Date de naissance",
               date_format(p.date_created,'%d/%m/%Y') as "Date enregistrement",
+              group_concat( distinct  (  case when pat.name='Date entrée cohorte' then  date(pa.value)  else  null end )) As "Date entrée cohorte",
                group_concat( distinct ( case when pat.name='Status VIH' then c.name else NULL end )) as "Status VIH",
                group_concat( distinct ( case when pat.name like '%Date%epist%' then date(pa.value)  else null end )) as "Date dépistage",
               group_concat( distinct  (  case when pat.name='ARV Naif/ Non Naif' then c.name else NULL end )) as "ARV Naif/ Non Naif",
               group_concat( distinct  (  case when pat.name='Converti CP' then case when pa.value ='true' then 'Oui' else 'Non'  end else null end )) As "Est converti CP",
                group_concat( distinct ( case when pat.name='Date de conversion' then date_format(pa.value,'%d/%m/%Y') else null end)) as "Date conversion",
                group_concat(distinct (case when pat.name like '%B%xpos%' then case when pa.value='true' then 'Oui' else 'Non' end else null end ))as "Est bébé exposé",
+               group_concat(distinct( case when pi.identifier  then (select identifier from patient_identifier where patient_id = r2.person_b) else null end)) AS "Nro Mére(Bébé éxposé)",
                case when p.dead=1 then 'Oui' when p.dead=0 then 'Non' else null end as "Est décédé",
                date_format(p.death_date, '%d/%m/%Y') as "Date de décés",
                group_concat(distinct (case when pat.name like '%Lieu%de%stage%' then pa.value else null end)) as "Lieu de dépistage",
@@ -43,6 +45,11 @@ select distinct pi.identifier  as "ID Patient",
                left join person_attribute_type pat on  pa.person_attribute_type_id=pat.person_attribute_type_id
 
                left join person_address pad on pad.person_id=p.person_id
+                left  join relationship r on r.person_b=pi.patient_id
+                left  join relationship r2 on r2.person_a=pi.patient_id
                left join concept_name c on c.concept_id=pa.value and c.voided = 0 and c.locale_preferred=1
-               where  date(p.date_created) BETWEEN date('#startDate#') and Date('#endDate#')
-              group by p.person_id ;
+               where date(case when pat.name='Date entrée cohorte' then  date(pa.value)  else  null end )
+
+
+ BETWEEN date('#startDate#') and Date('#endDate#')
+              group by pi.identifier,r.person_b;

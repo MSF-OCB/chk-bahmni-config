@@ -5,6 +5,7 @@ Select
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "ID Patient",
        EXTRACT(YEAR FROM Now()) - EXTRACT(YEAR FROM B.dob) as "Age"  ,
+       to_char(B.dob,'DD/MM/YYYY') AS "Date naissance",
        B.sexe AS "Sexe",
        to_char(B.sample_date, 'DD/MM/YYYY') as "Date de prélèvement",
 
@@ -15,7 +16,19 @@ Select
        sum(cast( CASE when B.Glucose_LCR = '' then null ELSE B.Glucose_LCR END  AS NUMERIC)) AS "GLU LCR (mg/dl)",
        (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Hep_B = '' then null ELSE B.Hep_B END AS NUMERIC))) ) "Hep. B", /*getting coded value for tests*/
        (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Crag_serique = '' then null  ELSE B.Crag_serique END AS NUMERIC))) )AS "CRAG SERIQUE",/*getting coded value for tests*/
-       (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Crag_LCR = '' then null  ELSE B.Crag_LCR END AS NUMERIC)))) AS "CRAG LCR"/*getting coded value for tests*/
+       (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Crag_LCR = '' then null  ELSE B.Crag_LCR END AS NUMERIC)))) AS "CRAG LCR",/*getting coded value for tests*/
+
+case
+when visit_type='OPD' AND priority=1 then 'OPD HIGH'
+when visit_type='IPD' AND priority=1 then 'IPD HIGH'
+when visit_type='OPD' AND priority=0  then 'OPD'
+when visit_type='IPD' AND priority=0  then 'IPD'
+when visit_type ='IPD'and priority = NULL then 'IPD'
+when visit_type='OPD' and priority=NULL then 'OPD'
+
+end AS "Priority",
+comment
+
 
 FROM
   (/*Pivoting the table row to column*/
@@ -28,6 +41,9 @@ FROM
        dob,
        sexe,
        sample_date,
+       comment,
+
+
 
        CASE
            WHEN tname ='CD4' THEN tvalue
@@ -52,7 +68,9 @@ FROM
        END AS Crag_serique,
         CASE
            WHEN tname ='Crag' THEN tvalue
-       END AS Crag_LCR
+       END AS Crag_LCR,
+       priority,
+       visit_type
 
        FROM
          (/*defining columns*/
@@ -70,7 +88,10 @@ FROM
                 sample.collection_date as "sample_date",
                 t.name AS tname,
                 r.value AS tvalue,
-                sample.accession_number
+                sample.accession_number,
+                sample.priority,
+                sample.visit_type,
+                a.comment
           FROM
           patient_identity pi
           INNER JOIN patient ON patient.id = pi.patient_id
@@ -99,7 +120,7 @@ FROM
 
                            ) AS A
     ) AS B
-WHERE date(B.date_of_results) BETWEEN '#startDate#' and '#endDate#'
+WHERE date(B.date_of_results) BETWEEN '#startDate#' and '#startDate#'
 
 GROUP BY B.Patient_Name,
          B.care_center_requesting,
@@ -108,7 +129,11 @@ GROUP BY B.Patient_Name,
          B.sexe,
          B.sample_date,
          B.date_of_results,
-         B.accession_number
+         B.accession_number,
+         B.priority,
+         B.visit_type,
+         B.comment
+
 
 ORDER BY B.date_of_results,
          B.care_center_requesting,
@@ -121,4 +146,3 @@ ORDER BY B.date_of_results,
          Where
 coalesce ("RESULTS CD4 (cells/µl)", "CD4 %","SGPT (UI/L)","CREAT (µmol/L)","GLU LCR (mg/dl)") is not null
 OR coalesce ("CRAG LCR","Hep. B","CRAG SERIQUE") is not null;
-

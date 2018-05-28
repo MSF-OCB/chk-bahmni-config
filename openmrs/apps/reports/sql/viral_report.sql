@@ -5,15 +5,23 @@ SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date de prelevement",
        B.Patient_Identifier AS "Id Patient",
        to_char(B.dob,'DD/MM/YYYY') AS "Date naissance",
        B.sexe AS "Sexe",
+case
+       when visit_type='OPD' AND priority=1 then 'OPD HIGH'
+when visit_type='IPD' AND priority=1 then 'IPD HIGH'
+when visit_type='OPD' AND priority=0  then 'OPD'
+when visit_type='IPD' AND priority=0  then 'IPD'
+when visit_type='IPD'and priority =NULL then 'IPD'
+when visit_type='OPD' and priority=NULL then 'OPD'
+
+end AS "Motif",
        sum(cast(case when B.ChargeVirale_value = '' then null else B.ChargeVirale_value end AS NUMERIC)) AS "Charge virale",
        sum(cast(case when B.ChargeVirale_value_log = '' then null else B.ChargeVirale_value_log end AS NUMERIC)) AS "Charge virale (Valeur Log)",
        to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
-       B.month_of_results AS "Mois des résultats",
-       CASE when string_agg(B.comment,', ')= 'OPD, OPD' then 'OPD'
-            when string_agg(B.comment,', ')= 'IPD, IPD' then 'IPD'
-            when string_agg(B.comment,', ')= 'OPD-High, OPD-High' then 'OPD-High'
-            when string_agg(B.comment,', ')= 'IPD-High, IPD-High' then 'IPD-High'
-            else string_agg(B.comment,', ') END AS "Notes"
+       Notes,
+       B.month_of_results AS "Mois des résultats"
+
+
+
 FROM
   (/*Pivoting the table row to column*/ SELECT Patient_Name,
                                                care_center_requesting,
@@ -23,13 +31,17 @@ FROM
                                                sexe,
                                                date_of_results,
                                                month_of_results,
-                                               COMMENT,
+
                                                CASE
                                                    WHEN tname ='Charge Virale HIV - Value' THEN tvalue
                                                END AS ChargeVirale_value,
                                                CASE
                                                    WHEN tname ='Charge Virale HIV - Logarithme' THEN tvalue
-                                               END AS ChargeVirale_value_log
+                                               END AS ChargeVirale_value_log,
+                                               visit_type,
+                                               priority,
+                                               comment
+
    FROM
      (/*Pivoting the table row to column*/ SELECT sample.collection_date  AS sample_date,
                                                   ss.name AS care_center_requesting,
@@ -45,7 +57,9 @@ FROM
                                                   r.value AS tvalue,
                                                   sample.lastupdated :: DATE AS date_of_results,
                                                   to_char(sample.lastupdated, 'MM') AS month_of_results,
-                                                  a.comment
+                                                  a.comment,
+                                                  sample.visit_type,
+                                                  sample.priority
       FROM
       patient_identity pi
       INNER JOIN patient ON patient.id = pi.patient_id
@@ -70,7 +84,11 @@ GROUP BY B.Patient_Name,
          B.dob,
          B.sexe,
          B.date_of_results,
-         B.month_of_results
+         B.month_of_results,
+         B.priority,
+         B.visit_type,
+         B.comment
+
 ORDER BY B.date_of_results,
          B.care_center_requesting,
          B.Patient_Name,
@@ -79,3 +97,4 @@ ORDER BY B.date_of_results,
          ) as A
          Where
 COALESCE ("Charge virale", "Charge virale (Valeur Log)") is not null;
+
