@@ -120,7 +120,7 @@
 
         </sql>
     </changeSet> 
-<changeSet id="OCB-CONFIG-201805111235" author="Vishnu">
+<changeSet id="OCB-CONFIG-2018051110710" author="Vishnu">
   <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
             select count(*) from global_property
@@ -129,51 +129,50 @@
         </preConditions>       
         <comment>Adding Global Property for ARV PROGRAM Queu </comment>
         <sql>
-    insert into global_property (property,property_value,uuid) 
-values ('emrapi.sqlSearch.activePatientsArv',"(SELECT DISTINCT concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
-                pi.identifier                                          AS 
-                identifier, 
-                concat("", p.uuid)                                     AS uuid, 
-                concat("", v.uuid)                                     AS 
-                activeVisitUuid, 
-                IF(va.value_reference = 'admitted', 'true', 'false')   AS 
-                hasBeenAdmitted 
-FROM   visit v 
-       join person_name pn 
-         ON v.patient_id = pn.person_id 
-            AND pn.voided = 0 
-       join patient_identifier pi 
-         ON v.patient_id = pi.patient_id 
-       join patient_identifier_type pit 
-         ON pi.identifier_type = pit.patient_identifier_type_id 
-       join global_property gp 
-         ON gp.property = 'bahmni.primaryidentifiertype'
-            AND gp.property_value = pit.uuid 
-       join person p 
-         ON p.person_id = v.patient_id 
-       join patient_program pg 
-         ON pg.patient_id = pi.patient_id 
-       join program pgg 
-         ON pgg.program_id = pg.program_id 
-       join location l 
-         ON l.uuid = ${visit_location_uuid} 
-            AND v.location_id = l.location_id 
-       left outer join visit_attribute va 
-                    ON va.visit_id = v.visit_id 
-                       AND va.attribute_type_id = 
-                           (SELECT 
-                           visit_attribute_type_id 
-                                                   FROM   visit_attribute_type 
-                                                   WHERE  name = 
-                           'admission status'
-                           ) 
-                       AND va.voided = 0 
-WHERE  v.date_stopped IS NULL 
-       AND v.voided = 0 
-       AND pgg.name = 'Programme ARV');", uuid() );  
+            insert into global_property (property,property_value,uuid)
+            values ('emrapi.sqlSearch.activePatientsArv',"SELECT DISTINCT concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name,
+            pi.identifier                                          AS
+            identifier,
+            concat('', p.uuid)                                     AS uuid,
+            concat('', v.uuid)                                     AS
+            activeVisitUuid,
+            IF(va.value_reference = 'admitted', 'true', 'false')   AS
+            hasBeenAdmitted
+            FROM   visit v
+            join person_name pn
+            ON v.patient_id = pn.person_id
+            AND pn.voided = 0
+            join patient_identifier pi
+            ON v.patient_id = pi.patient_id
+            join patient_identifier_type pit
+            ON pi.identifier_type = pit.patient_identifier_type_id
+            join global_property gp
+            ON gp.property = 'bahmni.primaryidentifiertype'
+            AND gp.property_value = pit.uuid
+            join person p
+            ON p.person_id = v.patient_id
+            join patient_program pg
+            ON pg.patient_id = pi.patient_id
+            join program pgg
+            ON pgg.program_id = pg.program_id
+            join location l
+            ON l.uuid = ${visit_location_uuid}
+            AND v.location_id = l.location_id
+            left outer join visit_attribute va
+            ON va.visit_id = v.visit_id
+            AND va.attribute_type_id =
+            (SELECT
+            visit_attribute_type_id
+            FROM   visit_attribute_type WHERE  name =
+            'admission status'
+            )
+            AND va.voided = 0
+            WHERE  v.date_stopped IS NULL
+            AND v.voided = 0
+            AND pgg.name = 'Programme ARV'", uuid() );
    </sql>
    </changeSet>
-<changeSet id="OCB-CONFIG-201805111237" author="Vishnu">
+<changeSet id="OCB-CONFIG-201805110712" author="Vishnu">
   <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
             select count(*) from global_property
@@ -182,48 +181,48 @@ WHERE  v.date_stopped IS NULL
         </preConditions>       
         <comment>Adding Global Property for TB PROGRAM Queue </comment>
         <sql>
-    insert into global_property (property,property_value,uuid) 
-values ('emrapi.sqlSearch.activePatientsTb',"(SELECT DISTINCT concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name, 
-                pi.identifier                                          AS 
-                identifier, 
-                concat("", p.uuid)                                     AS uuid, 
-                concat("", v.uuid)                                     AS 
-                activeVisitUuid, 
-                IF(va.value_reference = 'admitted', 'true', 'false')   AS 
-                hasBeenAdmitted 
-FROM   visit v 
-       join person_name pn 
-         ON v.patient_id = pn.person_id 
-            AND pn.voided = 0 
-       join patient_identifier pi 
-         ON v.patient_id = pi.patient_id 
-       join patient_identifier_type pit 
-         ON pi.identifier_type = pit.patient_identifier_type_id 
-       join global_property gp 
-         ON gp.property = 'bahmni.primaryidentifiertype'
-            AND gp.property_value = pit.uuid 
-       join person p 
-         ON p.person_id = v.patient_id 
-       join patient_program pg 
-         ON pg.patient_id = pi.patient_id 
-       join program pgg 
-         ON pgg.program_id = pg.program_id 
-       join location l 
-         ON l.uuid = ${visit_location_uuid} 
-            AND v.location_id = l.location_id 
-       left outer join visit_attribute va 
-                    ON va.visit_id = v.visit_id 
-                       AND va.attribute_type_id = 
-                           (SELECT 
-                           visit_attribute_type_id 
-                                                   FROM   visit_attribute_type 
-                                                   WHERE  name = 
-                           'admission status'
-                           ) 
-                       AND va.voided = 0 
-WHERE  v.date_stopped IS NULL 
-       AND v.voided = 0 
-       AND pgg.name = 'Programme TB');", uuid());  
+            insert into global_property (property,property_value,uuid)
+            values ('emrapi.sqlSearch.activePatientsTb',"SELECT DISTINCT concat(pn.given_name, ' ', Ifnull(pn.family_name, '')) AS name,
+            pi.identifier                                          AS
+            identifier,
+            concat('', p.uuid)                                     AS uuid,
+            concat('', v.uuid)                                     AS
+            activeVisitUuid,
+            IF(va.value_reference = 'admitted', 'true', 'false')   AS
+            hasBeenAdmitted
+            FROM   visit v
+            join person_name pn
+            ON v.patient_id = pn.person_id
+            AND pn.voided = 0
+            join patient_identifier pi
+            ON v.patient_id = pi.patient_id
+            join patient_identifier_type pit
+            ON pi.identifier_type = pit.patient_identifier_type_id
+            join global_property gp
+            ON gp.property = 'bahmni.primaryidentifiertype'
+            AND gp.property_value = pit.uuid
+            join person p
+            ON p.person_id = v.patient_id
+            join patient_program pg
+            ON pg.patient_id = pi.patient_id
+            join program pgg
+            ON pgg.program_id = pg.program_id
+            join location l
+            ON l.uuid = ${visit_location_uuid}
+            AND v.location_id = l.location_id
+            left outer join visit_attribute va
+            ON va.visit_id = v.visit_id
+            AND va.attribute_type_id =
+            (SELECT
+            visit_attribute_type_id
+            FROM   visit_attribute_type WHERE  name =
+            'admission status'
+            )
+            AND va.voided = 0
+            WHERE  v.date_stopped IS NULL
+            AND v.voided = 0
+            AND pgg.name = 'Programme TB'", uuid() );
    </sql>
    </changeSet>
+
     </databaseChangeLog>
