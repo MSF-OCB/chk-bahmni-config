@@ -21,9 +21,7 @@
             "Status VIH",
             "Date de conversion"
          ],
-         "addressFields":[
-            "address6"
-         ]
+         "addressFields":  ["countyDistrict"]
       },
       "labOrdersDisplayControl":{
          "translationKey":"DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
@@ -334,7 +332,7 @@
               "Sc, Diagnostic","Sc, Informations Infections opportunistes",
               "Sc, Informations prophylaxie","Effets secondaires - médicaments"
             ]
-            
+
         },
         "displayOrder":2,
         "translationKey":"DASHBOARD_TITLE_OPD_INFO_KEY"
@@ -384,9 +382,9 @@
           "numberOfVisits": 5,
           "conceptNames":[
            "Regimen Start date","ARV Line","Regimen Start reason"
-            
+
           ]
-         
+
       },
       "displayOrder":6
    }
@@ -407,7 +405,7 @@
        "ageLimit":100,
        "displayType": "Full-Page",
        "patientAttributes":["Type de cohorte","Nom du contact","Tel 1 du Contact"],
-       "addressFields":  ["address6","address5"]
+       "addressFields":  ["countyDistrict"]
      },
      "ipdObservation":{
         "translationKey":"IPD Observation",

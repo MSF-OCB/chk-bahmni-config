@@ -7624,4 +7624,51 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,'pg',0,NULL);
         </sql>
     </changeSet>
+
+    <changeSet id="OCB-CONFIG-201805291455" author="Pritam">
+  <preConditions onFail="MARK_RAN">
+      <sqlCheck expectedResult="0">
+        select count(*) from concept_numeric
+        where
+        concept_id in (select concept_id from concept_name
+                       where `name` in ("SNC_Glasgow(/15)")
+                       and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+                       )
+      </sqlCheck>
+  </preConditions>
+    <comment>updating concept numeric table for SNC_Glasgow(/15)</comment>
+    <sql>
+          INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = "SNC_Glasgow(/15)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
+      </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201805291456" author="Pritam">
+    <comment>updating concept numeric table for Tests rapides form</comment>
+    <sql>
+
+      update concept_numeric set precise = 1
+      where concept_id in
+      (
+        select concept_id
+        from concept_name
+        where `name` in
+        (
+        "SNC_Glasgow(/15)"
+        )
+        and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+      );
+  </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201805291636" author="Pritam">
+  <preConditions onFail="MARK_RAN">
+      <sqlCheck expectedResult="1">
+        select count(*) from address_hierarchy_level where `name` = "Commune" and address_field = "ADDRESS_6"
+      </sqlCheck>
+  </preConditions>
+    <comment>updating concept numeric table for SNC_Glasgow(/15)</comment>
+    <sql>
+          update address_hierarchy_level set address_field = "COUNTY_DISTRICT" where `name` = "Commune" and parent_level_id is null
+      </sql>
+</changeSet>
 </databaseChangeLog>
