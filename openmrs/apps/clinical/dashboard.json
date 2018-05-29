@@ -403,6 +403,7 @@
         "dashboardConfig":{
            "showDetailsButton":false,
            "conceptNames":[
+             "IPD Admission, Date d'admission",
              "Référé en IPD par(FOSA)",
              "FOSA de suivi ARV",
              "Syndrome d'admission",
