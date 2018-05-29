@@ -5368,22 +5368,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             update person_attribute_type set retired = 1 where name IN ("CHKIDDuDépendant1", "CHKIDDuDépendant2", "CHKIDDuDépendant3", "CHKIDDuDépendant4", "CHKIDDuDépendant5", "CHKIDDuDépendant6") and retired = 0;
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG1804231218" author="Sudhamsh">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="3">
-                select COUNT(*) from concept_name where name IN ("LCR (Sample)", "Selles (Sample)", "Selles (Panel)") and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
-            </sqlCheck>
-        </preConditions>
-        <comment>Updating translation for LCR (Sample), Selles (Sample), Selles (Panel) </comment>
-        <sql>
-            update concept_name set name = "LCR (Echantillon)" where name = "LCR (Sample)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            update concept_name set name = "Selles (Echantillon)" where name = "Selles (Sample)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            update concept_name set name = "Selles (Panneau)" where name = "Selles (Panel)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            update concept_name set name = "LCR (Echantillon)" where name = "LCR (Sample)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
-            update concept_name set name = "Selles (Echantillon)" where name = "Selles (Sample)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
-            update concept_name set name = "Selles (Panneau)" where name = "Selles (Panel)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
-        </sql>
-    </changeSet>
+
     <changeSet id="OCB-CONFIG1804231237" author="Sudhamsh">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="3">
@@ -5399,57 +5384,10 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG1804231407" author="Sudhamsh">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="1">
-                select COUNT(*) from concept_name where name IN ('Selles (Echantillon)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
-            </sqlCheck>
-        </preConditions>
-        <comment>Adding entries in event_records table for Selles Echantillon </comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
 
-            select concept_id into @concept_id from concept_name where name = 'Selles (Echantillon)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG1804231408" author="Sudhamsh">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="1">
-                select COUNT(*) from concept_name where name IN ('LCR (Echantillon)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
-            </sqlCheck>
-        </preConditions>
-        <comment>Adding entries in event_records table for LCR Echantillon</comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
 
-            select concept_id into @concept_id from concept_name where name = 'LCR (Echantillon)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
 
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG1804231413" author="Sudhamsh">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="1">
-                select COUNT(*) from concept_name where name IN ('Selles (Panneau)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
-            </sqlCheck>
-        </preConditions>
-        <comment>Adding entries in event_records table for Selles Panneau </comment>
-        <sql>
-            set @concept_id = 0;
-            set @uuid = NULL;
-
-            select concept_id into @concept_id from concept_name where name = 'Selles (Panneau)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-
-            select uuid into @uuid from concept where concept_id = @concept_id;
-            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
-        </sql>
-    </changeSet>
     <changeSet id="OCB-CONFIG-201804242217" author="Sudhamsh">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -5658,7 +5596,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
                 and cs.concept_set IN (select concept_id from concept_name where name = 'Sang');
             </sqlCheck>
         </preConditions>
-        <comment>Adding Aspect Test to LCR Sample</comment>
+        <comment>Adding MCH Test to LCR Sample</comment>
         <sql>
             set @concept_id = 0;
             set @member1_concept_id = 0;
@@ -5699,51 +5637,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             call add_concept_answer(@concept_id, @child4_concept_id, 4);
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG1804250032" author="Sudhamsh">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select COUNT(*) from concept_set cs
-                join concept_name cn
-                on cs.concept_id = cn.concept_id
-                where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect')
-                AND concept_name_type = "FULLY_SPECIFIED")
-                and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Panel)');
-            </sqlCheck>
-        </preConditions>
-        <comment>Adding Aspect Test to LCR Panel</comment>
-        <sql>
-            set @concept_id = 0;
-            set @member1_concept_id = 0;
 
-            select concept_id into @concept_id from concept_name where name = 'LCR (Panel)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            select concept_id into @member1_concept_id from concept_name where name = 'Numeration GB' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_set_members (@concept_id, @member1_concept_id, 11);
-
-        </sql>
-    </changeSet>
-    <changeSet id="OCB-CONFIG1804250038" author="Sudhamsh">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                select COUNT(*) from concept_set cs
-                join concept_name cn
-                on cs.concept_id = cn.concept_id
-                where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect')
-                AND concept_name_type = "FULLY_SPECIFIED")
-                and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Echantillon)');
-            </sqlCheck>
-        </preConditions>
-        <comment>Adding Aspect Test to LCR Sample</comment>
-        <sql>
-            set @concept_id = 0;
-            set @member1_concept_id = 0;
-
-            select concept_id into @concept_id from concept_name where name = 'LCR (Echantillon)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-
-            select concept_id into @member1_concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            call add_concept_set_members (@concept_id, @member1_concept_id, 12);
-
-        </sql>
-    </changeSet>
     <changeSet id="OCB-CONFIG1804250041" author="Sudhamsh">
         <comment>Adding entries in event_records table for MCH and Aspect</comment>
         <sql>
@@ -6604,4 +6498,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
             INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision) VALUES ((select concept_id from concept_name where name = 'MCH' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,NULL,'pg',0,NULL);
         </sql>
     </changeSet>
+<include file ="R2_lab_feedback.xml"/>
 </databaseChangeLog>
