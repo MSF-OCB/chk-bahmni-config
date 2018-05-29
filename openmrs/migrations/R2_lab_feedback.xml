@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="OCB-CONFIG-2018021941" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect'
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Tests to All Tests and panels</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+          </sql>
+        </changeSet>
+      <changeSet id="OCB-CONFIG18042310216" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="4">
+                select COUNT(*) from concept_name where name IN ("LCR (Sample)","LCR (Panel)", "Selles (Sample)", "Selles (Panel)") and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Updating translation for LCR (Sample), Selles (Sample), Selles (Panel) </comment>
+        <sql>
+            update concept_name set name = "LCR (Echantillon)" where name ='LCR (Sample)'
+            and locale = 'fr' and voided = 0 and concept_name_type='FULLY_SPECIFIED';
+            
+
+            update concept_name set name = "LCR (Panneau)" where name = "LCR (Panel)"  and concept_name_type ='FULLY_SPECIFIED' and locale='fr' and voided=0;
+            
+              
+
+            update concept_name set name = "Selles (Echantillon)" where name = "Selles (Sample)" and concept_name_type ='FULLY_SPECIFIED' and locale='fr' and voided=0;
+            
+                  
+            
+            update concept_name set name = "Selles (Panneau)" where name = "Selles (Panel)" and concept_name_type ='FULLY_SPECIFIED' and locale='fr' and voided=0; 
+        
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804230217" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('Selles (Echantillon)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for Selles Echantillon </comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Selles (Echantillon)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG180423110218" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('LCR (Echantillon)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for LCR Echantillon</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Echantillon)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804230219" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('Selles (Panneau)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for Selles Panneau </comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'Selles (Panneau)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG1804230220" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                select COUNT(*) from concept_name where name IN ('LCR (Panneau)') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding entries in event_records table for Selles Panneau </comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Panneau)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-20180210221" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect'
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Panneau)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Tests to All Tests and panels</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Panneau)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+          </sql>
+        </changeSet>
+            <changeSet id="OCB-CONFIG1804250255" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect')
+                AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'LCR (Echantillon)');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding Aspect Test to LCR Sample</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'LCR (Echantillon)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+
+        </sql>
+    </changeSet>
+  <changeSet id="OCB-CONFIG-201805280306" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Aspect'
+                   ) AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = '1');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Tests to Department 1</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = '1' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member1_concept_id from concept_name where name = 'Aspect' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+          </sql>
+          </changeSet>
+        
+
+
+      </databaseChangeLog>
