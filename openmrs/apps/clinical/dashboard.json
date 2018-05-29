@@ -328,7 +328,7 @@
         "isObservation":true,
         "displayType":"Full-Page",
         "dashboardConfig":{
-            "showGroupDateTime":false,
+            "showGroupDateTime":true,
             "numberOfVisits": 5,
             "conceptNames":["Stade clinique OMS",
               "Sc, Diagnostic","Sc, Informations Infections opportunistes",
@@ -344,7 +344,7 @@
       "isObservation":true,
       "displayType":"Full-Page",
       "dashboardConfig":{
-          "showGroupDateTime":false,
+          "showGroupDateTime":true,
           "numberOfVisits": 5,
           "conceptNames":[
            "IPD Admission, Date d'admission","Syndrome d'admission","Si autre, preciser",
