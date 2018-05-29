@@ -120,7 +120,7 @@ FROM
 
                            ) AS A
     ) AS B
-WHERE date(B.date_of_results) BETWEEN '#startDate#' and '#startDate#'
+WHERE date(B.date_of_results) BETWEEN '#startDate#' and '#endDate#'
 
 GROUP BY B.Patient_Name,
          B.care_center_requesting,

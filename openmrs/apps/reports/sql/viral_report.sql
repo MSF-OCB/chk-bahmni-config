@@ -17,7 +17,7 @@ end AS "Motif",
        sum(cast(case when B.ChargeVirale_value = '' then null else B.ChargeVirale_value end AS NUMERIC)) AS "Charge virale",
        sum(cast(case when B.ChargeVirale_value_log = '' then null else B.ChargeVirale_value_log end AS NUMERIC)) AS "Charge virale (Valeur Log)",
        to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
-       Notes,
+       B.comment as "Notes",
        B.month_of_results AS "Mois des résultats"
 
 
