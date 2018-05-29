@@ -333,8 +333,8 @@
             "conceptNames":["Stade clinique OMS",
               "Sc, Diagnostic","Sc, Informations Infections opportunistes",
               "Sc, Informations prophylaxie","Effets secondaires - médicaments"
-            ],
-            "scope":"latest"
+            ]
+            
         },
         "displayOrder":2,
         "translationKey":"DASHBOARD_TITLE_OPD_INFO_KEY"
@@ -347,10 +347,9 @@
           "showGroupDateTime":false,
           "numberOfVisits": 5,
           "conceptNames":[
-           "Date d'admission","Syndrome d'admission","Si autre, preciser",
+           "IPD Admission, Date d'admission","Syndrome d'admission","Si autre, preciser",
             "Diagnostic","Date de sortie"
-          ],
-          "scope":"latest"
+          ]
       },
       "displayOrder":3,
       "translationKey":"DASHBOARD_TITLE_IPD_INFO_KEY"
@@ -374,6 +373,22 @@
     "type":"programs",
     "displayOrder":4,
     "displayType": "Full-Page"
+   },
+   "regArvInformation":{
+    "translationKey":"PROGRAM_MANAGEMENT_REGIMENT_INFO_TREATMENT_KEY",
+    "type":"vitals",
+    "isObservation": true,
+    "displayType": "Full-Page",
+    "dashboardConfig":{
+          "showGroupDateTime":false,
+          "numberOfVisits": 5,
+          "conceptNames":[
+           "Regimen Start date","ARV Line","Regimen Start reason"
+            
+          ]
+         
+      },
+      "displayOrder":6
    }
   }
 },
