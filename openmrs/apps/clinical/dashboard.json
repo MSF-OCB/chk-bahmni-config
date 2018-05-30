@@ -569,7 +569,7 @@
         "isObservation": true,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "showGroupDateTime": false,
+          "showGroupDateTime": true,
           "numberOfVisits": 5,
           "conceptNames": [
             "Information Infections opportunistes",
