@@ -534,7 +534,7 @@
         "dashboardConfig":{
            "showDetailsButton":false,
            "conceptNames":[
-             "Test á l'admission"
+             "TDR"
            ],
            "scope":"latest"
         }
