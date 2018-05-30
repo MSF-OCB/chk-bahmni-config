@@ -24,7 +24,7 @@
   ],
   "config": {
     "enableLabOrderOptions": ["Urgent"],
-    "quickPrints": true,
+    "quickPrints": false,
     "networkConnectivity": {
       "showNetworkStatusMessage": false,
       "networkStatusCheckInterval": 20000,
@@ -61,14 +61,14 @@
     },
   "Motif début traitement" : {
        "excludeFrom" : ["Programme ARV"]
- }, 
+ },
  "Site TEP" : {
        "excludeFrom" : ["Programme ARV"]
  },
        "Program States for TB":{
          "excludeFrom": ["Programme ARV"]
        }
-    
+
     },
     "patientContext": {
       "programAttributes": [
