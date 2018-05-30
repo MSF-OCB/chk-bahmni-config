@@ -33,7 +33,7 @@ localhost
 [bahmni-reports-db-slave]
 
 [atomfeed-console]
-localhost
+
 
 [pacs-integration]
 
