@@ -61,6 +61,13 @@
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/PerdusDeVueEtPresumesPerDusDeVue.sql"
       }
+    },
+    "TBResultatsGenxpertTBLAM": {
+      "name": "TB Resultats Genxpert and TB-LAM",
+      "type": "MRSGeneric",
+      "config": {
+        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/TBResultatsGenxpertTBLAM.sql"
+      }
     }
 
 }
