@@ -378,10 +378,10 @@
     "isObservation": true,
     "displayType": "Full-Page",
     "dashboardConfig":{
-          "showGroupDateTime":false,
+          "showGroupDateTime":true,
           "numberOfVisits": 5,
           "conceptNames":[
-           "Regimen Start date","ARV Line","Regimen Start reason"
+           "Regimen Start date","RA, ARV Line","Regimen Start reason"
 
           ]
 
