@@ -68,6 +68,21 @@
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/TBResultatsGenxpertTBLAM.sql"
       }
+    },
+"HospitalizationsAdmission": {
+      "name": "Hospitalisations – Admission",
+      "type": "MRSGeneric",
+      "config": {
+        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/Hospitalisations_report.sql"
+      }
+    },
+"HospitalizationsAdmissionSortie": {
+      "name": "Hospitlalisations – Sortie",
+      "type": "MRSGeneric",
+      "config": {
+        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/Hospitalisations_Sortie_report.sql"
+      }
     }
+   
 
 }
