@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="OCB-201805310936" author="Sudhamsh">
+        <comment>Updating translations for concepts</comment>
+        <sql>
+            update concept_name set name = "Date début Régime" where name = "Regimen Start Date" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Regime ARV" where name = "ARV Line" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Motif début de régime" where name = "Regimen Start Reason" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-201805310939" author="Sudhamsh">
+        <comment>Updating translations for program attributes</comment>
+        <sql>
+            update program_attribute_type set description = "Ligne ARV" where description = "ARV Line";
+            update program_attribute_type set description = "Date de fin" where description = "End Date";
+            update program_attribute_type set description = "Phase du programme" where description = "Program States";
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
