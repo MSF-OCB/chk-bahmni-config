@@ -5,19 +5,17 @@ SELECT to_char(B.sample_date,'DD/MM/YYYY')  AS "Date de prelevement",
        B.Patient_Identifier AS "Id Patient",
        to_char(B.dob,'DD/MM/YYYY') AS "Date naissance",
        B.sexe AS "Sexe",
-case
-       when visit_type='OPD' AND priority=1 then 'OPD HIGH'
-when visit_type='IPD' AND priority=1 then 'IPD HIGH'
-when visit_type='OPD' AND priority=0  then 'OPD'
-when visit_type='IPD' AND priority=0  then 'IPD'
-when visit_type='IPD'and priority =NULL then 'IPD'
-when visit_type='OPD' and priority=NULL then 'OPD'
-
-end AS "Motif",
+       B.comment as "Motif",
        sum(cast(case when B.ChargeVirale_value = '' then null else B.ChargeVirale_value end AS NUMERIC)) AS "Charge virale",
        sum(cast(case when B.ChargeVirale_value_log = '' then null else B.ChargeVirale_value_log end AS NUMERIC)) AS "Charge virale (Valeur Log)",
        to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résultats",
-       B.comment as "Notes",
+        case
+       when visit_type='OPD' AND priority=1 then 'OPD HIGH'
+when visit_type='IPD' AND priority=1 then 'IPD HIGH'
+when visit_type='OPD' AND priority=0  then visit_type
+when visit_type='IPD' AND priority=0  then visit_type
+when visit_type='IPD'and priority =NULL then 'IPD'
+when visit_type='OPD' and priority=NULL then 'OPD' else null end as "Notes",
        B.month_of_results AS "Mois des résultats"
 
 
