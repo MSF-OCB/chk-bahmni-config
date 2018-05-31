@@ -534,16 +534,32 @@
         "dashboardConfig":{
            "showDetailsButton":false,
            "conceptNames":[
-             "TDR"
+             "Tests",
+             "Résultat(Numérique)",
+             "Résultat(Option)"
            ],
            "scope":"latest"
         }
      },
+    "investigationsChart": {
+      "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+      "type": "labOrders",
+      "displayOrder": 10,
+      "displayType": "Full-Page",
+      "dashboardConfig": {
+        "showGroupDateTime": true,
+        "title": null,
+        "numberOfVisits": 1,
+        "showChart": true,
+        "showTable": false,
+        "scope": "latest"
+      }
+    },
      "infoIPDAdmissionDetails":{
         "translationKey":"DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
         "type":"vitals",
         "isObservation":true,
-        "displayOrder":10,
+        "displayOrder":11,
         "displayType": "Full-Page",
         "dashboardConfig":{
            "showDetailsButton":false,

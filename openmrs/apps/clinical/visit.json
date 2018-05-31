@@ -116,7 +116,9 @@
                 "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_DETAILS",
                 "config": {
                     "conceptNames": [
-                        "Test á l'admission"
+                        "Tests",
+                        "Résultat(Numérique)",
+                        "Résultat(Option)"
                     ],
                     "scope": "latest"
                 }
