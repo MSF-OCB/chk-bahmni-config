@@ -11,8 +11,6 @@ CASE WHEN personForDetails.gender = 'M' THEN 'H'
 group_concat( distinct ( case when personAttributeTypeDetails.name="Date entrée cohorte"
                               then date_format(DATE(personAttributeDetails.value), '%d-%m-%Y')
                               else NULL end )) as "Date entrée cohorte",
-
-
 date_format(TBStartDate,'%d-%m-%Y') AS "Date début TB",
 MotifdébutTraitement AS "Motif début TB",
 TBType AS "Type TB",
@@ -41,17 +39,27 @@ from
         pp.date_enrolled AS "TBStartDate",
         pat.name AS "question",
         cnProgram.name AS "answer",
-        ppForARV.date_enrolled AS "ARVStartDate"
-
+        ppForARV.date_enrolled AS "ARVStartDate",
+        DATE(ppaForEndDate.value_reference) AS "endDate"
         from patient p
-        inner JOIN patient_program pp  on p.patient_id = pp.patient_id AND pp.program_id = 2 AND pp.voided = 0 AND pp.date_completed is NULL
-        inner JOIN patient_program_attribute ppa on pp.patient_program_id = ppa.patient_program_id
+        INNER JOIN patient_program pp  on p.patient_id = pp.patient_id AND pp.program_id = (select program_id from program where `name` = "Programme TB")
+        AND pp.voided = 0 AND pp.date_completed is NULL
 
-        inner JOIN program_attribute_type pat on ppa.attribute_type_id = pat.program_attribute_type_id AND ppa.voided = 0
-        inner JOIN concept_name cnProgram on ppa.value_reference = cnProgram.concept_id AND cnProgram.concept_name_type = "FULLY_SPECIFIED" and cnProgram.voided = 0 AND cnProgram.locale = 'fr'
+        LEFT JOIN patient_program_attribute ppa on pp.patient_program_id = ppa.patient_program_id AND ppa.voided = 0
 
-        LEFT JOIN patient_program ppForARV ON p.patient_id = ppForARV.patient_id and ppForARV.program_id =1 AND ppForARV.voided = 0
-        where pat.name in ("TB Type","Motif début traitement")
+        LEFT JOIN program_attribute_type pat on ppa.attribute_type_id = pat.program_attribute_type_id
+        LEFT JOIN concept_name cnProgram on ppa.value_reference = cnProgram.concept_id AND cnProgram.concept_name_type = "FULLY_SPECIFIED" and cnProgram.voided = 0 AND cnProgram.locale = 'fr'
+
+        LEFT JOIN patient_program ppForARV ON p.patient_id = ppForARV.patient_id
+        and ppForARV.program_id = (select program_id from program where `name` = "Programme ARV")
+        AND ppForARV.voided = 0
+
+        LEFT JOIN patient_program_attribute ppaForEndDate ON pp.patient_program_id = ppaForEndDate.patient_program_id
+        and ppaForEndDate.patient_program_attribute_id =  (
+                                                            select program_attribute_type_id
+                                                            from program_attribute_type
+                                                            where `name` = "End Date for Program" and description = "End Date" AND retired = 0)
+        WHERE (DATE(ppaForEndDate.value_reference) > date('#endDate#') OR ppaForEndDate.value_reference is NULL)
 
         ) AS A
         GROUP BY IDForProgram,TBStartDate
@@ -114,7 +122,7 @@ LEFT JOIN
                                                       concept_full_name in ("Positif","Négatif")
                                                   )
           and obsForresult.voided =0
-
+          WHERE DATE(obsForresult.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
           GROUP BY IDForObs,obsForActivityStatus.obs_datetime
           ) AS B
 
@@ -158,7 +166,7 @@ LEFT JOIN
                                                             "MTB -","MTB + RIF -","MTB + RIF +","MTB + RIF indeterminé"
                                                             )
                                 )
-
+        AND DATE(obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
         ) AS C
 
 ) AS patientGenexpert ON patientProgram.IDForProgram = patientGenexpert.IDForGenexpert AND  date(patientGenexpert.genexpertTime) = date(TBLamTime)
@@ -171,7 +179,6 @@ LEFT JOIN person_attribute personAttributeDetails on  patientProgram.IDForProgra
 LEFT JOIN person_attribute_type personAttributeTypeDetails ON  personAttributeDetails.person_attribute_type_id = personAttributeTypeDetails.person_attribute_type_id
 LEFT JOIN concept_view cvForAttribute on personAttributeDetails.value = cvForAttribute.concept_id
 
-WHERE DATE(TBLamTime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
 
 GROUP BY patientTBLam.TBLamTime,patientProgram.TBStartDate,patientGenexpert.genexpertTime
-ORDER BY "Date début TB";
+ORDER BY "Date début TB"
