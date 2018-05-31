@@ -581,6 +581,6 @@ Inner Join (
                                             and concept_name_type='FULLY_SPECIFIED' and locale='fr'
                                          )  
                 AND obsq.voided = 0
-                AND Date(obsq.value_datetime) between Date('#startDate#) AND Date('#endDate#')
+                AND Date(obsq.value_datetime) between Date('#startDate#') AND Date('#endDate#')
              ) As patientDateOfAdmission
              On patientDateOfAdmission.personid = patientOtherDetails.person_id;
