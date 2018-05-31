@@ -1,6 +1,6 @@
 {
   "DASHBOARD_TITLE_ADMISSION_DETAILS_KEY" : "Détails d'admission",
-  "DASHBOARD_TITLE_DISPOSITION_KEY" : "Sortie",
+  "DASHBOARD_TITLE_DISPOSITION_KEY" : "Mouvement",
   "PATIENT_MOVEMENT_LABEL" : "Mouvement de patient",
   "PATIENT_MOVEMENT_SELECT_LABEL" : "Sélectionner",
   "DOB_LABEL" : "Date de naissance",

@@ -6,12 +6,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="OCB-201805310936" author="Sudhamsh">
+    <changeSet id="OCB-201805310937" author="Sudhamsh">
         <comment>Updating translations for concepts</comment>
         <sql>
-            update concept_name set name = "Date début Régime" where name = "Regimen Start Date" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            update concept_name set name = "Regime ARV" where name = "ARV Line" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
-            update concept_name set name = "Motif début de régime" where name = "Regimen Start Reason" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Date début Régime" where name = "Regimen Start Date" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Regime ARV" where name = "ARV Line" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Motif début de régime" where name = "Regimen Start Reason" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
         </sql>
     </changeSet>
     <changeSet id="OCB-201805310939" author="Sudhamsh">

@@ -44,7 +44,7 @@
   "ALL_LAB_RESULTS_LABEL": "Tous les résultats Labo",
   "SEARCH_BY_PATIENT_ID_KEY": "Recherche par ID Patient",
   "SIDEBAR_NO_IMAGES_DISPLAY": "Aucune image à afficher",
-  "MEDICATIONS_BOARD_LABEL_KEY": "Médicaments",
+  "MEDICATIONS_BOARD_LABEL_KEY": "Prescription médicale",
   "MEDICATION_RECENT_TAB": "Récent",
   "MEDICATION_RECENT_TAB_STOP_REASON": "Arrêter la raison",
   "MEDICATION_RECENT_TAB_STOP_NOTES": "Notes",
@@ -156,7 +156,13 @@
   "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC" : "Syndrome à la sortie and Diagnostic principal à la sortie",
   "DASHBOARD_TITLE_EXIT_SYNDROME" : "Traitement à la sortie",
   "NO_DATA_MESSAGE" : "aucune donnée capturée",
-  "DASHBOARD_TITLE_REGIME_ARV" : "Regime ARV"
-
+  "DASHBOARD_TITLE_REGIME_ARV" : "Regime ARV",
+  "PROGRAM_MANAGEMENT_LABEL_PROGRAM_STATE": "Phase du programme",
+  "PROGRAM_MANAGEMENT_STOP_DATE_KEY": "Date de fin",
+  "VISIT_TITLE_OBSERVATIONS_KEY": "Observations",
+  "VISIT_TITLE_DISPOSITION_KEY": "Mouvement",
+  "VISIT_TITLE_ADMISSION_DETAILS_KEY": "Détails d'admission",
+  "VISIT_TITLE_LAB_INVESTIGATIONS_KEY": "Résultats Labo",
+  "VISIT_TITLE_TREATMENTS_KEY": "Traitement"
 
 }
