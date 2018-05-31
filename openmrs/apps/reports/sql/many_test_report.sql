@@ -1,13 +1,13 @@
 
 Select
 * from (
-SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date rèsultats",
+SELECT to_char(B.date_of_results,'DD/MM/YYYY') AS "Date des résults",
 
        B.care_center_requesting AS "Provenance",
        B.Patient_Name AS "Nom du patient",
        B.Patient_Identifier AS "Id Patient",
        to_char(B.dob,'DD/MM/YYYY') AS "Date naissance",
-       to_char(B.sample_date,'DD/MM/YYYY')  AS "Date prelevement",
+       to_char(B.sample_date,'DD/MM/YYYY')  AS "Date de prelevement",
        B.sexe AS "Sexe",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.PROTIEN='' then null else B.PROTIEN end as   NUMERIC))) AS "Pandy LCR",
 sum(cast(case when B.PLAQUETTES = '' then null else B.PLAQUETTES end AS NUMERIC))AS "Pqt",    

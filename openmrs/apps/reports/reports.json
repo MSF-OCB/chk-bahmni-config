@@ -21,7 +21,7 @@
          }
      },
     "labReport": {
-        "name": "Rapports Labo",
+        "name": "Autres rapports Labo",
          "type": "ElisGeneric",
          "config": {
              "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/many_test_report.sql"
