@@ -180,5 +180,86 @@
                 }
             }
         }
+    },
+    "Fiche Clinique IPD CHK - Sortie": {
+        "translationKey": "Fiche Clinique IPD CHK - Sortie",
+        "printing": {
+            "header": "Fiche Clinique IPD CHK - Sortie",
+            "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+        },
+        "sections": {
+            "RESUME DE PRISE EN CHARGE": {
+                "translationKey": "DASHBOARD_TITLE_SUMMARY_OF_SUPPORT",
+                "type": "observation",
+                "displayOrder" : 0,
+                "config": {
+                    "conceptNames": [
+                        "RPEC_Date",
+                        "Suivi Clinique",
+                        "Diagnostic"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "Diagnosis": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Arv à la sortie"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 1,
+                "translationKey": "DASHBOARD_TITLE_DIAGNOSIS"
+            },
+            "Diagnosis1":{
+                "type": "observation",
+                "isObservation": true,
+                "translationKey": "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC",
+                "displayOrder" : 2,
+                "config": {
+                    "conceptNames": [
+                        "Syndrome",
+                        "Diagnostic"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "Syndrome at Exit":{
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Traitement à la sortie",
+                        "Si autre, veuillez préciser"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 3,
+                "translationKey": "DASHBOARD_TITLE_EXIT_SYNDROME"
+
+            },
+            "Exit Mode": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Mode de sortie"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 4,
+                "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
+            },
+            "Date of the next appointment": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Date du prochain RDV"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 5,
+                "translationKey": "DASHBOARD_TITLE_DATE_OF_NEXT_APPOINTMENT"
+            }
+        }
     }
 }

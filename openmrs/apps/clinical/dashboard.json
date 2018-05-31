@@ -633,8 +633,8 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Si autre, preciser",
-            "Traitement à la sortie"
+            "Traitement à la sortie",
+            "Si autre, veuillez préciser"
           ],
           "scope": "latest"
         },
