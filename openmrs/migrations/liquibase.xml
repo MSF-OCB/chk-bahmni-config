@@ -6902,11 +6902,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     </changeSet>
     <changeSet id="OCB-CONFIG-201805081541" author="Sudhamsh">
         <comment>Creating concept answers for Centre de réference</comment>
-        <sqlFile path="Centre_de_réference_answers.sql"/>
+        <sqlFile path="Centre_de_reference_answers.sql"/>
     </changeSet>
     <changeSet id="OCB-CONFIG-201805081543" author="Sudhamsh">
         <comment>Adding concept answers for Centre de réference</comment>
-        <sqlFile path="Centre_de_réference_Coded_answer.sql"/>
+        <sqlFile path="Centre_de_reference_Coded_answer.sql"/>
     </changeSet>
 
     <changeSet id="OCB-CONFIG1805212032" author="Pritam">
@@ -7566,4 +7566,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
       </sql>
 </changeSet>
 <include file ="R2_lab_feedback.xml"/>
+    <include file ="update_translations.xml"/>
 </databaseChangeLog>
