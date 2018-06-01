@@ -261,5 +261,211 @@
                 "translationKey": "DASHBOARD_TITLE_DATE_OF_NEXT_APPOINTMENT"
             }
         }
+    },
+    "Suivi Consultation form": {
+        "translationKey": "Consultation de suivi",
+        "printing": {
+            "title": "Centre Hospitalier Kabinda",
+            "header": "Consultation de suivi",
+            "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+        },
+        "sections": {
+            "patientdetailsvisit1": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Date de prochain RDV"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 1,
+                "translationKey": "DASHBOARD_TITLE_DATE_OF_PROCHAIN RDV"
+            },
+            "patientdetailsvisit2": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Stade OMS"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 2,
+                "translationKey": "DASHBOARD_TITLE_DATE_OF_STADE_OMS"
+            },
+            "Parameters": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Temperature Data",
+                        "Tension_arterielle Data",
+                        "Frequence cardiaque Data",
+                        "Frequence respiratoire Data",
+                        "Poids",
+                        "IMC DATA",
+                        "Saturation",
+                        "Déshydratation",
+                        "Incapacité de marcher sans aide",
+                        "Altération de l'état neurologique",
+                        "Autre signe neurologique"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 3,
+                "translationKey": "DASHBOARD_TITLE_PARAMETERS"
+            },
+            "Motif Consultation": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Motif Consultation"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 4,
+                "translationKey": "DASHBOARD_TITLE_MOTIF_CONSULTATIONS"
+            },
+            "Histoire Maladie Actuelle": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Histoire Maladie Actuelle"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 5,
+                "translationKey": "DASHBOARD_TITLE_ACTUAL_HISTORY"
+            },
+            "Examen clinique": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Etat general",
+                        "Yeux",
+                        "Bouche",
+                        "Ganglions Sites",
+                        "Coeur",
+                        "Poumon",
+                        "Abdomen",
+                        "App génito-urinaire",
+                        "Peau",
+                        "App. Genital",
+                        "App. Osteoarticulaire",
+                        "Neurologie",
+                        "Sv, Autres"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 6,
+                "translationKey": "DASHBOARD_TITLE_EXAMEN_CLINIQUE"
+            },
+            "Paraclinique": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Type de radio",
+                        "Date de radio",
+                        "Resultats Radio"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 7,
+                "translationKey": "DASHBOARD_TITLE_PARACLINIC"
+            },
+            "Ecographie": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Type d'Echo",
+                        "Date Echo",
+                        "Resultats Echo"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 8,
+                "translationKey": "DASHBOARD_TITLE_ECOGRAPHIE"
+            },
+            "Diagnostic": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Sc, Diagnostic"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 9,
+                "translationKey": "DASHBOARD_TITLE_DIAGNOSTIC"
+            },
+            "Conduite à tenir": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Observations et conduite à tenir"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 10,
+                "translationKey": "DASHBOARD_TITLE_CONDUITE_A_TENIR"
+            },
+            "Infections Opportunistes": {
+                "type": "observation",
+                "translationKey": "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES",
+                "displayOrder": 11,
+                "config": {
+                    "conceptNames": [
+                        "Infections Opportunistes",
+                        "Status IO"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "Informations Prophylaxie": {
+                "type": "observation",
+                "translationKey": "DASHBOARD_TITLE_INFORMATIONS_PROPHYLAXIE",
+                "displayOrder": 12,
+                "config": {
+                    "conceptNames": [
+                        "Prophylaxie",
+                        "Date Debut Prophylaxie"
+                    ],
+                    "scope": "latest"
+                }
+            },
+            "Regime ARV": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Regimen Start date",
+                        "Regimen Start reason"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 14,
+                "translationKey": "DASHBOARD_TITLE_REGIME_ARV"
+            },
+            "Effets secondaires - médicaments": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Molécule",
+                        "Effets secondaires",
+                        "Grade,Suivi"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 17,
+                "translationKey": "DASHBOARD_TITLE_SECONDARY_MEDICATION"
+            },
+            "Note prochain RDV": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Notes"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 18,
+                "translationKey": "DASHBOARD_TITLE_NOTES"
+            }
+        }
     }
 }

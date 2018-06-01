@@ -1,577 +1,580 @@
 {
   "general": {
-   "translationKey":"DASHBOARD_TAB_GENERAL_KEY",
-   "displayByDefault":true,
-   "maxRecentlyViewedPatients":10,
-   "printing":{
-      "title":"Centre Hospitalier Kabinda",
-      "header":"General Summary",
-      "logo":"/bahmni_config/openelis/images/labLogo.jpg"
-   },
-   "sections":{
-      "patientInformation":{
-         "translationKey":"DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
-         "type":"patientInformation",
-         "displayOrder":0,
-         "ageLimit":100,
-         "patientAttributes":[
-            "ARV Naif/ Non Naif",
-            "Date depistage",
-            "Type de cohorte",
-            "Status VIH",
-            "Date de conversion"
-         ],
-         "addressFields":  ["countyDistrict"]
+    "translationKey": "DASHBOARD_TAB_GENERAL_KEY",
+    "displayByDefault": true,
+    "maxRecentlyViewedPatients": 10,
+    "printing": {
+      "title": "Centre Hospitalier Kabinda",
+      "header": "General Summary",
+      "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+    },
+    "sections": {
+      "patientInformation": {
+        "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
+        "type": "patientInformation",
+        "displayOrder": 0,
+        "ageLimit": 100,
+        "patientAttributes": [
+          "ARV Naif/ Non Naif",
+          "Date depistage",
+          "Type de cohorte",
+          "Status VIH",
+          "Date de conversion"
+        ],
+        "addressFields": [
+          "countyDistrict"
+        ]
       },
-      "labOrdersDisplayControl":{
-         "translationKey":"DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
-         "type":"ordersControl",
-         "orderType":"Lab Order",
-         "showDetailsButton":true,
-         "displayOrder":1,
-         "dashboardConfig":{
-            "conceptNames":[
-
-            ]
-         },
-         "expandedViewConfig":{
-            "conceptNames":[
-
-            ],
-            "showDetailsButton":true
-         }
+      "labOrdersDisplayControl": {
+        "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
+        "type": "ordersControl",
+        "orderType": "Lab Order",
+        "showDetailsButton": true,
+        "displayOrder": 1,
+        "dashboardConfig": {
+          "conceptNames": [
+          ]
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+          ],
+          "showDetailsButton": true
+        }
       },
-      "navigationLinksControl":{
-         "translationKey":"DASHBOARD_TITLE_NAVIGATION_LINKS_CONTROL_KEY",
-         "type":"navigationLinksControl",
-         "displayOrder":2,
-         "showLinks":[
-            "registration",
-            "enrolment",
-            "visitAttribute"
-         ]
+      "navigationLinksControl": {
+        "translationKey": "DASHBOARD_TITLE_NAVIGATION_LINKS_CONTROL_KEY",
+        "type": "navigationLinksControl",
+        "displayOrder": 2,
+        "showLinks": [
+          "registration",
+          "enrolment",
+          "visitAttribute"
+        ]
       },
-      "treatments":{
-         "translationKey":"DASHBOARD_TITLE_TREATMENTS_KEY",
-         "type":"treatment",
-         "displayOrder":4,
-         "dashboardConfig":{
-            "showFlowSheet":true,
-            "showListView":true,
-            "showRoute":true,
-            "showDrugForm":true,
-            "numberOfVisits":3,
-            "showOtherActive":true,
-            "showDetailsButton":true
-         },
-         "expandedViewConfig":{
-            "translationKey":"DASHBOARD_TITLE_TREATMENTS_KEY",
-            "showFlowSheet":true,
-            "showListView":true,
-            "showRoute":true,
-            "showDrugForm":true,
-            "numberOfVisits":"",
-            "showOtherActive":true,
-            "showDetailsButton":true
-         }
+      "treatments": {
+        "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY",
+        "type": "treatment",
+        "displayOrder": 4,
+        "dashboardConfig": {
+          "showFlowSheet": true,
+          "showListView": true,
+          "showRoute": true,
+          "showDrugForm": true,
+          "numberOfVisits": 3,
+          "showOtherActive": true,
+          "showDetailsButton": true
+        },
+        "expandedViewConfig": {
+          "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY",
+          "showFlowSheet": true,
+          "showListView": true,
+          "showRoute": true,
+          "showDrugForm": true,
+          "numberOfVisits": "",
+          "showOtherActive": true,
+          "showDetailsButton": true
+        }
       },
-      "obsForSUIVIForm":{
-         "translationKey":"DASHBOARD_SUIVI_FORM_DETAILS",
-         "type":"vitals",
-         "isObservation":true,
-         "showCertainty":true,
-         "showOrder":true,
-         "showDetailsButton":true,
-         "displayOrder":3,
-         "dashboardConfig":{
-            "conceptNames":[
-               "Information Diagnostique",
-               "Sc, Informations Infections opportunistes",
-               "Prochain RDV"
-            ],
-            "scope":"latest"
-         },
-         "expandedViewConfig":{
-            "conceptNames":[
-               "Information Diagnostique",
-               "Sc, Informations Infections opportunistes",
-               "Prochain RDV"
-            ],
-            "numberOfVisits":"",
-            "pivotTable":{
-
-            }
-         }
+      "obsForSUIVIForm": {
+        "translationKey": "DASHBOARD_SUIVI_FORM_DETAILS",
+        "type": "vitals",
+        "isObservation": true,
+        "showCertainty": true,
+        "showOrder": true,
+        "showDetailsButton": true,
+        "displayOrder": 3,
+        "dashboardConfig": {
+          "conceptNames": [
+            "Information Diagnostique",
+            "Sc, Informations Infections opportunistes",
+            "Prochain RDV"
+          ],
+          "scope": "latest"
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Information Diagnostique",
+            "Sc, Informations Infections opportunistes",
+            "Prochain RDV"
+          ],
+          "numberOfVisits": "",
+          "pivotTable": {
+          }
+        }
       },
-      "labResults":{
-         "translationKey":"DASHBOARD_TITLE_LAB_RESULTS_KEY",
-         "type":"labOrders",
-         "displayOrder":6,
-         "dashboardConfig":{
-            "title":null,
-            "numberOfVisits":5,
-            "showChart":true,
-            "showTable":true,
-            "showDetailsButton":true
-         },
-         "expandedViewConfig":{
-            "numberOfVisits":""
-         }
+      "labResults": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 6,
+        "dashboardConfig": {
+          "title": null,
+          "numberOfVisits": 5,
+          "showChart": true,
+          "showTable": true,
+          "showDetailsButton": true
+        },
+        "expandedViewConfig": {
+          "numberOfVisits": ""
+        }
       },
-      "triageForm":{
-         "translationKey":"DASHBOARD_TITLE_TRIAGE_FORM_KEY",
-         "type":"vitals",
-         "isObservation":true,
-         "displayOrder":5,
-         "hideEmptyDisplayControl":false,
-         "dashboardConfig":{
-            "conceptNames":[
-               "Triage Form"
-            ],
-            "numberOfVisits":1,
-            "showDetailsButton":true
-         },
-         "expandedViewConfig":{
-            "conceptNames":[
-               "Triage Form"
-            ],
-            "numberOfVisits":"",
-            "showDetailsButton":true,
-            "pivotTable":{
-
-            }
-         }
+      "triageForm": {
+        "translationKey": "DASHBOARD_TITLE_TRIAGE_FORM_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 5,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "conceptNames": [
+            "Triage Form"
+          ],
+          "numberOfVisits": 1,
+          "showDetailsButton": true
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Triage Form"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
       },
-      "testRapid":{
-         "translationKey":"DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
-         "type":"vitals",
-         "isObservation":true,
-         "displayOrder":8,
-         "hideEmptyDisplayControl":false,
-         "dashboardConfig":{
-            "showDetailsButton":true,
-            "numberOfVisits":5,
-            "conceptNames":[
-               "Tests rapides"
-            ]
-         },
-         "expandedViewConfig":{
-            "conceptNames":[
-               "Tests rapides"
-            ],
-            "numberOfVisits":"",
-            "showDetailsButton":true,
-            "pivotTable":{
-
-            }
-         }
+      "testRapid": {
+        "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 8,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 5,
+          "conceptNames": [
+            "Tests rapides"
+          ]
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Tests rapides"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
       },
-      "infectionsOpportunistes":{
-         "translationKey":"DASHBOARD_TITLE_INFECTION_OPPORTUNISTES_KEY",
-         "type":"vitals",
-         "isObservation":true,
-         "displayOrder":7,
-         "hideEmptyDisplayControl":false,
-         "dashboardConfig":{
-            "showDetailsButton":true,
-            "conceptNames":[
-               "Antécédents cliniques"
-            ],
-            "scope":"latest"
-         },
-         "expandedViewConfig":{
-            "conceptNames":[
-               "Antécédents cliniques"
-            ],
-            "numberOfVisits":"",
-            "showDetailsButton":true,
-            "pivotTable":{
-
-            }
-         }
+      "infectionsOpportunistes": {
+        "translationKey": "DASHBOARD_TITLE_INFECTION_OPPORTUNISTES_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 7,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "conceptNames": [
+            "Antécédents cliniques"
+          ],
+          "scope": "latest"
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Antécédents cliniques"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
       },
-      "transfertObs":{
-         "translationKey":"DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
-         "type":"vitals",
-         "isObservation":true,
-         "displayOrder":12,
-         "hideEmptyDisplayControl":false,
-         "dashboardConfig":{
-            "showDetailsButton":true,
-            "numberOfVisits":3,
-            "conceptNames":[
-               "Transfert, Date",
-               "Centre de réference",
-               "SC, PODI"
-            ]
-         },
-         "expandedViewConfig":{
-            "conceptNames":[
-               "Transfert, Date",
-               "Centre de réference",
-               "SC, PODI",
-               "Notes"
-            ],
-            "numberOfVisits":"",
-            "showDetailsButton":true,
-            "pivotTable":{
-
-            }
-         }
+      "transfertObs": {
+        "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 12,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 3,
+          "conceptNames": [
+            "Transfert, Date",
+            "Centre de réference",
+            "SC, PODI"
+          ]
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Transfert, Date",
+            "Centre de réference",
+            "SC, PODI",
+            "Notes"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
       },
-      "formsDisplay":{
-         "type":"forms",
-         "displayOrder":12,
-         "dashboardConfig":{
-            "title":null,
-            "maximumNoOfVisits":10
-         },
-         "formGroup":[
-            "Paraclinique(form)",
-            "Antécédents cliniques",
-            "Suivi Consultation"
-         ],
-         "translationKey":"DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
+      "formsDisplay": {
+        "type": "forms",
+        "displayOrder": 12,
+        "dashboardConfig": {
+          "title": null,
+          "maximumNoOfVisits": 10
+        },
+        "formGroup": [
+          "Paraclinique(form)",
+          "Antécédents cliniques",
+          "Suivi Consultation"
+        ],
+        "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
       },
-      "programs":{
-               "translationKey":"PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
-               "type":"programs",
-               "displayOrder":12
+      "programs": {
+        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+        "type": "programs",
+        "displayOrder": 12
       },
-      "regimenARV":{
-         "translationKey":"Regimen ARV",
-         "type":"vitals",
-         "isObservation":true,
-         "displayOrder":15,
-         "hideEmptyDisplayControl":false,
-         "dashboardConfig":{
-            "showDetailsButton":true,
-            "numberOfVisits":5,
-            "conceptNames":[
-               "Regime ARV"
-            ]
-         },
-         "expandedViewConfig":{
-            "conceptNames":[
-               "Regime ARV"
-            ],
-            "numberOfVisits":"",
-            "showDetailsButton":true,
-            "pivotTable":{
-
-            }
-         }
+      "regimenARV": {
+        "translationKey": "Regimen ARV",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 15,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 5,
+          "conceptNames": [
+            "Regime ARV"
+          ]
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Regime ARV"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
       },
-      "visits":{
-         "translationKey":"DASHBOARD_TITLE_VISITS_KEY",
-         "type":"visits",
-         "displayOrder":18,
-         "dashboardConfig":{
-            "title":null,
-            "maximumNoOfVisits":5,
-            "groupByVisits":true
-         }
+      "visits": {
+        "translationKey": "DASHBOARD_TITLE_VISITS_KEY",
+        "type": "visits",
+        "displayOrder": 18,
+        "dashboardConfig": {
+          "title": null,
+          "maximumNoOfVisits": 5,
+          "groupByVisits": true
+        }
       }
-   }
-},
-
- "patientChartSummary": {
-  "translationKey": "DASHBOARD_TITLE_PATIENT_SUMMARY_INFO",
-  "printing": {
+    }
+  },
+  "patientChartSummary": {
+    "translationKey": "DASHBOARD_TITLE_PATIENT_SUMMARY_INFO",
+    "printing": {
       "title": "Centre Hospitalier Kabinda",
       "header": "Sommaire du patient",
       "logo": "/bahmni_config/openelis/images/labLogo.jpg"
-  },
-
-      "sections":{
-         "patientInformation":{
-            "translationKey":"DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
-            "type":"patientInformation",
-            "displayOrder":0,
-            "ageLimit":100,
-            "displayType": "Full-Page",
-            "patientAttributes":[
-              "Type de cohorte"
-            ]
-          },
-
-        "treatments":{
-          "translationKey":"DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
-          "type":"treatment",
-          "displayOrder":1,
-          "displayType": "Full-Page",
-          "dashboardConfig":{
-              "showFlowSheet":true,
-              "showListView":true,
-              "showRoute":true,
-              "showDrugForm":true,
-              "numberOfVisits":5,
-              "showOtherActive":true,
-              "showDetailsButton":true,
-              "conceptNames":["Stopped Order Reason"]
-          },
-          "expandedViewConfig":{
-              "translationKey":"DASHBOARD_TITLE_TREATMENTS_KEY",
-              "showFlowSheet":true,
-              "showListView":true,
-              "showRoute":true,
-              "showDrugForm":true,
-              "numberOfVisits":5,
-              "showOtherActive":true,
-              "showDetailsButton":true
-          }
-      },
-      "VitalsInformation":{
-        "type":"vitals",
-        "isObservation":true,
-        "displayType":"Full-Page",
-        "dashboardConfig":{
-            "showGroupDateTime":true,
-            "numberOfVisits": 5,
-            "conceptNames":["Stade clinique OMS",
-              "Sc, Diagnostic","Sc, Informations Infections opportunistes",
-              "Sc, Informations prophylaxie","Effets secondaires - médicaments"
-            ]
-
-        },
-        "displayOrder":2,
-        "translationKey":"DASHBOARD_TITLE_OPD_INFO_KEY"
     },
-    "VitalsInformationNew":{
-      "type":"vitals",
-      "isObservation":true,
-      "displayType":"Full-Page",
-      "dashboardConfig":{
-          "showGroupDateTime":true,
-          "numberOfVisits": 5,
-          "conceptNames":[
-           "IPD Admission, Date d'admission","Syndrome d'admission","Si autre, preciser",
-            "Diagnostic","Date de sortie"
-          ]
+    "sections": {
+      "patientInformation": {
+        "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
+        "type": "patientInformation",
+        "displayOrder": 0,
+        "ageLimit": 100,
+        "displayType": "Full-Page",
+        "patientAttributes": [
+          "Type de cohorte"
+        ]
       },
-      "displayOrder":3,
-      "translationKey":"DASHBOARD_TITLE_IPD_INFO_KEY"
-  },
-    "investigationsChart": {
-      "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
-      "type": "labOrders",
-      "displayOrder": 3,
-      "displayType": "Full-Page",
-      "dashboardConfig": {
-        "title": null,
-        "numberOfVisits": 5,
-        "showChart": true,
-        "showTable": false,
-        "showDetailsButton": true
+      "treatments": {
+        "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
+        "type": "treatment",
+        "displayOrder": 1,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showFlowSheet": true,
+          "showListView": true,
+          "showRoute": true,
+          "showDrugForm": true,
+          "numberOfVisits": 5,
+          "showOtherActive": true,
+          "showDetailsButton": true,
+          "conceptNames": [
+            "Stopped Order Reason"
+          ]
+        },
+        "expandedViewConfig": {
+          "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY",
+          "showFlowSheet": true,
+          "showListView": true,
+          "showRoute": true,
+          "showDrugForm": true,
+          "numberOfVisits": 5,
+          "showOtherActive": true,
+          "showDetailsButton": true
+        }
+      },
+      "VitalsInformation": {
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 5,
+          "conceptNames": [
+            "Stade clinique OMS",
+            "Sc, Diagnostic",
+            "Sc, Informations Infections opportunistes",
+            "Sc, Informations prophylaxie",
+            "Effets secondaires - médicaments"
+          ]
+        },
+        "displayOrder": 2,
+        "translationKey": "DASHBOARD_TITLE_OPD_INFO_KEY"
+      },
+      "VitalsInformationNew": {
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 5,
+          "conceptNames": [
+            "IPD Admission, Date d'admission",
+            "Syndrome d'admission",
+            "Si autre, preciser",
+            "Diagnostic",
+            "Date de sortie"
+          ]
+        },
+        "displayOrder": 3,
+        "translationKey": "DASHBOARD_TITLE_IPD_INFO_KEY"
+      },
+      "investigationsChart": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 3,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "title": null,
+          "numberOfVisits": 5,
+          "showChart": true,
+          "showTable": false,
+          "showDetailsButton": true
+        }
+      },
+      "programs_1": {
+        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+        "type": "programs",
+        "displayOrder": 4,
+        "displayType": "Full-Page"
+      },
+      "regArvInformation": {
+        "translationKey": "PROGRAM_MANAGEMENT_REGIMENT_INFO_TREATMENT_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 5,
+          "conceptNames": [
+            "Regimen Start date",
+            "RA, ARV Line",
+            "Regimen Start reason"
+          ]
+        },
+        "displayOrder": 6
       }
-
-   },
-   "programs_1":{
-    "translationKey":"PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
-    "type":"programs",
-    "displayOrder":4,
-    "displayType": "Full-Page"
-   },
-   "regArvInformation":{
-    "translationKey":"PROGRAM_MANAGEMENT_REGIMENT_INFO_TREATMENT_KEY",
-    "type":"vitals",
-    "isObservation": true,
-    "displayType": "Full-Page",
-    "dashboardConfig":{
-          "showGroupDateTime":true,
-          "numberOfVisits": 5,
-          "conceptNames":[
-           "Regimen Start date","RA, ARV Line","Regimen Start reason"
-
-          ]
-
-      },
-      "displayOrder":6
-   }
-  }
-},
-"ipdAdmission": {
-  "translationKey": "Fiche Clinique IPD CHK - Admission",
-  "printing": {
+    }
+  },
+  "ipdAdmission": {
+    "translationKey": "Fiche Clinique IPD CHK - Admission",
+    "printing": {
       "title": "Centre Hospitalier Kabinda",
       "header": "Fiche Clinique IPD CHK - Admission",
       "logo": "/bahmni_config/openelis/images/labLogo.jpg"
-  },
-  "sections": {
-    "ipdPatientInformation":{
-       "translationKey":"DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
-       "type":"patientInformation",
-       "displayOrder":0,
-       "ageLimit":100,
-       "displayType": "Full-Page",
-       "patientAttributes":["Type de cohorte","Nom du contact","Tel 1 du Contact"],
-       "addressFields":  ["countyDistrict"]
-     },
-     "ipdObservation":{
-        "translationKey":"IPD Observation",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":1,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission, Date d'admission",
-             "Référé en IPD par(FOSA)",
-             "FOSA de suivi ARV",
-             "Syndrome d'admission",
-             "Malade arrivé mort"
-           ],
-           "scope":"latest"
-        }
-     },
-     "hospitalisationsAntérieures":{
-        "translationKey":"Hospitalisations antérieures",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":2,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission Section, Hospitalisations antérieures"
-           ],
-           "scope":"latest"
-        }
-     },
-     "historiqueVIH":{
-        "translationKey":"Historique VIH",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":3,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission Section, Historique VIH"
-           ],
-           "scope":"latest"
-        }
-     },
-     "historiqueARV":{
-        "translationKey":"Historique ARV",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":4,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission Section, Histoire ARV"
-           ],
-           "scope":"latest"
-        }
-     },
-     "adherenceARV":{
-        "translationKey":"Adhérence ARV",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":5,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission Section, Adherence ARV"
-           ],
-           "scope":"latest"
-        }
-     },
-     "historiqueTB":{
-        "translationKey":"Historique TB",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":6,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission Section, Historique TB"
-           ],
-           "scope":"latest"
-        }
-     },
-     "tbPrécédentes":{
-        "translationKey":"TB Précédentes",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":7,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission Section, TB Précédentes"
-           ],
-           "scope":"latest"
-        }
-     },
-     "prophylaxieAdmission":{
-        "translationKey":"Prophylaxie",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":8,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "IPD Admission, Prophylaxie à l'admission",
-             "IPD Admission, Stade OMS",
-             "IPD Admission, SNC Glasgow(/15)"
-           ],
-           "scope":"latest"
-        }
-     },
-     "ipdAdmission":{
-        "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_DETAILS",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":9,
-        "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "Tests",
-             "Résultat(Numérique)",
-             "Résultat(Option)"
-           ],
-           "scope":"latest"
-        }
-     },
-    "investigationsChart": {
-      "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
-      "type": "labOrders",
-      "displayOrder": 10,
-      "displayType": "Full-Page",
-      "dashboardConfig": {
-        "showGroupDateTime": true,
-        "title": null,
-        "numberOfVisits": 1,
-        "showChart": true,
-        "showTable": false,
-        "scope": "latest"
-      }
     },
-     "infoIPDAdmissionDetails":{
-        "translationKey":"DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
-        "type":"vitals",
-        "isObservation":true,
-        "displayOrder":11,
+    "sections": {
+      "ipdPatientInformation": {
+        "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
+        "type": "patientInformation",
+        "displayOrder": 0,
+        "ageLimit": 100,
         "displayType": "Full-Page",
-        "dashboardConfig":{
-           "showDetailsButton":false,
-           "conceptNames":[
-             "Infirmier en charge de l'admission",
-             "Medecin en charge de l'admission"
-           ],
-           "scope":"latest"
+        "patientAttributes": [
+          "Type de cohorte",
+          "Nom du contact",
+          "Tel 1 du Contact"
+        ],
+        "addressFields": [
+          "countyDistrict"
+        ]
+      },
+      "ipdObservation": {
+        "translationKey": "IPD Observation",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 1,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission, Date d'admission",
+            "Référé en IPD par(FOSA)",
+            "FOSA de suivi ARV",
+            "Syndrome d'admission",
+            "Malade arrivé mort"
+          ],
+          "scope": "latest"
         }
-     }
-  }
-},
+      },
+      "hospitalisationsAntérieures": {
+        "translationKey": "Hospitalisations antérieures",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 2,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission Section, Hospitalisations antérieures"
+          ],
+          "scope": "latest"
+        }
+      },
+      "historiqueVIH": {
+        "translationKey": "Historique VIH",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 3,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission Section, Historique VIH"
+          ],
+          "scope": "latest"
+        }
+      },
+      "historiqueARV": {
+        "translationKey": "Historique ARV",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 4,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission Section, Histoire ARV"
+          ],
+          "scope": "latest"
+        }
+      },
+      "adherenceARV": {
+        "translationKey": "Adhérence ARV",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 5,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission Section, Adherence ARV"
+          ],
+          "scope": "latest"
+        }
+      },
+      "historiqueTB": {
+        "translationKey": "Historique TB",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 6,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission Section, Historique TB"
+          ],
+          "scope": "latest"
+        }
+      },
+      "tbPrécédentes": {
+        "translationKey": "TB Précédentes",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 7,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission Section, TB Précédentes"
+          ],
+          "scope": "latest"
+        }
+      },
+      "prophylaxieAdmission": {
+        "translationKey": "Prophylaxie",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 8,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "IPD Admission, Prophylaxie à l'admission",
+            "IPD Admission, Stade OMS",
+            "IPD Admission, SNC Glasgow(/15)"
+          ],
+          "scope": "latest"
+        }
+      },
+      "ipdAdmission": {
+        "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_DETAILS",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 9,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "Tests",
+            "Résultat(Numérique)",
+            "Résultat(Option)"
+          ],
+          "scope": "latest"
+        }
+      },
+      "investigationsChart": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 10,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "title": null,
+          "numberOfVisits": 1,
+          "showChart": true,
+          "showTable": false,
+          "scope": "latest"
+        }
+      },
+      "infoIPDAdmissionDetails": {
+        "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 11,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "Infirmier en charge de l'admission",
+            "Medecin en charge de l'admission"
+          ],
+          "scope": "latest"
+        }
+      }
+    }
+  },
   "Fiche Clinique IPD CHK - Sortie": {
     "translationKey": "Fiche Clinique IPD CHK - Sortie",
     "printing": {
@@ -583,8 +586,8 @@
         "translationKey": "DASHBOARD_TITLE_SUMMARY_OF_SUPPORT",
         "isObservation": true,
         "type": "vitals",
-        "displayOrder" : 0,
-        "displayType" : "Full-Page",
+        "displayOrder": 0,
+        "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
@@ -610,12 +613,12 @@
         "displayOrder": 1,
         "translationKey": "DASHBOARD_TITLE_DIAGNOSIS"
       },
-      "Diagnosis1":{
+      "Diagnosis1": {
         "type": "vitals",
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC",
-        "displayOrder" : 2,
-        "displayType" : "Full-Page",
+        "displayOrder": 2,
+        "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
@@ -625,7 +628,7 @@
           "scope": "latest"
         }
       },
-      "Syndrome at Exit":{
+      "Syndrome at Exit": {
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
@@ -640,7 +643,6 @@
         },
         "displayOrder": 3,
         "translationKey": "DASHBOARD_TITLE_EXIT_SYNDROME"
-
       },
       "investigationsChart": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
@@ -736,29 +738,6 @@
       }
     }
   },
-"investigationChart": {
-  "translationKey": "Tableau des résultats",
-  "printing": {
-      "title": "Centre Hospitalier Kabinda",
-      "header": "Tableau des résultats",
-      "logo": "/bahmni_config/openelis/images/labLogo.jpg"
-  },
-  "sections": {
-      "investigationsChart": {
-        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
-        "type": "labOrders",
-        "displayOrder": 3,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "title": null,
-          "numberOfVisits": 10,
-          "showChart": true,
-          "showTable": false,
-          "showDetailsButton": true
-        }
-      }
-  }
-},
   "Suivi Consultation form": {
     "translationKey": "Consultation de suivi",
     "printing": {
@@ -772,7 +751,7 @@
         "isObservation": true,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "hideEmptyDisplayControl":true,
+          "hideEmptyDisplayControl": true,
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
@@ -823,7 +802,7 @@
         "displayOrder": 3,
         "translationKey": "DASHBOARD_TITLE_PARAMETERS"
       },
-      "Motif Consultation":{
+      "Motif Consultation": {
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
@@ -838,7 +817,7 @@
         "displayOrder": 4,
         "translationKey": "DASHBOARD_TITLE_MOTIF_CONSULTATIONS"
       },
-      "Histoire Maladie Actuelle":{
+      "Histoire Maladie Actuelle": {
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
@@ -899,7 +878,7 @@
       "Ecographie": {
         "type": "vitals",
         "isObservation": true,
-        "displayType" : "Full-Page",
+        "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
@@ -909,7 +888,7 @@
           ],
           "scope": "latest"
         },
-        "displayOrder" : 8,
+        "displayOrder": 8,
         "translationKey": "DASHBOARD_TITLE_ECOGRAPHIE"
       },
       "Diagnostic": {
@@ -923,7 +902,6 @@
             "Sc, Diagnostic"
           ],
           "scope": "latest"
-
         },
         "displayOrder": 9,
         "translationKey": "DASHBOARD_TITLE_DIAGNOSTIC"
@@ -947,8 +925,8 @@
         "type": "vitals",
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES",
-        "displayOrder" : 11,
-        "displayType" : "Full-Page",
+        "displayOrder": 11,
+        "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
@@ -962,8 +940,8 @@
         "type": "vitals",
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_INFORMATIONS_PROPHYLAXIE",
-        "displayOrder" : 12,
-        "displayType" : "Full-Page",
+        "displayOrder": 12,
+        "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
@@ -979,7 +957,7 @@
         "displayOrder": 13,
         "displayType": "Full-Page"
       },
-      "Regime ARV":{
+      "Regime ARV": {
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
@@ -994,7 +972,6 @@
         },
         "displayOrder": 14,
         "translationKey": "DASHBOARD_TITLE_REGIME_ARV"
-
       },
       "investigationsChart": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
@@ -1016,7 +993,7 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showFlowSheet": true,
-          "hideEmptyDisplayControl":true,
+          "hideEmptyDisplayControl": true,
           "showListView": true,
           "showRoute": true,
           "showDrugForm": true,
@@ -1028,7 +1005,7 @@
           ]
         }
       },
-      "Effets secondaires - médicaments":{
+      "Effets secondaires - médicaments": {
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
@@ -1059,6 +1036,29 @@
         },
         "displayOrder": 18,
         "translationKey": "DASHBOARD_TITLE_NOTES"
+      }
+    }
+  },
+  "investigationChart": {
+    "translationKey": "Tableau des résultats",
+    "printing": {
+      "title": "Centre Hospitalier Kabinda",
+      "header": "Tableau des résultats",
+      "logo": "/bahmni_config/openelis/images/labLogo.jpg"
+    },
+    "sections": {
+      "investigationsChart": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 3,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "title": null,
+          "numberOfVisits": 10,
+          "showChart": true,
+          "showTable": false,
+          "showDetailsButton": true
+        }
       }
     }
   }
