@@ -87,7 +87,7 @@
   "CLINICAL_DURATION_UNIT_MONTHS": "Mois(s)",
   "ADD_NEW_OBSERVATION" : "Ajouter un formulaire d'obs.",
   "CONCEPT_SET_GROUP_SEARCH_LABEL" : "Rechercher un formulaire d'observation",
-  "EMPTY_TEMPLATE_MESSAGE" : "",
+  "EMPTY_TEMPLATE_MESSAGE" : "Cliquer sur 'Ajouter ",
   "OBSERVATIONS_BOARD_LABEL_KEY": "Observations",
   "ADD_SECTION_KEY" : "Ajouter plus",
   "CHOOSE_ANSWER_FROM_DROPDOWN_LABEL": "Choisissez une réponse",
@@ -163,6 +163,11 @@
   "VISIT_TITLE_DISPOSITION_KEY": "Mouvement",
   "VISIT_TITLE_ADMISSION_DETAILS_KEY": "Détails d'admission",
   "VISIT_TITLE_LAB_INVESTIGATIONS_KEY": "Résultats Labo",
-  "VISIT_TITLE_TREATMENTS_KEY": "Traitement"
-
+  "VISIT_TITLE_TREATMENTS_KEY": "Traitement",
+  "PROGRAM_MANAGEMENT_DO_YOU_WANT_TO_REMOVE_KEY": "Voulez-vous l'enlever?",
+  "PROGRAM_MANAGEMENT_BY_KEY": "Par",
+  "PROGRAM_MANAGEMENT_ON_KEY": "Le",
+  "PROGRAM_MANAGEMENT_STARTED_ON_KEY": "Commencé le",
+  "PROGRAM_MANAGEMENT_CHOOSE_STATE_KEY": "choisir les états",
+  "DELETE_CONFIRM": "Effacer"
 }
