@@ -78,7 +78,7 @@ FROM
       INNER JOIN analysis a ON item.id = a.sampitem_id
       INNER JOIN RESULT r ON a.id = r.analysis_id
       INNER JOIN test t ON a.test_id = t.id AND
-            t.name IN  ('potassium','sodium','Chlore','Phosphatase alcaline','Bilirubine totalE','Bilirubine directE','Calcium')
+            t.name IN  ('potassium','sodium','Chlore','Phosphatase alcaline','Bilirubine totalE','Bilirubine directE','Calcium','Gamma GT')
        LEFT JOIN dictionary d ON  r.result_type = 'D' and cast(d.id as Text) = r.value
        WHERE   a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
