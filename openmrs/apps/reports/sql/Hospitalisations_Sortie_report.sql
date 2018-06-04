@@ -1,3 +1,4 @@
+
 Select patientDetails.IDPatient as "ID",
 patientDetails.TypeCohorte as "Type Cohorte",
 patientDetails.Nom,
@@ -8,7 +9,7 @@ patientDetails.Dateentréecohorte AS "Date entrée cohorte",
 patientOtherDetails.Structurederéférence AS "Structure de référence",
 patientOtherDetails.MeilleurePriseEnCharge AS "Meilleure prise en charge",
 patientDateOfAdmission.AdmissionDate AS "Date Admission",
-patientOtherDetails.Syndromedadmission AS "Syndrome à l’admission",
+patientOtherDetails.Syndromedadmission AS "Syndrome à l'admission",
 patientOtherDetails.1erdiagnostic AS "1er diagnostic à la sortie",
 patientOtherDetails.2ediagnostic AS "2e diagnostic à la sortie",
 patientOtherDetails.DateDeSortie AS "Date de sortie",
@@ -17,9 +18,6 @@ patientOtherDetails.CD4 AS "CD4(cells/µl)",
 patientOtherDetails.DateresultatCD4 AS "Date resultat CD4",
 patientOtherDetails.CV AS "CV(copies/ml)",
 patientOtherDetails.DateresultatCV as "Date resultat CV"
-
-
-
  from 
 (       
     select 
@@ -56,7 +54,7 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
             MAX(C6) AS "Structurederéférence",
             MAX(C7) AS "CV",
             Case when Max(C7) is not NULL then Max(dateResultCD4) END AS "DateresultatCV",
-            Max(dateResultCD4)
+            Max(dateResultCD4) as "dateResultCD4"
 
              from (
              /*CD4 result C1*/
@@ -275,8 +273,8 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
                                                       AND   obsForActivityStatus.voided = 0
                                                       
             Union ALL
-
-            Select A.person_id,
+/*Exit diagnosis D1 and D2*/
+            Select      A.person_id,
             A.AdmissionDate,
             Null AS C1,
             Null AS C2,
@@ -287,23 +285,31 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
             NULL AS C5,
             NULL AS C6,
             NULL AS C7,
-            Date(A.ActivityStatusDateCreated) as obsDate
+            Date(encounter_datetime) as obsDate
              from (
-                                Select A.person_id,
+             Select A.person_id,
                                 A.AdmissionDate,
                                 A.Diagnosis as D1,
                                 B.Diagnosis as D2,
                                 A.ActivityStatusDateCreated,
-                                B.obs_group_id
+                                B.obs_group_id,
+                                A.ActivityStatusEncounterID,
+                                A.AdmissionEncounterID,
+                                A.encounter_datetime
                                  from (
                                                     select  obsForActivityStatus.person_id,
                                                     obsForActivityStatus.obs_group_id,
                                                     toGetAdmissionDateTime.value_datetime as 'AdmissionDate',
                                                     toGetAdmissionDateTime.date_created AS 'AdmissionDateCreated',
                                                     obsForActivityStatus.date_created AS 'ActivityStatusDateCreated',
-                                                    Group_concat( (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded )) As 'Diagnosis'
+                                                    Group_concat( (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded )) As 'Diagnosis',
+                                                    obsForActivityStatus.encounter_id AS "ActivityStatusEncounterID",
+                                                    toGetAdmissionDateTime.encounter_id  AS "AdmissionEncounterID",
+                                                    patientEncounter.encounter_datetime
                                                     from 
                                                     obs obsForActivityStatus 
+                                                    Inner join encounter patientEncounter
+                                                    on patientEncounter.encounter_id = obsForActivityStatus.encounter_id
                                                     INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
                                                     Left Join obs toGetAdmissionDateTime
                                                     on toGetAdmissionDateTime.obs_group_id = obsForActivityStatus.obs_group_id
@@ -338,9 +344,14 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
                                                     toGetAdmissionDateTime.value_datetime as 'AdmissionDate',
                                                     toGetAdmissionDateTime.date_created AS 'AdmissionDateCreated',
                                                     obsForActivityStatus.date_created AS 'ActivityStatusDateCreated',
-                                                    Group_concat( (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded )) As 'Diagnosis'
+                                                    Group_concat( (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded )) As 'Diagnosis',
+                                                    obsForActivityStatus.encounter_id AS "ActivityStatusEncounterID",
+                                                    toGetAdmissionDateTime.encounter_id  AS "AdmissionEncounterID",
+                                                    patientEncounter.encounter_datetime
                                                     from 
                                                     obs obsForActivityStatus 
+                                                    Inner join encounter patientEncounter
+                                                    on patientEncounter.encounter_id = obsForActivityStatus.encounter_id
                                                     INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
                                                     Left Join obs toGetAdmissionDateTime
                                                     on toGetAdmissionDateTime.obs_group_id = obsForActivityStatus.obs_group_id
@@ -372,110 +383,12 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
 
                                 ) as B
                                 On A.person_id = B.person_id
-                                And Date(A.AdmissionDateCreated) = Date(B.ActivityStatusDateCreated)
+                                And A.AdmissionEncounterID = B.ActivityStatusEncounterID
                                 AND A.obs_group_id != B.obs_group_id
                                 Where A.AdmissionDate is not null OR B.AdmissionDate is not null
                                 Order by A.AdmissionDate,
                                 A.ActivityStatusDateCreated,B.obs_group_id
-
             ) AS A
-            Left Join 
-            (
-                                Select A.person_id,
-                                A.AdmissionDate,
-                                A.Diagnosis as D1,
-                                B.Diagnosis as D2,
-                                A.ActivityStatusDateCreated,
-                                B.obs_group_id
-                                 from (
-                                                    select  obsForActivityStatus.person_id,
-                                                    obsForActivityStatus.obs_group_id,
-                                                    toGetAdmissionDateTime.value_datetime as 'AdmissionDate',
-                                                    toGetAdmissionDateTime.date_created AS 'AdmissionDateCreated',
-                                                    obsForActivityStatus.date_created AS 'ActivityStatusDateCreated',
-                                                    Group_concat( (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded )) As 'Diagnosis'
-                                                    from 
-                                                    obs obsForActivityStatus 
-                                                    INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
-                                                    Left Join obs toGetAdmissionDateTime
-                                                    on toGetAdmissionDateTime.obs_group_id = obsForActivityStatus.obs_group_id
-                                                    And toGetAdmissionDateTime.concept_id = 1938
-                                                    AND toGetAdmissionDateTime.voided = 0
-                                                      Where obsForActivityStatus.concept_id in (
-                                                                                                select
-                                                                                                  distinct concept_id
-                                                                                                from
-                                                                                                  concept_view
-                                                                                                where
-                                                                                                  concept_full_name = "IPD Admission, Diagnostics de sortie"
-                                                                                              )
-                                                      and obsForActivityStatus.value_coded in (
-                                                                                                Select answer_concept from concept_answer where concept_id = 
-                                                                                                (select
-                                                                                                  distinct concept_id
-                                                                                                from
-                                                                                                  concept_view
-                                                                                                where
-                                                                                                  concept_full_name in ("IPD Admission, Diagnostics de sortie"))
-                                                                                                  
-                                                                                              ) 
-                                                                                              AND   obsForActivityStatus.voided = 0
-                                                                                             --  AND obsForActivityStatus.person_id = 9987
-                                                                                              group by person_id, obs_group_id
-                                ) as A
-                                LEFT join
-                                (
-                                                    select  obsForActivityStatus.person_id,
-                                                    obsForActivityStatus.obs_group_id,
-                                                    toGetAdmissionDateTime.value_datetime as 'AdmissionDate',
-                                                    toGetAdmissionDateTime.date_created AS 'AdmissionDateCreated',
-                                                    obsForActivityStatus.date_created AS 'ActivityStatusDateCreated',
-                                                    Group_concat( (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded )) As 'Diagnosis'
-                                                    from 
-                                                    obs obsForActivityStatus 
-                                                    INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
-                                                    Left Join obs toGetAdmissionDateTime
-                                                    on toGetAdmissionDateTime.obs_group_id = obsForActivityStatus.obs_group_id
-                                                    And toGetAdmissionDateTime.concept_id = 1938
-                                                    AND toGetAdmissionDateTime.voided = 0
-                                                      Where obsForActivityStatus.concept_id in (
-                                                                                                select
-                                                                                                  distinct concept_id
-                                                                                                from
-                                                                                                  concept_view
-                                                                                                where
-                                                                                                  concept_full_name = "IPD Admission, Diagnostics de sortie"
-                                                                                              )
-                                                      and obsForActivityStatus.value_coded in (
-                                                                                                Select answer_concept from concept_answer where concept_id = 
-                                                                                                (select
-                                                                                                  distinct concept_id
-                                                                                                from
-                                                                                                  concept_view
-                                                                                                where
-                                                                                                  concept_full_name in ("IPD Admission, Diagnostics de sortie"))
-                                                                                                  
-                                                                                              ) 
-                                                                                              AND   obsForActivityStatus.voided = 0
-                                                                                              -- AND obsForActivityStatus.person_id = 9987
-                                                                                              group by person_id, obs_group_id
-
-
-
-                                ) as B
-                                On A.person_id = B.person_id
-                                And Date(A.AdmissionDateCreated) = Date(B.ActivityStatusDateCreated)
-                                AND A.obs_group_id != B.obs_group_id
-                                Where A.AdmissionDate is not null OR B.AdmissionDate is not null
-                                Order by A.AdmissionDate,
-                                A.ActivityStatusDateCreated,B.obs_group_id
-
-            ) AS B
-
-            On A.person_id = B.person_id
-            And A.AdmissionDate = B.AdmissionDate
-            And A.obs_group_id > B.obs_group_id
-            Where B.person_id is null
 
             Union ALL
             /*Mode de sortie C5*/
@@ -573,7 +486,8 @@ Inner Join (
              /*Date of Admission C8*/
                 select          
                     obsq.person_id as 'personid',
-                    Date(obsq.value_datetime) as 'AdmissionDate'
+                    Date(obsq.value_datetime) as 'AdmissionDate',
+                    date(obsq.obs_datetime) as 'obsDate'
                 from obs obsq 
                 where obsq.concept_id in (
                                             select concept_id from concept_name where name ="IPD Admission, Date d'admission"
@@ -582,4 +496,6 @@ Inner Join (
                 AND obsq.voided = 0
              ) As patientDateOfAdmission
              On patientDateOfAdmission.personid = patientOtherDetails.person_id
-Where patientOtherDetails.DateDeSortie between DAte('#startDate#') AND Date('#endDate#');
+and patientOtherDetails.dateResultCD4 = patientDateOfAdmission.obsDate
+Where patientOtherDetails.DateDeSortie between DATE('#startDate#') AND Date('#endDate#')
+Order by patientDateOfAdmission.AdmissionDate,IDPatient;
