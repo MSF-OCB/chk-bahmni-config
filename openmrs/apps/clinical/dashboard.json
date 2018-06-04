@@ -85,7 +85,7 @@
         "displayOrder": 3,
         "dashboardConfig": {
           "conceptNames": [
-            "Autres diagnostics (Suivi)",
+            "Informations Autres diagnostics (Suivi)",
             "Sc, Informations Infections opportunistes",
             "Prochain RDV"
           ],
@@ -93,7 +93,7 @@
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Autres diagnostics (Suivi)",
+            "Informations Autres diagnostics (Suivi)",
             "Sc, Informations Infections opportunistes",
             "Prochain RDV"
           ],
@@ -599,7 +599,7 @@
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
-            "RPEC_Date",
+            "RPEC_Date(form)",
             "Suivi Clinique",
             "Diagnostic"
           ]

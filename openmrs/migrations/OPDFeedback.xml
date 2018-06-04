@@ -227,4 +227,15 @@
             INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer10,1,now(),uuid());
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201806052001" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                Select count(*) from concept_name where name = "RPEC_Date(form)" and concept_name_type ="FULLY_SPECIFIED";
+            </sqlCheck>
+        </preConditions>
+        <comment>Renaming Date to RPEC_Date</comment>
+        <sql>
+            Update concept_name set name = "RPEC_Date(form)" where name = "Date" and concept_name_type ="FULLY_SPECIFIED";
+        </sql>
+    </changeSet>
 </databaseChangeLog>
