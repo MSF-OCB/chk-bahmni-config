@@ -85,7 +85,7 @@
         "displayOrder": 3,
         "dashboardConfig": {
           "conceptNames": [
-            "Information Diagnostique",
+            "Autres diagnostics (Suivi)",
             "Sc, Informations Infections opportunistes",
             "Prochain RDV"
           ],
@@ -93,7 +93,7 @@
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Information Diagnostique",
+            "Autres diagnostics (Suivi)",
             "Sc, Informations Infections opportunistes",
             "Prochain RDV"
           ],
@@ -224,7 +224,10 @@
         "formGroup": [
           "Paraclinique(form)",
           "Antécédents cliniques",
-          "Suivi Consultation"
+          "Suivi Consultation",
+          "Admission IPD Form",
+          "Formulaire de sortie",
+          "IPD Résumé de prise en charge"
         ],
         "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
       },
@@ -243,12 +246,16 @@
           "showDetailsButton": true,
           "numberOfVisits": 5,
           "conceptNames": [
-            "Regime ARV"
+            "Regimen Start Date",
+            "RA, ARV Line",
+            "Regimen Start Reason"
           ]
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Regime ARV"
+            "Regimen Start Date",
+            "RA, ARV Line",
+            "Regimen Start Reason"
           ],
           "numberOfVisits": "",
           "showDetailsButton": true,
