@@ -6,11 +6,19 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="OCB-201805310937" author="Sudhamsh">
+    <changeSet id="OCB-201805310947" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="2">
+                select COUNT(*) from concept_name where name IN ('Motif début de régime','Date début Régime', 'Regime ARV') and concept_name_type = 'SHORT'  and locale = 'fr'  and voided = 0;
+            </sqlCheck>
+        </preConditions>
         <comment>Updating translations for concepts</comment>
         <sql>
             update concept_name set name = "Date début Régime" where name = "Regimen Start Date" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
-            update concept_name set name = "Regime ARV" where name = "ARV Line" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+
+            select concept_id into @concept_id from concept_name where name = "RA, ARV Line" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Regime ARV" where concept_id = @concept_id and locale = 'fr' and voided = 0 and concept_name_type = 'SHORT';
+
             update concept_name set name = "Motif début de régime" where name = "Regimen Start Reason" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
         </sql>
     </changeSet>
