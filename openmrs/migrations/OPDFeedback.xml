@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-201806114101" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                Select count(*) from concept_set where sort_weight=6 and  concept_id in (select concept_id from concept_name where name ='Information Diagnostique' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_set in (select concept_id from concept_name where name ='Suivi Consultation' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  and sort_weight=5;
+            </sqlCheck>
+        </preConditions>
+        <comment>Switching sets  Information Diagnostique and Sc, Informations Infections opportunistes</comment>
+        <sql>
+            update concept_set set sort_weight =6 where
+            concept_id in (select concept_id from concept_name where name ='Information Diagnostique' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_set in (select concept_id from concept_name where name ='Suivi Consultation' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  and sort_weight=5;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="OCB-CONFIG-201806114201" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                Select count(*) from concept_set where sort_weight =5 and concept_id in (select concept_id from concept_name where name ='Sc, Informations Infections opportunistes' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_set in (select concept_id from concept_name where name ='Suivi Consultation' and  concept_name_type="FULLY_SPECIFIED"and locale='fr')  and sort_weight=6;
+            </sqlCheck>
+        </preConditions>
+        <comment>Switching sets  Information Diagnostique and Sc, Informations Infections opportunistes</comment>
+        <sql>
+            update concept_set set sort_weight =5 where concept_id in (select concept_id from concept_name where name ='Sc, Informations Infections opportunistes' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_set in (select concept_id from concept_name where name ='Suivi Consultation' and  concept_name_type="FULLY_SPECIFIED"and locale='fr')  and sort_weight=6;
+        </sql>
+    </changeSet>
+
+
+
+
+
+
+    <changeSet id="OCB-CONFIG-201806114301" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                Select count(*) from concept_name where name = "Informations Autres diagnostics (Suivi)" and concept_name_type ="FULLY_SPECIFIED" and locale='fr';
+            </sqlCheck>
+        </preConditions>
+        <comment>Changing fully specified name for  Information Diagnostique</comment>
+        <sql>
+            select concept_id INTO @conceptid from concept_name where name ="Information Diagnostique" and concept_name_type ="FULLY_SPECIFIED" and locale='fr';
+            Update concept_name set name = "Informations Autres diagnostics (Suivi)" where concept_id = @conceptid and concept_name_type ="FULLY_SPECIFIED" and locale='fr';
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="OCB-CONFIG-201806114401" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                Select count(*) from concept_name where name = "Informations Autres diagnostics" and concept_name_type ="SHORT" and locale='fr';
+            </sqlCheck>
+        </preConditions>
+        <comment>Changing short name for  Information Diagnostique</comment>
+        <sql>
+            select concept_id INTO @conceptid from concept_name where name ="Informations Autres diagnostics (Suivi)" and concept_name_type ="FULLY_SPECIFIED" and locale='fr';
+            Update concept_name set name = "Informations Autres diagnostics" where concept_id = @conceptid and concept_name_type ="SHORT" and locale='fr';
+        </sql>
+    </changeSet>
+
+
+
+
+
+
+
+    <changeSet id="OCB-CONFIG-201806114601" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                Select count(*) from concept_name where name = "Autre(si le diagnostic n'est pas listé)";
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Autre(si le diagnostic n'est pas listé)</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"Autre(si le diagnostic n'est pas listé)", "Autre(si le diagnostic n'est pas listé)",'Text','Misc',FALSE);
+        </sql>
+    </changeSet>
+
+
+
+
+    <changeSet id="OCB-CONFIG-201806114701" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in ("Autre(si le diagnostic n'est pas listé)") AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Informations Autres diagnostics (Suivi)');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Autre(si le diagnostic n'est pas listé) to Information Diagnostique section</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = "Informations Autres diagnostics (Suivi)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member1_concept_id from concept_name where name = "Autre(si le diagnostic n'est pas listé)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 3);
+        </sql>
+    </changeSet>
+
+
+
+
+    <changeSet id="OCB-CONFIG-201806114801" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                Select count(*) from concept_name where name = "Aucun";
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Aucun</comment>
+        <sql>
+            set @concept_id = 0;
+            set @concept_short_id = 0;
+            set @concept_full_id = 0;
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"Aucun", "Aucun",'N/A','Misc',FALSE);
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="OCB-CONFIG-201806114901" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in ("Aucun") AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = "Infections Opportunistes");
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Aucun to Infections Opportunistes</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name='Infections Opportunistes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name ='Aucun'  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="OCB-CONFIG-201806115001" author="Mohit">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in ('Aucun') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Diagnostic');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Aucun to Diagnostic</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name='Diagnostic' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name ='Aucun' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        </sql>
+    </changeSet>
+
+
+
+    <changeSet id="OCB-CONFIG-201806115101" author="Mohit">
+
+        <comment>Deleting concept answers from Site TB</comment>
+        <sql>
+            SELECT concept_id INTO @concept_id FROM concept_name WHERE name = 'Site TB' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            DELETE FROM concept_answer WHERE concept_id =@concept_id;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="OCB-CONFIG-201806115201" author="Mohit">
+        <preConditions>
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                join
+                concept_name cn
+                on ca.concept_id = cn.concept_id
+                where ca.answer_concept IN (select concept_id from concept_name where name IN ('Abdominale','Ganglionnaire', 'Mal de pott', 'Meningé', 'Miliaire', 'Os et articulaire', 'Pericardite', 'Pleuresie', 'Poly-serosite', 'Autre') and concept_name_type = "FULLY_SPECIFIED")
+                AND
+                cn.concept_id IN (select concept_id from concept_name where name = 'Site TB');
+
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept answers to Site TB</comment>
+        <sql>
+            SELECT concept_id INTO @concept_id FROM concept_name WHERE name = 'Site TB' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+
+            SELECT concept_id INTO @concept_answer1 FROM concept_name WHERE name = 'Abdominale' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer1,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer2 FROM concept_name WHERE name = 'Ganglionnaire' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer2,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer3 FROM concept_name WHERE name = 'Mal de pott' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer3,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer4 FROM concept_name WHERE name = 'Meningé' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer4,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer5 FROM concept_name WHERE name = 'Miliaire' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer5,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer6 FROM concept_name WHERE name = 'Os et articulaire' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer6,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer7 FROM concept_name WHERE name = 'Pericardite' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer7,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer8 FROM concept_name WHERE name = 'Pleuresie' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer8,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer9 FROM concept_name WHERE name = 'Poly-serosite' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer9,1,now(),uuid());
+
+            SELECT concept_id INTO @concept_answer10 FROM concept_name WHERE name = 'Autre' AND concept_name_type="FULLY_SPECIFIED" and locale = 'fr';
+            INSERT INTO concept_answer (concept_id,answer_concept,creator,date_created,uuid) VALUES (@concept_id,@concept_answer10,1,now(),uuid());
+        </sql>
+    </changeSet>
+</databaseChangeLog>
