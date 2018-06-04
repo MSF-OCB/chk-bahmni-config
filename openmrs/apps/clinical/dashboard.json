@@ -594,6 +594,7 @@
         "isObservation": true,
         "type": "vitals",
         "displayOrder": 0,
+        "numberOfVisits": 1,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
@@ -601,8 +602,7 @@
             "RPEC_Date",
             "Suivi Clinique",
             "Diagnostic"
-          ],
-          "scope": "latest"
+          ]
         }
       },
       "Diagnosis": {
@@ -611,11 +611,10 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
-          "numberOfVisits": 4,
+          "numberOfVisits": 1,
           "conceptNames": [
             "Arv à la sortie"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 1,
         "translationKey": "DASHBOARD_TITLE_DIAGNOSIS"
@@ -625,14 +624,14 @@
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC",
         "displayOrder": 2,
+        "numberOfVisits": 1,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
             "Syndrome",
             "Diagnostic"
-          ],
-          "scope": "latest"
+          ]
         }
       },
       "Syndrome at Exit": {
@@ -644,9 +643,8 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Traitement à la sortie",
-            "Si autre, veuillez préciser"
-          ],
-          "scope": "latest"
+            "Si autre, preciser"
+          ]
         },
         "displayOrder": 3,
         "translationKey": "DASHBOARD_TITLE_EXIT_SYNDROME"
@@ -661,8 +659,7 @@
           "title": null,
           "numberOfVisits": 1,
           "showChart": true,
-          "showTable": false,
-          "scope": "latest"
+          "showTable": false
         }
       },
       "Exit Mode": {
@@ -674,8 +671,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Mode de sortie"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 5,
         "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
@@ -689,8 +685,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Date du prochain RDV"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 6,
         "translationKey": "DASHBOARD_TITLE_DATE_OF_NEXT_APPOINTMENT"
@@ -763,8 +758,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Date de prochain RDV"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 1,
         "translationKey": "DASHBOARD_TITLE_DATE_OF_PROCHAIN RDV"
@@ -778,8 +772,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Stade OMS"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 2,
         "translationKey": "DASHBOARD_TITLE_DATE_OF_STADE_OMS"
@@ -803,8 +796,7 @@
             "Incapacité de marcher sans aide",
             "Altération de l'état neurologique",
             "Autre signe neurologique"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 3,
         "translationKey": "DASHBOARD_TITLE_PARAMETERS"
@@ -818,8 +810,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Motif Consultation"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 4,
         "translationKey": "DASHBOARD_TITLE_MOTIF_CONSULTATIONS"
@@ -833,8 +824,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Histoire Maladie Actuelle"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 5,
         "translationKey": "DASHBOARD_TITLE_ACTUAL_HISTORY"
@@ -860,8 +850,7 @@
             "App. Osteoarticulaire",
             "Neurologie",
             "Sv, Autres"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 6,
         "translationKey": "DASHBOARD_TITLE_EXAMEN_CLINIQUE"
@@ -872,12 +861,12 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
             "Type de radio",
             "Date de radio",
             "Resultats Radio"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 7,
         "translationKey": "DASHBOARD_TITLE_PARACLINIC"
@@ -888,12 +877,12 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
             "Type d'Echo",
             "Date Echo",
             "Resultats Echo"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 8,
         "translationKey": "DASHBOARD_TITLE_ECOGRAPHIE"
@@ -907,8 +896,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Sc, Diagnostic"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 9,
         "translationKey": "DASHBOARD_TITLE_DIAGNOSTIC"
@@ -922,7 +910,6 @@
           "conceptNames": [
             "Observations et conduite à tenir"
           ],
-          "scope": "latest",
           "showGroupDateTime": true
         },
         "displayOrder": 10,
@@ -934,13 +921,13 @@
         "translationKey": "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES",
         "displayOrder": 11,
         "displayType": "Full-Page",
+        "numberOfVisits": 1,
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
             "Infections Opportunistes",
             "Status IO"
-          ],
-          "scope": "latest"
+          ]
         }
       },
       "Informations Prophylaxie": {
@@ -949,13 +936,13 @@
         "translationKey": "DASHBOARD_TITLE_INFORMATIONS_PROPHYLAXIE",
         "displayOrder": 12,
         "displayType": "Full-Page",
+        "numberOfVisits": 1,
         "dashboardConfig": {
           "showGroupDateTime": true,
           "conceptNames": [
             "Prophylaxie",
             "Date Debut Prophylaxie"
-          ],
-          "scope": "latest"
+          ]
         }
       },
       "Informations TB": {
@@ -974,8 +961,7 @@
           "conceptNames": [
             "Regimen Start date",
             "Regimen Start reason"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 14,
         "translationKey": "DASHBOARD_TITLE_REGIME_ARV"
@@ -1023,8 +1009,7 @@
             "Molécule",
             "Effets secondaires",
             "Grade,Suivi"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 17,
         "translationKey": "DASHBOARD_TITLE_SECONDARY_MEDICATION"
@@ -1038,8 +1023,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Notes"
-          ],
-          "scope": "latest"
+          ]
         },
         "displayOrder": 18,
         "translationKey": "DASHBOARD_TITLE_NOTES"

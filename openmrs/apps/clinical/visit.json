@@ -230,7 +230,7 @@
                 "config": {
                     "conceptNames": [
                         "Traitement à la sortie",
-                        "Si autre, veuillez préciser"
+                        "Si autre, preciser"
                     ],
                     "scope": "latest"
                 },
