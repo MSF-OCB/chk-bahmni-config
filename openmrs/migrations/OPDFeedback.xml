@@ -18,7 +18,6 @@
         </sql>
     </changeSet>
 
-
     <changeSet id="OCB-CONFIG-201806114201" author="Mohit">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -30,11 +29,6 @@
             update concept_set set sort_weight =5 where concept_id in (select concept_id from concept_name where name ='Sc, Informations Infections opportunistes' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_set in (select concept_id from concept_name where name ='Suivi Consultation' and  concept_name_type="FULLY_SPECIFIED"and locale='fr')  and sort_weight=6;
         </sql>
     </changeSet>
-
-
-
-
-
 
     <changeSet id="OCB-CONFIG-201806114301" author="Mohit">
         <preConditions onFail="MARK_RAN">
@@ -63,12 +57,6 @@
         </sql>
     </changeSet>
 
-
-
-
-
-
-
     <changeSet id="OCB-CONFIG-201806114601" author="Mohit">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -83,9 +71,6 @@
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"Autre(si le diagnostic n'est pas listé)", "Autre(si le diagnostic n'est pas listé)",'Text','Misc',FALSE);
         </sql>
     </changeSet>
-
-
-
 
     <changeSet id="OCB-CONFIG-201806114701" author="Mohit">
         <preConditions onFail="MARK_RAN">
@@ -107,9 +92,6 @@
         </sql>
     </changeSet>
 
-
-
-
     <changeSet id="OCB-CONFIG-201806114801" author="Mohit">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -124,7 +106,6 @@
             call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"Aucun", "Aucun",'N/A','Misc',FALSE);
         </sql>
     </changeSet>
-
 
     <changeSet id="OCB-CONFIG-201806114901" author="Mohit">
         <preConditions onFail="MARK_RAN">
@@ -145,7 +126,6 @@
             call add_concept_answer(@concept_id, @child1_concept_id, 1);
         </sql>
     </changeSet>
-
 
     <changeSet id="OCB-CONFIG-201806115001" author="Mohit">
         <preConditions onFail="MARK_RAN">
@@ -177,7 +157,6 @@
             DELETE FROM concept_answer WHERE concept_id =@concept_id;
         </sql>
     </changeSet>
-
 
     <changeSet id="OCB-CONFIG-201806115201" author="Mohit">
         <preConditions>
