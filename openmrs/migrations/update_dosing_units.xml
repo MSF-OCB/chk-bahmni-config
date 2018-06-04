@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-201806041139" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                where cs.concept_id IN (select concept_id from concept_name where name IN ('ml','g','dose','implant', 'ui','mg','bouffée','gélule','capsule','boite', 'application') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Dosing Units');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding new dosing units</comment>
+        <sql>
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"application","application", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"boite","boite", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"ml","ml", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"capsule","capsule", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"gélule","gélule", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"bouffée","bouffée", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"mg","mg", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"ui","ui", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"implant","implant", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"dose","dose", 'N/A','Misc', FALSE);
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"g","g", 'N/A','Misc', FALSE);
+
+        select max(sort_weight) into @weight from concept_answer where concept_id = (select concept_id from concept_name where name = 'Dosing Units' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+        select concept_id into @concept_id from concept_name where name = 'Dosing Units' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+        select concept_id into @member1_concept_id from concept_name where name =  "application" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member2_concept_id from concept_name where name =  "boite" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member3_concept_id from concept_name where name =  "ml" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member4_concept_id from concept_name where name =  "capsule" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member5_concept_id from concept_name where name =  "gélule" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member6_concept_id from concept_name where name =  "bouffée" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member7_concept_id from concept_name where name =  "mg" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member8_concept_id from concept_name where name =  "ui" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member9_concept_id from concept_name where name =  "implant" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member10_concept_id from concept_name where name =  "dose" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @member11_concept_id from concept_name where name =  "g" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+        call add_concept_set_members (@concept_id, @member1_concept_id, @weight+1);
+        call add_concept_set_members (@concept_id, @member2_concept_id, @weight+2);
+        call add_concept_set_members (@concept_id, @member3_concept_id, @weight+3);
+        call add_concept_set_members (@concept_id, @member4_concept_id, @weight+4);
+        call add_concept_set_members (@concept_id, @member5_concept_id, @weight+5);
+        call add_concept_set_members (@concept_id, @member6_concept_id, @weight+6);
+        call add_concept_set_members (@concept_id, @member7_concept_id, @weight+7);
+        call add_concept_set_members (@concept_id, @member8_concept_id, @weight+8);
+        call add_concept_set_members (@concept_id, @member9_concept_id, @weight+9);
+        call add_concept_set_members (@concept_id, @member10_concept_id, @weight+10);
+        call add_concept_set_members (@concept_id, @member11_concept_id, @weight+11);
+    </sql>
+</changeSet>
+
+    <changeSet id="OCB-CONFIG-201806041153" author="Sudhamsh">
+        <comment>Updating dosing units for drugs</comment>
+        <sql>
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ABACAVIR sulfate (ABC), 20 mg/ml, sol. buv., 240 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "comprimé"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ABC 600 mg / 3TC 300 mg, comp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SELS REHYDRATATION ORALE (SRO) basse osmol. sachet 20,5 g/1l";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "AMOXICILLINE 125mg/ ac.CLAV. 31.25mg/5ml susp.orale 100ml";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "AMOXICILLINE, 125mg/5ml, poudre susp. orale, 100 ml, fl";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "COTRIMOXAZOLE, 200mg/40mg/5ml, susp orale, 100 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ERYTHROMYCINE ethylsucc,125mg/5ml,poudre susp.orale,100ml,fl";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "IBUPROFENE, 100mg/5ml, susp. orale, 150 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LAMIVUDINE (3TC), 50mg/5ml, sol. orale, 100 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LPV / r 400/100mg/5ml, sol.orale, 60 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "METRONIDAZOLE, 125mg/5ml, poudre pr susp. orale, 100 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "NEVIRAPINE (NVP), 50mg/5ml, susp. orale, 100 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "NEVIRAPINE (NVP), 50mg/5ml, susp. orale, 240 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "NYSTATINE, 100.000 UI/ml, susp. orale";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "PARACETAMOL (acétaminophène), 120mg/5ml, susp. orale., fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "RESOMAL, réhydratation malnut. aiguë compliq, sach. 84g/2l";
+            update drug set dosage_form = (select concept_id from concept_name where name = "capsule" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "RETINOL (vitamine A) stabilisé, 200.000 UI, caps. molle";
+            update drug set dosage_form = (select concept_id from concept_name where name = "gélule" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "RITONAVIR (r), 100 mg, gél.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "comprimé" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SALBUTAMOL sulfate, 4 mg, comp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "bouffée" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SALBUTAMOL sulfate, éq.0,1mg base/bouffée, 200 bouff.aérosol";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SALBUTAMOL, solution pour nébuliseur, 2 mg/ml, 2,5ml unidose";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SELS REHYDRATATION ORALE (SRO) basse osmol. sachet 20,5 g/1l";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SODIUM chlorure, 6%, pour nébulisation, 4 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ZIDOVUDINE (AZT), 50mg/5ml, sol. orale, 100ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ACIDE TRANEXAMIQUE, 100 mg / ml, 5 ml amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "AMOXICILLINE 1g / acide CLAVULANIQUE 200mg, poudre";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "AMPHOTERICINE B complexe liposomal, 50 mg, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "AMPHOTERICINE B conventionnelle, 50 mg, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "AMPICILLINE, 1 g, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ARTEMETHER, 80 mg/ml, 1 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ARTESUNATE 60 mg, poudre, fl +NaHCO3 5% 1ml";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ATROPINE sulfate, 1 mg/ml, 1 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "BENZATHINE BENZYLPENICILLINE, 2,4 M UI, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "BLEOMYCINE sulfate, éq. 15 mg base, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "BUTYLBROMURE HYOSCINE (butylbrom.scopolamine), 20 mg/1ml,amp";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "CALCIUM GLUCONATE, 100 mg/ml, 10 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "CEFTRIAXONE sodique, éq. 1 g base, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "CEFTRIAXONE sodique, éq.1 g base, poudre, fl. + lidocaine IM";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "CHLORPROMAZINE, 25 mg/ml, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "COTRIMOXAZOLE, 80mg/16mg/ml, 5 ml pour perfusion, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "DEXAMETHASONE phosphate, 4 mg/ml, 1 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "DIAZEPAM, 5 mg/ml, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "DIGOXINE, 0,25 mg/ml, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "DOPAMINE chlorhydrate, 40 mg/ml, 5 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "EAU pour injection, 10 ml, amp. plastique";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "EPINEPHRINE (adrenaline) tartrate, éq.1 mg/ml base, 1ml, amp";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "FUROSEMIDE, 10 mg/ml, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "GENTAMICINE sulfate, eq. 40 mg/ml base, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "GLUCOSE hypertonique, 50%, 50 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "HALOPERIDOL, 5 mg/ml, 1 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ui"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "HEPARINE SODIQUE, 5 000 UI/ml, 5 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "HYDROCORTISONE succinate sodique, eq.100mg base, poudre,fl";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ui"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "INSULINE ISOPHANE (NPH), humaine, 100 UI/ml, 10 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ui"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "INSULINE RAPIDE, humaine,100 UI/ml, 10 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "KANAMYCINE sulfate, éq. 1 g base, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "KETAMINE chlorhydrate, éq. 50 mg/ml base, 10 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "implant"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LEVONORGESTREL implant 2 x 75mg (Jadelle) + trocart";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LIDOCAINE chlorhydrate, 1%, sans conservateur, 10 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "MEDROXYPROGESTERONE acétate, 150 mg, 1 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "METOCLOPRAMIDE chlorhydrate, 5 mg/ml, 2 ml, amp";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "METRONIDAZOLE, 5 mg/ml, 100 ml, poche plastique pr perfusion";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "MORPHINE chlorhydrate, 10 mg/ml, 1 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ui"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "NADROPARINE calcique, 2850 UI / 0,3 ml, seringue";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "NALOXONE chlorhydrate, 0,4 mg/ml, 1 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "OMEPRAZOLE sodique, éq.40 mg base, poudre, fl. pr perfusion";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ONDANSETRON chlorhydrate, 2mg/ml, amp,";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "PARACETAMOL (acétaminophène),10 mg/ml, 50 ml, sol., fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "POTASSIUM chlorure, 100 mg/ml, 10 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "PROMETHAZINE chlorhydrate, éq. 25 mg/ml base, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "QUININE dichlorhydrate, 300 mg/ml, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SODIUM BICARBONATE, 8,4%, 1 mEq/ml, 20 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "STREPTOMYCINE sulfate, éq. 1 g base, poudre, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "TRAMADOL chlorhydrate, 50 mg/ml, 2 ml, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "mg"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "VINCRISTINE sulfate, 1 mg/ml, 2 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "GLUCOSE, 5%, 1 l, poche souple, sans PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "GLUCOSE, 5%, 500 ml, poche souple, sans PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "PLASMA SUBSTITUT, gélatine, 500 ml, poche souple, ss PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "RINGER lactate, 1 l, poche souple, sans PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "RINGER lactate, 500 m l, poche souple, sans PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SODIUM chlorure, 0,9%, 1 l, poche souple, sans PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SODIUM chlorure, 0,9%, 250 ml, poche souple, sans PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SODIUM chlorure, 0,9%, 500 ml, poche souple, sans PVC";
+            update drug set dosage_form = (select concept_id from concept_name where name = "dose"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "VACCIN HEPATITE B, 1 dose adulte, fl. multidose";
+            update drug set dosage_form = (select concept_id from concept_name where name = "dose"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "VACCIN TT (tétanos), 1 dose, fl. multidose";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ACIDE BENZOIQUE 6% / ACIDE SALICYLIQUE 3%, pom., 40 g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ANTI HEMORROIDAIRE, pommade, 25 g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "BENZOATE DE BENZYLE, 25%, lotion, 1 l, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "CALAMINE, 15%, lotion, 500 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "comprimé"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "CLOTRIMAZOLE, 500 mg, comp. vaginal + applicateur";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "D.E.E.T., lotion répulsive anti-moustique";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "HYDRO-ALCOOLIQUE, solution, 500 ml, fl.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "HYDROCORTISONE acétate, 1%, pommade, 15 g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LIDOCAINE, 2%, gel, stérile, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "sachet"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LUBRIFIANT à usage général, soluble ds l'eau, gel, 82g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "MICONAZOLE nitrate, 2%, crème, 30 g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "OXYDE DE ZINC, 10%, pommade, 100 g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "PODOPHYLLOTOXINE, 0,5%, solution, 3,5 ml, + 30 applicateurs";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "POLYVIDONE IODEE, 10%, solution, 200 ml, fl. verseur";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "SULFADIAZINE ARGENTIQUE, 1%, crème, stérile, 50 g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "boite"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "VASELINE, 1kg, pommade";
+            update drug set dosage_form = (select concept_id from concept_name where name = "goutte"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "ATROPINE sulfate, 1%, collyre, stér, 0,4 ml, unidose, amp.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "application"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "TETRACYCLINE chlorhydrate, 1%, pommade opht., stér, 5g, tube";
+            update drug set dosage_form = (select concept_id from concept_name where name = "g"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "FORMULE INFANTILE, 1er âge, poudre, 900 g";
+            update drug set dosage_form = (select concept_id from concept_name where name = "g"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LAIT THERAPEUTIQUE, F100, poudre, 114 g";
+            update drug set dosage_form = (select concept_id from concept_name where name = "g"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "LAIT THERAPEUTIQUE, F75, poudre, 102,5 g";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "NUTRITION ENTERALE, hypercal.adulte,hyperprot.,ss fibre 0,5l";
+            update drug set dosage_form = (select concept_id from concept_name where name = "ml"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "NUTRITION ENTERALE, isocal.adulte, normoprot.,ss fibre 0,5l";
+            update drug set dosage_form = (select concept_id from concept_name where name = "sachet"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "RUTF, pâte d'arachide, 92 g";
+            update drug set dosage_form = (select concept_id from concept_name where name = "comprimé"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "RIFABUTINE, 150 mg, gel.";
+            update drug set dosage_form = (select concept_id from concept_name where name = "comprimé"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "FLUOXETINE chlorhydrate, éq. 20 mg base, gél.";
+        </sql>
+        </changeSet>
+
+        </databaseChangeLog>
