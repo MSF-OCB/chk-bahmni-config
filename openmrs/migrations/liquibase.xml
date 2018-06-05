@@ -7569,4 +7569,6 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     <include file ="update_translations.xml"/>
     <include file ="update_dosing_units.xml"/>
     <include file ="OPDFeedback.xml"/>
+    <include file ="ProgramWorkflow.xml"/>
+    <include file ="DisplayControlFeedback.xml"/>
 </databaseChangeLog>

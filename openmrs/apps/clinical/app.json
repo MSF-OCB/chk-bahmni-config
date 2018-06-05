@@ -162,6 +162,12 @@
         "multiSelect": true,
         "disableAddNotes": true
       },
+      "Fds, Diagnostic": {
+        "dropdown": false,
+        "autocomplete": true,
+        "multiSelect": true,
+        "disableAddNotes": true
+      },
       "RPEC": {
         "allowAddMore": true
       },

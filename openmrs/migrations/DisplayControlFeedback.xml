@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-201806051602" author="Sudhamsh">
+        <comment>Adding Fds Diagnostic concept</comment>
+        <sql>
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Fds, Diagnostic','Diagnostic','Coded','Misc',FALSE);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201806051606" author="Sudhamsh">
+    <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="0">
+            select COUNT(*) from concept_set cs
+            join concept_name cn
+            on cs.concept_id = cn.concept_id
+            where cs.concept_id IN (select concept_id from concept_name where name IN
+            (
+            'Toxoplasmose cérébrale (1)'
+            'Crypto NM (2)',
+            'Méningite tuberculeuse (3)',
+            'Neurosyphillis (4)',
+            'Méningite bactérienne (5)',
+            'méningite virale (6)',
+            'Encéphalopathie liée au VIH (7)',
+            'AVC (8)',
+            'neuropathie périphérique (9)',
+            'intoxication (alcohol, drugs) (10)',
+            'Parasitose - Diarrhée aigue (11)',
+            'Gastro-entérite (12)',
+            'Effets sécondaires (LPV/r) (13)',
+            'TB abdominal (14)',
+            'Gastro-entérite (15)',
+            'Parasitose - Diarrhée chronique (16)',
+            'Effets sécondaire (17)',
+            'MAC (18)',
+            'SK - Diarrhée chronique (19)',
+            'Effets sécondaire (20)',
+            'SK - Autres syndromes GI (21)',
+            'Candidose oesophagienne (22)',
+            'SK - Hematologique: anemie (23)',
+            'AZT (24)',
+            'Psychose (25)',
+            'Depression (26)',
+            'Anxiété (27)',
+            "Abus d'alcool ou de drogues (28)",
+            'Effets sécondaire médicaments (EFV) (29)',
+            'Pneumonie bactérielle (30)',
+            'Bronchite (31)',
+            'PCP (32)',
+            'TB pulmonaire (33)',
+            'Maladie pulmonaire obstructive chronique (34)',
+            'SK - Respiratoire (35)',
+            'Cryptococcose pulmonaire (36)',
+            'LIP (37)',
+            'Hypertension artérielle (38)',
+            'Insufficience cardiaque (39)'
+            'Péricardite (40)',
+            'Endocardite (41)',
+            'SK - Cutane (42)',
+            'Stephen johnsons (43)',
+            'Autre major (44)',
+            'IST (45)',
+            'Violence sexuelle (46)',
+            'IR Corrigée médicamenteux/ MNT (47)',
+            'HIVAN (48)',
+            'Cystite (49)',
+            'Pyelonéphrite (50)',
+            'Diabète (51)',
+            'SK - Orale (52)',
+            'Médicamenteux (53)',
+            'Virale (54)',
+            'TB Disséminée (55)',
+            'Paludisme (56)',
+            'Autres (57)') AND concept_name_type = "FULLY_SPECIFIED")
+            and cs.concept_set IN (select concept_id from concept_name where name = "Fds, Diagnostic");
+        </sqlCheck>
+    </preConditions>
+    <comment>Adding answers to Fds Diagnostic concept </comment>
+    <sql>
+        set @concept_id = 0;
+        set @child1_concept_id = 0;
+        set @child2_concept_id = 0;
+        set @child3_concept_id = 0;
+        set @child4_concept_id = 0;
+        set @child5_concept_id = 0;
+        set @child6_concept_id = 0;
+        set @child7_concept_id = 0;
+        set @child8_concept_id = 0;
+        set @child9_concept_id = 0;
+        set @child10_concept_id = 0;
+        set @child11_concept_id = 0;
+        set @child12_concept_id = 0;
+        set @child13_concept_id = 0;
+        set @child14_concept_id = 0;
+        set @child15_concept_id = 0;
+        set @child16_concept_id = 0;
+        set @child17_concept_id = 0;
+        set @child18_concept_id = 0;
+        set @child19_concept_id = 0;
+        set @child20_concept_id = 0;
+        set @child21_concept_id = 0;
+        set @child22_concept_id = 0;
+        set @child23_concept_id = 0;
+        set @child24_concept_id = 0;
+        set @child25_concept_id = 0;
+        set @child26_concept_id = 0;
+        set @child27_concept_id = 0;
+        set @child28_concept_id = 0;
+        set @child29_concept_id = 0;
+        set @child30_concept_id = 0;
+        set @child31_concept_id = 0;
+        set @child32_concept_id = 0;
+        set @child33_concept_id = 0;
+        set @child34_concept_id = 0;
+        set @child35_concept_id = 0;
+        set @child36_concept_id = 0;
+        set @child37_concept_id = 0;
+        set @child38_concept_id = 0;
+        set @child39_concept_id = 0;
+        set @child40_concept_id = 0;
+        set @child41_concept_id = 0;
+        set @child42_concept_id = 0;
+        set @child43_concept_id = 0;
+        set @child44_concept_id = 0;
+        set @child45_concept_id = 0;
+        set @child46_concept_id = 0;
+        set @child47_concept_id = 0;
+        set @child48_concept_id = 0;
+        set @child49_concept_id = 0;
+        set @child50_concept_id = 0;
+        set @child51_concept_id = 0;
+        set @child52_concept_id = 0;
+        set @child53_concept_id = 0;
+        set @child54_concept_id = 0;
+        set @child55_concept_id = 0;
+        set @child56_concept_id = 0;
+        set @child57_concept_id = 0;
+
+        select concept_id into @concept_id from concept_name where name = "Fds, Diagnostic" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+        select concept_id into @child1_concept_id from concept_name where name = 'Toxoplasmose cérébrale (1)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child2_concept_id from concept_name where name = 'Crypto NM (2)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child3_concept_id from concept_name where name = 'Méningite tuberculeuse (3)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child4_concept_id from concept_name where name = 'Neurosyphillis (4)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child5_concept_id from concept_name where name = 'Méningite bactérienne (5)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child6_concept_id from concept_name where name = 'méningite virale (6)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child7_concept_id from concept_name where name = 'Encéphalopathie liée au VIH (7)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child8_concept_id from concept_name where name = 'AVC (8)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child9_concept_id from concept_name where name = 'neuropathie périphérique (9)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child10_concept_id from concept_name where name = 'intoxication (alcohol, drugs) (10)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child11_concept_id from concept_name where name = 'Parasitose - Diarrhée aigue (11)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child12_concept_id from concept_name where name = 'Gastro-entérite (12)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child13_concept_id from concept_name where name = 'Effets sécondaires (LPV/r) (13)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child14_concept_id from concept_name where name = 'TB abdominal (14)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child15_concept_id from concept_name where name = 'Gastro-entérite (15)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child16_concept_id from concept_name where name = 'Parasitose - Diarrhée chronique (16)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child17_concept_id from concept_name where name = 'Effets sécondaire (17)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child18_concept_id from concept_name where name = 'MAC (18)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child19_concept_id from concept_name where name = 'SK - Diarrhée chronique (19)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child20_concept_id from concept_name where name = 'Effets sécondaire (20)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child21_concept_id from concept_name where name = 'SK - Autres syndromes GI (21)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child22_concept_id from concept_name where name = 'Candidose oesophagienne (22)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child23_concept_id from concept_name where name = 'SK - Hematologique: anemie (23)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child24_concept_id from concept_name where name = 'AZT (24)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child25_concept_id from concept_name where name = 'Psychose (25)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child26_concept_id from concept_name where name = 'Depression (26)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child27_concept_id from concept_name where name = 'Anxiété (27)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child28_concept_id from concept_name where name = "Abus d'alcool ou de drogues (28)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child29_concept_id from concept_name where name = 'Effets sécondaire médicaments (EFV) (29)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child30_concept_id from concept_name where name = 'Pneumonie bactérielle (30)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child31_concept_id from concept_name where name = 'Bronchite (31)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child32_concept_id from concept_name where name = 'PCP (32)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child33_concept_id from concept_name where name = 'TB pulmonaire (33)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child34_concept_id from concept_name where name = 'Maladie pulmonaire obstructive chronique (34)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child35_concept_id from concept_name where name = 'SK - Respiratoire (35)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child36_concept_id from concept_name where name = 'Cryptococcose pulmonaire (36)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child37_concept_id from concept_name where name = 'LIP (37)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child38_concept_id from concept_name where name = 'Hypertension artérielle (38)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child39_concept_id from concept_name where name = 'Insufficience cardiaque (39)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child40_concept_id from concept_name where name = 'Péricardite (40)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child41_concept_id from concept_name where name = 'Endocardite (41)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child42_concept_id from concept_name where name = 'SK - Cutane (42)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child43_concept_id from concept_name where name = 'Stephen johnsons (43)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child44_concept_id from concept_name where name = 'Autre major (44)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child45_concept_id from concept_name where name = 'IST (45)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child46_concept_id from concept_name where name = 'Violence sexuelle (46)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child47_concept_id from concept_name where name = 'IR Corrigée médicamenteux/ MNT (47)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child48_concept_id from concept_name where name = 'HIVAN (48)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child49_concept_id from concept_name where name = 'Cystite (49)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child50_concept_id from concept_name where name = 'Pyelonéphrite (50)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child51_concept_id from concept_name where name = 'Diabète (51)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child52_concept_id from concept_name where name = 'SK - Orale (52)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child53_concept_id from concept_name where name = 'Médicamenteux (53)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child54_concept_id from concept_name where name = 'Virale (54)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child55_concept_id from concept_name where name = 'TB Disséminée (55)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child56_concept_id from concept_name where name = 'Paludisme (56)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+        select concept_id into @child57_concept_id from concept_name where name = 'Autres (57)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+        call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        call add_concept_answer(@concept_id, @child3_concept_id, 3);
+        call add_concept_answer(@concept_id, @child4_concept_id, 4);
+        call add_concept_answer(@concept_id, @child5_concept_id, 5);
+        call add_concept_answer(@concept_id, @child6_concept_id, 6);
+        call add_concept_answer(@concept_id, @child7_concept_id, 7);
+        call add_concept_answer(@concept_id, @child8_concept_id, 8);
+        call add_concept_answer(@concept_id, @child9_concept_id, 9);
+        call add_concept_answer(@concept_id, @child10_concept_id, 10);
+        call add_concept_answer(@concept_id, @child11_concept_id, 11);
+        call add_concept_answer(@concept_id, @child12_concept_id, 12);
+        call add_concept_answer(@concept_id, @child13_concept_id, 13);
+        call add_concept_answer(@concept_id, @child14_concept_id, 14);
+        call add_concept_answer(@concept_id, @child15_concept_id, 15);
+        call add_concept_answer(@concept_id, @child16_concept_id, 16);
+        call add_concept_answer(@concept_id, @child17_concept_id, 17);
+        call add_concept_answer(@concept_id, @child18_concept_id, 18);
+        call add_concept_answer(@concept_id, @child19_concept_id, 19);
+        call add_concept_answer(@concept_id, @child20_concept_id, 20);
+        call add_concept_answer(@concept_id, @child21_concept_id, 21);
+        call add_concept_answer(@concept_id, @child22_concept_id, 22);
+        call add_concept_answer(@concept_id, @child23_concept_id, 23);
+        call add_concept_answer(@concept_id, @child24_concept_id, 24);
+        call add_concept_answer(@concept_id, @child25_concept_id, 25);
+        call add_concept_answer(@concept_id, @child26_concept_id, 26);
+        call add_concept_answer(@concept_id, @child27_concept_id, 27);
+        call add_concept_answer(@concept_id, @child28_concept_id, 28);
+        call add_concept_answer(@concept_id, @child29_concept_id, 29);
+        call add_concept_answer(@concept_id, @child30_concept_id, 30);
+        call add_concept_answer(@concept_id, @child31_concept_id, 31);
+        call add_concept_answer(@concept_id, @child32_concept_id, 32);
+        call add_concept_answer(@concept_id, @child33_concept_id, 33);
+        call add_concept_answer(@concept_id, @child34_concept_id, 34);
+        call add_concept_answer(@concept_id, @child35_concept_id, 35);
+        call add_concept_answer(@concept_id, @child36_concept_id, 36);
+        call add_concept_answer(@concept_id, @child37_concept_id, 37);
+        call add_concept_answer(@concept_id, @child38_concept_id, 38);
+        call add_concept_answer(@concept_id, @child39_concept_id, 39);
+        call add_concept_answer(@concept_id, @child40_concept_id, 40);
+        call add_concept_answer(@concept_id, @child41_concept_id, 41);
+        call add_concept_answer(@concept_id, @child42_concept_id, 42);
+        call add_concept_answer(@concept_id, @child43_concept_id, 43);
+        call add_concept_answer(@concept_id, @child44_concept_id, 44);
+        call add_concept_answer(@concept_id, @child45_concept_id, 45);
+        call add_concept_answer(@concept_id, @child46_concept_id, 46);
+        call add_concept_answer(@concept_id, @child47_concept_id, 47);
+        call add_concept_answer(@concept_id, @child48_concept_id, 48);
+        call add_concept_answer(@concept_id, @child49_concept_id, 49);
+        call add_concept_answer(@concept_id, @child50_concept_id, 50);
+        call add_concept_answer(@concept_id, @child51_concept_id, 51);
+        call add_concept_answer(@concept_id, @child52_concept_id, 52);
+        call add_concept_answer(@concept_id, @child53_concept_id, 53);
+        call add_concept_answer(@concept_id, @child54_concept_id, 54);
+        call add_concept_answer(@concept_id, @child55_concept_id, 55);
+        call add_concept_answer(@concept_id, @child56_concept_id, 56);
+        call add_concept_answer(@concept_id, @child57_concept_id, 57);
+    </sql>
+</changeSet>
+    <changeSet id="OCB-CONFIG-20180516515" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                where cs.concept_id IN (select concept_id from concept_name where name IN
+                ('Fds, Diagnostic') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Syndrome et Diagnostic');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding set member Fds Diagnostic to Formulaire de sortie Form</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member2_concept_id = 0;
+            set @sort_weight = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Syndrome et Diagnostic' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member1_concept_id from concept_name where name = "Fds, Diagnostic" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = "Diagnostic" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select sort_weight into @sort_weight from concept_set where concept_id = @member2_concept_id and concept_set = @concept_id;
+            update concept_set set concept_id = @member1_concept_id where concept_set =  @concept_id and sort_weight = @sort_weight;
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

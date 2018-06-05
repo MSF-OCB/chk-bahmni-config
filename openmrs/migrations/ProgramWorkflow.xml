@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="OCB-CONFIG-201806051647" author="Sudhamsh">
+
+    <comment>Adding Program Workflow for TB</comment>
+    <sql>
+        insert into program_workflow (program_id , concept_id , creator , date_created , retired , uuid) values
+        ((select program_id from program where name='Programme TB'), (select concept_id from concept_name where name = "TB Program Workflow" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0), 1, now(),0, uuid());
+    </sql>
+</changeSet>
+    <changeSet id="OCB-CONFIG-201806051734" author="Sudhamsh">
+
+        <comment>Adding Program states for TB Workflow</comment>
+        <sql>
+            select concept_id into @concept_id from concept_name where name = "TB Program Workflow" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            insert into program_workflow_state (program_workflow_id,concept_id,initial,terminal,creator,date_created,retired ,uuid) values
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "Intensive(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid()),
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "Entretien(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid());
+        </sql>
+    </changeSet>
+
+    <changeSet id="OCB-CONFIG-201806051747" author="Sudhamsh">
+        <comment>Adding Fds Diagnostic concept</comment>
+        <sql>
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'ARV Program Workflow','ARV Program Workflow','N/A','Misc',TRUE);
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201806051753" author="Sudhamsh">
+        <comment>Adding Program Workflow for ARV</comment>
+        <sql>
+            insert into program_workflow (program_id , concept_id , creator , date_created , retired , uuid) values
+            ((select program_id from program where name='Programme ARV'), (select concept_id from concept_name where name = "ARV Program Workflow" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0), 1, now(),0, uuid());
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201806051757" author="Sudhamsh">
+
+        <comment>Adding Program states for ARV Workflow</comment>
+        <sql>
+            select concept_id into @concept_id from concept_name where name = "ARV Program Workflow" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            insert into program_workflow_state (program_workflow_id,concept_id,initial,terminal,creator,date_created,retired ,uuid) values
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "1ere" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid()),
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "2e" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid()),
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "3e" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid()),
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "1ere alternative" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid()),
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "2e alternative" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid()),
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "3e alternative" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid()),
+            ((select program_workflow_id from program_workflow where concept_id=@concept_id),(select concept_id from concept_name where name = "autres" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),0,0,1,now(),0,uuid());
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201806051842" author="Sudhamsh">
+
+        <comment>Removing Program States</comment>
+        <sql>
+            delete from program_attribute_type where name IN ('Program States for TB','ARV Line(Programme)');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201806051849" author="Sudhamsh">
+
+        <comment>Updating  Program States names</comment>
+        <sql>
+            update concept_name set name = "Intensive" where name = "Intensive(ARV)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Entretien" where name = "Entretien(ARV)" and concept_name_type = 'SHORT' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Intensive" where name = "Intensive(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Entretien" where name = "Entretien(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            update concept_name set name = "Intensive" where name = "Intensive(ARV)" and concept_name_type = 'SHORT' and locale = 'en' and voided = 0;
+            update concept_name set name = "Entretien" where name = "Entretien(ARV)" and concept_name_type = 'SHORT' and locale = 'en' and voided = 0;
+            update concept_name set name = "Intensive" where name = "Intensive(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'en' and voided = 0;
+            update concept_name set name = "Entretien" where name = "Entretien(ARV)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'en' and voided = 0;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
