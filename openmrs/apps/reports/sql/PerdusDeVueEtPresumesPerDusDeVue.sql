@@ -11,7 +11,7 @@ group_concat( distinct ( case when personAttributeTypeDetails.name="Date entrée
                               then date_format(DATE(personAttributeDetails.value), '%d-%m-%Y')
                               else NULL end )) as "Date entrée cohorte",
 DATE_FORMAT(DATE(A.valueDate),'%d-%m-%Y') AS "Date de RDV",
-CASE WHEN MAX(timestampdiff(DAY,DATE(A.valueDate),'#endDate#')) BETWEEN 7 AND 90 THEN "Présumé perdu de vue"
+CASE WHEN MAX(timestampdiff(DAY,DATE(A.valueDate),'#endDate#')) BETWEEN 4 AND 90 THEN "Présumé perdu de vue"
      WHEN MAX(timestampdiff(DAY,DATE(A.valueDate),'#endDate#')) > 90 THEN "Perdu de vu"
      ELSE NULL END AS "Type de pérdu de vue",
 group_concat( distinct ( case when personAttributeTypeDetails.name="Tel 1" then personAttributeDetails.value else NULL end )) as "Telephone",
@@ -69,6 +69,6 @@ where
 DATE(A.valueDate) between ('#startDate#')  AND ('#endDate#')
 AND DATE(A.valueDate) > DATE(A.datestarted)
 AND DATE(A.valueDate) < curdate()
-AND datediff('#endDate#',A.valueDate) >= 7
+AND datediff('#endDate#',A.valueDate) >= 4
 
 GROUP BY A.person_id
