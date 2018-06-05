@@ -217,4 +217,23 @@
             Update concept_name set name = "RPEC_Date(form)" where name = "Date" and concept_name_type ="FULLY_SPECIFIED";
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201806052018" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                join concept_name cn
+                on cs.concept_id = cn.concept_id
+                where cs.concept_id IN (select concept_id from concept_name where name in ('Aucun') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Sc, Diagnostic');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding concept Aucun to Sc Diagnostic</comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name='Sc, Diagnostic' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name ='Aucun' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
