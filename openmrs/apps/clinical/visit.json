@@ -395,6 +395,17 @@
                 "displayOrder": 9,
                 "translationKey": "DASHBOARD_TITLE_DIAGNOSTIC"
             },
+            "Autre": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Autre(si le diagnostic n'est pas listé)"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 9,
+                "translationKey": "DASHBOARD_TITLE_AUTRE_DIAGNOSTIC"
+            },
             "Conduite à tenir": {
                 "type": "observation",
                 "config": {
