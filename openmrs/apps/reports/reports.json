@@ -89,6 +89,14 @@
     "config": {
       "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/ConsultationsOPD.sql"
     }
-  }   
-
+  } ,
+"IPD/EPDInfo": {
+      "name": "IPD EPI info",
+      "type": "MRSGeneric",
+      "config": {
+        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/IPDEPI_report.sql"
+      }
 }
+}  
+
+
