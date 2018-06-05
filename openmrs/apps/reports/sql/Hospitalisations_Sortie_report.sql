@@ -238,7 +238,8 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
             NULL AS C2,
             NULL AS C3,
             Case when (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded) = 'Autres' 
-            Then (Select obsForOthers.value_text from obs obsForOthers where obsForOthers.obs_group_id = obsForActivityStatus.obs_group_id and obsForOthers.concept_id = 842 and obsForOthers.voided = 0  )
+            Then (Select obsForOthers.value_text from obs obsForOthers where obsForOthers.obs_group_id = obsForActivityStatus.obs_group_id and obsForOthers.concept_id = (
+            select concept_id from concept_name where name ='Si autre, preciser' and locale='fr' and concept_name_type='FULLY_SPECIFIED') and obsForOthers.voided = 0  )
             ELSE
             (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
              END As 'C4',
@@ -313,7 +314,7 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
                                                     INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
                                                     Left Join obs toGetAdmissionDateTime
                                                     on toGetAdmissionDateTime.obs_group_id = obsForActivityStatus.obs_group_id
-                                                    And toGetAdmissionDateTime.concept_id = 1938
+                                                    And toGetAdmissionDateTime.concept_id = (select concept_id from concept_name where name='IPD Admission, Date admission' and locale='fr' and concept_name_type='FULLY_SPECIFIED')
                                                     AND toGetAdmissionDateTime.voided = 0
                                                       Where obsForActivityStatus.concept_id in (
                                                                                                 select
@@ -355,7 +356,8 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
                                                     INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
                                                     Left Join obs toGetAdmissionDateTime
                                                     on toGetAdmissionDateTime.obs_group_id = obsForActivityStatus.obs_group_id
-                                                    And toGetAdmissionDateTime.concept_id = 1938
+                                                    And toGetAdmissionDateTime.concept_id = (select concept_id from concept_name where name ='IPD Admission, Date admission'
+                                                    and locale='fr' and concept_name_type='FULLY_SPECIFIED')
                                                     AND toGetAdmissionDateTime.voided = 0
                                                       Where obsForActivityStatus.concept_id in (
                                                                                                 select
@@ -425,7 +427,8 @@ patientOtherDetails.DateresultatCV as "Date resultat CV"
                             NULL AS 'D2',
                             NULL AS 'C5',
                             Case when (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded) = 'Autres' 
-                            Then (Select obsForOthers.value_text from obs obsForOthers where obsForOthers.obs_group_id = obsForActivityStatus.obs_group_id and obsForOthers.concept_id = 842 and obsForOthers.voided = 0  ) ELSE (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded) END As 'C6',
+                            Then (Select obsForOthers.value_text from obs obsForOthers where obsForOthers.obs_group_id = obsForActivityStatus.obs_group_id and obsForOthers.concept_id = (select concept_id from concept_name where name ='Si autre, preciser' and locale='fr' 
+                            and concept_name_type='FULLY_SPECIFIED') and obsForOthers.voided = 0  ) ELSE (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded) END As 'C6',
                             NULL AS C7,
                              Date(obsForActivityStatus.obs_datetime) as 'ObsDate'
 
@@ -497,5 +500,5 @@ Inner Join (
              ) As patientDateOfAdmission
              On patientDateOfAdmission.personid = patientOtherDetails.person_id
 and patientOtherDetails.dateResultCD4 = patientDateOfAdmission.obsDate
-Where patientOtherDetails.DateDeSortie between DATE('#startDate#') AND Date('#endDate#')
+Where patientOtherDetails.DateDeSortie between DATE(#startDate#) AND Date(#endDate#)
 Order by patientDateOfAdmission.AdmissionDate,IDPatient;
