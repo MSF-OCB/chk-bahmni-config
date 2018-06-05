@@ -1,5 +1,5 @@
 
-Select patientDetails.person_id, patientDetails.IDPatient as "ID Patient",
+Select  patientDetails.IDPatient as "ID Patient",
 patientDetails.TypeCohorte as "Type de  Cohorte",
 date(admdate.name) as "Date d'admission",
 patientDetails.Nom,
