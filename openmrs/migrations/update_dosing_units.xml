@@ -171,5 +171,25 @@
             update drug set dosage_form = (select concept_id from concept_name where name = "comprimé"  and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0) where name =  "FLUOXETINE chlorhydrate, éq. 20 mg base, gél.";
         </sql>
         </changeSet>
+    <changeSet id="OCB-CONFIG-2018062215" author="Sudhamsh">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select COUNT(*) from concept_set cs
+                where cs.concept_id IN (select concept_id from concept_name where name IN ('puff') AND concept_name_type = "FULLY_SPECIFIED")
+                and cs.concept_set IN (select concept_id from concept_name where name = 'Drug Routes');
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding new dosing units</comment>
+        <sql>
+            call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"puff","puff", 'N/A','Misc', FALSE);
+
+            select max(sort_weight) into @weight from concept_answer where concept_id = (select concept_id from concept_name where name = 'Drug Routes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+            select concept_id into @concept_id from concept_name where name = 'Drug Routes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name =  "puff" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, @weight+1);
+        </sql>
+    </changeSet>
 
         </databaseChangeLog>

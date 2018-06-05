@@ -140,6 +140,7 @@
   "DASHBOARD_TITLE_PARACLINIC" : "Paraclinique",
   "DASHBOARD_TITLE_ECOGRAPHIE" :"Ecographie",
   "DASHBOARD_TITLE_DIAGNOSTIC" :"Diagnostic",
+  "DASHBOARD_TITLE_AUTRE_DIAGNOSTIC" : "Autre(si le diagnostic n'est pas listé)",
   "DASHBOARD_TITLE_CONDUITE_A_TENIR" : "Conduite à tenir",
   "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES" : "Infections Opportunistes",
   "DASHBOARD_TITLE_INFORMATIONS_PROPHYLAXIE" : "Informations Prophylaxie",

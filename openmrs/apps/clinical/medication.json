@@ -122,6 +122,50 @@
           "Géllule (Prefusion)": {
             "doseUnits": "Géllule (Prefusion)",
             "route": "Perfusion"
+          },
+          "application" : {
+            "doseUnits": "application",
+            "route": "application locale"
+          },
+          "boite" : {
+            "doseUnits": "boite",
+            "route": "application locale"
+          },
+          "ml": {
+            "doseUnits": "ml",
+            "route": "Orale"
+          },
+          "capsule": {
+            "doseUnits": "capsule",
+            "route": "orale"
+          },
+          "gélule" : {
+            "doseUnits": "gélule",
+            "route": "orale"
+          },
+          "bouffée": {
+            "doseUnits": "bouffée",
+            "route": "puff"
+          },
+          "mg" : {
+            "doseUnits": "mg",
+            "route": "injectable"
+          },
+          "ui" : {
+            "doseUnits": "ui",
+            "route": "injectable"
+          },
+          "implant": {
+            "doseUnits": "implant",
+            "route": "injectable"
+          },
+          "dose": {
+            "doseUnits": "dose",
+            "route": "injectable"
+          },
+          "g": {
+            "doseUnits": "g",
+            "route": "orale"
           }
 
         }

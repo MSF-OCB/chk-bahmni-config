@@ -901,6 +901,20 @@
         "displayOrder": 9,
         "translationKey": "DASHBOARD_TITLE_DIAGNOSTIC"
       },
+      "Autre": {
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "Autre(si le diagnostic n'est pas listé)"
+          ]
+        },
+        "displayOrder": 9,
+        "translationKey": "DASHBOARD_TITLE_AUTRE_DIAGNOSTIC"
+      },
       "Conduite à tenir": {
         "type": "vitals",
         "isObservation": true,
