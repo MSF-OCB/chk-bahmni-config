@@ -1097,4 +1097,4 @@ from person p
                                        ON test_obs.encounter_id = e.encounter_id
                                GROUP BY v.visit_id) latest_obs_test
                        ON latest_obs_test.test_obsDateTime = o.obs_datetime AND latest_obs_test.visit_id = v.visit_id) tblam ON tblam.person_id = v.patient_id AND tblam.visit_id = v.visit_id
-where v.date_created BETWEEN '#startDate#' AND '#endDate#' group by v.visit_id;
+where  date(v.date_created) between '#startDate#' AND '#endDate#'  group by v.visit_id;
