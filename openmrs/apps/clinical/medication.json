@@ -135,13 +135,13 @@
             "doseUnits": "ml",
             "route": "Orale"
           },
-          "capsule": {
-            "doseUnits": "capsule",
-            "route": "orale"
+          "Capsule": {
+            "doseUnits": "Capsule",
+            "route": "Orale"
           },
           "gélule" : {
             "doseUnits": "gélule",
-            "route": "orale"
+            "route": "Orale"
           },
           "bouffée": {
             "doseUnits": "bouffée",
@@ -159,13 +159,17 @@
             "doseUnits": "implant",
             "route": "injectable"
           },
-          "dose": {
-            "doseUnits": "dose",
+          "Dose": {
+            "doseUnits": "Dose",
             "route": "injectable"
           },
           "g": {
             "doseUnits": "g",
             "route": "orale"
+          },
+          "goutte": {
+            "doseUnits": "goutte",
+            "route": "application locale"
           }
 
         }
