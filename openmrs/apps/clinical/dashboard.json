@@ -595,10 +595,10 @@
         "isObservation": true,
         "type": "vitals",
         "displayOrder": 0,
-        "numberOfVisits": 1,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
             "RPEC_Date(form)",
             "Suivi Clinique",
@@ -625,10 +625,10 @@
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC",
         "displayOrder": 2,
-        "numberOfVisits": 1,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
             "Syndrome",
             "Fds, Diagnostic"
@@ -936,9 +936,9 @@
         "translationKey": "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES",
         "displayOrder": 11,
         "displayType": "Full-Page",
-        "numberOfVisits": 1,
         "dashboardConfig": {
           "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
             "Infections Opportunistes",
             "Status IO"
@@ -951,9 +951,9 @@
         "translationKey": "DASHBOARD_TITLE_INFORMATIONS_PROPHYLAXIE",
         "displayOrder": 12,
         "displayType": "Full-Page",
-        "numberOfVisits": 1,
         "dashboardConfig": {
           "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
             "Prophylaxie",
             "Date Debut Prophylaxie"
