@@ -194,7 +194,7 @@
                 "displayOrder" : 0,
                 "config": {
                     "conceptNames": [
-                        "RPEC_Date",
+                        "RPEC_Date(form)",
                         "Suivi Clinique",
                         "Diagnostic"
                     ],
