@@ -1,6 +1,6 @@
 Bahmni.ConceptSet.FormConditions.rules = {
-  'Syndrome d\'admission' : function (formName, formFieldValues) {
-       var synAdmission = formFieldValues['Syndrome d\'admission'];
+  "Syndrome d'admission" : function (formName, formFieldValues) {
+       var synAdmission = formFieldValues["Syndrome d'admission"];
 
        if (synAdmission =="Autres") {
            return {
