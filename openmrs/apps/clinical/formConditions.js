@@ -2,7 +2,7 @@ Bahmni.ConceptSet.FormConditions.rules = {
   "Syndrome d'admission" : function (formName, formFieldValues) {
        var synAdmission = formFieldValues["Syndrome d'admission"];
 
-       if (synAdmission =="Autres") {
+       if (synAdmission =="Autres(IPDForm)" || synAdmission =="Autres") {
            return {
                enable: ["Si autre, preciser"]
            }
