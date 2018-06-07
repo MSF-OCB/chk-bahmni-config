@@ -1,3 +1,4 @@
+
 select
   
     pi.identifier                                   AS `ID Patient`,
@@ -6,24 +7,24 @@ select
     CONCAT(pn.family_name,' ', pn.given_name)           AS `Nom`,
     floor(DATEDIFF(CURDATE(), p.birthdate) / 365)   AS `Age`,
     p.gender                                        AS `Sexe`,
-    v.date_started                                  AS `Date de visite`,
-    prochainEncounter.value_datetime                AS `Date prochain RDV`,
-    diagnosticEncounter.value_datetime              AS `Hist - Date diagnostic ARV`,
+    date(v.date_started)                                  AS `Date de visite`,
+    date(prochainEncounter.value_datetime)                AS `Date prochain RDV`,
+    date(diagnosticEncounter.value_datetime)              AS `Hist - Date diagnostic ARV`,
     regimeDebutLigne.name                           AS `Hist - Ligne ARV début`,
-    regimeDebutDate.value_datetime                  AS `Hist - Date début Régime`,
+    date(regimeDebutDate.value_datetime)                  AS `Hist - Date début Régime`,
     regimeDebutARV.name                             AS `Hist - Régime ARV début`,
     regimeActualLigne.name                          AS `Hist - Ligne ARV actuel`,
-    regimeActualDate.value_datetime                 AS `Hist - Date début Régime actuel`,
+    date(regimeActualDate.value_datetime)                 AS `Hist - Date début Régime actuel`,
     regimeActualARV.name                            AS `Hist - Régime ARV actuel`,
     prophylaxieInfo.name                            AS `Hist - Prophylaxie`,
-    arvProgram.arvStartDate                         AS `Date début ARV`,
+    date(arvprogram.enrolledDate)                       AS `Date début ARV`,
     regimeDebut.name                                AS `Régime début`,
     regimeActual.name                               AS `Régime actuel`,
-    arvProgram.arvLine                              AS `Ligne ARV actuelle`,
+    arvprogram.value                            AS `Ligne ARV actuelle`,
     stadeOMS.name                                   AS `Stade OMS`,
     taille.value_numeric                            AS `Taille`,
     poids.value_numeric                             AS `Poids`,
-    diagnostic.name                                 AS `Diagnostic`,
+    group_concat(distinct (diagnostic.S1),'')                               AS `Diagnostic`,
     tenir.name                                      AS `Observations et conduite à tenir`,
     infections.name                                 AS `Infections opportunistes`,
     tbProgram.tbType                                AS `Type de TB`,
@@ -35,10 +36,10 @@ select
     cv.value                                        AS `CV`,
     hemoglobin.value                                AS `Hemoglobine`,
     glyceme.value                                   AS `Glycémie`,
-    creatinine.value                                AS `Créatinine`,
+    ct.value                                AS `Créatinine`,
     gpt.value                                       AS `GPT`,
     tblam.value                                     AS `TB LAM`,
-    drugs.name                                      AS `Traitement`,
+    group_concat(distinct(drugs.name) ,'')                                      AS `Traitement`,
     effects1.name                                   AS `Effets secondaires 1`,
     effects2.name                                   AS `Effets secondaires 2`,
     effects3.name                                   AS `Effets secondaires 3`
@@ -353,21 +354,19 @@ from person p
                    latestConceptFillInfoForProphylaxie.concept_id,
                    latestConceptFillInfoForProphylaxie.latestVisit
               ) prophylaxieInfo on prophylaxieInfo.patient_id = v.patient_id and prophylaxieInfo.latestVisit = v.visit_id
-    LEFT JOIN (SELECT
-                   pp.patient_id,
-                   pp.date_enrolled         AS  `arvStartDate`,
-                   ppcn.name                AS `arvLine`
-               from patient_program pp
-                   INNER JOIN program p ON pp.program_id = p.program_id AND p.retired IS FALSE AND date_completed IS NULL AND voided IS FALSE
-                   INNER JOIN concept_name cn ON p.concept_id = cn.concept_id AND cn.name = 'Programme ARV'
-                                                 AND cn.voided IS FALSE AND cn.concept_name_type='FULLY_SPECIFIED'
-                                                 AND cn.locale = 'fr'
-                   INNER JOIN patient_program_attribute ppa ON ppa.patient_program_id = pp.patient_program_id AND ppa.voided IS FALSE
-                   INNER JOIN program_attribute_type pat ON ppa.attribute_type_id = pat.program_attribute_type_id AND pat.retired IS FALSE
-                                                            AND pat.name = 'ARV Line(Programme)'
-                   INNER JOIN concept_name ppcn ON ppa.value_reference = ppcn.concept_id AND ppcn.concept_name_type='SHORT'
-                                                   AND ppcn.locale = 'fr'
-              ) arvProgram on arvProgram.patient_id = p.person_id
+    LEFT JOIN (  select pp.patient_id,pp.date_enrolled as enrolledDate,p.name as Pname ,cn.name as value,vt.visit_id as visitid from patient_program pp
+                                                   inner join program p on pp.program_id=p.program_id and p.retired is false and date_completed is null and voided is false
+                                                   and p.name ='Programme ARV'
+                                                   
+                                                   inner join program_workflow pw on pw.program_id=pp.program_id
+                                                   inner join program_workflow_state pws on pws.program_workflow_id=pw.program_workflow_id
+                                                   inner join patient_state ps on ps.patient_program_id=pp.patient_program_id and ps.state=pws.program_workflow_state_id
+                                                   and ps.voided=0 and ps.end_date is null
+                                                   inner join concept_name cn on cn.concept_id=pws.concept_id
+                                                   inner join visit vt on vt.patient_id=pp.patient_id
+                                                   
+                                     
+                                                   )as arvprogram on arvprogram.patient_id=p.person_id and arvprogram.visitid=v.visit_id
     LEFT JOIN (select
                    o.person_id,
                    latestEncounter.visit_id,
@@ -464,49 +463,41 @@ from person p
                                GROUP BY e.visit_id) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime AND
                                                                        o.concept_id = latestEncounter.concept_id
               ) poids on poids.person_id = v.patient_id and poids.visit_id = v.visit_id
-    LEFT JOIN (select
-                   latestConceptsFilled.patient_id,
-                   latestConceptsFilled.concept_id,
-                   latestConceptsFilled.latestVisit,
-                   group_concat(answer.name) AS name
-               from
-                   (
-                       select
-                           e.patient_id,
-                           ligneArvInfo.concept_id,
-                           MAX(e.encounter_datetime) AS latestEncounterDateTime,
-                           e.visit_id AS latestVisit
-                       from
-                           (select
-                                o.obs_id,
-                                o.obs_group_id,
-                                cn.concept_id,
-                                o.encounter_id
-                            from obs o
-                                inner join concept_name cn on o.concept_id = cn.concept_id and cn.name = 'Sc, Diagnostic' AND cn.voided IS FALSE AND
-                                                              cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr' and o.voided IS FALSE
-                           ) ligneArvInfo
-                           inner join obs o2
-                               on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
-                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Information Diagnostique' AND cn.voided IS FALSE AND
-                                                         cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
-                           inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
-                       GROUP BY e.patient_id, e.visit_id
-                   ) latestConceptsFilled
-                   inner join obs o3 on o3.person_id = latestConceptsFilled.patient_id and
-                                        o3.concept_id = latestConceptsFilled.concept_id and o3.voided is false
-                   inner join obs o4 on o3.obs_group_id = o4.obs_id and o4.person_id = latestConceptsFilled.patient_id and
-                                        o4.voided is false
-                   inner join encounter e2 on o3.encounter_id = e2.encounter_id and e2.encounter_datetime = latestConceptsFilled.latestEncounterDateTime and
-                                              e2.visit_id = latestConceptsFilled.latestVisit and e2.voided is false
-                   inner join concept_name cn on o4.concept_id = cn.concept_id and cn.name = 'Information Diagnostique' AND cn.voided IS FALSE AND
-                                                 cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
-                   inner join concept_name answer on o3.value_coded = answer.concept_id AND answer.voided IS FALSE AND
-                                                     answer.concept_name_type = 'FULLY_SPECIFIED' AND answer.locale = 'fr'
-               group by latestConceptsFilled.patient_id,
-                   latestConceptsFilled.concept_id,
-                   latestConceptsFilled.latestVisit
-              ) diagnostic on diagnostic.patient_id = v.patient_id and diagnostic.latestVisit = v.visit_id
+    LEFT JOIN (
+    SELECT
+  firstAddSectionDateConceptInfo.person_id,
+  firstAddSectionDateConceptInfo.visit_id,
+  o3.value_datetime AS name,
+   (select distinct name from concept_name where concept_id =o3.value_coded and locale='fr' and concept_name_type='FULLY_SPECIFIED') as "S1"
+FROM
+  (SELECT
+     o2.person_id,
+     latestVisitEncounterAndVisitForConcept.visit_id,
+     MIN(o2.obs_id) AS firstAddSectionObsGroupId,
+     latestVisitEncounterAndVisitForConcept.concept_id
+   FROM
+     (SELECT
+        MAX(o.encounter_id) AS latestEncounter,
+        o.person_id,
+        o.concept_id,
+        e.visit_id
+      FROM obs o
+        INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ('Informations Autres diagnostics (Suivi)') AND
+                                      cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
+                                      cn.locale = 'fr' AND o.voided IS FALSE
+        INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
+      GROUP BY e.visit_id) latestVisitEncounterAndVisitForConcept
+     INNER JOIN obs o2 ON o2.person_id = latestVisitEncounterAndVisitForConcept.person_id AND
+                          o2.concept_id = latestVisitEncounterAndVisitForConcept.concept_id AND
+                          o2.encounter_id = latestVisitEncounterAndVisitForConcept.latestEncounter AND o2.voided IS FALSE
+     INNER JOIN encounter e2 ON o2.encounter_id = e2.encounter_id AND e2.visit_id = latestVisitEncounterAndVisitForConcept.visit_id AND
+                                e2.voided IS FALSE
+   GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
+  INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
+  INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Sc, Diagnostic') AND
+                                 cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as diagnostic on diagnostic.person_id=v.patient_id
+                                 and  diagnostic.visit_id=v.visit_id
+                     
     LEFT JOIN (select
                    latestConceptFillInfoForTenir.patient_id,
                    latestConceptFillInfoForTenir.concept_id,
@@ -602,29 +593,19 @@ from person p
                                                   AND ppcn.locale = 'fr'
                GROUP BY pp.patient_id
               ) tbProgram on tbProgram.patient_id = p.person_id
-    LEFT JOIN (SELECT e.patient_id,
-                   e.encounter_id,
-                   e.visit_id,
-                   group_concat(orderedDrugs.name) AS name
-               FROM encounter e
-                   INNER JOIN (SELECT
-                                   visit_id,
-                                   patient_id,
-                                   max(encounter_datetime) AS  `datetime`
-                               from encounter
-                               GROUP BY visit_id, patient_id) latestEncounter ON latestEncounter.datetime = e.encounter_datetime
-                                                                                 AND latestEncounter.patient_id = e.patient_id
-                                                                                 AND latestEncounter.visit_id = e.visit_id AND e.voided IS FALSE
-                   LEFT JOIN (SELECT
+    LEFT JOIN 
+    (
+    SELECT
                                   o.encounter_id,
-                                  o.patient_id,
-                                  drug.name
+                                  o.patient_id as patientid,
+                                  drug.name as name,
+                                  visit_id as visitid
                               from orders o
                                   INNER JOIN drug_order ON drug_order.order_id = o.order_id AND o.voided IS FALSE
-                                  INNER JOIN drug ON drug_order.drug_inventory_id = drug.drug_id AND drug.retired IS FALSE) orderedDrugs
-                       ON orderedDrugs.patient_id = e.patient_id AND orderedDrugs.encounter_id = e.encounter_id
-               GROUP BY e.patient_id, e.encounter_id, e.visit_id
-              ) drugs on drugs.patient_id = v.patient_id and drugs.visit_id = v.visit_id
+                                  INNER JOIN drug ON drug_order.drug_inventory_id = drug.drug_id AND drug.retired IS FALSE
+                                  inner join visit v on v.patient_id=o.patient_id
+                                  
+    ) as drugs on drugs.patientid=p.person_id and drugs.visitid=v.visit_id
     LEFT JOIN (SELECT
                    firstAddSection.patient_id,
                    firstAddSection.latestVisit,
@@ -1009,7 +990,8 @@ from person p
                FROM obs o INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND o.voided IS FALSE AND e.voided IS FALSE
                    INNER JOIN visit v ON v.visit_id = e.visit_id AND v.voided IS FALSE
                    INNER JOIN concept_view cv ON cv.concept_id = o.concept_id AND cv.retired IS FALSE AND
-                                                 cv.concept_full_name IN ('Créatinine(Bilan de routine IPD)','	Creatinine')
+                                                 cv.concept_full_name in('Créatinine(Bilan de routine IPD)','Creatinine')
+                                                 
                                                  AND o.value_numeric IS NOT NULL
                    INNER JOIN (SELECT
                                    v.visit_id,
@@ -1026,10 +1008,11 @@ from person p
                                             o.concept_id
                                         FROM obs o INNER JOIN concept_view cv_test
                                                 ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND cv_test.retired IS FALSE AND
-                                                   cv_test.concept_full_name IN ('Créatinine(Bilan de routine IPD)','	Creatinine') AND o.value_numeric IS NOT NULL)) test_obs
+                                                   cv_test.concept_full_name in ('Créatinine(Bilan de routine IPD)','Creatinine')
+                                                    AND o.value_numeric IS NOT NULL)) test_obs
                                        ON test_obs.encounter_id = e.encounter_id
-                               GROUP BY v.visit_id) latest_obs_test
-                       ON latest_obs_test.test_obsDateTime = o.obs_datetime AND latest_obs_test.visit_id = v.visit_id) creatinine ON creatinine.person_id = v.patient_id AND creatinine.visit_id = v.visit_id
+                               GROUP BY v.visit_id) as creatine) as ct on ct.person_id=p.person_id and ct.visit_id=v.visit_id
+                      
     LEFT JOIN (SELECT
                    o.person_id,
                    v.visit_id,
@@ -1097,4 +1080,4 @@ from person p
                                        ON test_obs.encounter_id = e.encounter_id
                                GROUP BY v.visit_id) latest_obs_test
                        ON latest_obs_test.test_obsDateTime = o.obs_datetime AND latest_obs_test.visit_id = v.visit_id) tblam ON tblam.person_id = v.patient_id AND tblam.visit_id = v.visit_id
-where  date(v.date_created) between '#startDate#' AND '#endDate#'  group by v.visit_id;
+where  date(v.date_created) between '#startDate#' AND '#endDate#'  group by v.visit_id  ;
