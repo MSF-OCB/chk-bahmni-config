@@ -52,6 +52,7 @@
 
         <comment>Removing Program States</comment>
         <sql>
+            delete  from patient_program_attribute where attribute_type_id in (select program_attribute_type_id from program_attribute_type where name in ('ARV Line(Programme)','Program States for TB'));
             delete from program_attribute_type where name IN ('Program States for TB','ARV Line(Programme)');
         </sql>
     </changeSet>
