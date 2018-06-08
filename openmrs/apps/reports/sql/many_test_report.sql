@@ -195,7 +195,7 @@ FROM
                                                    WHEN tname ='Globules Blancs' then tvalue
                                                END AS GBLANCS,
 
-                                               CASE WHEN tname='Malaria' then tvalue
+                                               CASE WHEN tname='TDR - Malaria' then tvalue
                                                END AS MALARIA
 
 
@@ -242,7 +242,7 @@ FROM
             'Microscopie TB - Recherche de BAAR (Pleural)','Microscopie TB - Recherche de BAAR (Crachat)','Microscopie TB - Recherche de BAAR (LCR-TB)',
             'Microscopie TB - Recherche de BAAR (LCR)','Microscopie TB - Recherche de BAAR (Urine)','Proteinorachie (test de Pandy)',
             'FL - NEUT%','FL - MXD%','FL - LYM%','Rivalta (Ganglionnaire)','Hemoglobine* (Hemocue)','Hemoglobine',
-            'Lactate','Globules Blancs','Syphilis','Malaria','Glycémie')
+            'Lactate','Globules Blancs','Syphilis','TDR - Malaria','Glycémie')
 
        WHERE   a.status_id=6 /*Filtering the result which are validated*/
                        AND sample.accession_number IS NOT NULL
