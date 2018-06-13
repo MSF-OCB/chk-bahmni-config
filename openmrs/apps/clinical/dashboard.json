@@ -433,7 +433,7 @@
             "Syndrome d'admission",
             "Si autre, preciser",
               "Diagnostics à l'admission",
-+            "Diagnostics à l'admission non listé",
+            "Diagnostics à l'admission non listé",
             "Malade arrivé mort"
           ],
           "scope": "latest"
