@@ -308,6 +308,16 @@
       "Prophylaxie":{
         "multiSelect": true
       },
+        "Diagnostics à l'admission":{
+        "autocomplete":true,
+        "multiSelect": true
+      },
+      "Infirmier en charge de l'admission":{
+        "autocomplete":true
+      },
+      "Medecin en charge de l'admission":{
+        "autocomplete":true
+      },
       "Informations autres pathologies":{
         "allowAddMore": true
       }

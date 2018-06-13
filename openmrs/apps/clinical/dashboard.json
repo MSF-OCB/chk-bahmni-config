@@ -431,6 +431,9 @@
             "Référé en IPD par(FOSA)",
             "FOSA de suivi ARV",
             "Syndrome d'admission",
+            "Si autre, preciser",
+              "Diagnostics à l'admission",
++            "Diagnostics à l'admission non listé",
             "Malade arrivé mort"
           ],
           "scope": "latest"
@@ -459,7 +462,7 @@
         "dashboardConfig": {
           "showDetailsButton": false,
           "conceptNames": [
-            "IPD Admission Section, Historique VIH"
+                    "Date diagnostic VIH(Ant)"
           ],
           "scope": "latest"
         }
@@ -515,7 +518,7 @@
         "dashboardConfig": {
           "showDetailsButton": false,
           "conceptNames": [
-            "IPD Admission Section, TB Précédentes"
+            "Traitement TB Antérieur"
           ],
           "scope": "latest"
         }

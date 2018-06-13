@@ -754,7 +754,7 @@ FROM
             o.concept_id,
             e.visit_id 
           FROM obs o
-            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("IPD Admission Section, Historique VIH") AND
+            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Historique ARV") AND
                                           cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
                                           cn.locale = 'fr' AND o.voided IS FALSE
             INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
@@ -766,7 +766,7 @@ FROM
                                     e2.voided IS FALSE
        GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
-      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('IPD Admission, Date diagnostic VIH') AND
+      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Date diagnostic VIH(Ant)') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
 
                   ) as hiv on hiv.person_id=patientDetails.person_id and hiv.visitid=v.visit_id
@@ -1140,7 +1140,7 @@ FROM
                                                             from
                                                               concept_view
                                                             where
-                                                              concept_full_name = "IPD Admission, TB Précédentes?"
+                                                              concept_full_name = "Traitement TB Antérieur"
                                                           )
                   and obsForActivityStatus.value_coded in (
                                                             Select answer_concept from concept_answer where concept_id = 
@@ -1149,7 +1149,7 @@ FROM
                                                             from
                                                               concept_view
                                                             where
-                                                              concept_full_name in ("IPD Admission, TB Précédentes?"))
+                                                              concept_full_name in ("Traitement TB Antérieur"))
                                                               
                                                           ) 
                                                           AND   obsForActivityStatus.voided = 0
@@ -1174,7 +1174,7 @@ FROM
             o.concept_id,
             e.visit_id
           FROM obs o
-            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("IPD Admission Section, TB Précédentes") AND
+            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Informations TB") AND
                                           cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
                                           cn.locale = 'fr' AND o.voided IS FALSE
             INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
@@ -1186,7 +1186,7 @@ FROM
                                     e2.voided IS FALSE
        GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
-      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('IPD Admission, Année') AND
+      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Traitement TB Antérieur') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
 
                   ) as anndate on anndate.person_id=patientDetails.person_id and anndate.visitid=v.visit_id
@@ -1455,7 +1455,7 @@ FROM
     FROM obs oTest
       INNER JOIN encounter et ON et.encounter_id = oTest.encounter_id AND et.voided IS FALSE
       INNER JOIN concept_view cvt
-        ON cvt.concept_id = oTest.concept_id AND cvt.concept_full_name = 'Charge Virale - Value(Bilan de routine IPD)' AND oTest.voided IS FALSE AND
+        ON cvt.concept_id = oTest.concept_id AND cvt.concept_full_name in('Charge Virale - Value(Bilan de routine IPD)','Charge Virale HIV - Value') AND oTest.voided IS FALSE AND
            cvt.retired IS FALSE
     GROUP BY visit_id
     ) as CV on CV.patient_id=patientDetails.person_id and CV.visitid=v.visit_id
@@ -1469,7 +1469,7 @@ FROM
     FROM obs oTest
       INNER JOIN encounter et ON et.encounter_id = oTest.encounter_id AND et.voided IS FALSE
       INNER JOIN concept_view cvt
-        ON cvt.concept_id = oTest.concept_id AND cvt.concept_full_name = 'CD4(Bilan de routine IPD)' AND oTest.voided IS FALSE AND
+        ON cvt.concept_id = oTest.concept_id AND cvt.concept_full_name in('CD4(Bilan de routine IPD)','CD4') AND oTest.voided IS FALSE AND
            cvt.retired IS FALSE
     GROUP BY visit_id
     ) as CD on CD.patient_id=patientDetails.person_id and CD.visitid=v.visit_id
@@ -1540,7 +1540,7 @@ FROM
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("IPD Admission, Date d'admission") AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as admdate on admdate.person_id=
-                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between '#startDate#' and '#endDate#'
+                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between '#startDate#' and '#endDate#
                                      group by v.visit_id,patientDetails.IDPatient;
                                     
                                                                     

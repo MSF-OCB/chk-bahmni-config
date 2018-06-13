@@ -9,7 +9,7 @@ select
     p.gender                                        AS `Sexe`,
     date(v.date_started)                                  AS `Date de visite`,
     date(prochainEncounter.value_datetime)                AS `Date prochain RDV`,
-    date(diagnosticEncounter.value_datetime)              AS `Hist - Date diagnostic ARV`,
+    date(diagnosticEncounter.value_datetime)              AS `Hist - Date diagnostic VIH`,
     regimeDebutLigne.name                           AS `Hist - Ligne ARV début`,
     date(regimeDebutDate.value_datetime)                  AS `Hist - Date début Régime`,
     regimeDebutARV.name                             AS `Hist - Régime ARV début`,
@@ -87,7 +87,7 @@ from person p
                                    cn.concept_id
                                from obs o
                                    INNER join concept_name cn
-                                       on o.concept_id = cn.concept_id and cn.name = 'Date diagnostic ARV' AND cn.voided IS FALSE AND
+                                       on o.concept_id = cn.concept_id and cn.name = 'Date diagnostic VIH(Ant)' AND cn.voided IS FALSE AND
                                           cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr' and o.voided IS FALSE
                                    INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE
                                GROUP BY e.visit_id) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime AND
