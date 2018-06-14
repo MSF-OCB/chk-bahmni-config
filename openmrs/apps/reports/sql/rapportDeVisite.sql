@@ -19,8 +19,8 @@ SELECT
   ELSE NULL END                                 AS 'Nouvelle visite',
   consultant_name.names                         AS 'Consultant',
   prev_appt_date.value_datetime                 AS 'Date de rendez-vous',
-  DATE(v.date_started)                          AS 'Date debut visite',
-  DATE(v.date_stopped)                          AS 'Date fin visite'
+  DATE_FORMAT(v.date_started,"%d/%m/%Y")                          AS 'Date debut visite',
+  DATE_FORMAT(v.date_stopped,"%d/%m/%Y")                          AS 'Date fin visite' 
 FROM visit v
   INNER JOIN visit_type vt ON vt.visit_type_id = v.visit_type_id AND vt.retired IS FALSE
   INNER JOIN patient_identifier pi ON pi.patient_id = v.patient_id AND pi.voided IS FALSE

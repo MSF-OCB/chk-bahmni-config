@@ -15,7 +15,7 @@ Select
     MotifdébutTraitement AS "Motif début TB",
     TBType AS "Type TB",
     date_format(ARVStartDate,'%d-%m-%Y') AS "Date début ARV",
-    Date(LabTestDate) "Date resultats",
+    DATE_FORMAT(LabTestDate,"%d/%m/%Y") "Date resultats",
     max(Genexpertresult) AS "Résultats Genexpert",
     max(TBLam) AS "Resultats TB-LAM"
 from (

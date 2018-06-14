@@ -1112,15 +1112,17 @@ FROM
                   left join
                   (
                   
-                  select  obsForActivityStatus.person_id,
+                 select  obsForActivityStatus.person_id,
                     NULL AS 'AdmissionDate',
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
+                 
                 
-                
-                (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
-                  As 'C4',
+                case when ((Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)="Premier episode") then 'Oui' 
+                when ((Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)="Traité précédemment") then 'Non'
+                 else null 
+                  end As 'C4',
                  NULL AS 'D1',
                  NULL AS 'D2',
                  NULL AS C5,
@@ -1153,6 +1155,8 @@ FROM
                                                               
                                                           ) 
                                                           AND   obsForActivityStatus.voided = 0
+                                                          
+                                                          
                   )as tbpre on tbpre.person_id=patientDetails.person_id and tbpre.visitid=v.visit_id
                   
                   left join
@@ -1540,7 +1544,7 @@ FROM
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("IPD Admission, Date d'admission") AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as admdate on admdate.person_id=
-                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between '#startDate#' and '#endDate#
+                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between '#startDate#' and '#endDate#'
                                      group by v.visit_id,patientDetails.IDPatient;
                                     
                                                                     
