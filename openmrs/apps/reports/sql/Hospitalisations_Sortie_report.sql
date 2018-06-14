@@ -572,6 +572,6 @@ Inner Join (
 
              On patientDateOfAdmission.personid = patientOtherDetails.person_id
 and patientOtherDetails.dateResultCD4 = patientDateOfAdmission.obsDate
-Where patientOtherDetails.DateDeSortie between DATE(#startDate#) AND Date(#endDate#)
+Where patientOtherDetails.DateDeSortie between DATE('#startDate#') AND Date('#endDate#')
 Order by patientDateOfAdmission.AdmissionDate,IDPatient;
 
