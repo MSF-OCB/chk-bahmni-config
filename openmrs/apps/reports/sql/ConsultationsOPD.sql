@@ -7,17 +7,17 @@ select
     CONCAT(pn.family_name,' ', pn.given_name)           AS `Nom`,
     floor(DATEDIFF(CURDATE(), p.birthdate) / 365)   AS `Age`,
     p.gender                                        AS `Sexe`,
-    date(v.date_started)                                  AS `Date de visite`,
-    date(prochainEncounter.value_datetime)                AS `Date prochain RDV`,
-    date(diagnosticEncounter.value_datetime)              AS `Hist - Date diagnostic VIH`,
+    date_format(v.date_started, '%m/%d/%y')                                  AS `Date de visite`,
+    date_format(prochainEncounter.value_datetime,'%m/%d/%y')                AS `Date prochain RDV`,
+    date_format(diagnosticEncounter.value_datetime,'%m/%d/%y')              AS `Hist - Date diagnostic VIH`,
     regimeDebutLigne.name                           AS `Hist - Ligne ARV début`,
-    date(regimeDebutDate.value_datetime)                  AS `Hist - Date début Régime`,
+    date_format(regimeDebutDate.value_datetime,'%m/%d/%y')                  AS `Hist - Date début Régime`,
     regimeDebutARV.name                             AS `Hist - Régime ARV début`,
     regimeActualLigne.name                          AS `Hist - Ligne ARV actuel`,
-    date(regimeActualDate.value_datetime)                 AS `Hist - Date début Régime actuel`,
+    date_format(regimeActualDate.value_datetime,'%m/%d/%y')                 AS `Hist - Date début Régime actuel`,
     regimeActualARV.name                            AS `Hist - Régime ARV actuel`,
     prophylaxieInfo.name                            AS `Hist - Prophylaxie`,
-    date(arvprogram.enrolledDate)                       AS `Date début ARV`,
+    date_format(arvprogram.enrolledDate,'%m/%d/%y')                       AS `Date début ARV`,
     regimeDebut.name                                AS `Régime début`,
     regimeActual.name                               AS `Régime actuel`,
     arvprogram.value                            AS `Ligne ARV actuelle`,
@@ -29,8 +29,8 @@ select
     infections.name                                 AS `Infections opportunistes`,
     tbProgram.tbType                                AS `Type de TB`,
     tbProgram.siteTEP                               AS `Site TB`,
-    tbProgram.tbStartDate                           AS `Date début Traitement`,
-    tbProgram.endDate                               AS `Date fin traitement`,
+    date_format(tbProgram.tbStartDate,'%m/%d/%y')                           AS `Date début Traitement`,
+    Date_format(tbProgram.endDate,'%m/%d/%y')                               AS `Date fin traitement`,
     tbProgram.reason                                AS `Motif début traitement TB`,
     cd4.value                                       AS `CD4`,
     cv.value                                        AS `CV`,
@@ -354,18 +354,35 @@ from person p
                    latestConceptFillInfoForProphylaxie.concept_id,
                    latestConceptFillInfoForProphylaxie.latestVisit
               ) prophylaxieInfo on prophylaxieInfo.patient_id = v.patient_id and prophylaxieInfo.latestVisit = v.visit_id
-    LEFT JOIN (  select pp.patient_id,pp.date_enrolled as enrolledDate,p.name as Pname ,cn.name as value,vt.visit_id as visitid from patient_program pp
-                                                   inner join program p on pp.program_id=p.program_id and p.retired is false and date_completed is null and voided is false
-                                                   and p.name ='Programme ARV'
-                                                   
-                                                   inner join program_workflow pw on pw.program_id=pp.program_id
-                                                   inner join program_workflow_state pws on pws.program_workflow_id=pw.program_workflow_id
-                                                   inner join patient_state ps on ps.patient_program_id=pp.patient_program_id and ps.state=pws.program_workflow_state_id
-                                                   and ps.voided=0 and ps.end_date is null
-                                                   inner join concept_name cn on cn.concept_id=pws.concept_id
-                                                   inner join visit vt on vt.patient_id=pp.patient_id
-                                                   
-                                     
+    LEFT JOIN ( 
+    SELECT
+    pp.patient_id,
+    pp.date_enrolled AS enrolledDate,
+    p.name           AS Pname,
+    cn.name          AS value,
+    vt.visit_id      AS visitid
+FROM patient_program pp
+    INNER JOIN
+    (SELECT
+         ARV_prog.patient_id,
+         max(ARV_prog.date_enrolled) AS date_enrolled
+     FROM (SELECT
+               pp.patient_id,
+               pp.program_id,
+               pp.date_enrolled
+           FROM patient_program pp INNER JOIN program p
+                   ON pp.program_id = p.program_id AND p.retired IS FALSE AND pp.voided IS FALSE AND
+                      p.name = 'Programme ARV') ARV_prog
+     GROUP BY patient_id) latest_arv_prog
+        ON latest_arv_prog.patient_id = pp.patient_id AND latest_arv_prog.date_enrolled = pp.date_enrolled
+    INNER JOIN program p ON pp.program_id = p.program_id AND p.retired IS FALSE
+
+INNER JOIN program_workflow pw ON pw.program_id=pp.program_id
+INNER JOIN program_workflow_state pws ON pws.program_workflow_id=pw.program_workflow_id
+INNER JOIN patient_state ps ON ps.patient_program_id=pp.patient_program_id AND ps.state=pws.program_workflow_state_id
+AND ps.voided=0 AND ps.end_date IS NULL
+INNER JOIN concept_name cn ON cn.concept_id=pws.concept_id
+INNER JOIN visit vt ON vt.patient_id = pp.patient_id
                                                    )as arvprogram on arvprogram.patient_id=p.person_id and arvprogram.visitid=v.visit_id
     LEFT JOIN (select
                    o.person_id,
@@ -575,23 +592,44 @@ FROM
                    latestConceptsFilled.latestVisit
               ) infections on infections.patient_id = v.patient_id and infections.latestVisit = v.visit_id
     LEFT JOIN (SELECT
-                   pp.patient_id,
-                   pp.date_enrolled                                                                  AS  `tbStartDate`,
-                   group_concat(IF(pat.name = 'TB Type', ppcn.name, NULL ))                          AS `tbType`,
-                   group_concat(IF(pat.name = 'Site TEP', ppcn.name, NULL ))                         AS `siteTEP`,
-                   group_concat(IF(pat.name = 'End Date for Program', ppa.value_reference, NULL ))   AS `endDate`,
-                   group_concat(IF(pat.name = 'Motif début traitement', ppcn.name, NULL ))           AS `reason`
-               from patient_program pp
-                   INNER JOIN program p ON pp.program_id = p.program_id AND p.retired IS FALSE AND date_completed IS NULL AND voided IS FALSE
-                   INNER JOIN concept_name cn ON p.concept_id = cn.concept_id AND cn.name = 'Programme TB'
-                                                 AND cn.voided IS FALSE AND cn.concept_name_type='FULLY_SPECIFIED'
-                                                 AND cn.locale = 'fr'
-                   INNER JOIN patient_program_attribute ppa ON ppa.patient_program_id = pp.patient_program_id AND ppa.voided IS FALSE
-                   INNER JOIN program_attribute_type pat ON ppa.attribute_type_id = pat.program_attribute_type_id AND pat.retired IS FALSE
-                                                            AND pat.name in ('TB Type', 'Site TEP', 'End Date for Program', 'Motif début traitement')
-                   LEFT JOIN concept_name ppcn ON ppa.value_reference = ppcn.concept_id AND ppcn.concept_name_type='SHORT'
-                                                  AND ppcn.locale = 'fr'
-               GROUP BY pp.patient_id
+    pp.patient_id,
+    pp.date_enrolled AS enrolledDate,
+    p.name           AS Pname,
+    vt.visit_id      AS visitid,
+    pp.date_enrolled                                                                  AS  `tbStartDate`,
+    group_concat(distinct(IF(pat.name = 'TB Type', cn.name, NULL )))                          AS `tbType`,
+                   group_concat(distinct(IF(pat.name = 'Site TEP', cn.name, NULL )))                      AS `siteTEP`,
+                 pp.date_completed    AS `endDate`,
+                   group_concat(distinct(IF(pat.name = 'Motif début traitement', cn.name, NULL )))           AS `reason`
+                  
+    
+FROM patient_program pp
+    INNER JOIN
+    (SELECT
+         ARV_prog.patient_id,
+         max(ARV_prog.date_enrolled) AS date_enrolled
+     FROM (SELECT
+               pp.patient_id,
+               pp.program_id,
+               pp.date_enrolled
+           FROM patient_program pp INNER JOIN program p
+                   ON pp.program_id = p.program_id AND p.retired IS FALSE AND pp.voided IS FALSE AND
+                      p.name = 'Programme TB') ARV_prog
+     GROUP BY patient_id) latest_arv_prog
+        ON latest_arv_prog.patient_id = pp.patient_id AND latest_arv_prog.date_enrolled = pp.date_enrolled
+    INNER JOIN program p ON pp.program_id = p.program_id AND p.retired IS FALSE
+
+INNER JOIN program_workflow pw ON pw.program_id=pp.program_id
+INNER JOIN patient_program_attribute ppa ON ppa.patient_program_id = pp.patient_program_id AND ppa.voided IS FALSE
+INNER JOIN program_attribute_type pat ON ppa.attribute_type_id = pat.program_attribute_type_id AND pat.retired IS FALSE
+INNER JOIN program_workflow_state pws ON pws.program_workflow_id=pw.program_workflow_id
+INNER JOIN patient_state ps ON ps.patient_program_id=pp.patient_program_id AND ps.state=pws.program_workflow_state_id
+AND ps.voided=0 AND ps.end_date IS NULL
+inner JOIN concept_name cn ON cn.concept_id=ppa.value_reference
+INNER JOIN visit vt ON vt.patient_id = pp.patient_id and cn.concept_name_type='SHORT'
+group by patient_id,visit_id,enrolledDate
+
+
               ) tbProgram on tbProgram.patient_id = p.person_id
     LEFT JOIN 
     (
