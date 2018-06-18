@@ -775,7 +775,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Stade OMS"
+            "Stade clinique OMS"
           ]
         },
         "displayOrder": 2,
@@ -978,6 +978,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Regimen Start date",
+            "RA, ARV Line",
             "Regimen Start reason"
           ]
         },
@@ -994,7 +995,8 @@
           "numberOfVisits": 1,
           "showChart": true,
           "showTable": false,
-          "showGroupDateTime": true
+          "showGroupDateTime": true,
+          "scope": "latest"
         }
       },
       "treatments": {
@@ -1024,9 +1026,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Molécule",
-            "Effets secondaires",
-            "Grade,Suivi"
+              "Effets secondaires - médicaments"
           ]
         },
         "displayOrder": 17,
@@ -1040,7 +1040,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Notes"
+            "Prochain RDV"
           ]
         },
         "displayOrder": 18,
