@@ -1,3 +1,4 @@
+
 select distinct pi.identifier  as "ID Patient",
                 group_concat( distinct (case when pat.name='Type de cohorte' then c.name else NULL end)) as "Type Cohorte",
                 concat(pn.family_name,' ',ifnull(pn.middle_name,''),' ', ifnull(pn.given_name,'')) as Nom,
@@ -5,7 +6,7 @@ select distinct pi.identifier  as "ID Patient",
                 case when p.gender='M' then 'Homme' when p.gender='F' then 'Femme' else null end as Sexe,
                 date_format(p.birthdate, '%d/%m/%Y') as "Date de naissance",
                 date_format(p.date_created,'%d/%m/%Y') as "Date enregistrement",
-                group_concat( distinct  (  case when pat.name='Date entrée cohorte' then  date(pa.value)  else  null end )) As "Date entrée cohorte",
+                group_concat( distinct  (  case when pat.name='Date entrée cohorte' then  date(pae.value)  else  null end )) As "Date entrée cohorte",
                 group_concat( distinct ( case when pat.name='Status VIH' then c.name else NULL end )) as "Status VIH",
                 group_concat( distinct ( case when pat.name like '%Date%epist%' then date(pa.value)  else null end )) as "Date dépistage",
                 group_concat( distinct  (  case when pat.name='ARV Naif/ Non Naif' then c.name else NULL end )) as "ARV Naif/ Non Naif",
@@ -42,6 +43,7 @@ from  patient_identifier pi
     join person p on p.person_id=pi.patient_id
     join person_name pn on pn.person_id=p.person_id
     left join person_attribute pa on p.person_id=pa.person_id and pa.voided=0
+    left join person_attribute pae on p.person_id=pae.person_id and pae.voided=0
 
     left join person_attribute_type pat on  pa.person_attribute_type_id=pat.person_attribute_type_id
 
@@ -50,7 +52,7 @@ from  patient_identifier pi
     left  join relationship r2 on r2.person_a=pi.patient_id
     left join concept_name c on c.concept_id=pa.value and c.voided = 0 and c.locale_preferred=1
     left outer join concept_name cn_death on cn_death.concept_id = p.cause_of_death AND cn_death.locale_preferred = 1 AND cn_death.voided IS FALSE AND p.voided IS FALSE
-where date(case when pat.name='Date entrée cohorte' then  date(pa.value)  else  null end )
+where date(pae.value)
 
 BETWEEN date('#startDate#') and Date('#endDate#')
 
