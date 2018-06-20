@@ -12,15 +12,15 @@ SELECT
   WHEN p.gender = 'O'
     THEN 'A'
   ELSE p.gender END                             AS 'Sexe',
-  dateEntreeCohore.value                        AS 'Date entree cohorte',
+  date_format(dateEntreeCohore.value,'%m/%d/%Y')                        AS 'Date entree cohorte',
   vt.name                                       AS 'Type de visite',
   CASE WHEN DATE(p.date_created) = DATE(v.date_started)
     THEN 'New Visit'
   ELSE NULL END                                 AS 'Nouvelle visite',
   consultant_name.names                         AS 'Consultant',
-  prev_appt_date.value_datetime                 AS 'Date de rendez-vous',
-  DATE_FORMAT(v.date_started,"%d/%m/%Y")                          AS 'Date debut visite',
-  DATE_FORMAT(v.date_stopped,"%d/%m/%Y")                          AS 'Date fin visite' 
+  date_format(prev_appt_date.value_datetime,'%m/%d/%Y')                 AS 'Date de rendez-vous',
+  DATE_format(v.date_started,'%m/%d/%Y')                          AS 'Date debut visite',
+  DATE_format(v.date_stopped,'%m/%d/%Y')                          AS 'Date fin visite'
 FROM visit v
   INNER JOIN visit_type vt ON vt.visit_type_id = v.visit_type_id AND vt.retired IS FALSE
   INNER JOIN patient_identifier pi ON pi.patient_id = v.patient_id AND pi.voided IS FALSE
@@ -47,14 +47,22 @@ FROM visit v
                      pat.retired IS FALSE
               WHERE pat.name = 'Date entrée cohorte'
             ) dateEntreeCohore ON dateEntreeCohore.person_id = pi.patient_id
-  LEFT JOIN (SELECT
+  LEFT JOIN (
+              SELECT
                v.patient_id,
                v.visit_id,
-               GROUP_CONCAT(DISTINCT (concat_ws(' ', pn.given_name, pn.family_name))) AS 'names'
+
+                GROUP_CONCAT(DISTINCT (concat_ws(' ', pn.given_name, pn.family_name))) AS 'names'
+
+
              FROM visit v INNER JOIN encounter e ON e.visit_id = v.visit_id
-               INNER JOIN users u ON u.user_id = e.creator AND u.retired IS FALSE
-               INNER JOIN person_name pn ON pn.person_id = u.person_id AND pn.voided IS FALSE
-             GROUP BY v.visit_id) consultant_name ON consultant_name.visit_id = v.visit_id
+             inner join obs o on o.encounter_id=e.encounter_id and o.person_id =v.patient_id
+             inner join encounter_provider ep on ep.encounter_id=e.encounter_id
+             inner join provider pr on pr.provider_id=ep.provider_id
+             inner join person_name pn on pn.person_id=pr.person_id
+
+             group by patient_id,
+              v.visit_id) consultant_name ON consultant_name.visit_id = v.visit_id
   LEFT JOIN (
               SELECT
                 obs.person_id,

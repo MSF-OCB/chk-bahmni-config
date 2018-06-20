@@ -495,10 +495,12 @@
                                      patientDetails.person_id and siautre.visitid=v.visit_id
                                      inner join
                                      (
-                                     SELECT
-      firstAddSectionDateConceptInfo.person_id,
+                                     
+    SELECT
+      firstAddSectionDateConceptInfo.person_id as ID,
       firstAddSectionDateConceptInfo.visit_id as visitid,
-      o3.value_datetime  AS name
+      o3.value_datetime AS name,
+      o3.obs_datetime
     FROM
       (SELECT
          o2.person_id,
@@ -507,12 +509,12 @@
          latestVisitEncounterAndVisitForConcept.concept_id
        FROM
          (SELECT
-            MAX(o.encounter_id) AS latestEncounter,
+            max(o.encounter_id) AS latestEncounter,
             o.person_id,
             o.concept_id,
             e.visit_id
           FROM obs o
-            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Formulaire de sortie") AND
+            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Admission IPD Form") AND
                                           cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
                                           cn.locale = 'fr' AND o.voided IS FALSE
             INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
@@ -524,10 +526,13 @@
                                     e2.voided IS FALSE
        GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
-      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("Date de sortie") AND
-                                     cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as admdate on admdate.person_id=
-                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between '#startDate#' and '#endDate#'
+      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("IPD Admission, Date d'admission") AND
+                                     cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'  
+                                     
+                                     
+                                    ) as admdate on admdate.ID=
+                                     patientDetails.person_id and admdate.visitid=v.visit_id
+                                      where date(sortdate.name) between date('#startDate#') and date('#endDate#')
                                      group by v.visit_id,patientDetails.IDPatient;
                                     
                                                                     
-
