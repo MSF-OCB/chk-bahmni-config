@@ -1,8 +1,8 @@
 
-    Select 
+    Select
     patientDetails.IDPatient as "ID Patient",
     patientDetails.TypeCohorte as "Type de  Cohorte",
-    date(admdate.name) as "Date d'admission",
+    date_format(admdate.name,'%d/%m/%Y') as "Date d'admission",
     patientDetails.Nom,
     patientDetails.Age,
     patientDetails.Sexe,
@@ -12,9 +12,9 @@
     syndrome.C4 as "Syndrome à l'admission",
     syndrome.OtherComment as "Autre Syndrome",
     malade.C4 as "Malade arrivé mort",
-    date(hosp1.name) as "Hospi antérieures - date d'admission 1",
-    date(hosp2.name) as "Hospi antérieures - date d'admission 2",
-    date(hosp3.name) as "Hospi antérieures - date d'admission 3",
+    Date_format(hosp1.name, '%d/%m/%Y') as "Hospi antérieures - date d'admission 1",
+    Date_format(hosp2.name, '%d/%m/%Y') as "Hospi antérieures - date d'admission 2",
+    Date_format(hosp3.name, '%d/%m/%Y') as "Hospi antérieures - date d'admission 3",
     stade.C4 as "Stade OMS",
     glas.gasvalue as "Glasgow",
     genexpert.value as "GenXpert",
@@ -27,18 +27,18 @@
     gly.value as "Glycémie",
     creat.value as "Créatinine",
     gpt.value as "GPT",
-    date(hiv.name) as "Date diagnostic VIH",
+    Date_format(hiv.name, '%d/%m/%Y') as "Date diagnostic VIH",
     hist.C4 as "Histoire ARV",
     si.C4 as "Si interrompu",
     ligne.C4 as "Ligne ARV en cours",
-    date(datelig.name) as "Date début de la ligne",
-    date(datearv.name) as "Date début ARV",
+    Date_format(datelig.name, '%d/%m/%Y') as "Date début de la ligne",
+    Date_format(datearv.name, '%d/%m/%Y') as "Date début ARV",
     aveg.C4 as "Arrêt des ARV pendant plus d'un mois",
     tben.C4 as "TB en cours de traitement à l'admission",
     elementTB.C4 as "Elements de diagnostic TB",
     tbpre.C4 as "TB Précédentes",
-    date(anndate.name) as "Année diagnostic",
-    date(sortdate.name) as "Date de sortie",
+    DATE_format(anndate.name, '%d/%m/%Y') as "Année diagnostic",
+    date_format(sortdate.name, '%d/%m/%Y') as "Date de sortie",
     lig.C4 as "Ligne ARV sortie",
     SY.S1 as "Syndrome sortie 1",
     group_concat(distinct (dg.S1),'') as "Diagnostic principal sortie",
@@ -46,13 +46,13 @@
     group_concat(DISTINCT (dg2.S2),'') as "Diagnostic sortie 2",
     siautre.name as "Autre diagnostic" ,
     CD.value as "CD4 Admission",
-    date(CD.CDDate) as "CD4 Date",
+    Date_format(CD.CDDate, '%d/%m/%Y') as "CD4 Date",
     CV.value as "CV Admission",
-    date(CV.CVDate) as "CV Date"
+    date_format(CV.CVDate, '%d/%m/%Y') as "CV Date"
 
 
     from (
-    select  
+    select
                 distinct pi.identifier  as "IDPatient",
                     p.person_id as "Person_ID",
                   group_concat( distinct (case when pat.name='Type de cohorte' then c.name else NULL end)) as "TypeCohorte",
@@ -72,7 +72,7 @@
                    left join person_address pad on pad.person_id=p.person_id
                    left join concept_name c on c.concept_id=pa.value and c.voided = 0 and c.locale_preferred=1
                   group by pi.identifier,vda.visit_id
-    ) AS patientDetails inner JOIN visit v ON v.patient_id = patientDetails.person_id 
+    ) AS patientDetails inner JOIN visit v ON v.patient_id = patientDetails.person_id
     inner join encounter e on e.visit_id =v.visit_id
     inner join obs o on o.encounter_id=e.encounter_id  AND v.voided IS FALSE
     left join
@@ -90,15 +90,15 @@
                                 NULL AS C7,
                                  Date(obsForActivityStatus.obs_datetime) as 'ObsDate',
                                  vt.visit_id as visit
-                                 
-                                 
 
-                from 
-                 obs obsForActivityStatus 
-                 
+
+
+                from
+                 obs obsForActivityStatus
+
                  inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -108,17 +108,17 @@
                                                               concept_full_name = "Référé en IPD par(FOSA)"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select  answer_concept from concept_answer  where concept_id = 
+                                                            Select  answer_concept from concept_answer  where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("Référé en IPD par(FOSA)"))
-                                                              
-                                                          ) 
-                  AND   obsForActivityStatus.voided = 0  
-                  )as refer on refer.person_id=patientDetails.person_id and refer.visit=v.visit_id 
+
+                                                          )
+                  AND   obsForActivityStatus.voided = 0
+                  )as refer on refer.person_id=patientDetails.person_id and refer.visit=v.visit_id
                   left join
                   (
                   select          obsForActivityStatus.person_id,
@@ -135,11 +135,11 @@
                                  Date(obsForActivityStatus.obs_datetime) as 'ObsDate',
                                  vt.visit_id as visit
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                  inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -149,16 +149,16 @@
                                                               concept_full_name = "FOSA de suivi ARV"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select  answer_concept from concept_answer  where concept_id = 
+                                                            Select  answer_concept from concept_answer  where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("FOSA de suivi ARV"))
-                                                              
-                                                          ) 
-                  AND   obsForActivityStatus.voided = 0  
+
+                                                          )
+                  AND   obsForActivityStatus.voided = 0
                   )as fosa on fosa.person_id=patientDetails.person_id and fosa.visit=v.visit_id
                   left join
                   (
@@ -167,11 +167,11 @@
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                Case when (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded) = 'Autres' 
+                Case when (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded) = 'Autres'
                 Then (Select obsForOthers.value_text from obs obsForOthers where obsForOthers.obs_group_id = obsForActivityStatus.obs_group_id and obsForOthers.concept_id = (
                 select distinct concept_id from concept_name where name ='Si autre, preciser' and locale='fr'
                 and concept_name_type='FULLY_SPECIFIED') and obsForOthers.voided = 0  ) END as 'OtherComment',
-                
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded) As 'C4',
                  NULL AS 'D1',
                  NULL AS 'D2',
@@ -181,11 +181,11 @@
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visit
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                  inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -195,27 +195,27 @@
                                                               concept_full_name = "Syndrome d'admission"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("Syndrome d'admission"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as syndrome on syndrome.person_id=patientDetails.person_id and syndrome.visit=v.visit_id
-                  
-                  left join 
+
+                  left join
                   (
                    select  obsForActivityStatus.person_id,
                     NULL AS 'AdmissionDate',
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -226,11 +226,11 @@
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visit
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                  inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -240,18 +240,18 @@
                                                               concept_full_name = "Malade arrivé mort"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("Malade arrivé mort"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as malade on malade.person_id=patientDetails.person_id and malade.visit=v.visit_id
-                  
+
                   left join
                   (
                   SELECT
@@ -399,8 +399,8 @@
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -411,11 +411,11 @@
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id  as visit
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                   inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -425,20 +425,20 @@
                                                               concept_full_name = "IPD Admission, Stade OMS"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("IPD Admission, Stade OMS"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as stade  on stade.person_id=patientDetails.person_id and stade.visit=v.visit_id
                   left join
                   (
-                   
+
      select obsq.person_id as "personid",
                         NULL AS 'AdmissionDate',
                         NULL AS C1,
@@ -452,17 +452,17 @@
                         NULL AS C7,
                         Date(obsq.obs_datetime) as "Obs_Date",
                         vt.visit_id as visit
-                        from obs obsq 
+                        from obs obsq
                          inner join encounter et on et.encounter_id=obsq.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
                         where obsq.concept_id in (
                                                     select concept_id from concept_name where name ="IPD Admission, SNC Glasgow(/15)"
                                                     and concept_name_type='FULLY_SPECIFIED' and locale='fr'
-                                                 )  
-                        AND obsq.voided = 0 
-                       
+                                                 )
+                        AND obsq.voided = 0
+
                   ) as glas on glas.personid=patientDetails.person_id and glas.visit=v.visit_id
-                  left join 
+                  left join
                   (
                   SELECT
       et.visit_id as visit,
@@ -519,9 +519,9 @@ FROM
     ON tbLam.obs_datetime = o.obs_datetime
   LEFT JOIN concept_view cva ON cva.concept_id = o.value_coded AND cva.retired IS FALSE) as TBLAM on TBLAM.person_id=v.patient_id and v.visit_id=TBLAM.visitid
 
-  
-      
-      
+
+
+
       left join
       (
        SELECT
@@ -752,7 +752,7 @@ FROM
             MAX(o.encounter_id) AS latestEncounter,
             o.person_id,
             o.concept_id,
-            e.visit_id 
+            e.visit_id
           FROM obs o
             INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Historique ARV") AND
                                           cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
@@ -777,8 +777,8 @@ FROM
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -789,11 +789,11 @@ FROM
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visit
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                  inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -803,15 +803,15 @@ FROM
                                                               concept_full_name = "IPD Admission, Histoire ARV"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("IPD Admission, Histoire ARV"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as hist on hist.person_id=patientDetails.person_id and hist.visit=v.visit_id
                   left join
@@ -821,8 +821,8 @@ FROM
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -833,11 +833,11 @@ FROM
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visitid
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                  inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -847,18 +847,18 @@ FROM
                                                               concept_full_name = "IPD Admission, Si interrompu"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("IPD Admission, Si interrompu"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as si on si.person_id=patientDetails.person_id and si.visitid=v.visit_id
-                  
+
                   left join
                   (
                    select  obsForActivityStatus.person_id,
@@ -866,8 +866,8 @@ FROM
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -877,11 +877,11 @@ FROM
                  NULL AS C7,
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visitid
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                  inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -891,18 +891,18 @@ FROM
                                                               concept_full_name = "IPD Admission, Ligne ARV en cours"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("IPD Admission, Ligne ARV en cours"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as ligne on ligne.person_id=patientDetails.person_id and ligne.visitid=v.visit_id
-                  
+
                   left join
                   (
                   SELECT
@@ -973,7 +973,7 @@ FROM
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
 
                   ) as datearv on datearv.person_id=patientDetails.person_id and datearv.visitid=v.visit_id
-                  
+
                   left join
                   (
                   select  obsForActivityStatus.person_id,
@@ -981,8 +981,8 @@ FROM
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -993,11 +993,11 @@ FROM
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visitid
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                   inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -1007,18 +1007,18 @@ FROM
                                                               concept_full_name = "IPD Admission, Avez-vous déjà arrêté les ARV pendant plus d'un mois"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("IPD Admission, Avez-vous déjà arrêté les ARV pendant plus d'un mois"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as aveg on aveg.person_id=patientDetails.person_id and aveg.visitid=v.visit_id
-                  
+
                   left join
                   (
                   select  obsForActivityStatus.person_id,
@@ -1026,8 +1026,8 @@ FROM
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -1038,11 +1038,11 @@ FROM
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visitid
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                   inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -1052,18 +1052,18 @@ FROM
                                                               concept_full_name = "IPD Admission, TB en cours de traitement à l'admission"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("IPD Admission, TB en cours de traitement à l'admission"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as tben on tben.person_id=patientDetails.person_id and tben.visitid=v.visit_id
-                  
+
                   left join
                   (
                   select  obsForActivityStatus.person_id,
@@ -1071,8 +1071,8 @@ FROM
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -1083,11 +1083,11 @@ FROM
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visitid
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                   inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -1097,31 +1097,31 @@ FROM
                                                               concept_full_name = "IPD Admission, Elements de diagnostic TB"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("IPD Admission, Elements de diagnostic TB"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as elementTB on elementTB.person_id=patientDetails.person_id and elementTB.visitid=v.visit_id
-                  
+
                   left join
                   (
-                  
+
                  select  obsForActivityStatus.person_id,
                     NULL AS 'AdmissionDate',
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                 
-                
-                case when ((Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)="Premier episode") then 'Oui' 
+
+
+                case when ((Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)="Premier episode") then 'Oui'
                 when ((Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)="Traité précédemment") then 'Non'
-                 else null 
+                 else null
                   end As 'C4',
                  NULL AS 'D1',
                  NULL AS 'D2',
@@ -1131,11 +1131,11 @@ FROM
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visitid
 
-                from 
-                 obs obsForActivityStatus 
+                from
+                 obs obsForActivityStatus
                   inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
                  inner join visit vt on vt.visit_id=et.visit_id
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -1145,20 +1145,20 @@ FROM
                                                               concept_full_name = "Traitement TB Antérieur"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("Traitement TB Antérieur"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
-                                                          
-                                                          
+
+
                   )as tbpre on tbpre.person_id=patientDetails.person_id and tbpre.visitid=v.visit_id
-                  
+
                   left join
                   (
                                     SELECT
@@ -1232,17 +1232,17 @@ FROM
 
                   ) as sortdate on sortdate.person_id=patientDetails.person_id and sortdate.visitid=v.visit_id
                   left join
-                  
+
                   (
-                  
-                  
+
+
                   select  obsForActivityStatus.person_id,
                     NULL AS 'AdmissionDate',
                 NULL AS C1,
                 NULL AS C2,
                 NULL AS C3,
-                
-                
+
+
                 (Select concept_short_name from concept_view where concept_id = obsForActivityStatus.value_coded)
                   As 'C4',
                  NULL AS 'D1',
@@ -1253,11 +1253,11 @@ FROM
                  date(obsForActivityStatus.obs_datetime) as 'obsDate',
                  vt.visit_id as visitid
 
-                from 
+                from
                  obs obsForActivityStatus
                   inner join encounter et on et.encounter_id=obsForActivityStatus.encounter_id
-                 inner join visit vt on vt.visit_id=et.visit_id 
-                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id 
+                 inner join visit vt on vt.visit_id=et.visit_id
+                INNER JOIN concept_view cn1 on obsForActivityStatus.concept_id = cn1.concept_id
                   Where obsForActivityStatus.concept_id in (
                                                             select
                                                               distinct concept_id
@@ -1267,18 +1267,18 @@ FROM
                                                               concept_full_name = "Ligne"
                                                           )
                   and obsForActivityStatus.value_coded in (
-                                                            Select answer_concept from concept_answer where concept_id = 
+                                                            Select answer_concept from concept_answer where concept_id =
                                                             (select
                                                               distinct concept_id
                                                             from
                                                               concept_view
                                                             where
                                                               concept_full_name in ("Ligne"))
-                                                              
-                                                          ) 
+
+                                                          )
                                                           AND   obsForActivityStatus.voided = 0
                   )as lig on lig.person_id=patientDetails.person_id and lig.visitid=v.visit_id
-                  left join 
+                  left join
                   ( SELECT
       firstAddSectionDateConceptInfo.person_id,
       firstAddSectionDateConceptInfo.visit_id as visitid,
@@ -1312,9 +1312,9 @@ FROM
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Syndrome') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as SY on SY.person_id=patientDetails.person_id
                                      and SY.visitid=v.visit_id
-                  
-       
-                  
+
+
+
                   left join
                   (
                   SELECT
@@ -1362,10 +1362,10 @@ FROM
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Syndrome') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr')as SY2 on SY2.person_id=patientDetails.person_id
                                      and SY2.visitid=v.visit_id
-                 
+
                  left join
                  (
-                 
+
     SELECT
       firstAddSectionDateConceptInfo.person_id,
       firstAddSectionDateConceptInfo.visit_id as visitid,
@@ -1399,8 +1399,8 @@ FROM
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Fds, Diagnostic') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as dg on dg.person_id=patientDetails.person_id
                                      and dg.visitid=v.visit_id
-                                     
-                                     
+
+
                                      left join
                                      (
                                        SELECT
@@ -1447,8 +1447,8 @@ FROM
       INNER JOIN obs o3 ON o3.obs_group_id = secondAddSectionDateConceptInfo.secondAddSectionObsGroupId AND o3.voided IS FALSE
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Fds, Diagnostic') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
-                                     )   dg2 on dg2.person_id=patientDetails.person_id    and dg2.visitid=v.visit_id                                                               
-                 
+                                     )   dg2 on dg2.person_id=patientDetails.person_id    and dg2.visitid=v.visit_id
+
                   left join
                   (
                     SELECT
@@ -1544,7 +1544,5 @@ FROM
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("IPD Admission, Date d'admission") AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as admdate on admdate.person_id=
-                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between '#startDate#' and '#endDate#'
+                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between DATE('#startDate#') and DATE('#endDate#')
                                      group by v.visit_id,patientDetails.IDPatient;
-                                    
-                                                                    

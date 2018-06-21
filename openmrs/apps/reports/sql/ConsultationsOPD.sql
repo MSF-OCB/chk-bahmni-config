@@ -1,23 +1,23 @@
 
 select
-  
+
     pi.identifier                                   AS `ID Patient`,
-    
+
     cohertType.name                                 AS `Type de cohorte`,
     CONCAT(pn.family_name,' ', pn.given_name)           AS `Nom`,
     floor(DATEDIFF(CURDATE(), p.birthdate) / 365)   AS `Age`,
     p.gender                                        AS `Sexe`,
-    date_format(v.date_started, '%m/%d/%y')                                  AS `Date de visite`,
-    date_format(prochainEncounter.value_datetime,'%m/%d/%y')                AS `Date prochain RDV`,
-    date_format(diagnosticEncounter.value_datetime,'%m/%d/%y')              AS `Hist - Date diagnostic VIH`,
+    date_format(v.date_started, '%d/%m/%y')                                  AS `Date de visite`,
+    date_format(prochainEncounter.value_datetime,'%d/%m/%y')                AS `Date prochain RDV`,
+    date_format(diagnosticEncounter.value_datetime,'%d/%m/%y')              AS `Hist - Date diagnostic VIH`,
     regimeDebutLigne.name                           AS `Hist - Ligne ARV début`,
-    date_format(regimeDebutDate.value_datetime,'%m/%d/%y')                  AS `Hist - Date début Régime`,
+    date_format(regimeDebutDate.value_datetime,'%d/%m/%y')                  AS `Hist - Date début Régime`,
     regimeDebutARV.name                             AS `Hist - Régime ARV début`,
     regimeActualLigne.name                          AS `Hist - Ligne ARV actuel`,
-    date_format(regimeActualDate.value_datetime,'%m/%d/%y')                 AS `Hist - Date début Régime actuel`,
+    date_format(regimeActualDate.value_datetime,'%d/%m/%y')                 AS `Hist - Date début Régime actuel`,
     regimeActualARV.name                            AS `Hist - Régime ARV actuel`,
     prophylaxieInfo.name                            AS `Hist - Prophylaxie`,
-    date_format(arvprogram.enrolledDate,'%m/%d/%y')                       AS `Date début ARV`,
+    date_format(arvprogram.enrolledDate,'%d/%m/%y')                       AS `Date début ARV`,
     regimeDebut.name                                AS `Régime début`,
     regimeActual.name                               AS `Régime actuel`,
     arvprogram.value                            AS `Ligne ARV actuelle`,
@@ -29,8 +29,8 @@ select
     infections.name                                 AS `Infections opportunistes`,
     tbProgram.tbType                                AS `Type de TB`,
     tbProgram.siteTEP                               AS `Site TB`,
-    date_format(tbProgram.tbStartDate,'%m/%d/%y')                           AS `Date début Traitement`,
-    Date_format(tbProgram.endDate,'%m/%d/%y')                               AS `Date fin traitement`,
+    date_format(tbProgram.tbStartDate,'%d/%m/%y')                           AS `Date début Traitement`,
+    Date_format(tbProgram.endDate,'%d/%m/%y')                               AS `Date fin traitement`,
     tbProgram.reason                                AS `Motif début traitement TB`,
     cd4.value                                       AS `CD4`,
     cv.value                                        AS `CV`,
@@ -354,7 +354,7 @@ from person p
                    latestConceptFillInfoForProphylaxie.concept_id,
                    latestConceptFillInfoForProphylaxie.latestVisit
               ) prophylaxieInfo on prophylaxieInfo.patient_id = v.patient_id and prophylaxieInfo.latestVisit = v.visit_id
-    LEFT JOIN ( 
+    LEFT JOIN (
     SELECT
     pp.patient_id,
     pp.date_enrolled AS enrolledDate,
@@ -514,7 +514,7 @@ FROM
   INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Sc, Diagnostic') AND
                                  cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as diagnostic on diagnostic.person_id=v.patient_id
                                  and  diagnostic.visit_id=v.visit_id
-                     
+
     LEFT JOIN (select
                    latestConceptFillInfoForTenir.patient_id,
                    latestConceptFillInfoForTenir.concept_id,
@@ -601,8 +601,8 @@ FROM
                    group_concat(distinct(IF(pat.name = 'Site TEP', cn.name, NULL )))                      AS `siteTEP`,
                  pp.date_completed    AS `endDate`,
                    group_concat(distinct(IF(pat.name = 'Motif début traitement', cn.name, NULL )))           AS `reason`
-                  
-    
+
+
 FROM patient_program pp
     INNER JOIN
     (SELECT
@@ -631,7 +631,7 @@ group by patient_id,visit_id,enrolledDate
 
 
               ) tbProgram on tbProgram.patient_id = p.person_id
-    LEFT JOIN 
+    LEFT JOIN
     (
     SELECT
                                   o.encounter_id,
@@ -642,7 +642,7 @@ group by patient_id,visit_id,enrolledDate
                                   INNER JOIN drug_order ON drug_order.order_id = o.order_id AND o.voided IS FALSE
                                   INNER JOIN drug ON drug_order.drug_inventory_id = drug.drug_id AND drug.retired IS FALSE
                                   inner join visit v on v.patient_id=o.patient_id
-                                  
+
     ) as drugs on drugs.patientid=p.person_id and drugs.visitid=v.visit_id
     LEFT JOIN (SELECT
                    firstAddSection.patient_id,
@@ -1029,7 +1029,7 @@ group by patient_id,visit_id,enrolledDate
                    INNER JOIN visit v ON v.visit_id = e.visit_id AND v.voided IS FALSE
                    INNER JOIN concept_view cv ON cv.concept_id = o.concept_id AND cv.retired IS FALSE AND
                                                  cv.concept_full_name in('Créatinine(Bilan de routine IPD)','Creatinine')
-                                                 
+
                                                  AND o.value_numeric IS NOT NULL
                    INNER JOIN (SELECT
                                    v.visit_id,
@@ -1050,7 +1050,7 @@ group by patient_id,visit_id,enrolledDate
                                                     AND o.value_numeric IS NOT NULL)) test_obs
                                        ON test_obs.encounter_id = e.encounter_id
                                GROUP BY v.visit_id) as creatine) as ct on ct.person_id=p.person_id and ct.visit_id=v.visit_id
-                      
+
     LEFT JOIN (SELECT
                    o.person_id,
                    v.visit_id,

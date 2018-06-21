@@ -4,7 +4,7 @@ SELECT
   concat_ws(' ', pn.given_name, pn.family_name) AS 'Nom',
   concat(floor(datediff(now(), p.birthdate) / 365), ' ans, ', floor((datediff(now(), p.birthdate) % 365) / 30),
          ' mois')                               AS 'Age',
-  date_format(p.birthdate, '%d-%m-%Y')          AS 'Date de naissance',
+  date_format(p.birthdate, '%d/%m/%Y')          AS 'Date de naissance',
   CASE WHEN p.gender = 'M'
     THEN 'H'
   WHEN p.gender = 'F'
@@ -12,15 +12,15 @@ SELECT
   WHEN p.gender = 'O'
     THEN 'A'
   ELSE p.gender END                             AS 'Sexe',
-  date_format(dateEntreeCohore.value,'%m/%d/%Y')                        AS 'Date entree cohorte',
+  date_format(dateEntreeCohore.value,'%d/%m/%Y')                        AS 'Date entree cohorte',
   vt.name                                       AS 'Type de visite',
   CASE WHEN DATE(p.date_created) = DATE(v.date_started)
     THEN 'New Visit'
   ELSE NULL END                                 AS 'Nouvelle visite',
   consultant_name.names                         AS 'Consultant',
-  date_format(prev_appt_date.value_datetime,'%m/%d/%Y')                 AS 'Date de rendez-vous',
-  DATE_format(v.date_started,'%m/%d/%Y')                          AS 'Date debut visite',
-  DATE_format(v.date_stopped,'%m/%d/%Y')                          AS 'Date fin visite'
+  date_format(prev_appt_date.value_datetime,'%d/%m/%Y')                 AS 'Date de rendez-vous',
+  DATE_format(v.date_started,'%d/%m/%Y')                          AS 'Date debut visite',
+  DATE_format(v.date_stopped,'%d/%m/%Y')                          AS 'Date fin visite'
 FROM visit v
   INNER JOIN visit_type vt ON vt.visit_type_id = v.visit_type_id AND vt.retired IS FALSE
   INNER JOIN patient_identifier pi ON pi.patient_id = v.patient_id AND pi.voided IS FALSE

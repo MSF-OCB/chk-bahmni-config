@@ -6,9 +6,9 @@ select distinct pi.identifier  as "ID Patient",
                 case when p.gender='M' then 'Homme' when p.gender='F' then 'Femme' else null end as Sexe,
                 date_format(p.birthdate, '%d/%m/%Y') as "Date de naissance",
                 date_format(p.date_created,'%d/%m/%Y') as "Date enregistrement",
-                group_concat( distinct  (  case when pat.name='Date entrée cohorte' then  date(pae.value)  else  null end )) As "Date entrée cohorte",
+                group_concat(distinct(case when pat.name='Date entrée cohorte' then  date_format(pae.value,'%d/%m/%Y')  else  null end )) As "Date entrée cohorte",
                 group_concat( distinct ( case when pat.name='Status VIH' then c.name else NULL end )) as "Status VIH",
-                group_concat( distinct ( case when pat.name like '%Date%epist%' then date(pa.value)  else null end )) as "Date dépistage",
+                group_concat( distinct ( case when pat.name like '%Date%epist%' then date_format(pa.value,'%d/%m/%Y')  else null end )) as "Date dépistage",
                 group_concat( distinct  (  case when pat.name='ARV Naif/ Non Naif' then c.name else NULL end )) as "ARV Naif/ Non Naif",
                 group_concat( distinct  (  case when pat.name='Converti CP' then case when pa.value ='true' then 'Oui' else 'Non'  end else null end )) As "Est converti CP",
                 group_concat( distinct ( case when pat.name='Date de conversion' then date_format(pa.value,'%d/%m/%Y') else null end)) as "Date conversion",
@@ -43,17 +43,16 @@ from  patient_identifier pi
     join person p on p.person_id=pi.patient_id
     join person_name pn on pn.person_id=p.person_id
     left join person_attribute pa on p.person_id=pa.person_id and pa.voided=0
-    left join person_attribute pae on p.person_id=pae.person_id and pae.voided=0
-
     left join person_attribute_type pat on  pa.person_attribute_type_id=pat.person_attribute_type_id
-
+    left join person_attribute pae on p.person_id=pae.person_id and pae.voided=0
+    left join person_attribute_type pate on  pae.person_attribute_type_id=pate.person_attribute_type_id
     left join person_address pad on pad.person_id=p.person_id
     left  join relationship r on r.person_b=pi.patient_id
     left  join relationship r2 on r2.person_a=pi.patient_id
     left join concept_name c on c.concept_id=pa.value and c.voided = 0 and c.locale_preferred=1
     left outer join concept_name cn_death on cn_death.concept_id = p.cause_of_death AND cn_death.locale_preferred = 1 AND cn_death.voided IS FALSE AND p.voided IS FALSE
-where date(pae.value)
 
-BETWEEN date('#startDate#') and Date('#endDate#')
+    where date(pae.value) BETWEEN date('#startDate#') and Date('#endDate#')
+    and pate.person_attribute_type_id = (select person_attribute_type_id from person_attribute_type where `name` = "Date entrée cohorte")
 
 group by pi.identifier,r.person_b;
