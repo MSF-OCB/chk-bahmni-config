@@ -65,6 +65,7 @@ FROM
                                                sexe,
                                                date_of_results,
                                                month_of_results,
+                                               sid,
                                                COMMENT,
                                                CASE
                                                    WHEN tname ='GE' THEN tvalue
@@ -220,6 +221,7 @@ FROM
                                                       patient.gender END AS sexe,
                                                   t.name AS tname,
                                                   r.value AS tvalue,
+                                                  sample.id as  sid,
 
                                                   sample.lastupdated :: DATE AS date_of_results,
                                                   to_char(to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'), 'Month') AS month_of_results,
@@ -235,7 +237,7 @@ FROM
       INNER JOIN analysis a ON item.id = a.sampitem_id
       INNER JOIN RESULT r ON a.id = r.analysis_id
       INNER JOIN test t ON a.test_id = t.id AND
-            t.name IN  ('GE','Rivalta (Gastrique)','Rivalta (Synovial)','Rivalta (Pus)','Rivalta (Ascite)','Rivalta (Pleural)','Rivalta (Crachat)','Rivalta (LCR)','Rivalta (Urine)','Gram',
+            t.name IN  ('GE','Rivalta (Gastrique)','Rivalta (Synovial)','Rivalta (Pus)','Rivalta (Ascite)','Rivalta (Pleural)','Rivalta (Crachat)','Rivalta (LCR)','Rivalta (Urine)','Gram','Plaquettes',
             'Test de Grossesse','Leucocytes','pH','Glucose','Acide ascorbique','Corps cétoniques','Nitrites','Protéines','Bilirubine',
             'Urobilinogène','Sang (hématurie)','Microscopie TB - Recherche de BAAR (Gastrique)','Microscopie TB - Recherche de BAAR (Synovial)',
             'Microscopie TB - Recherche de BAAR (Ganglionnaire)','Microscopie TB - Recherche de BAAR (Pus)','Microscopie TB - Recherche de BAAR (Ascite)',
@@ -255,7 +257,8 @@ GROUP BY B.Patient_Name,
          B.dob,
          B.sexe,
          B.date_of_results,
-         B.month_of_results
+         B.month_of_results,
+         B.sid
 ORDER BY B.date_of_results,
          B.care_center_requesting,
          B.Patient_Name,
