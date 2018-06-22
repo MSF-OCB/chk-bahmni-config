@@ -1,20 +1,20 @@
-Select 
+Select
     identifierOfPerson.identifier AS "ID",
     group_concat( distinct ( case when personAttributeTypeDetails.name="Type de cohorte" then cvForAttribute.concept_full_name else NULL end )) as "Type cohorte",
     concat( COALESCE(NULLIF(pnForDetails.given_name, ''), ''), ' ', COALESCE(NULLIF(pnForDetails.family_name, ''), '') ) AS "Nom",
     concat(floor(datediff(now(), personForDetails.birthdate)/365), ' ans, ',  floor((datediff(now(), personForDetails.birthdate)%365)/30),' mois') AS "Age",
-    date_format(personForDetails.birthdate, '%d-%m-%Y') AS "Date de naissance",
+    date_format(personForDetails.birthdate, '%d/%m/%Y') AS "Date de naissance",
     CASE WHEN personForDetails.gender = 'M' THEN 'H'
     WHEN personForDetails.gender = 'F' THEN 'F'
     WHEN personForDetails.gender = 'O' THEN 'A'
     else personForDetails.gender END AS "Sexe",
     group_concat( distinct ( case when personAttributeTypeDetails.name="Date entrée cohorte"
-    then date_format(DATE(personAttributeDetails.value), '%d-%m-%Y')
+    then date_format(DATE(personAttributeDetails.value), '%d/%m/%Y')
                          else NULL end )) as "Date entrée cohorte",
-    date_format(TBStartDate,'%d-%m-%Y') AS "Date début TB",
+    date_format(TBStartDate,'%d/%m/%Y') AS "Date début TB",
     MotifdébutTraitement AS "Motif début TB",
     TBType AS "Type TB",
-    date_format(ARVStartDate,'%d-%m-%Y') AS "Date début ARV",
+    date_format(ARVStartDate,'%d/%m/%Y') AS "Date début ARV",
     DATE_FORMAT(LabTestDate,"%d/%m/%Y") "Date resultats",
     max(Genexpertresult) AS "Résultats Genexpert",
     max(TBLam) AS "Resultats TB-LAM"
@@ -51,27 +51,27 @@ from (
                         from patient p
                             INNER JOIN patient_program pp  on p.patient_id = pp.patient_id AND pp.program_id = (select program_id from program where `name` = "Programme TB")
                                                               AND pp.voided = 0 AND pp.date_completed is NULL
-        
+
                             LEFT JOIN patient_program_attribute ppa on pp.patient_program_id = ppa.patient_program_id AND ppa.voided = 0
-        
+
                             LEFT JOIN program_attribute_type pat on ppa.attribute_type_id = pat.program_attribute_type_id
                             LEFT JOIN concept_name cnProgram on ppa.value_reference = cnProgram.concept_id AND cnProgram.concept_name_type = "FULLY_SPECIFIED" and cnProgram.voided = 0 AND cnProgram.locale = 'fr'
-        
+
                             LEFT JOIN patient_program ppForARV ON p.patient_id = ppForARV.patient_id
                                                                   and ppForARV.program_id = (select program_id from program where `name` = "Programme ARV")
                                                                   AND ppForARV.voided = 0
-        
+
                             LEFT JOIN patient_program_attribute ppaForEndDate ON pp.patient_program_id = ppaForEndDate.patient_program_id
                                                                                  and ppaForEndDate.patient_program_attribute_id =  (
                                 select program_attribute_type_id
                                 from program_attribute_type
                                 where `name` = "End Date for Program" and description = "End Date" AND retired = 0)
                         WHERE (DATE(ppaForEndDate.value_reference) > date('#endDate#') OR ppaForEndDate.value_reference is NULL)
-        
+
                     ) AS A
                 GROUP BY IDForProgram,TBStartDate
             ) AS patientProgram
-        Inner Join 
+        Inner Join
                 (
                 SELECT
                     IDForObs,
@@ -106,7 +106,7 @@ from (
                                     concept_full_name = 'TB - LAM'
                             )
                                                            and obsForActivityStatus.voided =0
-        
+
                             INNER JOIN obs obsForresult on obsForActivityStatus.obs_group_id = obsForresult.obs_group_id
                             INNER JOIN encounter encounterForresult on obsForresult.encounter_id = encounterForresult.encounter_id
                             INNER JOIN concept_name cn2 on obsForresult.value_coded = cn2.concept_id AND cn2.voided = 0
@@ -130,12 +130,12 @@ from (
                          WHERE DATE(obsForresult.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
                         GROUP BY IDForObs,obsForActivityStatus.obs_datetime
                     ) AS B
-        
+
             ) AS patientTBLam on patientProgram.patientID = patientTBLam.IDForObs
-        
-            
+
+
             Union ALL
-            
+
             Select patientID,
         TBStartDate,
         MotifdébutTraitement,
@@ -168,28 +168,28 @@ from (
                         from patient p
                             INNER JOIN patient_program pp  on p.patient_id = pp.patient_id AND pp.program_id = (select program_id from program where `name` = "Programme TB")
                                                               AND pp.voided = 0 AND pp.date_completed is NULL
-        
+
                             LEFT JOIN patient_program_attribute ppa on pp.patient_program_id = ppa.patient_program_id AND ppa.voided = 0
-        
+
                             LEFT JOIN program_attribute_type pat on ppa.attribute_type_id = pat.program_attribute_type_id
                             LEFT JOIN concept_name cnProgram on ppa.value_reference = cnProgram.concept_id AND cnProgram.concept_name_type = "FULLY_SPECIFIED" and cnProgram.voided = 0 AND cnProgram.locale = 'fr'
-        
+
                             LEFT JOIN patient_program ppForARV ON p.patient_id = ppForARV.patient_id
                                                                   and ppForARV.program_id = (select program_id from program where `name` = "Programme ARV")
                                                                   AND ppForARV.voided = 0
-        
+
                             LEFT JOIN patient_program_attribute ppaForEndDate ON pp.patient_program_id = ppaForEndDate.patient_program_id
                                                                                  and ppaForEndDate.patient_program_attribute_id =  (
                                 select program_attribute_type_id
                                 from program_attribute_type
                                 where `name` = "End Date for Program" and description = "End Date" AND retired = 0)
                         WHERE (DATE(ppaForEndDate.value_reference) > date('#endDate#') OR ppaForEndDate.value_reference is NULL)
-        
+
                     ) AS A
                 GROUP BY IDForProgram,TBStartDate
             ) AS patientProgram
-        
-        Inner Join 
+
+        Inner Join
             (
                 SELECT
                     IDForGenexpert,
@@ -206,7 +206,7 @@ from (
                                         obs_datetime AS "genexpertTime",
                                         cnForLabTest.name AS "Genexpert",
                                         cnForLabAnswer.name AS "Result"
-        
+
                         from obs
                             inner join concept_name cnForLabTest on obs.concept_id = cnForLabTest.concept_id
                             INNER JOIN concept_name cnForLabAnswer on obs.value_coded = cnForLabAnswer.concept_id
@@ -218,7 +218,7 @@ from (
                                 "Genexpert (Pleural)","Genexpert (Ganglionnaire)", "Genexpert (Synovial)",
                                 "Genexpert (Urine)", "Genexpert (LCR)")
                         )
-        
+
                               and obs.value_coded in (
                             SELECt concept_id
                             from concept_view
@@ -228,9 +228,9 @@ from (
                         )
                                AND DATE(obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
                     ) AS C
-        
+
             ) AS patientGenexpert ON patientProgram.patientID = patientGenexpert.IDForGenexpert
-    
+
 ) as patientInTBWithTBLamAndGenxpert
 Inner join patient_identifier identifierOfPerson on patientInTBWithTBLamAndGenxpert.patientID = identifierOfPerson.patient_id
 INNER JOIN person personForDetails ON patientInTBWithTBLamAndGenxpert.patientID = personForDetails.person_id

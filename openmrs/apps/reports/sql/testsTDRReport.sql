@@ -22,16 +22,16 @@ FROM
       obsLabResults.person_id,
       pi.identifier,
       cv.concept_full_name,
-      DATE_FORMAT(obsLabResults.obs_datetime, '%d-%m-%Y %H:%i:%S') AS "dateResults" ,
+      DATE_FORMAT(obsLabResults.obs_datetime, '%d/%m/%Y %H:%i:%S') AS "dateResults" ,
       vtype.name AS "typeOfVisit",
       concat( COALESCE(NULLIF(pnPersonAttribute.given_name, ''), ''), ' ', COALESCE(NULLIF(pnPersonAttribute.family_name, ''), '') ) AS "NameOfPerson",
       concat(floor(datediff(now(), person.birthdate)/365), ' ans, ',  floor((datediff(now(), person.birthdate)%365)/30),' mois') AS "personAge",
-      date_format(person.birthdate, '%d-%m-%Y') AS "dateOfBirth",
+      date_format(person.birthdate, '%d/%m/%Y') AS "dateOfBirth",
       CASE WHEN person.gender = 'M' THEN 'H'
            WHEN person.gender = 'F' THEN 'F'
            WHEN person.gender = 'O' THEN 'A'
            else person.gender END AS "gender",
-      date_format(pa.date_created, '%d-%m-%Y') AS "dateTypeTheCohorte",
+      date_format(pa.date_created, '%d/%m/%Y') AS "dateTypeTheCohorte",
       CASE WHEN obsLabTest.value_coded = (
                                           SELECT concept_id
                                           FROM concept_view

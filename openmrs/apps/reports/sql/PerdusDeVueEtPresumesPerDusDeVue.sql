@@ -2,15 +2,15 @@ SELECT identifier,
 group_concat( distinct ( case when personAttributeTypeDetails.name="Type de cohorte" then cvForAttribute.concept_full_name else NULL end )) as "Type cohorte",
 concat( COALESCE(NULLIF(personalDetails.given_name, ''), ''), ' ', COALESCE(NULLIF(personalDetails.family_name, ''), '') ) AS "Nom",
 concat(floor(datediff(now(), personForDetails.birthdate)/365), ' ans, ',  floor((datediff(now(), personForDetails.birthdate)%365)/30),' mois') AS "Age",
-date_format(personForDetails.birthdate, '%d-%m-%Y') AS "Date de naissance",
+date_format(personForDetails.birthdate, '%d/%m/%Y') AS "Date de naissance",
 CASE WHEN personForDetails.gender = 'M' THEN 'H'
      WHEN personForDetails.gender = 'F' THEN 'F'
      WHEN personForDetails.gender = 'O' THEN 'A'
      else personForDetails.gender END AS "Sexe",
 group_concat( distinct ( case when personAttributeTypeDetails.name="Date entrée cohorte"
-                              then date_format(DATE(personAttributeDetails.value), '%d-%m-%Y')
+                              then date_format(DATE(personAttributeDetails.value), '%d/%m/%Y')
                               else NULL end )) as "Date entrée cohorte",
-DATE_FORMAT(DATE(A.valueDate),'%d-%m-%Y') AS "Date de RDV",
+DATE_FORMAT(DATE(A.valueDate),'%d/%m/%Y') AS "Date de RDV",
 CASE WHEN MAX(timestampdiff(DAY,DATE(A.valueDate),'#endDate#')) BETWEEN 4 AND 90 THEN "Présumé perdu de vue"
      WHEN MAX(timestampdiff(DAY,DATE(A.valueDate),'#endDate#')) > 90 THEN "Perdu de vu"
      ELSE NULL END AS "Type de pérdu de vue",
@@ -31,7 +31,7 @@ group_concat( distinct ( case when personAttributeTypeDetails.name="Tel Conf 2" 
 CASE when personForDetails.dead = 0 then "Non"
      When personForDetails.dead = 1 Then "Oui"
      ELSE NULL END AS "Est décédé?",
-DATE_FORMAT(DATE(personForDetails.death_date),'%d-%m-%Y') AS "Date de décés",
+DATE_FORMAT(DATE(personForDetails.death_date),'%d/%m/%Y') AS "Date de décés",
 cvForGettingDeathReason.concept_full_name AS "Raison de décés"
 
 from
