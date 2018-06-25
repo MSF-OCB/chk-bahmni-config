@@ -972,10 +972,25 @@
           "scope": "latest"
         }
       },
+      "testRapid": {
+        "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 16,
+        "displayType": "Full-Page",
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "Tests rapides"
+          ]
+        }
+      },
       "treatments": {
         "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
         "type": "treatment",
-        "displayOrder": 16,
+        "displayOrder": 17,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showFlowSheet": true,
@@ -1002,7 +1017,7 @@
               "Effets secondaires - médicaments"
           ]
         },
-        "displayOrder": 17,
+        "displayOrder": 18,
         "translationKey": "DASHBOARD_TITLE_SECONDARY_MEDICATION"
       },
    "transfertObs": {
@@ -1010,7 +1025,7 @@
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
-        "displayOrder": 18,
+        "displayOrder": 19,
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "showDetailsButton": true,
@@ -1045,7 +1060,7 @@
             "Prochain RDV"
           ]
         },
-        "displayOrder": 19,
+        "displayOrder": 20,
         "translationKey": "DASHBOARD_TITLE_NOTES"
       }
     }
