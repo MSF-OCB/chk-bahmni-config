@@ -7576,4 +7576,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <sqlFile  path="users_dropdown.sql"/>
     </changeSet>
 <include file ="OPD_IPD_feedback.xml"/>
+<include file ="OPD_Feedback_306.xml"/>
+<include file ="OPD_Feedback_307.xml"/>
+
 </databaseChangeLog>

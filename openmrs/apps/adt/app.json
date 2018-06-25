@@ -49,7 +49,7 @@
                                 "translationKey":"DASHBOARD_TITLE_NAVIGATION_LINKS_CONTROL_KEY",
                                 "type": "navigationLinksControl",
                                 "displayOrder": 3,
-				"showLinks" : ["registration","visitAttribute"],
+				"showLinks" : ["registration"],
                                 "customLinks": [
                                         {
                                         "translationKey": "IPD_DASHBOARD_ORDERS_LINK_KEY",

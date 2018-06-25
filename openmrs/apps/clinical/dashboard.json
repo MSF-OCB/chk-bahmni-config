@@ -47,8 +47,7 @@
         "displayOrder": 2,
         "showLinks": [
           "registration",
-          "enrolment",
-          "visitAttribute"
+          "enrolment"
         ]
       },
       "treatments": {
