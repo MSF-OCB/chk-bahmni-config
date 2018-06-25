@@ -10,7 +10,7 @@
   "PATIENT_VISIT_ATTRIBUTES_PAGE_KEY": "Signes vitaux",
   "PATIENT_REGISTRATION_PAGE_KEY": "Info socio démographiques",
   "NO_DISPOSTIONS_AVAILABLE_MESSAGE_KEY": "Pas de mouvement disponible",
-  "IPD_DASHBOARD_ORDERS_LINK_KEY" : "Demand Labo",
+  "IPD_DASHBOARD_ORDERS_LINK_KEY" : "Demande bilan",
   "IPD_DASHBOARD_DASHBOARD_LINK_KEY" : "Tableau de bord Clinique",
   "IPD_DASHBOARD_MEDICATIONS_LINK_KEY" : "Ordonnance",
   "IPD_DASHBOARD_OBSERVATION_LINK_KEY" : "Observations",

@@ -1042,7 +1042,7 @@ group by patient_id,visit_id,enrolledDate
                                GROUP BY e.visit_id) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime AND
                                                                        o.concept_id = latestEncounter.concept_id
                    INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
-                                                             answer_concept.concept_name_type = 'FULLY_SPECIFIED' AND answer_concept.locale = 'fr'
+                                                             answer_concept.concept_name_type = 'SHORT' AND answer_concept.locale = 'fr'
                        ) as infomode on infomode.person_id=p.person_id and infomode.visit_id =v.visit_id
                        
     LEFT JOIN (SELECT

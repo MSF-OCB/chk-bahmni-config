@@ -111,5 +111,7 @@
   "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_5": "Informations des dépendant 5", 
   "REGISTRATION_PATIENT_NEW_DEPENDENTS_INFORMATON_6" :"Informations des dépendant 6",
   "REGISTRATION_VISIT_KEY": "Triage",
-  "OBS_ABNORMAL_TRANSLATE_KEY": "Signe de danger"
+  "OBS_ABNORMAL_TRANSLATE_KEY": "Signe de danger",
+  "MESSAGE_DIALOG_OPTION_COPY":"Copier Erreur",
+   "MESSAGE_DIALOG_OPTION_OKAY": "D'accord"
 }

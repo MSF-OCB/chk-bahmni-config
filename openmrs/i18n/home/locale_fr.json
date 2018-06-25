@@ -67,5 +67,7 @@
   "YOU_HAVE_NOT_BEEN_SETUP_PROVIDER": "Vous n'avez pas été configuré en tant que fournisseur, veuillez contacter l'administrateur.",
   "COULD_NOT_GET_PROVIDER": "Impossible d'obtenir le fournisseur pour l'utilisateur actuel.",
   "CHANGE_PASSWORD_SUCCESSFUL_MESSAGE": "Le mot de passe a été modifié avec succès",
-  "PRIVILEGE_REQUIRED": "L'utilisateur est connecté mais n'a pas les privilèges requis"
+  "PRIVILEGE_REQUIRED": "L'utilisateur est connecté mais n'a pas les privilèges requis",
+   "MESSAGE_DIALOG_OPTION_COPY":"Copier Erreur",
+   "MESSAGE_DIALOG_OPTION_OKAY": "D'accord"
 }

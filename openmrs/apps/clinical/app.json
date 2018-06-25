@@ -312,6 +312,9 @@
         "autocomplete":true,
         "multiSelect": true
       },
+      "Tension arterielle(Tabular)": {
+          "isTabular": true
+       },
       "Infirmier en charge de l'admission":{
         "autocomplete":true
       },

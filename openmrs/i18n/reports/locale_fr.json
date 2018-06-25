@@ -29,6 +29,8 @@
     "REPORT_DELETE": "Effacer",
     "REPORTS_HEADER_REPORTS": "Rapports",
     "REPORTS_HEADER_MY_REPORTS": "Mes rapports",
-    "CHOOSE_REPORT_FORMAT":"Choisir le format"
+    "CHOOSE_REPORT_FORMAT":"Choisir le format",
+    "MESSAGE_DIALOG_OPTION_COPY":"Copier Erreur",
+   "MESSAGE_DIALOG_OPTION_OKAY": "D'accord"
 
 }

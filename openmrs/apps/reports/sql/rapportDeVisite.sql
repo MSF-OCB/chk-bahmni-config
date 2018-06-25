@@ -15,7 +15,7 @@ SELECT
   date_format(dateEntreeCohore.value,'%d/%m/%Y')                        AS 'Date entree cohorte',
   vt.name                                       AS 'Type de visite',
   CASE WHEN DATE(p.date_created) = DATE(v.date_started)
-    THEN 'New Visit'
+    THEN 'Nouvelle visite'
   ELSE NULL END                                 AS 'Nouvelle visite',
   consultant_name.names                         AS 'Consultant',
   date_format(prev_appt_date.value_datetime,'%d/%m/%Y')                 AS 'Date de rendez-vous',

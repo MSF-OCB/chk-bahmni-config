@@ -124,14 +124,14 @@
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "conceptNames": [
-            "Triage Form"
+            "Signes vitaux"
           ],
           "numberOfVisits": 1,
           "showDetailsButton": true
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Triage Form"
+            "Signes vitaux"
           ],
           "numberOfVisits": "",
           "showDetailsButton": true,
@@ -886,21 +886,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Sc, Diagnostic"
-          ]
-        },
-        "displayOrder": 9,
-        "translationKey": "DASHBOARD_TITLE_DIAGNOSTIC"
-      },
-      "Autre": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Autre(si le diagnostic n'est pas listé)"
+            	"Informations Autres diagnostics (Suivi)"
           ]
         },
         "displayOrder": 9,

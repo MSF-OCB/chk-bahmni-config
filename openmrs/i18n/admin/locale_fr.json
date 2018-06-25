@@ -58,5 +58,7 @@
    "EDIT_PATIENT_DETAILS_MESSAGE":"L'utilisateur {{userId}} a modifié les détails du patient {{patientId}}",
    "MODULE" :"Module",
    "PRIVILEGE_REQUIRED": "L'utilisateur est connecté mais n'a pas les privilèges requis",
-   "RUN_REPORT_MESSAGE": "Rapport {{params.reportName}} lancé par l'utilisateur {{userId}}"
+   "RUN_REPORT_MESSAGE": "Rapport {{params.reportName}} lancé par l'utilisateur {{userId}}",
+   "MESSAGE_DIALOG_OPTION_COPY":"Copier Erreur",
+   "MESSAGE_DIALOG_OPTION_OKAY": "D'accord"
 }
