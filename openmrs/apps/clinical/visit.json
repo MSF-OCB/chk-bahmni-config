@@ -297,7 +297,7 @@
                 "config": {
                     "conceptNames": [
                         "Temperature Data",
-                        "Tension_arterielle Data",
+                        "Tension arterielle(Tabular)",
                         "Frequence cardiaque Data",
                         "Frequence respiratoire Data",
                         "Poids",
@@ -466,6 +466,19 @@
                 "displayOrder": 17,
                 "translationKey": "DASHBOARD_TITLE_SECONDARY_MEDICATION"
             },
+              "Informations de référence": {
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                       "Transfert, Date",
+            "Centre de réference",
+            "SC, PODI"
+                    ],
+                    "scope": "latest"
+                },
+                "displayOrder": 18,
+                "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY"
+            },
             "Note prochain RDV": {
                 "type": "observation",
                 "config": {
@@ -474,7 +487,7 @@
                     ],
                     "scope": "latest"
                 },
-                "displayOrder": 18,
+                "displayOrder": 19,
                 "translationKey": "DASHBOARD_TITLE_NOTES"
             }
         }

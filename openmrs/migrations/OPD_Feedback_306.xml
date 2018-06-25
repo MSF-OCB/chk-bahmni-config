@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+       
+
+ <changeSet id="OCB-CONFIG-201806211115" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                  select count(*) from concept_name where name  in ('Mode de sortie(Suivi)',
+                  'Hospi de jour(Suivi)','Hospi Entrée(Suivi)','Transfert(Suivi)','Domicile(Suivi)','Abandon(Suivi)',
+                  'Reféré(Suivi)','Décés(Suivi)','Informations mode de sortie(Suivi)');
+                </sqlCheck>
+
+        </preConditions>
+        <comment>creating new concepts to add in suivi form</comment>
+        <sql>
+ set @concept_id = 0;
+set @concept_short_id = 0;
+set @concept_full_id = 0;
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Informations mode de sortie(Suivi)','Informations mode de sortie','N/A','Misc',true);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Mode de sortie(Suivi)','Mode de sortie','Coded','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hospi de jour(Suivi)','Hospi de jour','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Hospi Entrée(Suivi)','Hospi Entrée','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Transfert(Suivi)','Transfert','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Domicile(Suivi)','Domicile','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Abandon(Suivi)','Abandon','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Reféré(Suivi)','Reféré','N/A','Misc',false);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Décés(Suivi)','Décés','N/A','Misc',false);
+</sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201806211116" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN('Hospi de jour(Suivi)','Hospi Entrée(Suivi)','Transfert(Suivi)','Domicile(Suivi)','Abandon(Suivi)','Reféré(Suivi)','Décés(Suivi)') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Mode de sortie(Suivi)');
+
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding ALBENDAZOLE concept as answer to Prophylaxie </comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+            set @child3_concept_id = 0;
+            set @child4_concept_id = 0;
+            set @child5_concept_id = 0;
+            set @child6_concept_id = 0;
+            set @child7_concept_id = 0;
+
+
+            select concept_id into @concept_id from concept_name where name = 'Mode de sortie(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @child1_concept_id from concept_name where name = 'Hospi de jour(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child2_concept_id from concept_name where name = 'Hospi Entrée(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child3_concept_id from concept_name where name = 'Transfert(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child4_concept_id from concept_name where name = 'Domicile(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child5_concept_id from concept_name where name = 'Abandon(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child6_concept_id from concept_name where name = 'Reféré(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @child7_concept_id from concept_name where name = 'Décés(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            call add_concept_answer(@concept_id, @child3_concept_id, 3);
+            call add_concept_answer(@concept_id, @child4_concept_id, 4);
+            call add_concept_answer(@concept_id, @child5_concept_id, 5);
+            call add_concept_answer(@concept_id, @child6_concept_id, 6);
+            call add_concept_answer(@concept_id, @child7_concept_id, 7);
+
+          </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201806211117" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Mode de sortie(Suivi)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name ='Informations mode de sortie(Suivi)');
+                </sqlCheck>
+        </preConditions>
+        <comment>adding set members to Informations mode de sortie(Suivi) section </comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Informations mode de sortie(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Mode de sortie(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+          </sql>
+        </changeSet>
+         <changeSet id="OCB-CONFIG-201806211118" author="Vishnu">
+        <comment> updating the sortweight for Prochain concept in Suivi form</comment>
+        <sql>
+            update concept_set set sort_weight=10 where concept_id in (select concept_id from concept_name where name ='Prochain RDV' and locale='fr' and concept_name_type='FULLY_SPECIFIED') and concept_set in (select concept_id from concept_name where name ='Suivi Consultation' and locale='fr' and concept_name_type='FULLY_SPECIFIED');
+          </sql>
+        </changeSet>
+<changeSet id="OCB-CONFIG-201806211119" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Informations mode de sortie(Suivi)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name ='Suivi Consultation');
+                </sqlCheck>
+        </preConditions>
+        <comment>adding new set members to Suivi form "Informations mode de sortie(Suivi) section" </comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Suivi Consultation' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Informations mode de sortie(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 9);
+          </sql>
+        </changeSet>
+         
+    </databaseChangeLog>

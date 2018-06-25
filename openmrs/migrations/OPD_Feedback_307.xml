@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        <changeSet id="OCB-CONFIG-20180621" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Triage Form') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'All Observation Templates');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Triage form to all tests and Panels</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'All Observation Templates' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Triage Form' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+          </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201806210813" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                  select count(*) from concept_name where name ='Signes vitaux' and locale='fr'
+                  and concept_name_type in ('FULLY_SPECIFIED','SHORT');
+                </sqlCheck>
+        </preConditions>
+        <comment>updating Triage form name to "Signes vitaux"</comment>
+        <sql>
+           update concept_name set name ='Signes vitaux' where name ='Triage Form' and locale='fr'
+           and concept_name_type in ('FULLY_SPECIFIED','SHORT');
+          </sql>
+        </changeSet>
+    
+
+     <changeSet id="OCB-CONFIG-201806210824" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN('ALBENDAZOLE') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = 'Prophylaxie');
+
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding ALBENDAZOLE concept as answer to Prophylaxie </comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Prophylaxie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+             select concept_id into @child1_concept_id from concept_name where name = 'ALBENDAZOLE' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 5);
+          </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201806210825" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_answer ca
+                   join
+                   concept_name cn
+                   on ca.concept_id = cn.concept_id
+                   where ca.answer_concept IN (select concept_id from concept_name where name IN('ALBENDAZOLE') and concept_name_type = "FULLY_SPECIFIED")
+                   AND
+                   cn.concept_id IN (select concept_id from concept_name where name = "IPD Admission, Prophylaxie à l'admission");
+
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding ALBENDAZOLE concept as answer to IPDADM form </comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = "IPD Admission, Prophylaxie à l'admission" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+             select concept_id into @child1_concept_id from concept_name where name = 'ALBENDAZOLE' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 5);
+          </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201806210828" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                  select count(*) from concept_name where name ='Tension arterielle - Systolique (mmHg)' and locale='fr'
+                  and concept_name_type in ('FULLY_SPECIFIED','SHORT');
+                </sqlCheck>
+        </preConditions>
+        <comment>updating Tension arterielle (mmHg) concept to "Tension arterielle - Systolique"</comment>
+        <sql>
+           update concept_name set name ='Tension arterielle - Systolique (mmHg)' where name ='Tension arterielle' and locale='fr'
+           and concept_name_type in ('FULLY_SPECIFIED','SHORT');
+          </sql>
+        </changeSet>
+
+ <changeSet id="OCB-CONFIG-201806210829" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                  select count(*) from concept_name where name ='Tension arterielle - diastolique (mmHg)'
+                </sqlCheck>
+        </preConditions>
+        <comment>creating 'Tension arterielle - diastolique' concept</comment>
+        <sql>
+ set @concept_id = 0;
+set @concept_short_id = 0;
+set @concept_full_id = 0;
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tension arterielle - diastolique (mmHg)','Tension arterielle - diastolique (mmHg)','Numeric','Misc',false);
+
+ INSERT INTO concept_numeric
+ (concept_id,hi_absolute,hi_critical,hi_normal,low_absolute,low_critical,low_normal,units,precise,display_precision)
+  VALUES ((select concept_id from concept_name where name = 'Tension arterielle - diastolique (mmHg)'
+   and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0),NULL,NULL,NULL,NULL,NULL,60,'mmHg',1,NULL);
+          </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201806210830" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                  select count(*) from concept_name where name  in ('Tension arterielle - diastolique(Data)','Tension arterielle(Tabular)')
+                </sqlCheck>
+        </preConditions>
+        <comment>creating 'Tension arterielle - diastolique(data)' concept</comment>
+        <sql>
+ set @concept_id = 0;
+set @concept_short_id = 0;
+set @concept_full_id = 0;
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tension arterielle - diastolique(Data)','Tension arterielle - diastolique (mmHg)','N/A','Concept Details',true);
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tension arterielle(Tabular)','Tension arterielle','N/A','Misc',true);
+
+
+          </sql>
+        </changeSet>
+  <changeSet id="OCB-CONFIG-201806210831" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                  select count(*) from concept_name where name ='Tension arterielle - diastolique(Abnormal)'
+                </sqlCheck>
+        </preConditions>
+        <comment>creating 'Tension arterielle - diastolique(data)' abnormal  concept</comment>
+        <sql>
+ set @concept_id = 0;
+set @concept_short_id = 0;
+set @concept_full_id = 0;
+call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'Tension arterielle - diastolique(Abnormal)','Abnormal','Boolean','Abnormal',false);
+
+          </sql>
+        </changeSet>
+
+  <changeSet id="OCB-CONFIG-201806210834" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Tension arterielle - diastolique (mmHg)','Tension arterielle - diastolique(Abnormal)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Tension arterielle - diastolique(Data)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding Triage form to all tests and Panels</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Tension arterielle - diastolique(Data)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Tension arterielle - diastolique (mmHg)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Tension arterielle - diastolique(Abnormal)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+          </sql>
+        </changeSet>  
+        <changeSet id="OCB-CONFIG-201806210836" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('	Tension_arterielle Data','Tension arterielle - diastolique(Data)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Tension arterielle(Tabular)');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding newconcepts(Blood pressure) to triage form</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            set @member2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'Tension arterielle(Tabular)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Tension_arterielle Data' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @member2_concept_id from concept_name where name = 'Tension arterielle - diastolique(Data)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+          </sql>
+        </changeSet> 
+        <changeSet id="OCB-CONFIG-201806210840" author="Vishnu">
+       
+        <comment>removing existing tension concept from Triage form</comment>
+        <sql>
+            delete from concept_set where concept_id in (select concept_id from concept_name
+            where name ='Tension_arterielle Data' and locale='fr' and concept_name_type
+            ='FULLY_SPECIFIED') and concept_set in (select concept_id from
+            concept_name where name='Signes vitaux' and locale='fr'
+            and concept_name_type='FULLY_SPECIFIED');
+                    </sql>
+        </changeSet>
+
+  <changeSet id="OCB-CONFIG-201806210839" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('Tension arterielle(Tabular)') AND concept_name_type = "FULLY_SPECIFIED")
+                   and cs.concept_set IN (select concept_id from concept_name where name = 'Signes vitaux');
+                </sqlCheck>
+        </preConditions>
+        <comment>Adding newconcepts(Blood pressure) to triage form</comment>
+        <sql>
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = 'Signes vitaux' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          
+            select concept_id into @member1_concept_id from concept_name where name = 'Tension arterielle(Tabular)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+           
+            call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+            
+          </sql>
+        </changeSet> 
+    </databaseChangeLog>
+    

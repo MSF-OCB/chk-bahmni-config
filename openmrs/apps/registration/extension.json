@@ -30,19 +30,5 @@
         "icon": "fa-patient-edit",
         "order": 1,
         "requiredPrivilege": "View Patients"
-    },
-"Triage Form":{
-        "id": "bahmni.registration.conceptSetGroup.nutritionalLevels",
-        "extensionPointId": "org.bahmni.registration.conceptSetGroup.observations",
-        "type": "config",
-        "extensionParams": {
-            "conceptName": "Triage Form",
-            "translationKey": "REGISTRATION_VISIT_KEY",
-            "conceptNames": ["Triage Form"],
-            "required":true,
-            "showLatest": false
-        },
-        "order": 1,
-        "requiredPrivilege": "Edit Visits"
     }
 }

@@ -778,7 +778,7 @@
           "numberOfVisits": 1,
           "conceptNames": [
             "Temperature Data",
-            "Tension_arterielle Data",
+            "Tension arterielle(Tabular)",
             "Frequence cardiaque Data",
             "Frequence respiratoire Data",
             "Poids",
@@ -925,7 +925,7 @@
         "type": "vitals",
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES",
-        "displayOrder": 11,
+        "displayOrder": 8,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
@@ -1020,6 +1020,35 @@
         "displayOrder": 17,
         "translationKey": "DASHBOARD_TITLE_SECONDARY_MEDICATION"
       },
+   "transfertObs": {
+        "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "displayOrder": 18,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 3,
+          "conceptNames": [
+            "Transfert, Date",
+            "Centre de réference",
+            "SC, PODI"
+          ]
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Transfert, Date",
+            "Centre de réference",
+            "SC, PODI",
+            "Notes"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
+      },
       "Note prochain RDV": {
         "type": "vitals",
         "isObservation": true,
@@ -1031,7 +1060,7 @@
             "Prochain RDV"
           ]
         },
-        "displayOrder": 18,
+        "displayOrder": 19,
         "translationKey": "DASHBOARD_TITLE_NOTES"
       }
     }

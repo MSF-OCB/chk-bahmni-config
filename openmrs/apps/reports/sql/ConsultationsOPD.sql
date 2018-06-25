@@ -42,7 +42,8 @@ select
     group_concat(distinct(drugs.name) ,'')                                      AS `Traitement`,
     effects1.name                                   AS `Effets secondaires 1`,
     effects2.name                                   AS `Effets secondaires 2`,
-    effects3.name                                   AS `Effets secondaires 3`
+    effects3.name                                   AS `Effets secondaires 3`,
+    infomode.infoname as "Mode de sortie"
 from person p
     INNER JOIN person_name pn ON p.person_id = pn.person_id AND p.voided IS FALSE AND pn.voided IS FALSE
     INNER JOIN patient_identifier pi ON pi.patient_id = pn.person_id AND pi.voided IS FALSE
@@ -1021,6 +1022,29 @@ group by patient_id,visit_id,enrolledDate
                                        ON test_obs.encounter_id = e.encounter_id
                                GROUP BY v.visit_id) latest_obs_test
                        ON latest_obs_test.test_obsDateTime = o.obs_datetime AND latest_obs_test.visit_id = v.visit_id) glyceme ON glyceme.person_id = v.patient_id AND glyceme.visit_id = v.visit_id
+                       left join
+                       (
+                               select
+                   o.person_id,
+                   latestEncounter.visit_id,
+                   answer_concept.name as infoname
+               from obs o
+                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE and o.voided is false
+                   INNER JOIN (select
+                                   e.visit_id,
+                                   max(e.encounter_datetime) AS `encounterTime`,
+                                   cn.concept_id
+                               from obs o
+                                   INNER join concept_name cn
+                                       on o.concept_id = cn.concept_id and cn.name = 'Mode de sortie(Suivi)' AND cn.voided IS FALSE AND
+                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr' and o.voided IS FALSE
+                                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE
+                               GROUP BY e.visit_id) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime AND
+                                                                       o.concept_id = latestEncounter.concept_id
+                   INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
+                                                             answer_concept.concept_name_type = 'FULLY_SPECIFIED' AND answer_concept.locale = 'fr'
+                       ) as infomode on infomode.person_id=p.person_id and infomode.visit_id =v.visit_id
+                       
     LEFT JOIN (SELECT
                    o.person_id,
                    v.visit_id,
