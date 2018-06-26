@@ -42,4 +42,18 @@
      update program_attribute_type set description='Date de fin' where name ='End Date for Program';
    </sql>
    </changeSet>
+ <changeSet id="OCB-CONFIG-201806251138" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name  where name ='Laisser sortir' and concept_name_type in ('FULLY_SPECIFIED','SHORT');
+            </sqlCheck>
+        </preConditions>
+        <comment>updating the IPD concept names as per the feedback card #302 </comment>
+        <sql>
+      update concept_name set name ='Laisser sortir'  where name ='Laisser sortir le patient'
+      and locale='fr' and concept_name_type='SHORT';
+      update concept_name set name ='Laisser sortir'  where name ='Laisser sortir le patient'
+      and locale='fr' and concept_name_type='SHORT';
+   </sql>
+   </changeSet>
  </databaseChangeLog>

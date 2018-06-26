@@ -236,7 +236,7 @@
         "displayOrder": 12
       },
       "regimenARV": {
-        "translationKey": "Regimen ARV",
+        "translationKey": "DASHBOARD_TITLE_REGIME_ARV",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 15,
