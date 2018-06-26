@@ -7579,4 +7579,31 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <include file ="OPD_Feedback_306.xml"/>
 <include file ="OPD_Feedback_307.xml"/>
 <include file ="OPD_IPD_Translations_302.xml"/>
+<changeSet id="OCB-CONFIG-201806251413" author="Pritam">
+     <comment>Adding New drug into the list </comment>
+     <sqlFile  path="AddingDrugName_New.sql"/>
+ </changeSet>
+ <changeSet id="OCB-CONFIG-201806251704" author="Pritam">
+   <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="1">
+          select count(*) from concept_set
+          where concept_set in
+                              (select distinct concept_id from concept_name where name ='Dosing Units')
+          and concept_id in   (select concept_id
+                               from concept_name
+                              where name in
+                                          ('g','goutte','application','boite','ml','Capsule','gélule','bouffée','mg','ui','implant','Dose')
+                               )
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing set members for the Dosing Units</comment>
+     <sql>
+          delete from concept_set where concept_id in
+          (select distinct concept_id from concept_name where name in
+                ('g','goutte','application','boite','ml','Capsule','gélule','bouffée','mg','ui','implant','Dose'))
+        and concept_set in
+                (select distinct concept_id from concept_name where name ='Dosing Units');
+     </sql>
+</changeSet>
+
 </databaseChangeLog>
