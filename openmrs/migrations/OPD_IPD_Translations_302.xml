@@ -15,6 +15,21 @@
       and locale='fr' and concept_name_type='FULLY_SPECIFIED';
    </sql>
    </changeSet>
+        <changeSet id="OCB-CONFIG-201806251137" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name  where name in ('Paraclinique - Radiologie','Paraclinique - Echographie') and concept_name_type='SHORT';
+                ;
+            </sqlCheck>
+        </preConditions>
+        <comment>updating the concept names as per the feedback card #302 </comment>
+        <sql>
+      update concept_name set name ='Paraclinique - Radiologie'  where name ='Paraclinique'
+      and locale='fr' and concept_name_type='SHORT';
+      update concept_name set name ='Paraclinique - Echographie'  where name ='Echographie'
+      and locale='fr' and concept_name_type='SHORT';
+   </sql>
+   </changeSet>
           <changeSet id="OCB-CONFIG-201806251136" author="Vishnu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
