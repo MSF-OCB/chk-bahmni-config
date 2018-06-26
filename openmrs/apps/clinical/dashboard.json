@@ -418,7 +418,7 @@
         ]
       },
       "ipdObservation": {
-        "translationKey": "IPD Observation",
+        "translationKey": "DASHBOARD_IPD_TAB_OBS_DETAILS",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 1,
