@@ -31,7 +31,7 @@
             },
             "ipdObservation":{
                 "type":"observation",
-                "translationKey":"IPD Observation",
+                "translationKey":"DASHBOARD_IPD_TAB_OBS_DETAILS",
                 "displayOrder":1,
                 "displayType": "Full-Page",
                 "config":{

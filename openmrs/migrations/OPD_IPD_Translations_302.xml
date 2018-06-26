@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        <changeSet id="OCB-CONFIG-201806251135" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from concept_name  where name in ('Paraclinique - Radiologie','Paraclinique - Echographie');
+                ;
+            </sqlCheck>
+        </preConditions>
+        <comment>updating the concept names as per the feedback card #302 </comment>
+        <sql>
+      update concept_name set name ='Paraclinique - Radiologie'  where name ='Paraclinique'
+      and locale='fr' and concept_name_type='FULLY_SPECIFIED';
+      update concept_name set name ='Paraclinique - Echographie'  where name ='Echographie'
+      and locale='fr' and concept_name_type='FULLY_SPECIFIED';
+   </sql>
+   </changeSet>
+          <changeSet id="OCB-CONFIG-201806251136" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from program_attribute_type where description='Date de fin'
+                and name ='End Date for Program';
+            </sqlCheck>
+        </preConditions>
+        <comment>Translating end date in program attributes </comment>
+        <sql>
+     update program_attribute_type set description='Date de fin' where name ='End Date for Program';
+   </sql>
+   </changeSet>
+ </databaseChangeLog>

@@ -12,7 +12,7 @@
   "NO_DISPOSTIONS_AVAILABLE_MESSAGE_KEY": "Pas de mouvement disponible",
   "IPD_DASHBOARD_ORDERS_LINK_KEY" : "Demande bilan",
   "IPD_DASHBOARD_DASHBOARD_LINK_KEY" : "Tableau de bord Clinique",
-  "IPD_DASHBOARD_MEDICATIONS_LINK_KEY" : "Ordonnance",
+  "IPD_DASHBOARD_MEDICATIONS_LINK_KEY" : "Prescription médicale",
   "IPD_DASHBOARD_OBSERVATION_LINK_KEY" : "Observations",
   "YEARS_LABEL" : "ans",
   "CLINICAL_YEARS_TRANSLATION_KEY": "ans",
@@ -23,5 +23,8 @@
   "MODULE_LABEL_TO_DISCHARGE_KEY":"A laisser sortir",
   "MODULE_LABEL_ALL_KEY": "Tous",
   "IPD_ADMIT_PATIENT_KEY": "Hospitaliser le patient",
-  "GO_CLINICAL_DASHBOARD_KEY": "Aller au tableau de bord clinique"
+  "GO_CLINICAL_DASHBOARD_KEY": "Aller au tableau de bord clinique",
+  "ADT_IPD_PATIENT_UNDO_DISCHARGE_KEY":"Annuler la sortie",
+  "ADT_IPD_PATIENT_ADMIT_BUTTON_KEY" :"Hospitaliser",
+  "ADT_IPD_PATIENT_DISCHARGE_KEY" :"Laisser sortir"
 }
