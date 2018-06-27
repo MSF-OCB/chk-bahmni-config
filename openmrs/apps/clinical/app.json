@@ -281,9 +281,6 @@
       "PODI":{
         "dropdown":true
       },
-      "TDR":{
-        "allowAddMore": true
-      },
       "Regimen Start reason":{
         "dropdown":true
       },

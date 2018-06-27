@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+<changeSet id="OCB-CONFIG-201806262145" author="Pritam">
+          <preConditions onFail="MARK_RAN">
+              <sqlCheck expectedResult="2">
+                select count(*) from concept
+                where datatype_id = (select concept_datatype_id from concept_datatype where `name` = "N/A")
+                and
+                concept_id in (select concept_id from concept_name
+                               where `name` in ("TR, TDR - Malaria","TB - LAM")
+                               and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0
+                               )
+              </sqlCheck>
+          </preConditions>
+      <comment>updating concepts datatype for Tests rapides form</comment>
+            <sql>
+                  update concept set datatype_id = (select concept_datatype_id from concept_datatype where `name` = "Coded"  )
+                  where concept_id in (select concept_id from concept_name where name = "TR, TDR - Malaria" and concept_name_type = 'FULLY_SPECIFIED' and voided = 0);
+
+                  update concept set datatype_id = (select concept_datatype_id from concept_datatype where `name` = "Coded" )
+                  where concept_id in (select concept_id from concept_name where name = "TB - LAM" and concept_name_type = 'FULLY_SPECIFIED' and voided = 0);
+              </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201806262146" author="Pritam">
+        <comment>Adding concept answers for TR, TDR - Malaria </comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = "TR, TDR - Malaria" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201806262147" author="Pritam">
+        <comment>Adding concept answers for TB - LAM </comment>
+        <sql>
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = "TB - LAM" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'Positif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Négatif' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+        </sql>
+</changeSet>
+
+
+<changeSet id="OCB-CONFIG-201806262100" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+              <sqlCheck expectedResult="6">
+                select count(*) from concept_answer where concept_id in (select concept_id from concept_name where `name` = "Tests")
+              </sqlCheck>
+      </preConditions>
+              <comment>Removing answers from Tests</comment>
+              <sql>
+                delete from concept_answer where concept_id in (select concept_id from concept_name where `name` = "Tests")
+              </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201806262101" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+              <sqlCheck expectedResult="3">
+                select count(*) from concept_set where concept_set in (select concept_id from concept_name where `name` = "TDR")
+              </sqlCheck>
+      </preConditions>
+              <comment>Removing set members from TDR</comment>
+              <sql>
+                Delete from concept_set where concept_set in (select concept_id from concept_name where `name` = "TDR")
+              </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201806262102" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+              <sqlCheck expectedResult="0">
+                select count(*)
+                from concept_set
+                where concept_id in (
+                                     select concept_id
+                                     from concept_name
+                                     where `name` in
+                                                    ("Tests","Résultat(Numérique)","Résultat(Option)")
+                                     )
+              </sqlCheck>
+      </preConditions>
+              <comment>Adding set members to TDR</comment>
+              <sql>
+                set @concept_id = 0;
+                set @member1_concept_id = 0;
+                set @member2_concept_id = 0;
+                set @member3_concept_id = 0;
+                set @member4_concept_id = 0;
+                set @member5_concept_id = 0;
+                set @member6_concept_id = 0;
+
+                select concept_id into @concept_id from concept_name where name = "TDR" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                select concept_id into @member1_concept_id from concept_name where name = "CD4 % (Enfants de moins de 5 ans)(%)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member2_concept_id from concept_name where name = "CD4(cells/µl)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member3_concept_id from concept_name where name = "Glycémie(mg/dl)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member4_concept_id from concept_name where name = "Hémoglobine (Hemocue)(g/dl)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member5_concept_id from concept_name where name = "TR, TDR - Malaria" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member6_concept_id from concept_name where name = "TB - LAM" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+                call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+                call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+                call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+                call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+                call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+              </sql>
+</changeSet>
+
+ </databaseChangeLog>
