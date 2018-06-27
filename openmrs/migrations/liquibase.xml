@@ -7605,5 +7605,16 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
                 (select distinct concept_id from concept_name where name ='Dosing Units');
      </sql>
 </changeSet>
+<changeSet id="OCB-CONFIG-201806271013" author="Vishnu">
+ <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="1">
+                  select count(*) from role_role where parent_role ='Clinical-App-Read-Only' and child_role ='Receptionist';
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing Clinical access to Receptionist </comment>
+     <sql>
+       delete from role_role where parent_role ='Clinical-App-Read-Only' and child_role ='Receptionist';
+     </sql>
+ </changeSet>
 
 </databaseChangeLog>
