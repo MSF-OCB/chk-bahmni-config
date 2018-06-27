@@ -9,7 +9,7 @@ SELECT
     dateResults AS "Date résultats",
     typeOfVisit AS "Type de visite",
     sum(Labtest1768) AS "Hémoglobine (Hemocue)(g/dl)",
-    (Select concept_full_name FROM concept_view WHERE concept_id = sum(Labtest549)) AS "TDR - Malaria",
+    (Select concept_full_name FROM concept_view WHERE concept_id = sum(Labtest1773)) AS "TDR - Malaria",
     sum(Labtest1769) AS "Glycémie(mg/dl)",
     sum(Labtest1771) AS "CD4 % (Enfants de moins de 5 ans)(%)",
     sum(Labtest1770) AS "CD4(cells/µl)",
@@ -18,11 +18,11 @@ SELECT
 FROM
       (
       SELECT
-      obsLabResults.obs_datetime,
-      obsLabResults.person_id,
+      obsLabTest.obs_datetime,
+      obsLabTest.person_id,
       pi.identifier,
       cv.concept_full_name,
-      DATE_FORMAT(obsLabResults.obs_datetime, '%d/%m/%Y %H:%i:%S') AS "dateResults" ,
+      DATE_FORMAT(obsLabTest.obs_datetime, '%d/%m/%Y %H:%i:%S') AS "dateResults" ,
       vtype.name AS "typeOfVisit",
       concat( COALESCE(NULLIF(pnPersonAttribute.given_name, ''), ''), ' ', COALESCE(NULLIF(pnPersonAttribute.family_name, ''), '') ) AS "NameOfPerson",
       concat(floor(datediff(now(), person.birthdate)/365), ' ans, ',  floor((datediff(now(), person.birthdate)%365)/30),' mois') AS "personAge",
@@ -32,45 +32,37 @@ FROM
            WHEN person.gender = 'O' THEN 'A'
            else person.gender END AS "gender",
       date_format(pa.date_created, '%d/%m/%Y') AS "dateTypeTheCohorte",
-      CASE WHEN obsLabTest.value_coded = (
-                                          SELECT concept_id
-                                          FROM concept_view
-                                          WHERE concept_full_name = "CD4 % (Enfants de moins de 5 ans)(%)"
-                                          )
-                                          THEN obsLabResults.value_numeric  END AS 'Labtest1771',
-      CASE WHEN obsLabTest.value_coded = (
-                                          SELECT concept_id
-                                          FROM concept_view
-                                          WHERE concept_full_name = "CD4(cells/µl)"
-                                          )
-                                          THEN obsLabResults.value_numeric  END AS 'Labtest1770',
-      CASE WHEN obsLabTest.value_coded = (
-                                          SELECT concept_id
-                                          FROM concept_view
-                                          WHERE concept_full_name = "Glycémie(mg/dl)"
-                                          )
-                                          THEN obsLabResults.value_numeric  END AS 'Labtest1769',
-      CASE WHEN obsLabTest.value_coded = (
-                                          SELECT concept_id
-                                          FROM concept_view
-                                          WHERE concept_full_name = "TB - LAM"
-                                          ) THEN obsLabResults.value_coded  END AS 'Labtest1772',
-      CASE WHEN obsLabTest.value_coded = (
-                                          SELECT concept_id
-                                          FROM concept_view
-                                          WHERE concept_full_name = "Hémoglobine (Hemocue)(g/dl)"
-                                          )
-                                          THEN obsLabResults.value_numeric  END AS 'Labtest1768',
-      CASE WHEN obsLabTest.value_coded = (
-                                          SELECT concept_id
-                                          FROM concept_view
-                                          WHERE concept_full_name = "TR, TDR - Malaria"
-                                          ) THEN obsLabResults.value_coded  END AS 'Labtest549'
-
-      FROM obs obsLabTest
-      INNER JOIN obs obsLabResults ON obsLabResults.obs_group_id = obsLabTest.obs_group_id
-      AND obsLabResults.person_id = obsLabTest.person_id
-      AND obsLabTest.obs_id != obsLabResults.obs_id
+    CASE WHEN obsLabTest.concept_id = (SELECT concept_id
+                               FROM concept_view
+                               WHERE concept_full_name = "CD4 % (Enfants de moins de 5 ans)(%)"
+                               )
+    THEN obsLabTest.value_numeric  END AS 'Labtest1771',
+    CASE WHEN obsLabTest.concept_id = (SELECT concept_id
+                               FROM concept_view
+                               WHERE concept_full_name = "CD4(cells/µl)"
+                               )
+    THEN obsLabTest.value_numeric  END AS 'Labtest1770',
+    CASE WHEN obsLabTest.concept_id = (SELECT concept_id
+                               FROM concept_view
+                               WHERE concept_full_name = "Glycémie(mg/dl)"
+                               )
+    THEN obsLabTest.value_numeric  END AS 'Labtest1769',
+    CASE WHEN obsLabTest.concept_id = (SELECT concept_id
+                               FROM concept_view
+                               WHERE concept_full_name = "Hémoglobine (Hemocue)(g/dl)"
+                               )
+    THEN obsLabTest.value_numeric  END AS 'Labtest1768',
+    CASE WHEN obsLabTest.concept_id = (SELECT concept_id
+                               FROM concept_view
+                               WHERE concept_full_name = "TR, TDR - Malaria"
+                               )
+    THEN obsLabTest.value_coded  END AS 'Labtest1773',
+    CASE WHEN obsLabTest.concept_id = (SELECT concept_id
+                               FROM concept_view
+                               WHERE concept_full_name = "TB - LAM"
+                               )
+    THEN obsLabTest.value_coded  END AS 'Labtest1772'
+    FROM obs obsLabTest
       INNER JOIN patient_identifier pi ON obsLabTest.person_id = pi.patient_id
       INNER JOIN person_attribute pa ON obsLabTest.person_id = pa.person_id
       INNER JOIN person_attribute_type pat ON pa.person_attribute_type_id = pat.person_attribute_type_id AND pat.name = "Type de cohorte" AND pat.retired = 0
@@ -80,26 +72,10 @@ FROM
       INNER JOIN visit v ON v.patient_id = person.person_id AND v.voided = 0
       INNER JOIN visit_type vtype ON v.visit_type_id = vtype.visit_type_id
 
-      WHERE obsLabTest.concept_id = (
-                                     SELECT concept_id
-                                     FROM concept_view
-                                     WHERE concept_full_name = "Tests"
-                                    )
-      AND obsLabTest.value_coded IN
-                                  (SELECT concept_id
-                                  FROM concept_view
-                                  WHERE concept_full_name in
-                                                            ("CD4 % (Enfants de moins de 5 ans)(%)",
-                                                            "CD4(cells/µl)","Glycémie(mg/dl)",
-                                                            "Hémoglobine (Hemocue)(g/dl)",
-                                                            "TB - LAM",
-                                                            "TR, TDR - Malaria")
-                                                            )
-      AND obsLabResults.voided = 0
-      AND obsLabTest.voided = 0
-      AND DATE(obsLabResults.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
-      Group  by obs_datetime,obsLabTest.value_coded
+      WHERE  obsLabTest.voided = 0
+      AND DATE(obsLabTest.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
+
       ) AS TDRReport
 
-group by person_id,obs_datetime
+group by person_id,obs_datetime,dateResults
 ORDER BY obs_datetime
