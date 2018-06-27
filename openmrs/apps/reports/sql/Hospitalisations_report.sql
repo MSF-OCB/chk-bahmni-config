@@ -16,8 +16,8 @@
     group_concat(DISTINCT (dg2.S2),'') as "2er diagnostic à la sortie",
      DATE_FORMAT(sortdate.name,'%d/%m/%Y') as "Date de sortie",
      modi.S1 as "Mode de sortie",
-    CD.value as "CD4(cells/µl)",
-    DATE_FORMAT(CD.CDDATE,'%d/%m/%Y') as "Date resultat CD4",
+    cd4.VALUE as "CD4(cells/µl)",
+    DATE_FORMAT(cd4.cd4_obsDateTime,'%d/%m/%Y') as "Date resultat CD4",
     CV.value as "CV(copies/ml)",
     DATE_FORMAT(CV.CVDate,'%d/%m/%Y') as "Date resultat CV"
 
@@ -238,11 +238,7 @@
                                                       ) 
                                                       AND   obsForActivityStatus.voided = 0
                   )as syndrome on syndrome.person_id=patientDetails.person_id and syndrome.visit=v.visit_id
-                  
-                
-                  
-     
-   
+  
     
                        
 
@@ -393,72 +389,39 @@
     left join
     (
      SELECT
-      o.person_id,
-      
-      o.value_numeric AS value,
-      o.obs_datetime as CDDATE,
-      
-      e.visit_id as visitid
-    FROM obs o
-      INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND o.voided IS FALSE AND e.voided IS FALSE
-      INNER JOIN visit v ON v.visit_id = e.visit_id AND v.voided IS FALSE
-      INNER JOIN concept_view cv ON cv.concept_id = o.concept_id AND
-                                    cv.retired IS FALSE AND
-                                    cv.concept_full_name IN
-                                    ('Résultat(Numérique)', '	CD4(cells/µl)') AND
-                                    o.value_numeric IS NOT NULL
-      INNER JOIN (
-                   SELECT
-                     v.visit_id,
-                     max(test_obs.obs_datetime) AS test_obsDateTime
-                   FROM visit v
-                     INNER JOIN encounter e ON
-                                              e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
-                     INNER JOIN
-                     (
-                       ( SELECT
-                           o.encounter_id,
-                           o.person_id,
-                           o.obs_datetime ,
-                           o.value_numeric,
-                           o.concept_id
-                         FROM obs o
-                           INNER JOIN
-                           (SELECT o.obs_group_id
-                            FROM obs o
-                              INNER JOIN concept_view cv_q ON
-                                                             o.concept_id = cv_q.concept_id AND o.voided IS FALSE AND
-                                                             cv_q.retired IS FALSE AND
-                                                             cv_q.concept_full_name IN ('Tests')
-                              INNER JOIN concept_view cv_ans ON
-                                                               cv_ans.concept_id = o.value_coded AND cv_ans.retired IS FALSE AND
-                                                               cv_ans.concept_full_name IN ('CD4(cells/µl)')
-                           ) parent_obs ON parent_obs.obs_group_id = o.obs_group_id
-                           INNER JOIN concept_view cv_result ON cv_result.concept_id = o.concept_id AND
-                                                                cv_result.retired IS FALSE AND
-                                                                cv_result.concept_full_name IN ('Résultat(Numérique)')
-                       )
-                       UNION
-                       ( SELECT
-                           o.encounter_id,
-                           o.person_id,
-                           o.obs_datetime,
-                           o.value_numeric,
-                           o.concept_id
-                         FROM obs o INNER JOIN concept_view cv_test
-                             ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND
-                                cv_test.retired IS FALSE AND
-                                cv_test.concept_full_name IN ('CD4') AND
-                                o.value_numeric IS NOT NULL
-                       )
-                     ) test_obs ON test_obs.encounter_id = e.encounter_id
-                   GROUP BY v.visit_id
-                 ) latest_obs_test ON latest_obs_test.test_obsDateTime = o.obs_datetime AND
-                                      latest_obs_test.visit_id = v.visit_id
-                                      
+                                   v.visit_id,
+                                   max(cd4_obs.obs_datetime) AS cd4_obsDateTime,
+                                   cd4_obs.person_id as PID,
+                                   cd4_obs.value_numeric as value
+                                   
+                               FROM visit v INNER JOIN encounter e
+                                       ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
+                                     
+                                   INNER JOIN
+                                   (SELECT
+                                         o.encounter_id,
+                                         o.person_id,
+                                         o.obs_datetime,
+                                         o.value_numeric,
+                                         o.concept_id
+                                     FROM obs o INNER JOIN concept_view cv_cd4
+                                             ON cv_cd4.concept_id = o.concept_id AND o.voided IS FALSE AND cv_cd4.retired IS FALSE AND
+                                                cv_cd4.concept_full_name IN ('CD4(cells/µl)') AND o.value_numeric IS NOT NULL
+
+                                    UNION
+                                    (SELECT
+                                         o.encounter_id,
+                                         o.person_id,
+                                         o.obs_datetime,
+                                         o.value_numeric,
+                                         o.concept_id
+                                     FROM obs o INNER JOIN concept_view cv_cd4
+                                             ON cv_cd4.concept_id = o.concept_id AND o.voided IS FALSE AND cv_cd4.retired IS FALSE AND
+                                                cv_cd4.concept_full_name IN ('CD4') AND o.value_numeric IS NOT NULL)) cd4_obs
+                                       ON cd4_obs.encounter_id = e.encounter_id
+                               GROUP BY v.visit_id) cd4 ON cd4.PID = patientDetails.person_id AND cd4.visit_id = v.visit_id
                                     
-                                    
-    )as CD on CD.person_id=patientDetails.person_id and CD.visitid=v.visit_id
+    
     left join 
     (
     SELECT
