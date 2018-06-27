@@ -392,7 +392,7 @@
                     ],
                     "scope": "latest"
                 },
-                "displayOrder": 9,
+                "displayOrder": 10,
                 "translationKey": "DASHBOARD_TITLE_AUTRE_DIAGNOSTIC"
             },
             "Conduite à tenir": {
@@ -403,13 +403,13 @@
                     ],
                     "scope": "latest"
                 },
-                "displayOrder": 10,
+                "displayOrder": 11,
                 "translationKey": "DASHBOARD_TITLE_CONDUITE_A_TENIR"
             },
             "Infections Opportunistes": {
                 "type": "observation",
                 "translationKey": "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES",
-                "displayOrder": 11,
+                "displayOrder": 9,
                 "config": {
                     "conceptNames": [
                         "Infections Opportunistes",
