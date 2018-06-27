@@ -51,7 +51,7 @@
   "LOGIN_LABEL_PASSWORD_KEY": "Mot de passe",
   "LOGIN_LABEL_LOCATION_KEY": "Emplacement",
   "LOGIN_LABEL_LOGIN_KEY": "S'identifier",
-  "HEADER_LABEL_LOGOUT_KEY": "Se déconnecter",
+  "HEADER_LABEL_LOGOUT_KEY": "Se deconnecter",
   "MODULE_LABEL_CLINICAL_KEY": "Clinique",
   "MODULE_LABEL_INPATIENT_KEY": "Hospitalisations",
   "MODULE_LABEL_RADIOLOGY_UPLOAD_KEY": "Radiologie chargement",

@@ -26,5 +26,6 @@
   "GO_CLINICAL_DASHBOARD_KEY": "Aller au tableau de bord clinique",
   "ADT_IPD_PATIENT_UNDO_DISCHARGE_KEY":"Annuler la sortie",
   "ADT_IPD_PATIENT_ADMIT_BUTTON_KEY" :"Hospitaliser",
-  "ADT_IPD_PATIENT_DISCHARGE_KEY" :"Laisser sortir"
+  "ADT_IPD_PATIENT_DISCHARGE_KEY" :"Laisser sortir",
+  "MESSAGE_DIALOG_OPTION_COPY":"Copier Erreur"
 }

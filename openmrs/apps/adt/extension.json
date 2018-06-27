@@ -49,7 +49,7 @@
         "extensionPointId": "org.bahmni.adt.discharge.action",
         "type": "config",
         "extensionParams" : {
-            "display": "Laisser sortir le",
+            "display": "Laisser sortir",
             "action":"discharge"
         },
         "order": 2,
