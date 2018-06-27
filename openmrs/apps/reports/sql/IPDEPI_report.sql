@@ -489,35 +489,25 @@
     GROUP BY visit_id) as genexpert on genexpert.patient_id=patientDetails.person_id and genexpert.visit=v.visit_id
     left join
   (
-  SELECT
-  person_id,
-  o.obs_datetime,
-  tbLam.visit_id as visitid,
-  cva.concept_full_name as Name
-FROM
-  obs o
-  INNER JOIN concept_view cv
-    ON cv.concept_id = o.concept_id AND cv.concept_full_name = 'Résultat(Option)' AND cv.retired IS FALSE AND
-       o.voided IS FALSE
-  INNER JOIN
-  (SELECT
-     et.visit_id,
-     MAX(oResult.obs_datetime) AS obs_datetime
-   FROM obs oTest
-     INNER JOIN encounter et ON et.encounter_id = oTest.encounter_id AND et.voided IS FALSE
-     INNER JOIN concept_view cvt
-       ON cvt.concept_id = oTest.concept_id AND cvt.concept_full_name = 'Tests' AND oTest.voided IS FALSE AND
-          cvt.retired IS FALSE
-     INNER JOIN concept_view cvta
-       ON cvta.concept_id = oTest.value_coded AND cvta.concept_full_name = 'TB - LAM' AND cvta.retired IS FALSE
-     LEFT JOIN obs oResult ON oResult.obs_group_id = oTest.obs_group_id AND oResult.voided IS FALSE
-     INNER JOIN concept_view cvr
-       ON cvr.concept_id = oResult.concept_id AND cvr.concept_full_name = 'Résultat(Option)' AND
-          cvr.retired IS FALSE
-   GROUP BY et.visit_id
-  ) tbLam
-    ON tbLam.obs_datetime = o.obs_datetime
-  LEFT JOIN concept_view cva ON cva.concept_id = o.value_coded AND cva.retired IS FALSE) as TBLAM on TBLAM.person_id=v.patient_id and v.visit_id=TBLAM.visitid
+  select
+                   o.person_id,
+                   latestEncounter.visit_id as visitid,
+                   answer_concept.name as Name
+               from obs o
+                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE and o.voided is false
+                   INNER JOIN (select
+                                   e.visit_id,
+                                   max(e.encounter_datetime) AS `encounterTime`,
+                                   cn.concept_id
+                               from obs o
+                                   INNER join concept_name cn
+                                       on o.concept_id = cn.concept_id and cn.name = 'TB - LAM' AND cn.voided IS FALSE AND
+                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr' and o.voided IS FALSE
+                                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE
+                               GROUP BY e.visit_id) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime AND
+                                                                       o.concept_id = latestEncounter.concept_id
+                   INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
+                                                             answer_concept.concept_name_type = 'FULLY_SPECIFIED' AND answer_concept.locale = 'fr') as TBLAM on TBLAM.person_id=v.patient_id and v.visit_id=TBLAM.visitid
 
 
 
@@ -585,130 +575,75 @@ FROM
     )as hep on hep.patient_id=patientDetails.person_id and hep.visitid=v.visit_id
     left join
     (
-    SELECT
-      o.person_id,
-      v.visit_id as visitid,
-      o.value_numeric AS value
-    FROM obs o
-      INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND o.voided IS FALSE AND e.voided IS FALSE
-      INNER JOIN visit v ON v.visit_id = e.visit_id AND v.voided IS FALSE
-      INNER JOIN concept_view cv ON cv.concept_id = o.concept_id AND
-                                    cv.retired IS FALSE AND
-                                    cv.concept_full_name IN
-                                    ('Résultat(Numérique)', 'Hemoglobine') AND
-                                    o.value_numeric IS NOT NULL
-      INNER JOIN (
-                   SELECT
-                     v.visit_id,
-                     max(test_obs.obs_datetime) AS test_obsDateTime
-                   FROM visit v
-                     INNER JOIN encounter e ON
-                                              e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
-                     INNER JOIN
-                     (
-                       ( SELECT
-                           o.encounter_id,
-                           o.person_id,
-                           o.obs_datetime,
-                           o.value_numeric,
-                           o.concept_id
-                         FROM obs o
-                           INNER JOIN
-                           (SELECT o.obs_group_id
-                            FROM obs o
-                              INNER JOIN concept_view cv_q ON
-                                                             o.concept_id = cv_q.concept_id AND o.voided IS FALSE AND
-                                                             cv_q.retired IS FALSE AND
-                                                             cv_q.concept_full_name IN ('Tests')
-                              INNER JOIN concept_view cv_ans ON
-                                                               cv_ans.concept_id = o.value_coded AND cv_ans.retired IS FALSE AND
-                                                               cv_ans.concept_full_name IN ('Hémoglobine (Hemocue)(g/dl)')
-                           ) parent_obs ON parent_obs.obs_group_id = o.obs_group_id
-                           INNER JOIN concept_view cv_result ON cv_result.concept_id = o.concept_id AND
-                                                                cv_result.retired IS FALSE AND
-                                                                cv_result.concept_full_name IN ('Résultat(Numérique)')
-                       )
-                       UNION
-                       ( SELECT
-                           o.encounter_id,
-                           o.person_id,
-                           o.obs_datetime,
-                           o.value_numeric,
-                           o.concept_id
-                         FROM obs o INNER JOIN concept_view cv_test
-                             ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND
-                                cv_test.retired IS FALSE AND
-                                cv_test.concept_full_name IN ('Hemoglobine') AND
-                                o.value_numeric IS NOT NULL
-                       )
-                     ) test_obs ON test_obs.encounter_id = e.encounter_id
-                   GROUP BY v.visit_id
-                 ) latest_obs_test ON latest_obs_test.test_obsDateTime = o.obs_datetime AND
-                                      latest_obs_test.visit_id = v.visit_id
-    )as hemo on hemo.person_id=patientDetails.person_id and hemo.visitid=v.visit_id
+  SELECT
+                                   v.visit_id as visitid,
+                                   max(hemo_obs.obs_datetime) AS hemo_obsDateTime,
+                                   hemo_obs.person_id as PID,
+                                   hemo_obs.value_numeric as value
+                                   
+                               FROM visit v INNER JOIN encounter e
+                                       ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
+                                     
+                                   INNER JOIN
+                                   (SELECT
+                                         o.encounter_id,
+                                         o.person_id,
+                                         o.obs_datetime,
+                                         o.value_numeric,
+                                         o.concept_id
+                                     FROM obs o INNER JOIN concept_view hemo_val
+                                             ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
+                                                hemo_val.concept_full_name IN ('Hémoglobine (Hemocue)(g/dl)') AND o.value_numeric IS NOT NULL
+
+                                    UNION
+                                    (SELECT
+                                         o.encounter_id,
+                                         o.person_id,
+                                         o.obs_datetime,
+                                         o.value_numeric,
+                                         o.concept_id
+                                     FROM obs o INNER JOIN concept_view hemo_val
+                                             ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
+                                                hemo_val.concept_full_name IN ('Hemoglobine') AND o.value_numeric IS NOT NULL)) hemo_obs
+                                       ON hemo_obs.encounter_id = e.encounter_id
+                               GROUP BY v.visit_id
+    )as hemo on hemo.PID=patientDetails.person_id and hemo.visitid=v.visit_id
     left join
     (
-    SELECT
-      o.person_id,
-      v.visit_id as visitid,
-      o.value_numeric AS value
-    FROM obs o
-      INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND o.voided IS FALSE AND e.voided IS FALSE
-      INNER JOIN visit v ON v.visit_id = e.visit_id AND v.voided IS FALSE
-      INNER JOIN concept_view cv ON cv.concept_id = o.concept_id AND
-                                    cv.retired IS FALSE AND
-                                    cv.concept_full_name IN
-                                    ('Résultat(Numérique)', 'Glycémie') AND
-                                    o.value_numeric IS NOT NULL
-      INNER JOIN (
-                   SELECT
-                     v.visit_id,
-                     max(test_obs.obs_datetime) AS test_obsDateTime
-                   FROM visit v
-                     INNER JOIN encounter e ON
-                                              e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
-                     INNER JOIN
-                     (
-                       ( SELECT
-                           o.encounter_id,
-                           o.person_id,
-                           o.obs_datetime,
-                           o.value_numeric,
-                           o.concept_id
-                         FROM obs o
-                           INNER JOIN
-                           (SELECT o.obs_group_id
-                            FROM obs o
-                              INNER JOIN concept_view cv_q ON
-                                                             o.concept_id = cv_q.concept_id AND o.voided IS FALSE AND
-                                                             cv_q.retired IS FALSE AND
-                                                             cv_q.concept_full_name IN ('Tests')
-                              INNER JOIN concept_view cv_ans ON
-                                                               cv_ans.concept_id = o.value_coded AND cv_ans.retired IS FALSE AND
-                                                               cv_ans.concept_full_name IN ('Glycémie(mg/dl)')
-                           ) parent_obs ON parent_obs.obs_group_id = o.obs_group_id
-                           INNER JOIN concept_view cv_result ON cv_result.concept_id = o.concept_id AND
-                                                                cv_result.retired IS FALSE AND
-                                                                cv_result.concept_full_name IN ('Résultat(Numérique)')
-                       )
-                       UNION
-                       ( SELECT
-                           o.encounter_id,
-                           o.person_id,
-                           o.obs_datetime,
-                           o.value_numeric,
-                           o.concept_id
-                         FROM obs o INNER JOIN concept_view cv_test
-                             ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND
-                                cv_test.retired IS FALSE AND
-                                cv_test.concept_full_name IN ('Glycémie') AND
-                                o.value_numeric IS NOT NULL
-                       )
-                     ) test_obs ON test_obs.encounter_id = e.encounter_id
-                   GROUP BY v.visit_id
-                 ) latest_obs_test ON latest_obs_test.test_obsDateTime = o.obs_datetime AND
-                                      latest_obs_test.visit_id = v.visit_id
-    )as gly on gly.person_id=patientDetails.person_id and gly.visitid=v.visit_id
+   SELECT
+                                   v.visit_id as visitid,
+                                   max(gly_obs.obs_datetime) AS gly_obsDateTime,
+                                   gly_obs.person_id as PID,
+                                   gly_obs.value_numeric as value
+                                   
+                               FROM visit v INNER JOIN encounter e
+                                       ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
+                                     
+                                   INNER JOIN
+                                   (SELECT
+                                         o.encounter_id,
+                                         o.person_id,
+                                         o.obs_datetime,
+                                         o.value_numeric,
+                                         o.concept_id
+                                     FROM obs o INNER JOIN concept_view gly_val
+                                             ON gly_val.concept_id = o.concept_id AND o.voided IS FALSE AND gly_val.retired IS FALSE AND
+                                                gly_val.concept_full_name IN ('Glycémie(mg/dl)') AND o.value_numeric IS NOT NULL
+
+                                    UNION
+                                    (SELECT
+                                         o.encounter_id,
+                                         o.person_id,
+                                         o.obs_datetime,
+                                         o.value_numeric,
+                                         o.concept_id
+                                     FROM obs o INNER JOIN concept_view gly_val
+                                             ON gly_val.concept_id = o.concept_id AND o.voided IS FALSE AND gly_val.retired IS FALSE AND
+                                                gly_val.concept_full_name IN ('Glycémie') AND o.value_numeric IS NOT NULL)) gly_obs
+                                       ON gly_obs.encounter_id = e.encounter_id
+                               GROUP BY v.visit_id
+         
+    )as gly on gly.PID=patientDetails.person_id and gly.visitid=v.visit_id
     left join
     (
     SELECT
