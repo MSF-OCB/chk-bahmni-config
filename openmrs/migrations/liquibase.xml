@@ -7616,5 +7616,16 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
        delete from role_role where parent_role ='Clinical-App-Read-Only' and child_role ='Receptionist';
      </sql>
  </changeSet>
+<changeSet id="OCB-CONFIG-201806271014" author="Vishnu">
+ <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="1">
+                  select count(*) from role_privilege where privilege in ('Delete Visits','Edit Visits') and role='Receptionist';
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing Close visit access to Receptionist </comment>
+     <sql>
+       delete from role_privilege where privilege in ('Delete Visits','Edit Visits') and role='Receptionist';
+     </sql>
+ </changeSet>
 
 </databaseChangeLog>
