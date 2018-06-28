@@ -23,16 +23,16 @@ sum(cast(case when B.GlYCEME='' then null else B.GlYCEME  end AS NUMERIC)) AS "G
 sum(cast(case when B.LACT='' then null else B.LACT  end AS NUMERIC)) AS "Lactate",
 
 
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_Urine='' then null else B.Microscopie_Urine end    AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Urine)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_LCR='' then null else B.Microscopie_LCR end   AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (LCR)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_LCR_TB='' then null else B.Microscopie_LCR_TB end  AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (LCR-TB)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Crachat='' then null else B.Microscopie_TB_Crachat end  AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Crachat)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Pleural='' then null else B.Microscopie_TB_Pleural end AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Pleural)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Ascite ='' then null else B.Microscopie_TB_Ascite end AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Ascite)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Pus='' then null else B.Microscopie_TB_Pus  end AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Pus)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Gangi='' then null else B.Microscopie_TB_Gangi end   AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Ganglionnaire)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Synovial='' then null else B.Microscopie_TB_Synovial end  AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Synovial)",
-(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Gastrique='' then null else  B.Microscopie_TB_Gastrique end AS NUMERIC))) AS "Microscopie TB - Recherche de BAAR (Gastrique)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_Urine='' then null else B.Microscopie_Urine end    AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Urine)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_LCR='' then null else B.Microscopie_LCR end   AS NUMERIC))) AS "Micro TB - Recherche de BAAR (LCR)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_LCR_TB='' then null else B.Microscopie_LCR_TB end  AS NUMERIC))) AS "Micro TB - Recherche de BAAR (LCR-TB)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Crachat='' then null else B.Microscopie_TB_Crachat end  AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Crachat)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Pleural='' then null else B.Microscopie_TB_Pleural end AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Pleural)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Ascite ='' then null else B.Microscopie_TB_Ascite end AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Ascite)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Pus='' then null else B.Microscopie_TB_Pus  end AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Pus)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Gangi='' then null else B.Microscopie_TB_Gangi end   AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Ganglionnaire)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Synovial='' then null else B.Microscopie_TB_Synovial end  AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Synovial)",
+(Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Microscopie_TB_Gastrique='' then null else  B.Microscopie_TB_Gastrique end AS NUMERIC))) AS "Micro TB - Recherche de BAAR (Gastrique)",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.Sang_hématurie='' then null else B.Sang_hématurie end  AS NUMERIC))) AS "BU-Sang",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.urobilinogène='' then null else B.urobilinogène end  AS NUMERIC))) AS "BU-Urobilinogène",
 (Select d.dict_entry from  dictionary d where   cast(d.id as NUMERIC) =sum(cast(case when B.bilirubine_urine='' then null else B.bilirubine_urine end  AS NUMERIC))) AS "BU-Bilirubine",
@@ -133,34 +133,34 @@ FROM
                                                    WHEN tname ='Sang (hématurie)' then tvalue
                                                END AS Sang_hématurie,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Gastrique)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Gastrique)' then tvalue
                                                END AS Microscopie_TB_Gastrique,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Synovial)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Synovial)' then tvalue
                                                END AS Microscopie_TB_Synovial,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Ganglionnaire)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Ganglionnaire)' then tvalue
                                                END AS Microscopie_TB_Gangi,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Pus)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Pus)' then tvalue
                                                END AS Microscopie_TB_Pus,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Ascite)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Ascite)' then tvalue
                                                END AS Microscopie_TB_Ascite,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Pleural)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Pleural)' then tvalue
                                                END AS Microscopie_TB_Pleural,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Crachat)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Crachat)' then tvalue
                                                END AS Microscopie_TB_Crachat,
                                                CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (LCR-TB)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (LCR-TB)' then tvalue
                                                END AS Microscopie_LCR_TB,
                                                 CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (LCR)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (LCR)' then tvalue
                                                END AS Microscopie_LCR,
                                                 CASE
-                                                   WHEN tname ='Microscopie TB - Recherche de BAAR (Urine)' then tvalue
+                                                   WHEN tname ='Micro TB - Recherche de BAAR (Urine)' then tvalue
                                                END AS Microscopie_Urine,
                                                 CASE
                                                    WHEN tname ='Proteinorachie (test de Pandy)' then tvalue
@@ -239,10 +239,10 @@ FROM
       INNER JOIN test t ON a.test_id = t.id AND
             t.name IN  ('GE','Rivalta (Gastrique)','Rivalta (Synovial)','Rivalta (Pus)','Rivalta (Ascite)','Rivalta (Pleural)','Rivalta (Crachat)','Rivalta (LCR)','Rivalta (Urine)','Gram','Plaquettes',
             'Test de Grossesse','Leucocytes','pH','Glucose','Acide ascorbique','Corps cétoniques','Nitrites','Protéines','Bilirubine',
-            'Urobilinogène','Sang (hématurie)','Microscopie TB - Recherche de BAAR (Gastrique)','Microscopie TB - Recherche de BAAR (Synovial)',
-            'Microscopie TB - Recherche de BAAR (Ganglionnaire)','Microscopie TB - Recherche de BAAR (Pus)','Microscopie TB - Recherche de BAAR (Ascite)',
-            'Microscopie TB - Recherche de BAAR (Pleural)','Microscopie TB - Recherche de BAAR (Crachat)','Microscopie TB - Recherche de BAAR (LCR-TB)',
-            'Microscopie TB - Recherche de BAAR (LCR)','Microscopie TB - Recherche de BAAR (Urine)','Proteinorachie (test de Pandy)',
+            'Urobilinogène','Sang (hématurie)','Microscopie TB - Recherche de BAAR (Gastrique)','Micro TB - Recherche de BAAR (Synovial)',
+            'Micro TB - Recherche de BAAR (Ganglionnaire)','Micro TB - Recherche de BAAR (Pus)','Micro TB - Recherche de BAAR (Ascite)',
+            'Micro TB - Recherche de BAAR (Pleural)','Micro TB - Recherche de BAAR (Crachat)','Micro TB - Recherche de BAAR (LCR-TB)',
+            'Micro TB - Recherche de BAAR (LCR)','Micro TB - Recherche de BAAR (Urine)','Proteinorachie (test de Pandy)',
             'FL - NEUT%','FL - MXD%','FL - LYM%','Rivalta (Ganglionnaire)','Hemoglobine* (Hemocue)','Hemoglobine',
             'Lactate','Globules Blancs','Syphilis','TDR - Malaria','Glycémie')
 
@@ -265,7 +265,7 @@ ORDER BY B.date_of_results,
          B.dob,
          B.sexe )as A
          where COALESCE ("FL-L%","FL-MID%","FL-N%") is not null
-         OR coalesce ("Siphilis","Microscopie TB - Recherche de BAAR (Urine)","Microscopie TB - Recherche de BAAR (LCR)","Microscopie TB - Recherche de BAAR (LCR-TB)","Microscopie TB - Recherche de BAAR (Crachat)","Microscopie TB - Recherche de BAAR (Pleural)","Microscopie TB - Recherche de BAAR (Ascite)","Microscopie TB - Recherche de BAAR (Pus)","Microscopie TB - Recherche de BAAR (Ganglionnaire)","Microscopie TB - Recherche de BAAR (Synovial)","Microscopie TB - Recherche de BAAR (Gastrique)",
+         OR coalesce ("Siphilis","Micro TB - Recherche de BAAR (Urine)","Micro TB - Recherche de BAAR (LCR)","Micro TB - Recherche de BAAR (LCR-TB)","Micro TB - Recherche de BAAR (Crachat)","Micro TB - Recherche de BAAR (Pleural)","Micro TB - Recherche de BAAR (Ascite)","Micro TB - Recherche de BAAR (Pus)","Micro TB - Recherche de BAAR (Ganglionnaire)","Micro TB - Recherche de BAAR (Synovial)","Micro TB - Recherche de BAAR (Gastrique)",
          "BU-Sang","BU-Urobilinogène","BU-Bilirubine","BU-Protéines","Palu","Pandy LCR",
          "BU-Nitrites","BU-Corps cétoniques","BU-Acide ascorbique","BU-Acide ascorbique",
          "BU-Glucose","BU-pH","BU-Leucocytes","Urine Test de grosse","Gram","Rivalta(Urine)","Rivalta(LCR)","Rivalta(Crachat)","Rivalta(Pleural)",
