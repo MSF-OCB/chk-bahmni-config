@@ -60,7 +60,7 @@ FROM
     CASE WHEN obsLabTest.concept_id = (SELECT concept_id
                                FROM concept_view
                                WHERE concept_full_name = "TB - LAM"
-                               )
+                               )                                 
     THEN obsLabTest.value_coded  END AS 'Labtest1772'
     FROM obs obsLabTest
       INNER JOIN patient_identifier pi ON obsLabTest.person_id = pi.patient_id
@@ -73,8 +73,8 @@ FROM
       INNER JOIN visit_type vtype ON v.visit_type_id = vtype.visit_type_id
 
       WHERE  obsLabTest.voided = 0
-      AND DATE(obsLabTest.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
-
+      AND DATE(obsLabTest.obs_datetime) BETWEEN DATE('2018-06-01') AND DATE('2018-06-30')
+      Group by dateResults,obsLabTest.value_coded,obsLabTest.value_numeric
       ) AS TDRReport
 
 group by person_id,obs_datetime,dateResults
