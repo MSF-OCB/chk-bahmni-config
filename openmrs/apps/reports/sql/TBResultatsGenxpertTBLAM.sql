@@ -17,16 +17,16 @@ Select
     date_format(ARVStartDate,'%d/%m/%Y') AS "Date début ARV",
     DATE_FORMAT(LabTestDate,"%d/%m/%Y") "Date resultats",
     max(Genexpertresult) AS "Résultats Genexpert",
-    max(TBLam) AS "Resultats TB-LAM"
+    max(TBVALUE) AS "Resultats TB-LAM"
 from (
         Select patientID,
         TBStartDate,
         MotifdébutTraitement,
         TBType,
         ARVStartDate,
-        IDForObs,
-        TBLamTime as "LabTestDate",
-        TBLam,
+        PID,
+        tbdate as "LabTestDate",
+        VALUE as "TBVALUE",
         NULL AS Genexpertresult
           from (
                 SELECT
@@ -66,75 +66,38 @@ from (
                                 select program_attribute_type_id
                                 from program_attribute_type
                                 where `name` = "End Date for Program" and description = "End Date" AND retired = 0)
-                        WHERE (DATE(ppaForEndDate.value_reference) > date('#endDate#') OR ppaForEndDate.value_reference is NULL)
+                        WHERE (DATE(ppaForEndDate.value_reference) > date('2018-06-30') OR ppaForEndDate.value_reference is NULL)
 
                     ) AS A
                 GROUP BY IDForProgram,TBStartDate
             ) AS patientProgram
         Inner Join
                 (
-                SELECT
-                    IDForObs,
-                    TBLamTime,
-                    case when tblam = "TB - LAM"
-                        THEN tblamresult
-                    ELSE NULL END AS "TBLam"
-                from
-                    (
-                        select p.patient_id AS IDForObs,
-                               cn1.name AS tblam,
-                               cn2.name AS tblamresult,
-                               obsForresult.obs_datetime AS TBLamTime
-                        from patient p
-                            INNER JOIN obs obsForActivityStatus on p.patient_id = obsForActivityStatus.person_id and obsForActivityStatus.voided = 0
-                            INNER JOIN encounter encounterForActivityStatus on obsForActivityStatus.encounter_id = encounterForActivityStatus.encounter_id
-                            INNER JOIN concept_name cn1 on obsForActivityStatus.value_coded = cn1.concept_id AND cn1.voided = 0
-                                                           and obsForActivityStatus.concept_id in (
-                                select
-                                    distinct concept_id
-                                from
-                                    concept_view
-                                where
-                                    concept_full_name = 'Tests'
-                            )
-                                                           and obsForActivityStatus.value_coded in (
-                                select
-                                    distinct concept_id
-                                from
-                                    concept_view
-                                where
-                                    concept_full_name = 'TB - LAM'
-                            )
-                                                           and obsForActivityStatus.voided =0
+                select
+                   o.person_id as PID,
+                   latestEncounter.visit_id,
+                   answer_concept.name as value,
+                   o.obs_datetime as tbdate
+               from obs o
+                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE and o.voided is false
+                   INNER JOIN (select
+                                   e.visit_id,
+                                   max(e.encounter_datetime) AS `encounterTime`,
+                                   cn.concept_id
+                               from obs o
+                                   INNER join concept_name cn
+                                       on o.concept_id = cn.concept_id and cn.name = 'TB - LAM' AND cn.voided IS FALSE AND
+                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr' and o.voided IS FALSE
+                                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE
+                               GROUP BY e.visit_id) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime AND
+                                                                       o.concept_id = latestEncounter.concept_id
+                   INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
+                                                             answer_concept.concept_name_type = 'FULLY_SPECIFIED' AND answer_concept.locale = 'fr'
 
-                            INNER JOIN obs obsForresult on obsForActivityStatus.obs_group_id = obsForresult.obs_group_id
-                            INNER JOIN encounter encounterForresult on obsForresult.encounter_id = encounterForresult.encounter_id
-                            INNER JOIN concept_name cn2 on obsForresult.value_coded = cn2.concept_id AND cn2.voided = 0
-                                                           and obsForresult.concept_id in (
-                                select
-                                    distinct concept_id
-                                from
-                                    concept_view
-                                where
-                                    concept_full_name = 'Résultat(Option)'
-                            )
-                                                           and obsForresult.value_coded in (
-                                select
-                                    distinct concept_id
-                                from
-                                    concept_view
-                                where
-                                    concept_full_name in ("Positif","Négatif")
-                            )
-                                                           and obsForresult.voided =0
-                         WHERE DATE(obsForresult.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
-                        GROUP BY IDForObs,obsForActivityStatus.obs_datetime
-                    ) AS B
-
-            ) AS patientTBLam on patientProgram.patientID = patientTBLam.IDForObs
+            ) AS patientTBLam on patientProgram.patientID = patientTBLam.PID
 
 
-            Union ALL
+            Union ALL   
 
             Select patientID,
         TBStartDate,
