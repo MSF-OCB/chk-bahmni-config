@@ -32,6 +32,7 @@ select
     date_format(tbProgram.tbStartDate,'%d/%m/%y')                           AS `Date début Traitement`,
     Date_format(tbProgram.endDate,'%d/%m/%y')                               AS `Date fin traitement`,
     tbProgram.reason                                AS `Motif début traitement TB`,
+    prophylaxieInfoSuivi.name                       as  "Prophylaxie",
     cd4.value                                       AS `CD4`,
     cv.value                                        AS `CV`,
     hemoglobin.value                                AS `Hemoglobine`,
@@ -355,6 +356,50 @@ from person p
                    latestConceptFillInfoForProphylaxie.concept_id,
                    latestConceptFillInfoForProphylaxie.latestVisit
               ) prophylaxieInfo on prophylaxieInfo.patient_id = v.patient_id and prophylaxieInfo.latestVisit = v.visit_id
+              left join (
+              select
+                   latestConceptFillInfoForProphylaxie.patient_id,
+                   latestConceptFillInfoForProphylaxie.concept_id,
+                   latestConceptFillInfoForProphylaxie.latestVisit,
+                   group_concat(answer.name) AS name
+               from
+                   (
+                       select
+                           e.patient_id,
+                           ligneArvInfo.concept_id,
+                           MAX(e.encounter_datetime) AS latestEncounterDateTime,
+                           e.visit_id AS latestVisit
+                       from
+                           (select
+                                o.obs_id,
+                                o.obs_group_id,
+                                cn.concept_id,
+                                o.encounter_id
+                            from obs o
+                                inner join concept_name cn on o.concept_id = cn.concept_id and cn.name = 'Prophylaxie' AND cn.voided IS FALSE AND
+                                                              cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr' and o.voided IS FALSE
+                           ) ligneArvInfo
+                           inner join obs o2
+                               on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
+                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Sc, Informations prophylaxie' AND cn.voided IS FALSE AND
+                                                         cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
+                           inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
+                       GROUP BY e.patient_id, e.visit_id
+                   ) latestConceptFillInfoForProphylaxie
+                   inner join obs o3 on o3.person_id = latestConceptFillInfoForProphylaxie.patient_id and
+                                        o3.concept_id = latestConceptFillInfoForProphylaxie.concept_id and o3.voided is false
+                   inner join obs o4 on o3.obs_group_id = o4.obs_id and o4.person_id = latestConceptFillInfoForProphylaxie.patient_id and
+                                        o4.voided is false
+                   inner join encounter e2 on o3.encounter_id = e2.encounter_id and e2.encounter_datetime = latestConceptFillInfoForProphylaxie.latestEncounterDateTime and
+                                              e2.visit_id = latestConceptFillInfoForProphylaxie.latestVisit and e2.voided is false
+                   inner join concept_name cn on o4.concept_id = cn.concept_id and cn.name = 'Sc, Informations prophylaxie' AND cn.voided IS FALSE AND
+                                                 cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
+                   inner join concept_name answer on o3.value_coded = answer.concept_id AND answer.voided IS FALSE AND
+                                                     answer.concept_name_type = 'FULLY_SPECIFIED' AND answer.locale = 'fr'
+               group by latestConceptFillInfoForProphylaxie.patient_id,
+                   latestConceptFillInfoForProphylaxie.concept_id,
+                   latestConceptFillInfoForProphylaxie.latestVisit
+                   )prophylaxieInfoSuivi on prophylaxieInfoSuivi.patient_id = v.patient_id and prophylaxieInfoSuivi.latestVisit = v.visit_id
     LEFT JOIN (
     SELECT
     pp.patient_id,
