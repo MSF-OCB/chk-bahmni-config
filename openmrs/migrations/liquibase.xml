@@ -6499,4 +6499,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         </sql>
     </changeSet>
 <include file ="R2_lab_feedback.xml"/>
+<include file ="CD4_and_demande_Panel_feedback.xml"/
 </databaseChangeLog>
