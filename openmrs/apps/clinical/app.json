@@ -318,6 +318,9 @@
       "Medecin en charge de l'admission":{
         "autocomplete":true
       },
+      "Vaccination":{
+        "multiSelect": true
+      },
       "Informations autres pathologies":{
         "allowAddMore": true
       }
