@@ -7628,4 +7628,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
      </sql>
  </changeSet>
 <include file ="Test_Rapid_Form_Updated.xml"/>
+<include file ="CD4_and_demande_Panel_feedback.xml"/>
 </databaseChangeLog>

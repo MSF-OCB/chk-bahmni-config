@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="OCB-CONFIG-201806290354" author="Vishnu">
+        <comment>Adding entries in event_records table for Hemogramme Lab Panel</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+            select concept_id into @concept_id from concept_name where name = 'Demande de transfusion sanguine' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201806290355" author="Vishnu">
+        <comment>Adding entries in event_records table for Hemogramme Lab Panel</comment>
+        <sql>
+            set @concept_id = 0;
+            set @uuid = NULL;
+            select concept_id into @concept_id from concept_name where name = 'CD4(Groupe)' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select uuid into @uuid from concept where concept_id = @concept_id;
+            INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'panel',now(),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/panel/',@uuid),'lab',now(),'lab');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
