@@ -275,6 +275,9 @@
       "Date de prochain RDV":{
         "allowFutureDates": true
       },
+      "Transfert, Date":{
+         "allowFutureDates": true
+      },
       "Centre de réference":{
         "autocomplete":true
       },
