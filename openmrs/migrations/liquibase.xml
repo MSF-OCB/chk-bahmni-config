@@ -7630,4 +7630,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
           and concept_set in (select distinct concept_id from concept_name where name ='Dosing Units');
      </sql>
 </changeSet>
+<changeSet id="OCB-CONFIG-201807022144" author="Pritam">
+    <comment>creating concepts to prophylaxie</comment>
+    <sqlFile path="Prophylaxie_concepts.sql"/>
+</changeSet>
+<include file ="Prophylaxie_adding_child_concepts.xml"/>
 </databaseChangeLog>

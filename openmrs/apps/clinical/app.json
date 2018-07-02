@@ -326,6 +326,9 @@
       },
       "Informations autres pathologies":{
         "allowAddMore": true
+      },
+      "Autre pathologies années" : {
+        "allowAddMore": true
       }
     }
   }
