@@ -302,9 +302,6 @@
       "TB résultat du traitement":{
         "dropdown": true
       },
-      "Prophylaxie":{
-        "multiSelect": true
-      },
         "Diagnostics à l'admission":{
         "autocomplete":true,
         "multiSelect": true

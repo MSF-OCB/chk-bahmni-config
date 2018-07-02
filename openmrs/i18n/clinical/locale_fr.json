@@ -191,6 +191,7 @@
    "ADMISSION_DATE_LABEL":"Date d’admission",
   "DISCHARGE_DATE_LABEL":"Date de sortie",
   "TREATMENT_CHART_HEADER_LABEL":"Tableau de traitement",
-  "DASHBOARD_IPD_TAB_OBS_DETAILS":"INFORMATIONS GENERALES"
+  "DASHBOARD_IPD_TAB_OBS_DETAILS":"INFORMATIONS GENERALES",
+  "PROGRAM_MANAGEMENT_SELECT_PROGRAM_MESSAGE_KEY":"Veuillez selectionner un programme dans lequel enrollé le patient"
 
 }

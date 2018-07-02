@@ -13,7 +13,7 @@ from(
                 sum(cast( CASE when B.CD4_percentage = '' then null ELSE B.CD4_percentage END  AS NUMERIC)) AS "CD4 %",
                 sum(cast( CASE when B.GPT = '' then null ELSE B.GPT END AS NUMERIC)) AS "SGPT (UI/L)",
                 sum(cast( CASE when B.Creatinine = '' then null ELSE B.Creatinine END  AS NUMERIC)) AS "CREAT (µmol/L)",
-                sum(cast( CASE when B.Glucose_LCR = '' then null ELSE B.Glucose_LCR END  AS NUMERIC)) AS "GLU LCR (mg/dl)",
+                sum(cast( CASE when B.Glucose_LCR = '' then null ELSE B.Glucose_LCR END  AS NUMERIC)) AS "Glycorachie",
                 (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Hep_B = '' then null ELSE B.Hep_B END AS NUMERIC))) ) "Hep. B", /*getting coded value for tests*/
                 (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Crag_serique = '' then null  ELSE B.Crag_serique END AS NUMERIC))) )AS "CRAG SERIQUE",/*getting coded value for tests*/
                 (Select dict_entry from DICTIONARY where id in (sum(cast(CASE when B.Crag_LCR = '' then null  ELSE B.Crag_LCR END AS NUMERIC)))) AS "CRAG LCR",/*getting coded value for tests*/
@@ -27,7 +27,7 @@ from(
                 when visit_type='OPD' and priority=NULL then 'OPD'
 
                 end AS "Notes",
-            comment
+            Motif as "Motif"
 
 
         FROM
@@ -41,7 +41,7 @@ from(
                     dob,
                     sexe,
                     sample_date,
-                    comment,
+                    Motif,
 
 
 
@@ -58,7 +58,7 @@ from(
                     WHEN tname ='Creatinine' THEN tvalue
                     END AS Creatinine,
                     CASE
-                    WHEN tname ='Glucose (LCR)' THEN tvalue
+                    WHEN tname ='Glycorachie' THEN tvalue
                     END AS Glucose_LCR,
                     CASE
                     WHEN tname ='Hépatite B' THEN tvalue
@@ -91,7 +91,7 @@ from(
                             sample.accession_number,
                             sample.priority,
                             sample.visit_type,
-                            a.comment
+                            a.comment as Motif
                         FROM
                             patient_identity pi
                             INNER JOIN patient ON patient.id = pi.patient_id
@@ -108,7 +108,7 @@ from(
                             'CD4 % (enfants de - 5 ans)',
                             'GPT',
                             'Creatinine',
-                            'Glucose (LCR)',
+                            'Glycorachie',
                             'Hépatite B',
                             'Crag serique',
                             'Crag'
@@ -132,7 +132,7 @@ from(
             B.accession_number,
             B.priority,
             B.visit_type,
-            B.comment
+            B.Motif
 
 
         ORDER BY B.date_of_results,
@@ -144,5 +144,5 @@ from(
 
     ) as A
 Where
-    coalesce ("RESULTS CD4 (cells/µl)", "CD4 %","SGPT (UI/L)","CREAT (µmol/L)","GLU LCR (mg/dl)") is not null
+    coalesce ("RESULTS CD4 (cells/µl)", "CD4 %","SGPT (UI/L)","CREAT (µmol/L)","Glycorachie") is not null
     OR coalesce ("CRAG LCR","Hep. B","CRAG SERIQUE") is not null;
