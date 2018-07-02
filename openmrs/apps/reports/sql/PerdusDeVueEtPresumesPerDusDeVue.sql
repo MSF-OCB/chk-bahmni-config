@@ -54,6 +54,7 @@ where obsForAppointmentDate.concept_id in (
                                            )
 AND obsForAppointmentDate.voided = 0
 AND visitForAppointmentDate.voided = 0
+
 group by obsForAppointmentDate.person_id
 )as A
 INNER JOIN person personForDetails on A.person_id = personForDetails.person_id
@@ -66,9 +67,11 @@ INNER JOIN person_attribute_type personAttributeTypeDetails ON  personAttributeD
 LEFT JOIN concept_view cvForAttribute on personAttributeDetails.value = cvForAttribute.concept_id
 
 where
-DATE(A.valueDate) between ('#startDate#')  AND ('#endDate#')
-AND DATE(A.valueDate) > DATE(A.datestarted)
-AND DATE(A.valueDate) < curdate()
-AND datediff('#endDate#',A.valueDate) >= 4
+(if (('#startDate#' = '#endDate#'),
 
-GROUP BY A.person_id
+((DATE(A.dateStarted) != DATE_ADD(DATE(A.valueDate), INTERVAL 3 DAY)) and DATE(A.valueDate) < DATE('#endDate#') and NOT(DATE(A.dateStarted) between DATE(A.valueDate) and DATE('#endDate#'))) ,
+
+(DATE(A.valueDate) BETWEEN DATE('#startDate#') AND DATE_ADD('#endDate#', INTERVAL -3 DAY)
+and (DATE(A.dateStarted) != DATE(A.valueDate) and NOT (DATE(A.dateStarted) > DATE(A.valueDate) and DATE(A.dateStarted) < DATE_ADD('#endDate#', INTERVAL -3 DAY))))))
+
+GROUP BY A.person_id;
