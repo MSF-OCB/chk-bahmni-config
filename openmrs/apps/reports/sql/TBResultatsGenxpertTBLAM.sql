@@ -66,7 +66,7 @@ from (
                                 select program_attribute_type_id
                                 from program_attribute_type
                                 where `name` = "End Date for Program" and description = "End Date" AND retired = 0)
-                        WHERE (DATE(ppaForEndDate.value_reference) > date('2018-06-30') OR ppaForEndDate.value_reference is NULL)
+                        WHERE (DATE(ppaForEndDate.value_reference) > DATE('#endDate#') OR ppaForEndDate.value_reference is NULL)
 
                     ) AS A
                 GROUP BY IDForProgram,TBStartDate
@@ -97,7 +97,7 @@ from (
             ) AS patientTBLam on patientProgram.patientID = patientTBLam.PID
 
 
-            Union ALL   
+            Union ALL
 
             Select patientID,
         TBStartDate,

@@ -26,9 +26,7 @@ from(
                 when visit_type ='IPD'and priority = NULL then 'IPD'
                 when visit_type='OPD' and priority=NULL then 'OPD'
 
-                end AS "Notes",
-            Motif as "Motif"
-
+                end AS "Notes"
 
         FROM
             (/*Pivoting the table row to column*/
