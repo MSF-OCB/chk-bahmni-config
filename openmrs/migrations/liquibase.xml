@@ -7583,28 +7583,6 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
      <comment>Adding New drug into the list </comment>
      <sqlFile  path="AddingDrugName_New.sql"/>
  </changeSet>
- <changeSet id="OCB-CONFIG-201806251704" author="Pritam">
-   <preConditions onFail="MARK_RAN">
-       <sqlCheck expectedResult="1">
-          select count(*) from concept_set
-          where concept_set in
-                              (select distinct concept_id from concept_name where name ='Dosing Units')
-          and concept_id in   (select concept_id
-                               from concept_name
-                              where name in
-                                          ('g','goutte','application','boite','ml','Capsule','gélule','bouffée','mg','ui','implant','Dose')
-                               )
-       </sqlCheck>
-   </preConditions>
-     <comment>Removing set members for the Dosing Units</comment>
-     <sql>
-          delete from concept_set where concept_id in
-          (select distinct concept_id from concept_name where name in
-                ('g','goutte','application','boite','ml','Capsule','gélule','bouffée','mg','ui','implant','Dose'))
-        and concept_set in
-                (select distinct concept_id from concept_name where name ='Dosing Units');
-     </sql>
-</changeSet>
 <changeSet id="OCB-CONFIG-201806271013" author="Vishnu">
  <preConditions onFail="MARK_RAN">
        <sqlCheck expectedResult="1">
@@ -7630,4 +7608,26 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <include file ="Test_Rapid_Form_Updated.xml"/>
 <include file ="CD4_and_demande_Panel_feedback.xml"/>
 <include file ="Updating_sortweights_feedback.xml"/>
+
+<changeSet id="OCB-CONFIG-201807021200" author="Pritam">
+   <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="22">
+          select count(*) from concept_set
+          where concept_set in
+                              (select distinct concept_id from concept_name where name ='Dosing Units')
+          and concept_id in   (select concept_id
+                               from concept_name
+                              where name in
+                                          ("Ampoule injectable", "Collyre", "Comprimé (Inhallation)", "Comprimé vaginale", "Crème à usage externe", "Cuillerée à soupe", "Flacon injectable", "Gel à usage externe", "Géllule", "Géllule (Prefusion)", "Lotion à usage externe", "Pate", "Poche souple", "Pomade à usage externe", "Poudre en boite", "Poudre en sachet et en boite", "Solution", "Solution (Inhallation)", "Solution à usage externe", "Solution enterale", "Tube à usage externe", "Unité")
+                               )
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing set members for the Dosing Units</comment>
+     <sql>
+          DELETE from concept_set where concept_id in
+                (select distinct concept_id from concept_name where name in
+                                      ("Ampoule injectable", "Collyre", "Comprimé (Inhallation)", "Comprimé vaginale", "Crème à usage externe", "Cuillerée à soupe", "Flacon injectable", "Gel à usage externe", "Géllule", "Géllule (Prefusion)", "Lotion à usage externe", "Pate", "Poche souple", "Pomade à usage externe", "Poudre en boite", "Poudre en sachet et en boite", "Solution", "Solution (Inhallation)", "Solution à usage externe", "Solution enterale", "Tube à usage externe", "Unité"))
+          and concept_set in (select distinct concept_id from concept_name where name ='Dosing Units');
+     </sql>
+</changeSet>
 </databaseChangeLog>

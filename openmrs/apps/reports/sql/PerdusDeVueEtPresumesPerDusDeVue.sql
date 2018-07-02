@@ -69,9 +69,9 @@ LEFT JOIN concept_view cvForAttribute on personAttributeDetails.value = cvForAtt
 where
 (if (('#startDate#' = '#endDate#'),
 
-((DATE(A.dateStarted) != DATE_ADD(DATE(A.valueDate), INTERVAL 3 DAY)) and DATE(A.valueDate) < DATE('#endDate#') and NOT(DATE(A.dateStarted) between DATE(A.valueDate) and DATE('#endDate#'))) ,
+((DATE(A.dateStarted) != DATE_ADD(DATE(A.valueDate), INTERVAL 4 DAY)) and DATE(A.valueDate) < DATE('#endDate#') and NOT(DATE(A.dateStarted) between DATE(A.valueDate) and DATE('#endDate#'))) ,
 
-(DATE(A.valueDate) BETWEEN DATE('#startDate#') AND DATE_ADD('#endDate#', INTERVAL -3 DAY)
-and (DATE(A.dateStarted) != DATE(A.valueDate) and NOT (DATE(A.dateStarted) > DATE(A.valueDate) and DATE(A.dateStarted) < DATE_ADD('#endDate#', INTERVAL -3 DAY))))))
+(DATE(A.valueDate) BETWEEN DATE('#startDate#') AND DATE_ADD('#endDate#', INTERVAL -4 DAY)
+and (DATE(A.dateStarted) != DATE(A.valueDate) and NOT (DATE(A.dateStarted) > DATE(A.valueDate) and DATE(A.dateStarted) < DATE_ADD('#endDate#', INTERVAL -4 DAY))))))
 
 GROUP BY A.person_id;
