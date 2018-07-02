@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">  
+
+   <changeSet id="OCB-CONFIG-201807020955" author="Vishnu">
+   <comment>Updating new sort weights for the concepts</comment>
+ <sql>
+            update concept_answer set sort_weight =1 where
+            answer_concept in (select concept_id from concept_name where name ='ABC/3TC/DRV/r/DTG' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ;
+
+            update concept_answer set sort_weight =2 where
+            answer_concept in (select concept_id from concept_name where name ='ABC/3TC/LPV/r' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ;
+
+            update concept_answer set sort_weight =3 where
+            answer_concept in (select concept_id from concept_name where name ='ABC/3TC/ATV/r' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+            update concept_answer set sort_weight =4 where
+            answer_concept in (select concept_id from concept_name where name ='ABC/3TC/NVP' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+            update concept_answer set sort_weight =5 where
+            answer_concept in (select concept_id from concept_name where name ='ABC/3TC/EFV' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+            update concept_answer set sort_weight =6 where
+            answer_concept in (select concept_id from concept_name where name ='AZT/3TC/ABC' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =7 where
+            answer_concept in (select concept_id from concept_name where name ='AZT/3TC/TDF/LPV/r' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =8 where
+            answer_concept in (select concept_id from concept_name where name ='AZT/3TC/ABC' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =9 where
+            answer_concept in (select concept_id from concept_name where name ='AZT/3TC/EFV' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr'); 
+
+             update concept_answer set sort_weight =10 where
+            answer_concept in (select concept_id from concept_name where name ='AZT/3TC/LPV/r' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+             update concept_answer set sort_weight =11 where
+            answer_concept in (select concept_id from concept_name where name ='AZT/3TC/ATV/r' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+             update concept_answer set sort_weight =12 where
+            answer_concept in (select concept_id from concept_name where name ='AZT/3TC/DRV/r/DTG' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+             update concept_answer set sort_weight =13 where
+            answer_concept in (select concept_id from concept_name where name ='TDF/3TC/LPV/r' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =14 where
+            answer_concept in (select concept_id from concept_name where name ='TDF/3TC/ATV/r' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+            update concept_answer set sort_weight =15 where
+            answer_concept in (select concept_id from concept_name where name ='TDF/3TC/DRV/r/DTG' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =16 where
+            answer_concept in (select concept_id from concept_name where name ='TDF/3TC/NVP' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ;
+
+            update concept_answer set sort_weight =17 where
+            answer_concept in (select concept_id from concept_name where name ='TDF/3TC/EFV' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='RA, ARV Line' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ;
+
+
+
+ </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-201807020956" author="Vishnu">
+   <comment>Updating new sort weights for the SiteTB concept</comment>
+ <sql>
+            update concept_answer set sort_weight =1 where
+            answer_concept in (select concept_id from concept_name where name ='Abdominale' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ;
+
+            update concept_answer set sort_weight =2 where
+            answer_concept in (select concept_id from concept_name where name ='Autre' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ;
+
+            update concept_answer set sort_weight =3 where
+            answer_concept in (select concept_id from concept_name where name ='Ganglionnaire' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+            update concept_answer set sort_weight =4 where
+            answer_concept in (select concept_id from concept_name where name ='Mal de pott' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ; 
+
+            update concept_answer set sort_weight =5 where
+            answer_concept in (select concept_id from concept_name where name ='Meningé' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+            update concept_answer set sort_weight =6 where
+            answer_concept in (select concept_id from concept_name where name ='Miliaire' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =7 where
+            answer_concept in (select concept_id from concept_name where name ='Os et articulaire' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =8 where
+            answer_concept in (select concept_id from concept_name where name ='Pericardite' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr') ; 
+
+             update concept_answer set sort_weight =9 where
+            answer_concept in (select concept_id from concept_name where name ='Pleuresie' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr'); 
+
+             update concept_answer set sort_weight =10 where
+            answer_concept in (select concept_id from concept_name where name ='Poly-serosite' and concept_name_type="FULLY_SPECIFIED" and locale='fr') and concept_id in (select concept_id from concept_name where name ='Site TB' and  concept_name_type="FULLY_SPECIFIED" and locale='fr')  ;           
+
+</sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-201807020957" author="Vishnu">
+        <comment>Adding new autres concept to Ligne ARV concept and adding it to the set</comment>
+        <sql>
+        	    set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+        call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"autres(Ligne)","autres", 'N/A','Misc', FALSE);
+               
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            select concept_id into @concept_id from concept_name where name = "Ligne d'ARV" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'autres(Ligne)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            call add_concept_answer(@concept_id, @child1_concept_id, 7);
+        </sql>
+    </changeSet>
+ </databaseChangeLog>
