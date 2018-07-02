@@ -74,7 +74,7 @@ FROM
 
       WHERE  obsLabTest.voided = 0
       AND DATE(obsLabTest.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
-      Group by dateResults,obsLabTest.value_coded,obsLabTest.value_numeric
+      Group by dateResults,Labtest1771,Labtest1770,Labtest1769,Labtest1768,Labtest1773,Labtest1772
       ) AS TDRReport
 
 group by person_id,obs_datetime,dateResults

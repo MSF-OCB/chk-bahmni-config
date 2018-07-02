@@ -77,17 +77,19 @@ Bahmni.ConceptSet.FormConditions.rules = {
                             }
                         }
                     },
-    'Vaccination': function (formName, formFieldValues) {
-        var conditions = {enable: [], disable: []};
-        var Vaccination = "Type de vaccination";
-        var result = formFieldValues['Vaccination'];
-        if (result == "Autres") {
-            conditions.enable.push(Vaccination);
-        } else {
-            conditions.disable.push(Vaccination);
-        }
-        return conditions;
-    },
+    "Vaccination": function(formName, formFieldValues) {
+          var questionThatTriggersRule = "Vaccination";
+          var selectedResponses = formFieldValues[questionThatTriggersRule];
+          var question1AffectedByRule = "Type de vaccination";
+          var conditionTrue = selectedResponses.indexOf('Autres') >= 0;
+          var ruleActions = {enable: [], disable: []};
+          if(conditionTrue) {
+              ruleActions.enable.push(question1AffectedByRule);
+          } else {
+              ruleActions.disable.push(question1AffectedByRule);
+          }
+          return ruleActions;
+          },
     "Mère sous ARV pendant la grossesse":function (formName, formFieldValues) {
         var conditions = {enable: [], disable: []};
         var Mois = "Si oui, Nombre de mois";
