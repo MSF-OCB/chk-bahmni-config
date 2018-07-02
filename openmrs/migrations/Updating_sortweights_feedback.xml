@@ -120,12 +120,16 @@
         	update concept_name set name ='Incapacité de marcher sans aide' where name ='Incapacité de marcher sans aid' and concept_name_type='SHORT' and locale='fr';
         </sql>
     </changeSet>
-    <changeSet id="OCB-CONFIG-201807020959" author="Vishnu">
+    <changeSet id="OCB-CONFIG-201807020960" author="Vishnu">
         <comment>Updating the concept shortname for Refer and Echech concepts</comment>
         <sql>
         	update concept_name set name ="Référé" where name ='Referé' and concept_name_type='SHORT' and locale='fr';
 
         	update concept_name set name ="Echec" where name ='Échec' and concept_name_type='SHORT' and locale='fr';
+               
+                update concept_name set name ="Référé" where name ='Referé' and concept_name_type='FULLY_SPECIFIED' and locale='fr';
+
+                update concept_name set name ="Echec" where name ='Échec' and concept_name_type='FULLY_SPECIFIED' and locale='fr';
         </sql>
     </changeSet>
  </databaseChangeLog>
