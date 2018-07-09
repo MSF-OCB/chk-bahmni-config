@@ -7635,4 +7635,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     <sqlFile path="Prophylaxie_concepts.sql"/>
 </changeSet>
 <include file ="Prophylaxie_adding_child_concepts.xml"/>
+<changeSet id="OCB-CONFIG-201807091223" author="Pritam">
+    <comment>creating concepts to prophylaxie</comment>
+    <sqlFile path="Add_New_Dosage_Form.sql"/>
+</changeSet>
+<include file ="Updating_Drugs_With_Dosage_Form.xml"/>
 </databaseChangeLog>

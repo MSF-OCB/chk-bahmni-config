@@ -27,151 +27,64 @@
           }
         ],
         "drugFormDefaults": {
-          "Cuillerée à soupe": {
-            "doseUnits": "Cuillerée à soupe",
-            "route": "Orale"
-          },
-          "Comprimé": {
-            "doseUnits": "Comprimé",
-            "route": "Orale"
-          },
-          "Géllule": {
-            "doseUnits": "Géllule",
-            "route": "Orale"
-          },
-          "Poudre en boite": {
-            "doseUnits": "Poudre en boite",
-            "route": "Orale"
-          },
-          "Poudre en sachet et en boite": {
-            "doseUnits": "Poudre en sachet et en boite",
-            "route": "Orale"
-          },
-          "Sachet": {
-            "doseUnits": "Sachet",
-            "route": "Orale"
-          },
-          "Solution": {
-            "doseUnits": "Solution",
-            "route": "Orale"
-          },
-          "Pate": {
-            "doseUnits": "Pate",
-            "route": "Á manger"
-          },
-          "Collyre": {
-            "doseUnits": "Collyre",
-            "route": "Application locale"
-          },
-          "Pomade à usage externe": {
-            "doseUnits": "Pomade à usage externe",
-            "route": "Application locale"
-          },
-          "Tube à usage externe": {
-            "doseUnits": "Tube à usage externe",
-            "route": "Application locale"
-          },
-          "Lotion à usage externe": {
-            "doseUnits": "Lotion à usage externe",
-            "route": "Application locale"
-          },
-          "Comprimé vaginale": {
-            "doseUnits": "Comprimé vaginale",
-            "route": "Application locale"
-          },
-          "Solution à usage externe": {
-            "doseUnits": "Solution à usage externe",
-            "route": "Application locale"
-          },
-          "Gel à usage externe": {
-            "doseUnits": "Gel à usage externe",
-            "route": "Application locale"
-          },
-          "Crème à usage externe": {
-            "doseUnits": "Crème à usage externe",
-            "route": "Application locale"
-          },
-          "Solution (Inhallation)": {
-            "doseUnits": "Solution (Inhallation)",
-            "route": "Inhallation"
-          },
-          "Comprimé (Inhallation)": {
-            "doseUnits": "Comprimé (Inhallation)",
-            "route": "Inhallation"
-          },
-          "Ampoule injectable": {
-            "doseUnits": "Ampoule injectable",
-            "route": "Injectable"
-          },
-          "Flacon injectable": {
-            "doseUnits": "Flacon injectable",
-            "route": "Injectable"
-          },
-          "Unité": {
-            "doseUnits": "Unité",
-            "route": "Injectable"
-          },
-          "Poche souple": {
-            "doseUnits": "Poche souple",
-            "route": "Perfusion"
-          },
-          "Solution enterale": {
-            "doseUnits": "Solution enterale",
-            "route": "Perfusion"
-          },
-          "Géllule (Prefusion)": {
-            "doseUnits": "Géllule (Prefusion)",
-            "route": "Perfusion"
-          },
-          "application" : {
-            "doseUnits": "application",
-            "route": "application locale"
-          },
-          "boite" : {
-            "doseUnits": "boite",
-            "route": "application locale"
-          },
-          "ml": {
+
+
+        "ml": {
             "doseUnits": "ml",
             "route": "Orale"
-          },
-          "Capsule": {
-            "doseUnits": "Capsule",
+        },
+        "Capsule":{
+          "doseUnits": "Capsule",
+          "route": "Orale"
+        },
+        "Comprimé" : {
+            "doseUnits": "Comprimé",
             "route": "Orale"
-          },
-          "gélule" : {
-            "doseUnits": "gélule",
-            "route": "Orale"
-          },
-          "bouffée": {
-            "doseUnits": "bouffée",
-            "route": "puff"
-          },
-          "mg" : {
-            "doseUnits": "mg",
-            "route": "injectable"
-          },
-          "ui" : {
-            "doseUnits": "ui",
-            "route": "injectable"
-          },
-          "implant": {
-            "doseUnits": "implant",
-            "route": "injectable"
-          },
-          "Dose": {
-            "doseUnits": "Dose",
-            "route": "injectable"
-          },
-          "g": {
-            "doseUnits": "g",
-            "route": "orale"
-          },
-          "goutte": {
+        },
+        "gélule":{
+          "doseUnits": "gélule",
+          "route": "Orale"
+        },
+        "boite" : {
+        	"doseUnits": "boite",
+        	"route": "application locale"
+	      },
+        "g" : {
+          	"doseUnits": "g",
+          	"route": "Orale"
+	        },
+        "bouffée" : {
+          "doseUnits": "bouffée",
+          "route": "Puff"
+        },
+        "mg" : {
+          "doseUnits": "mg",
+	        "route": "injectable"
+        },
+        "Dose" : {
+          "doseUnits": "Dose",
+	        "route": "injectable"
+        },
+        "application" : {
+            "doseUnits": "application",
+            "route": "application locale"
+        },
+        "goutte": {
             "doseUnits": "goutte",
             "route": "application locale"
-          }
-
+        },
+        "ui" : {
+            "doseUnits": "ui",
+            "route": "injectable"
+        },
+        "implant": {
+            "doseUnits": "implant",
+            "route": "injectable"
+        },
+        "Sachet": {
+            "doseUnits": "Sachet",
+            "route": "À manger"
+        }
         }
       },
       "drugOrderHistoryConfig" :{
