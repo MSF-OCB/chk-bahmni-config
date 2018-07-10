@@ -221,7 +221,7 @@
           "maximumNoOfVisits": 10
         },
         "formGroup": [
-          "Paraclinique(form)",
+          "Paraclinique",
           "Antécédents cliniques",
           "Suivi Consultation",
           "Admission IPD Form",

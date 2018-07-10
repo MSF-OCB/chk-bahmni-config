@@ -7640,4 +7640,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     <sqlFile path="Add_New_Dosage_Form.sql"/>
 </changeSet>
 <include file ="Updating_Drugs_With_Dosage_Form.xml"/>
+ <changeSet id="OCB-CONFIG-2018071252" author="Vishnu">
+        <comment>updating paraclinique form name</comment>
+        <sql>
+          update concept_name set name ='Paraclinique' where name ='Paraclinique(form)' and concept_name_type='FULLY_SPECIFIED';
+          update concept_name set name =NULL where concept_name_type='SHORT' and name='Paraclinique - Radiologie'; 
+          </sql>
+</changeSet>
 </databaseChangeLog>
