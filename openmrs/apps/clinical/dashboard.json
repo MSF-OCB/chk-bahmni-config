@@ -922,7 +922,7 @@
         }
       },
       "Informations Prophylaxie": {
-        "type": "vitals",
+        "type": "forms",
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_INFORMATIONS_PROPHYLAXIE",
         "displayOrder": 12,
@@ -931,8 +931,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Prophylaxie",
-            "Date Debut Prophylaxie"
+            "Sc, Informations prophylaxie"
           ]
         }
       },

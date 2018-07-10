@@ -69,11 +69,21 @@ FROM
       INNER JOIN concept_view cv ON cv.concept_id = pa.value
       INNER JOIN person ON person.person_id = obsLabTest.person_id
       INNER JOIN person_name pnPersonAttribute ON person.person_id = pnPersonAttribute.person_id
-      INNER JOIN visit v ON v.patient_id = person.person_id AND v.voided = 0
+      INNER JOIN visit v ON v.patient_id = obsLabTest.person_id AND v.voided = 0
       INNER JOIN visit_type vtype ON v.visit_type_id = vtype.visit_type_id
 
       WHERE  obsLabTest.voided = 0
       AND DATE(obsLabTest.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
+      AND obsLabTest.concept_id in (
+                                    select concept_id
+                                    from concept_name
+                                    where `name` in
+                                                    (
+                                    "CD4 % (Enfants de moins de 5 ans)(%)","CD4(cells/µl)","Glycémie(mg/dl)",
+                                    "Hémoglobine (Hemocue)(g/dl)","TR, TDR - Malaria","TB - LAM"
+                                                     )
+                                     and locale_preferred = 1 and voided =0 and concept_name_type = "FULLY_SPECIFIED"
+                                    )
       Group by dateResults,Labtest1771,Labtest1770,Labtest1769,Labtest1768,Labtest1773,Labtest1772
       ) AS TDRReport
 
