@@ -532,7 +532,7 @@
           "showDetailsButton": false,
           "conceptNames": [
             "IPD Admission, Prophylaxie à l'admission",
-            "IPD Admission, Stade OMS",
+            "Stade clinique OMS",
             "IPD Admission, SNC Glasgow(/15)"
           ],
           "scope": "latest"

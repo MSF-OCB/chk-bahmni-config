@@ -7644,7 +7644,29 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <comment>updating paraclinique form name</comment>
         <sql>
           update concept_name set name ='Paraclinique' where name ='Paraclinique(form)' and concept_name_type='FULLY_SPECIFIED';
-          update concept_name set name ='' where concept_name_type='SHORT' and name='Paraclinique - Radiologie'; 
+          update concept_name set name ='' where concept_name_type='SHORT' and name='Paraclinique - Radiologie';
           </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-201807121709" author="Pritam">
+   <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="5">
+         select count(*) from concept_set
+          where concept_set in
+                              (select distinct concept_id from concept_name where name ='Admission IPD Form')
+          and concept_id in   (select concept_id
+                               from concept_name
+                              where name in
+                                          ("IPD Admission, Stade OMS","IPD Admission, SNC Glasgow(/15)","Examen Physique á l'admission","Meilleure prise en charge","Test á l'admission")
+                               )
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing set members for the Admission IPD form</comment>
+     <sql>
+          DELETE from concept_set where concept_id in
+                                      (select distinct concept_id from concept_name where name in
+                                      ("IPD Admission, Stade OMS","IPD Admission, SNC Glasgow(/15)","Examen Physique á l'admission","Meilleure prise en charge","Test á l'admission")
+                                       )
+          and concept_set in (select distinct concept_id from concept_name where name ='Admission IPD Form');
+     </sql>
 </changeSet>
 </databaseChangeLog>

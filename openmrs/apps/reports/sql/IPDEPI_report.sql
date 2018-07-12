@@ -422,7 +422,7 @@
                                                             from
                                                               concept_view
                                                             where
-                                                              concept_full_name = "IPD Admission, Stade OMS"
+                                                              concept_full_name = "Stade clinique OMS"
                                                           )
                   and obsForActivityStatus.value_coded in (
                                                             Select answer_concept from concept_answer where concept_id =
@@ -431,7 +431,7 @@
                                                             from
                                                               concept_view
                                                             where
-                                                              concept_full_name in ("IPD Admission, Stade OMS"))
+                                                              concept_full_name in ("Stade clinique OMS"))
 
                                                           )
                                                           AND   obsForActivityStatus.voided = 0
@@ -580,10 +580,10 @@
                                    max(hemo_obs.obs_datetime) AS hemo_obsDateTime,
                                    hemo_obs.person_id as PID,
                                    hemo_obs.value_numeric as value
-                                   
+
                                FROM visit v INNER JOIN encounter e
                                        ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
-                                     
+
                                    INNER JOIN
                                    (SELECT
                                          o.encounter_id,
@@ -615,10 +615,10 @@
                                    max(gly_obs.obs_datetime) AS gly_obsDateTime,
                                    gly_obs.person_id as PID,
                                    gly_obs.value_numeric as value
-                                   
+
                                FROM visit v INNER JOIN encounter e
                                        ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
-                                     
+
                                    INNER JOIN
                                    (SELECT
                                          o.encounter_id,
@@ -642,7 +642,7 @@
                                                 gly_val.concept_full_name IN ('Glycémie') AND o.value_numeric IS NOT NULL)) gly_obs
                                        ON gly_obs.encounter_id = e.encounter_id
                                GROUP BY v.visit_id
-         
+
     )as gly on gly.PID=patientDetails.person_id and gly.visitid=v.visit_id
     left join
     (
