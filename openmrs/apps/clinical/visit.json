@@ -97,28 +97,26 @@
                     "scope": "latest"
                 }
             },
-            "prophylaxieAdmission":{
+             "prophylaxieAdmission":{
                 "type": "observation",
                 "displayOrder": 9,
                 "translationKey": "Prophylaxie",
                 "config": {
                     "conceptNames": [
-                        "IPD Admission, Prophylaxie à l'admission",
-                        "Stade clinique OMS",
-                        "IPD Admission, SNC Glasgow(/15)"
+                        "Prophylaxie",
+            "Date Debut Prophylaxie"
                     ],
                     "scope": "latest"
                 }
-            },
-            "ipdAdmission":{
+            },	
+             "testRapid":{
                 "type": "observation",
                 "displayOrder": 10,
-                "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_DETAILS",
+                "isObservation": true,
+                "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
                 "config": {
                     "conceptNames": [
-                        "Tests",
-                        "Résultat(Numérique)",
-                        "Résultat(Option)"
+                     "Tests rapides"
                     ],
                     "scope": "latest"
                 }

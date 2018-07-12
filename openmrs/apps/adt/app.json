@@ -74,6 +74,21 @@
                                 "type": "disposition",
                                 "numberOfVisits": 1,
                                 "displayOrder": 4
+                        },
+                        "IpdandDischargeControl":{
+                                "translationKey":"DASHBOARD_TITLE_IPD_DISCHARGE_CONTROL_KEY",
+                              "type": "vitals",
+                              "isObservation": true,
+                              "numberOfVisits": 3,
+                                
+                                "displayOrder": 5,
+                                "dashboardConfig":{
+                                "conceptNames": [
+                                            "IPD Admission, Date d'admission",
+                                            "Date de sortie",
+                                            "Fds, Diagnostic",
+                                            "Si autre, veuillez préciser"]
+                            }
                         }
                 
             }}

@@ -77,4 +77,11 @@
               
         </sql>
     </changeSet>
+<changeSet id="OCB-CONFIG-201807121120" author="Vishnu">
+       <comment>Removing Prophylaxie section from IPD admission Form </comment>
+        <sql>
+               delete from concept_set where  concept_id  in (select concept_id from concept_name where name="IPD Admission, Prophylaxie à l'admission" and locale='fr' and concept_name_type='FULLY_SPECIFIED')  and concept_set in (select concept_id from concept_name where name ='Admission IPD Form' and locale='fr' and concept_name_type='FULLY_SPECIFIED');
+
+       </sql>
+    </changeSet>
     </databaseChangeLog>

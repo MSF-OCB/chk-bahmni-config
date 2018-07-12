@@ -531,27 +531,25 @@
         "dashboardConfig": {
           "showDetailsButton": false,
           "conceptNames": [
-            "IPD Admission, Prophylaxie à l'admission",
-            "Stade clinique OMS",
-            "IPD Admission, SNC Glasgow(/15)"
+           "Prophylaxie",
+            "Date Debut Prophylaxie"
           ],
           "scope": "latest"
         }
       },
-      "ipdAdmission": {
-        "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_DETAILS",
+       "testRapid": {
+        "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 9,
         "displayType": "Full-Page",
+        "hideEmptyDisplayControl": false,
         "dashboardConfig": {
-          "showDetailsButton": false,
+          "showDetailsButton": true,
+          "numberOfVisits": 5,
           "conceptNames": [
-            "Tests",
-            "Résultat(Numérique)",
-            "Résultat(Option)"
-          ],
-          "scope": "latest"
+            "Tests rapides"
+          ]
         }
       },
       "investigationsChart": {

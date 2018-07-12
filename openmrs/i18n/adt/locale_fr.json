@@ -27,5 +27,6 @@
   "ADT_IPD_PATIENT_UNDO_DISCHARGE_KEY":"Annuler la sortie",
   "ADT_IPD_PATIENT_ADMIT_BUTTON_KEY" :"Hospitaliser",
   "ADT_IPD_PATIENT_DISCHARGE_KEY" :"Laisser sortir",
-  "MESSAGE_DIALOG_OPTION_COPY":"Copier Erreur"
+  "MESSAGE_DIALOG_OPTION_COPY":"Copier Erreur",
+  "DASHBOARD_TITLE_IPD_DISCHARGE_CONTROL_KEY":"Dernières visites"
 }
