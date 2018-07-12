@@ -51,12 +51,12 @@ select
                                                     And TBpatientProgCompletedDate.program_id = TBpatientProgStartDate.program_id
                                                     where TBpatientProgCompletedDate.date_completed is not null
                                                     and TBpatientProgCompletedDate.outcome_concept_id is not  null
-                                                    AND TBpatientProgCompletedDate.date_completed <= DATE('#endDate#')
+                                                    AND DATE(TBpatientProgCompletedDate.date_completed) <= DATE('#endDate#')
                                                     and TBpatientProgCompletedDate.voided = 0
                                                     And TBpatientProgCompletedDate.program_id = 2
                                                     AND TBpatientProgStartDate.voided = 0
                                                     And pp.patient_id = TBpatientProgCompletedDate.patient_id
-                                                    AND TBpatientProgStartDate.date_enrolled <= DATE('#endDate#')
+                                                    AND DATE(TBpatientProgStartDate.date_enrolled) <= DATE('#endDate#')
                                                     group by TBpatientProgCompletedDate.patient_id
 
                                                   )
