@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+       <changeSet id="OCB-CONFIG-20180712120" author="Vishnu">   
+       <comment>Removing coded answers from mode de sortie and creating new mode sections as per #311</comment>
+        <sql>
+              delete from concept_answer where concept_id in (select concept_id from concept_name where name ='Mode de sortie(Suivi)' and  concept_name_type='FULLY_SPECIFIED' and locale='fr');
+
+              call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"Mode d'entrée (IPD)","Mode d'entrée (IPD)",'Coded','Misc',FALSE);
+
+              set @concept_id = 0;
+              set @child1_concept_id = 0;
+              set @child2_concept_id = 0;
+             
+              select concept_id into @concept_id from concept_name where name = "Mode d'entrée (IPD)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child1_concept_id from concept_name where name = 'Hospi de jour(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child2_concept_id from concept_name where name = "Hospi Entrée(Suivi)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              call add_concept_answer (@concept_id, @child1_concept_id, 1);
+              call add_concept_answer (@concept_id, @child2_concept_id, 2);
+          </sql>
+      </changeSet>
+      <changeSet id="OCB-CONFIG-201807121118" author="Vishnu"> 
+      <comment> Updating mode de sorte with latest coded answers </comment> 
+      <sql>
+
+              set @concept_id = 0;
+              set @child1_concept_id = 0;
+              set @child2_concept_id = 0;
+              set @child3_concept_id= 0;
+              set @child4_concept_id = 0;
+              set @child5_concept_id = 0;
+
+              select concept_id into @concept_id from concept_name where name = "Mode de sortie(Suivi)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child1_concept_id from concept_name where name = 'Transfert(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child2_concept_id from concept_name where name = 'Domicile(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child3_concept_id from concept_name where name = "Abandon(Suivi)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child4_concept_id from concept_name where name = 'Reféré(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child5_concept_id from concept_name where name = 'Décés(Suivi)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+
+              call add_concept_answer (@concept_id, @child1_concept_id, 1);
+              call add_concept_answer (@concept_id, @child2_concept_id, 2);
+              call add_concept_answer (@concept_id, @child3_concept_id, 3);
+              call add_concept_answer (@concept_id, @child4_concept_id, 4);
+              call add_concept_answer (@concept_id, @child5_concept_id, 5);
+   </sql> 
+   </changeSet>
+   <changeSet id="OCB-CONFIG-201807121119" author="Vishnu">   
+       <comment>Adding 2 mode sections to "Informations mode de sortie(Suivi)" section </comment>
+        <sql>
+              delete from concept_set where concept_set in (select concept_id from concept_name where name ="Informations mode de sortie(Suivi)" and locale='fr' and concept_name_type='FULLY_SPECIFIED');
+
+        	  set @concept_id = 0;
+              set @member1_concept_id = 0;
+              set @member2_concept_id = 0;
+            
+              select concept_id into @concept_id from concept_name where name = "Informations mode de sortie(Suivi)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @member1_concept_id from concept_name where name = "Mode d'entrée (IPD)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @member2_concept_id from concept_name where name = "Mode de sortie(Suivi)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+              call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+              
+        </sql>
+    </changeSet>
+    </databaseChangeLog>

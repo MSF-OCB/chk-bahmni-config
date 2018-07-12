@@ -173,7 +173,7 @@
             o.concept_id,
             e.visit_id
           FROM obs o
-            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ('Formulaire de sortie') AND
+            INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Informations mode de sortie(Suivi)") AND
                                           cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
                                           cn.locale = 'fr' AND o.voided IS FALSE
             INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
@@ -185,7 +185,7 @@
                                     e2.voided IS FALSE
        GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
-      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Mode de sortie') AND
+      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("Mode d'entrée (IPD)") AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as modi on modi.person_id=patientDetails.person_id
                                      and modi.visitid=v.visit_id
 

@@ -242,7 +242,7 @@
                 "type": "observation",
                 "config": {
                     "conceptNames": [
-                        "Mode de sortie"
+                        "Informations mode de sortie(Suivi)"
                     ],
                     "scope": "latest"
                 },
@@ -468,6 +468,17 @@
                 "displayOrder": 18,
                 "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY"
             },
+             "Exit Mode":{
+                "type": "observation",
+                "config": {
+                    "conceptNames": [
+                        "Informations mode de sortie(Suivi)"
+                    ],
+                    "scope": "latest"
+                },
+               "displayOrder": 19,
+                "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
+            },
             "Note prochain RDV": {
                 "type": "observation",
                 "config": {
@@ -476,7 +487,7 @@
                     ],
                     "scope": "latest"
                 },
-                "displayOrder": 19,
+                "displayOrder": 20,
                 "translationKey": "DASHBOARD_TITLE_NOTES"
             }
         }

@@ -671,9 +671,9 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
-          "numberOfVisits": 1,
+          "numberOfVisits": "",
           "conceptNames": [
-            "Mode de sortie"
+            "Informations mode de sortie(Suivi)"
           ]
         },
         "displayOrder": 5,
@@ -1047,6 +1047,20 @@
           "pivotTable": {
           }
         }
+      },
+       "Exit Mode": {
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": "",
+          "conceptNames": [
+            "Informations mode de sortie(Suivi)"
+          ]
+        },
+        "displayOrder": 19,
+        "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
       },
       "Note prochain RDV": {
         "type": "vitals",
