@@ -192,6 +192,7 @@
   "DISCHARGE_DATE_LABEL":"Date de sortie",
   "TREATMENT_CHART_HEADER_LABEL":"Tableau de traitement",
   "DASHBOARD_IPD_TAB_OBS_DETAILS":"Informations Generales",
-  "PROGRAM_MANAGEMENT_SELECT_PROGRAM_MESSAGE_KEY":"Veuillez selectionner un programme dans lequel enrollé le patient"
+  "PROGRAM_MANAGEMENT_SELECT_PROGRAM_MESSAGE_KEY":"Veuillez selectionner un programme dans lequel enrollé le patient",
+  "CLINICAL_FORM_ERRORS_MESSAGE_KEY":"Veuillez entrer une valeur dans les champs obligatoires ou corriger la valeur dans les champs en surbrillance"
 
 }
