@@ -481,7 +481,7 @@
                 "type": "observation",
                 "config": {
                     "conceptNames": [
-                        "Notes"
+                        "SC, Notes"
                     ],
                     "scope": "latest"
                 },
