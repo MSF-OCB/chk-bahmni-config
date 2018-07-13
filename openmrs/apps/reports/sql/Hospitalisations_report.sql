@@ -159,7 +159,7 @@
       firstAddSectionDateConceptInfo.person_id,
       firstAddSectionDateConceptInfo.visit_id as visitid,
       o3.value_datetime AS name,
-       (select distinct name from concept_name where concept_id =o3.value_coded and locale='fr' and concept_name_type='FULLY_SPECIFIED') as "S1"
+       (select distinct name from concept_name where concept_id =o3.value_coded and locale='fr' and concept_name_type='SHORT') as "S1"
     FROM
       (SELECT
          o2.person_id,
