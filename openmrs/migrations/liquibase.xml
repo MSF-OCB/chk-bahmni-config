@@ -7644,7 +7644,97 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         <comment>updating paraclinique form name</comment>
         <sql>
           update concept_name set name ='Paraclinique' where name ='Paraclinique(form)' and concept_name_type='FULLY_SPECIFIED';
-          update concept_name set name ='' where concept_name_type='SHORT' and name='Paraclinique - Radiologie'; 
+          update concept_name set name ='' where concept_name_type='SHORT' and name='Paraclinique - Radiologie';
           </sql>
+</changeSet>
+<changeSet id="OCB-CONFIG-201807121709" author="Pritam">
+   <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="4">
+         select count(*) from concept_set
+          where concept_set in
+                              (select distinct concept_id from concept_name where name ='Admission IPD Form')
+          and concept_id in   (select concept_id
+                               from concept_name
+                              where name in
+                                          ("IPD Admission, Stade OMS","Examen Physique á l'admission","Meilleure prise en charge","Test á l'admission")
+                               )
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing set members for the Admission IPD form</comment>
+     <sql>
+          DELETE from concept_set where concept_id in
+                                      (select distinct concept_id from concept_name where name in
+                                      ("IPD Admission, Stade OMS","Examen Physique á l'admission","Meilleure prise en charge","Test á l'admission")
+                                       )
+          and concept_set in (select distinct concept_id from concept_name where name ='Admission IPD Form');
+     </sql>
+</changeSet>
+
+
+<changeSet id="OCB-CONFIG-201807132030" author="Pritam">
+   <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="1">
+          select count(*) from concept_set
+          where concept_set in
+                              (select distinct concept_id from concept_name where name ='Prochain RDV')
+          and concept_id in   (select concept_id
+                               from concept_name
+                               where name  = "Notes"
+                               )
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing Notes from Prochain RDV </comment>
+     <sql>
+          DELETE from concept_set where concept_id in
+                (select distinct concept_id from concept_name where name  = "Notes")
+          and concept_set in (select distinct concept_id from concept_name where name ='Prochain RDV');
+     </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201807132031" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_name where name = "SC, Notes" and concept_name_type = "FULLY_SPECIFIED"
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding concept SC, Notes</comment>
+            <sql>
+                set @concept_id = 0;
+                set @concept_short_id = 0;
+                set @concept_full_id = 0;
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'SC, Notes','Notes','Text','Misc',false);
+            </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201807132032" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                  select count(*) from concept_set
+                                where concept_set in
+                                      (select distinct concept_id from concept_name where name ='Prochain RDV')
+                                and concept_id in   (select concept_id
+                                       from concept_name
+                                       where name  = "SC, Notes"
+                                       )
+                    </sqlCheck>
+            </preConditions>
+            <comment>Adding SC, Notes to Prochain RDV </comment>
+            <sql>
+              set @concept_id = 0;
+              set @member1_concept_id = 0;
+
+              select concept_id into @concept_id from concept_name where name = 'Prochain RDV' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @member1_concept_id from concept_name where name = 'SC, Notes' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              call add_concept_set_members (@concept_id, @member1_concept_id, 2);
+            </sql>
+</changeSet>
+
+<changeSet id="OCB-CONFIG-201807132125" author="Pritam">
+<comment>Updating the name of  program end date attribute </comment>
+<sql>
+    update program_attribute_type set description ="Date fin Programme" where description ='Date de fin' and name ='End Date for Program';
+</sql>
 </changeSet>
 </databaseChangeLog>
