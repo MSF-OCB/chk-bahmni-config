@@ -15,6 +15,7 @@
     group_concat(DISTINCT (dg2.S2),'') as "2er diagnostic à la sortie",
      DATE_FORMAT(sortdate.name,'%d/%m/%Y') as "Date de sortie",
      modi.S1 as "Mode de sortie",
+     mpc.name as "MPC",
     cd4.VALUE as "CD4(cells/µl)",
     DATE_FORMAT(cd4.cd4_obsDateTime,'%d/%m/%Y') as "Date resultat CD4",
     CV.value as "CV(copies/ml)",
@@ -278,13 +279,7 @@
 
                   ) as sortdate on sortdate.person_id=patientDetails.person_id and sortdate.visitid=v.visit_id
                   left join
-
-
-
-
-
-
-                (
+               (
 
     SELECT
       firstAddSectionDateConceptInfo.person_id,
@@ -319,7 +314,29 @@
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Fds, Diagnostic') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as dg on dg.person_id=patientDetails.person_id
                                      and dg.visitid=v.visit_id
-
+ left join
+ (
+ select
+                   o.person_id as PID,
+                   latestEncounter.visit_id as visitid,
+                   answer_concept.name as Name
+               from obs o
+                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE and o.voided is false
+                   INNER JOIN (select
+                                   e.visit_id,
+                                   max(e.encounter_datetime) AS `encounterTime`,
+                                   cn.concept_id
+                               from obs o
+                                   INNER join concept_name cn
+                                       on o.concept_id = cn.concept_id and cn.name = 'MPC(Sorte)' AND cn.voided IS FALSE AND
+                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr' and o.voided IS FALSE
+                                   INNER JOIN encounter e on o.encounter_id = e.encounter_id AND e.voided IS FALSE
+                               GROUP BY e.visit_id) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime AND
+                                                                       o.concept_id = latestEncounter.concept_id
+                   INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
+                                                             answer_concept.concept_name_type = 'FULLY_SPECIFIED' AND answer_concept.locale = 'fr')as mpc
+                                                             on mpc.PID=patientDetails.person_id and mpc.visitid=v.visit_id
+                                                             
 
                                      left join
                                      (
@@ -492,3 +509,4 @@
                                     ) as admdate on admdate.ID=
                                      patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between date('#startDate#') and Date('#endDate#')
                                      group by v.visit_id,patientDetails.IDPatient;
+

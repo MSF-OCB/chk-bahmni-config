@@ -7736,5 +7736,6 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     update program_attribute_type set description ="Date fin Programme" where description ='Date de fin' and name ='End Date for Program';
 </sql>
 </changeSet>
+<include file ="IPD_Feedback_316.xml"/>
 
 </databaseChangeLog>

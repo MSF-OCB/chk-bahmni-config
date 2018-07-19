@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+       <changeSet id="OCB-CONFIG-20180712234" author="Vishnu">
+       <comment>Creating MPC section and adding answers for it</comment>
+        <sql>
+
+              call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,"MPC(Sorte)","MPC",'Coded','Misc',FALSE);
+
+              set @concept_id = 0;
+              set @child1_concept_id = 0;
+              set @child2_concept_id = 0;
+
+              select concept_id into @concept_id from concept_name where name = "MPC(Sorte)" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child1_concept_id from concept_name where name = 'Oui' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              select concept_id into @child2_concept_id from concept_name where name = "Non" and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+              call add_concept_answer (@concept_id, @child1_concept_id, 1);
+              call add_concept_answer (@concept_id, @child2_concept_id, 2);
+          </sql>
+      </changeSet>
+       <changeSet id="OCB-CONFIG-201807150958" author="Vishnu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                   select COUNT(*) from concept_set cs
+                   join concept_name cn
+                   on cs.concept_id = cn.concept_id
+                   where cs.concept_id IN (select concept_id from concept_name where name IN('MPC(Sorte)') AND concept_name_type = "FULLY_SPECIFIED")
+and
+cs.concept_set IN (select concept_id from concept_name where name = 'Formulaire de sortie');
+                </sqlCheck>
+        </preConditions>
+       <comment> updating sortweight of Mode de sorte and Adding MPC section under discharge form</comment>
+        <sql>
+            update concept_set set sort_weight=9 where concept_id in (select concept_id from concept_name where name ='Date du prochain RDV' and concept_name_type='FULLY_SPECIFIED'
+            and locale='fr') and concept_set in (select concept_id from concept_name where name='Formulaire de sortie' and locale='fr' and concept_name_type='FULLY_SPECIFIED');
+
+            set @concept_id = 0;
+            set @member1_concept_id = 0;
+      
+
+            select concept_id into @concept_id from concept_name where name = 'Formulaire de sortie' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            select concept_id into @member1_concept_id from concept_name where name = 'MPC(Sorte)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_set_members (@concept_id, @member1_concept_id, 8);
+              
+          </sql>
+      </changeSet>
+    </databaseChangeLog>
