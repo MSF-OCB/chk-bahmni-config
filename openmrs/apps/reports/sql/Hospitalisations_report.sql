@@ -16,8 +16,8 @@
      DATE_FORMAT(sortdate.name,'%d/%m/%Y') as "Date de sortie",
      modi.S1 as "Mode de sortie",
      mpc.name as "MPC",
-    cd4.VALUE as "CD4(cells/µl)",
-    DATE_FORMAT(cd4.cd4_obsDateTime,'%d/%m/%Y') as "Date resultat CD4",
+    cd4.value as "CD4(cells/µl)",
+    DATE_FORMAT(cd4.obsdate,'%d/%m/%Y') as "Date resultat CD4",
     CV.value as "CV(copies/ml)",
     DATE_FORMAT(CV.CVDate,'%d/%m/%Y') as "Date resultat CV"
 
@@ -404,38 +404,53 @@
     ) as CV on CV.patient_id=patientDetails.person_id and CV.visitid=v.visit_id
     left join
     (
-     SELECT
-                                   v.visit_id,
-                                   max(cd4_obs.obs_datetime) AS cd4_obsDateTime,
-                                   cd4_obs.person_id as PID,
-                                   max(cd4_obs.value_numeric) as value
-
-                               FROM visit v INNER JOIN encounter e
-                                       ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
-
-                                   INNER JOIN
-                                   (SELECT
-                                         o.encounter_id,
-                                         o.person_id,
-                                         o.obs_datetime,
-                                         o.value_numeric,
-                                         o.concept_id
-                                     FROM obs o INNER JOIN concept_view cv_cd4
-                                             ON cv_cd4.concept_id = o.concept_id AND o.voided IS FALSE AND cv_cd4.retired IS FALSE AND
-                                                cv_cd4.concept_full_name IN ('CD4(cells/µl)') AND o.value_numeric IS NOT NULL
-
-                                    UNION
-                                    (SELECT
-                                         o.encounter_id,
-                                         o.person_id,
-                                         o.obs_datetime,
-                                         o.value_numeric,
-                                         o.concept_id
-                                     FROM obs o INNER JOIN concept_view cv_cd4
-                                             ON cv_cd4.concept_id = o.concept_id AND o.voided IS FALSE AND cv_cd4.retired IS FALSE AND
-                                                cv_cd4.concept_full_name IN ('CD4') AND o.value_numeric IS NOT NULL)) cd4_obs
-                                       ON cd4_obs.encounter_id = e.encounter_id
-                               GROUP BY v.visit_id) cd4 ON cd4.PID = patientDetails.person_id AND cd4.visit_id = v.visit_id
+ select pid,max(obsdate) as obsdate,vid,value from (select * 
+from (
+      select  
+      * 
+      from (
+            SELECT
+            o.encounter_id,
+            o.person_id as pid,
+            o.obs_datetime as obsdate,
+            o.value_numeric as value,
+            o.concept_id,
+            v.visit_id as vid,
+            o.obs_id as oid
+            FROM obs o 
+            INNER JOIN concept_view cv_test ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND
+                            cv_test.retired IS FALSE AND
+                            cv_test.concept_full_name IN ('CD4') AND
+                            o.value_numeric IS NOT NULL
+            inner join visit v on v.patient_id=o.person_id group by vid,obsdate order by o.obs_id) x group by value,pid order by obsdate desc )y
+            group by pid,vid
+             
+            union
+            
+            select * 
+from (
+      select  
+      * 
+      from (
+            SELECT
+            o.encounter_id,
+            o.person_id as pid,
+            o.obs_datetime as obsdate,
+            o.value_numeric as value,
+            o.concept_id,
+            v.visit_id as vid,
+            o.obs_id as oid
+            FROM obs o 
+            INNER JOIN concept_view cv_test ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND
+                            cv_test.retired IS FALSE AND
+                            cv_test.concept_full_name IN ('CD4(cells/µl)') AND
+                            o.value_numeric IS NOT NULL
+            inner join visit v on v.patient_id=o.person_id group by vid,obsdate order by o.obs_id desc) x group by value,pid order by obsdate desc )y
+            group by vid,obsdate order by oid desc) A group by pid order by obsdate desc
+            
+             
+ 
+ ) cd4 ON cd4.pid = patientDetails.person_id AND cd4.vid = v.visit_id
 
 
     left join

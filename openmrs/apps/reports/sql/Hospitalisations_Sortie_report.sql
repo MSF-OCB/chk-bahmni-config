@@ -1,4 +1,4 @@
-Select
+  Select
     patientDetails.IDPatient as "ID",
     patientDetails.TypeCohorte as "Type de  Cohorte",
 
@@ -15,9 +15,9 @@ Select
     group_concat(DISTINCT (dg2.S2),'') as "2er diagnostic à la sortie",
      DATE_FORMAT(sortdate.name,'%d/%m/%Y') as "Date de sortie",
      modi.S1 as "Mode de sortie",
-     mpc.name as "MPC(Sorte)"
-,    CD.value as "CD4(cells/µl)",
-    DATE_FORMAT(CD.cd4_obsDateTime,'%d/%m/%Y') as "Date resultat CD4",
+     mpc.name as "MPC",
+    cd4.VALUE as "CD4(cells/µl)",
+    DATE_FORMAT(cd4.cd4_obsDateTime,'%d/%m/%Y') as "Date resultat CD4",
     CV.value as "CV(copies/ml)",
     DATE_FORMAT(CV.CVDate,'%d/%m/%Y') as "Date resultat CV"
 
@@ -186,7 +186,7 @@ Select
                                     e2.voided IS FALSE
        GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
-      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Mode de sortie(Suivi)') AND
+      INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("Mode d'entrée (IPD)") AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as modi on modi.person_id=patientDetails.person_id
                                      and modi.visitid=v.visit_id
 
@@ -242,10 +242,6 @@ Select
 
 
 
-
-
-
-
     left join
     (
 
@@ -283,13 +279,7 @@ Select
 
                   ) as sortdate on sortdate.person_id=patientDetails.person_id and sortdate.visitid=v.visit_id
                   left join
-
-
-
-
-
-
-                (
+               (
 
     SELECT
       firstAddSectionDateConceptInfo.person_id,
@@ -324,8 +314,8 @@ Select
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('Fds, Diagnostic') AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr') as dg on dg.person_id=patientDetails.person_id
                                      and dg.visitid=v.visit_id
-left join 
-(
+ left join
+ (
  select
                    o.person_id as PID,
                    latestEncounter.visit_id as visitid,
@@ -346,6 +336,7 @@ left join
                    INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
                                                              answer_concept.concept_name_type = 'FULLY_SPECIFIED' AND answer_concept.locale = 'fr')as mpc
                                                              on mpc.PID=patientDetails.person_id and mpc.visitid=v.visit_id
+                                                             
 
                                      left join
                                      (
@@ -413,8 +404,8 @@ left join
     ) as CV on CV.patient_id=patientDetails.person_id and CV.visitid=v.visit_id
     left join
     (
-      SELECT
-                                   v.visit_id as visitid,
+     SELECT
+                                   v.visit_id,
                                    max(cd4_obs.obs_datetime) AS cd4_obsDateTime,
                                    cd4_obs.person_id as PID,
                                    max(cd4_obs.value_numeric) as value
@@ -444,10 +435,9 @@ left join
                                              ON cv_cd4.concept_id = o.concept_id AND o.voided IS FALSE AND cv_cd4.retired IS FALSE AND
                                                 cv_cd4.concept_full_name IN ('CD4') AND o.value_numeric IS NOT NULL)) cd4_obs
                                        ON cd4_obs.encounter_id = e.encounter_id
-                               GROUP BY v.visit_id
+                               GROUP BY v.visit_id) cd4 ON cd4.PID = patientDetails.person_id AND cd4.visit_id = v.visit_id
 
 
-    )as CD on CD.PID=patientDetails.person_id and CD.visitid=v.visit_id
     left join
     (
     SELECT
@@ -484,8 +474,7 @@ left join
                                      patientDetails.person_id and siautre.visitid=v.visit_id
                                      inner join
                                      (
-
-    SELECT
+                                    SELECT
       firstAddSectionDateConceptInfo.person_id as ID,
       firstAddSectionDateConceptInfo.visit_id as visitid,
       o3.value_datetime AS name,
@@ -517,9 +506,7 @@ left join
       INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId AND o3.voided IS FALSE
       INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("IPD Admission, Date d'admission") AND
                                      cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
-
-
                                     ) as admdate on admdate.ID=
-                                     patientDetails.person_id and admdate.visitid=v.visit_id
-                                      where date(sortdate.name) between date('#startDate#') and date('#endDate#')
+                                     patientDetails.person_id and admdate.visitid=v.visit_id and date(sortdate.name) between date('#startDate#') and Date('#endDate#')
                                      group by v.visit_id,patientDetails.IDPatient;
+
