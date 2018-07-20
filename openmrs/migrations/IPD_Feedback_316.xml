@@ -53,4 +53,11 @@ cs.concept_set IN (select concept_id from concept_name where name = 'Formulaire 
               
           </sql>
       </changeSet>
+  <changeSet id="OCB-CONFIG-201807150959" author="Vishnu">
+         <comment> Removing Ligne section from Formulaire discharge form #317</comment>
+          <sql>
+              delete from concept_set where concept_id in (select concept_id from concept_name where name ='Ligne' and locale='fr' and concept_name_type='FULLY_SPECIFIED')
+              and concept_set in (select concept_id from concept_name where name ="Arv à la sortie" and locale='fr' and concept_name_type='FULLY_SPECIFIED');
+            </sql>
+        </changeSet>
     </databaseChangeLog>
