@@ -39,7 +39,8 @@
     tbnew.TbPrecedents  AS "TB Précédentes",
     tbnew.Annediagnostic AS "Année diagnostic",
     date_format(sortdate.name, '%d/%m/%Y') AS "Date de sortie",
-    lig.C4 AS "Ligne ARV sortie",
+    (CASE WHEN lig.C4 IS  NULL THEN "Pas sous ARV"
+     ELSE  lig.C4 END ) AS "Ligne ARV sortie",
     SY.S1 AS "Syndrome sortie 1",
     group_concat(distinct (dg.S1),'') AS "Diagnostic principal sortie",
     SY2.S2 AS "Syndrome sortie 2",
@@ -1189,47 +1190,47 @@
    LEFT JOIN
 
                   (
-                  SELECT
-                  obsForActivityStatus.person_id,
-                  NULL AS 'AdmissionDate',
-                  NULL AS C1,
-                  NULL AS C2,
-                  NULL AS C3,
-                  (SELECT  concept_short_name FROM concept_view WHERE concept_id = obsForActivityStatus.value_coded)
-                  As 'C4',
-                  NULL AS 'D1',
-                  NULL AS 'D2',
-                  NULL AS C5,
-                  NULL AS C6,
-                  NULL AS C7,
-                  date(obsForActivityStatus.obs_datetime) AS 'obsDate',
-                  vt.visit_id AS visitid
-
-                  FROM
-                  obs obsForActivityStatus
-                  INNER JOIN encounter et ON et.encounter_id=obsForActivityStatus.encounter_id
-                  INNER JOIN visit vt ON vt.visit_id=et.visit_id
-                  INNER JOIN concept_view cn1 ON obsForActivityStatus.concept_id = cn1.concept_id
-                  Where obsForActivityStatus.concept_id IN (
-                                                          SELECT
-                                                            distinct concept_id
-                                                          FROM
-                                                            concept_view
-                                                           WHERE
-                                                            concept_full_name = "Ligne"
-                                                        )
-                  AND obsForActivityStatus.value_coded IN (
-                                                          SELECT  answer_concept FROM concept_answer WHERE concept_id =
-                                                          (SELECT
-                                                            distinct concept_id
-                                                          FROM
-                                                            concept_view
-                                                           WHERE
-                                                            concept_full_name IN ("Ligne"))
-
-                                                        )
-                                                        AND   obsForActivityStatus.voided = 0
-                  ) AS lig ON lig.person_id=patientDetails.person_id AND lig.visitid=v.visit_id
+                    SELECT
+                              patientID.patient_id as 'PatientID',
+                              NULL AS 'AdmissionDate',
+                              NULL AS C1,
+                              NULL AS C2,
+                              NULL AS C3,
+                              (
+                                  SELECT conceptName.concept_full_name
+                                  from concept_view conceptName
+                                  where conceptName.concept_id=one.concept_id /* concept full name of Ligne ARV sortie values*/
+                              ) As 'C4',
+                              NULL AS 'D1',
+                              NULL AS 'D2',
+                              NULL AS C5,
+                              NULL AS C6,
+                              NULL AS C7,
+                              date(patientID.date_enrolled) AS 'obsDate', /*date of enrollment of patient in Program*/
+                             vt.visit_id AS visitid
+                     from
+                            patient_state phaseOfProgram
+                            inner JOIN patient_program patientID
+                            on patientID.patient_program_id=phaseOfProgram.patient_program_id
+                            inner join program_workflow_state one
+                            on phaseOfProgram.state=one.program_workflow_state_id  /* to fetch the concept id of the Ligne ARV sortie values*/
+                            inner join concept_view conceptName
+                            on conceptName.concept_id=one.concept_id
+                            inner join visit vt
+                            on vt.patient_id=patientID.patient_id
+                                where program_id =
+                                                   (
+                                                     select program_id
+                                                     from program
+                                                     where program.name = 'Programme ARV' /*the program in which patient is enrolled*/
+                                                     and retired=0
+                                                   )
+                                and patientID.voided=0
+                                and patientID.date_voided is null
+                                and phaseOfProgram.end_date IS NULL /* for the latest value of Ligne ARV sortie */
+                                and patientID.date_completed is null /* for removing the deleted programs */
+                                and vt.date_stopped is null /* for displaying the latest visits*/
+                  ) AS lig ON lig.PatientID=patientDetails.person_id AND lig.visitid=v.visit_id
     LEFT JOIN
                   (
                   SELECT
@@ -1547,24 +1548,24 @@
 
         /*getting data from programs */
 
-        select 
+        select
         pid,
         (case when phase then phase else null end) as "LigneARV",
         phaseDate as "Datedébutligne",
         date(DatedébutARV) as "DatedébutARV"
 
         from (
-        select 
+        select
         p.program_id,
         pp.patient_id as pid,
-        pp.date_enrolled as "DatedébutARV", 
+        pp.date_enrolled as "DatedébutARV",
         ps.start_date as phaseDate,
         (case when pws.concept_id then cn.name else null end) as phase
-        from program p 
+        from program p
         inner join patient_program pp on pp.program_id=p.program_id and p.program_id in (select  program_id from patient_program where name ="Programme ARV") and pp.date_completed is null
         inner join patient_state ps on ps.patient_program_id=pp.patient_program_id  and ps.end_date is null
         inner join program_workflow_state pws on ps.state=pws.program_workflow_state_id
-        inner join concept_name cn on pws.concept_id=cn.concept_id and cn.voided =0 and cn.locale='fr' and cn.concept_name_type='SHORT')arv 
+        inner join concept_name cn on pws.concept_id=cn.concept_id and cn.voided =0 and cn.locale='fr' and cn.concept_name_type='SHORT')arv
 
 
         union all
@@ -1642,9 +1643,9 @@
         INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("HA, Date début") AND
         cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr')anne
         )totalform on totalform.PID=Tbpre.pid
-                                          
-        ) arvnew on arvnew.pid=patientDetails.person_id 
-                   
+
+        ) arvnew on arvnew.pid=patientDetails.person_id
+
     LEFT JOIN
                 (
                 SELECT
@@ -1736,4 +1737,3 @@
                 ) AS admdate ON admdate.person_id = patientDetails.person_id AND admdate.visitid=v.visit_id
                 AND date(admdate.name) between DATE('#startDate#') AND DATE('#endDate#')
                 GROUP BY v.visit_id,patientDetails.IDPatient;
-
