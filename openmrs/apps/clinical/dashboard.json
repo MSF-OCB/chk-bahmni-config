@@ -508,16 +508,24 @@
           "scope": "latest"
         }
       },
+      "programs": {
+        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+        "type": "programs",
+        "displayType": "Full-Page",
+        "displayOrder": 7
+      },
       "tbPrécédentes": {
         "translationKey": "TB Précédentes",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 7,
+        "displayOrder": 8,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
           "conceptNames": [
-            "Traitement TB Antérieur"
+            "Traitement TB Antérieur",
+            "TB Année de depistage"
+
           ],
           "scope": "latest"
         }
@@ -526,7 +534,7 @@
         "translationKey": "Prophylaxie",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 8,
+        "displayOrder": 9,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
@@ -541,7 +549,7 @@
         "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 9,
+        "displayOrder": 10,
         "displayType": "Full-Page",
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
@@ -555,7 +563,7 @@
       "investigationsChart": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
         "type": "labOrders",
-        "displayOrder": 10,
+        "displayOrder": 11,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
@@ -570,7 +578,7 @@
         "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 11,
+        "displayOrder": 12,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
