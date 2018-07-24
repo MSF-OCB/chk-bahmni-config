@@ -121,7 +121,7 @@ from person p
                            ) ligneArvInfo
                            inner join obs o2
                                on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
-                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Régime Début' AND cn.voided IS FALSE AND
+                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Regime Debut' AND cn.voided IS FALSE AND
                                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
                            inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
                        GROUP BY e.patient_id, e.visit_id
@@ -158,7 +158,7 @@ from person p
                            ) ligneArvInfo
                            inner join obs o2
                                on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
-                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Régime Début' AND cn.voided IS FALSE AND
+                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Regime Debut' AND cn.voided IS FALSE AND
                                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
                            inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
                        GROUP BY e.patient_id, e.visit_id
@@ -193,7 +193,7 @@ from person p
                            ) ligneArvInfo
                            inner join obs o2
                                on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
-                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Régime Début' AND cn.voided IS FALSE AND
+                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Regime Debut' AND cn.voided IS FALSE AND
                                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
                            inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
                        GROUP BY e.patient_id, e.visit_id
@@ -230,7 +230,7 @@ from person p
                            ) ligneArvInfo
                            inner join obs o2
                                on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
-                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Régime actuel' AND cn.voided IS FALSE AND
+                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Regime actuel' AND cn.voided IS FALSE AND
                                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
                            inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
                        GROUP BY e.patient_id, e.visit_id
@@ -267,7 +267,7 @@ from person p
                            ) ligneArvInfo
                            inner join obs o2
                                on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
-                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Régime actuel' AND cn.voided IS FALSE AND
+                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Regime actuel' AND cn.voided IS FALSE AND
                                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
                            inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
                        GROUP BY e.patient_id, e.visit_id
@@ -302,7 +302,7 @@ from person p
                            ) ligneArvInfo
                            inner join obs o2
                                on o2.obs_id = ligneArvInfo.obs_group_id and o2.encounter_id = ligneArvInfo.encounter_id and o2.voided is false
-                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Régime actuel' AND cn.voided IS FALSE AND
+                           inner join concept_name cn on o2.concept_id = cn.concept_id and cn.name = 'Regime actuel' AND cn.voided IS FALSE AND
                                                          cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'fr'
                            inner join encounter e on ligneArvInfo.encounter_id = e.encounter_id and e.voided is false
                        GROUP BY e.patient_id, e.visit_id

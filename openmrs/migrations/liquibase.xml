@@ -7737,5 +7737,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 </sql>
 </changeSet>
 <include file ="IPD_Feedback_316.xml"/>
-
+<changeSet id="OCB-CONFIG-201807241234" author="Vishnu">
+         <comment>Updating the concept names to show in the sections in dashboard</comment>
+          <sql>
+              update concept_name set name ="Regime Debut" where name="Régime Début" and concept_name_type="FULLY_SPECIFIED" and locale='fr' and voided=0;
+              update concept_name set name ="Regime actuel" where name="Régime actuel" and concept_name_type="FULLY_SPECIFIED" and locale='fr' and voided=0;
+</sql>
+</changeSet>
 </databaseChangeLog>

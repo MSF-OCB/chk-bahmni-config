@@ -1602,7 +1602,7 @@
         o.concept_id,
         e.visit_id
         FROM obs o
-        INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Régime actuel","Régime Début") AND
+        INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Regime actuel","Regime Debut") AND
           cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
           cn.locale = 'fr' AND o.voided IS FALSE
         INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
@@ -1636,7 +1636,7 @@
         o.concept_id,
         e.visit_id
         FROM obs o
-        INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Régime actuel","Régime Début") AND
+        INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ("Regime actuel","Regime Debut") AND
           cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
           cn.locale = 'fr' AND o.voided IS FALSE
         INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE

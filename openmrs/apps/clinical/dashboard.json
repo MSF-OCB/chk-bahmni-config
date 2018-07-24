@@ -480,6 +480,21 @@
           "scope": "latest"
         }
       },
+      "anticidentsARVData": {
+        "translationKey": "Antécédents Cliniques",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 4,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showDetailsButton": false,
+          "conceptNames": [
+            "Regime Debut",
+            "Regime actuel"
+          ],
+          "scope":"latest"
+        }
+      },
       "adherenceARV": {
         "translationKey": "Adhérence ARV",
         "type": "vitals",
