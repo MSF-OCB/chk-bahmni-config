@@ -2,7 +2,7 @@
     SELECT
     patientDetails.IDPatient AS "ID Patient",
     patientDetails.TypeCohorte AS "Type de  Cohorte",
-    date_format(admdate.name,'%d/%m/%Y') AS "Date d'admission",
+    date_format(admdate.admissionDate,'%d/%m/%Y') AS "Date d'admission",
     patientDetails.Nom,
     patientDetails.Age,
     patientDetails.Sexe,
@@ -39,9 +39,10 @@
     tbnew.TbPrecedents  AS "TB Précédentes",
     tbnew.Annediagnostic AS "Année diagnostic",
     date_format(sortdate.name, '%d/%m/%Y') AS "Date de sortie",
-    (CASE WHEN lig.C4 IS  NULL THEN "Pas sous ARV"
-     ELSE  lig.C4 END ) AS "Ligne ARV sortie",
-    SY.S1 AS "Syndrome sortie 1",
+    (CASE  WHEN lig.Ligne in ("1ere","2e","3e","1ere alternative","2e alternative","3e alternative","Autres") THEN lig.Ligne
+          WHEN lig.Ligne = "NoPhase" then NULL
+          ELSE "Pas Sour ARV" END) AS "Ligne ARV sortie",
+     SY.S1 AS "Syndrome sortie 1",
     group_concat(distinct (dg.S1),'') AS "Diagnostic principal sortie",
     SY2.S2 AS "Syndrome sortie 2",
     group_concat(DISTINCT (dg2.S2),'') AS "Diagnostic sortie 2",
@@ -51,6 +52,7 @@
     CV.value AS "CV Admission",
     date_format(CV.CVDate, '%d/%m/%Y') AS "CV Date"
 
+
     FROM
           (
           SELECT
@@ -59,7 +61,10 @@
           group_concat( distinct (CASE WHEN pat.name='Type de cohorte' then c.name else NULL end)) AS "TypeCohorte",
           concat(pn.family_name,' ',ifnull(pn.middle_name,''),' ', ifnull(pn.given_name,'')) AS Nom,
           concat(floor(datediff(now()   , p.birthdate)/365), ' ans, ',  floor((datediff(now(), p.birthdate)%365)/30),' mois') AS "Age",
-          CASE WHEN p.gender='M' then 'Homme' WHEN p.gender='F' then 'Femme' else null end AS Sexe,
+          CASE WHEN p.gender='M' then 'Homme'
+          WHEN p.gender='F' then 'Femme'
+          WHEN p.gender='O' then 'Autre'
+          else null end AS Sexe,
           date_format(p.birthdate, '%d/%m/%Y') AS "Datedenaissance",
           date_format(p.date_created,'%d/%m/%Y') AS "Dateenregistrement",
           group_concat( distinct  (  CASE WHEN pat.name='Date entrée cohorte' then  date(pa.value)  else  null end )) As "Dateentréecohorte",
@@ -888,6 +893,7 @@
                   INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ('IPD Admission, Date début de la ligne') AND
                                  cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
 
+
                   ) AS datelig ON datelig.person_id=patientDetails.person_id AND datelig.visitid=v.visit_id
     LEFT JOIN
                   (
@@ -1190,47 +1196,49 @@
    LEFT JOIN
 
                   (
-                    SELECT
-                              patientID.patient_id as 'PatientID',
-                              NULL AS 'AdmissionDate',
-                              NULL AS C1,
-                              NULL AS C2,
-                              NULL AS C3,
-                              (
-                                  SELECT conceptName.concept_full_name
-                                  from concept_view conceptName
-                                  where conceptName.concept_id=one.concept_id /* concept full name of Ligne ARV sortie values*/
-                              ) As 'C4',
-                              NULL AS 'D1',
-                              NULL AS 'D2',
-                              NULL AS C5,
-                              NULL AS C6,
-                              NULL AS C7,
-                              date(patientID.date_enrolled) AS 'obsDate', /*date of enrollment of patient in Program*/
-                             vt.visit_id AS visitid
-                     from
-                            patient_state phaseOfProgram
-                            inner JOIN patient_program patientID
-                            on patientID.patient_program_id=phaseOfProgram.patient_program_id
-                            inner join program_workflow_state one
-                            on phaseOfProgram.state=one.program_workflow_state_id  /* to fetch the concept id of the Ligne ARV sortie values*/
-                            inner join concept_view conceptName
-                            on conceptName.concept_id=one.concept_id
-                            inner join visit vt
-                            on vt.patient_id=patientID.patient_id
-                                where program_id =
-                                                   (
-                                                     select program_id
-                                                     from program
-                                                     where program.name = 'Programme ARV' /*the program in which patient is enrolled*/
-                                                     and retired=0
-                                                   )
-                                and patientID.voided=0
-                                and patientID.date_voided is null
-                                and phaseOfProgram.end_date IS NULL /* for the latest value of Ligne ARV sortie */
-                                and patientID.date_completed is null /* for removing the deleted programs */
-                                and vt.date_stopped is null /* for displaying the latest visits*/
-                  ) AS lig ON lig.PatientID=patientDetails.person_id AND lig.visitid=v.visit_id
+                    select
+                    patientID,
+                    DateDebutARV,
+                    (case when patientWithARVEnrolled.LigneARV then patientWithARVEnrolled.LigneARV else "NoPhase" end ) as "Ligne"
+                    from
+                            (
+                            select
+                            patientID,
+                            (case when phaseOfProg in ("1ere","2e","3e","1ere alternative","2e alternative","3e alternative","Autres") then phaseOfProg else NULL end) as "LigneARV",
+                            phaseDate as "DateDebutligne",
+                            date(enrollmentDate) as "DateDebutARV"
+                            FROM
+                                (Select * FROM
+                                              (SELECT * FROM
+                                                            (
+                                                            SELECT
+                                                            ARVprog.program_id,
+                                                            patientARVprog.patient_id as patientID,
+                                                            patientARVprog.date_enrolled as "enrollmentDate",
+                                                            patientPhaseOfProg.start_date as "phaseDate",
+                                                            v.visit_id AS vid,
+                                                            (case when progWorkflowState.concept_id then cn.name else null end) as "phaseOfProg"
+                                                            from
+                                                            patient_program patientARVprog
+                                                            INNER JOIN program ARVprog on ARVprog.program_id = patientARVprog.program_id  and patientARVprog.voided = 0
+                                                            LEFT JOIN patient_state patientPhaseOfProg on patientARVprog.patient_program_id  = patientPhaseOfProg.patient_program_id and patientPhaseOfProg.voided = 0
+                                                            LEFT join program_workflow_state progWorkflowState on patientPhaseOfProg.state = progWorkflowState.program_workflow_state_id
+                                                            left join concept_name cn on progWorkflowState.concept_id = cn.concept_id and cn.voided =0 and cn.locale='fr' and cn.concept_name_type='SHORT'
+                                                            inner join visit v on v.patient_id = patientARVprog.patient_id
+
+
+                                                            WHERE ARVprog.program_id = (select program_id from program where `name` = "Programme ARV") and patientARVprog.voided=0
+                                                            and patientPhaseOfProg.end_date is null and patientARVprog.date_completed is null AND patientPhaseOfProg.end_date is null
+                                                            GROUP BY patientARVprog.patient_id,patientPhaseOfProg.start_date
+                                                            ORDER BY patientPhaseOfProg.patient_program_id DESC
+                                                            )X
+                                                            GROUP BY phaseOfProg,patientID
+                                                            ORDER BY phaseDate DESC
+                                              ) Y
+                                              GROUP BY patientID
+                                 ) AS arv
+                            ) as patientWithARVEnrolled
+                  ) AS lig ON lig.patientID=patientDetails.person_id
     LEFT JOIN
                   (
                   SELECT
@@ -1702,7 +1710,7 @@
                 SELECT
                 firstAddSectionDateConceptInfo.person_id,
                 firstAddSectionDateConceptInfo.visit_id AS visitid,
-                o3.value_datetime  AS name
+                o3.value_datetime  AS "admissionDate"
                 FROM
                           (
                           SELECT
@@ -1735,5 +1743,5 @@
                 INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("IPD Admission, Date d'admission") AND
                 cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
                 ) AS admdate ON admdate.person_id = patientDetails.person_id AND admdate.visitid=v.visit_id
-                AND date(admdate.name) between DATE('#startDate#') AND DATE('#endDate#')
+                AND date(admdate.admissionDate) between DATE('#startDate#') AND DATE('#endDate#')
                 GROUP BY v.visit_id,patientDetails.IDPatient;
