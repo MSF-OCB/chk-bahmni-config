@@ -41,7 +41,7 @@
     date_format(sortdate.name, '%d/%m/%Y') AS "Date de sortie",
     (CASE  WHEN lig.Ligne in ("1ere","2e","3e","1ere alternative","2e alternative","3e alternative","Autres") THEN lig.Ligne
           WHEN lig.Ligne = "NoPhase" then NULL
-          ELSE "Pas Sour ARV" END) AS "Ligne ARV sortie",
+          ELSE "Pas sous ARV" END) AS "Ligne ARV sortie",
      SY.S1 AS "Syndrome sortie 1",
     group_concat(distinct (dg.S1),'') AS "Diagnostic principal sortie",
     SY2.S2 AS "Syndrome sortie 2",

@@ -89,10 +89,10 @@
             "tbPrécédentes":{
                 "type": "observation",
                 "displayOrder": 8,
-                "translationKey": "TB Précédentes",
+                "translationKey": "Antécédents cliniques - TB Précédentes",
                 "config": {
                     "conceptNames": [
-                        "IPD Admission Section, TB Précédentes"
+                        "Informations TB"
                     ],
                     "scope": "latest"
                 }
@@ -100,15 +100,14 @@
              "prophylaxieAdmission":{
                 "type": "observation",
                 "displayOrder": 9,
-                "translationKey": "Prophylaxie",
+                "translationKey": "Prophylaxie à l’admission",
                 "config": {
                     "conceptNames": [
-                        "Prophylaxie",
-            "Date Debut Prophylaxie"
+                        "Sc, Informations prophylaxie"
                     ],
                     "scope": "latest"
                 }
-            },	
+            },
              "testRapid":{
                 "type": "observation",
                 "displayOrder": 10,
@@ -192,9 +191,7 @@
                 "displayOrder" : 0,
                 "config": {
                     "conceptNames": [
-                        "RPEC_Date(form)",
-                        "Suivi Clinique",
-                        "Diagnostic"
+                        "RPEC"
                     ],
                     "scope": "latest"
                 }
@@ -217,8 +214,7 @@
                 "displayOrder" : 2,
                 "config": {
                     "conceptNames": [
-                        "Syndrome",
-                        "Diagnostic"
+                        "Syndrome et Diagnostic"
                     ],
                     "scope": "latest"
                 }

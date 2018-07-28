@@ -7751,4 +7751,25 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     (select concept_id from concept_name where name ="IPD Admission Section, Histoire ARV" and locale='fr' and concept_name_type='FULLY_SPECIFIED');
 </sql>
 </changeSet>
+<changeSet id="OCB-CONFIG-201807262313" author="Pritam">
+   <preConditions onFail="MARK_RAN">
+       <sqlCheck expectedResult="1">
+         select count(*) from concept_set
+          where concept_set in
+                              (select distinct concept_id from concept_name where name ='Formulaire de sortie')
+          and concept_id in   (select concept_id
+                               from concept_name
+                              where name in
+                                          ("Mode de sortie")
+                               )
+       </sqlCheck>
+   </preConditions>
+     <comment>Removing set members for the Admission IPD form</comment>
+     <sql>
+          DELETE from concept_set where concept_id in
+                                      (select distinct concept_id from concept_name where name in ("Mode de sortie")
+                                       )
+          and concept_set in (select distinct concept_id from concept_name where name ='Formulaire de sortie');
+     </sql>
+</changeSet>
 </databaseChangeLog>

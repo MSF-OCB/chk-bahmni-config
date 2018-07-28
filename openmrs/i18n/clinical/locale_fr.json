@@ -154,7 +154,7 @@
   "DASHBOARD_TITLE_DIAGNOSIS": "SORTIE",
   "DASHBOARD_TITLE_EXIT_MODE" : "Mode de sortie",
   "DASHBOARD_TITLE_DATE_OF_NEXT_APPOINTMENT": "Date du prochain RDV",
-  "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC" : "Syndrome à la sortie and Diagnostic principal à la sortie",
+  "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC" : "Syndrome et diagnostics à la sortie",
   "DASHBOARD_TITLE_EXIT_SYNDROME" : "Traitement à la sortie",
   "NO_DATA_MESSAGE" : "aucune donnée capturée",
   "DASHBOARD_TITLE_REGIME_ARV" : "Regime ARV",

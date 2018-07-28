@@ -530,32 +530,30 @@
         "displayOrder": 7
       },
       "tbPrécédentes": {
-        "translationKey": "TB Précédentes",
-        "type": "vitals",
+        "translationKey": "Antécédents cliniques - TB Précédentes",
+        "type": "forms",
         "isObservation": true,
         "displayOrder": 8,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
           "conceptNames": [
-            "Traitement TB Antérieur",
-            "TB Année de depistage"
+            "Informations TB"
 
           ],
           "scope": "latest"
         }
       },
       "prophylaxieAdmission": {
-        "translationKey": "Prophylaxie",
-        "type": "vitals",
+        "translationKey": "Prophylaxie à l’admission",
+        "type": "forms",
         "isObservation": true,
         "displayOrder": 9,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
           "conceptNames": [
-           "Prophylaxie",
-            "Date Debut Prophylaxie"
+           "Sc, Informations prophylaxie"
           ],
           "scope": "latest"
         }
@@ -623,9 +621,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "RPEC_Date(form)",
-            "Suivi Clinique",
-            "Diagnostic"
+            "RPEC"
           ]
         }
       },
@@ -644,7 +640,7 @@
         "translationKey": "DASHBOARD_TITLE_DIAGNOSIS"
       },
       "Diagnosis1": {
-        "type": "vitals",
+        "type": "forms",
         "isObservation": true,
         "translationKey": "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC",
         "displayOrder": 2,
@@ -653,8 +649,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Syndrome",
-            "Fds, Diagnostic"
+            "Syndrome et Diagnostic"
           ]
         }
       },
