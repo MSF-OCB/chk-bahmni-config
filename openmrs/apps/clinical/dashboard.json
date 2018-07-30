@@ -495,11 +495,27 @@
           "scope":"latest"
         }
       },
+      "regArvInformation": {
+        "translationKey": "Regime ARV",
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "conceptNames": [
+            "Regimen Start date",
+            "RA, ARV Line",
+            "Regimen Start reason"
+          ],
+          "scope": "latest"
+        },
+        "displayOrder": 5
+      },
       "adherenceARV": {
         "translationKey": "Adhérence ARV",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 5,
+        "displayOrder": 6,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
@@ -513,7 +529,7 @@
         "translationKey": "Historique TB",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 6,
+        "displayOrder": 7,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
@@ -527,13 +543,13 @@
         "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
         "type": "programs",
         "displayType": "Full-Page",
-        "displayOrder": 7
+        "displayOrder": 8
       },
       "tbPrécédentes": {
         "translationKey": "Antécédents cliniques - TB Précédentes",
         "type": "forms",
         "isObservation": true,
-        "displayOrder": 8,
+        "displayOrder": 9,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
@@ -548,7 +564,7 @@
         "translationKey": "Prophylaxie à l’admission",
         "type": "forms",
         "isObservation": true,
-        "displayOrder": 9,
+        "displayOrder": 10,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
@@ -562,7 +578,7 @@
         "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 10,
+        "displayOrder": 11,
         "displayType": "Full-Page",
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
@@ -576,7 +592,7 @@
       "investigationsChart": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
         "type": "labOrders",
-        "displayOrder": 11,
+        "displayOrder": 12,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
@@ -591,7 +607,7 @@
         "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 12,
+        "displayOrder": 13,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
