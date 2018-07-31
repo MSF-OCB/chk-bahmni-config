@@ -221,12 +221,16 @@
           "maximumNoOfVisits": 10
         },
         "formGroup": [
+          "Admission IPD Form",
+          "Triage Form",
           "Paraclinique",
+          "Formulaire de sortie",
+          "IPD Résumé de prise en charge",
           "Antécédents cliniques",
           "Suivi Consultation",
-          "Admission IPD Form",
-          "Formulaire de sortie",
-          "IPD Résumé de prise en charge"
+          "Transfert",
+          "Tests rapides",
+          "Regime ARV"
         ],
         "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
       },

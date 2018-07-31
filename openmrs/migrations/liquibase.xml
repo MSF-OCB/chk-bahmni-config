@@ -7778,4 +7778,12 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
          update concept_name set name ="Diagnostic à la sortie" where concept_id in (select concept_id from (select * from concept_name  where name ='Fds, Diagnostic')X)  and name not in ('Fds, Diagnostic') and concept_name_type="SHORT";           
     </sql>
 </changeSet>
+<changeSet id ="OCB-CONFIG-201807300219" author="Vishnu">
+    <comment> updating the concept name for paraclinique to maintain uniformity in Dashboards</comment>
+    <sql>
+        update concept_name set name ="Paraclinique - Radiologie" where concept_id in (select concept_id from (select * from concept_name where name='Paraclinique - Radiologie'
+        and locale='fr' and concept_name_type='FULLY_SPECIFIED')x) and concept_name_type in ('FULLY_SPECIFIED','SHORT')  and locale='en';
+    </sql>
+</changeSet>
+
 </databaseChangeLog>
