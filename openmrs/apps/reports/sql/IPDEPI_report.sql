@@ -1467,7 +1467,7 @@ select * From
                                                     patientARVprog.patient_id as patientID,
                                                     IF(patientARVprog.date_changed > patientARVprog.date_created,patientARVprog.date_changed,patientARVprog.date_created)  AS "dateCreatedOnTB",
                                                     (CASE WHEN patientARVprog.date_enrolled THEN "Oui" ELSE NULL END ) AS "Tbprecedents",
-                                                    year(patientARVprog.date_enrolled) AS "Anne",
+                                                    DATE_FORMAT(patientARVprog.date_enrolled,'%Y') AS "Anne",
                                                     patientPhaseOfProg.start_date as "phaseDate",
                                                     v.visit_id AS vid,
                                                     (case when progWorkflowState.concept_id then cv.concept_full_name else null end) as "phaseOfProg"
