@@ -1842,5 +1842,5 @@ LEFT JOIN
                 INNER JOIN concept_name cn2 ON cn2.concept_id = o3.concept_id AND cn2.name IN ("IPD Admission, Date d'admission") AND
                 cn2.voided IS FALSE AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'fr'
                 ) AS admdate ON admdate.person_id = patientDetails.person_id AND admdate.visitid=v.visit_id
-                AND date(admdate.admissionDate) between DATE('#starDate#') AND DATE('#endDate#')
+                AND date(admdate.admissionDate) between DATE('#startDate#') AND DATE('#endDate#')
                 GROUP BY v.visit_id,patientDetails.IDPatient;
