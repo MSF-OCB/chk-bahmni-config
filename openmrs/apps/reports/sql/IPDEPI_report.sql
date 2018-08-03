@@ -1469,6 +1469,7 @@ select * From
                                                     (CASE WHEN patientARVprog.date_enrolled THEN "Oui" ELSE NULL END ) AS "Tbprecedents",
                                                     DATE_FORMAT(patientARVprog.date_enrolled,'%Y') AS "Anne",
                                                     patientPhaseOfProg.start_date as "phaseDate",
+                                                    patientARVprog.date_completed,
                                                     v.visit_id AS vid,
                                                     (case when progWorkflowState.concept_id then cv.concept_full_name else null end) as "phaseOfProg"
                                                     from
@@ -1481,7 +1482,7 @@ select * From
 
 
                                                     WHERE ARVprog.program_id = (select program_id from program where `name` = "Programme TB") and patientARVprog.voided=0
-                                                    and patientPhaseOfProg.end_date is null and patientARVprog.date_completed is null AND patientPhaseOfProg.end_date is null
+                                                    and patientPhaseOfProg.end_date is null  AND patientPhaseOfProg.end_date is null
                                                     GROUP BY patientARVprog.patient_id,patientPhaseOfProg.start_date
                                                     ORDER BY patientPhaseOfProg.patient_program_id DESC
                                                     )X
@@ -1611,6 +1612,7 @@ from
                                         patientARVprog.patient_id as patientID,
                                         patientARVprog.date_enrolled as "enrollmentDate",
                                         patientPhaseOfProg.start_date as "phaseDate",
+                                        patientARVprog.date_completed,
                                         v.visit_id AS vid,
                                         patientPhaseOfProg.date_created AS "programPhaseCreate",
                                         (case when progWorkflowState.concept_id then cv.concept_full_name else null end) as "phaseOfProg"
@@ -1624,7 +1626,7 @@ from
 
 
                                         WHERE ARVprog.program_id = (select program_id from program where `name` = "Programme ARV") and patientARVprog.voided=0
-                                        and patientPhaseOfProg.end_date is null and patientARVprog.date_completed is null AND patientPhaseOfProg.end_date is null
+                                        and patientPhaseOfProg.end_date is null  AND patientPhaseOfProg.end_date is null
                                         GROUP BY patientARVprog.patient_id,patientPhaseOfProg.start_date
                                         ORDER BY patientPhaseOfProg.patient_program_id DESC
                                         )X
