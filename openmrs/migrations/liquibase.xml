@@ -7785,5 +7785,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         and locale='fr' and concept_name_type='FULLY_SPECIFIED')x) and concept_name_type in ('FULLY_SPECIFIED','SHORT')  and locale='en';
     </sql>
 </changeSet>
-
+<include file="updated_program_queues.xml"/>
 </databaseChangeLog>
