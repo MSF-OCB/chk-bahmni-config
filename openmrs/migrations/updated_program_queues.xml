@@ -5,7 +5,7 @@
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-<changeSet id="OCB-CONFIG-2018080309025" author="Vishnu">
+<changeSet id="OCB-CONFIG-2018080309030" author="Vishnu">
   <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
             select count(*) from global_property
@@ -38,7 +38,7 @@
             join person p
             ON p.person_id = v.patient_id
             join patient_program pg
-            ON pg.patient_id = pi.patient_id
+            ON pg.patient_id = pi.patient_id and pg.date_completed is  null
             join program pgg
             ON pgg.program_id = pg.program_id and  pgg.name = 'Programme ARV'
             join location l
@@ -58,7 +58,7 @@
               order by ds desc,visit_id desc)X group by identifier;" where property="emrapi.sqlSearch.activePatientsArv";
    </sql>
    </changeSet>
-   <changeSet id="OCB-CONFIG-2018080309024" author="Vishnu">
+   <changeSet id="OCB-CONFIG-2018080309031" author="Vishnu">
   <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
             select count(*) from global_property
@@ -91,7 +91,7 @@
             join person p
             ON p.person_id = v.patient_id
             join patient_program pg
-            ON pg.patient_id = pi.patient_id
+            ON pg.patient_id = pi.patient_id and pg.date_completed is  null
             join program pgg
             ON pgg.program_id = pg.program_id and  pgg.name = 'Programme TB'
             join location l
