@@ -3,17 +3,17 @@ select
     group_concat(distinct(case when pad.name='Type de cohorte' then cn.name else null end))                  as "Type cohorte",
      CONCAT(pn.family_name,' ', pn.given_name)                                                               AS `Nom`,
     floor(DATEDIFF(CURDATE(), p.birthdate) / 365)                                                            AS `Age`,
-    date(p.birthdate)                                                                                        as "Date de naissance",
+    date_format(p.birthdate, '%d/%m/%Y')                                                                     as "Date de naissance",
     CASE WHEN p.gender = 'M' THEN 'H'
     WHEN p.gender = 'F' THEN 'F'
     WHEN p.gender = 'O' THEN 'A'
     else p.gender END                                                                                        AS "Sexe",
     date_format(group_concat(distinct(case when pad.name ='Date entrée cohorte' then date(pa.value) else null end)),'%d/%m/%Y')      as "Date entree cohorte",
-    date_format(tbpgm.tbStartDate,'%d/%m/%Y')                                                                                       as "Date début TB",
+    date_format(tbpgm.tbStartDate,'%d/%m/%Y')                                                                as "Date début TB",
     tbpgm.reason                                                                                             as "Motif début TB",
     tbpgm.tbType                                                                                             as "Type TB",
-    date_format(arvpgm.enrolledDate,'%d/%m/%Y')                                                                                      as "Date début ARV",
-    tbgenexp.dateresults                                                                                     as "Date resultats ",
+    date_format(arvpgm.enrolledDate,'%d/%m/%Y')                                                              as "Date début ARV",
+    date_format(tbgenexp.dateresults,'%d/%m/%Y')                                                             as "Date resultats ",
     tbgenexp.genvalue                                                                                        as "Résultats Genexpert",
     tbgenexp.TBLAMvalue                                                                                      as "Resultats TB-LAM"
 
