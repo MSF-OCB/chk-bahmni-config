@@ -7786,9 +7786,10 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     </sql>
 </changeSet>
 <include file="updated_program_queues.xml"/>
-<changeSet id ="OCB-CONFIG-20180806" author="Vishnu">
+<changeSet id ="OCB-CONFIG-20180807" author="Vishnu">
     <comment> Removing the Program Attribute Datede fin</comment>
     <sql>
+        delete from  patient_program_attribute where attribute_type_id in (select program_attribute_type_id from program_attribute_type where name='End Date for Program' and description='Date fin Programme');
         delete from program_attribute_type where name ="End Date for Program" and description ="Date fin Programme";
     </sql>
 </changeSet>
