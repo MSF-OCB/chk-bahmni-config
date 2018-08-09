@@ -17,7 +17,7 @@ SELECT
   CASE WHEN DATE(p.date_created) = DATE(v.date_started)
     THEN 'Nouvelle visite'
   ELSE NULL END                                 AS 'Nouvelle visite',
-  consultant_name.names                         AS 'Consultant',
+  (case when vt.name in('LAB VISIT') then null else consultant_name.names   end )                        AS 'Consultant',
   date_format(prev_appt_date.value_datetime,'%d/%m/%Y')                 AS 'Date de rendez-vous',
   DATE_format(v.date_started,'%d/%m/%Y')                          AS 'Date debut visite',
   DATE_format(v.date_stopped,'%d/%m/%Y')                          AS 'Date fin visite'
@@ -98,5 +98,5 @@ FROM visit v
                                     GROUP BY pv.visit_id
                                     ) latest_obs ON latest_obs.prev_visit_id = en.visit_id AND latest_obs.obsDateTime = obs.obs_datetime
                         ) prev_appt_date
-    ON prev_appt_date.visit_id = v.visit_id 
+    ON prev_appt_date.visit_id = v.visit_id
 WHERE DATE(v.date_started) BETWEEN DATE('#startDate#') AND DATE('#endDate#');
