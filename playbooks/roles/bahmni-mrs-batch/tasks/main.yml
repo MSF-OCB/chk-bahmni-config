@@ -62,6 +62,7 @@
     src: /var/www/bahmni_config/openmrs/custom/
     state: link
     force: yes
+    follow: no
 
 - name: "Install initializer module"
   copy: 
