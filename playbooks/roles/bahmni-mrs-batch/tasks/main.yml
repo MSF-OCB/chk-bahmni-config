@@ -61,6 +61,7 @@
     owner: bahmni
     src: /var/www/bahmni_config/openmrs/custom/
     state: link
+    force: yes
 
 - name: "Install initializer module"
   copy: 
