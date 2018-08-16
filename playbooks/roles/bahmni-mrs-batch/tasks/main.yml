@@ -1,33 +1,33 @@
 --- 
-- 
-  name: "Stop openmrs"
+
+- name: "Stop openmrs"
   service: "name=openmrs state=stopped"
   when: "passive is not defined or passive != 'yes'"
-- 
+  
+- name: "delete previous bahmnicore module"
   file: 
     path: /opt/openmrs/modules/bahmnicore-0.90.SNAPSHOT.omod
     state: absent
-  name: "delete previous bahmnicore module"
-- 
+- name: "copying the bahmnicore omod"
   command: "cp /tmp/bahmnicore-0.90-SNAPSHOT.omod /opt/openmrs/modules/bahmnicore-0.90-SNAPSHOT.omod"
-  name: "copying the bahmnicore omod"
-- 
+
+- name: "copying the bahmni apps"
   command: "cp /tmp/bahmniapps.zip /opt/bahmni-web/etc/bahmniapps.zip"
-  name: "copying the bahmni apps"
-- 
+
+- name: "unlinking /var/www/bahmniapps"
   command: "unlink /var/www/bahmniapps"
-  name: "unlinking /var/www/bahmniapps"
   when: "bahmniapps_url is defined"
-- 
-  name: "Unzip downloaded bahmniapps file"
+
+- name: "Unzip downloaded bahmniapps file"
   unarchive: 
     dest: /opt/bahmni-web/etc/bahmniapps
     src: /opt/bahmni-web/etc/bahmniapps.zip
-- 
+
+- name: "linking /var/www/bahmniapps to Possible bahmniapps"
   command: "ln -s /opt/bahmni-web/etc/bahmniapps /var/www/bahmniapps"
-  name: "linking /var/www/bahmniapps to Possible bahmniapps"
   when: "bahmniapps_url is defined"
--
+
+- name: Stop bahmni-reports
   service:
     name: bahmni-reports
     state: stopped
@@ -47,11 +47,13 @@
   unarchive:
     dest: /opt/bahmni-reports/bahmni-reports
     src: /tmp/bahmnireports.war
--
+
+- name: Start bahmni-reports
   service:
     name: bahmni-reports
     state: started
-- 
+
+- name: "Linking configuration folder for Initializer module"
   file: 
     dest: /opt/openmrs/configuration
     group: bahmni
@@ -59,17 +61,18 @@
     owner: bahmni
     src: /var/www/bahmni_config/openmrs/custom/
     state: link
-  name: "Linking configuration folder for Initializer module"
-- 
+    force: yes
+    follow: no
+
+- name: "Install initializer module"
   copy: 
     dest: /opt/openmrs/modules/initializer-1.0.1-SNAPSHOT.omod
     group: bahmni
     mode: "u=rw,g=r,o=r"
     owner: bahmni
     src: /tmp/initializer-1.0.1-SNAPSHOT.omod
-  name: "Install initializer module"
-- 
-  name: "Start openmrs"
+
+- name: "Start openmrs"
   service: "name=openmrs state=started"
   when: "passive is not defined or passive != 'yes'"
 
@@ -86,4 +89,3 @@
     name: yearly_id_change
     special_time: "yearly"
     job: "/etc/bahmni-installer/idGen.sh"
-
