@@ -180,7 +180,7 @@
          "strictAutocompleteFromLevel": "address6"
       },
       "mandatoryPersonAttributes": [
-         "ARV Naif/ Non Naif","Type de cohorte","Status VIH","Categorie Centre de provenance"
+         "ARV Naif/ Non Naif","Type de cohorte","Status VIH","Categorie Centre de provenance,"Date entrée cohorte"
       ],
       "defaultVisitType": "OPD",
       "showMiddleName": true,
