@@ -1758,17 +1758,40 @@ LEFT JOIN
     LEFT JOIN
                 (
                 SELECT
-                et.visit_id AS visitid,
-                et.patient_id,
-                Max(oTest.value_numeric)    AS value,
-                oTest.obs_datetime AS CDDate
-                FROM obs oTest
-                INNER JOIN encounter et ON et.encounter_id = oTest.encounter_id AND et.voided IS FALSE
-                INNER JOIN concept_view cvt
-                ON cvt.concept_id = oTest.concept_id AND cvt.concept_full_name in('CD4(Bilan de routine IPD)','CD4') AND oTest.voided IS FALSE AND
-                cvt.retired IS FALSE
-                GROUP BY visit_id
-                ) AS CD ON CD.patient_id=patientDetails.person_id AND CD.visitid=v.visit_id
+                    v.visit_id AS visitid,
+                    max(cd4_obs.obs_datetime) AS CDDate,
+                    cd4_obs.person_id AS PID,
+                    cd4_obs.value_numeric AS value
+                    FROM visit v INNER JOIN encounter e
+                    ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
+                    INNER JOIN
+                              (
+                              SELECT
+                              o.encounter_id,
+                              o.person_id,
+                              o.obs_datetime,
+                              o.value_numeric,
+                              o.concept_id
+                              FROM obs o INNER JOIN concept_view cd4_val
+                              ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
+                              cd4_val.concept_full_name IN ("CD4(cells/µl)") AND o.value_numeric IS NOT NULL
+
+                              UNION
+
+                              (
+                              SELECT
+                              o.encounter_id,
+                              o.person_id,
+                              o.obs_datetime,
+                              o.value_numeric,
+                              o.concept_id
+                              FROM obs o INNER JOIN concept_view cd4_val
+                              ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
+                              cd4_val.concept_full_name IN ("CD4(Bilan de routine IPD)","CD4") AND o.value_numeric IS NOT NULL)
+                              ) cd4_obs
+                    ON cd4_obs.encounter_id = e.encounter_id
+                    GROUP BY v.visit_id
+                ) AS CD ON CD.PID=patientDetails.person_id AND CD.visitid=v.visit_id
     LEFT JOIN
                 (
                 SELECT
