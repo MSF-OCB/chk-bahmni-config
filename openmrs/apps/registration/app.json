@@ -65,7 +65,7 @@
             ],
             "expanded": true
          },
-         
+
          "patientConfidentInformation":
                 {
             "title" : "Informations Des Confidents",
@@ -104,8 +104,8 @@
             "EstInforméDuStatutSérologique1",
             "RésultatDuTestVIH1",
             "DateDeNaissanceDépendant1"
-            
-            
+
+
           ]
         },
         "patientNewDependentSectionSecond": {
@@ -174,13 +174,13 @@
           ]
         }
       },
-      
+
       "addressHierarchy": {
          "showAddressFieldsTopDown": false,
          "strictAutocompleteFromLevel": "address6"
       },
       "mandatoryPersonAttributes": [
-         "ARV Naif/ Non Naif","Type de cohorte","Status VIH","Categorie Centre de provenance,"Date entrée cohorte"
+         "ARV Naif/ Non Naif","Type de cohorte","Status VIH","Categorie Centre de provenance","Date entrée cohorte"
       ],
       "defaultVisitType": "OPD",
       "showMiddleName": true,
