@@ -1,7 +1,7 @@
 {
   "homePage": {
     "header_text": "<b>WELCOME TO<br />BAHMNI EMR & HOSPITAL SERVICE",
-    "logo": "/msf_logo.png",
+    "logo": "/bahmni/images/msf_logo.png",
     "title_text": " "
   },
   "loginPage": {
