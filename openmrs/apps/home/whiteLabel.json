@@ -5,7 +5,7 @@
     "title_text": " "
   },
   "loginPage": {
-    "logo": "/msf_logo.png",
+    "logo": "/bahmni/images/msf_logo.png",
     "showHeaderText": true,
     "showTitleText": false
   },
