@@ -1,7 +1,6 @@
 #!/bin/bash -e
-export pass=$(grep OPENMRS_DB_PASSWORD /etc/bahmni-installer/bahmni.conf |cut -f 2 -d =)
 
-mysql -uroot -p${pass} openmrs << EOF
+psql -Uclinlims clinlims << EOF
 start transaction;
 update analysis
 set status_id = 15, comment = 'Annulé automatiquement à cause de manque de résultats.'
