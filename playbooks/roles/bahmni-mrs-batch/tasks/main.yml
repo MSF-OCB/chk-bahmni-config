@@ -78,7 +78,7 @@
 
 - name: "copy yearly id script for bahmni Registration ID"
   copy:
-    src: "{{ role_path }}/files/idGen.sh"
+    src: idGen.sh
     dest: "/etc/bahmni-installer/idGen.sh"
     owner: "{{ bahmni_user }}"
     group: "{{ bahmni_group }}"
@@ -89,3 +89,19 @@
     name: yearly_id_change
     special_time: "yearly"
     job: "/etc/bahmni-installer/idGen.sh"
+
+- name: Copy lab backlog script
+  copy:
+    src: lab_backlog.sh
+    dest: "/etc/bahmni-installer/lab_backlog.sh"
+    owner: "{{ bahmni_user }}"
+    group: "{{ bahmni_group }}"
+    mode: 755
+
+- name: Configure lab backlog cronjob
+  cron:
+    name: clean_lab_backlog
+    minute: 0
+    hour: 1
+    job: "/etc/bahmni-installer/lab_backlog.sh"
+
