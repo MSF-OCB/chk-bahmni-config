@@ -1,5 +1,11 @@
 #!/bin/bash -e
 
+. /cron_env.sh
+
+if [ "${BAHMNI_SERVER_MODE}" != "active" ]; then
+  exit 0
+fi
+
 psql -Uclinlims clinlims << EOF
 start transaction;
 update analysis

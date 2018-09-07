@@ -1,4 +1,11 @@
-#!/bin/bash
+#!/bin/bash -e
+
+. /cron_env.sh
+
+if [ "${BAHMNI_SERVER_MODE}" != "active" ]; then
+  exit 0
+fi
+
 export pass=`grep OPENMRS_DB_PASSWORD /etc/bahmni-installer/bahmni.conf |cut -f 2 -d =`
 
 mysql -uroot -p${pass} openmrs << EOF
