@@ -33,7 +33,7 @@ where status_id = 4
                  and s.lastupdated < (now() - interval '1 week')
              )
     )
-);
+  );
 commit;
 EOF
 
