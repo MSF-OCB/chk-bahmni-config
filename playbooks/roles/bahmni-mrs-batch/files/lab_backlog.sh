@@ -30,8 +30,7 @@ where status_id = 4
                inner join sample s on si.samp_id = s.id
                where analysis.sampitem_id = si.id
                  and s.accession_number is null
-                 and s.lastupdated < (now() - interval '1 week')
-             )
+                 and s.lastupdated < (now() - interval '1 week'))
     )
   );
 commit;
