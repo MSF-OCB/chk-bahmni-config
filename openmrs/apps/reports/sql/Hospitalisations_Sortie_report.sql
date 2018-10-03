@@ -43,7 +43,7 @@
                    left join person_attribute_type pat on  pa.person_attribute_type_id=pat.person_attribute_type_id
                    left join person_address pad on pad.person_id=p.person_id
                    left join concept_name c on c.concept_id=pa.value and c.voided = 0 and c.locale_preferred=1
-                  group by pi.identifier,vda.visit_id
+                  group by pi.identifier
     ) AS patientDetails inner JOIN visit v ON v.patient_id = patientDetails.person_id
     inner join encounter e on e.visit_id =v.visit_id
     inner join obs o on o.encounter_id=e.encounter_id  AND v.voided IS FALSE
@@ -509,4 +509,5 @@
                                     ) as admdate on admdate.ID=
                                      patientDetails.person_id and admdate.visitid=v.visit_id and date(sortdate.name) between date('#startDate#') and Date('#endDate#')
                                      group by v.visit_id,patientDetails.IDPatient;
+
 
