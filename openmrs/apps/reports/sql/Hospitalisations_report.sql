@@ -1,7 +1,6 @@
   Select
     patientDetails.IDPatient as "ID",
     patientDetails.TypeCohorte as "Type de  Cohorte",
-
     patientDetails.Nom,
     patientDetails.Age,
     patientDetails.Datedenaissance as "Date de naissance",
@@ -9,19 +8,16 @@
     DATE_FORMAT(patientDetails.Dateentréecohorte,'%d/%m/%Y') as "Date entrée cohorte",
     refer.C6 as "Structure de référence",
     DATE_FORMAT(admdate.name,'%d/%m/%Y') as "Date d'admission",
-
     syndrome.C4 as "Syndrome à l'admission",
     group_concat(distinct (dg.S1),'') as "1er diagnostic à la sortie",
     group_concat(DISTINCT (dg2.S2),'') as "2er diagnostic à la sortie",
-     DATE_FORMAT(sortdate.name,'%d/%m/%Y') as "Date de sortie",
-     modi.S1 as "Mode de sortie",
-     mpc.name as "MPC",
+    DATE_FORMAT(sortdate.name,'%d/%m/%Y') as "Date de sortie",
+    modi.S1 as "Mode de sortie",
+    mpc.name as "MPC",
     cd4.value as "CD4(cells/µl)",
     DATE_FORMAT(cd4.obsdate,'%d/%m/%Y') as "Date resultat CD4",
     CV.value as "CV(copies/ml)",
     DATE_FORMAT(CV.CVDate,'%d/%m/%Y') as "Date resultat CV"
-
-
     from (
     select
                 distinct pi.identifier  as "IDPatient",
@@ -43,8 +39,9 @@
                    left join person_attribute_type pat on  pa.person_attribute_type_id=pat.person_attribute_type_id
                    left join person_address pad on pad.person_id=p.person_id
                    left join concept_name c on c.concept_id=pa.value and c.voided = 0 and c.locale_preferred=1
-                  group by pi.identifier,vda.visit_id
-    ) AS patientDetails inner JOIN visit v ON v.patient_id = patientDetails.person_id
+                  group by pi.identifier
+    ) AS patientDetails 
+    inner JOIN visit v ON v.patient_id = patientDetails.person_id
     inner join encounter e on e.visit_id =v.visit_id
     inner join obs o on o.encounter_id=e.encounter_id  AND v.voided IS FALSE
     left join
@@ -404,53 +401,40 @@
     ) as CV on CV.patient_id=patientDetails.person_id and CV.visitid=v.visit_id
     left join
     (
- select pid,max(obsdate) as obsdate,vid,value from (select * 
-from (
-      select  
-      * 
-      from (
-            SELECT
-            o.encounter_id,
-            o.person_id as pid,
-            o.obs_datetime as obsdate,
-            o.value_numeric as value,
-            o.concept_id,
-            v.visit_id as vid,
-            o.obs_id as oid
-            FROM obs o 
-            INNER JOIN concept_view cv_test ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND
-                            cv_test.retired IS FALSE AND
-                            cv_test.concept_full_name IN ('CD4') AND
-                            o.value_numeric IS NOT NULL
-            inner join visit v on v.patient_id=o.person_id group by vid,obsdate order by o.obs_id) x group by value,pid order by obsdate desc )y
-            group by pid,vid
-             
-            union
-            
-            select * 
-from (
-      select  
-      * 
-      from (
-            SELECT
-            o.encounter_id,
-            o.person_id as pid,
-            o.obs_datetime as obsdate,
-            o.value_numeric as value,
-            o.concept_id,
-            v.visit_id as vid,
-            o.obs_id as oid
-            FROM obs o 
-            INNER JOIN concept_view cv_test ON cv_test.concept_id = o.concept_id AND o.voided IS FALSE AND
-                            cv_test.retired IS FALSE AND
-                            cv_test.concept_full_name IN ('CD4(cells/µl)') AND
-                            o.value_numeric IS NOT NULL
-            inner join visit v on v.patient_id=o.person_id group by vid,obsdate order by o.obs_id desc) x group by value,pid order by obsdate desc )y
-            group by vid,obsdate order by oid desc) A group by pid order by obsdate desc
-            
-             
- 
- ) cd4 ON cd4.pid = patientDetails.person_id AND cd4.vid = v.visit_id
+  SELECT
+                    v.visit_id AS vid,
+                    max(cd4_obs.obs_datetime) AS obsdate,
+                    cd4_obs.person_id AS PID,
+                    cd4_obs.value_numeric AS value
+                    FROM visit v INNER JOIN encounter e
+                    ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
+                    INNER JOIN
+                              (
+                              SELECT
+                              o.encounter_id,
+                              o.person_id,
+                              o.obs_datetime,
+                              o.value_numeric,
+                              o.concept_id
+                              FROM obs o INNER JOIN concept_view cd4_val
+                              ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
+                              cd4_val.concept_full_name IN ("CD4(cells/µl)") AND o.value_numeric IS NOT NULL
+
+                              UNION
+
+                              (
+                              SELECT
+                              o.encounter_id,
+                              o.person_id,
+                              o.obs_datetime,
+                              o.value_numeric,
+                              o.concept_id
+                              FROM obs o INNER JOIN concept_view cd4_val
+                              ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
+                              cd4_val.concept_full_name IN ("CD4(Bilan de routine IPD)","CD4") AND o.value_numeric IS NOT NULL)
+                              ) cd4_obs
+                    ON cd4_obs.encounter_id = e.encounter_id
+                    GROUP BY v.visit_id) cd4 ON cd4.pid = patientDetails.person_id AND cd4.vid = v.visit_id
 
 
     left join
@@ -524,4 +508,5 @@ from (
                                     ) as admdate on admdate.ID=
                                      patientDetails.person_id and admdate.visitid=v.visit_id and date(admdate.name) between date('#startDate#') and Date('#endDate#')
                                      group by v.visit_id,patientDetails.IDPatient;
+
 
