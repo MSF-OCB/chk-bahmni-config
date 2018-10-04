@@ -5,6 +5,14 @@
     name: bahmni-lab
     state: stopped
   ignore_errors: yes
+  
+- name: "Backup bahmni-lab.conf to preserve JVM params."
+  copy:
+    src: "/etc/bahmni-lab/bahmni-lab.conf"
+    dest: "/tmp/bahmni-lab.conf.bak"
+    mode: preserve
+    remote_src: yes
+    
 
 - name: "Uninstall the bahmni-lab rpm"
   yum:
@@ -15,6 +23,18 @@
   yum:
     name: /tmp/bahmni-lab-90.noarch.rpm
     state: present
+    
+- name: "Restore bahmni-lab.conf."
+  copy:
+    src: "/tmp/bahmni-lab.conf.bak"
+    dest: "/etc/bahmni-lab/bahmni-lab.conf"
+    mode: preserve
+    remote_src: yes
+    
+- name: "Delete bahmni-lab.conf backup"
+  file:
+    path: "/tmp/bahmni-lab.conf.bak"
+    state: absent
 
 - name: "Start the bahmni-lab service"
   service:
