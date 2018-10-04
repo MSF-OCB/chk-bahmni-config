@@ -14,9 +14,9 @@
 - name: Install custom bahmni-lab rpm
   yum:
     name: /tmp/bahmni-lab-90.noarch.rpm
-    state:present
+    state: present
 
 - name: "Start the bahmni-lab service"
   service:
-    name:bahmni-lab
+    name: bahmni-lab
     state: started
