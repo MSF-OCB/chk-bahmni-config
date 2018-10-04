@@ -77,7 +77,7 @@
           LEFT JOIN person_attribute_type pat ON  pa.person_attribute_type_id=pat.person_attribute_type_id
           LEFT JOIN person_address pad ON pad.person_id=p.person_id
           LEFT JOIN concept_name c ON c.concept_id=pa.value AND c.voided = 0 AND c.locale_preferred=1
-          GROUP BY pi.identifier,vda.visit_id
+          GROUP BY pi.identifier
           ) AS patientDetails
     INNER JOIN visit v ON v.patient_id = patientDetails.person_id
     INNER JOIN encounter e ON e.visit_id =v.visit_id
@@ -98,7 +98,6 @@
               NULL AS C7,
               Date(obsForActivityStatus.obs_datetime) AS 'ObsDate',
               vt.visit_id AS visit
-
               FROM
               obs obsForActivityStatus
               INNER JOIN encounter et ON et.encounter_id=obsForActivityStatus.encounter_id
@@ -112,7 +111,7 @@
                                                         WHERE
                                                         concept_full_name = "Référé en IPD par(FOSA)"
                                                        )
-              AND obsForActivityStatus.value_coded IN (
+              AND obsForActivityStatus.value_coded IN  (
                                                         SELECT   answer_concept FROM concept_answer  WHERE concept_id =
                                                         (SELECT
                                                         distinct concept_id
@@ -120,7 +119,7 @@
                                                         concept_view
                                                         WHERE
                                                         concept_full_name IN ("Référé en IPD par(FOSA)"))
-                                                      )
+                                                       )
               AND   obsForActivityStatus.voided = 0
              ) AS refer ON refer.person_id=patientDetails.person_id AND refer.visit=v.visit_id
      LEFT JOIN
@@ -255,7 +254,6 @@
                                                         )
                 AND   obsForActivityStatus.voided = 0
               ) AS malade ON malade.person_id=patientDetails.person_id AND malade.visit=v.visit_id
-
     LEFT JOIN
               (
               SELECT
@@ -586,48 +584,13 @@
                     ) AS hep ON hep.patient_id=patientDetails.person_id AND hep.visitid=v.visit_id
     LEFT JOIN
                     (
-                    SELECT
-                    v.visit_id AS visitid,
-                    max(hemo_obs.obs_datetime) AS hemo_obsDateTime,
-                    hemo_obs.person_id AS PID,
-                    hemo_obs.value_numeric AS value
-                    FROM
-                    visit v
-                    INNER JOIN encounter e ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
-                    INNER JOIN
-                                (
-                                SELECT
-                                o.encounter_id,
-                                o.person_id,
-                                o.obs_datetime,
-                                o.value_numeric,
-                                o.concept_id
-                                FROM obs o INNER JOIN concept_view hemo_val
-                                ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
-                                hemo_val.concept_full_name IN ('Hémoglobine (Hemocue)(g/dl)') AND o.value_numeric IS NOT NULL
-
-                                UNION
-
-                                (
-                                SELECT
-                                o.encounter_id,
-                                o.person_id,
-                                o.obs_datetime,
-                                o.value_numeric,
-                                o.concept_id
-                                FROM obs o INNER JOIN concept_view hemo_val
-                                ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
-                                hemo_val.concept_full_name IN ('Hemoglobine') AND o.value_numeric IS NOT NULL)) hemo_obs
-                                ON hemo_obs.encounter_id = e.encounter_id
-                                GROUP BY v.visit_id
-                    ) AS hemo ON hemo.PID=patientDetails.person_id AND hemo.visitid=v.visit_id
-    LEFT JOIN
-                    (
-                    SELECT
-                    v.visit_id AS visitid,
-                    max(gly_obs.obs_datetime) AS gly_obsDateTime,
-                    gly_obs.person_id AS PID,
-                    gly_obs.value_numeric AS value
+                    select hemo_obs.vid AS vid,
+                   hemo_obs.obsdate AS obsdate,
+                    hemo_obs.pid AS PID,
+                    hemo_obs.value AS value from (SELECT v.visit_id AS vid,
+                   hemo.obs_datetime AS obsdate,
+                    hemo.person_id AS PID,
+                    hemo.value_numeric AS value
                     FROM visit v INNER JOIN encounter e
                     ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
                     INNER JOIN
@@ -638,11 +601,11 @@
                               o.obs_datetime,
                               o.value_numeric,
                               o.concept_id
-                              FROM obs o INNER JOIN concept_view gly_val
-                              ON gly_val.concept_id = o.concept_id AND o.voided IS FALSE AND gly_val.retired IS FALSE AND
-                              gly_val.concept_full_name IN ('Glycémie(mg/dl)') AND o.value_numeric IS NOT NULL
-
-                              UNION
+                              FROM obs o INNER JOIN concept_view hemo_val
+                              ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
+                              hemo_val.concept_full_name IN ('Hémoglobine (Hemocue)(g/dl)') AND o.value_numeric IS NOT NULL
+        
+                              UNION 
 
                               (
                               SELECT
@@ -651,14 +614,57 @@
                               o.obs_datetime,
                               o.value_numeric,
                               o.concept_id
-                              FROM obs o INNER JOIN concept_view gly_val
-                              ON gly_val.concept_id = o.concept_id AND o.voided IS FALSE AND gly_val.retired IS FALSE AND
-                              gly_val.concept_full_name IN ('Glycémie') AND o.value_numeric IS NOT NULL)
-                              ) gly_obs
-                    ON gly_obs.encounter_id = e.encounter_id
-                    GROUP BY v.visit_id
+                              FROM obs o INNER JOIN concept_view hemo_val
+                              ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
+                              hemo_val.concept_full_name IN ('Hemoglobine') AND o.value_numeric IS NOT NULL )
+                             
+                              ) hemo
+                    ON hemo.encounter_id = e.encounter_id
+                    order by obsdate desc) hemo_obs
+                    GROUP BY vid
+                    ) AS hemo ON hemo.PID=patientDetails.person_id AND hemo.vid=v.visit_id
+    LEFT JOIN
+                    (
+                   select glyc_obs.vid AS vid,
+                   glyc_obs.obsdate AS obsdate,
+                    glyc_obs.pid AS PID,
+                    glyc_obs.value AS value from (SELECT v.visit_id AS vid,
+                   glyc.obs_datetime AS obsdate,
+                    glyc.person_id AS PID,
+                    glyc.value_numeric AS value
+                    FROM visit v INNER JOIN encounter e
+                    ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
+                    INNER JOIN
+                              (
+                              SELECT
+                              o.encounter_id,
+                              o.person_id,
+                              o.obs_datetime,
+                              o.value_numeric,
+                              o.concept_id
+                              FROM obs o INNER JOIN concept_view glyc_val
+                              ON glyc_val.concept_id = o.concept_id AND o.voided IS FALSE AND glyc_val.retired IS FALSE AND
+                              glyc_val.concept_full_name IN ('Glycémie(mg/dl)') AND o.value_numeric IS NOT NULL
+        
+                              UNION 
 
-                    ) AS gly ON gly.PID=patientDetails.person_id AND gly.visitid=v.visit_id
+                              (
+                              SELECT
+                              o.encounter_id,
+                              o.person_id,
+                              o.obs_datetime,
+                              o.value_numeric,
+                              o.concept_id
+                              FROM obs o INNER JOIN concept_view glyc_val
+                              ON glyc_val.concept_id = o.concept_id AND o.voided IS FALSE AND glyc_val.retired IS FALSE AND
+                              glyc_val.concept_full_name IN ('Glycémie') AND o.value_numeric IS NOT NULL )
+                             
+                              ) glyc
+                    ON glyc.encounter_id = e.encounter_id
+                    order by obsdate desc) glyc_obs
+                    GROUP BY vid
+
+                    ) AS gly ON gly.PID=patientDetails.person_id AND gly.vid=v.visit_id
     LEFT JOIN
                     (
                       SELECT
@@ -1208,11 +1214,11 @@
                             phaseDate as "DateDebutligne",
                             date(enrollmentDate) as "DateDebutARV"
                             FROM
-                                (Select * FROM
-                                              (SELECT * FROM
+                                (Select Y.program_id,Y.patientID,Y.enrollmentDate,Y.phaseDate,Y.vid,Y.phaseOfProg FROM
+                                              (SELECT X.program_id,X.patientID,X.enrollmentDate,X.phaseDate,X.vid,X.phaseOfProg FROM
                                                             (
                                                             SELECT
-                                                            ARVprog.program_id,
+                                                            ARVprog.program_id as program_id,
                                                             patientARVprog.patient_id as patientID,
                                                             patientARVprog.date_enrolled as "enrollmentDate",
                                                             patientPhaseOfProg.start_date as "phaseDate",
@@ -1357,7 +1363,9 @@
                                     o.concept_id,
                                     e.visit_id
                                     FROM obs o
-                                    INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND cn.name IN ('Syndrome et Diagnostic') AND
+                                    INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND 
+
+                                    cn.name IN ('Syndrome et Diagnostic') AND
                                                             cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
                                                             cn.locale = 'fr' AND o.voided IS FALSE
                                     INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
@@ -1456,12 +1464,12 @@ tbPatients.person_id AS pid,
                     dateCreatedForm
                     FROM
  (
-select * From
+select person.person_id,tbprog.patientID,tbprog.dateCreatedOnTB,tbprog.Tbprecedents,tbprog.Anne,tbprog.phaseDate,tbprog.date_completed,tbprog.vid,tbprog.phaseOfProg From
                     person
                     LEFT JOIN
                             (
-                            Select * FROM
-                                      (SELECT * FROM
+                            Select Y.patientID,Y.dateCreatedOnTB,Y.Tbprecedents,Y.Anne,Y.phaseDate,Y.date_completed,Y.vid,Y.phaseOfProg FROM
+                                      (SELECT X.patientID,X.dateCreatedOnTB,X.Tbprecedents,X.Anne,X.phaseDate,X.date_completed,X.vid,X.phaseOfProg FROM
                                                     (
                                                     SELECT
                                                     patientARVprog.patient_id as patientID,
@@ -1600,19 +1608,19 @@ arvPatients.person_id as pid,
 date(enrollmentDate) as "DatedébutARV"
 from
 (
-    select * from
+    select person.person_id, arv.program_id,arv.patientID,arv.enrollmentDate,arv.phaseDate, arv.date_completed,arv.vid,arv.programPhaseCreate,arv.phaseOfProg from
     person
     LEFT  JOIN
                (
-                Select * FROM
-                          (SELECT * FROM
+                Select Y.program_id,Y.patientID,Y.enrollmentDate,Y.phaseDate, Y.date_completed,Y.vid,Y.programPhaseCreate,Y.phaseOfProg FROM
+                          (SELECT X.program_id,X.patientID,X.enrollmentDate,X.phaseDate, X.date_completed,X.vid,X.programPhaseCreate,X.phaseOfProg FROM
                                         (
                                         SELECT
-                                        ARVprog.program_id,
+                                        ARVprog.program_id as program_id,
                                         patientARVprog.patient_id as patientID,
                                         patientARVprog.date_enrolled as "enrollmentDate",
                                         patientPhaseOfProg.start_date as "phaseDate",
-                                        patientARVprog.date_completed,
+                                        patientARVprog.date_completed As date_completed,
                                         v.visit_id AS vid,
                                         patientPhaseOfProg.date_created AS "programPhaseCreate",
                                         (case when progWorkflowState.concept_id then cv.concept_full_name else null end) as "phaseOfProg"
@@ -1660,18 +1668,18 @@ LEFT JOIN
                     FROM
                          (
                             select
-                            *
+                            Y.latestEncounter,Y.person_id,Y.concept_id,Y.visit_id
                             from
                                 (
                                 SELECT
-                                *
+                                X.latestEncounter,X.person_id,X.concept_id,X.visit_id
                                 FROM
                                        (
                                         SELECT
                                         MAX(o.encounter_id) AS latestEncounter,
-                                        o.person_id,
-                                        o.concept_id,
-                                        e.visit_id
+                                        o.person_id as person_id,
+                                        o.concept_id As concept_id,
+                                        e.visit_id as visit_id
                                         FROM obs o
                                         INNER JOIN concept_name cn ON o.concept_id = cn.concept_id
                                         AND (cn.name IN ("Regime actuel") or cn.name IN ("Regime Debut"))
@@ -1716,18 +1724,18 @@ LEFT JOIN
                                             FROM
                                                 (
                                                     select
-                                                    *
+                                                    Y.latestEncounter,Y.person_id,Y.concept_id,Y.visit_id
                                                     from
                                                         (
                                                         SELECT
-                                                        *
+                                                        X.latestEncounter,X.person_id,X.concept_id,X.visit_id
                                                         FROM
                                                                (
                                                                 SELECT
                                                                 MAX(o.encounter_id) AS latestEncounter,
-                                                                o.person_id,
-                                                                o.concept_id,
-                                                                e.visit_id
+                                                                o.person_id as person_id,
+                                                                o.concept_id As concept_id,
+                                                                e.visit_id As visit_id
                                                                 FROM obs o
                                                                 INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND (cn.name IN ("Regime actuel") or cn.name IN ("Regime Debut")) AND
                                                                   cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
@@ -1757,11 +1765,13 @@ LEFT JOIN
 
     LEFT JOIN
                 (
-                SELECT
-                    v.visit_id AS visitid,
-                    max(cd4_obs.obs_datetime) AS CDDate,
-                    cd4_obs.person_id AS PID,
-                    cd4_obs.value_numeric AS value
+                select cd4_obs.vid AS vid,
+                   cd4_obs.obsdate AS CDDate,
+                    cd4_obs.pid AS PID,
+                    cd4_obs.value AS value from (SELECT v.visit_id AS vid,
+                   cd4.obs_datetime AS obsdate,
+                    cd4.person_id AS PID,
+                    cd4.value_numeric AS value
                     FROM visit v INNER JOIN encounter e
                     ON e.visit_id = v.visit_id AND e.voided IS FALSE AND v.voided IS FALSE
                     INNER JOIN
@@ -1775,8 +1785,8 @@ LEFT JOIN
                               FROM obs o INNER JOIN concept_view cd4_val
                               ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
                               cd4_val.concept_full_name IN ("CD4(cells/µl)") AND o.value_numeric IS NOT NULL
-
-                              UNION
+        
+                              UNION 
 
                               (
                               SELECT
@@ -1787,11 +1797,13 @@ LEFT JOIN
                               o.concept_id
                               FROM obs o INNER JOIN concept_view cd4_val
                               ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
-                              cd4_val.concept_full_name IN ("CD4(Bilan de routine IPD)","CD4") AND o.value_numeric IS NOT NULL)
-                              ) cd4_obs
-                    ON cd4_obs.encounter_id = e.encounter_id
-                    GROUP BY v.visit_id
-                ) AS CD ON CD.PID=patientDetails.person_id AND CD.visitid=v.visit_id
+                              cd4_val.concept_full_name IN ("CD4(Bilan de routine IPD)","CD4") AND o.value_numeric IS NOT NULL )
+                             
+                              ) cd4
+                    ON cd4.encounter_id = e.encounter_id
+                    order by obsdate desc) cd4_obs
+                    GROUP BY vid
+                ) AS CD ON CD.PID=patientDetails.person_id AND CD.vid=v.visit_id
     LEFT JOIN
                 (
                 SELECT
