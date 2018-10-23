@@ -1,27 +1,27 @@
-SELECT result_date      AS "Date des résultats",
-       Provenance,
-       Nom              AS "Nom du patient",
-       Id               AS "Id Patient",
-       date_naissance   AS "Date naissance",
-       date_prelevement AS "Date de prelevement",
-       Sexe,
-       eid              AS "EID/PCR",
-       crachat          AS "Genexpert Crachat",
-       urine            AS "Genexpert Urine",
-       lcr              AS "Genexpert LCR",
-       pleural          AS "Genexpert Pleural",
-       ascite              "Genexpert Ascite",
-       pus              AS "Genexpert Pus",
-       ganlionnaire     AS "Genexpert Ganglionnaire",
-       synovial         AS "Genexpert Synovial",
-       gastrique        AS "Genexpert Gastrique"
+SELECT result_date            AS "Date des résultats",
+       care_center_requesting as "Provenance",
+       Patient_Name           AS "Nom du patient",
+       Id                     AS "Id Patient",
+       date_naissance         AS "Date naissance",
+       date_prelevement       AS "Date de prelevement",
+       Sexe                   as "Sexe",
+       eid                    AS "EID/PCR",
+       crachat                AS "Genexpert Crachat",
+       urine                  AS "Genexpert Urine",
+       lcr                    AS "Genexpert LCR",
+       pleural                AS "Genexpert Pleural",
+       ascite                    "Genexpert Ascite",
+       pus                    AS "Genexpert Pus",
+       gangl                  AS "Genexpert Ganglionnaire",
+       synovial               AS "Genexpert Synovial",
+       gastrique              AS "Genexpert Gastrique"
 FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                                                                    AS "result_date",
-             B.care_center_requesting                                                                                    AS "Provenance",
-             B.Patient_Name                                                                                              AS "Nom",
-             B.Patient_Identifier                                                                                        AS "Id",
+             B.care_center_requesting,
+             B.Patient_Name,
+             B.Patient_Identifier                                                                                        AS "id",
              to_char(b.dob, 'DD/MM/YYYY')                                                                                AS "date_naissance",
              to_char(B.sample_date, 'DD/MM/YYYY')                                                                        AS "date_prelevement",
-             B.sexe                                                                                                      AS "Sexe",
+             B.sexe                                                                                                      AS "sexe",
              (SELECT d.dict_entry
               FROM DICTIONARY d
               WHERE CAST(d.id AS NUMERIC) =
@@ -37,7 +37,7 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
              (SELECT d.dict_entry
               FROM DICTIONARY d
               WHERE CAST(d.id AS NUMERIC) = sum(
-                                              CAST(CASE WHEN B.GenLcr = '' THEN NULL ELSE B.GenLcr END AS NUMERIC)))     AS "lCR",
+                                              CAST(CASE WHEN B.GenLcr = '' THEN NULL ELSE B.GenLcr END AS NUMERIC)))     AS "lcr",
              (SELECT d.dict_entry
               FROM DICTIONARY d
               WHERE CAST(d.id AS NUMERIC) = sum(CAST(CASE WHEN B.GenPleural = '' THEN NULL ELSE B.GenPleural END AS
@@ -53,7 +53,7 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
              (SELECT d.dict_entry
               FROM DICTIONARY d
               WHERE CAST(d.id AS NUMERIC) = sum(CAST(CASE WHEN B.GenGangilio = '' THEN NULL ELSE B.GenGangilio END AS
-                                                     NUMERIC)))                                                          AS "ganglionnaire",
+                                                     NUMERIC)))                                                          AS "gangl",
              (SELECT d.dict_entry
               FROM DICTIONARY d
               WHERE CAST(d.id AS NUMERIC) = sum(CAST(CASE WHEN B.GenSynovial = '' THEN NULL ELSE B.GenSynovial END AS
@@ -102,63 +102,57 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
                                                         CASE
                                                           WHEN tname = 'Genexpert (Synovial)' THEN tvalue
                                                             END AS GenSynovial
-                                                 FROM (/*Pivoting the table row to column*/ SELECT sample.collection_date                              AS sample_date,
-                                                                                                   ss.name                                             AS care_center_requesting,
-                                                                                                   TRIM(concat(
-                                                                                                          COALESCE(NULLIF(person.first_name, ''), ''),
-                                                                                                          ' ',
-                                                                                                          COALESCE(NULLIF(person.last_name, ''), ''))) AS Patient_Name,
-                                                                                                   pi.identity_data                                    AS Patient_Identifier,
-                                                                                                   patient.birth_date ::DATE AS dob,
-                                                                                                   CASE
-                                                                                                     WHEN patient.gender = 'M'
-                                                                                                             THEN 'H'
-                                                                                                     WHEN patient.gender = 'F'
-                                                                                                             THEN 'F'
-                                                                                                     WHEN patient.gender = 'O'
-                                                                                                             THEN 'A'
-                                                                                                     ELSE patient.gender END                           AS sexe,
-                                                                                                   t.name                                              AS tname,
-                                                                                                   r.value                                             AS tvalue,
-                                                                                                   r.lastupdated ::DATE AS date_of_results,
-                                                                                                   to_char(
-                                                                                                     to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'),
-                                                                                                     'Month')                                          AS month_of_results,
-                                                                                                   a.comment
-                                                                                            FROM patient_identity pi
-                                                                                                   INNER JOIN patient
-                                                                                                     ON patient.id = pi.patient_id
-                                                                                                   INNER JOIN person
-                                                                                                     ON patient.person_id = person.id
-                                                                                                   INNER JOIN sample_human
-                                                                                                     ON patient.id = sample_human.patient_id
-                                                                                                   INNER JOIN sample sample
-                                                                                                     ON sample_human.samp_id = sample.id
-                                                                                                   INNER JOIN sample_source ss
-                                                                                                     ON sample.sample_source_id = ss.id
-                                                                                                   INNER JOIN sample_item item
-                                                                                                     ON sample.id = item.samp_id
-                                                                                                   INNER JOIN analysis a
-                                                                                                     ON item.id = a.sampitem_id
-                                                                                                   INNER JOIN RESULT r
-                                                                                                     ON a.id = r.analysis_id
-                                                                                                   INNER JOIN test t
-                                                                                                     ON a.test_id = t.id AND
-                                                                                                        t.name IN (
-                                                                                                            'Genexpert (Crachat)',
-                                                                                                            'Genexpert (Urine)',
-                                                                                                            'Genexpert (LCR)',
-                                                                                                            'Genexpert (Pleural)',
-                                                                                                            'Genexpert (Ascite)',
-                                                                                                            'Genexpert (Pus)',
-                                                                                                            'Genexpert (Ganglionnaire)',
-                                                                                                            'Genexpert (Synovial)',
-                                                                                                            'Genexpert (Gastrique)',
-                                                                                                            'EID (PCR)')
+                                                 FROM (/*Pivoting the table row to column*/
+                                                      SELECT sample.collection_date                              AS sample_date,
+                                                             ss.name                                             AS care_center_requesting,
+                                                             TRIM(concat(
+                                                                    COALESCE(NULLIF(person.first_name, ''), ''),
+                                                                    ' ',
+                                                                    COALESCE(NULLIF(person.last_name, ''), ''))) AS Patient_Name,
+                                                             pi.identity_data                                    AS Patient_Identifier,
+                                                             patient.birth_date ::DATE AS dob,
+                                                             CASE
+                                                               WHEN patient.gender = 'M'
+                                                                       THEN 'H'
+                                                               WHEN patient.gender = 'F'
+                                                                       THEN 'F'
+                                                               WHEN patient.gender = 'O'
+                                                                       THEN 'A'
+                                                               ELSE patient.gender END                           AS sexe,
+                                                             t.name                                              AS tname,
+                                                             r.value                                             AS tvalue,
+                                                             r.lastupdated ::DATE AS date_of_results,
+                                                             to_char(
+                                                               to_timestamp(date_part('month', r.lastupdated) :: TEXT, 'MM'),
+                                                               'Month')                                          AS month_of_results,
+                                                             a.comment
+                                                      FROM patient_identity pi
+                                                             INNER JOIN patient ON patient.id = pi.patient_id
+                                                             INNER JOIN person ON patient.person_id = person.id
+                                                             INNER JOIN sample_human
+                                                               ON patient.id = sample_human.patient_id
+                                                             INNER JOIN sample sample
+                                                               ON sample_human.samp_id = sample.id
+                                                             INNER JOIN sample_source ss
+                                                               ON sample.sample_source_id = ss.id
+                                                             INNER JOIN sample_item item ON sample.id = item.samp_id
+                                                             INNER JOIN analysis a ON item.id = a.sampitem_id
+                                                             INNER JOIN RESULT r ON a.id = r.analysis_id
+                                                             INNER JOIN test t ON a.test_id = t.id AND
+                                                                                  t.name IN ('Genexpert (Crachat)',
+                                                                                             'Genexpert (Urine)',
+                                                                                             'Genexpert (LCR)',
+                                                                                             'Genexpert (Pleural)',
+                                                                                             'Genexpert (Ascite)',
+                                                                                             'Genexpert (Pus)',
+                                                                                             'Genexpert (Ganglionnaire)',
+                                                                                             'Genexpert (Synovial)',
+                                                                                             'Genexpert (Gastrique)',
+                                                                                             'EID (PCR)')
 
-                                                                                            WHERE a.status_id = 6 /*Filtering the result which are validated*/
-                                                                                              AND sample.accession_number IS NOT NULL
-                                                                                              AND pi.identity_type_id = 2) AS A) AS B
+                                                      WHERE a.status_id = 6 /*Filtering the result which are validated*/
+                                                        AND sample.accession_number IS NOT NULL
+                                                        AND pi.identity_type_id = 2) AS A) AS B
       WHERE date(B.date_of_results) BETWEEN '#startDate#' AND '#endDate#'
       GROUP BY B.Patient_Name,
                B.sample_date,
@@ -173,6 +167,6 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
                B.Patient_Name,
                B.dob,
                B.sexe) AS A
-WHERE COALESCE("EID/PCR", "Genexpert Crachat", "Genexpert Urine", "Genexpert LCR", "Genexpert Pleural",
-               "Genexpert Ascite", "Genexpert Pus", "Genexpert Ganglionnaire", "Genexpert Synovial",
-               "Genexpert Gastrique") IS NOT NULL;
+WHERE COALESCE("eid", "crachat", "urine", "lcr", "pleural",
+               "ascite", "pus", "gangl", "synovial",
+               "gastrique") IS NOT NULL;
