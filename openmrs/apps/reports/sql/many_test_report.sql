@@ -271,5 +271,3 @@ ORDER BY B.date_of_results,
          "BU-Glucose","BU-pH","BU-Leucocytes","Urine Test de grosse","Gram","Rivalta(Urine)","Rivalta(LCR)","Rivalta(Crachat)","Rivalta(Pleural)",
          "Rivalta(Ascite)","Rivalta(Pus)","Rivalta(Ganglionnaire)","Rivalta (Synovial)","Rivalta (Gastrique)","GE") is not null
           or coalesce ("Pqt","Hb","GB","Lactate","Glycémie","Hb(Hemocue)") is not null ;
-
-
