@@ -175,6 +175,6 @@ FROM (SELECT pp.patient_id,
        INNER JOIN person_attribute pa ON pa.person_id = p.person_id
        INNER JOIN person_attribute_type pad ON pad.person_attribute_type_id = pa.person_attribute_type_id
        INNER JOIN concept_name cn ON cn.concept_id = pa.value
-WHERE date(tbgenexp.dateresults) BETWEEN date('2018/01/01') AND Date('2018/10/31')
+WHERE date(tbgenexp.dateresults) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
   AND Date(tbpgm.tbStartDate) <= Date(tbgenexp.dateresults)
 GROUP BY pi.identifier, tbgenexp.dateresults;
