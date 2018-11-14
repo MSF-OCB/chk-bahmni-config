@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <changeSet id="OCB-CONFIG-201811061826" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'AZATANAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to AZATANAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'AZATANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061827" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'DARUNAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to DARUNAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'DARUNAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061828" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'FOSAMPRENAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to FOSAMPRENAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'FOSAMPRENAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061829" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'INDINAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to INDINAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'INDINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061830" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'LOPINAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to LOPINAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'LOPINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061831" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'NELFINAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to NELFINAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'NELFINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061832" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'SAQUINAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to SAQUINAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'SAQUINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061833" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select count(*) from concept_answer ca
+                           join
+                           concept_name cn
+                           on ca.concept_id = cn.concept_id
+                           where ca.answer_concept IN (select concept_id from concept_name where name IN ('High','Intermediate','Low','Susceptible') and concept_name_type = "FULLY_SPECIFIED")
+                           AND
+                           cn.concept_id IN (select concept_id from concept_name where name = 'TIPRANAVIR/r(Resistance)');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding Answers to TIPRANAVIR/r(Resistance) LabTest</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @child1_concept_id = 0;
+                    set @child2_concept_id = 0;
+                    set @child3_concept_id = 0;
+                    set @child4_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'TIPRANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child1_concept_id from concept_name where name = 'High' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child2_concept_id from concept_name where name = 'Intermediate' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child3_concept_id from concept_name where name = 'Low' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @child4_concept_id from concept_name where name = 'Susceptible' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_answer(@concept_id, @child1_concept_id, 1);
+                    call add_concept_answer(@concept_id, @child2_concept_id, 2);
+                    call add_concept_answer(@concept_id, @child3_concept_id, 3);
+                    call add_concept_answer(@concept_id, @child4_concept_id, 4);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061834" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select COUNT(*) from concept_set cs
+                           join concept_name cn
+                           on cs.concept_id = cn.concept_id
+                           where cs.concept_id IN (select concept_id from concept_name where name IN("AZATANAVIR/r(Resistance)", "DARUNAVIR/r(Resistance)", "FOSAMPRENAVIR/r(Resistance)", "INDINAVIR/r(Resistance)", "LOPINAVIR/r(Resistance)", "NELFINAVIR/r(Resistance)", "SAQUINAVIR/r(Resistance)", "TIPRANAVIR/r(Resistance)") AND concept_name_type = "FULLY_SPECIFIED")
+                           and cs.concept_set IN (select concept_id from concept_name where name = 'Test Genotypage');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding New Tests to pannel Test Genotypage </comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @member1_concept_id = 0;
+                    set @member2_concept_id = 0;
+                    set @member3_concept_id = 0;
+                    set @member4_concept_id = 0;
+                    set @member5_concept_id = 0;
+                    set @member6_concept_id = 0;
+                    set @member7_concept_id = 0;
+                    set @member8_concept_id = 0;
+
+                    select concept_id into @concept_id from concept_name where name = 'Test Genotypage' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    select concept_id into @member1_concept_id from concept_name where name = 'AZATANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @member2_concept_id from concept_name where name = 'DARUNAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @member3_concept_id from concept_name where name = 'FOSAMPRENAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @member4_concept_id from concept_name where name = 'INDINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @member5_concept_id from concept_name where name = 'LOPINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @member6_concept_id from concept_name where name = 'NELFINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @member7_concept_id from concept_name where name = 'SAQUINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                    select concept_id into @member8_concept_id from concept_name where name = 'TIPRANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+                    call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+                    call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+                    call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+                    call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+                    call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+                    call add_concept_set_members (@concept_id, @member7_concept_id, 7);
+                    call add_concept_set_members (@concept_id, @member8_concept_id, 8);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061843" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="0">
+                           select COUNT(*) from concept_set cs
+                           join concept_name cn
+                           on cs.concept_id = cn.concept_id
+                           where cs.concept_id IN (select concept_id from concept_name where name IN("AZATANAVIR/r(Resistance)", "DARUNAVIR/r(Resistance)", "FOSAMPRENAVIR/r(Resistance)", "INDINAVIR/r(Resistance)", "LOPINAVIR/r(Resistance)", "NELFINAVIR/r(Resistance)", "SAQUINAVIR/r(Resistance)", "TIPRANAVIR/r(Resistance)") AND concept_name_type = "FULLY_SPECIFIED")
+                           and cs.concept_set IN (select concept_id from concept_name where name = 'Sang');
+                        </sqlCheck>
+                </preConditions>
+                <comment>Adding New Tests to Sang</comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @member1_concept_id = 0;
+                    set @member2_concept_id = 0;
+                    set @member3_concept_id = 0;
+                    set @member4_concept_id = 0;
+                    set @member5_concept_id = 0;
+                    set @member6_concept_id = 0;
+                    set @member7_concept_id = 0;
+                    set @member8_concept_id = 0;
+                    set @member9_concept_id = 0;
+
+                  select concept_id into @concept_id from concept_name where name = 'Sang' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                  select concept_id into @member1_concept_id from concept_name where name = 'Test Genotypage' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member2_concept_id from concept_name where name = 'AZATANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member3_concept_id from concept_name where name = 'DARUNAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member4_concept_id from concept_name where name = 'FOSAMPRENAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member5_concept_id from concept_name where name = 'INDINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member6_concept_id from concept_name where name = 'LOPINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member7_concept_id from concept_name where name = 'NELFINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member8_concept_id from concept_name where name = 'SAQUINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member9_concept_id from concept_name where name = 'TIPRANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+
+                  call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+                  call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+                  call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+                  call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+                  call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+                  call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+                  call add_concept_set_members (@concept_id, @member7_concept_id, 7);
+                  call add_concept_set_members (@concept_id, @member8_concept_id, 8);
+                  call add_concept_set_members (@concept_id, @member9_concept_id, 9);
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811062023" author="Pritam">
+        <comment>ordering sortweight</comment>
+        <sql>
+            update concept_set set sort_weight=53 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='Test Genotypage');
+
+            update concept_set set sort_weight=54 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='AZATANAVIR/r(Resistance)');
+
+            update concept_set set sort_weight=55 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='DARUNAVIR/r(Resistance)');
+
+            update concept_set set sort_weight=56 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='FOSAMPRENAVIR/r(Resistance)');
+
+            update concept_set set sort_weight=57 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='INDINAVIR/r(Resistance)');
+
+            update concept_set set sort_weight=58 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='LOPINAVIR/r(Resistance)');
+
+            update concept_set set sort_weight=59 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='NELFINAVIR/r(Resistance)');
+
+            update concept_set set sort_weight=60 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name = 'SAQUINAVIR/r(Resistance)');
+
+            update concept_set set sort_weight=61 where concept_set in (select concept_id from concept_name where name ='Sang' and locale='fr') and concept_id in (select concept_id from concept_name where name ='TIPRANAVIR/r(Resistance)');
+        </sql>
+
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-201811061944" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                         select COUNT(*) from concept_set cs
+                         join concept_name cn
+                         on cs.concept_id = cn.concept_id
+                         where cs.concept_id IN (select concept_id from concept_name where name IN(
+                          "AZATANAVIR/r(Resistance)",
+                          "DARUNAVIR/r(Resistance)",
+                          "FOSAMPRENAVIR/r(Resistance)",
+                          "INDINAVIR/r(Resistance)",
+                          "LOPINAVIR/r(Resistance)",
+                          "NELFINAVIR/r(Resistance)",
+                          "SAQUINAVIR/r(Resistance)",
+                          "TIPRANAVIR/r(Resistance)"
+                         )
+                        and cs.concept_set IN (select concept_id from concept_name where name = 'All_Tests_and_Panels'));
+                </sqlCheck>
+                </preConditions>
+                <comment>Adding new Tests and Panels to All_Tests_and_Panels set</comment>
+                <sql>
+                  set @concept_id = 0;
+                  set @member1_concept_id = 0;
+                  set @member2_concept_id = 0;
+                  set @member3_concept_id = 0;
+                  set @member4_concept_id = 0;
+                  set @member5_concept_id = 0;
+                  set @member6_concept_id = 0;
+                  set @member7_concept_id = 0;
+                  set @member8_concept_id = 0;
+                  set @member9_concept_id = 0;
+
+
+                  select concept_id into @concept_id from concept_name where name = 'All_Tests_and_Panels' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                  select concept_id into @member1_concept_id from concept_name where name = 'Test Genotypage' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member2_concept_id from concept_name where name = 'AZATANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member3_concept_id from concept_name where name = 'DARUNAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member4_concept_id from concept_name where name = 'FOSAMPRENAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member5_concept_id from concept_name where name = 'INDINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member6_concept_id from concept_name where name = 'LOPINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member7_concept_id from concept_name where name = 'NELFINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member8_concept_id from concept_name where name = 'SAQUINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                  select concept_id into @member9_concept_id from concept_name where name = 'TIPRANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+
+                  call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+                  call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+                  call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+                  call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+                  call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+                  call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+                  call add_concept_set_members (@concept_id, @member7_concept_id, 7);
+                  call add_concept_set_members (@concept_id, @member8_concept_id, 8);
+                  call add_concept_set_members (@concept_id, @member9_concept_id, 9);
+                </sql>
+        </changeSet>
+
+        <changeSet id="OCB-CONFIG-201811061845" author="Pritam">
+              <comment>Adding entries in event_records table for All Lab Tests</comment>
+                <sql>
+                  set @uuid = NULL;
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'AZATANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'DARUNAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'FOSAMPRENAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'INDINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'LOPINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'NELFINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'SAQUINAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+
+                  select uuid into @uuid from concept where concept_id = (select concept_id from concept_name where name = 'TIPRANAVIR/r(Resistance)' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0);
+                  INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'test',now(),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/test/',@uuid),'lab',now(),'lab');
+                </sql>
+        </changeSet>
+        <changeSet id="OCB-CONFIG-201811061846" author="Pritam">
+                <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="1">
+                        select COUNT(*) from concept_name where name IN ('Test Genotypage') and concept_name_type = 'FULLY_SPECIFIED'  and locale = 'fr'  and voided = 0;
+                    </sqlCheck>
+                </preConditions>
+                <comment>Adding entries in event_records table for Test Genotypage </comment>
+                <sql>
+                    set @concept_id = 0;
+                    set @uuid = NULL;
+
+                    select concept_id into @concept_id from concept_name where name = 'Test Genotypage' and concept_name_type ='FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                    select uuid into @uuid from concept where concept_id = @concept_id;
+                    INSERT INTO event_records (uuid,title,timestamp,uri,object,category,date_created,tags) VALUES (uuid(),'sample',now(),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),concat('/openmrs/ws/rest/v1/reference-data/sample/',@uuid),'lab',now(),'lab');
+                </sql>
+        </changeSet>
+</databaseChangeLog>

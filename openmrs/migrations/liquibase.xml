@@ -7775,7 +7775,7 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <changeSet id ="OCB-CONFIG-201807290219" author="Vishnu">
     <comment> updating the concept name for diagnostic in Discharge form</comment>
     <sql>
-         update concept_name set name ="Diagnostic à la sortie" where concept_id in (select concept_id from (select * from concept_name  where name ='Fds, Diagnostic')X)  and name not in ('Fds, Diagnostic') and concept_name_type="SHORT";           
+         update concept_name set name ="Diagnostic à la sortie" where concept_id in (select concept_id from (select * from concept_name  where name ='Fds, Diagnostic')X)  and name not in ('Fds, Diagnostic') and concept_name_type="SHORT";
     </sql>
 </changeSet>
 <changeSet id ="OCB-CONFIG-201807300219" author="Vishnu">
@@ -7793,4 +7793,9 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
         delete from program_attribute_type where name ="End Date for Program" and description ="Date fin Programme";
     </sql>
 </changeSet>
+<changeSet id="OCB-CONFIG-201811061935" author="Pritam">
+    <comment>Migrations to split identifier and assign cohort type</comment>
+    <sqlFile path="Genotype_New_concept.sql"/>
+</changeSet>
+<include file="Genotypage_pannel.xml"/>
 </databaseChangeLog>
