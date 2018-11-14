@@ -812,17 +812,7 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Temperature Data",
-            "Tension arterielle(Tabular)",
-            "Frequence cardiaque Data",
-            "Frequence respiratoire Data",
-            "Poids",
-            "IMC DATA",
-            "Saturation",
-            "Déshydratation",
-            "Incapacité de marcher sans aide",
-            "Altération de l'état neurologique",
-            "Autre signe neurologique"
+            "Signes vitaux"
           ]
         },
         "displayOrder": 3,
@@ -1136,5 +1126,41 @@
         }
       }
     }
-  }
+  },
+  "trends": {
+    "translationKey": "Trends",
+    "maxRecentlyViewedPatients": 10,
+    "sections": {
+        "chargeVirale":{
+                     "type":"observationGraph",
+                     "title":"Charge Virale - Lab",
+                     "config":{
+                               "yAxisConcepts":["Charge Virale HIV - Value"],
+                               "xAxisConcept":"observationDateTime",
+                               "numberOfVisits":30
+                             },
+                     "displayOrder":1
+                   },
+          "CD4ObsForm":{
+                      "type":"observationGraph",
+                      "title":"CD4 – TDR",
+                      "config":{
+                                "yAxisConcepts":["CD4(cells/µl)"],
+                                "xAxisConcept":"observationDateTime",
+                                "numberOfVisits":30
+                               },
+                      "displayOrder":2
+                    },
+          "CD4LabTest":{
+                       "type":"observationGraph",
+                       "title":"CD4 - Lab",
+                       "config":{
+                                 "yAxisConcepts":["CD4"],
+                                 "xAxisConcept":"observationDateTime",
+                                 "numberOfVisits":30
+                               },
+                       "displayOrder":3
+                     }
+                 }
+             }
 }
