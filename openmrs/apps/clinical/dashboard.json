@@ -126,7 +126,7 @@
           "conceptNames": [
             "Signes vitaux"
           ],
-          "numberOfVisits": 1,
+            "scope": "latest",
           "showDetailsButton": true
         },
         "expandedViewConfig": {
@@ -810,10 +810,10 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
-          "numberOfVisits": 1,
           "conceptNames": [
             "Signes vitaux"
-          ]
+          ],
+          "scope": "latest"
         },
         "displayOrder": 3,
         "translationKey": "DASHBOARD_TITLE_PARAMETERS"
