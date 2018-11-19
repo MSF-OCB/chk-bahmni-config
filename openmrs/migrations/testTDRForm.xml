@@ -9,7 +9,7 @@
 
     <changeSet id="OCB-CONFIG-2018111700" author="Pritam">
             <preConditions onFail="MARK_RAN">
-                    <sqlCheck expectedResult="6">
+                    <sqlCheck expectedResult="0">
                            select count(*)
                            from
                            concept_name
