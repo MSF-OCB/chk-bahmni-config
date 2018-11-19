@@ -1,4 +1,24 @@
 Bahmni.ConceptSet.FormConditions.rules = {
+  "TR, Type de visite": function (formName, formFieldValues) {
+        var conditions = {
+            show: [],
+            hide: []
+        };
+        var TRdateAdmission = "TR, Admission - Informations générales";
+        var TRCD4Enfant = "CD4 % (Enfants de moins de 5 ans)(%)"
+        var TRCD4test = "CD4(cells/µl)"
+        var typeDeVisit = formFieldValues['TR, Type de visite'];
+        if (typeDeVisit == "TR, Admission IPD") {
+            conditions.show.push(TRdateAdmission);
+            conditions.show.push(TRCD4Enfant);
+            conditions.show.push(TRCD4test);
+        } else {
+            conditions.hide.push(TRdateAdmission);
+            conditions.hide.push(TRCD4Enfant);
+            conditions.hide.push(TRCD4test);
+        }
+        return conditions;
+    },
   "Syndrome d'admission" : function (formName, formFieldValues) {
        var synAdmission = formFieldValues["Syndrome d'admission"];
 

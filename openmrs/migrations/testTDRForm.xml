@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="OCB-CONFIG-2018111700" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                    <sqlCheck expectedResult="6">
+                           select count(*)
+                           from
+                           concept_name
+                           where
+                           name in ('TR, Admission IPD','TR, Type de visite','TR, Admission - Informations générales')
+                           and  concept_name_type = "FULLY_SPECIFIED" and voided = 0;
+                    </sqlCheck>
+            </preConditions>
+            <comment>Adding concepts for Regime ARV form</comment>
+            <sql>
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, Admission IPD','Admission IPD','N/A','Misc',FALSE);
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, Type de visite','Type de visite','Coded','Misc',TRUE);
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, Admission - Informations générales','Admission - Informations générales','N/A','Misc',TRUE);
+            </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201811181745" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                       select count(*) from concept_answer ca
+                       join
+                       concept_name cn
+                       on ca.concept_id = cn.concept_id
+                       where ca.answer_concept IN (select concept_id from concept_name where name IN
+                       (
+                       'TR, Admission IPD','Autre'
+                       )
+                       and concept_name_type = "FULLY_SPECIFIED")
+                       AND
+                       cn.concept_id IN (select concept_id from concept_name where name = 'TR, Type de visite');
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding New Answers to Type de visite  </comment>
+            <sql>
+            DELETE from concept_answer where concept_id in (select concept_id from concept_name where name ='TR, Type de visite' and  concept_name_type='FULLY_SPECIFIED' and locale='fr');
+
+            set @concept_id = 0;
+            set @child1_concept_id = 0;
+            set @child2_concept_id = 0;
+
+            select concept_id into @concept_id from concept_name where name = 'TR, Type de visite' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child1_concept_id from concept_name where name = 'TR, Admission IPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+            select concept_id into @child2_concept_id from concept_name where name = 'Autre' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+            call add_concept_answer(@concept_id, @child1_concept_id, 1);
+            call add_concept_answer(@concept_id, @child2_concept_id, 2);
+            </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201811181757" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                    select count(*) from concept_answer ca
+                    join
+                    concept_name cn
+                    on ca.concept_id = cn.concept_id
+                    where ca.answer_concept IN (select concept_id from concept_name where name IN ('IPD Admission, Date d\'admission','Infirmier en charge de l\'admission') and concept_name_type = "FULLY_SPECIFIED")
+                    AND
+                    cn.concept_id IN (select concept_id from concept_name where name = 'TR, Admission - Informations générales');
+                </sqlCheck>
+            </preConditions>
+            <comment>Adding set members Admission - Informations générales</comment>
+            <sql>
+                set @concept_id = 0;
+                set @member1_concept_id = 0;
+                set @member2_concept_id = 0;
+
+                select concept_id into @concept_id from concept_name where name = 'TR, Admission - Informations générales' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                select concept_id into @member1_concept_id from concept_name where name = 'IPD Admission, Date d\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member2_concept_id from concept_name where name = 'Infirmier en charge de l\'admission' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+                call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+
+            </sql>
+     </changeSet>
+     <changeSet id="OCB-CONFIG-201811181814" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+               <sqlCheck expectedResult="1">
+                  select count(*) from concept_set
+                  where concept_set in
+                                      (select distinct concept_id from concept_name where name ='Tests rapides')
+                  and concept_id in   (select concept_id
+                                       from concept_name
+                                      where name in ('TDR')
+                                       );
+               </sqlCheck>
+            </preConditions>
+            <comment>Removing set members for the Dosing Units</comment>
+            <sql>
+                    DELETE
+                    from concept_set
+                    where concept_id
+                    in
+                        (
+                        select distinct concept_id
+                        from concept_name
+                        where name in ('TDR')
+                        )
+                    and concept_set in
+                                    (
+                                    select distinct concept_id from concept_name where name ='Tests rapides'
+                                    );
+            </sql>
+      </changeSet>
+      <changeSet id="OCB-CONFIG-201811020001" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="0">
+                       select COUNT(*) from concept_set cs
+                       join concept_name cn
+                       on cs.concept_id = cn.concept_id
+                       where cs.concept_id IN (select concept_id from concept_name where name IN
+                       ('TR, Type de visite','TR, Admission - Informations générales','TDR') AND concept_name_type = "FULLY_SPECIFIED")
+                       and cs.concept_set IN (select concept_id from concept_name where name = 'Tests rapides');
+                    </sqlCheck>
+            </preConditions>
+            <comment>Adding set members for Test Rapids form</comment>
+            <sql>
+
+                set @concept_id = 0;
+                set @member1_concept_id = 0;
+                set @member2_concept_id = 0;
+                set @member3_concept_id = 0;
+
+                select concept_id into @concept_id from concept_name where name = 'Tests rapides' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member1_concept_id from concept_name where name = 'TR, Type de visite' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member2_concept_id from concept_name where name = 'TR, Admission - Informations générales' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+                select concept_id into @member3_concept_id from concept_name where name = 'TDR' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+                call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+                call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+                call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+
+            </sql>
+    </changeSet>
+</databaseChangeLog>
