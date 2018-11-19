@@ -21,7 +21,7 @@
             <comment>Adding concepts for Regime ARV form</comment>
             <sql>
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, Admission IPD','Admission IPD','N/A','Misc',FALSE);
-                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, Type de visite','Type de visite','Coded','Misc',TRUE);
+                call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, Type de visite','Type de visite','Coded','Misc',FALSE);
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'TR, Admission - Informations générales','Admission - Informations générales','N/A','Misc',TRUE);
             </sql>
     </changeSet>
