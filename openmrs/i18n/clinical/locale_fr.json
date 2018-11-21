@@ -195,6 +195,7 @@
   "PROGRAM_MANAGEMENT_SELECT_PROGRAM_MESSAGE_KEY":"Veuillez selectionner un programme dans lequel enrollé le patient",
   "CLINICAL_FORM_ERRORS_MESSAGE_KEY":"Veuillez entrer une valeur dans les champs obligatoires ou corriger la valeur dans les champs en surbrillance",
   "CANNOT_HAVE_MORE_THAN_ONE_ACTIVE_ORDER":"Un ou plusieurs médicaments que vous essayez de prescrire sont encore actifs. Veuillez changer la date de début des médicaments concernés ou enlever les de la nouvelle prescription",
-  "ENTERED_VALUE_OUT_OF_RANGE":"La valeur entrée (champs en rouge) n’est pas comprise dans la marge des valeurs autorisées pour ce champs. Veuillez vérifier l’information dans ce champs"
+  "ENTERED_VALUE_OUT_OF_RANGE":"La valeur entrée (champs en rouge) n’est pas comprise dans la marge des valeurs autorisées pour ce champs. Veuillez vérifier l’information dans ce champs",
+  "OBSERVATION_GRAPH_NO_DATA_LABEL":"Pas de données"
 
 }
