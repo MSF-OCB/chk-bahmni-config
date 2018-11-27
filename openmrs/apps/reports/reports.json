@@ -98,7 +98,7 @@
       }
   },
   "MedicationReport": {
-      "name": "Medication Report",
+      "name": "Pharmacie - Dispensation",
       "type": "MRSGeneric",
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/Medication_Report.sql"

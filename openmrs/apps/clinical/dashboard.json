@@ -1128,7 +1128,7 @@
     }
   },
   "trends": {
-    "translationKey": "Trends",
+    "translationKey": "Tendances",
     "maxRecentlyViewedPatients": 10,
     "sections": {
         "chargeVirale":{
