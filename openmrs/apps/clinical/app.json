@@ -313,7 +313,8 @@
           "isTabular": true
        },
       "Infirmier en charge de l'admission":{
-        "autocomplete":true
+        "autocomplete":true,
+        "required": true
       },
       "Medecin en charge de l'admission":{
         "autocomplete":true
@@ -331,8 +332,7 @@
         "allowAddMore": true
       },
       "TR, Type de visite" :{"required": true},
-      "IPD Admission, Date d'admission" :{"required": true},
-      "Infirmier en charge de l'admission" :{"required": true,"dropdown": true}
+      "IPD Admission, Date d'admission" :{"required": true}
     }
   }
 }
