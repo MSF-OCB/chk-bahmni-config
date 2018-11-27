@@ -218,6 +218,107 @@ Bahmni.ConceptSet.FormConditions.rules = {
             conditions.hide.push(HisTB);
         }
         return conditions;
-    }
+    },
+    "CO, PHQ" : function (formName, formFieldValues) {
+       var phqType = formFieldValues["CO, PHQ"];
+
+       if (phqType == "CO, Première" || phqType == "CO, Reévaluation") {
+           return {
+               show: ["CO, Score"]
+           }
+       } else {
+           return {
+               hide: ["CO, Score"]
+           }
+       }
+   },
+   "Status prophylaxie" : function (formName, formFieldValues) {
+       var statusProphylaxieType = formFieldValues["Status prophylaxie"];
+
+       if (statusProphylaxieType == "prophylaxie arret") {
+           return {
+               show: ["motif arret prophylaxie"]
+           }
+       } else {
+           return {
+               hide: ["motif arret prophylaxie"]
+           }
+       }
+   },
+   "CO, Patient initié aux ARV ou changement de molécule?": function (formName, formFieldValues) {
+        var conditions = {
+            show: [],
+            hide: []
+        };
+        var regimeLine = "RA, ARV Line";
+        var regimeStartDate = "Regimen Start date"
+        var regimeReason = "Regimen Start reason"
+        var regimeQuestion = formFieldValues['CO, Patient initié aux ARV ou changement de molécule?'];
+        if (regimeQuestion == "Oui") {
+            conditions.show.push(regimeLine);
+            conditions.show.push(regimeStartDate);
+            conditions.show.push(regimeReason);
+        } else {
+            conditions.hide.push(regimeLine);
+            conditions.hide.push(regimeStartDate);
+            conditions.hide.push(regimeReason);
+        }
+        return conditions;
+    },
+    "Mode de sortie(Suivi)": function (formName, formFieldValues) {
+    var transfertType = formFieldValues["Mode de sortie(Suivi)"];
+    var modeOfTransfert = formFieldValues["Mode d'entrée (IPD)"];
+    if (transfertType == "Transfert(Suivi)") {
+        if (modeOfTransfert == "Hospi de jour(Suivi)") {
+            return {
+                show: ["Transfert", "Prochain RDV"]
+            }
+        } else {
+            return {
+                show: ["Transfert"],
+                hide: ["Prochain RDV"]
+            }
+        }
+    } else if (transfertType == "Domicile(Suivi)" || transfertType == "Reféré(Suivi)") {
+        return {
+            show: ["Prochain RDV"],
+            hide: ["Transfert"]
+
+        }
+      } else {
+          if (modeOfTransfert == "Hospi de jour(Suivi)") {
+              return {
+                  show: ["Prochain RDV"],
+                  hide: ["Transfert"]
+              }
+          } else {
+              return {
+                  hide: ["Transfert", "Prochain RDV"]
+              }
+          }
+      }
+    },
+    "Mode d'entrée (IPD)": function (formName, formFieldValues) {
+        var modeOfTransfert = formFieldValues["Mode d'entrée (IPD)"];
+        var transfertType = formFieldValues["Mode de sortie(Suivi)"];
+
+        if (modeOfTransfert == "Hospi de jour(Suivi)") {
+            return {
+                show: ["Prochain RDV"]
+            }
+        } else {
+            if (transfertType == "Domicile(Suivi)" || transfertType == "Reféré(Suivi)") {
+                return {
+                    show: ["Prochain RDV"]
+                }
+            } else {
+                return {
+
+                    hide: ["Prochain RDV"]
+                }
+            }
+
+        }
+     }
 
  };

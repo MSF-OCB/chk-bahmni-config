@@ -279,10 +279,12 @@
          "allowFutureDates": true
       },
       "Centre de réference":{
-        "autocomplete":true
+        "autocomplete":true,
+        "required":true
       },
       "PODI":{
-        "dropdown":true
+        "dropdown":true,
+        "required":true
       },
       "Regimen Start reason":{
         "dropdown":true
@@ -323,7 +325,8 @@
         "multiSelect": true
       },
       "SC, PODI":{
-         "dropdown": true
+         "dropdown": true,
+         "required": true
       },
       "Informations autres pathologies":{
         "allowAddMore": true
@@ -332,7 +335,12 @@
         "allowAddMore": true
       },
       "TR, Type de visite" :{"required": true},
-      "IPD Admission, Date d'admission" :{"required": true}
+      "IPD Admission, Date d'admission" :{"required": true},
+      "CO, Type de consultation":{"required": true},
+      "motif arret prophylaxie":{"required": true},
+      "RA, ARV Line":{"required": true,"dropdown": true},
+      "Regimen Start date":{"required": true},
+      "Regimen Start reason":{"required": true,"dropdown": true}
     }
   }
 }
