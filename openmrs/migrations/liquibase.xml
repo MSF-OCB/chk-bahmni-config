@@ -7800,4 +7800,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <include file="Genotypage_pannel.xml"/>
 <include file="testTDRForm.xml"/>
 <include file="Consulation_OPD.xml"/>
+<include file="Consulation_Admission_IPD.xml"/>
 </databaseChangeLog>

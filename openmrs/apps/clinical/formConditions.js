@@ -317,8 +317,46 @@ Bahmni.ConceptSet.FormConditions.rules = {
                     hide: ["Prochain RDV"]
                 }
             }
-
         }
-     }
+     },
+     "IPD Admission, Histoire ARV" : function (formName, formFieldValues) {
+       var historyARV = formFieldValues["IPD Admission, Histoire ARV"];
 
+       if (historyARV == "ARV intérrompu" ) {
+           return {
+               show: ["IPD Admission, Si interrompu"]
+           }
+       }
+       else {
+           return {
+               hide: ["IPD Admission, Si interrompu"]
+           }
+       }
+     },
+     "IPD Admission, TB en cours de traitement à l'admission" : function (formName, formFieldValues) {
+       var modeOfTransfert = formFieldValues["IPD Admission, TB en cours de traitement à l'admission"];
+
+       if (modeOfTransfert == "Oui" ) {
+           return {
+               show: ["IPD Admission, Elements de diagnostic TB","IPD Admission, Date début anti-TB","IPD Admission, Adhérence aux anti-TB"]
+           }
+       } else {
+           return {
+               hide: ["IPD Admission, Elements de diagnostic TB","IPD Admission, Date début anti-TB","IPD Admission, Adhérence aux anti-TB"]
+           }
+       }
+     },
+     "CAI, Patient initié aux ARV ou changement de molécule?" : function (formName, formFieldValues) {
+       var modeOfTransfert = formFieldValues["CAI, Patient initié aux ARV ou changement de molécule?"];
+
+       if (modeOfTransfert == "Oui" ) {
+           return {
+               show: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+           }
+       } else {
+           return {
+               hide: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+           }
+         }
+      }
  };

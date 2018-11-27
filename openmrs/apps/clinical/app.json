@@ -105,17 +105,20 @@
         "allowAddMore": true
       },
       "Syndrome d'admission": {
-        "dropdown": true
+        "dropdown": true,
+        "required": true
       },
       "IPD Admission, Diagnostics de sortie" :{
         "autocomplete":true,
         "multiSelect" : true
       },
       "IPD Admission, Histoire ARV" :{
-        "dropdown": true
+        "dropdown": true,
+        "required": true
       },
       "IPD Admission, Si interrompu" :{
-        "dropdown": true
+        "dropdown": true,
+        "required": true
       },
       "IPD Admission, Ligne ARV en cours" :{
         "dropdown": true
@@ -142,13 +145,16 @@
         "dropdown": true
       },
       "Référé en IPD par(FOSA)": {
-        "autocomplete":true
+        "autocomplete":true,
+        "required": true
       },
       "FOSA de suivi ARV": {
-        "autocomplete":true
+        "autocomplete":true,
+        "required": true
       },
       "Malade arrivé mort": {
-        "dropdown": true
+        "dropdown": true,
+        "required": true
       },
       "Stade OMS": {
         "dropdown": true
@@ -319,7 +325,8 @@
         "required": true
       },
       "Medecin en charge de l'admission":{
-        "autocomplete":true
+        "autocomplete":true,
+        "required": true
       },
       "Vaccination":{
         "multiSelect": true
@@ -340,7 +347,22 @@
       "motif arret prophylaxie":{"required": true},
       "RA, ARV Line":{"required": true,"dropdown": true},
       "Regimen Start date":{"required": true},
-      "Regimen Start reason":{"required": true,"dropdown": true}
+      "Regimen Start reason":{"required": true,"dropdown": true},
+      "CAI, Noms":{"required": true},
+      "CAI, Adresse physique":{"required": true},
+      "CAI, Numéro Tél":{"required": true},
+      "IPD Admission, Avez-vous déjà arrêté les ARV pendant plus d'un mois":{"required": true},
+      "IPD Admission, TB en cours de traitement à l'admission":{"required": true},
+      "IPD Admission, Elements de diagnostic TB":{"required": true},
+      "IPD Admission, SNC Glasgow(/15)":{"required": true},
+      "CAI, ARV Line":{"required": true,"dropdown": true},
+      "CAI, Date début Regime ARV":{"required": true},
+      "CAI, Motif début régime":{"dropdown": true,"required": true},
+      "CSI, PODI":{"required": true,"dropdown": true},
+      "CAI, Infections opportunistes": {"autocomplete": true},
+      "CAI, Diagnostic":{"autocomplete":true,"multiSelect": true},
+      "CAI, Evaluation des symptômes TB": {"multiSelect": true},
+      "CAI, Stade OMS":{"dropdown": true}
     }
   }
 }
