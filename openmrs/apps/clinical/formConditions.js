@@ -358,5 +358,52 @@ Bahmni.ConceptSet.FormConditions.rules = {
                hide: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
            }
          }
-      }
+      },
+      "CSI, Status prophylaxie" : function (formName, formFieldValues) {
+        var statusProphylaxieType = formFieldValues["CSI, Status prophylaxie"];
+
+        if (statusProphylaxieType == "prophylaxie arret") {
+            return {
+                show: ["CSI, Motif d\'arrêt prophylaxie"]
+            }
+        } else {
+            return {
+                hide: ["CSI, Motif d\'arrêt prophylaxie"]
+            }
+        }
+    },
+    "CSI, Patient initié aux ARV ou changement de molécule?" : function (formName, formFieldValues) {
+        var modeOfTransfert = formFieldValues["CSI, Patient initié aux ARV ou changement de molécule?"];
+
+        if (modeOfTransfert == "Oui" ) {
+            return {
+                show: ["CSI, ARV Line","CSI, Date début Regime ARV","CSI, Motif début régime"]
+            }
+        } else {
+            return {
+                hide: ["CSI, ARV Line","CSI, Date début Regime ARV","CSI, Motif début régime"]
+            }
+        }
+     },
+     "CSI, Mode de sortie" : function (formName, formFieldValues) {
+    var transfertType = formFieldValues["CSI, Mode de sortie"];
+      if (transfertType == "Transfert(Suivi)") {
+              return {
+                  show: ["CSI, Transfert"],
+                  hide: ["CSI, Prochain RDV"]
+              }
+          }
+      else if (transfertType == "Domicile(Suivi)" || transfertType == "Reféré(Suivi)") {
+          return {
+              show: ["CSI, Prochain RDV"],
+              hide: ["CSI, Transfert"]
+          }
+        }
+      else {
+          return {
+            hide: ["CSI, Transfert", "CSI, Prochain RDV"]
+                }
+            }
+     }
+
  };

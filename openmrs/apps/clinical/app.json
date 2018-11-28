@@ -172,21 +172,24 @@
         "dropdown": false,
         "autocomplete": true,
         "multiSelect": true,
-        "disableAddNotes": true
+        "disableAddNotes": true,
+        "required":true
       },
       "RPEC": {
         "allowAddMore": true
       },
       "Date de sortie": {
         "allowFutureDates": true,
-        "disableAddNotes": true
+        "disableAddNotes": true,
+        "required":true
       },
       "Syndrome et Diagnostic": {
         "allowAddMore": true
       },
       "Syndrome": {
         "dropdown": true,
-        "disableAddNotes": true
+        "disableAddNotes": true,
+        "required":true
       },
       "Ligne": {
         "disableAddNotes": true
@@ -195,11 +198,14 @@
         "disableAddNotes": true
       },
       "Traitemtent TB commencé?": {
-        "disableAddNotes": true
+        "disableAddNotes": true,
+        "required":true
       },
       "Mode de sortie": {
         "disableAddNotes": true
       },
+      "Date début":{"required":true},
+      "MPC(Sorte)":{"required":true},
       "Date du prochain RDV": {
         "disableAddNotes": true,
         "allowFutureDates" : true
@@ -362,7 +368,16 @@
       "CAI, Infections opportunistes": {"autocomplete": true},
       "CAI, Diagnostic":{"autocomplete":true,"multiSelect": true},
       "CAI, Evaluation des symptômes TB": {"multiSelect": true},
-      "CAI, Stade OMS":{"dropdown": true}
+      "CAI, Stade OMS":{"dropdown": true},
+      "CSI, ARV Line":{"required": true,"dropdown": true},
+      "CSI, Date début Regime ARV":{"required": true},
+      "CSI, Motif début régime":{"dropdown": true,"required": true},
+      "CSI, Centre de référence":{"autocomplete":true},
+      "CSI, PODI":{"dropdown": true},
+      "CSI, Motif d'arrêt prophylaxie":{"required": true},
+      "CSI, Mode de sortie":{"required": true},
+      "CSI, Centre de référence":{"required": true,"autocomplete":true},
+      "CSI, PODI":{"required": true,"dropdown": true}
     }
   }
 }
