@@ -655,6 +655,18 @@
                 call add_concept_fr(@concept_id,@concept_short_id,@concept_full_id,'CSI, Sortie IPD','Sortie IPD','N/A','Misc',TRUE);
             </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201812031215" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="1">
+                    Select count(*) from concept_name where name = "Sortie IPD" and concept_name_type ="SHORT" and locale='fr';
+                </sqlCheck>
+            </preConditions>
+            <comment>Changing short name for  Stade clinique OMS</comment>
+            <sql>
+                select concept_id INTO @conceptid from concept_name where name ="CSI, Sortie IPD" and concept_name_type ="FULLY_SPECIFIED" and locale='fr';
+                Update concept_name set name = "Consultation Sortie IPD" where concept_id = @conceptid and concept_name_type ="SHORT" and locale='fr';
+            </sql>
+    </changeSet>
     <changeSet id="OCB-CONFIG-18011251117" author="Pritam">
             <preConditions onFail="MARK_RAN">
                 <sqlCheck expectedResult="0">

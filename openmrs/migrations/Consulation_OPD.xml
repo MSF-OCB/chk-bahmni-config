@@ -179,6 +179,18 @@
                 Update concept_name set name = "Examen physique" where concept_id = @conceptid and concept_name_type ="SHORT" and locale='fr';
             </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201812031141" author="Pritam">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck expectedResult="1">
+                    Select count(*) from concept_name where name = "Stade clinique OMS" and concept_name_type ="SHORT" and locale='fr';
+                </sqlCheck>
+            </preConditions>
+            <comment>Changing short name for  Stade clinique OMS</comment>
+            <sql>
+                select concept_id INTO @conceptid from concept_name where name ="Stade clinique OMS" and concept_name_type ="FULLY_SPECIFIED" and locale='fr';
+                Update concept_name set name = "Stade OMS" where concept_id = @conceptid and concept_name_type ="SHORT" and locale='fr';
+            </sql>
+    </changeSet>
     <changeSet id="OCB-CONFIG-201811271538" author="Pritam">
         <comment>Removing set members from Examen clinique </comment>
         <sql>
