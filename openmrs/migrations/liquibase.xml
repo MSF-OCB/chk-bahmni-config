@@ -7802,4 +7802,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <include file="Consulation_OPD.xml"/>
 <include file="Consulation_Admission_IPD.xml"/>
 <include file="Consultation_Admission_Sortie.xml"/>
+<include file="queues_for_IPD_CD4_CV.xml"/>
 </databaseChangeLog>
