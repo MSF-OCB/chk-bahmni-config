@@ -127,6 +127,34 @@
         "order": 3,
         "requiredPrivilege": "app:adt"
     },
+    "bahmniAdtPatientsSearchPatientsWithoutCV":{
+    "id": "bahmni.adt.patients.search.admissionsWithoutCV",
+    "extensionPointId": "org.bahmni.patient.search",
+    "type": "config",
+    "extensionParams": {
+        "searchHandler": "emrapi.sqlSearch.admissionsWithoutCV",
+        "translationKey": "MODULE_LABEL_TO_ADMISSIONS_WITHOUT_CV_KEY",
+        "forwardUrl" : "/bahmni/clinical/index.html#/default/patient/{{patientUuid}}/dashboard",
+        "view" : "tabular"
+    },
+    "label": "Admissions Without CV",
+    "order": 4,
+    "requiredPrivilege": "app:adt"
+    },
+    "bahmniAdtPatientsSearchPatientsWithoutCD4":{
+        "id": "bahmni.adt.patients.search.admissionsWithoutCD4",
+        "extensionPointId": "org.bahmni.patient.search",
+        "type": "config",
+        "extensionParams": {
+            "searchHandler": "emrapi.sqlSearch.admissionsWithoutCD4",
+            "translationKey": "MODULE_LABEL_TO_ADMISSIONS_WITHOUT_CD4_KEY",
+            "forwardUrl" : "/bahmni/clinical/index.html#/default/patient/{{patientUuid}}/dashboard",
+            "view" : "tabular"
+        },
+        "label": "Admissions Without CD4",
+        "order": 5,
+        "requiredPrivilege": "app:adt"
+    },
     "bahmniAdtPatientsSearchAllPatients":{
         "id": "bahmni.adt.patients.search.allPatients",
         "extensionPointId": "org.bahmni.patient.search",
@@ -136,7 +164,7 @@
             "forwardUrl" : "#/patient/{{patientUuid}}/visit/{{visitUuid}}/admit"
         },
         "label": "All",
-        "order": 4,
+        "order": 6,
         "requiredPrivilege": "app:adt"
     }
 }
