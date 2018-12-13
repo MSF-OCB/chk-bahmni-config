@@ -7803,4 +7803,16 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
 <include file="Consulation_Admission_IPD.xml"/>
 <include file="Consultation_Admission_Sortie.xml"/>
 <include file="queues_for_IPD_CD4_CV.xml"/>
+<changeSet id="OCB-CONFIG-201812122325" author="Pritam">
+    <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="2">
+          select count(*) from concept_name where `name` = "Regime ARV" and concept_name_type = 'FULLY_SPECIFIED' AND voided= 0;
+        </sqlCheck>
+    </preConditions>
+      <comment>updating Regime ARV FULLY_SPECIFIED name </comment>
+    <sql>
+          update concept_name set name = "CO, Regime ARV" where `name` = "Regime ARV" and concept_name_type = 'FULLY_SPECIFIED' AND voided= 0;
+    </sql>
+</changeSet>
+<include file='Removing_Old_Forms.xml'/>
 </databaseChangeLog>

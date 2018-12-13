@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="OCB-CONFIG-201812130936" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="13">
+              SELECT count(*)
+              from
+              concept_set
+              where concept_id in
+                          (select distinct concept_id from concept_name
+                          where name in
+                                    (
+                                    "Admission IPD Form","Formulaire de sortie","Suivi Consultation","Transfert","CO, Regime ARV","Signes vitaux","Antécédents cliniques","CO, Consultation OPD","CAI, Consulation Admission IPD","IPD Résumé de prise en charge","CSI, Sortie IPD","Tests rapides","Paraclinique"
+                                    )
+                          and concept_set in (select distinct concept_id from concept_name where name ='All Observation Templates'));
+            </sqlCheck>
+        </preConditions>
+        <comment>Removing set members for the All observation template</comment>
+        <sql>
+           delete from concept_set where concept_id in (select distinct concept_id from concept_name where name in
+                    ("Admission IPD Form","Formulaire de sortie","Suivi Consultation","Transfert","CO, Regime ARV","Signes vitaux","Antécédents cliniques","CO, Consultation OPD","CAI, Consulation Admission IPD","IPD Résumé de prise en charge","CSI, Sortie IPD","Tests rapides","Paraclinique")
+            and concept_set in (select distinct concept_id from concept_name where name ="All Observation Templates"));
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201812131721" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+                 select COUNT(*) from concept_set cs
+                 join concept_name cn
+                 on cs.concept_id = cn.concept_id
+                 where cs.concept_id IN (select concept_id from concept_name where name IN
+                 (
+                 "Signes vitaux","Antécédents cliniques","CO, Consultation OPD","CAI, Consulation Admission IPD","IPD Résumé de prise en charge","CSI, Sortie IPD","Tests rapides","Paraclinique"
+                 ) AND concept_name_type = "FULLY_SPECIFIED")
+                 and cs.concept_set IN (select concept_id from concept_name where name = 'All Observation Templates');
+              </sqlCheck>
+      </preConditions>
+      <comment>Adding set members for All observation template</comment>
+      <sql>
+          set @concept_id = 0;
+          set @member1_concept_id = 0;
+          set @member2_concept_id = 0;
+          set @member3_concept_id = 0;
+          set @member4_concept_id = 0;
+          set @member5_concept_id = 0;
+          set @member6_concept_id = 0;
+          set @member7_concept_id = 0;
+          set @member8_concept_id = 0;
+
+          select concept_id into @concept_id from concept_name where name = 'All Observation Templates' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member1_concept_id from concept_name where name = 'Signes vitaux' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member2_concept_id from concept_name where name = 'Antécédents cliniques' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member3_concept_id from concept_name where name = 'CO, Consultation OPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member4_concept_id from concept_name where name = 'CAI, Consulation Admission IPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member5_concept_id from concept_name where name = 'IPD Résumé de prise en charge' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member6_concept_id from concept_name where name = 'CSI, Sortie IPD' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member7_concept_id from concept_name where name = 'Tests rapides' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+          select concept_id into @member8_concept_id from concept_name where name = 'Paraclinique' and concept_name_type = 'FULLY_SPECIFIED' and locale = 'fr' and voided = 0;
+
+          call add_concept_set_members (@concept_id, @member1_concept_id, 1);
+          call add_concept_set_members (@concept_id, @member2_concept_id, 2);
+          call add_concept_set_members (@concept_id, @member3_concept_id, 3);
+          call add_concept_set_members (@concept_id, @member4_concept_id, 4);
+          call add_concept_set_members (@concept_id, @member5_concept_id, 5);
+          call add_concept_set_members (@concept_id, @member6_concept_id, 6);
+          call add_concept_set_members (@concept_id, @member7_concept_id, 7);
+          call add_concept_set_members (@concept_id, @member8_concept_id, 8);
+      </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201812130945" author="Pritam">
+        <comment>Removing the set members from Admission IPD Form</comment>
+        <sql>
+            delete
+            from
+            concept_set
+            where concept_set in (select distinct concept_id from concept_name where name ='Admission IPD Form');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201812130946" author="Pritam">
+        <comment>Removing the set members from Formulaire de sortie</comment>
+        <sql>
+            delete
+            from
+            concept_set
+            where concept_set in (select distinct concept_id from concept_name where name ='Formulaire de sortie');
+        </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201812130947" author="Pritam">
+        <comment>Removing the set members from Suivi Consultation</comment>
+        <sql>
+            delete
+            from
+            concept_set
+            where concept_set in (select distinct concept_id from concept_name where name ='Suivi Consultation');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
