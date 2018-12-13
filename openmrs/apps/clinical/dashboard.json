@@ -25,20 +25,30 @@
           "countyDistrict"
         ]
       },
-      "labOrdersDisplayControl": {
-        "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
-        "type": "ordersControl",
-        "orderType": "Lab Order",
+      "obsForSUIVIForm": {
+        "translationKey": "DASHBOARD_SUIVI_FORM_DETAILS",
+        "type": "vitals",
+        "isObservation": true,
+        "showCertainty": true,
+        "showOrder": true,
         "showDetailsButton": true,
         "displayOrder": 1,
         "dashboardConfig": {
           "conceptNames": [
-          ]
+            "Sc, Informations Infections opportunistes",
+            "Informations Autres diagnostics (Suivi)",
+            "Prochain RDV"
+          ],
+          "scope": "latest"
         },
         "expandedViewConfig": {
           "conceptNames": [
+            "CO, Hypothèses diagnostics",
+            "Prochain RDV"
           ],
-          "showDetailsButton": true
+          "numberOfVisits": "",
+          "pivotTable": {
+          }
         }
       },
       "navigationLinksControl": {
@@ -49,6 +59,16 @@
           "registration",
           "enrolment"
         ]
+      },
+      "visits": {
+        "translationKey": "DASHBOARD_TITLE_VISITS_KEY",
+        "type": "visits",
+        "displayOrder": 3,
+        "dashboardConfig": {
+          "title": null,
+          "maximumNoOfVisits": 5,
+          "groupByVisits": true
+        }
       },
       "treatments": {
         "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY",
@@ -74,29 +94,27 @@
           "showDetailsButton": true
         }
       },
-      "obsForSUIVIForm": {
-        "translationKey": "DASHBOARD_SUIVI_FORM_DETAILS",
+      "screeningDepression": {
+        "translationKey": "DASHBOARD_TITLE_SCREENING_DEPRESSION_KEY",
         "type": "vitals",
         "isObservation": true,
-        "showCertainty": true,
-        "showOrder": true,
-        "showDetailsButton": true,
-        "displayOrder": 3,
+        "displayOrder": 5,
+        "hideEmptyDisplayControl": false,
         "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 25,
           "conceptNames": [
-            "Informations Autres diagnostics (Suivi)",
-            "Sc, Informations Infections opportunistes",
-            "Prochain RDV"
-          ],
-          "scope": "latest"
+            "CO, PHQ",
+            "CO, Score"
+          ]
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Informations Autres diagnostics (Suivi)",
-            "Sc, Informations Infections opportunistes",
-            "Prochain RDV"
+            "CO, PHQ",
+            "CO, Score"
           ],
           "numberOfVisits": "",
+          "showDetailsButton": true,
           "pivotTable": {
           }
         }
@@ -120,7 +138,7 @@
         "translationKey": "DASHBOARD_TITLE_TRIAGE_FORM_KEY",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 5,
+        "displayOrder": 7,
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "conceptNames": [
@@ -162,11 +180,59 @@
           }
         }
       },
+      "transfertObs": {
+        "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 9,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 3,
+          "conceptNames": [
+            "Centre de réference",
+            "SC, PODI",
+            "CSI, Centre de référence",
+            "CSI, PODI"
+          ]
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Centre de réference",
+            "SC, PODI",
+            "CSI, Centre de référence",
+            "CSI, PODI"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
+      },
+      "formsDisplay": {
+        "type": "forms",
+        "displayOrder": 10,
+        "dashboardConfig": {
+          "title": null,
+          "maximumNoOfVisits": 10
+        },
+        "formGroup": [
+          "Signes vitaux",
+          "Antécédents cliniques ",
+          "CO, Consultation OPD",
+          "CAI, Consulation Admission IPD",
+          "IPD Résumé de prise en charge",
+          "CSI, Sortie IPD",
+          "Tests rapides",
+          "Paraclinique"
+        ],
+        "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
+      },
       "infectionsOpportunistes": {
         "translationKey": "DASHBOARD_TITLE_INFECTION_OPPORTUNISTES_KEY",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 7,
+        "displayOrder": 11,
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "showDetailsButton": true,
@@ -185,80 +251,38 @@
           }
         }
       },
-      "transfertObs": {
-        "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
-        "type": "vitals",
-        "isObservation": true,
-        "displayOrder": 12,
-        "hideEmptyDisplayControl": false,
-        "dashboardConfig": {
-          "showDetailsButton": true,
-          "numberOfVisits": 3,
-          "conceptNames": [
-            "Transfert, Date",
-            "Centre de réference",
-            "SC, PODI"
-          ]
-        },
-        "expandedViewConfig": {
-          "conceptNames": [
-            "Transfert, Date",
-            "Centre de réference",
-            "SC, PODI",
-            "Notes"
-          ],
-          "numberOfVisits": "",
-          "showDetailsButton": true,
-          "pivotTable": {
-          }
-        }
-      },
-      "formsDisplay": {
-        "type": "forms",
-        "displayOrder": 12,
-        "dashboardConfig": {
-          "title": null,
-          "maximumNoOfVisits": 10
-        },
-        "formGroup": [
-          "Admission IPD Form",
-          "Triage Form",
-          "Paraclinique",
-          "Formulaire de sortie",
-          "IPD Résumé de prise en charge",
-          "Antécédents cliniques",
-          "Suivi Consultation",
-          "Transfert",
-          "Tests rapides",
-          "Regime ARV"
-        ],
-        "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
-      },
-      "programs": {
-        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
-        "type": "programs",
-        "displayOrder": 12
-      },
       "regimenARV": {
         "translationKey": "DASHBOARD_TITLE_REGIME_ARV",
         "type": "vitals",
         "isObservation": true,
-        "displayOrder": 15,
+        "displayOrder": 12,
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "showDetailsButton": true,
-          "numberOfVisits": 5,
+          "numberOfVisits": 10,
           "conceptNames": [
-            "Regimen Start Date",
             "RA, ARV Line",
-            "Regimen Start Reason"
+            "Regimen Start date",
+            "Regimen Start reason",
+            "CAI, ARV Line",
+            "CAI, Date début Regime ARV",
+            "CAI, Motif début régime",
+            "CSI, ARV Line",
+            "CSI, Date début Regime ARV",
+            "CSI, Motif début régime"
           ]
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Regimen Start Date",
             "RA, ARV Line",
-            "Regimen Start Reason"
+            "Regimen Start date",
+            "Regimen Start reason",
+            "CAI, ARV Line",
+            "CAI, Date début Regime ARV",
+            "CAI, Motif début régime",
+            "CSI, ARV Line",
+            "CSI, Date début Regime ARV",
+            "CSI, Motif début régime"
           ],
           "numberOfVisits": "",
           "showDetailsButton": true,
@@ -266,15 +290,26 @@
           }
         }
       },
-      "visits": {
-        "translationKey": "DASHBOARD_TITLE_VISITS_KEY",
-        "type": "visits",
-        "displayOrder": 18,
+      "labOrdersDisplayControl": {
+        "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
+        "type": "ordersControl",
+        "orderType": "Lab Order",
+        "showDetailsButton": true,
+        "displayOrder": 13,
         "dashboardConfig": {
-          "title": null,
-          "maximumNoOfVisits": 5,
-          "groupByVisits": true
+          "conceptNames": [
+          ]
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+          ],
+          "showDetailsButton": true
         }
+      },
+      "programs": {
+        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+        "type": "programs",
+        "displayOrder": 14
       }
     }
   },
@@ -333,11 +368,9 @@
           "numberOfVisits": 5,
           "conceptNames": [
             "Stade clinique OMS",
-            "Sc, Diagnostic",
-            "Sc, Informations Infections opportunistes",
-            "Autre(si le diagnostic n'est pas listé)",
-            "Sc, Informations prophylaxie",
-            "Effets secondaires - médicaments"
+            "CO, Hypothèses diagnostics",
+            "CO, Regime ARV",
+            "Informations mode de sortie(Suivi)"
           ]
         },
         "displayOrder": 2,
@@ -353,9 +386,10 @@
           "conceptNames": [
             "IPD Admission, Date d'admission",
             "Syndrome d'admission",
-            "Si autre, preciser",
-            "Diagnostic",
-            "Date de sortie"
+            "CAI, Hypothèses diagnostics",
+            "CSI, Hypothèses diagnostics",
+            "Date de sortie",
+            "CSI, Issue de la consultation"
           ]
         },
         "displayOrder": 3,
@@ -364,7 +398,7 @@
       "investigationsChart": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
         "type": "labOrders",
-        "displayOrder": 3,
+        "displayOrder": 4,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "title": null,
@@ -377,7 +411,7 @@
       "programs_1": {
         "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
         "type": "programs",
-        "displayOrder": 4,
+        "displayOrder": 5,
         "displayType": "Full-Page"
       },
       "regArvInformation": {
@@ -389,9 +423,15 @@
           "showGroupDateTime": true,
           "numberOfVisits": 5,
           "conceptNames": [
-            "Regimen Start date",
             "RA, ARV Line",
-            "Regimen Start reason"
+            "Regimen Start date",
+            "Regimen Start reason",
+            "CAI, ARV Line",
+            "CAI, Date début Regime ARV",
+            "CAI, Motif début régime",
+            "CSI, ARV Line",
+            "CSI, Date début Regime ARV",
+            "CSI, Motif début régime"
           ]
         },
         "displayOrder": 6
@@ -406,21 +446,6 @@
       "logo": "/bahmni_config/openelis/images/labLogo.jpg"
     },
     "sections": {
-      "ipdPatientInformation": {
-        "translationKey": "DASHBOARD_TITLE_PATIENT_INFORMATION_KEY",
-        "type": "patientInformation",
-        "displayOrder": 0,
-        "ageLimit": 100,
-        "displayType": "Full-Page",
-        "patientAttributes": [
-          "Type de cohorte",
-          "Nom du contact",
-          "Tel 1 du Contact"
-        ],
-        "addressFields": [
-          "countyDistrict"
-        ]
-      },
       "ipdObservation": {
         "translationKey": "DASHBOARD_IPD_TAB_OBS_DETAILS",
         "type": "vitals",
@@ -429,197 +454,200 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
+          "numberOfVisits": 1,
           "conceptNames": [
             "IPD Admission, Date d'admission",
-            "Référé en IPD par(FOSA)",
-            "FOSA de suivi ARV",
-            "Syndrome d'admission",
-            "Si autre, preciser",
-              "Diagnostics à l'admission",
-            "Diagnostics à l'admission non listé",
-            "Malade arrivé mort"
-          ],
-          "scope": "latest"
+            "CAI, Admission - Données générales",
+            "Infirmier en charge de l'admission"
+          ]
         }
       },
       "hospitalisationsAntérieures": {
-        "translationKey": "Hospitalisations antérieures",
+        "translationKey": "DASHBOARD_TITLE_HOSPITALISATIONS_ANTERIEURES",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 2,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
+          "numberOfVisits": 2,
           "conceptNames": [
-            "IPD Admission Section, Hospitalisations antérieures"
-          ],
-          "scope": "latest"
+            "IPD Admission, Date d'admission",
+            "Date de sortie",
+            "Syndrome à la sortie"
+          ]
         }
       },
       "historiqueVIH": {
-        "translationKey": "Historique VIH",
+        "translationKey": "DASHBOARD_TITLE_ANAMNESE",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 3,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
+          "numberOfVisits": 1,
           "conceptNames": [
-                    "Date diagnostic VIH(Ant)"
-          ],
-          "scope": "latest"
-        }
-      },
-      "historiqueARV": {
-        "translationKey": "Historique ARV",
-        "type": "vitals",
-        "isObservation": true,
-        "displayOrder": 4,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showDetailsButton": false,
-          "conceptNames": [
-            "IPD Admission Section, Histoire ARV"
-          ],
-          "scope": "latest"
-        }
-      },
-      "anticidentsARVData": {
-        "translationKey": "Antécédents Cliniques",
-        "type": "vitals",
-        "isObservation": true,
-        "displayOrder": 4,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showDetailsButton": false,
-          "conceptNames": [
-            "Regime Debut",
-            "Regime actuel"
-          ],
-          "scope":"latest"
-        }
-      },
-      "regArvInformation": {
-        "translationKey": "Regime ARV",
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "conceptNames": [
-            "Regimen Start date",
+            "Date diagnostic VIH(Ant)",
+            "IPD Admission, Histoire ARV",
+            "IPD Admission, Si interrompu",
             "RA, ARV Line",
-            "Regimen Start reason"
-          ],
-          "scope": "latest"
-        },
-        "displayOrder": 5
-      },
-      "adherenceARV": {
-        "translationKey": "Adhérence ARV",
-        "type": "vitals",
-        "isObservation": true,
-        "displayOrder": 6,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showDetailsButton": false,
-          "conceptNames": [
-            "IPD Admission Section, Adherence ARV"
-          ],
-          "scope": "latest"
+            "Regimen Start date",
+            "Regimen Start reason",
+            "CAI, ARV Line",
+            "CAI, Date début Regime ARV",
+            "CAI, Motif début régime",
+            "CSI, ARV Line",
+            "CSI, Date début Regime ARV",
+            "CSI, Motif début régime",
+            "IPD Admission, Avez-vous déjà arrêté les ARV pendant plus d'un mois",
+            "IPD Admission, TB en cours de traitement à l'admission",
+            "IPD Admission, Elements de diagnostic TB",
+            "IPD Admission, Date début anti-TB",
+            "IPD Admission, Adhérence aux anti-TB",
+            "CAI, Informations prophylaxie",
+            "CAI, Plaintes à l'admission et durée des symptômes",
+            "CAI, Evaluation des symptômes TB"
+          ]
         }
       },
-      "historiqueTB": {
-        "translationKey": "Historique TB",
-        "type": "vitals",
+      "antecedentsMedicaux": {
+        "translationKey": "DASHBOARD_TITLE_ANTECEDENTS_MEDICAUX",
+        "type": "forms",
         "isObservation": true,
-        "displayOrder": 7,
+        "displayOrder": 4,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
+          "numberOfVisits": 1,
           "conceptNames": [
-            "IPD Admission Section, Historique TB"
-          ],
-          "scope": "latest"
+            "Information Infections opportunistes",
+            "Informations TB",
+            "Informations Prophylaxie",
+            "Regime Debut",
+            "Autre traitement",
+            "Informations autres pathologies",
+            "Informations allergies",
+            "Informations hématologiques"
+          ]
         }
       },
       "programs": {
         "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
         "type": "programs",
         "displayType": "Full-Page",
-        "displayOrder": 8
+        "displayOrder": 5
       },
-      "tbPrécédentes": {
-        "translationKey": "Antécédents cliniques - TB Précédentes",
-        "type": "forms",
+      "paramètres": {
+        "translationKey": "DASHBOARD_TITLE_PARAMETERS",
         "isObservation": true,
-        "displayOrder": 9,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showDetailsButton": false,
-          "conceptNames": [
-            "Informations TB"
-
-          ],
-          "scope": "latest"
-        }
-      },
-      "prophylaxieAdmission": {
-        "translationKey": "Prophylaxie à l’admission",
-        "type": "forms",
-        "isObservation": true,
-        "displayOrder": 10,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showDetailsButton": false,
-          "conceptNames": [
-           "Sc, Informations prophylaxie"
-          ],
-          "scope": "latest"
-        }
-      },
-       "testRapid": {
-        "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
         "type": "vitals",
-        "isObservation": true,
-        "displayOrder": 11,
+        "displayOrder": 6,
         "displayType": "Full-Page",
-        "hideEmptyDisplayControl": false,
         "dashboardConfig": {
-          "showDetailsButton": true,
-          "numberOfVisits": 5,
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
-            "Tests rapides"
+            "Signes vitaux"
           ]
         }
       },
-      "investigationsChart": {
+      "examenPhysiqueAdmission": {
+        "translationKey": "DASHBOARD_TITLE_EXAMEN_PHYSIQUE_A_LADMISSION",
+        "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 7,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "CAI, Examen physique"
+          ]
+        }
+      },
+      "hypothèsesDiagnostiques": {
+        "translationKey": "DASHBOARD_TITLE_HYPOTHESE_DIAGNOSTICS",
+        "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 8,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "CAI, Hypothèses diagnostics"
+          ]
+        }
+      },
+      "tests": {
+        "translationKey": "DASHBOARD_TITLE_TESTS",
+        "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 9,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "TDR"
+          ]
+        }
+      },
+       "investigationsChart": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
         "type": "labOrders",
-        "displayOrder": 12,
+        "displayOrder": 10,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "title": null,
           "numberOfVisits": 1,
           "showChart": true,
-          "showTable": false,
-          "scope": "latest"
+          "showTable": false
         }
       },
-      "infoIPDAdmissionDetails": {
-        "translationKey": "DASHBOARD_IPD_TAB_ADMISSION_OTHER_INFORMATION",
-        "type": "vitals",
+      "conduiteATenir": {
+        "translationKey": "DASHBOARD_TITLE_CONDUITE_A_TENIR",
         "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 11,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "CAI, Conduite à tenir"
+          ]
+        }
+      },
+      "issueDeConsultation": {
+        "translationKey": "DASHBOARD_TITLE_ISSUE_DE_LA_CONSULTATION",
+        "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 12,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "CAI, Issue de la consultation"
+          ]
+        }
+      },
+      "MédecinEtInfirmierEnChargeDeL'Admission": {
+        "translationKey": "DASHBOARD_TITLE_MEDECIN_ET_INFIRMIER_EN_CHARGW_DE_L'_ADMISSION",
+        "isObservation": true,
+        "type": "vitals",
         "displayOrder": 13,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "showDetailsButton": false,
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
           "conceptNames": [
             "Infirmier en charge de l'admission",
             "Medecin en charge de l'admission"
-          ],
-          "scope": "latest"
+          ]
         }
       }
     }
@@ -631,8 +659,8 @@
       "logo": "/bahmni_config/openelis/images/labLogo.jpg"
     },
     "sections": {
-      "RESUME DE PRISE EN CHARGE": {
-        "translationKey": "DASHBOARD_TITLE_SUMMARY_OF_SUPPORT",
+      "datedDeSortie": {
+        "translationKey": "DASHBOARD_TITLE_DATE_DE_SORTIE",
         "isObservation": true,
         "type": "vitals",
         "displayOrder": 0,
@@ -641,13 +669,30 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "RPEC"
+            "Date de sortie"
           ]
         }
       },
-      "Diagnosis": {
-        "type": "vitals",
+      "paramètres": {
+        "translationKey": "DASHBOARD_TITLE_PARAMETRES",
         "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 1,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "Signes vitaux"
+          ],
+          "scope":"latest"
+        }
+      },
+      "arvALaSortie": {
+        "translationKey": "DASHBOARD_TITLE_ARV_A_LA_SORTIE",
+        "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 2,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
@@ -655,38 +700,21 @@
           "conceptNames": [
             "Arv à la sortie"
           ]
-        },
-        "displayOrder": 1,
-        "translationKey": "DASHBOARD_TITLE_DIAGNOSIS"
-      },
-      "Diagnosis1": {
-        "type": "forms",
-        "isObservation": true,
-        "translationKey": "DASHBOARD_TITLE_SYNDROME_DIAGNOSTIC",
-        "displayOrder": 2,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Syndrome et Diagnostic"
-          ]
         }
       },
-      "Syndrome at Exit": {
-        "type": "vitals",
+      "hypothèseDiagnostics": {
+        "translationKey": "DASHBOARD_TITLE_HYPOTHESE_DIAGNOSTICS",
         "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 3,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
-          "numberOfVisits": 1,
           "conceptNames": [
-            "Traitement à la sortie",
-            "Si autre, preciser"
-          ]
-        },
-        "displayOrder": 3,
-        "translationKey": "DASHBOARD_TITLE_EXIT_SYNDROME"
+            "Syndrome à la sortie"
+          ],
+          "scope":"latest"
+        }
       },
       "investigationsChart": {
         "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
@@ -701,33 +729,71 @@
           "showTable": false
         }
       },
-      "Exit Mode": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": "",
-          "conceptNames": [
-            "Informations mode de sortie(Suivi)"
-          ]
-        },
+      "programs": {
+        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+        "type": "programs",
         "displayOrder": 5,
-        "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
+        "displayType": "Full-Page"
       },
-      "Date of the next appointment": {
-        "type": "vitals",
+      "conduiteATenir": {
+        "translationKey": "DASHBOARD_TITLE_CONDUITE_A_TENIR",
         "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 6,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Date du prochain RDV"
+            "CSI, Conduite à tenir"
           ]
-        },
-        "displayOrder": 6,
-        "translationKey": "DASHBOARD_TITLE_DATE_OF_NEXT_APPOINTMENT"
+        }
+      },
+      "treatments": {
+        "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
+        "type": "treatment",
+        "displayOrder": 7,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showFlowSheet": true,
+          "showListView": true,
+          "showRoute": true,
+          "showDrugForm": true,
+          "showOtherActive": true,
+          "showDetailsButton": true,
+          "conceptNames": [
+            "Stopped Order Reason"
+          ],
+          "scope": "latest"
+        }
+      },
+      "issueDeLaConsultation": {
+        "translationKey": "DASHBOARD_TITLE_ISSUE_DE_LA_CONSULTATION",
+        "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 8,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "CSI, Issue de la consultation"
+          ]
+        }
+      },
+      "ipdRésuméDePriseEnCharge": {
+        "translationKey": "DASHBOARD_TITLE_IPD_RESUME_DE_PRISE_EN_CHARGE",
+        "isObservation": true,
+        "type": "vitals",
+        "displayOrder": 9,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "RPEC"
+          ]
+        }
       }
     }
   },
@@ -768,13 +834,28 @@
     }
   },
   "Suivi Consultation form": {
-    "translationKey": "Consultation de suivi",
+    "translationKey": "Consultation OPD",
     "printing": {
       "title": "Centre Hospitalier Kabinda",
-      "header": "Consultation de suivi",
+      "header": "Consultation OPD",
       "logo": "/bahmni_config/openelis/images/labLogo.jpg"
     },
     "sections": {
+      "typeDeConsultation": {
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "hideEmptyDisplayControl": true,
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "CO, Type de consultation"
+          ]
+        },
+        "displayOrder": 1,
+        "translationKey": "DASHBOARD_TITLE_TYPE_DE_CONSULTATION"
+      },
       "patientdetailsvisit1": {
         "type": "vitals",
         "isObservation": true,
@@ -787,7 +868,7 @@
             "Date de prochain RDV"
           ]
         },
-        "displayOrder": 1,
+        "displayOrder": 2,
         "translationKey": "DASHBOARD_TITLE_DATE_OF_PROCHAIN RDV"
       },
       "patientdetailsvisit2": {
@@ -801,7 +882,7 @@
             "Stade clinique OMS"
           ]
         },
-        "displayOrder": 2,
+        "displayOrder": 3,
         "translationKey": "DASHBOARD_TITLE_DATE_OF_STADE_OMS"
       },
       "Parameters": {
@@ -810,29 +891,15 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showGroupDateTime": true,
-          "conceptNames": [
-            "Signes vitaux"
-          ],
-          "scope": "latest"
-        },
-        "displayOrder": 3,
-        "translationKey": "DASHBOARD_TITLE_PARAMETERS"
-      },
-      "Motif Consultation": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Motif Consultation"
+            "Signes vitaux"
           ]
         },
         "displayOrder": 4,
-        "translationKey": "DASHBOARD_TITLE_MOTIF_CONSULTATIONS"
+        "translationKey": "DASHBOARD_TITLE_PARAMETERS"
       },
-      "Histoire Maladie Actuelle": {
+      "anamneseConsultationOPD": {
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
@@ -840,13 +907,13 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Histoire Maladie Actuelle"
+            "CO, Anamnèse"
           ]
         },
         "displayOrder": 5,
-        "translationKey": "DASHBOARD_TITLE_ACTUAL_HISTORY"
+        "translationKey": "DASHBOARD_TITLE_ANAMNESE"
       },
-      "Examen clinique": {
+      "examenPhysique": {
         "type": "vitals",
         "isObservation": true,
         "displayType": "Full-Page",
@@ -854,23 +921,25 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Etat general",
-            "Yeux",
-            "Bouche",
-            "Ganglions Sites",
-            "Coeur",
-            "Poumon",
-            "Abdomen",
-            "App génito-urinaire",
-            "Peau",
-            "App. Genital",
-            "App. Osteoarticulaire",
-            "Neurologie",
-            "Sv, Autres"
+            "Examen clinique"
           ]
         },
         "displayOrder": 6,
-        "translationKey": "DASHBOARD_TITLE_EXAMEN_CLINIQUE"
+        "translationKey": "DASHBOARD_TITLE_EXAMEN_PHYSIQUE"
+      },
+      "hypothèsesDiagnostiques": {
+        "type": "vitals",
+        "isObservation": true,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "showGroupDateTime": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "CO, Hypothèses diagnostics"
+          ]
+        },
+        "displayOrder": 7,
+        "translationKey": "DASHBOARD_TITLE_HYPOTHESES_DIAGNOSTIQUES"
       },
       "Paraclinique": {
         "type": "vitals",
@@ -880,12 +949,10 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Type de radio",
-            "Date de radio",
-            "Resultats Radio"
+            "Paraclinique - Radiologie"
           ]
         },
-        "displayOrder": 7,
+        "displayOrder": 8,
         "translationKey": "DASHBOARD_TITLE_PARACLINIC"
       },
       "Ecographie": {
@@ -896,27 +963,39 @@
           "showGroupDateTime": true,
           "numberOfVisits": 1,
           "conceptNames": [
-            "Type d'Echo",
-            "Date Echo",
-            "Resultats Echo"
-          ]
-        },
-        "displayOrder": 8,
-        "translationKey": "DASHBOARD_TITLE_ECOGRAPHIE"
-      },
-      "Diagnostic": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            	"Informations Autres diagnostics (Suivi)"
+            "Paraclinique - Echographie"
           ]
         },
         "displayOrder": 9,
-        "translationKey": "DASHBOARD_TITLE_AUTRE_DIAGNOSTIC"
+        "translationKey": "DASHBOARD_TITLE_ECOGRAPHIE"
+      },
+      "investigationsChart": {
+        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
+        "type": "labOrders",
+        "displayOrder": 10,
+        "displayType": "Full-Page",
+        "dashboardConfig": {
+          "title": null,
+          "numberOfVisits": 1,
+          "showChart": true,
+          "showTable": false,
+          "showGroupDateTime": true
+        }
+      },
+      "testRapid": {
+        "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 11,
+        "displayType": "Full-Page",
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "numberOfVisits": 1,
+          "conceptNames": [
+            "TDR"
+          ]
+        }
       },
       "Conduite à tenir": {
         "type": "vitals",
@@ -925,97 +1004,23 @@
         "dashboardConfig": {
           "numberOfVisits": 1,
           "conceptNames": [
-            "Observations et conduite à tenir"
+            "CO, Conduite à tenir"
           ],
           "showGroupDateTime": true
         },
-        "displayOrder": 10,
+        "displayOrder": 12,
         "translationKey": "DASHBOARD_TITLE_CONDUITE_A_TENIR"
       },
-      "Infections Opportunistes": {
-        "type": "vitals",
-        "isObservation": true,
-        "translationKey": "DASHBOARD_TITLE_INFECTIONS_OPPORTUNISTES",
-        "displayOrder": 8,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Infections Opportunistes",
-            "Status IO"
-          ]
-        }
-      },
-      "Informations Prophylaxie": {
-        "type": "forms",
-        "isObservation": true,
-        "translationKey": "DASHBOARD_TITLE_INFORMATIONS_PROPHYLAXIE",
-        "displayOrder": 12,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Sc, Informations prophylaxie"
-          ]
-        }
-      },
-      "Informations TB": {
+      "programs": {
         "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+        "displayType": "Full-Page",
         "type": "programs",
-        "displayOrder": 13,
-        "displayType": "Full-Page"
-      },
-      "Regime ARV": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Regimen Start date",
-            "RA, ARV Line",
-            "Regimen Start reason"
-          ]
-        },
-        "displayOrder": 14,
-        "translationKey": "DASHBOARD_TITLE_REGIME_ARV"
-      },
-      "investigationsChart": {
-        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
-        "type": "labOrders",
-        "displayOrder": 15,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "title": null,
-          "numberOfVisits": 1,
-          "showChart": true,
-          "showTable": false,
-          "showGroupDateTime": true,
-          "scope": "latest"
-        }
-      },
-      "testRapid": {
-        "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
-        "type": "vitals",
-        "isObservation": true,
-        "displayOrder": 16,
-        "displayType": "Full-Page",
-        "hideEmptyDisplayControl": false,
-        "dashboardConfig": {
-          "showDetailsButton": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Tests rapides"
-          ]
-        }
+        "displayOrder": 13
       },
       "treatments": {
         "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
         "type": "treatment",
-        "displayOrder": 17,
+        "displayOrder": 14,
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showFlowSheet": true,
@@ -1031,77 +1036,20 @@
           ]
         }
       },
-      "Effets secondaires - médicaments": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-              "Effets secondaires - médicaments"
-          ]
-        },
-        "displayOrder": 18,
-        "translationKey": "DASHBOARD_TITLE_SECONDARY_MEDICATION"
-      },
-   "transfertObs": {
-        "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "displayOrder": 19,
-        "hideEmptyDisplayControl": false,
-        "dashboardConfig": {
-          "showDetailsButton": true,
-          "numberOfVisits": 3,
-          "conceptNames": [
-            "Transfert, Date",
-            "Centre de réference",
-            "SC, PODI"
-          ]
-        },
-        "expandedViewConfig": {
-          "conceptNames": [
-            "Transfert, Date",
-            "Centre de réference",
-            "SC, PODI",
-            "Notes"
-          ],
-          "numberOfVisits": "",
-          "showDetailsButton": true,
-          "pivotTable": {
-          }
-        }
-      },
-       "Exit Mode": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": "",
-          "conceptNames": [
-            "Informations mode de sortie(Suivi)"
-          ]
-        },
-        "displayOrder": 19,
-        "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
-      },
-      "Note prochain RDV": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Prochain RDV"
-          ]
-        },
-        "displayOrder": 20,
-        "translationKey": "DASHBOARD_TITLE_NOTES"
-      }
+      "Exit Mode": {
+       "type": "vitals",
+       "isObservation": true,
+       "displayType": "Full-Page",
+       "dashboardConfig": {
+         "showGroupDateTime": true,
+         "numberOfVisits": "",
+         "conceptNames": [
+           "Informations mode de sortie(Suivi)"
+         ]
+       },
+       "displayOrder": 15,
+       "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
+     }
     }
   },
   "investigationChart": {

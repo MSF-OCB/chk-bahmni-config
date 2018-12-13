@@ -196,6 +196,18 @@
   "CLINICAL_FORM_ERRORS_MESSAGE_KEY":"Veuillez entrer une valeur dans les champs obligatoires ou corriger la valeur dans les champs en surbrillance",
   "CANNOT_HAVE_MORE_THAN_ONE_ACTIVE_ORDER":"Un ou plusieurs médicaments que vous essayez de prescrire sont encore actifs. Veuillez changer la date de début des médicaments concernés ou enlever les de la nouvelle prescription",
   "ENTERED_VALUE_OUT_OF_RANGE":"La valeur entrée (champs en rouge) n’est pas comprise dans la marge des valeurs autorisées pour ce champs. Veuillez vérifier l’information dans ce champs",
-  "OBSERVATION_GRAPH_NO_DATA_LABEL":"Pas de données"
+  "OBSERVATION_GRAPH_NO_DATA_LABEL":"Pas de données",
+  "DASHBOARD_TITLE_SCREENING_DEPRESSION_KEY":"Screening depression",
+  "DASHBOARD_TITLE_HOSPITALISATIONS_ANTERIEURES":"Hospitalisations antérieures",
+  "DASHBOARD_TITLE_ANTECEDENTS_MEDICAUX":"Antécédents médicaux",
+  "DASHBOARD_TITLE_EXAMEN_PHYSIQUE_A_LADMISSION":"Examen physique à admission",
+  "DASHBOARD_TITLE_HYPOTHESE_DIAGNOSTICS":"Hypothèses diagnostiques",
+  "DASHBOARD_TITLE_TESTS":"Tests",
+  "DASHBOARD_TITLE_ISSUE_DE_LA_CONSULTATION":"Issue de consultation",
+  "DASHBOARD_TITLE_MEDECIN_ET_INFIRMIER_EN_CHARGW_DE_L'_ADMISSION":"Médecin et infirmier en charge de admission",
+  "DASHBOARD_TITLE_DATE_DE_SORTIE":"Date de sortie",
+  "DASHBOARD_TITLE_PARAMETRES":"Paramètres",
+  "DASHBOARD_TITLE_ARV_A_LA_SORTIE":"ARV à la sortie",
+  "DASHBOARD_TITLE_IPD_RESUME_DE_PRISE_EN_CHARGE":"IPD Résumé de prise en charge"
 
 }
