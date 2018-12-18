@@ -372,12 +372,11 @@
       "CSI, ARV Line":{"required": true,"dropdown": true},
       "CSI, Date début Regime ARV":{"required": true},
       "CSI, Motif début régime":{"dropdown": true,"required": true},
-      "CSI, Centre de référence":{"autocomplete":true},
-      "CSI, PODI":{"dropdown": true},
       "CSI, Motif d'arrêt prophylaxie":{"required": true},
       "CSI, Mode de sortie":{"required": true},
       "CSI, Centre de référence":{"required": true,"autocomplete":true},
-      "CSI, PODI":{"required": true,"dropdown": true}
+      "CSI, PODI":{"required": true,"dropdown": true},
+      "CSI, Date prochain RDV" :{"disableAddNotes": true,"allowFutureDates" : true}
     }
   }
 }

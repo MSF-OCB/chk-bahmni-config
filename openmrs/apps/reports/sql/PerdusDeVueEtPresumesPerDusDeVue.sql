@@ -70,7 +70,8 @@ FROM (SELECT person_id,
       WHERE obsForAppointmentDate.concept_id IN (SELECT concept_id
                                                  FROM concept_view
                                                  WHERE concept_full_name
-                                                         IN ("Date du prochain RDV", "Date de prochain RDV"))
+                                                         IN ("CSI, Date prochain RDV",
+                                                             "Date de prochain RDV"))
         AND obsForAppointmentDate.voided = 0
         AND visitForAppointmentDate.voided = 0
         AND obs_id NOT IN (SELECT obs_id
@@ -80,7 +81,7 @@ FROM (SELECT person_id,
                            WHERE obsForAppointmentDate.concept_id IN (SELECT concept_id
                                                                       FROM concept_view
                                                                       WHERE concept_full_name
-                                                                              IN ("Date du prochain RDV",
+                                                                              IN ("CSI, Date prochain RDV",
                                                                                   "Date de prochain RDV"))
                              AND obsForAppointmentDate.voided = 0
                              AND visitForAppointmentDate.voided = 0

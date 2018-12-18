@@ -71,7 +71,7 @@ LEFT JOIN (/*getting appointment date of the previous visit*/
             obs obs
             INNER JOIN encounter en ON en.encounter_id = obs.encounter_id AND obs.voided IS FALSE AND en.voided IS FALSE
             INNER JOIN concept_view cv ON cv.concept_id = obs.concept_id
-            AND cv.concept_full_name IN ('Date de prochain RDV','Date du prochain RDV') AND cv.retired IS FALSE
+            AND cv.concept_full_name IN ("Date de prochain RDV") AND cv.retired IS FALSE
             INNER JOIN
                     (
                       SELECT
@@ -83,7 +83,7 @@ LEFT JOIN (/*getting appointment date of the previous visit*/
                             INNER JOIN encounter e ON e.encounter_id = o.encounter_id
                             AND o.voided IS FALSE AND e.voided IS FALSE
                             INNER JOIN concept_view cv ON cv.concept_id = o.concept_id
-                            AND cv.concept_full_name IN ('Date de prochain RDV','Date du prochain RDV')
+                            AND cv.concept_full_name IN ("Date de prochain RDV")
                             AND cv.retired IS FALSE
                             INNER JOIN
                                     (/*Getting previous visit*/

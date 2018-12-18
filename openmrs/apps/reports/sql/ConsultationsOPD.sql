@@ -913,8 +913,8 @@ group by patient_id,visit_id,enrolledDate
                               FROM obs o INNER JOIN concept_view cd4_val
                               ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
                               cd4_val.concept_full_name IN ("CD4(cells/µl)") AND o.value_numeric IS NOT NULL
-        
-                              UNION 
+
+                              UNION
 
                               (
                               SELECT
@@ -926,12 +926,12 @@ group by patient_id,visit_id,enrolledDate
                               FROM obs o INNER JOIN concept_view cd4_val
                               ON cd4_val.concept_id = o.concept_id AND o.voided IS FALSE AND cd4_val.retired IS FALSE AND
                               cd4_val.concept_full_name IN ("CD4(Bilan de routine IPD)","CD4") AND o.value_numeric IS NOT NULL )
-                             
+
                               ) cd4
                     ON cd4.encounter_id = e.encounter_id
                     order by obsdate desc) cd4_obs
                     GROUP BY vid
-             
+
     ) cd4 ON cd4.pid = v.patient_id AND cd4.vid= v.visit_id
     LEFT JOIN (SELECT
                    o.person_id,
@@ -960,7 +960,7 @@ group by patient_id,visit_id,enrolledDate
                                                    cv_test.concept_full_name IN ('Charge Virale HIV - Value', 'Charge Virale - Value(Bilan de routine IPD)') AND o.value_numeric IS NOT NULL)) test_obs
                                        ON test_obs.encounter_id = e.encounter_id
                                GROUP BY v.visit_id) latest_obs_cv
-                       ON latest_obs_cv.test_obsDateTime = o.obs_datetime AND latest_obs_cv.visit_id = v.visit_id) 
+                       ON latest_obs_cv.test_obsDateTime = o.obs_datetime AND latest_obs_cv.visit_id = v.visit_id)
     cv ON cv.person_id = v.patient_id AND cv.visit_id = v.visit_id
     LEFT JOIN (select hemo_obs.vid AS vid,
                    hemo_obs.obsdate AS obsdate,
@@ -982,8 +982,8 @@ group by patient_id,visit_id,enrolledDate
                               FROM obs o INNER JOIN concept_view hemo_val
                               ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
                               hemo_val.concept_full_name IN ('Hemoglobine','Hemoglobine(Bilan de routine IPD)') AND o.value_numeric IS NOT NULL
-        
-                              UNION 
+
+                              UNION
                               (
                               SELECT
                               o.encounter_id,
@@ -993,12 +993,12 @@ group by patient_id,visit_id,enrolledDate
                               o.concept_id
                               FROM obs o INNER JOIN concept_view hemo_val
                               ON hemo_val.concept_id = o.concept_id AND o.voided IS FALSE AND hemo_val.retired IS FALSE AND
-                              hemo_val.concept_full_name IN ("Hémoglobine (Hemocue)(g/dl)") AND o.value_numeric IS NOT NULL )                             
+                              hemo_val.concept_full_name IN ("Hémoglobine (Hemocue)(g/dl)") AND o.value_numeric IS NOT NULL )
                               ) hemo
                     ON hemo.encounter_id = e.encounter_id
                     order by obsdate desc) hemo_obs
                     GROUP BY vid
-            
+
              ) hemoglobin ON hemoglobin.pid = v.patient_id AND hemoglobin.vid = v.visit_id
     LEFT JOIN (
     select glyc_obs.vid AS vid,
@@ -1021,8 +1021,8 @@ group by patient_id,visit_id,enrolledDate
                               FROM obs o INNER JOIN concept_view glyc_val
                               ON glyc_val.concept_id = o.concept_id AND o.voided IS FALSE AND glyc_val.retired IS FALSE AND
                               glyc_val.concept_full_name IN ("Glycémie") AND o.value_numeric IS NOT NULL
-        
-                              UNION 
+
+                              UNION
 
                               (
                               SELECT
@@ -1034,12 +1034,12 @@ group by patient_id,visit_id,enrolledDate
                               FROM obs o INNER JOIN concept_view glyc_val
                               ON glyc_val.concept_id = o.concept_id AND o.voided IS FALSE AND glyc_val.retired IS FALSE AND
                               glyc_val.concept_full_name IN ("Glycémie(mg/dl)") AND o.value_numeric IS NOT NULL )
-                             
+
                               ) glyc
                     ON glyc.encounter_id = e.encounter_id
                     order by obsdate desc) glyc_obs
                     GROUP BY vid
-             
+
 ) glyceme ON glyceme.pid = v.patient_id AND glyceme.vid = v.visit_id
                        left join
                        (
@@ -1063,7 +1063,7 @@ group by patient_id,visit_id,enrolledDate
                    INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
                                                              answer_concept.concept_name_type = 'SHORT' AND answer_concept.locale = 'fr'
                        ) as infomode on infomode.person_id=p.person_id and infomode.visit_id =v.visit_id
-                       
+
     LEFT JOIN (SELECT
                    o.person_id,
                    v.visit_id,
@@ -1123,4 +1123,3 @@ group by patient_id,visit_id,enrolledDate
                    INNER JOIN concept_name answer_concept on o.value_coded = answer_concept.concept_id  AND answer_concept.voided IS FALSE AND
                                                              answer_concept.concept_name_type = 'FULLY_SPECIFIED' AND answer_concept.locale = 'fr')tblam ON tblam.person_id = v.patient_id AND tblam.visit_id = v.visit_id
 where  date(v.date_created) between Date('#startDate#') AND Date('#endDate#')  group by v.visit_id  ;
-

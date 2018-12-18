@@ -50,6 +50,26 @@
 
             </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201812171946" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="2">
+              select
+              count(*)
+              from
+              concept
+              INNER JOIN concept_datatype on concept.datatype_id = concept_datatype.concept_datatype_id and `concept_datatype`.`name` = "Datetime"
+              INNER JOIN concept_name ON concept.concept_id = concept_name.concept_id AND `concept_name`.`name`= "CSI, Date prochain RDV";
+          </sqlCheck>
+      </preConditions>
+      <comment>Changing datatype of CSI, Date prochain RDV</comment>
+      <sql>
+          Update concept set concept.datatype_id = 6 where
+          concept_id = (
+                        select concept_id from concept_name
+                        where `concept_name`.`name`= "CSI, Date prochain RDV"
+                        and concept_name_type ="FULLY_SPECIFIED" and locale='fr');
+      </sql>
+    </changeSet>
     <changeSet id="OCB-CONFIG-201811242117" author="Pritam">
           <comment>Adding concept answers for CSI, Si Infections opportunistes, Status I.O</comment>
           <sql>
@@ -2028,4 +2048,5 @@
          call add_concept_answer(@concept_id,  @child430_concept_id ,430);
       </sql>
     </changeSet>
+
 </databaseChangeLog>

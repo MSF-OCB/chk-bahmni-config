@@ -15,7 +15,7 @@ SELECT pi.identifier                                                            
                                             ELSE NULL END)),
                    '%d/%m/%Y')                                                                 AS "Dateentréecohorte",
        refer.C6                                                                                AS "Structure de référence",
-       DATE_FORMAT(admdate.name, '%d/%m/%Y')                                                   AS "Date d'admissiON",
+       DATE_FORMAT(admdate.name, '%d/%m/%Y')                                                   AS "Date d'admission",
        syndrome.C4                                                                             AS "Syndrome à l'admission",
        GROUP_CONCAT(DISTINCT (dg.S1), '')                                                      AS "1er diagnostic à la sortie",
        GROUP_CONCAT(DISTINCT (dg2.S2), '')                                                     AS "2er diagnostic à la sortie",
@@ -39,7 +39,7 @@ FROM
            FROM (SELECT max(o.encounter_id) AS latestEncounter, o.person_id, o.concept_id, e.visit_id
                  FROM obs o
                         INNER JOIN concept_name cn
-                          ON o.concept_id = cn.concept_id AND cn.name IN ("Admission IPD Form") AND
+                          ON o.concept_id = cn.concept_id AND cn.name IN ("TR, Admission - Informations générales") AND
                              cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
                              cn.locale = 'fr' AND o.voided IS FALSE
                         INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
@@ -100,7 +100,7 @@ FROM
                       FROM (SELECT MAX(o.encounter_id) AS latestEncounter, o.person_id, o.concept_id, e.visit_id
                             FROM obs o
                                    INNER JOIN concept_name cn ON o.concept_id = cn.concept_id AND
-                                                                 cn.name IN ("Informations mode de sortie(Suivi)") AND
+                                                                 cn.name IN ("CSI, Issue de la consultation") AND
                                                                  cn.voided IS FALSE AND
                                                                  cn.concept_name_type = 'FULLY_SPECIFIED' AND
                                                                  cn.locale = 'fr' AND o.voided IS FALSE
@@ -119,7 +119,7 @@ FROM
                             o3.voided IS FALSE
                               AND o3.concept_id = (SELECT concept_id
                                                    FROM concept_name cn2
-                                                   WHERE cn2.name IN ("Mode d'entrée (IPD)")
+                                                   WHERE cn2.name IN ("CSI, Mode de sortie")
                                                      AND cn2.voided IS FALSE
                                                      AND cn2.concept_name_type = 'FULLY_SPECIFIED'
                                                      AND cn2.locale = 'fr')) AS mode_sortie
@@ -168,7 +168,7 @@ FROM
                       FROM (SELECT MAX(o.encounter_id) AS latestEncounter, o.person_id, o.concept_id, e.visit_id
                             FROM obs o
                                    INNER JOIN concept_name cn
-                                     ON o.concept_id = cn.concept_id AND cn.name IN ("Formulaire de sortie") AND
+                                     ON o.concept_id = cn.concept_id AND cn.name IN ("CSI, Sortie IPD") AND
                                         cn.voided IS FALSE AND cn.concept_name_type = 'FULLY_SPECIFIED' AND
                                         cn.locale = 'fr' AND o.voided IS FALSE
                                    INNER JOIN encounter e ON e.encounter_id = o.encounter_id AND e.voided IS FALSE
