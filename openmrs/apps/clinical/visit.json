@@ -49,7 +49,11 @@
                 "displayOrder": 3,
                 "translationKey":"Hospitalisations antérieures",
                 "config": {
-                    "conceptNames": ["IPD Admission Section, Hospitalisations antérieures"],
+                    "conceptNames": [
+                  "IPD Admission, Date d'admission",
+                  "Date de sortie",
+                  "Fds, Diagnostic"
+                  ],
                     "scope": "latest"
                 }
             },
@@ -236,7 +240,7 @@
                 "type": "observation",
                 "config": {
                     "conceptNames": [
-                        "Informations mode de sortie(Suivi)"
+                        "CSI, Issue de la consultation"
                     ],
                     "scope": "latest"
                 },
@@ -247,7 +251,7 @@
                 "type": "observation",
                 "config": {
                     "conceptNames": [
-                        "Date du prochain RDV"
+                        "CSI, Date prochain RDV"
                     ],
                     "scope": "latest"
                 },
@@ -257,7 +261,7 @@
         }
     },
     "Suivi Consultation form": {
-        "translationKey": "Consultation de suivi",
+        "translationKey": "Consultation OPD",
         "printing": {
             "title": "Centre Hospitalier Kabinda",
             "header": "Consultation de suivi",
@@ -453,9 +457,8 @@
                 "type": "observation",
                 "config": {
                     "conceptNames": [
-                       "Transfert, Date",
-            "Centre de réference",
-            "SC, PODI"
+                    "Centre de réference",
+                    "SC, PODI"
                     ],
                     "scope": "latest"
                 },

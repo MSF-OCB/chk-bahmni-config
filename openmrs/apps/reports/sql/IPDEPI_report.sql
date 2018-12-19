@@ -5,7 +5,7 @@ SELECT
       CASE WHEN pat.name = 'Type de cohorte' THEN cn.name ELSE NULL END
     )
   ) AS "TypeCohorte",
-  date_format(admdate.name, '%d/%m/%Y') AS "Date d'admission",
+  date_format(hosp1.currentDateAdmission, '%d/%m/%Y') AS "Date d'admission",
   concat(
     pn.family_name,
     ' ',
@@ -26,7 +26,7 @@ SELECT
   syndrome.C4 AS "Syndrome à l'admission",
   syndrome.OtherComment AS "Autre Syndrome",
   malade.C4 AS "Malade arrivé mort",
-  Date_format(hosp1.name, '%d/%m/%Y') AS "Hospi antérieures - Date admission",
+  Date_format(hosp1.previousDateDAdmission, '%d/%m/%Y') AS "Hospi antérieures - Date admission",
   stade.C4 AS "Stade OMS",
   glas.gasvalue AS "Glasgow",
   genexpert.value AS "GenXpert",
@@ -73,7 +73,7 @@ SELECT
   traitmentTBCommence.treatmentAnswer AS "Traitement TB Commencé IPD?",
   DATE_FORMAT(traitmentTBCommence.dateDebut, '%d/%m/%Y') AS "Date début Traitement TB IPD",
   DATE_FORMAT(tbDateEnrolled.date_enrolled, '%d/%m/%Y') AS "Date début TB",
-  date_format(sortdate.name, '%d/%m/%Y') AS "Date de sortie",
+  date_format(admdate.name, '%d/%m/%Y') AS "Date de sortie",
   modeDeSortie.name AS "Mode de sortie",
   misSousARV.misSousARVAnswer AS "Mis sous ARV en hospitalisation"
 FROM
@@ -279,62 +279,58 @@ FROM
   ) AS fosa ON fosa.person_id = admdate.person_id
   AND fosa.visit = admdate.visitid
   LEFT JOIN (
-    /* get Hospi antérieures - date d'admission 1 details for latest encounter of each visit of patients  */
-    SELECT
-      firstAddSectionDateConceptInfo.person_id,
-      firstAddSectionDateConceptInfo.visit_id AS visit,
-      o3.value_datetime AS NAME
-    FROM
-      (
-        SELECT
-          o2.person_id,
-          latestVisitEncounterAndVisitForConcept.visit_id,
-          MIN(o2.obs_id) AS firstAddSectionObsGroupId,
-          latestVisitEncounterAndVisitForConcept.concept_id
-        FROM
-          (
-            SELECT
-              MAX(o.encounter_id) AS latestEncounter,
-              o.person_id,
-              o.concept_id,
-              e.visit_id
-            FROM
-              obs o
-              INNER JOIN concept_name cn ON o.concept_id = cn.concept_id
-              AND cn.name IN ('TR, Admission - Informations générales')
-              AND cn.voided IS FALSE
-              AND cn.concept_name_type = 'FULLY_SPECIFIED'
-              AND cn.locale = 'fr'
-              AND o.voided IS FALSE
-              INNER JOIN encounter e ON e.encounter_id = o.encounter_id
-              AND e.voided IS FALSE
-            GROUP BY
-              e.visit_id
-          ) latestVisitEncounterAndVisitForConcept
-          INNER JOIN obs o2 ON o2.person_id = latestVisitEncounterAndVisitForConcept.person_id
-          AND o2.concept_id = latestVisitEncounterAndVisitForConcept.concept_id
-          AND o2.encounter_id = latestVisitEncounterAndVisitForConcept.latestEncounter
-          AND o2.voided IS FALSE
-          INNER JOIN encounter e2 ON o2.encounter_id = e2.encounter_id
-          AND e2.visit_id = latestVisitEncounterAndVisitForConcept.visit_id
-          AND e2.voided IS FALSE
-        GROUP BY
-          latestVisitEncounterAndVisitForConcept.visit_id
-      ) firstAddSectionDateConceptInfo
-      INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId
-      AND o3.voided IS FALSE
-      AND o3.concept_id = (
-        SELECT
-          concept_id
-        FROM
-          concept_name cn2
-        WHERE
-          cn2.name in ('IPD Admission, Date d\'admission')
-          AND cn2.voided IS FALSE
-          AND cn2.concept_name_type = 'FULLY_SPECIFIED'
-          AND cn2.locale = 'fr'
-      )
-  ) AS hosp1 ON hosp1.person_id = admdate.person_id
+    /* get Hospi antérieures date and current admission date */
+            select
+                latestVisitValues.patient_id AS person_id,
+                latestVisitValues.visit_id AS visit,
+                checkPreviousVisit.visit_id,
+                latestVisitValues.date_started,
+                latestVisitValues.currentVisitValue AS currentDateAdmission,
+                checkPreviousVisit.previousVisit AS previousDateDAdmission
+                from
+                        (select
+                        v.patient_id,
+                        obs.concept_id,
+                        obs.value_datetime AS "currentVisitValue",
+                        v.date_started,
+                        v.visit_id
+                        From
+                        visit v
+                        JOIN encounter ON v.visit_id= encounter.visit_id
+                        LEFT JOIN obs on obs.encounter_id = encounter.encounter_id
+                        And obs.concept_id = (
+                                                SELECT concept_id
+                                                from concept_name
+                                                where `name` = "IPD Admission, Date d'admission"
+                                                and voided = 0 and locale = 'fr'
+                                                and concept_name_type = "FULLY_SPECIFIED"
+                                            )
+                            and obs.voided = 0
+                        ) as latestVisitValues
+                LEFT JOIN (
+                            select
+                            v.patient_id,
+                            min(v.visit_id) as visit_id,
+                            v.date_started,
+                            obs.value_datetime as "previousVisit"
+                            from
+                            visit v
+                            JOIN encounter ON v.visit_id= encounter.visit_id
+                            LEFT JOIN obs on obs.encounter_id = encounter.encounter_id
+                            And obs.concept_id = (
+                                                SELECT concept_id
+                                                from concept_name
+                                                where `name` = "IPD Admission, Date d'admission"
+                                                and voided = 0 and locale = 'fr'
+                                                and concept_name_type = "FULLY_SPECIFIED"
+                                                )
+                            and obs.voided = 0
+                            GROUP BY v.visit_id
+                          )
+                checkPreviousVisit on checkPreviousVisit.patient_id = latestVisitValues.patient_id
+                and latestVisitValues.date_started > checkPreviousVisit.date_started AND latestVisitValues.date_started != checkPreviousVisit.date_started
+                group by checkPreviousVisit.visit_id
+            ) AS hosp1 ON hosp1.person_id = admdate.person_id
   AND hosp1.visit = admdate.visitid
   LEFT JOIN (
     /* get Stade OMS details for latest encounter of each visit of patients  */
@@ -362,7 +358,7 @@ FROM
         FROM
           concept_view
         WHERE
-          concept_full_name = "Stade clinique OMS"
+          concept_full_name = "CAI, Stade OMS"
       )
       AND obsForActivityStatus.value_coded IN (
         SELECT
@@ -376,7 +372,7 @@ FROM
             FROM
               concept_view
             WHERE
-              concept_full_name IN ("Stade clinique OMS")
+              concept_full_name IN ("CAI, Stade OMS")
           )
       )
       AND obsForActivityStatus.voided = 0
@@ -932,64 +928,6 @@ FROM
       AND obsForActivityStatus.voided = 0
   ) AS elementTB ON elementTB.person_id = admdate.person_id
   AND elementTB.visitid = admdate.visitid
-  LEFT JOIN (
-    /* get date de sortie details for latest encounter of each visit of patients  */
-    SELECT
-      firstAddSectionDateConceptInfo.person_id,
-      firstAddSectionDateConceptInfo.visit_id AS visitid,
-      o3.value_datetime AS NAME
-    FROM
-      (
-        SELECT
-          o2.person_id,
-          latestVisitEncounterAndVisitForConcept.visit_id,
-          MIN(o2.obs_id) AS firstAddSectionObsGroupId,
-          latestVisitEncounterAndVisitForConcept.concept_id
-        FROM
-          (
-            SELECT
-              MAX(o.encounter_id) AS latestEncounter,
-              o.person_id,
-              o.concept_id,
-              e.visit_id
-            FROM
-              obs o
-              INNER JOIN concept_name cn ON o.concept_id = cn.concept_id
-              AND cn.name IN ("Formulaire de sortie")
-              AND cn.voided IS FALSE
-              AND cn.concept_name_type = 'FULLY_SPECIFIED'
-              AND cn.locale = 'fr'
-              AND o.voided IS FALSE
-              INNER JOIN encounter e ON e.encounter_id = o.encounter_id
-              AND e.voided IS FALSE
-            GROUP BY
-              e.visit_id
-          ) latestVisitEncounterAndVisitForConcept
-          INNER JOIN obs o2 ON o2.person_id = latestVisitEncounterAndVisitForConcept.person_id
-          AND o2.concept_id = latestVisitEncounterAndVisitForConcept.concept_id
-          AND o2.encounter_id = latestVisitEncounterAndVisitForConcept.latestEncounter
-          AND o2.voided IS FALSE
-          INNER JOIN encounter e2 ON o2.encounter_id = e2.encounter_id
-          AND e2.visit_id = latestVisitEncounterAndVisitForConcept.visit_id
-          AND e2.voided IS FALSE
-        GROUP BY
-          latestVisitEncounterAndVisitForConcept.visit_id
-      ) firstAddSectionDateConceptInfo
-      INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId
-      AND o3.voided IS FALSE
-      AND o3.concept_id = (
-        SELECT
-          concept_id
-        FROM
-          concept_name cn2
-        WHERE
-          cn2.name = ('Date de sortie')
-          AND cn2.voided IS FALSE
-          AND cn2.concept_name_type = 'FULLY_SPECIFIED'
-          AND cn2.locale = 'fr'
-      )
-  ) AS sortdate ON sortdate.person_id = admdate.person_id
-  AND sortdate.visitid = admdate.visitid
   LEFT JOIN (
     /* get Programme ARV details for latest encounter of each visit of patients  */
     SELECT
@@ -2036,7 +1974,7 @@ FROM
             FROM
               obs o
               INNER JOIN concept_name cn ON o.concept_id = cn.concept_id
-              AND cn.name IN ("syndrome � la sortie")
+              AND cn.name IN ("Syndrome à la sortie")
               AND cn.voided IS FALSE
               AND cn.concept_name_type = 'FULLY_SPECIFIED'
               AND cn.locale = 'fr'
@@ -2282,4 +2220,5 @@ FROM
   ) AS tbDateEnrolled on tbDateEnrolled.patient_id = admdate.person_id
 GROUP BY
   pi.identifier,
-  admdate.visitid;
+  admdate.visitid
+ORDER BY pi.identifier;
