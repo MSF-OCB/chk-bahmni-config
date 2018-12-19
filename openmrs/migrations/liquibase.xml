@@ -7815,4 +7815,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     </sql>
 </changeSet>
 <include file='Removing_Old_Forms.xml'/>
+<include file="queues_for_IPD_CD4_CV.xml"/>
 </databaseChangeLog>
