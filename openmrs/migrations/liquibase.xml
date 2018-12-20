@@ -7814,5 +7814,5 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
           update concept_name set name = "CO, Regime ARV" where `name` = "Regime ARV" and concept_name_type = 'FULLY_SPECIFIED' AND voided= 0;
     </sql>
 </changeSet>
-<include file='Removing_Old_Forms.xml'
+<include file='Removing_Old_Forms.xml'/>
 </databaseChangeLog>
