@@ -7798,11 +7798,11 @@ INSERT INTO concept_numeric (concept_id,hi_absolute,hi_critical,hi_normal,low_ab
     <sqlFile path="Genotype_New_concept.sql"/>
 </changeSet>
 <include file="Genotypage_pannel.xml"/>
+<include file="queues_for_IPD_CD4_CV.xml"/>
 <include file="testTDRForm.xml"/>
 <include file="Consulation_OPD.xml"/>
 <include file="Consulation_Admission_IPD.xml"/>
 <include file="Consultation_Admission_Sortie.xml"/>
-<include file="queues_for_IPD_CD4_CV.xml"/>
 <changeSet id="OCB-CONFIG-201812122325" author="Pritam">
     <preConditions onFail="MARK_RAN">
         <sqlCheck expectedResult="2">
