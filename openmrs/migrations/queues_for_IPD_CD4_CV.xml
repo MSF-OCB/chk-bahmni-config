@@ -143,12 +143,12 @@
         where property= 'emrapi.sqlSearch.admissionsWithoutCD4';
      </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201812191229" author="Pritam">
+<changeSet id="OCB-CONFIG-201812191229" author="Pritam">
 
      <comment> Updating the CV queue </comment>
      <sql>
       update global_property set property_value =
-      "SELECT concat(pn.given_name,' ', ifnull(pn.family_name, ' ')) AS NAME,
+      "SELECT concat(pn.given_name,' ', ifnull(pn.family_name, ' ')) AS name,
       pi.identifier                                          AS identifier,
       p.uuid                                    AS uuid,
       v.uuid                                    AS activeVisitUuid,
@@ -201,12 +201,12 @@
         where property= 'emrapi.sqlSearch.admissionsWithoutCV';
      </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201812191230" author="Pritam">
+<changeSet id="OCB-CONFIG-201812191230" author="Pritam">
 
      <comment> Updating the CD4 queue </comment>
      <sql>
         update global_property set property_value =
-        "SELECT concat(pn.given_name, ' ', ifnull(pn.family_name, '')) AS NAME,
+        "SELECT concat(pn.given_name, ' ', ifnull(pn.family_name, '')) AS name,
         pi.identifier                                          AS identifier,
         p.uuid                                     AS uuid,
         v.uuid                                     AS activeVisitUuid,
