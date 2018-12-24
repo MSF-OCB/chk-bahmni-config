@@ -319,20 +319,21 @@ Bahmni.ConceptSet.FormConditions.rules = {
             }
         }
      },
-     "IPD Admission, Histoire ARV" : function (formName, formFieldValues) {
-       var historyARV = formFieldValues["IPD Admission, Histoire ARV"];
+     'IPD Admission, Histoire ARV': function (formName, formFieldValues) {
+             var conditions = {
+                 show: [],
+                 hide: []
+             };
 
-       if (historyARV == "ARV intérrompu" ) {
-           return {
-               show: ["IPD Admission, Si interrompu"]
-           }
-       }
-       else {
-           return {
-               hide: ["IPD Admission, Si interrompu"]
-           }
-       }
-     },
+             var interrompu = "IPD Admission, Si interrompu";
+             var resultInterrompu = formFieldValues['IPD Admission, Histoire ARV'];
+             if (resultInterrompu == "ARV intérrompu" || resultInterrompu == "IPD Admission History ARV, ARV intérrompu" ) {
+                 conditions.show.push(interrompu);
+             } else {
+                 conditions.hide.push(interrompu);
+             }
+             return conditions;
+         },
      "IPD Admission, TB en cours de traitement à l'admission" : function (formName, formFieldValues) {
        var modeOfTransfert = formFieldValues["IPD Admission, TB en cours de traitement à l'admission"];
 
