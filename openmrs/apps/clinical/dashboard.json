@@ -217,7 +217,7 @@
           "maximumNoOfVisits": 10
         },
         "formGroup": [
-          "Signes vitaux",
+          "Triage Form",
           "Antécédents cliniques",
           "CO, Consultation OPD",
           "CAI, Consulation Admission IPD",
