@@ -858,29 +858,24 @@ FROM
   AND aveg.visitid = admdate.visitid
   LEFT JOIN (
     /* get TB en cours details for latest encounter of each visit of patients  */
-    SELECT
-      obsForActivityStatus.person_id,
-      (
-        SELECT
-          concept_short_name
-        FROM
-          concept_view
-        WHERE
-          concept_id = obsForActivityStatus.value_coded
-      ) AS 'C4',
-      DATE(obsForActivityStatus.obs_datetime) AS 'obsDate',
-      vt.visit_id AS visitid
-    FROM
-      obs obsForActivityStatus
-      INNER JOIN encounter et ON et.encounter_id = obsForActivityStatus.encounter_id
-      INNER JOIN visit vt ON vt.visit_id = et.visit_id
-      INNER JOIN concept_view cn1 ON obsForActivityStatus.concept_id = cn1.concept_id
-      INNER JOIN concept_view cv ON cv.concept_id = obsForActivityStatus.concept_id
-      AND cv.concept_full_name = "IPD Admission, TB en cours de traimtement à l'admission"
-      INNER JOIN concept_answer ca ON ca.concept_id = cv.concept_id
-      AND obsForActivityStatus.value_coded = ca.answer_concept
-      AND cv.concept_full_name = "IPD Admission, TB en cours de traitement à l'admission"
-      AND obsForActivityStatus.voided = 0
+            select
+            obsForActivityStatus.person_id,
+            vt.visit_id AS visitid,
+            (
+              SELECT
+                concept_short_name
+              FROM
+                concept_view
+              WHERE
+                concept_id = obsForActivityStatus.value_coded
+            ) AS 'C4'
+            From
+            obs obsForActivityStatus
+            INNER JOIN encounter et on et.encounter_id = obsForActivityStatus.encounter_id
+            INNER JOIN visit vt ON vt.visit_id = et.visit_id
+            INNER JOIN concept_view cv ON cv.concept_id = obsForActivityStatus.concept_id
+                AND cv.concept_full_name = "IPD Admission, TB en cours de traitement à l'admission"
+                AND obsForActivityStatus.voided = 0
   ) AS tben ON tben.person_id = admdate.person_id
   AND tben.visitid = admdate.visitid
   LEFT JOIN (

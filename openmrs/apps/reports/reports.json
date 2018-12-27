@@ -42,7 +42,7 @@
       }
     },
     "rapportDeVisite": {
-      "name": "Rapport de visite",
+      "name": "Rapport de visite-OPD",
       "type": "MRSGeneric",
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/rapportDeVisite.sql"

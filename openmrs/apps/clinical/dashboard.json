@@ -454,12 +454,12 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
-          "numberOfVisits": 1,
           "conceptNames": [
             "IPD Admission, Date d'admission",
             "CAI, Admission - Données générales",
             "Infirmier en charge de l'admission"
-          ]
+          ],
+          "scope": "latest"
         }
       },
       "hospitalisationsAntérieures": {
@@ -486,7 +486,6 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
-          "numberOfVisits": 1,
           "conceptNames": [
             "Date diagnostic VIH(Ant)",
             "IPD Admission, Histoire ARV",
@@ -508,7 +507,8 @@
             "CAI, Informations prophylaxie",
             "CAI, Plaintes à l'admission et durée des symptômes",
             "CAI, Evaluation des symptômes TB"
-          ]
+          ],
+          "scope": "latest"
         }
       },
       "antecedentsMedicaux": {
