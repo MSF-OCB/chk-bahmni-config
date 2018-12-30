@@ -255,7 +255,7 @@
          "address": {
             "label": "Commune",
             "placeholder": "Saisissez la commune",
-            "field": "address6"
+            "field": "COUNTY_DISTRICT"
          }
       },
      "patientSearchResults": {
