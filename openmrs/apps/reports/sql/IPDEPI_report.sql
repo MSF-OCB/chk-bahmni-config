@@ -754,7 +754,7 @@ FROM
       obsForActivityStatus.person_id,
       (
         SELECT
-          concept_short_name
+          concept_full_name
         FROM
           concept_view
         WHERE
@@ -835,7 +835,7 @@ FROM
       obsForActivityStatus.person_id,
       (
         SELECT
-          concept_short_name
+          concept_full_name
         FROM
           concept_view
         WHERE
@@ -863,7 +863,7 @@ FROM
             vt.visit_id AS visitid,
             (
               SELECT
-                concept_short_name
+                concept_full_name
               FROM
                 concept_view
               WHERE

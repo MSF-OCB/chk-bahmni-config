@@ -99,4 +99,17 @@
             where concept_set in (select distinct concept_id from concept_name where name ='Suivi Consultation');
         </sql>
     </changeSet>
+    <changeSet id="OCB-CONFIG-201812302132" author="Pritam">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+              select count(*) from concept_name where name = "Non connu" and concept_name_type = "SHORT" and locale='fr';
+            </sqlCheck>
+        </preConditions>
+        <comment>Adding short name for non connu</comment>
+        <sql>
+           set @conceptid =(select concept_id from concept_name where name='Non connu' and concept_name_type='FULLY_SPECIFIED' and locale='fr');
+           insert into concept_name (concept_id,name,locale,date_created,creator,concept_name_type,uuid) values (@conceptid,'Non connu','fr',now(),6,'SHORT',uuid());
+           insert into concept_name (concept_id,name,locale,date_created,creator,concept_name_type,uuid) values (@conceptid,'Non connu','en',now(),6,'SHORT',uuid())
+        </sql>
+    </changeSet>
 </databaseChangeLog>
