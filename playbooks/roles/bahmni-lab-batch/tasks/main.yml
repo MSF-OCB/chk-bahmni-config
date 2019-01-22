@@ -35,8 +35,3 @@
   file:
     path: "/tmp/bahmni-lab.conf.bak"
     state: absent
-
-- name: "Start the bahmni-lab service"
-  service:
-    name: bahmni-lab
-    state: started
