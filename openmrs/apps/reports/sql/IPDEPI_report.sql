@@ -754,7 +754,7 @@ FROM
       obsForActivityStatus.person_id,
       (
         SELECT
-          concept_full_name
+          concept_short_name
         FROM
           concept_view
         WHERE

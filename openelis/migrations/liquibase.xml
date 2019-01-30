@@ -6,4 +6,50 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
     <include file="elis_users.xml"/>
     <include file="AddProvidersInElis.xml"/>
+    <changeSet id="OCB-CONFIG-201901301008" author="Pritam">
+      <preConditions onFail="MARK_RAN">
+          <sqlCheck expectedResult="0">
+              select count(*) from system_module where "name" in('LogbookResults:1','LogbookResults:2','LogbookResults:3','LogbookResults:4','LogbookResults:CV','LogbookResults:PR','LogbookResults:TB','LogbookResults:IPD');
+          </sqlCheck>
+      </preConditions>
+      <comment>Inserting department  in system_module  table</comment>
+      <sql>
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:1','Results=>Enter=>1','N','N','N','N');
+
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:2','Results=>Enter=>2','N','N','N','N');
+
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:3','Results=>Enter=>3','N','N','N','N');
+
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:4','Results=>Enter=>4','N','N','N','N');
+
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:CV','Results=>Enter=>CV','N','N','N','N');
+
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:PR','Results=>Enter=>PR','N','N','N','N');
+
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:TB','Results=>Enter=>TB','N','N','N','N');
+
+          insert into system_module(id,name,description,has_select_flag,has_add_flag,has_update_flag,has_delete_flag) values((SELECT max(id)+1 FROM system_module),'LogbookResults:IPD','Results=>Enter=>IPD','N','N','N','N');
+      </sql>
+    </changeSet>
+    <changeSet id="OCB-CONFIG-201901301013" author="Pritam">
+          <comment>Inserting department  in system_role_module table</comment>
+          <sql>
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:1'));
+
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:2'));
+
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:3'));
+
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:4'));
+
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:CV'));
+
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:PR'));
+
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:TB'));
+
+              insert into system_role_module(id,has_select,has_add,has_update,has_delete,system_role_id,system_module_id) values((SELECT max(id)+1 FROM system_role_module),'Y','Y','Y','Y',5,(select id from system_module where "name"= 'LogbookResults:IPD'));
+
+          </sql>
+    </changeSet>
 </databaseChangeLog>
