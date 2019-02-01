@@ -2224,4 +2224,4 @@ FROM
 GROUP BY
   pi.identifier,
   admdate.visitid
-ORDER BY pi.identifier,hosp1.currentDateAdmission;
+ORDER BY pi.identifier,admdate.currentDateDeSortieValue;
