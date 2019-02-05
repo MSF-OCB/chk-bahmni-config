@@ -511,52 +511,52 @@ FROM (/* get date de admission details for each visit of patients  */
                   select
                   *
                   from
-                  (
-                  select
-                  v.visit_id as vid,
-                  v.patient_id as pid,
-                  v.date_started as datestarted,
-                  test.DiagnosticDate
-                  from
-                  visit v
-                  Left Join
-                         (
-                         select group_concat(DiagnosticDate) as DiagnosticDate,
-                         visit_id,
-                         patient_id,
-                         visitDate
-                         from (
-                              Select
-                              visitDiagDate.visit_id,
-                              visitDiagDate.patient_id patient_id,
-                              visitDiagDate.date_started as visitDate,
-                              obsDiagnosticDate.value_datetime as DiagnosticDate
-                              from obs obsDiagnosticDate
-                              inner join encounter encounterDiagDate on obsDiagnosticDate.encounter_id = encounterDiagDate.encounter_id
-                              Inner Join visit visitDiagDate on encounterDiagDate.visit_id = visitDiagDate.visit_id
-                              where  concept_id =  (
-                                                    SELECT
-                                                      concept_id
-                                                    FROM
-                                                      concept_name cn2
-                                                    WHERE
-                                                      cn2.name = ('Date diagnostic VIH(Ant)')
-                                                      AND cn2.voided IS FALSE
-                                                      AND cn2.concept_name_type = 'FULLY_SPECIFIED'
-                                                      AND cn2.locale = 'fr'
-                                                  )
-                              order by date_started desc
-                              ) as listDiagnosticDate
-                              Group by listDiagnosticDate.visit_id
-                          )test
-                          on v.patient_id = test.patient_id and v.date_started >= test.visitDate
-                          order by test.DiagnosticDate desc
-                  ) AS DIAGNOSTIC
+                        (
+                        select
+                        v.visit_id as vid,
+                        v.patient_id as pid,
+                        v.date_started as datestarted,
+                        test.DiagnosticDate
+                        from
+                        visit v
+                        Left Join
+                                  (
+                                  select DiagnosticDate as DiagnosticDate,
+                                  visit_id,
+                                  patient_id,
+                                  visitDate
+                                  from (/*list of diagnosis date for current visit*/
+                                  Select
+                                  visitDiagDate.visit_id,
+                                  visitDiagDate.patient_id patient_id,
+                                  visitDiagDate.date_started as visitDate,
+                                  MAX(encounterDiagDate.encounter_datetime) as encounterDate,/*Fetching max encounter time when the concept is filled*/
+                                  obsDiagnosticDate.value_datetime as DiagnosticDate
+                                  from obs obsDiagnosticDate
+                                  inner join encounter encounterDiagDate on obsDiagnosticDate.encounter_id = encounterDiagDate.encounter_id
+                                  Inner Join visit visitDiagDate on encounterDiagDate.visit_id = visitDiagDate.visit_id
+                                  where  concept_id =  (
+                                                       SELECT
+                                                         concept_id
+                                                       FROM
+                                                         concept_name cn2
+                                                       WHERE
+                                                         cn2.name = ('Date diagnostic VIH(Ant)')
+                                                         AND cn2.voided IS FALSE
+                                                         AND cn2.concept_name_type = 'FULLY_SPECIFIED'
+                                                         AND cn2.locale = 'fr'
+                                                     )
+                                  GROUP BY visitDiagDate.visit_id,encounterDiagDate.encounter_datetime
+                                  order by encounterDiagDate.encounter_datetime desc
+                                  ) as listDiagnosticDate
+                                  Group by listDiagnosticDate.visit_id
+                                  )test
+                        on v.patient_id = test.patient_id and v.date_started >= test.visitDate
+                        order by test.DiagnosticDate desc
+                        ) AS DIAGNOSTIC
                   group by DIAGNOSTIC.vid
                   order by DIAGNOSTIC.pid,DIAGNOSTIC.vid
-                 ) AS hiv
-         ON hiv.pid = admdate.person_id
-              AND hiv.vid = admdate.visitid
+        ) AS hiv ON hiv.pid = admdate.person_id AND hiv.vid = admdate.visitid
        LEFT JOIN (/* get ARV histoire details for latest encounter of each visit of patients  */
                  SELECT obsForActivityStatus.person_id,
                         (SELECT concept_full_name
