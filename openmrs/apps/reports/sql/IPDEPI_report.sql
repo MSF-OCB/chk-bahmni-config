@@ -729,7 +729,7 @@ FROM (/* get date de admission details for each visit of patients  */
                              ORDER BY programSubSection.programPhaseCreate DESC)test
                        GROUP BY test.visit_id, test.patient_id) programValue
                         LEFT JOIN (SELECT *
-                                   FROM (SELECT v.date_stopped, v.visit_id, a.*
+                                   FROM (SELECT v.date_stopped, v.visit_id, a.pid,a.visitid,a.LigneARV,a.Datedébutligne,a.obsDateTime
                                          FROM visit v
                                                 LEFT JOIN (SELECT Tbpre.pid,
                                                                   visitid,
@@ -1327,241 +1327,249 @@ FROM (/* get date de admission details for each visit of patients  */
                  /*removing the patient which dont have program data and form data*/) AS tbnew
          ON tbnew.pid = admdate.person_id
        LEFT JOIN (/* get arv details for each visit of patients  */
-                 SELECT patient_id AS pid, programValue.visit_id, (
-                     CASE
-                       WHEN ifnull(programPhaseCreate, '1981-01-01') > ifnull(obsDateTime, '1981-01-01')
-                               THEN phaseOfProg
-                       ELSE LigneARV END
-                     )             AS "ligneARV", (
-                            CASE
-                              WHEN ifnull(programPhaseCreate, '1981-01-01') > ifnull(obsDateTime, '1981-01-01')
-                                      THEN phaseDate
-                              ELSE Datedébutligne END
-                            )      AS "Datedébutligne", DATE(enrollmentDate) AS "DatedébutARV"
-                 FROM (SELECT *
-                       FROM (SELECT v.visit_id,
-                                    v.patient_id,
-                                    v.date_started,
-                                    programSubSection.program_id,
-                                    enrollmentDate,
-                                    phaseDate,
-                                    date_completed,
-                                    programSubSection.programPhaseCreate AS programPhaseCreate,
-                                    programSubSection.phaseOfProg
-                             FROM visit v
-                                    LEFT JOIN (SELECT ARVprog.program_id              AS program_id,
-                                                      patientARVprog.patient_id       AS patientID,
-                                                      patientARVprog.date_enrolled    AS "enrollmentDate",
-                                                      patientPhaseOfProg.start_date   AS "phaseDate",
-                                                      patientARVprog.date_completed   AS date_completed,
-                                                      patientPhaseOfProg.date_created AS "programPhaseCreate",
-                                                      (
-                                                          CASE
-                                                            WHEN progWorkflowState.concept_id THEN cv.concept_full_name
-                                                            ELSE NULL END
-                                                          )                           AS "phaseOfProg"
-                                               FROM patient_program patientARVprog
-                                                      INNER JOIN program ARVprog
-                                                        ON ARVprog.program_id = patientARVprog.program_id
-                                                             AND patientARVprog.voided = 0
-                                                      LEFT JOIN patient_state patientPhaseOfProg
-                                                        ON patientARVprog.patient_program_id =
-                                                           patientPhaseOfProg.patient_program_id
-                                                             AND patientPhaseOfProg.voided = 0
-                                                      LEFT JOIN program_workflow_state progWorkflowState
-                                                        ON patientPhaseOfProg.state = progWorkflowState.program_workflow_state_id
-                                                      LEFT JOIN concept_view cv
-                                                        ON progWorkflowState.concept_id = cv.concept_id
-                                                             AND cv.retired = 0
+         SELECT patient_id AS pid,programValue.visit_id,
+     (
+       CASE WHEN ifnull(programPhaseCreate, '1981-01-01') > ifnull(obsDateTime, '1981-01-01')  THEN phaseOfProg ELSE LigneARV END
+     ) AS "ligneARV",
+     (
+       CASE WHEN ifnull(programPhaseCreate, '1981-01-01') > ifnull(obsDateTime, '1981-01-01') THEN phaseDate ELSE Datedébutligne END
+     ) AS "Datedébutligne",
+     DATE(enrollmentDate) AS "DatedébutARV"  FROM (SELECT * FROM (SELECT v.visit_id,v.patient_id,v.date_started,programSubSection.program_id,enrollmentDate,phaseDate,date_completed,programSubSection.programPhaseCreate AS programPhaseCreate,programSubSection.phaseOfProg FROM visit v
+LEFT JOIN
+(SELECT
+                     ARVprog.program_id AS program_id,
+                     patientARVprog.patient_id AS patientID,
+                     patientARVprog.date_enrolled AS "enrollmentDate",
+                     patientPhaseOfProg.start_date AS "phaseDate",
+                     patientARVprog.date_completed AS date_completed,
+                     patientPhaseOfProg.date_created AS "programPhaseCreate",
+                     (
+                       CASE WHEN progWorkflowState.concept_id THEN cv.concept_full_name ELSE NULL END
+                     ) AS "phaseOfProg"
+                   FROM
+                     patient_program patientARVprog
+                     INNER JOIN program ARVprog ON ARVprog.program_id = patientARVprog.program_id
+                     AND patientARVprog.voided = 0
+                     LEFT JOIN patient_state patientPhaseOfProg ON patientARVprog.patient_program_id = patientPhaseOfProg.patient_program_id
+                     AND patientPhaseOfProg.voided = 0
+                     LEFT JOIN program_workflow_state progWorkflowState ON patientPhaseOfProg.state = progWorkflowState.program_workflow_state_id
+                     LEFT JOIN concept_view cv ON progWorkflowState.concept_id = cv.concept_id
+                     AND cv.retired = 0
 
-                                               WHERE ARVprog.program_id =
-                                                     (SELECT program_id FROM program WHERE `name` = "Programme ARV")
-                                                 AND patientARVprog.voided = 0)programSubSection
-                                      ON v.patient_id = programSubSection.patientID AND
-                                         (DATE_FORMAT(v.date_started, '%Y-%m-%d %H:%i:%s') >
-                                          DATE_FORMAT(programSubSection.programPhaseCreate, '%Y-%m-%d %H:%i:%s') OR
-                                          timestampdiff(HOUR, v.date_started, programSubSection.programPhaseCreate) %
-                                          24 <= 1) AND
-                                         ifnull(DATE_FORMAT(v.date_stopped, '%Y-%m-%d %H:%i:%s'),
-                                                DATE_FORMAT(sysdate(), '%Y-%m-%d %H:%i:%s')) >
-                                         DATE_FORMAT(programSubSection.programPhaseCreate, '%Y-%m-%d %H:%i:%s')
-                             ORDER BY programSubSection.programPhaseCreate DESC)test
-                       GROUP BY test.visit_id, test.patient_id) programValue
-                        LEFT JOIN (SELECT *
-                                   FROM (SELECT v.date_started, v.visit_id, a.pid,a.visitid,a.LigneARV,a.Datedébutligne,a.obsDateTime
-                                         FROM visit v
-                                                LEFT JOIN (SELECT Tbpre.pid,
-                                                                  visitid,
-                                                                  (
-                                                                      CASE
-                                                                        WHEN S1 IN ('1ere',
-                                                                                    '2e',
-                                                                                    '3e',
-                                                                                    '1ere alternative',
-                                                                                    '2e alternative',
-                                                                                    '3e alternative',
-                                                                                    'Autres') THEN S1
-                                                                        ELSE NULL END
-                                                                      )              AS "LigneARV",
-                                                                  totalform.name     AS "Datedébutligne",
-                                                                  Tbpre.obs_datetime AS "obsDateTime"
-                                                           FROM (SELECT firstAddSectionDateConceptInfo.person_id AS pid,
-                                                                        firstAddSectionDateConceptInfo.visit_id  AS visitid,
-                                                                        o3.value_datetime                        AS NAME,
-                                                                        o3.obs_datetime,
-                                                                        (SELECT NAME
-                                                                         FROM concept_name
-                                                                         WHERE concept_id = o3.value_coded
-                                                                           AND locale = 'fr'
-                                                                           AND concept_name_type = 'SHORT')      AS "S1"
-                                                                 FROM (SELECT o2.person_id,
-                                                                              latestVisitEncounterAndVisitForConcept.visit_id,
-                                                                              o2.obs_id AS firstAddSectionObsGroupId,
-                                                                              latestVisitEncounterAndVisitForConcept.concept_id
-                                                                       FROM (SELECT Y.latestEncounter,
-                                                                                    Y.person_id,
-                                                                                    Y.concept_id,
-                                                                                    Y.visit_id
-                                                                             FROM (SELECT X.latestEncounter,
-                                                                                          X.person_id,
-                                                                                          X.concept_id,
-                                                                                          X.visit_id
-                                                                                   FROM (SELECT MAX(o.encounter_id) AS latestEncounter,
-                                                                                                o.person_id         AS person_id,
-                                                                                                o.concept_id        AS concept_id,
-                                                                                                e.visit_id          AS visit_id
-                                                                                         FROM obs o
-                                                                                                INNER JOIN concept_name cn
-                                                                                                  ON o.concept_id = cn.concept_id
-                                                                                                       AND (
-                                                                                                         cn.name IN ("Regime actuel")
-                                                                                                           OR
-                                                                                                         cn.name IN ("Regime Debut")
-                                                                                                         )
-                                                                                                       AND
-                                                                                                     cn.voided IS FALSE
-                                                                                                       AND
-                                                                                                     cn.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                                       AND
-                                                                                                     cn.locale = 'fr'
-                                                                                                       AND
-                                                                                                     o.voided IS FALSE
-                                                                                                INNER JOIN encounter e
-                                                                                                  ON e.encounter_id = o.encounter_id
-                                                                                                       AND
-                                                                                                     e.voided IS FALSE
-                                                                                         GROUP BY o.person_id,
-                                                                                                  o.encounter_id) AS X
-                                                                                   ORDER BY latestEncounter DESC) AS Y
-                                                                             GROUP BY person_id,
-                                                                                      visit_id) latestVisitEncounterAndVisitForConcept
-                                                                              INNER JOIN obs o2
-                                                                                ON o2.person_id = latestVisitEncounterAndVisitForConcept.person_id
-                                                                                     AND
-                                                                                   o2.concept_id = latestVisitEncounterAndVisitForConcept.concept_id
-                                                                                     AND
-                                                                                   o2.encounter_id = latestVisitEncounterAndVisitForConcept.latestEncounter
-                                                                                     AND o2.voided IS FALSE
-                                                                              INNER JOIN encounter e2
-                                                                                ON o2.encounter_id = e2.encounter_id
-                                                                                     AND
-                                                                                   e2.visit_id = latestVisitEncounterAndVisitForConcept.visit_id
-                                                                                     AND e2.voided IS FALSE
-                                                                       GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
-                                                                        INNER JOIN obs o3 ON o3.obs_group_id =
-                                                                                             firstAddSectionDateConceptInfo.firstAddSectionObsGroupId
-                                                                                               AND o3.voided IS FALSE
-                                                                                               AND o3.concept_id =
-                                                                                                   (SELECT concept_id
-                                                                                                    FROM concept_name cn2
-                                                                                                    WHERE cn2.name IN ("Ligne d'ARV")
-                                                                                                      AND cn2.voided IS FALSE
-                                                                                                      AND cn2.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                                      AND cn2.locale = 'fr')) Tbpre
-                                                                  LEFT JOIN (SELECT PID, NAME
-                                                                             FROM (SELECT firstAddSectionDateConceptInfo.person_id AS PID,
-                                                                                          firstAddSectionDateConceptInfo.visit_id  AS visitid,
-                                                                                          DATE(o3.value_datetime)                  AS NAME
-                                                                                   FROM (SELECT o2.person_id,
-                                                                                                latestVisitEncounterAndVisitForConcept.visit_id,
-                                                                                                MIN(o2.obs_id) AS firstAddSectionObsGroupId,
-                                                                                                latestVisitEncounterAndVisitForConcept.concept_id
-                                                                                         FROM (SELECT Y.latestEncounter,
-                                                                                                      Y.person_id,
-                                                                                                      Y.concept_id,
-                                                                                                      Y.visit_id
-                                                                                               FROM (SELECT X.latestEncounter,
-                                                                                                            X.person_id,
-                                                                                                            X.concept_id,
-                                                                                                            X.visit_id
-                                                                                                     FROM (SELECT MAX(o.encounter_id) AS latestEncounter,
-                                                                                                                  o.person_id         AS person_id,
-                                                                                                                  o.concept_id        AS concept_id,
-                                                                                                                  e.visit_id          AS visit_id
-                                                                                                           FROM obs o
-                                                                                                                  INNER JOIN concept_name cn
-                                                                                                                    ON o.concept_id = cn.concept_id
-                                                                                                                         AND
-                                                                                                                       (
-                                                                                                                           cn.name IN ("Regime actuel")
-                                                                                                                             OR
-                                                                                                                           cn.name IN ("Regime Debut")
-                                                                                                                           )
-                                                                                                                         AND
-                                                                                                                       cn.voided IS FALSE
-                                                                                                                         AND
-                                                                                                                       cn.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                                                         AND
-                                                                                                                       cn.locale = 'fr'
-                                                                                                                         AND
-                                                                                                                       o.voided IS FALSE
-                                                                                                                  INNER JOIN encounter e
-                                                                                                                    ON e.encounter_id = o.encounter_id
-                                                                                                                         AND
-                                                                                                                       e.voided IS FALSE
-                                                                                                           GROUP BY o.person_id,
-                                                                                                                    o.encounter_id) AS X
-                                                                                                     ORDER BY latestEncounter DESC) AS Y
-                                                                                               GROUP BY person_id) latestVisitEncounterAndVisitForConcept
-                                                                                                INNER JOIN obs o2
-                                                                                                  ON o2.person_id = latestVisitEncounterAndVisitForConcept.person_id
-                                                                                                       AND
-                                                                                                     o2.concept_id = latestVisitEncounterAndVisitForConcept.concept_id
-                                                                                                       AND
-                                                                                                     o2.encounter_id = latestVisitEncounterAndVisitForConcept.latestEncounter
-                                                                                                       AND
-                                                                                                     o2.voided IS FALSE
-                                                                                                INNER JOIN encounter e2
-                                                                                                  ON o2.encounter_id = e2.encounter_id
-                                                                                                       AND
-                                                                                                     e2.visit_id = latestVisitEncounterAndVisitForConcept.visit_id
-                                                                                                       AND
-                                                                                                     e2.voided IS FALSE
-                                                                                         GROUP BY latestVisitEncounterAndVisitForConcept.visit_id) firstAddSectionDateConceptInfo
-                                                                                          INNER JOIN obs o3
-                                                                                            ON o3.obs_group_id =
-                                                                                               firstAddSectionDateConceptInfo.firstAddSectionObsGroupId
-                                                                                                 AND o3.voided IS FALSE
-                                                                                                 AND o3.concept_id =
-                                                                                                     (SELECT concept_id
-                                                                                                      FROM concept_name cn2
-                                                                                                      WHERE cn2.name IN ("HA, Date début")
-                                                                                                        AND cn2.voided IS FALSE
-                                                                                                        AND cn2.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                                        AND cn2.locale = 'fr')) anne) totalform
-                                                                    ON totalform.PID = Tbpre.pid) a
-                                                  ON a.pid = v.patient_id AND
-                                                     (DATE_FORMAT(v.date_started, '%Y-%m-%d %H:%i:%s') >
-                                                      DATE_FORMAT(a.obsDateTime, '%Y-%m-%d %H:%i:%s') OR
-                                                      timestampdiff(HOUR, v.date_started, a.obsDateTime) % 24 <= 1) AND
-                                                     ifnull(DATE_FORMAT(v.date_stopped, '%Y-%m-%d %H:%i:%s'),
-                                                            DATE_FORMAT(sysdate(), '%Y-%m-%d %H:%i:%s')) >
-                                                     DATE_FORMAT(a.obsDateTime, '%Y-%m-%d %H:%i:%s')
-                                         ORDER BY obsdateTime DESC) formDataSubSection
-                                   GROUP BY formDataSubSection.visit_id) formData
-                          ON programValue.patient_id = formData.pid AND programValue.visit_id = formData.visit_id
-                 ORDER BY patient_id
-                 /*removing the patient which dont have program data and form data*/) arvnew
+                   WHERE
+                     ARVprog.program_id = (
+                       SELECT
+                         program_id
+                       FROM
+                         program
+                       WHERE
+                         `name` = "Programme ARV"
+                     )
+                     AND patientARVprog.voided = 0
+                     )programSubSection ON v.patient_id=programSubSection.patientID AND (DATE_FORMAT(v.date_started,'%Y-%m-%d %H:%i:%s') > DATE_FORMAT(programSubSection.programPhaseCreate,'%Y-%m-%d %H:%i:%s') OR timestampdiff(HOUR,v.date_started,programSubSection.programPhaseCreate)%24<=1) AND
+                     ifnull(DATE_FORMAT(v.date_stopped,'%Y-%m-%d %H:%i:%s'),DATE_FORMAT(sysdate(),'%Y-%m-%d %H:%i:%s'))> DATE_FORMAT(programSubSection.programPhaseCreate,'%Y-%m-%d %H:%i:%s')
+                     ORDER BY programSubSection.programPhaseCreate DESC)test
+                    GROUP BY test.visit_id,test.patient_id ) programValue
+                    LEFT JOIN (SELECT * FROM  (
+                      SELECT v.date_started,v.visit_id,a.pid,a.visitid,a.LigneARV,a.Datedébutligne,a.obsDateTime
+                      FROM visit v LEFT JOIN(SELECT
+         Tbpre.pid,
+        visitid,
+         (
+           CASE WHEN S1 IN (
+             '1ere',
+             '2e',
+             '3e',
+             '1ere alternative',
+             '2e alternative',
+             '3e alternative',
+             'Autres'
+           ) THEN S1 ELSE NULL END
+         ) AS "LigneARV",
+         totalform.name AS "Datedébutligne",
+         Tbpre.obs_datetime AS "obsDateTime"
+       FROM
+         (
+           SELECT
+             firstAddSectionDateConceptInfo.person_id AS pid,
+             firstAddSectionDateConceptInfo.visit_id AS visitid,
+             o3.value_datetime AS NAME,
+             o3.obs_datetime,
+             (
+               SELECT
+                 NAME
+               FROM
+                 concept_name
+               WHERE
+                 concept_id = o3.value_coded
+                 AND locale = 'fr'
+                 AND concept_name_type = 'SHORT'
+             ) AS "S1"
+           FROM
+             (
+               SELECT
+                 o2.person_id,
+                 latestVisitEncounterAndVisitForConcept.visit_id,
+                 o2.obs_id AS firstAddSectionObsGroupId,
+                 latestVisitEncounterAndVisitForConcept.concept_id
+               FROM
+                 (
+                   SELECT
+                     Y.latestEncounter,
+                     Y.person_id,
+                     Y.concept_id,
+                     Y.visit_id
+                   FROM
+                     (
+                       SELECT
+                         X.latestEncounter,
+                         X.person_id,
+                         X.concept_id,
+                         X.visit_id
+                       FROM
+                         (
+                           SELECT
+                             MAX(o.encounter_id) AS latestEncounter,
+                             o.person_id AS person_id,
+                             o.concept_id AS concept_id,
+                             e.visit_id AS visit_id
+                           FROM
+                             obs o
+                             INNER JOIN concept_name cn ON o.concept_id = cn.concept_id
+                             AND (
+                               cn.name IN ("Regime actuel")
+                               OR cn.name IN ("Regime Debut")
+                             )
+                             AND cn.voided IS FALSE
+                             AND cn.concept_name_type = 'FULLY_SPECIFIED'
+                             AND cn.locale = 'fr'
+                             AND o.voided IS FALSE
+                             INNER JOIN encounter e ON e.encounter_id = o.encounter_id
+                             AND e.voided IS FALSE
+                           GROUP BY
+                             o.person_id,
+                             o.encounter_id
+                         ) AS X
+
+                     ) AS Y
+
+                 ) latestVisitEncounterAndVisitForConcept
+                 INNER JOIN obs o2 ON o2.person_id = latestVisitEncounterAndVisitForConcept.person_id
+                 AND o2.concept_id = latestVisitEncounterAndVisitForConcept.concept_id
+                 AND o2.encounter_id = latestVisitEncounterAndVisitForConcept.latestEncounter
+                 AND o2.voided IS FALSE
+                 INNER JOIN encounter e2 ON o2.encounter_id = e2.encounter_id
+                 AND e2.visit_id = latestVisitEncounterAndVisitForConcept.visit_id
+                 AND e2.voided IS FALSE
+               GROUP BY
+                 latestVisitEncounterAndVisitForConcept.visit_id
+             ) firstAddSectionDateConceptInfo
+             INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId
+             AND o3.voided IS FALSE
+             AND o3.concept_id = (
+               SELECT
+                 concept_id
+               FROM
+                 concept_name cn2
+               WHERE
+                 cn2.name IN ("Ligne d'ARV")
+                 AND cn2.voided IS FALSE
+                 AND cn2.concept_name_type = 'FULLY_SPECIFIED'
+                 AND cn2.locale = 'fr'
+             )
+         ) Tbpre
+         LEFT JOIN (SELECT
+             PID,
+             NAME
+           FROM
+             (
+               SELECT
+                 firstAddSectionDateConceptInfo.person_id AS PID,
+                 firstAddSectionDateConceptInfo.visit_id AS visitid,
+                 DATE(o3.value_datetime) AS NAME
+               FROM
+                 (
+                   SELECT
+                     o2.person_id,
+                     latestVisitEncounterAndVisitForConcept.visit_id,
+                     MIN(o2.obs_id) AS firstAddSectionObsGroupId,
+                     latestVisitEncounterAndVisitForConcept.concept_id
+                   FROM
+                     (
+                       SELECT
+                         Y.latestEncounter,
+                         Y.person_id,
+                         Y.concept_id,
+                         Y.visit_id
+                       FROM
+                         (
+                           SELECT
+                             X.latestEncounter,
+                             X.person_id,
+                             X.concept_id,
+                             X.visit_id
+                           FROM
+                             (
+                               SELECT
+                                 MAX(o.encounter_id) AS latestEncounter,
+                                 o.person_id AS person_id,
+                                 o.concept_id AS concept_id,
+                                 e.visit_id AS visit_id
+                               FROM
+                                 obs o
+                                 INNER JOIN concept_name cn ON o.concept_id = cn.concept_id
+                                 AND (
+                                   cn.name IN ("Regime actuel")
+                                   OR cn.name IN ("Regime Debut")
+                                 )
+                                 AND cn.voided IS FALSE
+                                 AND cn.concept_name_type = 'FULLY_SPECIFIED'
+                                 AND cn.locale = 'fr'
+                                 AND o.voided IS FALSE
+                                 INNER JOIN encounter e ON e.encounter_id = o.encounter_id
+                                 AND e.voided IS FALSE
+                               GROUP BY
+                                 o.person_id,
+                                 o.encounter_id
+                             ) AS X
+                           ORDER BY
+                             latestEncounter DESC
+                         ) AS Y
+                       GROUP BY
+                         person_id
+                     ) latestVisitEncounterAndVisitForConcept
+                     INNER JOIN obs o2 ON o2.person_id = latestVisitEncounterAndVisitForConcept.person_id
+                     AND o2.concept_id = latestVisitEncounterAndVisitForConcept.concept_id
+                     AND o2.encounter_id = latestVisitEncounterAndVisitForConcept.latestEncounter
+                     AND o2.voided IS FALSE
+                     INNER JOIN encounter e2 ON o2.encounter_id = e2.encounter_id
+                     AND e2.visit_id = latestVisitEncounterAndVisitForConcept.visit_id
+                     AND e2.voided IS FALSE
+                   GROUP BY
+                     latestVisitEncounterAndVisitForConcept.visit_id
+                 ) firstAddSectionDateConceptInfo
+                 INNER JOIN obs o3 ON o3.obs_group_id = firstAddSectionDateConceptInfo.firstAddSectionObsGroupId
+                 AND o3.voided IS FALSE
+                 AND o3.concept_id = (
+                   SELECT
+                     concept_id
+                   FROM
+                     concept_name cn2
+                   WHERE
+                     cn2.name IN ("HA, Date début")
+                     AND cn2.voided IS FALSE
+                     AND cn2.concept_name_type = 'FULLY_SPECIFIED'
+                     AND cn2.locale = 'fr'
+                 )
+             ) anne
+             ) totalform ON totalform.PID = Tbpre.pid) a ON a.pid=v.patient_id AND
+             (DATE_FORMAT(v.date_started,'%Y-%m-%d %H:%i:%s') > DATE_FORMAT(a.obsDateTime,'%Y-%m-%d %H:%i:%s') OR timestampdiff(HOUR,v.date_started,a.obsDateTime)%24<=1) AND
+                     ifnull(DATE_FORMAT(v.date_stopped,'%Y-%m-%d %H:%i:%s'),DATE_FORMAT(sysdate(),'%Y-%m-%d %H:%i:%s'))> DATE_FORMAT(a.obsDateTime,'%Y-%m-%d %H:%i:%s')
+             ORDER BY obsdateTime DESC) formDataSubSection
+             GROUP BY formDataSubSection.visit_id
+            ) formData ON programValue.patient_id = formData.pid AND programValue.visit_id = formData.visit_id
+             ORDER BY patient_id
+         ) arvnew
          ON arvnew.pid = admdate.person_id AND arvnew.visit_id = admdate.visitid
        LEFT JOIN (/* get cd4 details for each visit of patients  */
                  SELECT cd4_obs.vid AS vid, cd4_obs.obsdate AS CDDate, cd4_obs.pid AS PID, cd4_obs.value AS VALUE
