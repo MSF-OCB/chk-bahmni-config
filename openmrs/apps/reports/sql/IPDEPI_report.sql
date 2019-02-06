@@ -559,7 +559,7 @@ FROM (/* get date de admission details for each visit of patients  */
         ) AS hiv ON hiv.pid = admdate.person_id AND hiv.vid = admdate.visitid
        LEFT JOIN (/* get ARV histoire details for latest encounter of each visit of patients  */
                  SELECT obsForActivityStatus.person_id,
-                        (SELECT concept_full_name
+                        (SELECT concept_short_name
                          FROM concept_view
                          WHERE concept_id = obsForActivityStatus.value_coded) AS 'C4',
                         DATE(obsForActivityStatus.obs_datetime)               AS 'obsDate',
