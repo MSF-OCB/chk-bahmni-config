@@ -55,7 +55,7 @@ SELECT pi.identifier                                             AS "ID Patient"
                     THEN lig.LigneARV
             WHEN lig.LigneARV = "NoPhase" THEN NULL
             ELSE "Pas sous ARV" END
-          )                                                     AS "Ligne ARV sortie"
+          )                                                     AS "Ligne ARV sortie",
        SY.S1                                                     AS "Syndrome sortie 1",
        group_concat(DISTINCT (dg.S1), '')                        AS "Diagnostic principal sortie",
        SY2.S2                                                    AS "Syndrome sortie 2",
