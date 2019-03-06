@@ -341,6 +341,9 @@
          "dropdown": true,
          "required": true
       },
+      "CAI, Informations Infections Opportunistes" : {
+        "allowAddMore": true
+      },
       "Informations autres pathologies":{
         "allowAddMore": true
       },

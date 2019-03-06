@@ -634,21 +634,6 @@
             "CAI, Issue de la consultation"
           ]
         }
-      },
-      "MédecinEtInfirmierEnChargeDeL'Admission": {
-        "translationKey": "DASHBOARD_TITLE_MEDECIN_ET_INFIRMIER_EN_CHARGW_DE_L'_ADMISSION",
-        "isObservation": true,
-        "type": "vitals",
-        "displayOrder": 13,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Infirmier en charge de l'admission",
-            "Medecin en charge de l'admission"
-          ]
-        }
       }
     }
   },

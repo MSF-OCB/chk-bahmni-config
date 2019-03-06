@@ -360,6 +360,19 @@ Bahmni.ConceptSet.FormConditions.rules = {
            }
          }
       },
+     "CAI, Mode d'entrée (IPD)": function (formName, formFieldValues) {
+        var modeOfTransfert = formFieldValues["CAI, Mode d'entrée (IPD)"];
+
+        if (modeOfTransfert == "Hospi de jour(Suivi)") {
+          return {
+            show: ["Prochain RDV"]
+          }
+        } else {
+          return {
+            hide: ["Prochain RDV"]
+          }
+        }
+     },
       "CSI, Status prophylaxie" : function (formName, formFieldValues) {
         var statusProphylaxieType = formFieldValues["CSI, Status prophylaxie"];
 
@@ -386,25 +399,29 @@ Bahmni.ConceptSet.FormConditions.rules = {
             }
         }
      },
-     "CSI, Mode de sortie" : function (formName, formFieldValues) {
-    var transfertType = formFieldValues["CSI, Mode de sortie"];
+    "CSI, Mode de sortie" : function (formName, formFieldValues) {
+      var transfertType = formFieldValues["CSI, Mode de sortie"];
       if (transfertType == "Transfert(Suivi)") {
-              return {
-                  show: ["CSI, Transfert"],
-                  hide: ["CSI, Prochain RDV"]
-              }
-          }
-      else if (transfertType == "Domicile(Suivi)" || transfertType == "Reféré(Suivi)") {
-          return {
-              show: ["CSI, Prochain RDV"],
-              hide: ["CSI, Transfert"]
-          }
+        return {
+          show: ["CSI, Transfert"],
+          hide: ["CSI, Prochain RDV", "referred"]
         }
-      else {
-          return {
-            hide: ["CSI, Transfert", "CSI, Prochain RDV"]
-                }
-            }
-     }
+      } else if (transfertType == "Reféré(Suivi)") {
+        return {
+          show: ["referred"],
+          hide: ["CSI, Transfert", "CSI, Prochain RDV"]
+        }
+      } else if (transfertType == "Domicile(Suivi)") {
+        return {
+          show: ["CSI, Prochain RDV"],
+          hide: ["CSI, Transfert", "referred"]
+        }
+      } else {
+        return {
+          hide: ["CSI, Transfert", "CSI, Prochain RDV", "referred"]
+        }
+      }
+    }
 
  };
+
