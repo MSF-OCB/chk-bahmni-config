@@ -338,8 +338,7 @@
         "multiSelect": true
       },
       "SC, PODI":{
-         "dropdown": true,
-         "required": true
+         "dropdown": true
       },
       "CAI, Informations Infections Opportunistes" : {
         "allowAddMore": true
