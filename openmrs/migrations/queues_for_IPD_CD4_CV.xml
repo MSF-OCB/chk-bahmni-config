@@ -3,261 +3,167 @@
        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 <changeSet id="MAADI-CONFIG-201812111509" author="Pritam">
-       <preConditions onFail="MARK_RAN">
-           <sqlCheck expectedResult= "0">
-               select count(*) from global_property where property='emrapi.sqlSearch.admissionsWithoutCV';
-           </sqlCheck>
-       </preConditions>
-       <comment>Creating Global Property emrapi.sqlSearch.admissionsWithoutCV</comment>
-       <sql>
-           INSERT INTO global_property (property, property_value, uuid)
-           VALUES ('emrapi.sqlSearch.admissionsWithoutCV', '', uuid());
-       </sql>
+  <preConditions onFail="MARK_RAN">
+    <sqlCheck expectedResult= "0">
+      select count(*) from global_property where property='emrapi.sqlSearch.admissionsWithoutCV';
+    </sqlCheck>
+  </preConditions>
+  <comment>Creating Global Property emrapi.sqlSearch.admissionsWithoutCV</comment>
+  <sql>
+    INSERT INTO global_property (property, property_value, uuid)
+    VALUES ('emrapi.sqlSearch.admissionsWithoutCV', '', uuid());
+  </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201812111510" author="Pritam">
+<changeSet id="MAADI-CONFIG-201903141800" author="Ramses">
+  <comment> Updating the CV queue </comment>
+  <sql><![CDATA[
+select distinct
+  concat(pn.given_name, ' ', ifnull(pn.family_name, ' ')) as name,
+  pi.identifier as identifier,
+  p.uuid as uuid,
+  v.uuid as activeVisitUuid,
+  'true' as hasBeenAdmitted
 
-     <comment> Updating the CV queue </comment>
-     <sql>
-      update global_property set property_value =
-      "SELECT concat(pn.given_name,' ', ifnull(pn.family_name, ' ')) AS NAME,
-      pi.identifier                                          AS identifier,
-      concat(' ', p.uuid)                                     AS uuid,
-      concat(' ', v.uuid)                                     AS activeVisitUuid,
-      'true'                                                 AS hasBeenAdmitted
-      FROM visit v,
-       patient_identifier pi,
-       person_name pn,
-       person p
-      WHERE v.patient_id = pi.patient_id
-      AND pi.patient_id = pn.person_id
-      AND p.person_id = pi.patient_id
-      AND p.voided IS FALSE
-      AND v.visit_type_id = (SELECT visit_type_id FROM visit_type WHERE NAME = 'IPD')
-      AND date_stopped IS NULL
-      AND v.visit_id IN(SELECT visit_id
-                      FROM encounter
-                      WHERE encounter_id IN (SELECT encounter_id
-                                             FROM obs
-                                             WHERE concept_id = (SELECT concept_id
-                                                                 FROM concept_name
-                                                                 WHERE concept_id IN (SELECT concept_id
-                                                                                      FROM concept_set
-                                                                                      WHERE concept_set IN
-                                                                                            (SELECT cn.concept_id
-                                                                                             FROM concept_name cn
-                                                                                             WHERE cn.name IN ('TR, Admission - Informations générales')
-                                                                                               AND cn.voided IS FALSE
-                                                                                               AND cn.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                               AND cn.locale = 'fr'))
-                                                                   AND NAME = \"Date d'admission\"
-                                                                   AND voided IS FALSE
-                                                                   AND concept_name_type = 'SHORT'
-                                                                   AND locale = 'fr')
-                                               AND HOUR(TIMEDIFF(value_datetime, CURRENT_TIMESTAMP())) > 72
-                                               AND voided IS FALSE))
-      AND v.visit_id NOT IN
-        (SELECT visit_id
-         FROM encounter
-         WHERE encounter_id IN (SELECT encounter_id
-                                FROM obs
-                                WHERE concept_id IN (SELECT concept_id
-                                                     FROM concept_name
-                                                     WHERE NAME IN ('Charge Virale HIV - Value',
-                                                                    'Charge Virale - Value(Bilan de routine IPD)')
-                                                       AND voided IS FALSE
-                                                       AND concept_name_type = 'FULLY_SPECIFIED'
-                                                       AND locale = 'fr')
-                                  AND value_numeric IS NOT NULL
-                                  AND voided IS FALSE));"
-        where property= 'emrapi.sqlSearch.admissionsWithoutCV';
-     </sql>
+from visit v
+inner join patient_identifier pi
+  on v.patient_id = pi.patient_id
+inner join person_name pn
+  on pi.patient_id = pn.person_id
+inner join person p
+  on p.person_id = pi.patient_id
+inner join visit_type vt
+  on v.visit_type_id = vt.visit_type_id
+
+inner join encounter e
+  on e.visit_id = v.visit_id
+inner join obs o
+  on o.encounter_id = e.encounter_id
+inner join concept_name cn
+  on cn.concept_id = o.concept_id
+inner join concept_set cs
+  on cn.concept_id = cs.concept_id
+inner join concept_name csn
+  on csn.concept_id = cs.concept_set
+
+where p.voided IS FALSE
+  and vt.name = 'IPD'
+  and v.date_stopped is null
+
+  and csn.name like 'TR, Admission - Informations g%n%rales'
+  and not csn.voided
+  and csn.concept_name_type = 'FULLY_SPECIFIED'
+  and csn.locale = 'fr'
+
+  and cn.name = 'Date d''admission'
+  and not cn.voided
+  and cn.concept_name_type = 'SHORT'
+  and cn.locale = 'fr'
+
+  and o.value_datetime is not null
+  and o.value_datetime < now() - interval 71 hour
+  and not o.voided
+
+  and not exists (
+    select 1
+	from encounter e1
+	inner join obs o1
+	  on e1.encounter_id = o1.encounter_id
+	inner join concept_name cn1
+	  on o1.concept_id = cn1.concept_id
+	where e1.visit_id = v.visit_id
+	  and cn1.name in ('Charge Virale HIV - Value',
+	                   'Charge Virale - Value(Bilan de routine IPD)')
+	  and not cn1.voided
+	  and cn1.concept_name_type = 'FULLY_SPECIFIED'
+	  and cn1.locale = 'fr'
+
+	  and o.value_numeric is not null
+	  and not o.voided
+  )
+order by pi.identifier;
+  ]]></sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201812111511" author="Pritam">
-       <preConditions onFail="MARK_RAN">
-           <sqlCheck expectedResult= "0">
-               select count(*) from global_property where property='emrapi.sqlSearch.admissionsWithoutCD4';
-           </sqlCheck>
-       </preConditions>
-       <comment>Creating Global Property emrapi.sqlSearch.admissionsWithoutCD4</comment>
-       <sql>
-           INSERT INTO global_property (property, property_value, uuid)
-           VALUES ('emrapi.sqlSearch.admissionsWithoutCD4', '', uuid());
-       </sql>
+<changeSet id="MAADI-CONFIG-201903141800" author="Ramses">
+  <preConditions onFail="MARK_RAN">
+    <sqlCheck expectedResult= "0">
+      select count(*) from global_property where property='emrapi.sqlSearch.admissionsWithoutCD4';
+    </sqlCheck>
+  </preConditions>
+  <comment>Creating Global Property emrapi.sqlSearch.admissionsWithoutCD4</comment>
+  <sql>
+    INSERT INTO global_property (property, property_value, uuid)
+    VALUES ('emrapi.sqlSearch.admissionsWithoutCD4', '', uuid());
+  </sql>
 </changeSet>
 <changeSet id="MAADI-CONFIG-201812111512" author="Pritam">
+  <comment> Updating the CD4 queue </comment>
+  <sql><![CDATA[
+select distinct
+  concat(pn.given_name, ' ', ifnull(pn.family_name, ' ')) as name,
+  pi.identifier as identifier,
+  p.uuid as uuid,
+  v.uuid as activeVisitUuid,
+  'true' as hasBeenAdmitted
 
-     <comment> Updating the CD4 queue </comment>
-     <sql>
-        update global_property set property_value =
-        "SELECT concat(pn.given_name, ' ', ifnull(pn.family_name, '')) AS NAME,
-        pi.identifier                                          AS identifier,
-        concat(' ', p.uuid)                                     AS uuid,
-        concat(' ', v.uuid)                                     AS activeVisitUuid,
-        'true'                                                 AS hasBeenAdmitted
-        FROM visit v,
-             patient_identifier pi,
-             person_name pn,
-             person p
-        WHERE v.patient_id = pi.patient_id
-          AND pi.patient_id = pn.person_id
-          AND p.person_id = pi.patient_id
-          AND p.voided IS FALSE
-          AND v.visit_type_id = (SELECT visit_type_id FROM visit_type WHERE NAME = 'IPD')
-          AND date_stopped IS NULL
-          AND v.visit_id IN(SELECT visit_id
-                            FROM encounter
-                            WHERE encounter_id IN (SELECT encounter_id
-                                                   FROM obs
-                                                   WHERE concept_id = (SELECT concept_id
-                                                                       FROM concept_name
-                                                                       WHERE concept_id IN (SELECT concept_id
-                                                                                            FROM concept_set
-                                                                                            WHERE concept_set IN
-                                                                                                  (SELECT cn.concept_id
-                                                                                                   FROM concept_name cn
-                                                                                                   WHERE cn.name IN ('TR, Admission - Informations générales')
-                                                                                                     AND cn.voided IS FALSE
-                                                                                                     AND cn.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                                     AND cn.locale = 'fr'))
-                                                                         AND NAME = \"Date d'admission\"
-                                                                         AND voided IS FALSE
-                                                                         AND concept_name_type = 'SHORT'
-                                                                         AND locale = 'fr')
-                                                     AND HOUR(TIMEDIFF(value_datetime, CURRENT_TIMESTAMP())) > 24
-                                                     AND voided IS FALSE))
-          AND v.visit_id NOT IN
-              (SELECT visit_id
-               FROM encounter
-               WHERE encounter_id IN (SELECT encounter_id
-                                      FROM obs
-                                      WHERE concept_id IN (SELECT concept_id
-                                                           FROM concept_name
-                                                           WHERE NAME IN ('CD4(cells/µl)',
-                                                                          'CD4(Bilan de routine IPD)',
-                                                                          'CD4')
-                                                             AND voided IS FALSE
-                                                             AND concept_name_type = 'FULLY_SPECIFIED'
-                                                             AND locale = 'fr')
-                                        AND value_numeric IS NOT NULL
-                                        AND voided IS FALSE));"
-        where property= 'emrapi.sqlSearch.admissionsWithoutCD4';
-     </sql>
-</changeSet>
-<changeSet id="OCB-CONFIG-201812191229" author="Pritam">
+from visit v
+inner join patient_identifier pi
+  on v.patient_id = pi.patient_id
+inner join person_name pn
+  on pi.patient_id = pn.person_id
+inner join person p
+  on p.person_id = pi.patient_id
+inner join visit_type vt
+  on v.visit_type_id = vt.visit_type_id
 
-     <comment> Updating the CV queue </comment>
-     <sql>
-      update global_property set property_value =
-      "SELECT concat(pn.given_name,' ', ifnull(pn.family_name, ' ')) AS name,
-      pi.identifier                                          AS identifier,
-      p.uuid                                    AS uuid,
-      v.uuid                                    AS activeVisitUuid,
-      'true'                                                 AS hasBeenAdmitted
-      FROM visit v,
-       patient_identifier pi,
-       person_name pn,
-       person p
-      WHERE v.patient_id = pi.patient_id
-      AND pi.patient_id = pn.person_id
-      AND p.person_id = pi.patient_id
-      AND p.voided IS FALSE
-      AND v.visit_type_id = (SELECT visit_type_id FROM visit_type WHERE NAME = 'IPD')
-      AND date_stopped IS NULL
-      AND v.visit_id IN(SELECT visit_id
-                      FROM encounter
-                      WHERE encounter_id IN (SELECT encounter_id
-                                             FROM obs
-                                             WHERE concept_id = (SELECT concept_id
-                                                                 FROM concept_name
-                                                                 WHERE concept_id IN (SELECT concept_id
-                                                                                      FROM concept_set
-                                                                                      WHERE concept_set IN
-                                                                                            (SELECT cn.concept_id
-                                                                                             FROM concept_name cn
-                                                                                             WHERE cn.name IN ('TR, Admission - Informations générales')
-                                                                                               AND cn.voided IS FALSE
-                                                                                               AND cn.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                               AND cn.locale = 'fr'))
-                                                                   AND NAME = \"Date d'admission\"
-                                                                   AND voided IS FALSE
-                                                                   AND concept_name_type = 'SHORT'
-                                                                   AND locale = 'fr')
-                                               AND HOUR(TIMEDIFF(value_datetime, CURRENT_TIMESTAMP())) > 71
-                                               AND voided IS FALSE))
-      AND v.visit_id NOT IN
-        (SELECT visit_id
-         FROM encounter
-         WHERE encounter_id IN (SELECT encounter_id
-                                FROM obs
-                                WHERE concept_id IN (SELECT concept_id
-                                                     FROM concept_name
-                                                     WHERE NAME IN ('Charge Virale HIV - Value',
-                                                                    'Charge Virale - Value(Bilan de routine IPD)')
-                                                       AND voided IS FALSE
-                                                       AND concept_name_type = 'FULLY_SPECIFIED'
-                                                       AND locale = 'fr')
-                                  AND value_numeric IS NOT NULL
-                                  AND voided IS FALSE));"
-        where property= 'emrapi.sqlSearch.admissionsWithoutCV';
-     </sql>
-</changeSet>
-<changeSet id="OCB-CONFIG-201812191230" author="Pritam">
+inner join encounter e
+  on e.visit_id = v.visit_id
+inner join obs o
+  on o.encounter_id = e.encounter_id
+inner join concept_name cn
+  on cn.concept_id = o.concept_id
+inner join concept_set cs
+  on cn.concept_id = cs.concept_id
+inner join concept_name csn
+  on csn.concept_id = cs.concept_set
 
-     <comment> Updating the CD4 queue </comment>
-     <sql>
-        update global_property set property_value =
-        "SELECT concat(pn.given_name, ' ', ifnull(pn.family_name, '')) AS name,
-        pi.identifier                                          AS identifier,
-        p.uuid                                     AS uuid,
-        v.uuid                                     AS activeVisitUuid,
-        'true'                                                 AS hasBeenAdmitted
-        FROM visit v,
-             patient_identifier pi,
-             person_name pn,
-             person p
-        WHERE v.patient_id = pi.patient_id
-          AND pi.patient_id = pn.person_id
-          AND p.person_id = pi.patient_id
-          AND p.voided IS FALSE
-          AND v.visit_type_id = (SELECT visit_type_id FROM visit_type WHERE NAME = 'IPD')
-          AND date_stopped IS NULL
-          AND v.visit_id IN(SELECT visit_id
-                            FROM encounter
-                            WHERE encounter_id IN (SELECT encounter_id
-                                                   FROM obs
-                                                   WHERE concept_id = (SELECT concept_id
-                                                                       FROM concept_name
-                                                                       WHERE concept_id IN (SELECT concept_id
-                                                                                            FROM concept_set
-                                                                                            WHERE concept_set IN
-                                                                                                  (SELECT cn.concept_id
-                                                                                                   FROM concept_name cn
-                                                                                                   WHERE cn.name IN ('TR, Admission - Informations générales')
-                                                                                                     AND cn.voided IS FALSE
-                                                                                                     AND cn.concept_name_type = 'FULLY_SPECIFIED'
-                                                                                                     AND cn.locale = 'fr'))
-                                                                         AND NAME = \"Date d'admission\"
-                                                                         AND voided IS FALSE
-                                                                         AND concept_name_type = 'SHORT'
-                                                                         AND locale = 'fr')
-                                                     AND HOUR(TIMEDIFF(value_datetime, CURRENT_TIMESTAMP())) > 23
-                                                     AND voided IS FALSE))
-          AND v.visit_id NOT IN
-              (SELECT visit_id
-               FROM encounter
-               WHERE encounter_id IN (SELECT encounter_id
-                                      FROM obs
-                                      WHERE concept_id IN (SELECT concept_id
-                                                           FROM concept_name
-                                                           WHERE NAME IN ('CD4(cells/µl)',
-                                                                          'CD4(Bilan de routine IPD)',
-                                                                          'CD4')
-                                                             AND voided IS FALSE
-                                                             AND concept_name_type = 'FULLY_SPECIFIED'
-                                                             AND locale = 'fr')
-                                        AND value_numeric IS NOT NULL
-                                        AND voided IS FALSE));"
-        where property= 'emrapi.sqlSearch.admissionsWithoutCD4';
-     </sql>
+where p.voided IS FALSE
+  and vt.name = 'IPD'
+  and v.date_stopped is null
+
+  and csn.name like 'TR, Admission - Informations g%n%rales'
+  and not csn.voided
+  and csn.concept_name_type = 'FULLY_SPECIFIED'
+  and csn.locale = 'fr'
+
+  and cn.name = 'Date d''admission'
+  and not cn.voided
+  and cn.concept_name_type = 'SHORT'
+  and cn.locale = 'fr'
+
+  and o.value_datetime is not null
+  and o.value_datetime < now() - interval 23 hour
+  and not o.voided
+
+  and not exists (
+    select 1
+	from encounter e1
+	inner join obs o1
+	  on e1.encounter_id = o1.encounter_id
+	inner join concept_name cn1
+	  on o1.concept_id = cn1.concept_id
+	where e1.visit_id = v.visit_id
+	  and cn1.name in ('CD4(cells/µl)',
+                       'CD4(Bilan de routine IPD)',
+                       'CD4')
+	  and not cn1.voided
+	  and cn1.concept_name_type = 'FULLY_SPECIFIED'
+	  and cn1.locale = 'fr'
+
+	  and o.value_numeric is not null
+	  and not o.voided
+  )
+order by pi.identifier;
+  ]]></sql>
 </changeSet>
 </databaseChangeLog>
+
