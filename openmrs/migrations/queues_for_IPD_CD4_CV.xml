@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-<changeSet id="MAADI-CONFIG-201812111509" author="Pritam">
+<changeSet id="MAADI-CONFIG-201903149265" author="Pritam">
   <preConditions onFail="MARK_RAN">
     <sqlCheck expectedResult= "0">
       select count(*) from global_property where property='emrapi.sqlSearch.admissionsWithoutCV';
@@ -83,7 +83,7 @@ where p.voided IS FALSE
 order by pi.identifier;
   ]]></sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201903141800" author="Ramses">
+<changeSet id="MAADI-CONFIG-2019031492653" author="Pritam">
   <preConditions onFail="MARK_RAN">
     <sqlCheck expectedResult= "0">
       select count(*) from global_property where property='emrapi.sqlSearch.admissionsWithoutCD4';
@@ -95,7 +95,7 @@ order by pi.identifier;
     VALUES ('emrapi.sqlSearch.admissionsWithoutCD4', '', uuid());
   </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201812111512" author="Pritam">
+<changeSet id="MAADI-CONFIG-201903141801" author="Ramses">
   <comment> Updating the CD4 queue </comment>
   <sql><![CDATA[
 select distinct
