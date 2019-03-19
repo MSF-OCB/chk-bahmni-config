@@ -14,7 +14,7 @@
     VALUES ('emrapi.sqlSearch.admissionsWithoutCV', '', uuid());
   </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201903141800" author="Ramses">
+<changeSet id="MAADI-CONFIG-201903191002" author="Ramses">
   <comment> Updating the CV queue </comment>
   <sql><![CDATA[
 update global_property set property_value = "
@@ -97,7 +97,7 @@ where property= 'emrapi.sqlSearch.admissionsWithoutCV';
     VALUES ('emrapi.sqlSearch.admissionsWithoutCD4', '', uuid());
   </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201903141801" author="Ramses">
+<changeSet id="MAADI-CONFIG-201903191003" author="Ramses">
   <comment> Updating the CD4 queue </comment>
   <sql><![CDATA[
 update global_property set property_value = "
