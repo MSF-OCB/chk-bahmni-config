@@ -17,6 +17,7 @@
 <changeSet id="MAADI-CONFIG-201903141800" author="Ramses">
   <comment> Updating the CV queue </comment>
   <sql><![CDATA[
+update global_property set property_value = "
 select distinct
   concat(pn.given_name, ' ', ifnull(pn.family_name, ' ')) as name,
   pi.identifier as identifier,
@@ -80,7 +81,8 @@ where p.voided IS FALSE
 	  and o.value_numeric is not null
 	  and not o.voided
   )
-order by pi.identifier;
+order by pi.identifier;"
+where property= 'emrapi.sqlSearch.admissionsWithoutCV';
   ]]></sql>
 </changeSet>
 <changeSet id="MAADI-CONFIG-2019031492653" author="Pritam">
@@ -98,6 +100,7 @@ order by pi.identifier;
 <changeSet id="MAADI-CONFIG-201903141801" author="Ramses">
   <comment> Updating the CD4 queue </comment>
   <sql><![CDATA[
+update global_property set property_value = "
 select distinct
   concat(pn.given_name, ' ', ifnull(pn.family_name, ' ')) as name,
   pi.identifier as identifier,
@@ -162,7 +165,8 @@ where p.voided IS FALSE
 	  and o.value_numeric is not null
 	  and not o.voided
   )
-order by pi.identifier;
+order by pi.identifier;"
+where property= 'emrapi.sqlSearch.admissionsWithoutCD4';
   ]]></sql>
 </changeSet>
 </databaseChangeLog>
