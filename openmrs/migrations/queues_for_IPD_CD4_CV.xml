@@ -14,7 +14,7 @@
     VALUES ('emrapi.sqlSearch.admissionsWithoutCV', '', uuid());
   </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201903191002" author="Ramses">
+<changeSet id="MAADI-CONFIG-201904181653" author="Ramses">
   <comment> Updating the CV queue </comment>
   <sql><![CDATA[
 update global_property set property_value = "
@@ -78,8 +78,8 @@ where p.voided IS FALSE
 	  and cn1.concept_name_type = 'FULLY_SPECIFIED'
 	  and cn1.locale = 'fr'
 
-	  and o.value_numeric is not null
-	  and not o.voided
+	  and o1.value_numeric is not null
+	  and not o1.voided
   )
 order by pi.identifier;"
 where property= 'emrapi.sqlSearch.admissionsWithoutCV';
@@ -97,7 +97,7 @@ where property= 'emrapi.sqlSearch.admissionsWithoutCV';
     VALUES ('emrapi.sqlSearch.admissionsWithoutCD4', '', uuid());
   </sql>
 </changeSet>
-<changeSet id="MAADI-CONFIG-201903191003" author="Ramses">
+<changeSet id="MAADI-CONFIG-201904181654" author="Ramses">
   <comment> Updating the CD4 queue </comment>
   <sql><![CDATA[
 update global_property set property_value = "
@@ -162,8 +162,8 @@ where p.voided IS FALSE
 	  and cn1.concept_name_type = 'FULLY_SPECIFIED'
 	  and cn1.locale = 'fr'
 
-	  and o.value_numeric is not null
-	  and not o.voided
+	  and o1.value_numeric is not null
+	  and not o1.voided
   )
 order by pi.identifier;"
 where property= 'emrapi.sqlSearch.admissionsWithoutCD4';
