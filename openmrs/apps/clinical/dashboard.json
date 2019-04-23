@@ -1027,7 +1027,7 @@
        "displayType": "Full-Page",
        "dashboardConfig": {
          "showGroupDateTime": true,
-         "numberOfVisits": "",
+         "numberOfVisits": 1,
          "conceptNames": [
            "Informations mode de sortie(Suivi)"
          ]
