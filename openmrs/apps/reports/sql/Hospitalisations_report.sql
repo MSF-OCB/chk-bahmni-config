@@ -264,7 +264,7 @@ FROM
     FROM
       visit v
       INNER JOIN encounter ON v.visit_id = encounter.visit_id
-      LEFT JOIN obs ON obs.encounter_id = encounter.encounter_id
+      INNER JOIN obs ON obs.encounter_id = encounter.encounter_id
       AND obs.concept_id = (
         SELECT
           concept_id
