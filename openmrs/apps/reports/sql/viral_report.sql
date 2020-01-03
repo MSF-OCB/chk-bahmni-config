@@ -1,5 +1,6 @@
-SELECT "Date de prelevement",
+SELECT "Date de Réception",
        "Provenance",
+       "Date de Prélèvement",
        "Nom du patient",
        "Id Patient",
        "Date naissance",
@@ -10,8 +11,9 @@ SELECT "Date de prelevement",
        "Date des résultats",
        "Notes",
        "Mois des résultats"
-FROM (SELECT to_char(B.sample_date, 'DD/MM/YYYY')                      AS "Date de prelevement",
+FROM (SELECT to_char(B.sample_date, 'DD/MM/YYYY')                      AS "Date de Réception",
              B.care_center_requesting                                  AS "Provenance",
+             to_char(B.received_date, 'DD/MM/YYYY')                    AS "Date de Prélèvement",
              B.Patient_Name                                            AS "Nom du patient",
              B.Patient_Identifier                                      AS "Id Patient",
              to_char(B.dob, 'DD/MM/YYYY')                              AS "Date naissance",
@@ -40,6 +42,7 @@ FROM (SELECT to_char(B.sample_date, 'DD/MM/YYYY')                      AS "Date 
                   care_center_requesting,
                   Patient_Identifier,
                   sample_date,
+                  received_date,
                   dob,
                   sexe,
                   date_of_results,
@@ -57,6 +60,7 @@ FROM (SELECT to_char(B.sample_date, 'DD/MM/YYYY')                      AS "Date 
 
            FROM (/*Pivoting the table row to column*/
                 SELECT sample.collection_date                                   AS sample_date,
+                       sample.received_date					   AS received_date,
                        ss.name                                                  AS care_center_requesting,
                        TRIM(concat(COALESCE(NULLIF(person.first_name, ''), ''), ' ',
                                    COALESCE(NULLIF(person.last_name, ''), ''))) AS Patient_Name,
@@ -92,6 +96,7 @@ FROM (SELECT to_char(B.sample_date, 'DD/MM/YYYY')                      AS "Date 
       WHERE date(B.date_of_results) BETWEEN '#startDate#' AND '#endDate#'
       GROUP BY B.Patient_Name,
                B.sample_date,
+               B.received_date,
                B.care_center_requesting,
                B.Patient_Identifier,
                B.dob,
