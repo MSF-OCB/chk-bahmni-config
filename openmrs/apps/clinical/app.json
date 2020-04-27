@@ -44,7 +44,7 @@
       "patientInformation": {
         "ageLimit": 100
       },
-"ARV Line(Programme)" : {
+	"ARV Line(Programme)" : {
               "excludeFrom" : ["Programme TB"]
       },
       "TB Type":{
@@ -57,16 +57,16 @@
         "required": true
       },
       "TB Type":{
-        "excludeFrom" : ["Programme ARV"]
+        "excludeFrom" : ["Programme ARV","Crypto Neuro Méningé","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
     },
   "Motif début traitement" : {
-       "excludeFrom" : ["Programme ARV"]
+       "excludeFrom" : ["Programme ARV","Crypto Neuro Méningé","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
  },
  "Site TEP" : {
-       "excludeFrom" : ["Programme ARV"]
+       "excludeFrom" : ["Programme ARV","Crypto Neuro Méningé","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
  },
        "Program States for TB":{
-         "excludeFrom": ["Programme ARV"]
+         "excludeFrom": ["Programme ARV","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
        }
 
     },
@@ -378,7 +378,7 @@
       "CSI, Mode de sortie":{"required": true},
       "CSI, Centre de référence":{"required": true,"autocomplete":true},
       "CSI, PODI":{"required": true,"dropdown": true},
-      "CSI, Date prochain RDV" :{"disableAddNotes": true,"allowFutureDates" : true}
+      "CSI, Date prochain RDV" :{"disableAddNotes": true,"allowFutureDates" : true},
     }
   }
 }
