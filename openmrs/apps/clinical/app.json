@@ -379,6 +379,8 @@
       "CSI, Centre de référence":{"required": true,"autocomplete":true},
       "CSI, PODI":{"required": true,"dropdown": true},
       "CSI, Date prochain RDV" :{"disableAddNotes": true,"allowFutureDates" : true},
+	  "Date de sortie": {"allowFutureDates" : false},
+	  "Refere vers": {"required": true}
     }
   }
 }
