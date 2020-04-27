@@ -34,17 +34,35 @@
         "showDetailsButton": true,
         "displayOrder": 1,
         "dashboardConfig": {
+		  "numberOfVisits":1,
           "conceptNames": [
-            "Sc, Informations Infections opportunistes",
-            "Informations Autres diagnostics (Suivi)",
-            "Prochain RDV"
+			"Infections Opportunistes",
+			"Status IO",
+			"CAI, Infections opportunistes",
+			"CAI, Status IO",
+			"Sc, Diagnostic",
+			"Autre(si le diagnostic n'est pas listé)",
+			"Date de prochain RDV",
+			"SC, Notes",
+			"Fds, Diagnostic",
+			"CSI, Date prochain RDV",
+			"CSI, Notes"
           ],
           "scope": "latest"
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "CO, Hypothèses diagnostics",
-            "Prochain RDV"
+            "Infections Opportunistes",
+			"Status IO",
+			"CAI, Infections opportunistes",
+			"CAI, Status IO",
+			"Sc, Diagnostic",
+			"Autre(si le diagnostic n'est pas listé)",
+			"Date de prochain RDV",
+			"SC, Notes",
+			"Fds, Diagnostic",
+			"CSI, Date prochain RDV",
+			"CSI, Notes"
           ],
           "numberOfVisits": "",
           "pivotTable": {
@@ -165,14 +183,34 @@
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "showDetailsButton": true,
-          "numberOfVisits": 5,
+          "numberOfVisits": 3,
           "conceptNames": [
-            "Tests rapides"
+			"TR, Type de visite",
+			"IPD Admission, Date d'admission",
+			"Infirmier en charge de l'admission",
+			"CAI, Contacts malade",
+			"CD4 % (Enfants de moins de 5 ans)(%)",
+			"CD4(cells/µl)",
+			"Glycémie(mg/dl)",
+			"Hémoglobine (Hemocue)(g/dl)",
+			"Créatinine (IPD)",
+			"TR, TDR - Malaria",
+			"TB - LAM"
           ]
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Tests rapides"
+			"TR, Type de visite",
+			"IPD Admission, Date d'admission",
+			"Infirmier en charge de l'admission",
+			"CAI, Contacts malade",
+			"CD4 % (Enfants de moins de 5 ans)(%)",
+			"CD4(cells/µl)",
+			"Glycémie(mg/dl)",
+			"Hémoglobine (Hemocue)(g/dl)",
+			"Créatinine (IPD)",
+			"TR, TDR - Malaria",
+			"TB - LAM"
           ],
           "numberOfVisits": "",
           "showDetailsButton": true,
@@ -454,6 +492,7 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
+		  "showGroupDateTime": false,
           "conceptNames": [
             "IPD Admission, Date d'admission",
             "CAI, Admission - Données générales",
@@ -486,6 +525,7 @@
         "displayType": "Full-Page",
         "dashboardConfig": {
           "showDetailsButton": false,
+		  "showGroupDateTime": false,
           "conceptNames": [
             "Date diagnostic VIH(Ant)",
             "IPD Admission, Histoire ARV",
@@ -496,9 +536,6 @@
             "CAI, ARV Line",
             "CAI, Date début Regime ARV",
             "CAI, Motif début régime",
-            "CSI, ARV Line",
-            "CSI, Date début Regime ARV",
-            "CSI, Motif début régime",
             "IPD Admission, Avez-vous déjà arrêté les ARV pendant plus d'un mois",
             "IPD Admission, TB en cours de traitement à l'admission",
             "IPD Admission, Elements de diagnostic TB",
@@ -545,11 +582,12 @@
         "displayOrder": 6,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "showGroupDateTime": true,
+          "showGroupDateTime": false,
           "numberOfVisits": 1,
           "conceptNames": [
             "Signes vitaux"
-          ]
+          ],
+		  "scope":"latest"
         }
       },
       "examenPhysiqueAdmission": {
@@ -573,10 +611,13 @@
         "displayOrder": 8,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "showGroupDateTime": true,
+          "showGroupDateTime": false,
           "numberOfVisits": 1,
           "conceptNames": [
-            "CAI, Hypothèses diagnostics"
+            "CAI, Infections opportunistes",
+			"CAI, Status IO",
+			"CAI, Informations Autres diagnostics",
+			
           ]
         }
       },
@@ -614,10 +655,15 @@
         "displayOrder": 11,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "showGroupDateTime": true,
+          "showGroupDateTime": false,
           "numberOfVisits": 1,
           "conceptNames": [
-            "CAI, Conduite à tenir"
+			"CAI, Prophylaxie",
+			"CAI, ARV Line",
+			"CAI, Date début Regime ARV",
+			"CAI, Motif début régime",
+			"CAI, Traitement",
+			"CAI, Effets secondaires - médicaments"
           ]
         }
       },
@@ -628,10 +674,10 @@
         "displayOrder": 12,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "showGroupDateTime": true,
+          "showGroupDateTime": no,
           "numberOfVisits": 1,
           "conceptNames": [
-            "CAI, Issue de la consultation"
+            "CAI, Mode d'entrée (IPD)"
           ]
         }
       }
