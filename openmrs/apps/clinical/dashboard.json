@@ -616,7 +616,7 @@
           "conceptNames": [
             "CAI, Infections opportunistes",
 			"CAI, Status IO",
-			"CAI, Informations Autres diagnostics",
+			"CAI, Informations Autres diagnostics"
           ]
         }
       },
@@ -673,7 +673,6 @@
         "displayOrder": 12,
         "displayType": "Full-Page",
         "dashboardConfig": {
-          "showGroupDateTime": no,
           "numberOfVisits": 1,
           "conceptNames": [
             "CAI, Mode d'entrée (IPD)"
