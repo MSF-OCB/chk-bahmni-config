@@ -862,224 +862,144 @@
       }
     }
   },
-  "Suivi Consultation form": {
-    "translationKey": "Consultation OPD",
+  "consultationOPD":{
+	"translationKey": "Consultation OPD",
     "printing": {
       "title": "Centre Hospitalier Kabinda",
       "header": "Consultation OPD",
       "logo": "/bahmni_config/openelis/images/labLogo.jpg"
     },
-    "sections": {
-      "typeDeConsultation": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "hideEmptyDisplayControl": true,
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "CO, Type de consultation"
-          ]
-        },
-        "displayOrder": 1,
-        "translationKey": "DASHBOARD_TITLE_TYPE_DE_CONSULTATION"
-      },
-      "patientdetailsvisit1": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "hideEmptyDisplayControl": true,
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Date de prochain RDV"
-          ]
-        },
-        "displayOrder": 2,
-        "translationKey": "DASHBOARD_TITLE_DATE_OF_PROCHAIN RDV"
-      },
-      "patientdetailsvisit2": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Stade clinique OMS"
-          ]
-        },
-        "displayOrder": 3,
-        "translationKey": "DASHBOARD_TITLE_DATE_OF_STADE_OMS"
-      },
-      "Parameters": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Signes vitaux"
-          ]
-        },
-        "displayOrder": 4,
-        "translationKey": "DASHBOARD_TITLE_PARAMETERS"
-      },
-      "anamneseConsultationOPD": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "CO, Anamnèse"
-          ]
-        },
-        "displayOrder": 5,
-        "translationKey": "DASHBOARD_TITLE_ANAMNESE"
-      },
-      "examenPhysique": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Examen clinique"
-          ]
-        },
-        "displayOrder": 6,
-        "translationKey": "DASHBOARD_TITLE_EXAMEN_PHYSIQUE"
-      },
-      "hypothèsesDiagnostiques": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "CO, Hypothèses diagnostics"
-          ]
-        },
-        "displayOrder": 7,
-        "translationKey": "DASHBOARD_TITLE_HYPOTHESES_DIAGNOSTIQUES"
-      },
-      "Paraclinique": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Paraclinique - Radiologie"
-          ]
-        },
-        "displayOrder": 8,
-        "translationKey": "DASHBOARD_TITLE_PARACLINIC"
-      },
-      "Ecographie": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showGroupDateTime": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "Paraclinique - Echographie"
-          ]
-        },
-        "displayOrder": 9,
-        "translationKey": "DASHBOARD_TITLE_ECOGRAPHIE"
-      },
-      "investigationsChart": {
-        "translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY",
-        "type": "labOrders",
-        "displayOrder": 10,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "title": null,
-          "numberOfVisits": 1,
-          "showChart": true,
-          "showTable": false,
-          "showGroupDateTime": true
-        }
-      },
-      "testRapid": {
-        "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
-        "type": "vitals",
-        "isObservation": true,
-        "displayOrder": 11,
-        "displayType": "Full-Page",
-        "hideEmptyDisplayControl": false,
-        "dashboardConfig": {
-          "showDetailsButton": true,
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "TDR"
-          ]
-        }
-      },
-      "Conduite à tenir": {
-        "type": "vitals",
-        "isObservation": true,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "numberOfVisits": 1,
-          "conceptNames": [
-            "CO, Conduite à tenir"
-          ],
-          "showGroupDateTime": true
-        },
-        "displayOrder": 12,
-        "translationKey": "DASHBOARD_TITLE_CONDUITE_A_TENIR"
-      },
-      "programs": {
-        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
-        "displayType": "Full-Page",
-        "type": "programs",
-        "displayOrder": 13
-      },
-      "treatments": {
-        "translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
-        "type": "treatment",
-        "displayOrder": 14,
-        "displayType": "Full-Page",
-        "dashboardConfig": {
-          "showFlowSheet": true,
-          "hideEmptyDisplayControl": true,
-          "showListView": true,
-          "showRoute": true,
-          "showDrugForm": true,
-          "numberOfVisits": 1,
-          "showOtherActive": true,
-          "showGroupDateTime": true,
-          "conceptNames": [
-            "Stopped Order Reason"
-          ]
-        }
-      },
-      "Exit Mode": {
-       "type": "vitals",
-       "isObservation": true,
-       "displayType": "Full-Page",
-       "dashboardConfig": {
-         "showGroupDateTime": true,
-         "numberOfVisits": 1,
-         "conceptNames": [
-           "Informations mode de sortie(Suivi)"
-         ]
-       },
-       "displayOrder": 15,
-       "translationKey": "DASHBOARD_TITLE_EXIT_MODE"
-     }
-    }
+	"sections": {
+		"patientGeneralInfoOPD": {
+			"type": "flowSheet",
+			"title": "Informations générales",
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "numberOfVisits": 1,
+			  "obsConcepts": [
+					"CO, Type de consultation",
+					"Date de prochain RDV"
+				],
+			  "scope": "latest",
+			  "showGroupDateTime": false
+			},
+			"displayOrder": 1
+		},
+		"patientParametresOPD": {
+			"type": "flowSheet",
+			"title": "Paramètres patients",
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "numberOfVisits": 1,
+			  "obsConcepts": [
+					"Stade clinique OMS",
+					"Poids",
+					"Taille"
+				],
+			  "scope": "latest",
+			  "showGroupDateTime": false
+			},
+			"displayOrder": 2
+		},
+		"patientHypotheseDiagnosticsOPD": {
+			"type": "vitals",
+			"isObservation": true,
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "showGroupDateTime": false,
+			  "numberOfVisits": 1,
+			  "conceptNames": [
+				"Sc, Informations Infections opportunistes",
+				"Informations Autres diagnostics (Suivi)"
+			  ]
+			},
+			"displayOrder": 3,
+			"translationKey": "DASHBOARD_TITLE_HYPOTHESES_DIAGNOSTIQUES"
+		},
+		"patientConduiteATenirOPD": {
+			"type": "vitals",
+			"isObservation": true,
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "numberOfVisits": 1,
+			  "conceptNames": [
+				"Sc, Informations prophylaxie"
+			  ],
+			  "showGroupDateTime": false,
+			  "scope": "latest"
+			},
+			"displayOrder": 4,
+			"translationKey": "DASHBOARD_TITLE_CONDUITE_A_TENIR"
+		},
+		"patientCD4ViralLoadOPD": {
+			"type": "flowSheet",
+			"title": "RESULTATS LABO(CV&CD4)",
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "numberOfVisits": 1,
+			  "obsConcepts": [
+					"CD4(cells/µl)"
+				],
+			  "labConcepts": [
+					"Charge Virale",
+					"CD4"
+				],
+			  "scope": "latest",
+			  "showGroupDateTime": false
+			},
+			"displayOrder": 5,
+			"translationKey": "DASHBOARD_TITLE_LAB_RESULTS_KEY"
+		},
+		"patientRegimeARV": {
+			"type": "vitals",
+			"isObservation": true,
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "numberOfVisits": "",
+			  "conceptNames": [
+				"RA, ARV Line",
+				"Regimen Start date",
+				"Regimen Start reason",
+				"CAI, ARV Line",
+				"CAI, Date début Regime ARV",
+				"CAI, Motif début régime",
+				"CSI, ARV Line",
+				"CSI, Date début Regime ARV",
+				"CSI, Motif début régime"
+			  ],
+			  "showGroupDateTime": false,
+			  "groupBy":"visits",
+			  "scope": "latest"
+			},
+			"displayOrder": 6,
+			"translationKey": "DASHBOARD_TITLE_REGIME_ARV"
+		},
+		"treatments": {
+			"translationKey": "DASHBOARD_TITLE_TREATMENTS_KEY_MEDICATION",
+			"type": "treatment",
+			"displayOrder": 7,
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "showFlowSheet": true,
+			  "hideEmptyDisplayControl": true,
+			  "showListView": true,
+			  "showRoute": true,
+			  "showDrugForm": true,
+			  "numberOfVisits": 1,
+			  "showOtherActive": false,
+			  "showGroupDateTime": false,
+			  "conceptNames": [
+				"Stopped Order Reason"
+			  ]
+			}
+		},
+		"patientProgramOPD": {
+			"translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+			"displayType": "Full-Page",
+			"type": "programs",
+			"displayOrder": 8
+		}
+	}
   },
   "investigationChart": {
     "translationKey": "Tableau des résultats",

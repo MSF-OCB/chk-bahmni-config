@@ -323,17 +323,17 @@ Bahmni.ConceptSet.FormConditions.rules = {
 		 var histoireARV = formFieldValues["IPD Admission, Histoire ARV"];
 		 if(histoireARV=="ARV intérrompu" || histoireARV=="IPD Admission History ARV, ARV intérrompu"){
 			return {
-			   show: ["IPD Admission, Si interrompu","CAI, Date début Regime ARV"],
-			   hide: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+			   show: ["IPD Admission, Si interrompu"],
+			   hide: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
 		   }
 		 }else if (histoireARV =="IPD Admission History ARV, Sous ARV" || histoireARV =="Sous ARV"){
 			return {
-			   show: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"],
+			   show: ["RA, ARV Line","Regimen Start date","Regimen Start reason"],
 			   hide: ["IPD Admission, Si interrompu"]  
 			}
 		 }else{
 			return {
-			   hide: ["IPD Admission, Si interrompu","CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+			   hide: ["IPD Admission, Si interrompu","RA, ARV Line","Regimen Start date","Regimen Start reason"]
 			}
 		 }		 
       },
@@ -355,11 +355,11 @@ Bahmni.ConceptSet.FormConditions.rules = {
 
        if (modeOfTransfert == "Oui" ) {
            return {
-               show: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+               show: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
            }
        } else {
            return {
-               hide: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+               hide: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
            }
          }
       },
@@ -381,11 +381,11 @@ Bahmni.ConceptSet.FormConditions.rules = {
 
         if (modeOfTransfert == "Oui" ) {
             return {
-                show: ["CSI, ARV Line","CSI, Date début Regime ARV","CSI, Motif début régime"]
+                show: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
             }
         } else {
             return {
-                hide: ["CSI, ARV Line","CSI, Date début Regime ARV","CSI, Motif début régime"]
+                hide: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
             }
         }
      },
