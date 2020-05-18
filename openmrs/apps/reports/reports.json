@@ -103,5 +103,12 @@
       "config": {
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/Medication_Report.sql"
       }
+  },
+  "LabTestReport": {
+      "name": "Analyses Labo",
+      "type": "ElisGeneric",
+      "config": {
+        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/Lab_Report.sql"
+      }
   }
 }
