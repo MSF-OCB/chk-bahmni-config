@@ -998,7 +998,23 @@
 			"displayType": "Full-Page",
 			"type": "programs",
 			"displayOrder": 8
+		},
+		"consultationNotes": {
+			"type": "vitals",
+			"isObservation": true,
+			"displayType": "Full-Page",
+			"dashboardConfig": {
+			  "numberOfVisits": 1,
+			  "conceptNames": [
+					"SC, Notes"
+			  ],
+			  "showGroupDateTime": false,
+			  "scope": "latest"
+			},
+			"displayOrder": 9,
+			"translationKey": "DASHBOARD_TITLE_NOTES"
 		}
+
 	}
   },
   "investigationChart": {
