@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+       <changeSet id="OCB-CONFIG-202007031210" author="Mohammad">
+
+           <comment> Adding new index to the report - Hospitalisation and Hospitalisation_Sortie</comment>
+           <sql>
+                set @x := (select count(*) from information_schema.statistics where table_name = 'concept_name' and index_name = 'idx__name_locale_concept_name_type_voided' and table_schema = database());
+                set @sql := if( @x > 0, 'select ''Index exists.''', 'Alter table concept_name add index `idx__name_locale_concept_name_type_voided`(`name`, `locale`, `concept_name_type`, `voided`);');
+                PREPARE stmt FROM @sql;
+                EXECUTE stmt;
+                set @x := (select count(*) from information_schema.statistics where table_name = 'obs' and index_name = 'idx__concept_id_voided' and table_schema = database());
+                set @sql := if( @x > 0, 'select ''Index exists.''', 'Alter table obs add index `idx__concept_id_voided`(`concept_id`, `voided`);');
+                PREPARE stmt FROM @sql;
+                EXECUTE stmt;
+                set @x := (select count(*) from information_schema.statistics where table_name = 'obs' and index_name = 'idx__encounter_id_concept_id_voided' and table_schema = database());
+                set @sql := if( @x > 0, 'select ''Index exists.''', 'Alter table obs add index `idx__encounter_id_concept_id_voided`(`encounter_id`, `concept_id`, `voided`);');
+                PREPARE stmt FROM @sql;
+                EXECUTE stmt;
+           </sql>
+         </changeSet>
+       </databaseChangeLog>
+
