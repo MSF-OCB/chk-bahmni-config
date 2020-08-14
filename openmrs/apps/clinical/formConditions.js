@@ -320,20 +320,23 @@ Bahmni.ConceptSet.FormConditions.rules = {
         }
      },
      'IPD Admission, Histoire ARV': function (formName, formFieldValues) {
-             var conditions = {
-                 show: [],
-                 hide: []
-             };
-
-             var interrompu = "IPD Admission, Si interrompu";
-             var resultInterrompu = formFieldValues['IPD Admission, Histoire ARV'];
-             if (resultInterrompu == "ARV intérrompu" || resultInterrompu == "IPD Admission History ARV, ARV intérrompu" ) {
-                 conditions.show.push(interrompu);
-             } else {
-                 conditions.hide.push(interrompu);
-             }
-             return conditions;
-         },
+		 var histoireARV = formFieldValues["IPD Admission, Histoire ARV"];
+		 if(histoireARV=="ARV intérrompu" || histoireARV=="IPD Admission History ARV, ARV intérrompu"){
+			return {
+			   show: ["IPD Admission, Si interrompu"],
+			   hide: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
+		   }
+		 }else if (histoireARV =="IPD Admission History ARV, Sous ARV" || histoireARV =="Sous ARV"){
+			return {
+			   show: ["RA, ARV Line","Regimen Start date","Regimen Start reason"],
+			   hide: ["IPD Admission, Si interrompu"]  
+			}
+		 }else{
+			return {
+			   hide: ["IPD Admission, Si interrompu","RA, ARV Line","Regimen Start date","Regimen Start reason"]
+			}
+		 }		 
+      },
      "IPD Admission, TB en cours de traitement à l'admission" : function (formName, formFieldValues) {
        var modeOfTransfert = formFieldValues["IPD Admission, TB en cours de traitement à l'admission"];
 
@@ -352,27 +355,14 @@ Bahmni.ConceptSet.FormConditions.rules = {
 
        if (modeOfTransfert == "Oui" ) {
            return {
-               show: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+               show: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
            }
        } else {
            return {
-               hide: ["CAI, ARV Line","CAI, Date début Regime ARV","CAI, Motif début régime"]
+               hide: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
            }
          }
       },
-     "CAI, Mode d'entrée (IPD)": function (formName, formFieldValues) {
-        var modeOfTransfert = formFieldValues["CAI, Mode d'entrée (IPD)"];
-
-        if (modeOfTransfert == "Hospi de jour(Suivi)") {
-          return {
-            show: ["Prochain RDV"]
-          }
-        } else {
-          return {
-            hide: ["Prochain RDV"]
-          }
-        }
-     },
       "CSI, Status prophylaxie" : function (formName, formFieldValues) {
         var statusProphylaxieType = formFieldValues["CSI, Status prophylaxie"];
 
@@ -391,37 +381,102 @@ Bahmni.ConceptSet.FormConditions.rules = {
 
         if (modeOfTransfert == "Oui" ) {
             return {
-                show: ["CSI, ARV Line","CSI, Date début Regime ARV","CSI, Motif début régime"]
+                show: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
             }
         } else {
             return {
-                hide: ["CSI, ARV Line","CSI, Date début Regime ARV","CSI, Motif début régime"]
+                hide: ["RA, ARV Line","Regimen Start date","Regimen Start reason"]
             }
         }
      },
     "CSI, Mode de sortie" : function (formName, formFieldValues) {
       var transfertType = formFieldValues["CSI, Mode de sortie"];
-      if (transfertType == "Transfert(Suivi)") {
+      if (transfertType == "Domicile(Suivi)") {
         return {
-          show: ["CSI, Transfert"],
-          hide: ["CSI, Prochain RDV", "referred"]
+          show: ["CSI, Prochain RDV"],
+          hide: ["CSI, Transfert", "Refere vers"]
         }
       } else if (transfertType == "Reféré(Suivi)") {
         return {
-          show: ["referred"],
+		  show: ["Refere vers"],
           hide: ["CSI, Transfert", "CSI, Prochain RDV"]
-        }
-      } else if (transfertType == "Domicile(Suivi)") {
-        return {
-          show: ["CSI, Prochain RDV"],
-          hide: ["CSI, Transfert", "referred"]
         }
       } else {
         return {
-          hide: ["CSI, Transfert", "CSI, Prochain RDV", "referred"]
+          hide: ["CSI, Transfert", "CSI, Prochain RDV", "Refere vers"]
         }
       }
-    }
+    },
+	"Malade arrivé mort" : function (formName, formFieldValues) {
+		var arrivalDead = formFieldValues["Malade arrivé mort"];
+		if(arrivalDead == "Oui") {
+				return {
+						 hide: ["CAI, Anamnèse","CAI, Examen physique","CAI, Hypothèses diagnostics","CAI, Conduite à tenir","CAI, Issue de la consultation"]
+				}
+		}
+		else {
+				return {
+						show: ["CAI, Anamnèse","CAI, Examen physique","CAI, Hypothèses diagnostics","CAI, Conduite à tenir","CAI, Issue de la consultation"]
+						}
+		}
+	},
+	"Type Session PSE" : function (formName, formFieldValues) {
+		var pscSessionType = formFieldValues["Type Session PSE"];
+		if(pscSessionType == "Screening - Type") {
+			return {
+					 hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"]
+
+			}
+		}
+		else if (pscSessionType == "Session ART - Type"){
+			return {
+					hide: ["Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
+					show: ["Type Session ART- Groupe"]
+			}
+		}
+		else if (pscSessionType == "Boosting Adherence - Type"){
+			return {
+					hide: ["Type Session ART- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
+					show: ["Type Session Boosting Adherence- Groupe"]
+			}
+		}
+		else if (pscSessionType == "Session IPD - Type"){
+			return {
+					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
+					show: ["Type Session IPD- Groupe"]
+			}
+		}
+		else if (pscSessionType == "Session TB - Type"){
+			return {
+					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
+					show: ["Type Session TB- Groupe"]
+			}
+		}
+		else if (pscSessionType == "Session Annonce - Type"){
+			return {
+					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
+					show: ["Type Session Annonce- Groupe"]
+			}
+		}
+		else if (pscSessionType == "Sarcome de Kaposi - Type"){
+			return {
+					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Autre Session- Groupe"],
+					show: ["Type Session Sarcome de Kaposi- Groupe"]
+			}
+		}
+		else if (pscSessionType == "Autre Session - Type"){
+			return {
+					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe"],
+					show: ["Type Autre Session- Groupe"]
+			}
+		}
+		else {
+			return {
+					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"]
+			}
+		}
+	}
+
 
  };
 

@@ -5,6 +5,10 @@ SELECT
       CASE WHEN pat.name = 'Type de cohorte' THEN cn.name ELSE NULL END
     )
   ) AS "TypeCohorte",
+    GROUP_CONCAT(
+	DISTINCT(
+	  CASE WHEN pat.name = 'Status VIH' THEN cn.name ELSE NULL END)
+  ) AS "StatusVIH",
   CONCAT(
     pn.family_name,
     ' ',
@@ -34,12 +38,15 @@ SELECT
     ),
     '%d/%m/%Y'
   ) AS "Date entrée cohorte",
+  onarv.C9 as "Historique ARV",
+  date_format(arvpgm.enrolledDate, '%d/%m/%Y')                                              AS "Date début ARV",
   refer.C6 AS "Structure de référence",
   DATE_FORMAT(
     admdate1.currentDateDeAdmissionValue,
     '%d/%m/%Y'
   ) AS "Date d'admission",
   syndrome.C4 AS "Syndrome à l'admission",
+  arrivaldead.C8 AS "Arrivé mort",
   GROUP_CONCAT(
     DISTINCT (dg.S1),
     ''
@@ -53,6 +60,7 @@ SELECT
     '%d/%m/%Y'
   ) AS "Date de sortie",
   mode_sortie.S1 AS "Mode de sortie",
+  refv.name as "Référé vers",
   mpc.name AS "MPC",
   cd4.value AS "CD4(cells/µl)",
   DATE_FORMAT(cd4.CDdate, '%d/%m/%Y') AS "Date resultat CD4",
@@ -99,6 +107,23 @@ FROM
   LEFT JOIN concept_name cn ON cn.concept_id = pa.value
   AND cn.voided = 0
   AND cn.locale_preferred = 1
+  
+  LEFT JOIN (/*ARV enrollment Date*/
+	 SELECT pp.patient_id, date(pp.date_enrolled) AS enrolledDate
+	 FROM patient_program pp
+			INNER JOIN (SELECT ARV_prog.patient_id, max(ARV_prog.date_enrolled) AS date_enrolled
+						FROM (SELECT pp.patient_id, pp.program_id, pp.date_enrolled
+							  FROM patient_program pp
+									 INNER JOIN program p
+									   ON pp.program_id = p.program_id AND p.retired IS FALSE AND
+										  pp.voided = 0 AND
+										  p.name = 'Programme ARV') ARV_prog
+						GROUP BY patient_id) latest_arv_prog
+			  ON latest_arv_prog.patient_id = pp.patient_id AND
+				 latest_arv_prog.date_enrolled = pp.date_enrolled
+			INNER JOIN program p ON pp.program_id = p.program_id AND p.retired IS FALSE
+	 GROUP BY patient_id) AS arvpgm ON arvpgm.patient_id = sortdate.person_id
+  
   LEFT JOIN (
 
     /* get structure de référence details for each visit of patients */
@@ -128,6 +153,67 @@ FROM
       AND obsForActivityStatus.voided = 0
   ) AS refer ON refer.person_id = sortdate.person_id
   AND refer.visit = sortdate.visitid
+  
+  LEFT JOIN (
+
+    /* Get to know whether patient arrived dead or not 'malade arrivé mort?' */
+    SELECT
+      obsForActivityStatus.person_id,
+      (
+        SELECT
+          concept_short_name
+        FROM
+          concept_view
+        WHERE
+          concept_id = obsForActivityStatus.value_coded
+      ) AS 'C8',
+      DATE(
+        obsForActivityStatus.obs_datetime
+      ) AS 'ObsDate',
+      vt.visit_id AS visit
+    FROM
+      obs obsForActivityStatus
+      INNER JOIN encounter et ON et.encounter_id = obsForActivityStatus.encounter_id
+      INNER JOIN visit vt ON vt.visit_id = et.visit_id
+      INNER JOIN concept_view cv ON cv.concept_id = obsForActivityStatus.concept_id
+      AND cv.concept_full_name = "Malade arrivé mort"
+      INNER JOIN concept_answer ca ON ca.concept_id = cv.concept_id
+      AND obsForActivityStatus.value_coded = ca.answer_concept
+      AND cv.concept_full_name IN ("Malade arrivé mort")
+      AND obsForActivityStatus.voided = 0
+  ) AS arrivaldead ON arrivaldead.person_id = sortdate.person_id
+  AND arrivaldead.visit = sortdate.visitid
+  
+   LEFT JOIN (
+
+    /* Get to know whether patient is on ARV on arrival' */
+    SELECT
+      obsForActivityStatus.person_id,
+      (
+        SELECT
+          concept_short_name
+        FROM
+          concept_view
+        WHERE
+          concept_id = obsForActivityStatus.value_coded
+      ) AS 'C9',
+      DATE(
+        obsForActivityStatus.obs_datetime
+      ) AS 'ObsDate',
+      vt.visit_id AS visit
+    FROM
+      obs obsForActivityStatus
+      INNER JOIN encounter et ON et.encounter_id = obsForActivityStatus.encounter_id
+      INNER JOIN visit vt ON vt.visit_id = et.visit_id
+      INNER JOIN concept_view cv ON cv.concept_id = obsForActivityStatus.concept_id
+      AND cv.concept_full_name = "IPD Admission, Histoire ARV"
+      INNER JOIN concept_answer ca ON ca.concept_id = cv.concept_id
+      AND obsForActivityStatus.value_coded = ca.answer_concept
+      AND cv.concept_full_name IN ("IPD Admission, Histoire ARV")
+      AND obsForActivityStatus.voided = 0
+  ) AS onarv ON onarv.person_id = sortdate.person_id
+  AND onarv.visit = sortdate.visitid
+  
   LEFT JOIN (
 
     /* get mode d'entrée details for latest encounter of each visit of patients  */
@@ -389,6 +475,45 @@ FROM
       AND answer_concept.locale = 'fr'
   ) AS mpc ON mpc.PID = sortdate.person_id
   AND mpc.visitid = sortdate.visitid
+  
+  LEFT JOIN (
+
+    /* get Référé vers information */
+    SELECT
+      o.person_id AS PID,
+      latestEncounter.visit_id AS visitid,
+      answer_concept.name AS NAME
+    FROM
+      obs o
+      INNER JOIN encounter e ON o.encounter_id = e.encounter_id
+      AND e.voided IS FALSE
+      AND o.voided IS FALSE
+      INNER JOIN (
+        SELECT
+          e.visit_id,
+          max(e.encounter_datetime) AS `encounterTime`,
+          cn.concept_id
+        FROM
+          obs o
+          INNER JOIN concept_name cn ON o.concept_id = cn.concept_id
+          AND cn.name = 'Refere vers'
+          AND cn.voided IS FALSE
+          AND cn.concept_name_type = 'FULLY_SPECIFIED'
+          AND cn.locale = 'fr'
+          AND o.voided IS FALSE
+          INNER JOIN encounter e ON o.encounter_id = e.encounter_id
+          AND e.voided IS FALSE
+        GROUP BY
+          e.visit_id
+      ) latestEncounter ON latestEncounter.encounterTime = e.encounter_datetime
+      AND o.concept_id = latestEncounter.concept_id
+      INNER JOIN concept_name answer_concept ON o.value_coded = answer_concept.concept_id
+      AND answer_concept.voided IS FALSE
+      AND answer_concept.concept_name_type = 'FULLY_SPECIFIED'
+      AND answer_concept.locale = 'fr'
+  ) AS refv ON refv.PID = sortdate.person_id
+  AND refv.visitid = sortdate.visitid
+  
   LEFT JOIN (
 
     /* get 2er diagnostic à la sortie details for each visit of patients  */
