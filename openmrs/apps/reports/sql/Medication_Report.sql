@@ -58,7 +58,7 @@ INNER JOIN concept_view cv ON valuesOfattribute.value = cv.concept_id
 INNER JOIN encounter e ON drugOrderDetails.innerEncounter= e.encounter_id
 INNER JOIN visit v ON e.visit_id = v.visit_id
 INNER JOIN visit_type vt ON v.visit_type_id = vt.visit_type_id
-WHERE DATE(drugOrderDetails.dateDispensed) DATE('#startDate#') and DATE('#endDate#')
+WHERE DATE(drugOrderDetails.dateDispensed) BETWEEN DATE('#startDate#') and DATE('#endDate#')
 AND identifier.voided = 0
 AND valuesOfattribute.voided = 0
 AND cohortType.retired = 0
