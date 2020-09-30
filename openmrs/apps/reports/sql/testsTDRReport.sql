@@ -64,8 +64,9 @@ FROM (SELECT obsLabTest.obs_datetime,
              INNER JOIN concept_view cv ON cv.concept_id = pa.value
              INNER JOIN person ON person.person_id = obsLabTest.person_id
              INNER JOIN person_name pnPersonAttribute ON person.person_id = pnPersonAttribute.person_id
-             INNER JOIN visit v ON v.patient_id = obsLabTest.person_id AND v.voided = 0
-             INNER JOIN visit_type vtype ON v.visit_type_id = vtype.visit_type_id
+			 INNER JOIN encounter e ON e.encounter_id = obsLabTest.encounter_id AND e.voided = 0
+			 INNER JOIN visit v ON v.visit_id = e.visit_id AND v.voided = 0 
+			 INNER JOIN visit_type vtype ON v.visit_type_id = vtype.visit_type_id
 
       WHERE obsLabTest.voided = 0
         AND DATE(obsLabTest.obs_datetime) BETWEEN DATE('#startDate#') AND DATE('#endDate#')

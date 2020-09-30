@@ -171,7 +171,6 @@
       "Fds, Diagnostic": {
         "dropdown": false,
         "autocomplete": true,
-        "multiSelect": true,
         "disableAddNotes": true,
         "required":true
       },
