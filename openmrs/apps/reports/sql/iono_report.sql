@@ -12,7 +12,8 @@ SELECT result_date      AS "Date des résultats",
        pal              AS "Phosphatase alchaline(Pal)",
        bt               AS "Billi Total(BT)",
        bd               AS "Billi direct(BD)",
-       calcium          AS "Calcium (Ca)"
+       calcium          AS "Calcium (Ca)",
+       lipase           AS "Lipase"
 FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                                        AS "result_date",
              B.care_center_requesting                                                        AS "provenance",
              B.Patient_Name                                                                  AS "nom",
@@ -30,7 +31,8 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
                       NUMERIC))                                                              AS "bt",
              sum(CAST(CASE WHEN B.bildirect = '' THEN NULL ELSE B.bildirect END AS
                       NUMERIC))                                                              AS "bd",
-             sum(CAST(CASE WHEN B.calc = '' THEN NULL ELSE B.calc END AS NUMERIC))           AS "calcium"
+             sum(CAST(CASE WHEN B.calc = '' THEN NULL ELSE B.calc END AS NUMERIC))           AS "calcium",
+             sum(CAST(CASE WHEN B.lip = '' THEN NULL ELSE B.lip END AS NUMERIC))           AS "lipase"
       FROM (/*Pivoting the table row to column*/
            SELECT Patient_Name,
                   care_center_requesting,
@@ -64,7 +66,10 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
                       END AS bildirect,
                   CASE
                     WHEN tname = 'Calcium' THEN tvalue
-                      END AS calc
+                      END AS calc,
+                  CASE
+                    WHEN tname = 'Lipase' THEN tvalue
+                      END AS lip
 
 
            FROM (/*Pivoting the table row to column*/
@@ -109,7 +114,8 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
                                                        'Bilirubine totalE',
                                                        'Bilirubine directE',
                                                        'Calcium',
-                                                       'Gamma GT')
+                                                       'Gamma GT',
+                                                       'Lipase')
                        LEFT JOIN DICTIONARY d ON r.result_type = 'D' AND CAST(d.id AS TEXT) = r.value
                 WHERE a.status_id = 6 /*Filtering the result which are validated*/
                   AND sample.accession_number IS NOT NULL
@@ -129,4 +135,4 @@ FROM (SELECT to_char(B.date_of_results, 'DD/MM/YYYY')                           
                B.dob,
                B.sexe) AS A
 WHERE COALESCE("k", "na", "cl", "gamma", "pal", "bt", "bd",
-               "calcium") IS NOT NULL;
+               "calcium","lipase") IS NOT NULL;
