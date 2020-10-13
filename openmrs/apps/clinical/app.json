@@ -461,7 +461,35 @@
       },
       "Refere vers": {
         "required": true
-      }
+      },
+	  "SessionPSEDemande": {
+		"multiSelect":true,
+		"autocomplete":true
+	  },
+	  "SessionInitiation": {
+		"multiSelect":true
+	  },
+	  "SessionSuivi": {
+		"multiSelect":true
+	  },
+	  "SessionSET": {
+		"multiSelect":true
+	  },
+	  "SessionET": {
+		"multiSelect":true
+	  },
+	  "SessionBebeExpose": {
+		"multiSelect":true
+	  },
+	  "SessionAnnonce": {
+		"multiSelect":true
+	  },
+	  "SessionAutre": {
+		"multiSelect":true
+	  },
+	  "SessionScreening": {
+		"multiSelect":true
+	  }
     }
   }
 }
