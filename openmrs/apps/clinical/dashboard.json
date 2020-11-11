@@ -120,16 +120,19 @@
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "showDetailsButton": true,
-          "numberOfVisits": 25,
+          "scope": "latest",
           "conceptNames": [
-            "CO, PHQ",
-            "CO, Score"
+            "SD, Peu d'intérêt ou de plaisir à faire des choses",
+            "SD, Se sentir triste, déprimé(e), ou désespéré(e)",
+			"CO, Score"
           ]
         },
         "expandedViewConfig": {
           "conceptNames": [
             "CO, PHQ",
-            "CO, Score"
+			"SD, Peu d'intérêt ou de plaisir à faire des choses",
+            "SD, Se sentir triste, déprimé(e), ou désespéré(e)",
+			"CO, Score"
           ],
           "numberOfVisits": "",
           "showDetailsButton": true,
