@@ -154,30 +154,50 @@
         "expandedViewConfig": {
           "numberOfVisits": ""
         }
-      },
-      "triageForm": {
-        "translationKey": "DASHBOARD_TITLE_TRIAGE_FORM_KEY",
+      },	  
+	  "sessionDepression": {
+        "translationKey": "DASHBOARD_TITLE_PSC_SESSION_KEY",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 7,
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
+          "showDetailsButton": true,
+          "scope": "latest",
+		  "groupBy":"visits",
           "conceptNames": [
-            "Signes vitaux"
-          ],
-            "scope": "latest",
-          "showDetailsButton": true
+		    "SessionPSEDemande",
+			"SessionInitiation",
+            "SessionSuivi",
+			"SessionSET",
+			"SessionET",
+			"SessionBebeExpose",
+			"SessionAnnonce",
+			"SessionAutre",
+			"SessionScreening",
+			"PSENote"
+          ]
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Signes vitaux"
+            "SessionPSEDemande",
+			"SessionInitiation",
+            "SessionSuivi",
+			"SessionSET",
+			"SessionET",
+			"SessionBebeExpose",
+			"SessionAnnonce",
+			"SessionAutre",
+			"SessionScreening",
+			"PSENote"
           ],
+		  "groupBy":"visits",
           "numberOfVisits": "",
           "showDetailsButton": true,
           "pivotTable": {
           }
         }
-      },
+      },	  
       "testRapid": {
         "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
         "type": "vitals",
@@ -221,28 +241,22 @@
           }
         }
       },
-      "transfertObs": {
-        "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
+      "triageForm": {
+        "translationKey": "DASHBOARD_TITLE_TRIAGE_FORM_KEY",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 9,
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
-          "showDetailsButton": true,
-          "numberOfVisits": 3,
           "conceptNames": [
-            "Centre de réference",
-            "SC, PODI",
-            "CSI, Centre de référence",
-            "CSI, PODI"
-          ]
+            "Signes vitaux"
+          ],
+            "scope": "latest",
+          "showDetailsButton": true
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Centre de réference",
-            "SC, PODI",
-            "CSI, Centre de référence",
-            "CSI, PODI"
+            "Signes vitaux"
           ],
           "numberOfVisits": "",
           "showDetailsButton": true,
@@ -269,22 +283,28 @@
         ],
         "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
       },
-      "infectionsOpportunistes": {
-        "translationKey": "DASHBOARD_TITLE_INFECTION_OPPORTUNISTES_KEY",
+      "transfertObs": {
+        "translationKey": "DASHBOARD_TITLE_TRANSFER_REFERENCE_FORM_KEY",
         "type": "vitals",
         "isObservation": true,
         "displayOrder": 11,
         "hideEmptyDisplayControl": false,
         "dashboardConfig": {
           "showDetailsButton": true,
+          "numberOfVisits": 3,
           "conceptNames": [
-            "Antécédents cliniques"
-          ],
-          "scope": "latest"
+            "Centre de réference",
+            "SC, PODI",
+            "CSI, Centre de référence",
+            "CSI, PODI"
+          ]
         },
         "expandedViewConfig": {
           "conceptNames": [
-            "Antécédents cliniques"
+            "Centre de réference",
+            "SC, PODI",
+            "CSI, Centre de référence",
+            "CSI, PODI"
           ],
           "numberOfVisits": "",
           "showDetailsButton": true,
@@ -331,12 +351,40 @@
           }
         }
       },
+      "infectionsOpportunistes": {
+        "translationKey": "DASHBOARD_TITLE_INFECTION_OPPORTUNISTES_KEY",
+        "type": "vitals",
+        "isObservation": true,
+        "displayOrder": 13,
+        "hideEmptyDisplayControl": false,
+        "dashboardConfig": {
+          "showDetailsButton": true,
+          "conceptNames": [
+            "Antécédents cliniques"
+          ],
+          "scope": "latest"
+        },
+        "expandedViewConfig": {
+          "conceptNames": [
+            "Antécédents cliniques"
+          ],
+          "numberOfVisits": "",
+          "showDetailsButton": true,
+          "pivotTable": {
+          }
+        }
+      },
+	  "programs": {
+        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
+        "type": "programs",
+        "displayOrder": 14
+      },
       "labOrdersDisplayControl": {
         "translationKey": "DASHBOARD_TITLE_LAB_ORDERS_DISPLAY_CONTROL_KEY",
         "type": "ordersControl",
         "orderType": "Lab Order",
         "showDetailsButton": true,
-        "displayOrder": 13,
+        "displayOrder": 15,
         "dashboardConfig": {
           "conceptNames": [
           ]
@@ -346,11 +394,6 @@
           ],
           "showDetailsButton": true
         }
-      },
-      "programs": {
-        "translationKey": "PROGRAM_MANAGEMENT_ACTIVE_TREATMENT_KEY",
-        "type": "programs",
-        "displayOrder": 14
       }
     }
   },
@@ -1002,6 +1045,44 @@
 			"type": "programs",
 			"displayOrder": 8
 		},
+		"sessionPSEDemandee": {
+			"type": "vitals",
+			"isObservation": true,
+			"dashboardConfig": {
+			  "numberOfVisits": "",
+			  "conceptNames": [	
+				"SessionPSEDemande"
+			  ],
+			  "showGroupDateTime": false,
+			  "groupBy":"visits",
+			  "scope": "latest"
+			},
+			"displayOrder": 9,
+			"translationKey": "DASHBOARD_TITLE_PSC_SESSION_KEY"
+		},
+		"sessionPSEFaite": {
+			"type": "vitals",
+			"isObservation": true,
+			"dashboardConfig": {
+			  "numberOfVisits": "",
+			  "conceptNames": [
+				"SessionInitiation",
+				"SessionSuivi",
+				"SessionSET",
+				"SessionET",
+				"SessionBebeExpose",
+				"SessionAnnonce",
+				"SessionAutre",
+				"SessionScreening",
+				"PSENote"
+			  ],
+			  "showGroupDateTime": false,
+			  "groupBy":"visits",
+			  "scope": "latest"
+			},
+			"displayOrder": 10,
+			"translationKey": "DASHBOARD_TITLE_PSC_SESSION_KEY"
+		},
 		"consultationNotes": {
 			"type": "vitals",
 			"isObservation": true,
@@ -1014,7 +1095,7 @@
 			  "showGroupDateTime": false,
 			  "scope": "latest"
 			},
-			"displayOrder": 9,
+			"displayOrder": 11,
 			"translationKey": "DASHBOARD_TITLE_NOTES"
 		}
 
