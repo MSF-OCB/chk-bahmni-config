@@ -234,7 +234,8 @@
       },
       "Date du prochain RDV": {
         "disableAddNotes": true,
-        "allowFutureDates": true
+        "allowFutureDates": true,
+		"required": true
       },
       "Paraclinique - Radiologie": {
         "allowAddMore": true
@@ -307,7 +308,8 @@
         "allowAddMore": true
       },
       "Date de prochain RDV": {
-        "allowFutureDates": true
+        "allowFutureDates": true,
+		"required": true
       },
       "Transfert, Date": {
         "allowFutureDates": true
@@ -457,7 +459,8 @@
       },
       "CSI, Date prochain RDV": {
         "disableAddNotes": true,
-        "allowFutureDates": true
+        "allowFutureDates": true,
+		"required": true
       },
       "Refere vers": {
         "required": true
