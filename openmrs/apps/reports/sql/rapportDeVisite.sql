@@ -192,6 +192,5 @@ LEFT JOIN
             ) AS scoreValue ON scoreValue.person_id = obsForActivityStatus.person_id  and scoreValue.visit_id = vt.visit_id
          GROUP BY visit
          ) AS phqScoreValue on phqScoreValue.person_id = v.patient_id AND phqScoreValue.visit = v.visit_id
-WHERE DATE(v.date_started) BETWEEN DATE('#startDate#') AND DATE('#endDate#')
-ORDER BY v.date_started
-;
+WHERE DATE(v.date_started) BETWEEN DATE('#startDate#') AND DATE('#endDate#') AND v.voided = 0
+ORDER BY v.date_started;
