@@ -329,13 +329,13 @@ Bahmni.ConceptSet.FormConditions.rules = {
 		 }else if (histoireARV =="IPD Admission History ARV, Sous ARV" || histoireARV =="Sous ARV"){
 			return {
 			   show: ["RA, ARV Line","Regimen Start date","Regimen Start reason"],
-			   hide: ["IPD Admission, Si interrompu"]  
+			   hide: ["IPD Admission, Si interrompu"]
 			}
 		 }else{
 			return {
 			   hide: ["IPD Admission, Si interrompu","RA, ARV Line","Regimen Start date","Regimen Start reason"]
 			}
-		 }		 
+		 }
       },
      "IPD Admission, TB en cours de traitement à l'admission" : function (formName, formFieldValues) {
        var modeOfTransfert = formFieldValues["IPD Admission, TB en cours de traitement à l'admission"];
@@ -419,64 +419,6 @@ Bahmni.ConceptSet.FormConditions.rules = {
 						show: ["CAI, Anamnèse","CAI, Examen physique","CAI, Hypothèses diagnostics","CAI, Conduite à tenir","CAI, Issue de la consultation"]
 						}
 		}
-	},
-	"Type Session PSE" : function (formName, formFieldValues) {
-		var pscSessionType = formFieldValues["Type Session PSE"];
-		if(pscSessionType == "Screening - Type") {
-			return {
-					 hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"]
-
-			}
-		}
-		else if (pscSessionType == "Session ART - Type"){
-			return {
-					hide: ["Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
-					show: ["Type Session ART- Groupe"]
-			}
-		}
-		else if (pscSessionType == "Boosting Adherence - Type"){
-			return {
-					hide: ["Type Session ART- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
-					show: ["Type Session Boosting Adherence- Groupe"]
-			}
-		}
-		else if (pscSessionType == "Session IPD - Type"){
-			return {
-					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
-					show: ["Type Session IPD- Groupe"]
-			}
-		}
-		else if (pscSessionType == "Session TB - Type"){
-			return {
-					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
-					show: ["Type Session TB- Groupe"]
-			}
-		}
-		else if (pscSessionType == "Session Annonce - Type"){
-			return {
-					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"],
-					show: ["Type Session Annonce- Groupe"]
-			}
-		}
-		else if (pscSessionType == "Sarcome de Kaposi - Type"){
-			return {
-					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Autre Session- Groupe"],
-					show: ["Type Session Sarcome de Kaposi- Groupe"]
-			}
-		}
-		else if (pscSessionType == "Autre Session - Type"){
-			return {
-					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe"],
-					show: ["Type Autre Session- Groupe"]
-			}
-		}
-		else {
-			return {
-					hide: ["Type Session ART- Groupe","Type Session Boosting Adherence- Groupe","Type Session IPD- Groupe","Type Session TB- Groupe","Type Session Annonce- Groupe","Type Session Sarcome de Kaposi- Groupe","Type Autre Session- Groupe"]
-			}
-		}
 	}
 
-
  };
-

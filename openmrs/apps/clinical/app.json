@@ -23,7 +23,9 @@
     "visitUuid"
   ],
   "config": {
-    "enableLabOrderOptions": ["Urgent"],
+    "enableLabOrderOptions": [
+      "Urgent"
+    ],
     "quickPrints": false,
     "networkConnectivity": {
       "showNetworkStatusMessage": false,
@@ -44,31 +46,54 @@
       "patientInformation": {
         "ageLimit": 100
       },
-	"ARV Line(Programme)" : {
-              "excludeFrom" : ["Programme TB"]
+      "ARV Line(Programme)": {
+        "excludeFrom": [
+          "Programme TB"
+        ]
       },
-      "TB Type":{
-        "required": true
-    },
+      "TB Type": {
+        "excludeFrom": [
+          "Programme ARV",
+          "Crypto Neuro Méningé",
+          "INH",
+          "Crypto Sérique",
+          "Toxoplasmose",
+          "Pneumocystose (PCP)",
+          "Isosporose"
+        ]
+      },
       "Site TEP": {
-              "required": true
+        "excludeFrom": [
+          "Programme ARV",
+          "Crypto Neuro Méningé",
+          "INH",
+          "Crypto Sérique",
+          "Toxoplasmose",
+          "Pneumocystose (PCP)",
+          "Isosporose"
+        ]
       },
-      "Motif début traitement" : {
-        "required": true
+      "Motif début traitement": {
+        "excludeFrom": [
+          "Programme ARV",
+          "Crypto Neuro Méningé",
+          "INH",
+          "Crypto Sérique",
+          "Toxoplasmose",
+          "Pneumocystose (PCP)",
+          "Isosporose"
+        ]
       },
-      "TB Type":{
-        "excludeFrom" : ["Programme ARV","Crypto Neuro Méningé","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
-    },
-  "Motif début traitement" : {
-       "excludeFrom" : ["Programme ARV","Crypto Neuro Méningé","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
- },
- "Site TEP" : {
-       "excludeFrom" : ["Programme ARV","Crypto Neuro Méningé","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
- },
-       "Program States for TB":{
-         "excludeFrom": ["Programme ARV","INH","Crypto Sérique","Toxoplasmose","Pneumocystose (PCP)","Isosporose"]
-       }
-
+      "Program States for TB": {
+        "excludeFrom": [
+          "Programme ARV",
+          "INH",
+          "Crypto Sérique",
+          "Toxoplasmose",
+          "Pneumocystose (PCP)",
+          "Isosporose"
+        ]
+      }
     },
     "patientContext": {
       "programAttributes": [
@@ -108,35 +133,35 @@
         "dropdown": true,
         "required": true
       },
-      "IPD Admission, Diagnostics de sortie" :{
-        "autocomplete":true,
-        "multiSelect" : true
+      "IPD Admission, Diagnostics de sortie": {
+        "autocomplete": true,
+        "multiSelect": true
       },
-      "IPD Admission, Histoire ARV" :{
+      "IPD Admission, Histoire ARV": {
         "dropdown": true,
         "required": true
       },
-      "IPD Admission, Si interrompu" :{
+      "IPD Admission, Si interrompu": {
         "dropdown": true,
         "required": true
       },
-      "IPD Admission, Ligne ARV en cours" :{
+      "IPD Admission, Ligne ARV en cours": {
         "dropdown": true
       },
-      "IPD Admission, Elements de diagnostic TB" : {
-        "multiSelect" : true
+      "IPD Admission, Elements de diagnostic TB": {
+        "required": true
       },
-      "IPD Admission, Régime actuel" :{
-        "autocomplete":true
+      "IPD Admission, Régime actuel": {
+        "autocomplete": true
       },
       "IPD Admission, Type": {
         "dropdown": true
       },
-      "IPD Admission Section, Hospitalisations antérieures":{
+      "IPD Admission Section, Hospitalisations antérieures": {
         "allowAddMore": true
       },
       "IPD Admission, Prophylaxie à l'admission": {
-        "multiSelect" : true
+        "multiSelect": true
       },
       "IPD Admission, Stade OMS": {
         "dropdown": true
@@ -145,11 +170,11 @@
         "dropdown": true
       },
       "Référé en IPD par(FOSA)": {
-        "autocomplete":true,
+        "autocomplete": true,
         "required": true
       },
       "FOSA de suivi ARV": {
-        "autocomplete":true,
+        "autocomplete": true,
         "required": true
       },
       "Malade arrivé mort": {
@@ -172,15 +197,13 @@
         "dropdown": false,
         "autocomplete": true,
         "disableAddNotes": true,
-        "required":true
+        "required": true
       },
       "RPEC": {
         "allowAddMore": true
       },
       "Date de sortie": {
-        "allowFutureDates": true,
-        "disableAddNotes": true,
-        "required":true
+        "allowFutureDates": false
       },
       "Syndrome et Diagnostic": {
         "allowAddMore": true
@@ -188,7 +211,7 @@
       "Syndrome": {
         "dropdown": true,
         "disableAddNotes": true,
-        "required":true
+        "required": true
       },
       "Ligne": {
         "disableAddNotes": true
@@ -198,16 +221,21 @@
       },
       "Traitemtent TB commencé?": {
         "disableAddNotes": true,
-        "required":true
+        "required": true
       },
       "Mode de sortie": {
         "disableAddNotes": true
       },
-      "Date début":{"required":true},
-      "MPC(Sorte)":{"required":true},
+      "Date début": {
+        "required": true
+      },
+      "MPC(Sorte)": {
+        "required": true
+      },
       "Date du prochain RDV": {
         "disableAddNotes": true,
-        "allowFutureDates" : true
+        "allowFutureDates": true,
+		"required": true
       },
       "Paraclinique - Radiologie": {
         "allowAddMore": true
@@ -219,7 +247,9 @@
         "dropdown": true
       },
       "Infections Opportunistes": {
-        "autocomplete": true
+        "dropdown": false,
+        "autocomplete": true,
+        "multiSelect": true
       },
       "Ligne d'ARV": {
         "dropdown": true
@@ -257,129 +287,212 @@
       "Informations Vaccination": {
         "allowAddMore": true
       },
-      "Sc, Diagnostic":{
-        "dropdown":false,
-        "autocomplete":true,
+      "Sc, Diagnostic": {
+        "dropdown": false,
+        "autocomplete": true,
         "multiSelect": true
       },
-      "Stade clinique OMS":{
-        "dropdown":true
+      "Stade clinique OMS": {
+        "dropdown": true
       },
-      "Examen clinique":{
+      "Examen clinique": {
         "allowAddMore": true
       },
-      "Information Diagnostique":{
-        "allowAddMore": true
-
-      },
-      "Sc, Informations prophylaxie":{
+      "Information Diagnostique": {
         "allowAddMore": true
       },
-      "Sc, Informations Infections opportunistes":{
+      "Sc, Informations prophylaxie": {
         "allowAddMore": true
       },
-      "Infections Opportunistes":{
-        "dropdown":false,
-        "autocomplete":true,
-        "multiSelect": true
+      "Sc, Informations Infections opportunistes": {
+        "allowAddMore": true
       },
-      "Date de prochain RDV":{
+      "Date de prochain RDV": {
+        "allowFutureDates": true,
+		"required": true
+      },
+      "Transfert, Date": {
         "allowFutureDates": true
       },
-      "Transfert, Date":{
-         "allowFutureDates": true
+      "Centre de réference": {
+        "autocomplete": true,
+        "required": true
       },
-      "Centre de réference":{
-        "autocomplete":true,
-        "required":true
+      "PODI": {
+        "dropdown": true,
+        "required": true
       },
-      "PODI":{
-        "dropdown":true,
-        "required":true
+      "Regimen Start reason": {
+        "required": true,
+        "dropdown": true
       },
-      "Regimen Start reason":{
-        "dropdown":true
+      "Effets secondaires - médicaments": {
+        "allowAddMore": true
       },
-       "Effets secondaires - médicaments":{
-        "allowAddMore":true
-      },
-      "Résultat(Option)":{
-        "dropdown":true
+      "Résultat(Option)": {
+        "dropdown": true
       },
       "RA, ARV Line": {
+        "required": true,
         "dropdown": true
       },
-      "Type d'Echo":{
-        "dropdown":true
-      },
-      "Historique TB antérieur(si traité précédemment)":{
+      "Type d'Echo": {
         "dropdown": true
       },
-      "TB résultat du traitement":{
+      "Historique TB antérieur(si traité précédemment)": {
         "dropdown": true
       },
-        "Diagnostics à l'admission":{
-        "autocomplete":true,
+      "TB résultat du traitement": {
+        "dropdown": true
+      },
+      "Diagnostics à l'admission": {
+        "autocomplete": true,
         "multiSelect": true
       },
       "Tension arterielle(Tabular)": {
-          "isTabular": true
-       },
-      "Infirmier en charge de l'admission":{
-        "autocomplete":true,
+        "isTabular": true
+      },
+      "Infirmier en charge de l'admission": {
+        "autocomplete": true,
         "required": true
       },
-      "Medecin en charge de l'admission":{
-        "autocomplete":true,
+      "Medecin en charge de l'admission": {
+        "autocomplete": true,
         "required": true
       },
-      "Vaccination":{
+      "Vaccination": {
         "multiSelect": true
       },
-      "SC, PODI":{
-         "dropdown": true
+      "SC, PODI": {
+        "dropdown": true
       },
-      "CAI, Informations Infections Opportunistes" : {
+      "CAI, Informations Infections Opportunistes": {
         "allowAddMore": true
       },
-      "Informations autres pathologies":{
+      "Informations autres pathologies": {
         "allowAddMore": true
       },
-      "Autre pathologies années" : {
+      "Autre pathologies années": {
         "allowAddMore": true
       },
-      "TR, Type de visite" :{"required": true},
-      "IPD Admission, Date d'admission" :{"required": true},
-      "CO, Type de consultation":{"required": true},
-      "motif arret prophylaxie":{"required": true},
-      "RA, ARV Line":{"required": true,"dropdown": true},
-      "Regimen Start date":{"required": true},
-      "Regimen Start reason":{"required": true,"dropdown": true},
-      "CAI, Noms":{"required": true},
-      "CAI, Adresse physique":{"required": true},
-      "CAI, Numéro Tél":{"required": true},
-      "IPD Admission, Avez-vous déjà arrêté les ARV pendant plus d'un mois":{"required": true},
-      "IPD Admission, TB en cours de traitement à l'admission":{"required": true},
-      "IPD Admission, Elements de diagnostic TB":{"required": true},
-      "IPD Admission, SNC Glasgow(/15)":{"required": true},
-      "CAI, ARV Line":{"required": true,"dropdown": true},
-      "CAI, Date début Regime ARV":{"required": true},
-      "CAI, Motif début régime":{"dropdown": true,"required": true},
-      "CSI, PODI":{"required": true,"dropdown": true},
-      "CAI, Infections opportunistes": {"autocomplete": true},
-      "CAI, Diagnostic":{"autocomplete":true,"multiSelect": true},
-      "CAI, Evaluation des symptômes TB": {"multiSelect": true},
-      "CAI, Stade OMS":{"dropdown": true},
-      "CSI, ARV Line":{"required": true,"dropdown": true},
-      "CSI, Date début Regime ARV":{"required": true},
-      "CSI, Motif début régime":{"dropdown": true,"required": true},
-      "CSI, Motif d'arrêt prophylaxie":{"required": true},
-      "CSI, Mode de sortie":{"required": true},
-      "CSI, Centre de référence":{"required": true,"autocomplete":true},
-      "CSI, PODI":{"required": true,"dropdown": true},
-      "CSI, Date prochain RDV" :{"disableAddNotes": true,"allowFutureDates" : true},
-	  "Date de sortie": {"allowFutureDates" : false},
-	  "Refere vers": {"required": true}
+      "TR, Type de visite": {
+        "required": true
+      },
+      "IPD Admission, Date d'admission": {
+        "required": true
+      },
+      "CO, Type de consultation": {
+        "required": true
+      },
+      "motif arret prophylaxie": {
+        "required": true
+      },
+      "Regimen Start date": {
+        "required": true
+      },
+      "CAI, Noms": {
+        "required": true
+      },
+      "CAI, Adresse physique": {
+        "required": true
+      },
+      "CAI, Numéro Tél": {
+        "required": true
+      },
+      "IPD Admission, Avez-vous déjà arrêté les ARV pendant plus d'un mois": {
+        "required": true
+      },
+      "IPD Admission, TB en cours de traitement à l'admission": {
+        "required": true
+      },
+      "IPD Admission, SNC Glasgow(/15)": {
+        "required": true
+      },
+      "CAI, ARV Line": {
+        "required": true,
+        "dropdown": true
+      },
+      "CAI, Date début Regime ARV": {
+        "required": true
+      },
+      "CAI, Motif début régime": {
+        "dropdown": true,
+        "required": true
+      },
+      "CSI, PODI": {
+        "required": true,
+        "dropdown": true
+      },
+      "CAI, Infections opportunistes": {
+        "autocomplete": true
+      },
+      "CAI, Diagnostic": {
+        "autocomplete": true,
+        "multiSelect": true
+      },
+      "CAI, Evaluation des symptômes TB": {
+        "multiSelect": true
+      },
+      "CAI, Stade OMS": {
+        "dropdown": true
+      },
+      "CSI, ARV Line": {
+        "required": true,
+        "dropdown": true
+      },
+      "CSI, Date début Regime ARV": {
+        "required": true
+      },
+      "CSI, Motif début régime": {
+        "dropdown": true,
+        "required": true
+      },
+      "CSI, Motif d'arrêt prophylaxie": {
+        "required": true
+      },
+      "CSI, Mode de sortie": {
+        "required": true
+      },
+      "CSI, Centre de référence": {
+        "required": true,
+        "autocomplete": true
+      },
+      "CSI, Date prochain RDV": {
+        "disableAddNotes": true,
+        "allowFutureDates": true,
+		"required": true
+      },
+      "Refere vers": {
+        "required": true
+      },
+	  "SessionPSEDemande": {
+		"multiSelect":true,
+		"autocomplete":true
+	  },
+	  "SessionInitiation": {
+		"multiSelect":true
+	  },
+	  "SessionSuivi": {
+		"multiSelect":true
+	  },
+	  "SessionSET": {
+		"multiSelect":true
+	  },
+	  "SessionET": {
+		"multiSelect":true
+	  },
+	  "SessionBebeExpose": {
+		"multiSelect":true
+	  },
+	  "SessionAnnonce": {
+		"multiSelect":true
+	  },
+	  "SessionAutre": {
+		"multiSelect":true
+	  },
+	  "SessionScreening": {
+		"multiSelect":true
+	  }
     }
   }
 }

@@ -202,6 +202,7 @@
   "ENTERED_VALUE_OUT_OF_RANGE":"La valeur entrée (champs en rouge) n’est pas comprise dans la marge des valeurs autorisées pour ce champs. Veuillez vérifier l’information dans ce champs",
   "OBSERVATION_GRAPH_NO_DATA_LABEL":"Pas de données",
   "DASHBOARD_TITLE_SCREENING_DEPRESSION_KEY":"Screening depression",
+  "DASHBOARD_TITLE_PSC_SESSION_KEY":"Sessions PSE",
   "DASHBOARD_TITLE_HOSPITALISATIONS_ANTERIEURES":"Hospitalisations antérieures",
   "DASHBOARD_TITLE_ANTECEDENTS_MEDICAUX":"Antécédents médicaux",
   "DASHBOARD_TITLE_EXAMEN_PHYSIQUE_A_LADMISSION":"Admission - Examen Physique",

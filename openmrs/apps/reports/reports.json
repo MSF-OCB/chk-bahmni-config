@@ -48,6 +48,13 @@
         "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/rapportDeVisite.sql"
       }
     },
+	"rapportOPD": {
+      "name": "Consultations OPD",
+      "type": "MRSGeneric",
+      "config": {
+        "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/ConsultationsOPD.sql"
+      }
+    },
     "testsTDRReport": {
       "name": "Tests TDR",
       "type": "MRSGeneric",
@@ -83,11 +90,11 @@
       "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/Hospitalisations_Sortie_report.sql"
     }
   },
-  "ConsultationsOPD": {
-    "name": "Consultations OPD",
+  "RapportSessPSE": {
+    "name": "Sessions PSE",
     "type": "MRSGeneric",
     "config": {
-      "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/ConsultationsOPD.sql"
+      "sqlPath": "/var/www/bahmni_config/openmrs/apps/reports/sql/RapportSessPSE.sql"
     }
   },
 "IPD/EPDInfo": {
