@@ -13,7 +13,7 @@ set status_id = 15, comment = 'Annulé automatiquement à cause de manque de ré
 where status_id = 4
   and (
     (
-      lastupdated < (now() - interval '2 months')
+      lastupdated < (now() - interval '3 months')
       and exists ( select 1
                    from test t
                    where t.id = analysis.test_id
