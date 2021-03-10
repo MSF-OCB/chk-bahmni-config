@@ -279,7 +279,8 @@
           "IPD Résumé de prise en charge",
           "CSI, Sortie IPD",
           "Tests rapides",
-          "Paraclinique"
+          "Paraclinique",
+	  "FormSessionPSE"
         ],
         "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
       },
