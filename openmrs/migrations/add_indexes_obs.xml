@@ -3,7 +3,6 @@
        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
        <changeSet id="OCB-CONFIG-202007031210" author="Mohammad">
-
            <comment> Adding new index to the report - Hospitalisation and Hospitalisation_Sortie</comment>
            <sql>
                 set @x := (select count(*) from information_schema.statistics where table_name = 'concept_name' and index_name = 'idx__name_locale_concept_name_type_voided' and table_schema = database());
@@ -20,5 +19,45 @@
                 EXECUTE stmt;
            </sql>
          </changeSet>
+         <changeSet id="OCB-CONFIG-202008141610" author="Mohammad">
+             <comment> Adding new index to the report - Pharmacie Dispensation</comment>
+             <sql>
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'concept_name' and index_name = 'idx__concept_id_locale_concept_name_type_voided' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE concept_name ADD INDEX `idx__concept_id_locale_concept_name_type_voided`(`concept_id`, `locale`, `concept_name_type`, `voided`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'obs' and index_name = 'idx__order_id_concept_id' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE obs ADD INDEX `idx__order_id_concept_id`(`order_id`, `concept_id`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'encounter_provider' and index_name = 'idx__encounter_id_voided' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE encounter_provider ADD INDEX `idx__encounter_id_voided`(`encounter_id`, `voided`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'person_attribute' and index_name = 'idx__value_person_id_person_attribute_type_id_voided' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE person_attribute ADD INDEX `idx__value_person_id_person_attribute_type_id_voided`(`value`, `person_id`, `person_attribute_type_id`, `voided`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'patient_identifier' and index_name = 'idx__patient_id_voided' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE patient_identifier ADD INDEX `idx__patient_id_voided`(`patient_id`, `voided`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'orders' and index_name = 'idx__patient_id_order_type_id_date_activated' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE orders ADD INDEX `idx__patient_id_order_type_id_date_activated`(`patient_id`, `order_type_id`, `date_activated`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'orders' and index_name = 'idx__patient_id_order_type_id' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE orders ADD INDEX `idx__patient_id_order_type_id`(`patient_id`, `order_type_id`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'orders' and index_name = 'idx__order_id_order_type_id' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE orders ADD INDEX `idx__order_id_order_type_id`(`order_id`, `order_type_id`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+                  set @x := (select count(*) from information_schema.statistics where table_name = 'encounter' and index_name = 'idx__visit_id_encounter_id_voided' and table_schema = database());
+                  set @sql := if( @x > 0, 'select ''Index exists.''', 'ALTER TABLE encounter ADD INDEX `idx__visit_id_encounter_id_voided`(`visit_id`, `encounter_id`, `voided`);');
+                  PREPARE stmt FROM @sql;
+                  EXECUTE stmt;
+             </sql>
+           </changeSet>
        </databaseChangeLog>
-
