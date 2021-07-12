@@ -460,7 +460,11 @@
       "CSI, Date prochain RDV": {
         "disableAddNotes": true,
         "allowFutureDates": true,
-		"required": true
+    		"required": true
+      },
+      "Score de Braden": {
+        "dropdown": true,
+        "required": true
       },
       "Refere vers": {
         "required": true
