@@ -154,7 +154,7 @@
         "expandedViewConfig": {
           "numberOfVisits": ""
         }
-      },	  
+      },
 	  "sessionDepression": {
         "translationKey": "DASHBOARD_TITLE_PSC_SESSION_KEY",
         "type": "vitals",
@@ -197,7 +197,7 @@
           "pivotTable": {
           }
         }
-      },	  
+      },
       "testRapid": {
         "translationKey": "DASHBOARD_TITLE_TEST_RAPID_FORM_KEY",
         "type": "vitals",
@@ -279,7 +279,8 @@
           "IPD Résumé de prise en charge",
           "CSI, Sortie IPD",
           "Tests rapides",
-          "Paraclinique"
+          "Paraclinique",
+          "FormSessionPSE"
         ],
         "translationKey": "DASHBOARD_TITLE_FORMS_DISPLAY_CONTROL_KEY"
       },
@@ -1050,7 +1051,7 @@
 			"isObservation": true,
 			"dashboardConfig": {
 			  "numberOfVisits": "",
-			  "conceptNames": [	
+			  "conceptNames": [
 				"SessionPSEDemande"
 			  ],
 			  "showGroupDateTime": false,
